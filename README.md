@@ -8,5 +8,6 @@ Caldarola Giovanni 10520479
 Catano Vincenzo 10520959
 
 FUNZIONA
+CIAO
 
 Descrizione del progetto: Il progetto consiste nella realizzazione della versione digitale del gioco da tavolo Sagrada.
