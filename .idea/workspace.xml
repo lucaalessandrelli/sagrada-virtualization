@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aae32133-5b1d-40b5-a8d7-ce8386ff0e60" name="Default" comment="">
+    <list default="true" id="aae32133-5b1d-40b5-a8d7-ce8386ff0e60" name="Default" comment="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard partial">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -395,11 +395,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524331322027</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard partial">
+      <created>1524331338484</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1524331338484</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17379000" />
+    <option name="totallyTimeSpent" value="17417000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -465,7 +472,8 @@
     <MESSAGE value="PROVA GIO" />
     <MESSAGE value="creato package1" />
     <MESSAGE value="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard parziali" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard parziali" />
+    <MESSAGE value="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard partial" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard partial" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
