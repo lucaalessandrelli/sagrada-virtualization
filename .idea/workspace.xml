@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aae32133-5b1d-40b5-a8d7-ce8386ff0e60" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/package1/Cell.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/package1/Pos.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/package1/ScoreMarker.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/package1/ScoreTrack.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/package1/WindowPatternCard.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -393,11 +388,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524309533951</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard parziali">
+      <created>1524331322025</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1524331322027</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17308000" />
+    <option name="totallyTimeSpent" value="17379000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -462,7 +464,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="PROVA GIO" />
     <MESSAGE value="creato package1" />
-    <option name="LAST_COMMIT_MESSAGE" value="creato package1" />
+    <MESSAGE value="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard parziali" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cell,Pos,ScoreMarker,ScoreTrack,WindowPatterCard parziali" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
