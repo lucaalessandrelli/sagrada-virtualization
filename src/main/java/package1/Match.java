@@ -1,9 +1,12 @@
 package package1;
 
+import java.util.ArrayList;
+
 public class Match {
     private int id;
     private Table table;
-    //private State state;
+    private ArrayList<Player> playerList;
+    private State state;
 
     public Match(){
 
