@@ -8,11 +8,11 @@ public class Cell {
         this.property = property;
         this.pos = pos;
     }
-
+    //getter method
     public Property getProperty(){
         return this.property;
     }
-
+    //getter method
     public Pos getPosition(){
         return this.pos;
     }
