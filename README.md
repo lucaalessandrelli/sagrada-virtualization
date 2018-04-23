@@ -1,5 +1,5 @@
 # ProgettoIngSw
-Group components:
+Team components:
 
 Alessandrelli Luca 10533904
 
