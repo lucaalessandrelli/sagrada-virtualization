@@ -1,5 +1,5 @@
 # ProgettoIngSw
-Componenti del gruppo:
+Group components:
 
 Alessandrelli Luca 10533904
 
@@ -8,4 +8,4 @@ Caldarola Giovanni 10520479
 Catano Vincenzo 10520959
 
 
-Descrizione del progetto: Il progetto consiste nella realizzazione della versione digitale del gioco da tavolo Sagrada.
+Description of the project: the project is based on the realization of the digital version of the board game "Sagrada"
