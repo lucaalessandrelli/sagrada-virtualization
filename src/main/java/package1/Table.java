@@ -9,6 +9,8 @@ public class Table {
     private ArrayList<ObjectiveCard> objectiveCards = new ArrayList<ObjectiveCard>(4);
     private ArrayList<ToolCard> toolCards = new ArrayList<ToolCard>(3);
     private ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<WindowPatternCard>(4);
+    private DraftPool draftPool;
+    private DiceBag diceBag;
 
     public Table(RoundTrack roundTrack, ScoreTrack scoreTrack, ArrayList<ObjectiveCard> objectiveCards, ArrayList<ToolCard> toolCards, ArrayList<WindowPatternCard> windowPatternCards) {
         this.roundTrack = roundTrack;

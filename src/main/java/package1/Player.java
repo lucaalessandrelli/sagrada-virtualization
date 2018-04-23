@@ -8,6 +8,8 @@ public class Player {
     private ObjectiveCard myObjCard;
     private WindowPatternCard myWindow;
     private int myFavTokens;
+    private DraftPool draftPool;
+    private DiceBag diceBag;
 
     public Player(){
 
