@@ -35,7 +35,7 @@ public class ScoreTrack {
     public ArrayList<String> getPlayers() {
         ArrayList<String> players = new ArrayList<String>(4);
         for (ScoreMarker x: markers) {
-            players.add(x.getPlayer().getName());
+            //players.add(x.getPlayer().getName());
         }
         return players;
     }
