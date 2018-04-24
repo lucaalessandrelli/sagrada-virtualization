@@ -16,7 +16,7 @@ public class WindowPatternCard {
     public int getNum(){
         return this.num;
     }
-
+    //getter
     public int getDifficulty(){
         return this.difficulty;
     }
