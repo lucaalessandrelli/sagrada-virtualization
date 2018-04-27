@@ -5,6 +5,7 @@ public class Property {
     private Colour colour;
     private int number;
 
+
     //constructor for dice
     public Property(Colour colour){
         this.colour = colour;

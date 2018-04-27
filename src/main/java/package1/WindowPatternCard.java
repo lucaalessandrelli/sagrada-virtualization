@@ -2,13 +2,12 @@ package package1;
 
 public class WindowPatternCard {
     private int num;
-    private Cell[][] matr;
+    private Cell[][] matr = new Cell[4][5];
     private int difficulty;
     private String name;
 
-    public WindowPatternCard(int num, int ncol, int nrow, int difficulty, String name){
+    public WindowPatternCard(int num, int difficulty, String name){
         this.num = num;
-        this.matr = new Cell[nrow][ncol];
         this.difficulty = difficulty;
         this.name = name;
     }
@@ -20,6 +19,7 @@ public class WindowPatternCard {
     public int getDifficulty(){
         return this.difficulty;
     }
+    public Cell[][] getMatr(){ return this.matr;}
     //shows every attribute of the Card, also the scheme
     public void show(){
         System.out.println("ID number :" + num + "\n" + "Difficulty :" + difficulty + "\n" + "Name :" + name + "Scheme :\n" + "\n");
