@@ -5,6 +5,10 @@ public class Property {
     private Colour colour;
     private int number;
 
+    public Property(){
+        this.colour = Colour.WHITE;
+        this.number = 0;
+    }
 
     //constructor for dice
     public Property(Colour colour){
@@ -16,11 +20,19 @@ public class Property {
         number = value;
     }
     //getter method
-    public String getColour() {
-        return colour.toString();
+    public Colour getColour() {
+        return this.colour;
     }
     //getter method
     public int getNumber() {
         return number;
+    }
+    //setter method
+    public void setColour(Colour z){
+        this.colour = z;
+    }
+    //setter method
+    public void setNumber(int k){
+        this.number = k;
     }
 }
