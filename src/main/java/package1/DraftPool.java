@@ -5,14 +5,18 @@ import java.util.ArrayList;
 public class DraftPool {
     private ArrayList<Dice> draftPool;
 
-    //the number x, is the number of players present in the match
+    public DraftPool(){
+        draftPool = new ArrayList<Dice>(0);
+    }
+
+    //the number x is the number of players present in the match
     public DraftPool(int x){
-        ArrayList<Dice> tmp = new ArrayList<Dice>((x*2)+1);
-        Dice k = new Dice();
+        this.draftPool = new ArrayList<Dice>((x*2)+1);
+        /*Dice k = new Dice();
         for(int i = 0; i < (x*2)+1; i++){
             tmp.add(k);
         }
-        this.draftPool = tmp;
+        this.draftPool = tmp;*/
     }
 
     //getter method
@@ -47,7 +51,7 @@ public class DraftPool {
         draftPool = newDice;
     }
 
-    //gives back the number of dices remaining in the drafpool
+    //gives back the number of dices remaining in the draftpool
     public int getNumOfDices(){
         return draftPool.size();
     }

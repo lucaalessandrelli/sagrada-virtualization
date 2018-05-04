@@ -1,10 +1,14 @@
 package package1;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class WindowPatternCard {
     private int num;
     private Cell[][] matr = new Cell[4][5];
     private int difficulty;
     private String name;
+    //private int cont = 12; I'm not sure about this so the method and this attribute is all commented
 
     public WindowPatternCard(int num, int difficulty, String name){
         this.num = num;
@@ -40,6 +44,24 @@ public class WindowPatternCard {
             }
         }
     }
+
+    //Pull out 4 WindowPatternCard given to the player to select one of them
+   /* !!!!Is pseudo-code!!!!!
+      public ArrayList<WindowPatternCard> pullOut(){
+        int dimension = 4;
+        ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
+        int randomNum;
+        Random rand = new Random();
+        for(int k = 0; k < dimension; k++) {
+            randomNum = rand.nextInt((cont));
+            Here I need to take from the configuration file the randomNum card
+            Here I need to "sign" the card so that in the next cycle I won't take the same card I took before
+            this.cont--;
+            tmp.add(z); Supposing that z is the selected card from this "turn"
+        }
+        return tmp;
+    }
+    */
 
     //place the dice
     public Boolean placeDice(Dice d, int x, int y){

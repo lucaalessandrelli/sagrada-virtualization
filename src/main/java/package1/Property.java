@@ -17,7 +17,7 @@ public class Property {
     //constructor for Window Pattern Card
     public  Property(Colour colour, int value){
         this.colour = colour;
-        number = value;
+        this.number = value;
     }
     //getter method
     public Colour getColour() {

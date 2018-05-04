@@ -12,12 +12,37 @@ public class Table {
     private DraftPool draftPool;
     private DiceBag diceBag;
 
+
+    public Table(){
+        this.diceBag = new DiceBag();
+        this.draftPool = new DraftPool();
+        for(int i = 0; i < 3; i++){
+            ToolCard x = new ToolCard();
+            //x.getCard()?? To take a casual tool card
+            this.toolCards.add(x);
+        }
+        for(int i = 0; i < 3; i++){
+            ObjectiveCard x = new ObjectiveCard();
+            //x.getCard()?? To take a casual tool card
+            this.objectiveCards.add(x);
+        }
+    }
+
     public Table(RoundTrack roundTrack, ScoreTrack scoreTrack, ArrayList<ObjectiveCard> objectiveCards, ArrayList<ToolCard> toolCards, ArrayList<WindowPatternCard> windowPatternCards) {
         this.roundTrack = roundTrack;
         this.scoreTrack = scoreTrack;
         this.objectiveCards = objectiveCards;
         this.toolCards = toolCards;
         this.windowPatternCards = windowPatternCards;
+    }
+
+    public void addCard(WindowPatternCard z) throws IndexOutOfBoundsException{
+        try{
+            if(this.windowPatternCards.size() < 4)
+                this.windowPatternCards.add(z);
+        } catch (IndexOutOfBoundsException e){
+            throw e;
+        }
     }
     //Implement this in the other class
     public void showPlayers() {
