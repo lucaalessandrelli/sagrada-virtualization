@@ -1,10 +1,12 @@
 package it.polimi.ingsw;
 
-import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 import package1.DiceBag;
 
-public class DiceBagTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class DiceBagTest {
 
     @Test
     public void TestCreation(){

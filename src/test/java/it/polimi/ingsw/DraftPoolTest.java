@@ -1,13 +1,14 @@
 package it.polimi.ingsw;
 
-import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 import package1.Dice;
 import package1.DraftPool;
 
 import java.util.ArrayList;
 
-public class DraftPoolTest extends TestCase{
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class DraftPoolTest{
 
     //we really need to test this??
     @Test

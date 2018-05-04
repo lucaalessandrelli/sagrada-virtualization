@@ -1,11 +1,12 @@
 package it.polimi.ingsw;
 
-import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 import package1.Dice;
 import package1.WindowPatternCard;
 
-public class WindowPatternCardTest extends TestCase{
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class WindowPatternCardTest{
 
 
     @Test
