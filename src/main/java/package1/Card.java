@@ -20,15 +20,15 @@ public abstract class  Card {
     public void show(){
     }
 
-    public String getName(){
-        return name;
+    public String getName() {
+        return this.name;
     }
 
-    public String getDescription(){
-        return description;
+    public String getDescription() {
+        return this.description;
     }
 
     public int getID(){
-        return idnumber;
+        return this.idnumber;
     }
 }

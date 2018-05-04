@@ -1,30 +1,59 @@
 package package1;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
 
 public class Match {
     private int id;
     private Table table;
-    private ArrayList<Player> playerList;
+    private List<Player> playerList;
     private State state;
+    //round array declaration
+    private Round[] roundArray;
 
-    public Match(){
-
+    //When Match is created its state is "WaitingRoom"
+    public Match(int id){
+        this.id = id;
+        //this.table = new Table();
+        playerList = new ArrayList<Player>();
+        state = new WaitingRoom(5000);
+        //round array initialize
+        roundArray = new Round[10];
     }
+
     //getter method
     public int getId() {
-        return id;
+        return this.id;
     }
+
     //getter method
     public Table getTable() {
-        return table;
+        return this.table;
     }
-    //add Player to a Match
-    public void addPlayer(){
 
+    //returns the list of players assigned to a match
+    public List<Player> getPlayerList() {
+        return playerList;
     }
+
+
     //get current status of Match(State)
-   /* public String getState() {
+    public State getState() {
+        return state;
+    }
 
-    }*/
+    //Setter method
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    //add a Player to a Match
+    public void addPlayer(Player player){
+        state.addPlayer(playerList, player, this);
+    }
+
+    //remove a Player from a Match
+    public void removePlayer(Player player){
+        state.removePlayer(playerList, player, this);
+    }
 }
