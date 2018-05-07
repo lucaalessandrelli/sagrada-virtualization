@@ -8,3 +8,5 @@
     * - [x] addPlayerWaitingRoomTest
     * - [x] removePlayerStartedMatchTest
     * - [x] removePlayerWaitingRoomTest
+* ToolCardTest
+    * - [x] increasingCost
