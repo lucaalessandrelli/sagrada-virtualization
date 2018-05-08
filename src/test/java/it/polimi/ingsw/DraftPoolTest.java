@@ -1,23 +1,16 @@
 package it.polimi.ingsw;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import package1.Dice;
 import package1.DraftPool;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DraftPoolTest{
 
-    //we really need to test this??
-    @Test
-    public void TestNumDices(){
-        DraftPool tester = new DraftPool(1);
-        assertTrue(tester.getNumOfDices() == 3);
-        tester = new DraftPool(0);
-        assertTrue(tester.getNumOfDices() == 1);
-    }
 
     @Test
     public void TestRemoveDice(){
@@ -33,11 +26,24 @@ public class DraftPoolTest{
         tester.chooseDice(1);
         assertTrue(tester.getNumOfDices() == (j - 1));
     }
-/*
+
     @Test
     public void TestNeverEmpty(){
-
+        int i;
+        DraftPool tester = new DraftPool();
+        Dice y = new Dice();
+        ArrayList<Dice> x = new ArrayList<Dice>(9);
+        for(i = 0; i < 9; i++){
+            x.add(y);
+        }
+        tester.addNewDices(x);
+        for(i = 0; tester.getNumOfDices() > 1;){
+            tester.chooseDice(i);
+        }
+        assertTrue(tester.getNumOfDices() == 1);
+        assertThrows(IndexOutOfBoundsException.class,()->{tester.chooseDice(0);});
     }
 
-*/
+
+
 }

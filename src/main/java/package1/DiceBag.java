@@ -27,7 +27,10 @@ public class DiceBag {
 
     //setter method
     public void setNumPlayers(int n){
-        this.numPlayers = n;
+        if(n > 0 && n < 5)
+            this.numPlayers = n;
+        else
+            System.out.println("Invalid number of players");
     }
 
     //getter method

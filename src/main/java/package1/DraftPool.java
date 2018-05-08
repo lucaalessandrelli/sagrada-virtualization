@@ -11,12 +11,8 @@ public class DraftPool {
 
     //the number x is the number of players present in the match
     public DraftPool(int x){
-        this.draftPool = new ArrayList<Dice>((x*2)+1);
-        /*Dice k = new Dice();
-        for(int i = 0; i < (x*2)+1; i++){
-            tmp.add(k);
-        }
-        this.draftPool = tmp;*/
+        int y = (x * 2) + 1;
+        this.draftPool = new ArrayList<Dice>(y);
     }
 
     //getter method
@@ -33,8 +29,7 @@ public class DraftPool {
                 return d;
             }
             else{
-                IndexOutOfBoundsException e = new IndexOutOfBoundsException();
-                throw e;
+                throw new IndexOutOfBoundsException();
             }
         }catch (IndexOutOfBoundsException e){
             System.out.println("The size of the array is under 1");
@@ -48,7 +43,7 @@ public class DraftPool {
 
     //add new dices that have been drown out from the bag
     public void addNewDices(ArrayList<Dice> newDice){
-        draftPool = newDice;
+        this.draftPool = newDice;
     }
 
     //gives back the number of dices remaining in the draftpool
