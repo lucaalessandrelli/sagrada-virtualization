@@ -29,22 +29,22 @@ public class WaitingRoom implements State {
             //change state
             if(playerList.size() == 4) {
                 match.setState(new StartedMatch());
+                match.registerMatch();
             }
         }
     }
 
     public void removePlayer(List<Player> playerList, Player player,Match match) {
         playerList.remove(player);
-        //if n°players drops below 2 timer needs to be reset and stopped
-        if (playerList.size() < 2) {
+
+        //if the player to be remover is the last one then the match can be deleted
+        if (playerList.size() == 0) {
+            match.delete();
+        } else if (playerList.size() < 2) { //if n°players drops below 2 timer needs to be reset and stopped
             //resetTimer
             timer.cancel();
             //tempTime = time;
             timer = new Timer();
         }
-    }
-
-    public void somethingForRounds(List<Player> playerList, Round[] roundArray) {
-        //do nothing you are in WaitingRoom
     }
 }

@@ -4,19 +4,17 @@ import org.junit.jupiter.api.Test;
 import package1.Match;
 import package1.Player;
 import package1.StartedMatch;
+import package1.WaitingRoom;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class TimerTest {
     @Test
-    public void resetTest() throws InterruptedException {
+    public void resetTimerTest() throws InterruptedException {
         Match match1 = new Match(1);
         Player player1 = new Player();
         Player player2 = new Player();
-        Player player3 = new Player();
-        Player player4 = new Player();
-        Player player5 = new Player();
 
         match1.addPlayer(player1);
         match1.addPlayer(player2);
@@ -55,5 +53,20 @@ public class TimerTest {
         //Test the right state of the match when the timer has been reset
         assertTrue(match1.getPlayerList().size() == 2);
         assertTrue(match1.getState() instanceof StartedMatch);
+    }
+
+    @Test
+    public void noTimerTest() throws InterruptedException {
+        Match match1 = new Match(1);
+        Player player1 = new Player();
+
+        match1.addPlayer(player1);
+
+
+        System.out.println("----begin sleep1----");
+        Thread.sleep(7000);
+        System.out.println("----end sleep1----");
+
+        assertTrue(match1.getState() instanceof WaitingRoom);
     }
 }

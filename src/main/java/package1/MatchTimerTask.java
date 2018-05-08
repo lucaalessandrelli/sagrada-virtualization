@@ -24,6 +24,7 @@ public class MatchTimerTask extends TimerTask {
         tempTime -= 1000;
         if(playerList.size() >= 2 && tempTime == 0) {
             match.setState(new StartedMatch());
+            match.registerMatch();
             System.out.println("Now the state is: StartedMatch");
             timer.cancel();
         } else if(playerList.size() < 2 && tempTime == 0) {

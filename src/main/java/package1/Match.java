@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.*;
 
 public class Match {
+    private Server server;
     private int id;
     private Table table;
     private List<Player> playerList;
@@ -12,7 +13,8 @@ public class Match {
     private Round[] roundArray;
 
     //When Match is created its state is "WaitingRoom"
-    public Match(int id){
+    public Match(int id/*, Server server*/){
+        //this.server = server;
         this.id = id;
         //this.table = new Table();
         playerList = new ArrayList<Player>();
@@ -55,5 +57,16 @@ public class Match {
     //remove a Player from a Match
     public void removePlayer(Player player){
         state.removePlayer(playerList, player, this);
+    }
+
+    //add to the hashTable players and id match
+    public void registerMatch() {
+        //server.addRecord(playerList, id);
+    }
+
+    //remove from the hashTable players and id match and deletes the match instance
+    public void delete() {
+        //server.removeRecord(id);
+        //server.deleteMatch(this);
     }
 }
