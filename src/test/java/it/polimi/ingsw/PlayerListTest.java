@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 import package1.Match;
 import package1.Player;
 
@@ -101,4 +102,33 @@ public class PlayerListTest {
         assertTrue(match.getPlayerList().contains(player3));
     }
 
+    /* constructor of other class still not implemented
+    //Testing numbers of players in waiting room going to 0
+    @Test
+    public void emptyWaitingRoom() {
+        Server server = new Server();
+        Match match1 = new Match(1);
+        Match match2 = new Match(2);
+        Match match3 = new Match(3);
+        Match match4 = new Match(4);
+
+        Player player1 = new Player();
+        Player player2 = new Player();
+
+        server.addMatch(match1);
+        server.addMatch(match2);
+        server.addMatch(match3);
+        server.addMatch(match4);
+
+        match1.addPlayer(player1);
+        match1.addPlayer(player2);
+
+        match1.removePlayer(player1);
+        match1.removePlayer(player2);
+
+        assertTrue(server.getMatchList().size() == 3);
+        assertTrue(server.getMatchList().contains(match2));
+        assertTrue(server.getMatchList().contains(match3));
+        assertTrue(server.getMatchList().contains(match4));
+    } */
 }
