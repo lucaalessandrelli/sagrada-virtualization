@@ -10,7 +10,7 @@
     * - [x] removePlayerWaitingRoomTest
     * - [ ] emptyWaitingRoomTest
 * ToolCardTest
-    * - [x] increasingCost
+    * - [x] increasingCostTest
 
 
 * DiceBagTest
