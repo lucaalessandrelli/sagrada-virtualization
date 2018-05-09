@@ -9,18 +9,15 @@ public class Match {
     private Table table;
     private List<Player> playerList;
     private State state;
-    //round array declaration
-    private Round[] roundArray;
+    private List<Round> roundList;
 
     //When Match is created its state is "WaitingRoom"
     public Match(int id/*, Server server*/){
         //this.server = server;
         this.id = id;
-        //this.table = new Table();
         playerList = new ArrayList<Player>();
         state = new WaitingRoom(5000);
-        //round array initialize
-        roundArray = new Round[10];
+        this.roundList = new ArrayList<Round>(10);
     }
 
     //getter method
@@ -31,6 +28,14 @@ public class Match {
     //getter method
     public Table getTable() {
         return this.table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public List<Round> getRoundList() {
+        return this.roundList;
     }
 
     //returns the list of players assigned to a match
@@ -69,4 +74,19 @@ public class Match {
         //server.removeRecord(id);
         //server.deleteMatch(this);
     }
+
+    //Modifier method
+    public void addRoundList(Round round) {
+        roundList.add(round);
+    }
+
+    public void initializeRounds()  {
+
+        state.createRounds(playerList, this, roundList);
+    }
+
+    public void start() {
+        
+    }
+
 }

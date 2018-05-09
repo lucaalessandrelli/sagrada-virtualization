@@ -1,16 +1,20 @@
 package package1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Round {
-    private ArrayList<Player> playerList;
+    private Match match;
+    private int roundNumber;
+    private List<Player> playerList;
     private DiceBag diceBag;
     private boolean status;
     private Dice lastDice;
-    private TurnHandler currentTurn;
 
-    public Round() {
-
+    public Round(Match match, List<Player> playerList, int roundNumber) {
+        this.match = match;
+        this.playerList = playerList;
+        this.roundNumber = roundNumber;
     }
 
     public void setStatus(boolean status) {
@@ -27,6 +31,10 @@ public class Round {
 
     public Dice getLastDice() {
         return this.lastDice;
+    }
+
+    public int getRoundNumber() {
+        return this.roundNumber;
     }
 
 }

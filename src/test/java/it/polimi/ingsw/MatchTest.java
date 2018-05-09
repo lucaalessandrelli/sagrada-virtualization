@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 import package1.Match;
 import package1.Player;
+import package1.Round;
+import package1.StartedMatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,4 +133,28 @@ public class MatchTest {
         assertTrue(server.getMatchList().contains(match3));
         assertTrue(server.getMatchList().contains(match4));
     } */
+
+    @Test
+    public void initializeRoundTest() {
+        int i = 1;
+        Match match = new Match(1);
+
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        Player player4 = new Player();
+
+        match.addPlayer(player1);
+        match.addPlayer(player2);
+        match.addPlayer(player3);
+        match.addPlayer(player4);
+
+        assertTrue(match.getRoundList().size() == 10);
+
+        for (Round round: match.getRoundList()) {
+            assertTrue(round.getRoundNumber() == i);
+            i++;
+        }
+
+    }
 }

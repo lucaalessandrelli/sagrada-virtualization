@@ -1,7 +1,9 @@
 package package1;
 
+import java.util.ArrayList;
 import java.util.List;
 
+//create a Table object and send it to the Match class.)
 public class StartedMatch implements State {
 
     public StartedMatch() {
@@ -16,9 +18,11 @@ public class StartedMatch implements State {
         //can't remove a player, match already started
     }
 
-    public void somethingForRounds(List<Player> playerList, Round[] roundArray) {
-        //decide later what to do
+    public void createRounds(List<Player> playerList, Match match,List<Round> roundList) {
+        int roundNumber = 1;
+
+        for(;roundNumber < 11; roundNumber++) {
+            match.addRoundList(new Round(match, playerList, roundNumber));
+        }
     }
-
-
 }
