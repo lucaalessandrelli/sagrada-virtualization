@@ -10,7 +10,7 @@ public class ToolCardTest {
 
     //testing the increasing cost of a ToolCard after it's been used
     @Test
-    public void increasingCost() {
+    public void increasingCostTest() {
         ToolCard toolCard1 = new ToolCard();
         ToolCard toolCard2 = new ToolCard();
 

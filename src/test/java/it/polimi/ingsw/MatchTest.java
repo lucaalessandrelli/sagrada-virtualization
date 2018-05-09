@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class PlayerListTest {
+public class MatchTest {
     //private List<Match> matches = new ArrayList<Match>();
     //private List<Player> players = new ArrayList<Player>();
 
@@ -105,7 +105,7 @@ public class PlayerListTest {
     /* constructor of other class still not implemented
     //Testing numbers of players in waiting room going to 0
     @Test
-    public void emptyWaitingRoom() {
+    public void emptyWaitingRoomTest() {
         Server server = new Server();
         Match match1 = new Match(1);
         Match match2 = new Match(2);
