@@ -13,6 +13,7 @@ public class WaitingRoom {
     private long time;
 
     public WaitingRoom(long time) {
+        //this.server = server;
         playerList = new ArrayList<>();
         this.time = time;
         //this.tempTime = time;
@@ -62,6 +63,8 @@ public class WaitingRoom {
     public List<Player> getPlayerList() {
         /*
         MAKE A CLONE COPY OF playerList
+
+        return clonePlayerList(playerList);
         */
         return playerList;
     }
@@ -72,4 +75,14 @@ public class WaitingRoom {
     public void notifyServer() {
         server.createMatch(this);
     }
+
+    /*public List<Player> clonePlayerList(List<Player> playerList) {
+        List<Player> cloneList = new ArrayList<>();
+
+        for (Player player: playerList) {
+            //cloneList.add(player.clonePlayer(player));
+        }
+
+        return cloneList;
+    }*/
 }

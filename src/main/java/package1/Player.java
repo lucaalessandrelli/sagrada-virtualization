@@ -12,15 +12,16 @@ public class Player {
     private int myFavTokens;
 
     //just take username from user
-    public Player(){
-        Scanner in = new Scanner(System.in);
+    public Player(String username){
+        this.username = username;
+        /*Scanner in = new Scanner(System.in);
         String input = in.next();
         while (input.length() == 0) {
             System.out.println("Username not valid!");
             input = in.next();
         }
         username = input;
-
+        */
     }
     //getter method
     public String getUsername() {

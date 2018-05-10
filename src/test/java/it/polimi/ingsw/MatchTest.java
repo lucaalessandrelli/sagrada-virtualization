@@ -11,11 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MatchTest {
     private List<Match> matches;
     //private List<Player> players = new ArrayList<Player>();
-    Server server = new Server();
 
-    @Test //create for every object a clone method so we can deep clone objects
-    //doesn't work because i pass playerList by reference and not by copy, so after i restore the lobby i have null pointers in the match class.
+
+    @Test
     public void maxPlayersMatchTest() {
+        Server server = new Server();
+
         Player player1 = new Player();
         Player player2 = new Player();
         Player player3 = new Player();
@@ -44,6 +45,8 @@ public class MatchTest {
 
     @Test
     public void addPlayerWaitingRoomTest() {
+        Server server = new Server();
+
         Player player1 = new Player();
         Player player2 = new Player();
 
@@ -55,6 +58,7 @@ public class MatchTest {
         assertTrue(server.getLobby().getPlayerList().contains(player1));
         assertTrue(server.getLobby().getPlayerList().contains(player2));
     }
+
 /*
     @Test
     public void removePlayerStartedMatchTest() {
