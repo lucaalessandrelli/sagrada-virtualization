@@ -17,11 +17,11 @@ public class MatchTest {
     public void maxPlayersMatchTest() {
         Server server = new Server();
 
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Player player3 = new Player();
-        Player player4 = new Player();
-        Player player5 = new Player();
+        Player player1 = new Player("1");
+        Player player2 = new Player("2");
+        Player player3 = new Player("3");
+        Player player4 = new Player("4");
+        Player player5 = new Player("5");
 
         server.connectPlayer(player1);
         server.connectPlayer(player2);
@@ -47,8 +47,8 @@ public class MatchTest {
     public void addPlayerWaitingRoomTest() {
         Server server = new Server();
 
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = new Player("1");
+        Player player2 = new Player("2");
 
         server.connectPlayer(player1);
         server.connectPlayer(player2);
