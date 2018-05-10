@@ -5,28 +5,26 @@ import java.util.TimerTask;
 import java.util.List;
 
 public class MatchTimerTask extends TimerTask {
-    private Timer timer;
-    private List<Player> playerList;
-    private Match match;
-    private WaitingRoom room;
+    private WaitingRoom lobby;
     private long time;
     private long tempTime;
+    private Timer timer;
+    private List<Player> playerList;
 
-    public MatchTimerTask(List<Player> playerList, Match match, WaitingRoom room, long time, Timer timer) {
-        this.playerList = playerList;
-        this.match = match;
-        this.room = room;
+    public MatchTimerTask(WaitingRoom lobby, long time, Timer timer) {
+        this.lobby = lobby;
         this.time = time;
         this.tempTime = time;
         this.timer = timer;
+        playerList = lobby.getPlayerList();
     }
 
     @Override
     public void run() {
         tempTime -= 1000;
         if(playerList.size() >= 2 && tempTime == 0) {
-            //change state
-            room.changeState(match);
+            //CREATE A REAL MATCH
+            lobby.notifyServer();
             System.out.println("Now the state is: StartedMatch");
             timer.cancel();
         } else if(playerList.size() < 2 && tempTime == 0) {

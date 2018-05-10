@@ -1,67 +1,61 @@
 package it.polimi.ingsw;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
-import package1.Match;
-import package1.Player;
-import package1.Round;
-import package1.StartedMatch;
+import package1.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class MatchTest {
-    //private List<Match> matches = new ArrayList<Match>();
+    private List<Match> matches;
     //private List<Player> players = new ArrayList<Player>();
+    Server server = new Server();
 
-    @Test
+    @Test //create for every object a clone method so we can deep clone objects
+    //doesn't work because i pass playerList by reference and not by copy, so after i restore the lobby i have null pointers in the match class.
     public void maxPlayersMatchTest() {
-        Match match = new Match(1);
-
         Player player1 = new Player();
         Player player2 = new Player();
         Player player3 = new Player();
         Player player4 = new Player();
         Player player5 = new Player();
-        Player player6 = new Player();
-        Player player7 = new Player();
 
+        server.connectPlayer(player1);
+        server.connectPlayer(player2);
+        server.connectPlayer(player3);
+        server.connectPlayer(player4);
+        server.connectPlayer(player5);
 
-        match.addPlayer(player1);
-        match.addPlayer(player2);
-        match.addPlayer(player3);
-        match.addPlayer(player4);
-        match.addPlayer(player5);
-        match.addPlayer(player6);
-        match.addPlayer(player7);
+        matches = server.getMatchList();
+        Match match1 = matches.get(0);
+        WaitingRoom lobby = server.getLobby();
 
         // Testing max 4 players in a Match
-        assertTrue(match.getPlayerList().size() == 4);
-        assertTrue(match.getPlayerList().contains(player1));
-        assertTrue(match.getPlayerList().contains(player2));
-        assertTrue(match.getPlayerList().contains(player3));
-        assertTrue(match.getPlayerList().contains(player4));
+        assertTrue(matches.size() == 1);
+        assertTrue(server.getLobby().getPlayerList().size() == 1);
+        assertTrue(match1.getPlayerList().size() == 4);
+        assertTrue(match1.getPlayerList().contains(player1));
+        assertTrue(match1.getPlayerList().contains(player2));
+        assertTrue(match1.getPlayerList().contains(player3));
+        assertTrue(match1.getPlayerList().contains(player4));
     }
 
     @Test
     public void addPlayerWaitingRoomTest() {
-        Match match = new Match(1); // Match is tested
         Player player1 = new Player();
         Player player2 = new Player();
 
-        match.addPlayer(player1);
-        match.addPlayer(player2);
+        server.connectPlayer(player1);
+        server.connectPlayer(player2);
 
         // Testing addPlayer function in Waiting Room
-        assertTrue(match.getPlayerList().size() == 2);
-        assertTrue(match.getPlayerList().contains(player1));
-        assertTrue(match.getPlayerList().contains(player2));
+        assertTrue(server.getLobby().getPlayerList().size() == 2);
+        assertTrue(server.getLobby().getPlayerList().contains(player1));
+        assertTrue(server.getLobby().getPlayerList().contains(player2));
     }
-
+/*
     @Test
     public void removePlayerStartedMatchTest() {
         Match match = new Match(1); // Match is tested
@@ -133,7 +127,7 @@ public class MatchTest {
         assertTrue(server.getMatchList().contains(match3));
         assertTrue(server.getMatchList().contains(match4));
     } */
-
+/*
     @Test
     public void initializeRoundTest() {
         int i = 1;
@@ -157,4 +151,5 @@ public class MatchTest {
         }
 
     }
+    */
 }
