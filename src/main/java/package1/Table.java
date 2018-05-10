@@ -75,4 +75,16 @@ public class Table {
         this.showTool();
         this.showWindow();
     }
+
+    public ObjectiveCard getObjCard() {
+        return null;
+    }
+
+    public ArrayList<WindowPatternCard> getRandomWindows() {
+        return null;
+    }
+
+    public ArrayList<Dice> getDiceFromBag() {
+        return null;
+    }
 }

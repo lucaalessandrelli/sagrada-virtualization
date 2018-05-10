@@ -5,23 +5,46 @@ public class Move {
     private Dice chosenDice;
     private ToolCard toolCard;
 
-    //move without tool card
-    public Move(Pos pos, Dice dice){
-
+    //chosen just pos
+    public Move(Pos pos) {
         chosenPos = pos;
-        chosenDice = dice;
-        toolCard = null;
-
     }
-    //move with chosen tool card
-    public Move(ToolCard  toolc){
 
-        chosenPos = null;
-        chosenDice = null;
+    //chosen just toolcard
+    public Move(ToolCard toolc) {
         toolCard = toolc;
     }
-    //check the move
-    protected void check(){
 
+    //chosen just dice
+    public Move (Dice dice){
+        chosenDice = dice;
+    }
+
+    //getter method
+    public Dice getChosenDice() throws NullPointerException {
+        if (chosenDice != null) {
+            return chosenDice;
+        }else{
+            throw new NullPointerException();
+        }
+    }
+
+    //getter method
+    public Pos getChosenPos() throws NullPointerException {
+        if(chosenPos != null){
+            return chosenPos;
+        }else{
+            throw new NullPointerException();
+        }
+
+    }
+
+    //getter method
+    public ToolCard getToolCard() throws NullPointerException {
+        if (toolCard!= null) {
+            return toolCard;
+        }else {
+            throw new NullPointerException();
+        }
     }
 }
