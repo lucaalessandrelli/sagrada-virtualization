@@ -18,7 +18,7 @@ public class Server {
         this.clientHandler = new ClientHandler();
         this.idMatch = 0;
         this.timerWaitingRoom = 5000;
-        this.lobby = new WaitingRoom(timerWaitingRoom);
+        this.lobby = new WaitingRoom(timerWaitingRoom, this);
     }
 
     //Modifier methods

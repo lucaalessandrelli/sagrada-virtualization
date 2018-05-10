@@ -12,8 +12,8 @@ public class Player {
     private int myFavTokens;
 
     //just take username from user
-    public Player(String username){
-        this.username = username;
+    public Player(){
+
         /*Scanner in = new Scanner(System.in);
         String input = in.next();
         while (input.length() == 0) {

@@ -12,8 +12,8 @@ public class WaitingRoom {
     private TimerTask task;
     private long time;
 
-    public WaitingRoom(long time) {
-        //this.server = server;
+    public WaitingRoom(long time, Server server) {
+        this.server = server;
         playerList = new ArrayList<>();
         this.time = time;
         //this.tempTime = time;
@@ -76,7 +76,7 @@ public class WaitingRoom {
         server.createMatch(this);
     }
 
-    /*public List<Player> clonePlayerList(List<Player> playerList) {
+    public List<Player> clonePlayerList(List<Player> playerList) {
         List<Player> cloneList = new ArrayList<>();
 
         for (Player player: playerList) {
@@ -84,5 +84,5 @@ public class WaitingRoom {
         }
 
         return cloneList;
-    }*/
+    }
 }
