@@ -18,7 +18,7 @@ public class Server {
         this.clientHandler = new ClientHandler();
         this.idMatch = 0;
         this.timerWaitingRoom = 5000;
-        this.lobby = new WaitingRoom(timerWaitingRoom, this);
+        this.lobby = new WaitingRoom(timerWaitingRoom);
     }
 
     //Modifier methods
@@ -33,6 +33,8 @@ public class Server {
 
     public void createMatch(WaitingRoom lobby) {
         matchList.add(new Match(lobby.getPlayerList(), this, idMatch));
+        /*START MATCH*/
+        matchList.get(idMatch).start();
         idMatch++;
         lobby.restore();
     }

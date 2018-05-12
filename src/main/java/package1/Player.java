@@ -23,6 +23,13 @@ public class Player {
         username = input;
         */
     }
+
+    //I created another constructor (should be the right one with a little bit of adjustment)
+    public Player(String username) {
+        this.username = username;
+        //adjustment
+    }
+
     //getter method
     public String getUsername() {
         return username;
@@ -98,7 +105,30 @@ public class Player {
     }
 
 
+    public Player clonePlayer() {
+        String clonedString = new String(this.getUsername());
+        Player clonedPlayer = new Player(clonedString);
+
+        return clonedPlayer;
+    }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) o;
+
+        if(!(this.username.equals(player.getUsername()))) {
+            return false;
+        }
+
+        return true;
+    }
 }
 

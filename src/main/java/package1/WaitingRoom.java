@@ -12,8 +12,7 @@ public class WaitingRoom {
     private TimerTask task;
     private long time;
 
-    public WaitingRoom(long time, Server server) {
-        this.server = server;
+    public WaitingRoom(long time) {
         playerList = new ArrayList<>();
         this.time = time;
         //this.tempTime = time;
@@ -50,9 +49,10 @@ public class WaitingRoom {
     }
 
     public void restore() {
-        for (Player player: playerList) {
+        /*for (Player player: playerList) {
             playerList.remove(player);
-        }
+        }*/
+        this.playerList = new ArrayList<Player>();
         //resetTimer
         timer.cancel();
         //tempTime = time;
@@ -61,26 +61,23 @@ public class WaitingRoom {
 
     //Getter methods
     public List<Player> getPlayerList() {
-        /*
-        MAKE A CLONE COPY OF playerList
-
-        return clonePlayerList(playerList);
-        */
-        return playerList;
+        return clonePlayerList();
     }
 
     //Setter methods
-
+    public void setServer(Server server){
+        this.server = server;
+    }
 
     public void notifyServer() {
         server.createMatch(this);
     }
 
-    public List<Player> clonePlayerList(List<Player> playerList) {
+    public List<Player> clonePlayerList() {
         List<Player> cloneList = new ArrayList<>();
 
-        for (Player player: playerList) {
-            //cloneList.add(player.clonePlayer(player));
+        for (Player player: this.playerList) {
+            cloneList.add(player.clonePlayer());
         }
 
         return cloneList;
