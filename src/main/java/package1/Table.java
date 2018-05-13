@@ -1,6 +1,7 @@
 package package1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
 public class Table {
@@ -85,6 +86,10 @@ public class Table {
     }
 
     public ArrayList<Dice> getDiceFromBag() {
+        return null;
+    }
+
+    public List<Dice> getAllDraft() {
         return null;
     }
 }
