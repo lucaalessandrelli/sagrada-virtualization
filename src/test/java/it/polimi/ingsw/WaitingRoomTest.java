@@ -5,12 +5,17 @@ import package1.Player;
 import package1.Server;
 import package1.WaitingRoom;
 
+import java.rmi.RemoteException;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WaitingRoomTest {
     Server server = new Server();
     WaitingRoom lobby = server.getLobby();
+
+    public WaitingRoomTest() throws RemoteException {
+    }
 
     @Test
     public void addPlayerTest() {

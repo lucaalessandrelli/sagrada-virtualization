@@ -6,6 +6,7 @@ import package1.Player;
 import package1.Server;
 import package1.WaitingRoom;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,6 +16,9 @@ public class TimerTest {
     private List<Match> matches;
     Server server = new Server();
     WaitingRoom lobby = server.getLobby();
+
+    public TimerTest() throws RemoteException {
+    }
 
     @Test
     public void resetTimerTest() throws InterruptedException {

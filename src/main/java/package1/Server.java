@@ -1,9 +1,11 @@
 package package1;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server {
+public class Server extends UnicastRemoteObject implements ServerInterface {
     private WaitingRoom lobby;
     private List<Match> matchList;
     private List<Client> clientList;
@@ -12,7 +14,8 @@ public class Server {
     private long timerWaitingRoom;
 
 
-    public Server() {
+    public Server() throws RemoteException {
+        super();
         this.matchList = new ArrayList<Match>();
         this.clientList = new ArrayList<Client>();
         this.clientHandler = new ClientHandler();
@@ -50,5 +53,11 @@ public class Server {
 
     public WaitingRoom getLobby() {
         return lobby;
+    }
+
+    @Override
+    public String login(String name) throws RemoteException {
+        System.out.println(name + " is connecting");
+        return new String("welcome");
     }
 }

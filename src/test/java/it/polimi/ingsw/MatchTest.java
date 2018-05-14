@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import org.junit.jupiter.api.Test;
 import package1.*;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,6 +14,9 @@ public class MatchTest {
     private List<Match> matches;
     Server server = new Server();
     WaitingRoom lobby = server.getLobby();
+
+    public MatchTest() throws RemoteException {
+    }
 
 
     @Test
