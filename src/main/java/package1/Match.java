@@ -39,7 +39,7 @@ public class Match {
     }
 
     public void startNextRound() {
-            roundList.add(new Round(this, this.playerList, roundNumber));
+            roundList.add(new Round(this.playerList, roundNumber));
             /* call on the round just created a method that start the round
             roundList.get(roundNumber-1).startRound();
              */
