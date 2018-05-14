@@ -1,44 +1,44 @@
 package package1;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class Player {
     private String username;
+    private boolean active;
     private Table myTable;
     private ObjectiveCard myObjCard;
     private WindowPatternCard myWindow;
     private int myFavTokens;
 
-    //just take username from user
-    public Player(){
 
-        /*Scanner in = new Scanner(System.in);
-        String input = in.next();
-        while (input.length() == 0) {
-            System.out.println("Username not valid!");
-            input = in.next();
-        }
-        username = input;
-        */
-    }
-
-    //I created another constructor (should be the right one with a little bit of adjustment)
+    //just get the username from user
     public Player(String username) {
         this.username = username;
-        //adjustment
+        active = true;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+
+    public void setActivity(boolean active) {
+        this.active = active;
     }
 
     //getter method
     public String getUsername() {
         return username;
     }
+
     //setter method
     public void setMyTable(Table table){
         myTable= table;
-
     }
+
     //getter method
     public Table getMyTable() {
         return myTable;
@@ -55,18 +55,26 @@ public class Player {
     //choose between 4 WindowsPatternCard and set MyFavTokens
     public void ChooseWindow() {
         ArrayList<WindowPatternCard> windows = myTable.getRandomWindows();
-        windows.forEach(i -> System.out.println(i.getNum()));
-        Scanner in = new Scanner(System.in);
-        int chosenOne = in.nextInt();
+     //   windows.forEach(i -> System.out.println(i.getNum())); player view
+     //   Scanner in = new Scanner(System.in);  player choose
+        int chosenOne = 0;
         while (myWindow==null) {
             for (WindowPatternCard w : windows) {
                 if (w.getNum() == chosenOne) {
-                    myWindow = w;
-                    myFavTokens = myWindow.getDifficulty();
+                    setMyWindow(w);
+                    setmyFavTokens();
                 }
             }
         }
 
+    }
+
+    private void setMyWindow(WindowPatternCard w) {
+        myWindow = w;
+    }
+
+    private void setmyFavTokens() {
+        myFavTokens = myWindow.getDifficulty();
     }
 
     //decreases favTokens if ToolCard is used
@@ -83,8 +91,7 @@ public class Player {
     }
     //getter method
     public int getFavTok(){
-        int tok = myFavTokens;
-        return tok;
+        return myFavTokens;
     }
     //pull out dice at the beginning of round
     public ArrayList<Dice> pullOutFirst(){
@@ -92,8 +99,8 @@ public class Player {
         return dice;
     }
     //modify windowsPatternCard
-    public void placeMove(){
-
+    public void placeMove(Move move){
+        myWindow.placeDice(move.getChosenDice(),move.getChosenPos().getX(),move.getChosenPos().getY());
     }
 
     //create a Move
@@ -105,30 +112,9 @@ public class Player {
     }
 
 
-    public Player clonePlayer() {
-        String clonedString = new String(this.getUsername());
-        Player clonedPlayer = new Player(clonedString);
-
-        return clonedPlayer;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (!(o instanceof Player)) {
-            return false;
-        }
-
-        Player player = (Player) o;
-
-        if(!(this.username.equals(player.getUsername()))) {
-            return false;
-        }
-
-        return true;
+    public List<Dice> getLastDice() {
+        List<Dice> remainingDice = myTable.getAllDraft();
+        return remainingDice;
     }
 }
 

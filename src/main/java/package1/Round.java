@@ -1,35 +1,40 @@
 package package1;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 public class Round {
-    private Match match;
     private int roundNumber;
-    private List<Player> playerList;
-    private DiceBag diceBag;
-    private boolean status;
-    private Dice lastDice;
+    private PlayersContainer players;
+    private List<Dice> lastDice;
 
-    public Round(Match match, List<Player> playerList, int roundNumber) {
-        this.match = match;
-        this.playerList = playerList;
+    public Round(List<Player> playerList, int roundNumber) {
         this.roundNumber = roundNumber;
+        players = new PlayersContainer(playerList);
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void start() throws NotEnoughPlayersException {
+        Player p = null;
+        Iterator<Player> i = players.getIterator();
+        while(i.hasNext()){
+            p = i.next();
+            if (p.isActive()){
+                Turn t = new Turn(p);
+            }
+            if(!players.checkActivity()){
+                throw new NotEnoughPlayersException();
+            }
+        }
+        setLastDice(p);
     }
 
-    public boolean getStatus() {
-        return this.status;
+
+    private void setLastDice(Player p) {
+
+        this.lastDice = p.getLastDice();
     }
 
-    public void setLastDice(Dice lastDice) {
-        this.lastDice = lastDice;
-    }
-
-    public Dice getLastDice() {
+    public List<Dice> getLastDice() {
         return this.lastDice;
     }
 

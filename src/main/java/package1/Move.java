@@ -20,6 +20,11 @@ public class Move {
         chosenDice = dice;
     }
 
+    public Move (Dice dice, Pos pos){
+        chosenPos = pos;
+        chosenDice= dice;
+    }
+
     //getter method
     public Dice getChosenDice() throws NullPointerException {
         if (chosenDice != null) {
