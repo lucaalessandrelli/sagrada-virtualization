@@ -3,12 +3,14 @@
 * TimerTest
     * - [x] resetTimerTest
     * - [x] noTimerTest
+    * - [x] oneTimeTimerTest
 * MatchTest
-    * - [x] maxPlayersMatchTest
-    * - [x] addPlayerWaitingRoomTest
-    * - [x] removePlayerStartedMatchTest
-    * - [x] removePlayerWaitingRoomTest
-    * - [ ] emptyWaitingRoomTest
+    * - [x] initializeRoundTest
+    * - [x] maxPlayersTest
+* WaitingRoomTest
+    * - [x] addPlayerTest
+    * - [x] removePlayerTest
+    * - [x] equalsTest
 * ToolCardTest
     * - [x] increasingCostTest
 
