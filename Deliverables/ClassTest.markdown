@@ -10,6 +10,7 @@
 * WaitingRoomTest
     * - [x] addPlayerTest
     * - [x] removePlayerTest
+    * - [x] equalsTest
 * ToolCardTest
     * - [x] increasingCostTest
 
