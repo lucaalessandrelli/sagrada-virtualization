@@ -19,6 +19,11 @@ public class Property {
         this.colour = colour;
         this.number = value;
     }
+
+    public Property clone() throws CloneNotSupportedException {
+        Property x = (Property) super.clone();
+        return x;
+    }
     //getter method
     public Colour getColour() {
         return this.colour;

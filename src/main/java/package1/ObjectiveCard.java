@@ -13,6 +13,17 @@ public class ObjectiveCard extends Card{
         + this.points + "\nType: "
         + this.type);
     }
+    //this method returns a public objective card
+    public ObjectiveCard askForPublic(){
+        //take a public card from the ones available in the file
+        return null;
+    }
+
+    //this method returns a private objective card
+    public ObjectiveCard askForPrivate(){
+        //take a private card from the ones available in the file
+        return null;
+    }
 
     //Left for future implementation
     public int finalpoints(){

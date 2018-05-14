@@ -18,12 +18,13 @@ public class ToolCard extends Card {
 
     public void setUsed() {
         this.used = true;
-        this.setCost(2);
+        this.cost = 2;
     }
 
-    public void setCost(int cost) {
+    /*public void setCost(int cost) {
         this.cost = cost;
     }
+    */
 
     public int getCost() {
         return this.cost;

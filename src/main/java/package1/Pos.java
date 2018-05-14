@@ -14,6 +14,10 @@ public class Pos {
         this.y = y;
     }
 
+    public Pos clone() throws CloneNotSupportedException {
+        Pos x = (Pos) super.clone();
+        return x;
+    }
     public int getX(){
         return this.x;
     }

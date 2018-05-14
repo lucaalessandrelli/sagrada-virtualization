@@ -21,14 +21,20 @@ public abstract class  Card {
     }
 
     public String getName() {
-        return this.name;
+        String x = new String();
+        x = this.name;
+        return x;
     }
 
     public String getDescription() {
-        return this.description;
+        String x = new String();
+        x = this.description;
+        return x;
     }
 
     public int getID(){
-        return this.idnumber;
+        int x;
+        x = this.idnumber;
+        return x;
     }
 }

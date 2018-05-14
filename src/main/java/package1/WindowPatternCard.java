@@ -8,7 +8,6 @@ public class WindowPatternCard {
     private Cell[][] matr = new Cell[4][5];
     private int difficulty;
     private String name;
-    //private int cont = 12; I'm not sure about this so the method and this attribute is all commented
 
     public WindowPatternCard(int num, int difficulty, String name){
         this.num = num;
@@ -17,15 +16,49 @@ public class WindowPatternCard {
     }
 
     public int getNum(){
+        int x = this.num;
         return this.num;
     }
 
-    //getter
-    public int getDifficulty(){
-        return this.difficulty;
+
+    public int getDifficulty() {
+        int x = this.difficulty;
+        return x;
     }
 
-    public Cell[][] getMatr(){ return this.matr;}
+
+    public Cell[][] getMatr(){
+        Cell[][] x = new Cell[4][5];
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 6; j++){
+                x[i][j] = matr[i][j];
+            }
+        }
+        return x;
+    }
+
+    private void setNum(int x){
+        this.num = x;
+    }
+
+    private void setDifficulty(int x){
+        this.difficulty = x;
+    }
+
+    private void setName(String x){
+        this.name = x;
+    }
+
+    private void setMatr(Cell[][] x){
+        this.matr = x;
+    }
+
+    @Override
+    public WindowPatternCard clone() throws CloneNotSupportedException {
+        WindowPatternCard x = (WindowPatternCard) super.clone();
+        x.setMatr((Cell[][])x.getMatr().clone()); //!!Ricorda di fare la clone di CELL!!!!!
+        return x;
+    }
 
     //shows every attribute of the Card, also the scheme
     public void show(){
@@ -44,24 +77,6 @@ public class WindowPatternCard {
             }
         }
     }
-
-    //Pull out 4 WindowPatternCard given to the player to select one of them
-   /* !!!!Is pseudo-code!!!!!
-      public ArrayList<WindowPatternCard> pullOut(){
-        int dimension = 4;
-        ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
-        int randomNum;
-        Random rand = new Random();
-        for(int k = 0; k < dimension; k++) {
-            randomNum = rand.nextInt((cont));
-            Here I need to take from the configuration file the randomNum card
-            Here I need to "sign" the card so that in the next cycle I won't take the same card I took before
-            this.cont--;
-            tmp.add(z); Supposing that z is the selected card from this "turn"
-        }
-        return tmp;
-    }
-    */
 
     //place the dice
     public Boolean placeDice(Dice d, int x, int y){

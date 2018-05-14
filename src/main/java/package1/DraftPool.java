@@ -17,7 +17,9 @@ public class DraftPool {
 
     //getter method
     public ArrayList<Dice> getDraftPool() {
-        return draftPool;
+        ArrayList<Dice> x = new ArrayList<>();
+        x = draftPool;
+        return x;
     }
 
     //get dice from array at position i
