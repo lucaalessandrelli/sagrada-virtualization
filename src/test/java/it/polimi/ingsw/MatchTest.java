@@ -13,11 +13,10 @@ public class MatchTest {
     private List<Match> matches;
     Server server = new Server();
     WaitingRoom lobby = server.getLobby();
-    //private List<Player> players = new ArrayList<Player>();
 
 
     @Test
-    public void maxPlayersMatchTest() {
+    public void maxPlayersTest() {
         lobby.setServer(server);
 
         Player player1 = new Player("1");
@@ -49,81 +48,6 @@ public class MatchTest {
     }
 
     @Test
-    public void equalsTest() {
-        lobby.setServer(server);
-
-        Player player1 = new Player("1");
-        Player player2 = new Player("1");
-
-        server.connectPlayer(player1);
-
-        assertTrue(lobby.getPlayerList().size() == 1);
-        assertTrue(lobby.getPlayerList().contains(player1));
-        assertTrue(lobby.getPlayerList().contains(player2));
-    }
-
-    @Test
-    public void addPlayerWaitingRoomTest() {
-        lobby.setServer(server);
-
-        Player player1 = new Player("1");
-        Player player2 = new Player("2");
-
-        server.connectPlayer(player1);
-        server.connectPlayer(player2);
-
-        // Testing addPlayer function in Waiting Room
-        assertTrue(lobby.getPlayerList().size() == 2);
-        assertTrue(lobby.getPlayerList().contains(player1));
-        assertTrue(lobby.getPlayerList().contains(player2));
-    }
-
-/*
-    @Test
-    public void removePlayerStartedMatchTest() {
-        Match match = new Match(1); // Match is tested
-        Player player1 = new Player();
-        Player player2 = new Player();
-        Player player3 = new Player();
-        Player player4 = new Player();
-
-        match.addPlayer(player1);
-        match.addPlayer(player2);
-        match.addPlayer(player3);
-        match.addPlayer(player4);
-
-        match.removePlayer(player1);
-
-        // Testing the remove function when match state is StartedMatch
-        assertTrue(match.getPlayerList().size() == 4);
-        assertTrue(match.getPlayerList().contains(player1));
-        assertTrue(match.getPlayerList().contains(player2));
-        assertTrue(match.getPlayerList().contains(player3));
-        assertTrue(match.getPlayerList().contains(player4));
-    }*/
-
-    @Test
-    public void removePlayerWaitingRoomTest() {
-        lobby.setServer(server);
-
-        Player player1 = new Player("2");
-        Player player2 = new Player("2");
-        Player player3 = new Player("3");
-
-        server.connectPlayer(player1);
-        server.connectPlayer(player2);
-        server.connectPlayer(player3);
-
-        server.disconnectPlayer(player1);
-
-        // Testing the remove function when match state is WaitingRoom
-        assertTrue(lobby.getPlayerList().size() == 2);
-        assertTrue(lobby.getPlayerList().contains(player2));
-        assertTrue(lobby.getPlayerList().contains(player3));
-    }
-
-
-    @Test
     public void initializeRoundTest() {
         int i = 1;
         lobby.setServer(server);
@@ -141,16 +65,9 @@ public class MatchTest {
         Match match = server.getMatchList().get(0);
 
         assertTrue(match.getPlayerList().size() == 4);
+        assertTrue(match.getRoundList().size() == 10);
 
-        List<Round> roundList = match.getRoundList();
-
-        assertTrue(roundList.size() == 1);
-
-        match.startNextRound();
-
-        assertTrue(roundList.size() == 2);
-
-        for (Round round: roundList) {
+        for (Round round: match.getRoundList()) {
             assertTrue(round.getRoundNumber() == i);
             i++;
         }

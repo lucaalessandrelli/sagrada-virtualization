@@ -15,19 +15,16 @@ public class WaitingRoom {
     public WaitingRoom(long time) {
         playerList = new ArrayList<>();
         this.time = time;
-        //this.tempTime = time;
         timer = new Timer();
     }
 
     //Modifier methods
     public void addPlayer(Player player) {
         if (playerList.size() == 1) {
+            playerList.add(player);
             //start the timer
             task = new MatchTimerTask(this,time, timer);
-            //this.startTimer(playerList,match);
             timer.schedule(task, 1000,1000);
-            playerList.add(player);
-
         } else if (playerList.size() < 4) {
             playerList.add(player);
             if(playerList.size() == 4) {
@@ -42,26 +39,25 @@ public class WaitingRoom {
 
         if (playerList.size() < 2) { //if n°players drops below 2 timer needs to be reset and stopped
             //resetTimer
-            timer.cancel();
-            //tempTime = time;
-            timer = new Timer();
+            this.resetTimer();
         }
     }
 
+    public void resetTimer() {
+        timer.cancel();
+        timer = new Timer();
+    }
+
     public void restore() {
-        /*for (Player player: playerList) {
-            playerList.remove(player);
-        }*/
         this.playerList = new ArrayList<Player>();
         //resetTimer
-        timer.cancel();
-        //tempTime = time;
-        timer = new Timer();
+        this.resetTimer();
     }
 
     //Getter methods
     public List<Player> getPlayerList() {
-        return clonePlayerList();
+        //return clonePlayerList();
+        return this.playerList;
     }
 
     //Setter methods
@@ -73,7 +69,7 @@ public class WaitingRoom {
         server.createMatch(this);
     }
 
-    public List<Player> clonePlayerList() {
+    /*public List<Player> clonePlayerList() {
         List<Player> cloneList = new ArrayList<>();
 
         for (Player player: this.playerList) {
@@ -81,5 +77,5 @@ public class WaitingRoom {
         }
 
         return cloneList;
-    }
+    }*/
 }
