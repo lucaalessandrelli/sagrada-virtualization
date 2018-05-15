@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.modelTest.gameLogicTest;
 
 import it.polimi.ingsw.model.gameData.Player;
 import it.polimi.ingsw.model.gameLogic.PlayersContainer;

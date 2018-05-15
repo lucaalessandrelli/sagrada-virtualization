@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.modelTest.gameDataTest;
 
 import it.polimi.ingsw.model.gameData.Dice;
 import it.polimi.ingsw.model.gameData.DraftPool;
