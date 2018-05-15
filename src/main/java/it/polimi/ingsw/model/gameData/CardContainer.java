@@ -16,17 +16,20 @@ public class CardContainer {
             objectivepublic.add((i+1));
         }
     }
+
     //Pull out 4 WindowPatternCard given to the player to select one of them
     //!!!!Misses one part of the code!!!!
-      public ArrayList<WindowPatternCard> pullOutPattern(){
+    public ArrayList<WindowPatternCard> pullOutPattern(){
         int dimension = 4;
         ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
         int randomNum;
+        int cont = pattern.size();
         Random rand = new Random();
         for(int k = 0; k < dimension; k++) {
-            randomNum = rand.nextInt((pattern.size()));
-           // Here I need to take from the configuration file the randomNum card
+            randomNum = rand.nextInt(cont);
+            // Here I need to take from the configuration file the randomNum card
             pattern.remove(randomNum);
+            cont--;
             //tmp.add(z); Supposing that z is the selected card from this "turn"
         }
         return tmp;
@@ -38,11 +41,13 @@ public class CardContainer {
         int dimension = numPlayers;
         ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
         int randomNum;
+        int cont = objectiveprivate.size();
         Random rand = new Random();
         for(int k = 0; k < dimension; k++) {
-            randomNum = rand.nextInt((objectiveprivate.size()));
+            randomNum = rand.nextInt(cont);
             // Here I need to take from the configuration file the randomNum card
             objectiveprivate.remove(randomNum);
+            cont--;
             //tmp.add(z); Supposing that z is the selected card from this "turn"
         }
         return tmp;
@@ -54,11 +59,13 @@ public class CardContainer {
         int dimension = 3;
         ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
         int randomNum;
+        int cont = objectivepublic.size();
         Random rand = new Random();
         for(int k = 0; k < dimension; k++) {
-            randomNum = rand.nextInt((objectivepublic.size()));
+            randomNum = rand.nextInt(cont);
             // Here I need to take from the configuration file the randomNum card
             objectivepublic.remove(randomNum);
+            cont--;
             //tmp.add(z); Supposing that z is the selected card from this "turn"
         }
         return tmp;

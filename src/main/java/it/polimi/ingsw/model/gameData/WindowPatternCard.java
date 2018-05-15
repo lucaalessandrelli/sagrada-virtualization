@@ -26,8 +26,8 @@ public class WindowPatternCard {
 
     public Cell[][] getMatr(){
         Cell[][] x = new Cell[4][5];
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 6; j++){
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 5; j++){
                 x[i][j] = matr[i][j];
             }
         }
@@ -83,8 +83,7 @@ public class WindowPatternCard {
         else{
             matr[x][y] = new Cell();
             matr[x][y].setOccupation(true);
-            matr[x][y].getProperty().setColour(d.getColour());
-            matr[x][y].getProperty().setNumber(d.getNumber());
+            matr[x][y].setDice(d);
             return true;
         }
     }
