@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.gameData.ToolCard;
 import org.junit.jupiter.api.Test;
-import package1.ToolCard;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

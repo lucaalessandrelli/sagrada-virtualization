@@ -1,9 +1,8 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.gameData.Dice;
+import it.polimi.ingsw.model.gameData.DraftPool;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-import package1.Dice;
-import package1.DraftPool;
 
 import java.util.ArrayList;
 

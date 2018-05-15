@@ -1,7 +1,8 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.gameData.Player;
+import it.polimi.ingsw.model.gameLogic.Round;
 import org.junit.jupiter.api.Test;
-import package1.*;
 
 import java.rmi.RemoteException;
 import java.util.List;

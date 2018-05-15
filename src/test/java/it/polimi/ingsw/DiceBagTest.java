@@ -1,12 +1,11 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.gameData.Colour;
+import it.polimi.ingsw.model.gameData.Dice;
+import it.polimi.ingsw.model.gameData.DiceBag;
 import org.junit.jupiter.api.Test;
-import package1.Colour;
-import package1.Dice;
-import package1.DiceBag;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

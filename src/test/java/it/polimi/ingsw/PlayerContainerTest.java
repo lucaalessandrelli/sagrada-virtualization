@@ -1,8 +1,8 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.gameData.Player;
+import it.polimi.ingsw.model.gameLogic.PlayersContainer;
 import org.junit.jupiter.api.Test;
-import package1.Player;
-import package1.PlayersContainer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

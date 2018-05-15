@@ -1,8 +1,8 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.gameData.Dice;
+import it.polimi.ingsw.model.gameData.WindowPatternCard;
 import org.junit.jupiter.api.Test;
-import package1.Dice;
-import package1.WindowPatternCard;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

@@ -1,9 +1,7 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.gameData.Player;
 import org.junit.jupiter.api.Test;
-import package1.Player;
-import package1.Server;
-import package1.WaitingRoom;
 
 import java.rmi.RemoteException;
 

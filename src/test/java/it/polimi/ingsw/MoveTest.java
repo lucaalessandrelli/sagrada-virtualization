@@ -1,11 +1,10 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.gameData.Dice;
+import it.polimi.ingsw.model.gameLogic.Move;
+import it.polimi.ingsw.model.gameLogic.Pos;
+import it.polimi.ingsw.model.gameData.ToolCard;
 import org.junit.jupiter.api.Test;
-import package1.Dice;
-import package1.Move;
-import package1.Pos;
-import package1.ToolCard;
-
 
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
