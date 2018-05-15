@@ -28,3 +28,8 @@
    * - [x] TestMatrixLenght
    * - [x] TestOccupied
    * - [x] TestFull
+   
+* PlayerContainer
+   * -[x] testIterator1
+   * -[x] testIterator2
+   * -[x] testActivity
