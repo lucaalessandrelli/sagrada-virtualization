@@ -30,7 +30,7 @@ public class Property {
     }
     //getter method
     public int getNumber() {
-        return number;
+        return this.number;
     }
     //setter method
     public void setColour(Colour z){

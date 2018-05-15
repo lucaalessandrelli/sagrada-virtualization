@@ -17,7 +17,7 @@ public class DraftPool {
 
     //getter method
     public ArrayList<Dice> getDraftPool() {
-        ArrayList<Dice> x = new ArrayList<>();
+        ArrayList<Dice> x;
         x = draftPool;
         return x;
     }
