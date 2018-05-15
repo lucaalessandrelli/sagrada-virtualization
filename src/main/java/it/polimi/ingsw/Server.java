@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gameData.Player;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.rmi.server.Unreferenced;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,4 +59,15 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         System.out.println(name + " is connecting");
         return new String("welcome");
     }
+
+    @Override
+    public String command(String cmd) throws RemoteException {
+        if(cmd.equals("exit")){
+            System.out.println();
+            return new String("ok");
+        }else{
+           return new String("invalid command");
+        }
+    }
+
 }
