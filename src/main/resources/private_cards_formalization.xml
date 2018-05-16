@@ -1,0 +1,67 @@
+<PRIVATECARDS>
+	<CARD>
+		<NUMBER>1</NUMBER>
+		<NAME>Sfumature rosse</NAME>
+		<DESCRIPTION>Somma dei valori su tutti i dadi rossi</DESCRIPTION>
+		<TYPE>Privata</TYPE>
+		<POINTS>V</POINTS>
+		<RULES>
+			<WHERE>-</WHERE>
+			<PROP>-</PROP>
+			<VALUES>-</VALUES>
+			<COLOR>R</COLOR>
+		</RULES>
+	</CARD>
+	<CARD>
+		<NUMBER>2</NUMBER>
+		<NAME>Sfumature gialle</NAME>
+		<DESCRIPTION>Somma dei valori su tutti i dadi gialli</DESCRIPTION>
+		<TYPE>Privata</TYPE>
+		<POINTS>V</POINTS>
+		<RULES>
+			<WHERE>-</WHERE>
+			<PROP>-</PROP>
+			<VALUES>-</VALUES>
+			<COLOR>Y</COLOR>
+		</RULES>
+	</CARD>
+	<CARD>
+		<NUMBER>3</NUMBER>
+		<NAME>Sfumature verdi</NAME>
+		<DESCRIPTION>Somma dei valori su tutti i dadi verdi</DESCRIPTION>
+		<TYPE>Privata</TYPE>
+		<POINTS>V</POINTS>
+		<RULES>
+			<WHERE>-</WHERE>
+			<PROP>-</PROP>
+			<VALUES>-</VALUES>
+			<COLOR>G</COLOR>
+		</RULES>
+	</CARD>
+	<CARD>
+		<NUMBER>4</NUMBER>
+		<NAME>Sfumature blu</NAME>
+		<DESCRIPTION>Somma dei valori su tutti i dadi blu</DESCRIPTION>
+		<TYPE>Privata</TYPE>
+		<POINTS>V</POINTS>
+		<RULES>
+			<WHERE>-</WHERE>
+			<PROP>-</PROP>
+			<VALUES>-</VALUES>
+			<COLOR>B</COLOR>
+		</RULES>
+	</CARD>
+	<CARD>
+		<NUMBER>5</NUMBER>
+		<NAME>Sfumature viola</NAME>
+		<DESCRIPTION>Somma dei valori su tutti i dadi viola</DESCRIPTION>
+		<TYPE>Privata</TYPE>
+		<POINTS>V</POINTS>
+		<RULES>
+			<WHERE>-</WHERE>
+			<PROP>-</PROP>
+			<VALUES>-</VALUES>
+			<COLOR>P</COLOR>
+		</RULES>
+	</CARD>
+</PRIVATECARDS>
