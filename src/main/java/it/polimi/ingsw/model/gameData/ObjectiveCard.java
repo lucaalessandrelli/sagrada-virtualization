@@ -9,7 +9,7 @@ public class ObjectiveCard extends Card{
     private String name;
     private String description;
     private int idnumber;
-    private ArrayList<String> rules = new ArrayList<String>();
+    private Rules rules;
 
 
     public ObjectiveCard(){
@@ -18,6 +18,7 @@ public class ObjectiveCard extends Card{
         this.name = null;
         this.description = null;
         this.idnumber = 0;
+        this.rules = null;
     }
 
     public ObjectiveCard(int points, String type, String name, String description, int idnumber) {
@@ -48,7 +49,7 @@ public class ObjectiveCard extends Card{
         return this.type;
     }
 
-    public ArrayList<String> getRules(){
+    public Rules getRules(){
         return this.rules;
     }
 
@@ -78,7 +79,13 @@ public class ObjectiveCard extends Card{
     }
 
     //Left for future implementation
-    public int finalpoints(){
+    public int finalpoints(WindowPatternCard w){
+        int result = 0;
+        for (String x: this.rules.getRules()) {
+            result = result + ((this.rules.verify(x,w))*points);
+        }
         return 1;
     }
+
+
 }

@@ -124,7 +124,7 @@
 		<POINTS>4</POINTS>
 		<RULES>
 			<WHERE>-</WHERE>
-			<PROP>NOCOLOR</PROP>
+			<PROP>-</PROP>
 			<VALUES>-</VALUES>
 			<COLOR>Y,G,B,P,R</COLOR>
 		</RULES>

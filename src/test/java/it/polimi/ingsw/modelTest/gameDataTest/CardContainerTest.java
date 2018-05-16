@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.modelTest.gameDataTest;
 
 import it.polimi.ingsw.model.gameData.AlreadyBeenCalledException;
 import it.polimi.ingsw.model.gameData.CardContainer;
@@ -69,10 +69,10 @@ public class CardContainerTest {
         ArrayList<ObjectiveCard> test = new ArrayList<ObjectiveCard>();
         test = tester.pullOutPublic();
         for (ObjectiveCard x: test) {
-            for (String k: x.getRules()){
+            for (String k: x.getRules().getRules()){
              System.out.println("Regola: " + k + "\n");
             }
-            assertTrue(!(x.getRules().isEmpty()));
+            assertTrue(!(x.getRules().getRules().isEmpty()));
         }
     }
 }
