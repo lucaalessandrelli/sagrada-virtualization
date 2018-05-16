@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.gameData;
 
-import it.polimi.ingsw.model.gameLogic.Pos;
-
 public class Cell {
     private Property property;
     private Pos pos;

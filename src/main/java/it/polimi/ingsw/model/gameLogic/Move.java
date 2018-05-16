@@ -3,8 +3,10 @@ package it.polimi.ingsw.model.gameLogic;
 import it.polimi.ingsw.model.gameData.Dice;
 import it.polimi.ingsw.model.gameData.ToolCard;
 
-public class Move {
-    private Pos chosenPos;
+public interface Move {
+
+}
+/*    private Pos chosenPos;
     private Dice chosenDice;
     private ToolCard toolCard;
 
@@ -56,3 +58,4 @@ public class Move {
         }
     }
 }
+*/

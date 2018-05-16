@@ -101,7 +101,7 @@ public class Player {
     }
     //modify windowsPatternCard
     public void placeMove(Move move){
-        myWindow.placeDice(move.getChosenDice(),move.getChosenPos().getX(),move.getChosenPos().getY());
+      //  myWindow.placeDice(move.getChosenDice(),move.getChosenPos().getX(),move.getChosenPos().getY());
     }
 
     //create a Move

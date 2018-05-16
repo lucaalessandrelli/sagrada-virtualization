@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.gameData;
 
-public class Dice {
+import it.polimi.ingsw.model.gameLogic.Move;
+
+public class Dice implements Move {
     private Property prop;
 
     public Dice(){

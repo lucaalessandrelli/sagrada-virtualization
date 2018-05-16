@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.gameData;
 
-public class ToolCard extends Card {
+import it.polimi.ingsw.model.gameLogic.Move;
+
+public class ToolCard extends Card implements Move {
     private boolean used;
     private int cost;
 

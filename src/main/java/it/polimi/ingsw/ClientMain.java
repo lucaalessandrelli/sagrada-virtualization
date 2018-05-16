@@ -2,7 +2,6 @@ package it.polimi.ingsw;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
 public class ClientMain {
