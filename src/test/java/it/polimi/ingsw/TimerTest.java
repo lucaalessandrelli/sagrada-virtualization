@@ -35,7 +35,7 @@ public class TimerTest {
         System.out.println("Now numPlayer is "+ lobby.getPlayerList().size());
 
         System.out.println("----begin sleep2----");
-        Thread.sleep(3000);
+        Thread.sleep(6000);
         System.out.println("----end sleep2----");
 
         server.connectPlayer(player2);
