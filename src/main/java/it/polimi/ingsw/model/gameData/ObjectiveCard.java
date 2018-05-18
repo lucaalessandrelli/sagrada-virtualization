@@ -14,11 +14,11 @@ public class ObjectiveCard extends Card{
 
     public ObjectiveCard(){
         this.points = 0;
-        this.type = null;
-        this.name = null;
-        this.description = null;
+        this.type = "";
+        this.name = "";
+        this.description = "";
         this.idnumber = 0;
-        this.rules = null;
+        this.rules = new Rules();
     }
 
     public ObjectiveCard(int points, String type, String name, String description, int idnumber) {

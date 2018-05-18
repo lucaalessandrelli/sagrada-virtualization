@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public class Rules {
 
-    private ArrayList<String> rules = new ArrayList<String>();
+    private ArrayList<String> rules;
+
+    public Rules(){
+        this.rules = new ArrayList<String>();
+    }
 
 
     public ArrayList<String> getRules(){

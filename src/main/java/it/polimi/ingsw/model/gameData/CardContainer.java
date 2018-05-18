@@ -72,7 +72,7 @@ public class CardContainer {
             Random rand = new Random();
             for (int k = 0; k < dimension; k++) {
                 randomNum = rand.nextInt(cont - k);
-                tmp.add(this.readValues("C:/Users/Vincenzo/IdeaProjects/ProgettoIngSw/src/main/resources/private_cards_formalization.xml", objectiveprivate.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                tmp.add(this.readValues("src/main/resources/private_cards_formalization.xml", objectiveprivate.get(randomNum))); //Supposing that z is the selected card from this "turn"
                 objectiveprivate.remove(randomNum);
             }
         } catch (AlreadyBeenCalledException e){
@@ -95,7 +95,7 @@ public class CardContainer {
             Random rand = new Random();
             for (int k = 0; k < dimension; k++) {
                 randomNum = rand.nextInt(cont - k);
-                tmp.add(this.readValues("C:/Users/Vincenzo/IdeaProjects/ProgettoIngSw/src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                tmp.add(this.readValues("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
                 objectivepublic.remove(randomNum);
             }
         } catch (AlreadyBeenCalledException e){
@@ -107,7 +107,8 @@ public class CardContainer {
     private ObjectiveCard readValues(String namefile, int cont) throws ParserConfigurationException, IOException, SAXException {
         ObjectiveCard myobj = new ObjectiveCard();
         int result;
-        File file = new File(namefile);
+        String path = new File(namefile).getAbsolutePath();
+        File file = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         Document document = documentBuilder.parse(file);
@@ -124,12 +125,12 @@ public class CardContainer {
                 myobj.setPoints(result);
             }
             myobj.setID(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()));
-            this.readRulesPublic(document,myobj.getRules(),cont);
+            this.readRulesPublic(document,myobj.getRules().getRules(),cont);
         }
         else {
             myobj.setID(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()) + 10);
             myobj.setPoints(1);
-            myobj.getRules().add(document.getElementsByTagName("COLOR").item(cont).getTextContent());
+            myobj.getRules().getRules().add(document.getElementsByTagName("COLOR").item(cont).getTextContent());
         }
         return myobj;
     }
