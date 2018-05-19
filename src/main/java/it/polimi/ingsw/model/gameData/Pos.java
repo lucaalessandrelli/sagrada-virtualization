@@ -16,10 +16,6 @@ public class Pos implements Move {
         this.y = y;
     }
 
-    public Pos clone() throws CloneNotSupportedException {
-        Pos x = (Pos) super.clone();
-        return x;
-    }
     public int getX(){
         return this.x;
     }
@@ -28,4 +24,7 @@ public class Pos implements Move {
         return this.y;
     }
 
+    public void setX(int x){this.x = x;}
+
+    public void setY(int y){this.y = y;}
 }

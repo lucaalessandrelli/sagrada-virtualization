@@ -5,7 +5,7 @@ import java.util.List;
 
 //I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
 public class Table {
-    private ArrayList<Player> scoreTrack= new ArrayList<Player>();
+    private ArrayList<Player> myplayer= new ArrayList<Player>();
     private ArrayList<ObjectiveCard> objectiveCards = new ArrayList<ObjectiveCard>(4);
     private ArrayList<ToolCard> toolCards = new ArrayList<ToolCard>(3);
     private ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<WindowPatternCard>(4);
@@ -30,24 +30,24 @@ public class Table {
         }
     }
 
-    public Table(ArrayList<Player> scoreTrack, ArrayList<ObjectiveCard> objectiveCards, ArrayList<ToolCard> toolCards, ArrayList<WindowPatternCard> windowPatternCards) {
-        this.scoreTrack = scoreTrack;
+    public Table(ArrayList<Player> myplayer, ArrayList<ObjectiveCard> objectiveCards, ArrayList<ToolCard> toolCards, ArrayList<WindowPatternCard> windowPatternCards) {
+        this.myplayer = myplayer;
         this.objectiveCards = objectiveCards;
         this.toolCards = toolCards;
         this.windowPatternCards = windowPatternCards;
     }
 
-    public void addCard(WindowPatternCard z) throws IndexOutOfBoundsException{
-        try{
-            if(this.windowPatternCards.size() < 4)
+    public boolean addCard(WindowPatternCard z) throws IndexOutOfBoundsException{
+            if(this.windowPatternCards.size() < 4) {
                 this.windowPatternCards.add(z);
-        } catch (IndexOutOfBoundsException e){
-            throw e;
-        }
+                return true;
+            }
+            else
+                return false;
     }
     //Implement this in the other class
     public void showPlayers() {
-        for (Player x : this.scoreTrack) {
+        for (Player x : this.myplayer) {
             System.out.println("Player: " + x.getUsername() + "\n");
         }
     }
@@ -93,6 +93,6 @@ public class Table {
     }
 
     public List<Dice> getAllDraft() {
-        return null;
+        return this.draftPool.getDraftPool();
     }
 }

@@ -9,6 +9,7 @@ public enum Colour {
     WHITE("WHITE");
 
     private String name;
+
     private Colour(String mystring) {
         this.name = mystring;
     }
@@ -16,6 +17,12 @@ public enum Colour {
     @Override
     public String toString(){
         return name;
+    }
+
+    public boolean equals(Colour c){
+        if(this.toString().equals(c.toString()))
+            return true;
+        return false;
     }
 
 }

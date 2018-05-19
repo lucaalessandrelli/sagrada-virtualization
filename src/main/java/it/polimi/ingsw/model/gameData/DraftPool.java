@@ -17,9 +17,7 @@ public class DraftPool {
 
     //getter method
     public ArrayList<Dice> getDraftPool() {
-        ArrayList<Dice> x;
-        x = draftPool;
-        return x;
+        return this.draftPool;
     }
 
     //get dice from array at position i
@@ -51,6 +49,15 @@ public class DraftPool {
     //gives back the number of dices remaining in the draftpool
     public int getNumOfDices(){
         return draftPool.size();
+    }
+
+    //find the dice d in the Draftpool
+    public boolean findDice(Dice d){
+        for(Dice x: this.draftPool){
+            if (x.equals(d))
+                return true;
+        }
+        return false;
     }
 
 }

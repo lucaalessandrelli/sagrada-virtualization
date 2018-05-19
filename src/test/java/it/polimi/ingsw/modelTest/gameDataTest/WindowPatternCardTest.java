@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gameData.Dice;
 import it.polimi.ingsw.model.gameData.WindowPatternCard;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WindowPatternCardTest{
@@ -12,8 +13,8 @@ public class WindowPatternCardTest{
     @Test
     public void TestMatrixLength(){
         WindowPatternCard tester = new WindowPatternCard(0,0,"No name");
-        assertTrue(tester.getMatr().length == 4);
-        assertTrue(tester.getMatr()[0].length == 5);
+        assertEquals(5, tester.getMatr().size());
+        assertEquals(4, tester.getMatr().get(0).size());
     }
 
     //to do this we need to define the rules
@@ -28,21 +29,21 @@ public class WindowPatternCardTest{
         int x = 0,y = 0;
         Dice d = new Dice();
         assertTrue(tester.placeDice(d,x,y) == true);
-        assertTrue(tester.getMatr()[x][y].isOccupied() == true);
+        assertTrue(tester.getMatr().get(x).get(y).isOccupied() == true);
     }
 
     @Test
     public void TestFull(){
         Dice d = new Dice();
         WindowPatternCard tester = new WindowPatternCard(0,0,"No name");
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j <5; j++){
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 4; j++){
                 tester.placeDice(d,i,j);
             }
         }
 
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 5; j++){
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 4; j++){
                 assertTrue(tester.placeDice(d,i,j) == false);
             }
         }

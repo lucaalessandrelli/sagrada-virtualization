@@ -1,8 +1,10 @@
 package it.polimi.ingsw.model.gameData;
 
+import java.util.ArrayList;
+
 public class WindowPatternCard {
     private int num;
-    private Cell[][] matr = new Cell[4][5];
+    private ArrayList<ArrayList<Cell>> matr = new ArrayList<>(5);
     private int difficulty;
     private String name;
 
@@ -10,6 +12,14 @@ public class WindowPatternCard {
         this.num = num;
         this.difficulty = difficulty;
         this.name = name;
+        for(int i = 0; i < 5; i++){
+            ArrayList<Cell> x = new ArrayList<>(4);
+            this.matr.add(x);
+            for(int j = 0; j < 4; j++){
+                Cell y = new Cell();
+                this.matr.get(i).add(y);
+            }
+        }
     }
 
     public int getNum(){
@@ -24,16 +34,14 @@ public class WindowPatternCard {
     }
 
 
-    public Cell[][] getMatr(){
-        Cell[][] x = new Cell[4][5];
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 5; j++){
-                x[i][j] = matr[i][j];
-            }
-        }
-        return x;
+    public ArrayList<ArrayList<Cell>> getMatr(){
+        return this.matr;
     }
-
+    /*
+    public Cell[] getCell(){
+        return;
+    }
+*/
     private void setNum(int x){
         this.num = x;
     }
@@ -46,29 +54,25 @@ public class WindowPatternCard {
         this.name = x;
     }
 
-    private void setMatr(Cell[][] x){
+    private void setMatr(ArrayList<ArrayList<Cell>> x){
         this.matr = x;
     }
 
-    @Override
-    public WindowPatternCard clone() throws CloneNotSupportedException {
-        WindowPatternCard x = (WindowPatternCard) super.clone();
-        x.setMatr((Cell[][])x.getMatr().clone()); //!!Ricorda di fare la clone di CELL!!!!!
-        return x;
-    }
 
     //shows every attribute of the Card, also the scheme
     public void show(){
         System.out.println("ID number :" + num + "\n" + "Difficulty :" + difficulty + "\n" + "Name :" + name + "Scheme :\n" + "\n");
-        for(int i = 0; i <= matr.length; i++){
+        int x = this.matr.size();
+        int y = this.matr.get(0).size();
+        for(int i = 0; i < x; i++){
             System.out.println(" " + i + " ");
-            for (int j = 0; j <= matr[i].length ; j++) {
+            for (int j = 0; j < y; j++) {
                 if (i == 0) {
                     System.out.println(" " + j + " ");
                 }
                 else
                     System.out.println(" " + "matr[i][j]" + " ");
-                if( j == matr[i].length) {
+                if( j == matr.get(i).size()) {
                     System.out.println("\n");
                 }
             }
@@ -76,15 +80,28 @@ public class WindowPatternCard {
     }
 
     //place the dice
-    public Boolean placeDice(Dice d, int x, int y){
+    public boolean placeDice(Dice d, int x, int y){
         /*Here we need the validation of the rules*/
-        if((matr[x][y] != null) && matr[x][y].isOccupied())
+        if((matr.get(x).get(y) != null) && matr.get(x).get(y).isOccupied())
             return false;
         else{
-            matr[x][y] = new Cell();
-            matr[x][y].setOccupation(true);
-            matr[x][y].setDice(d);
+            matr.get(x).get(y).setOccupation(true);
+            matr.get(x).get(y).setDice(d);
             return true;
         }
+    }
+
+    public boolean isIn(Pos p){
+        if(this.matr.get(p.getX()).get(p.getY()).isOccupied())
+            return true;
+        return false;
+    }
+
+    public Dice getDice(Pos p){
+        return (this.matr.get(p.getX()).get(p.getY()).getDice());
+    }
+
+    public Cell getCell(Pos p){
+        return (this.matr.get(p.getX()).get(p.getY()));
     }
 }

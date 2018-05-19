@@ -84,7 +84,7 @@ public class ObjectiveCard extends Card{
         for (String x: this.rules.getRules()) {
             result = result + ((this.rules.verify(x,w))*points);
         }
-        return 1;
+        return result;
     }
 
 

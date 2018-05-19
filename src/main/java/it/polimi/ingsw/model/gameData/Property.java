@@ -20,10 +20,6 @@ public class Property {
         this.number = value;
     }
 
-    public Property clone() throws CloneNotSupportedException {
-        Property x = (Property) super.clone();
-        return x;
-    }
     //getter method
     public Colour getColour() {
         return this.colour;
@@ -33,11 +29,11 @@ public class Property {
         return this.number;
     }
     //setter method
-    public void setColour(Colour z){
+    protected void setColour(Colour z){
         this.colour = z;
     }
     //setter method
-    public void setNumber(int k){
+    protected void setNumber(int k){
         this.number = k;
     }
 }

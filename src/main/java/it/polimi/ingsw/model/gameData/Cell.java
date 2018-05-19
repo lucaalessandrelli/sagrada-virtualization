@@ -7,10 +7,9 @@ public class Cell {
     private Dice dice;
 
     public Cell(){
-        Property x = new Property();
-        Pos z = new Pos();
-        this.property = x;
-        this.pos = z;
+        this.property = new Property();
+        this.pos = new Pos();
+        this.dice = new Dice();
     }
 
     public Cell(Property property, Pos pos){
@@ -18,26 +17,14 @@ public class Cell {
         this.pos = pos;
     }
 
-    @Override
-    public Cell clone() throws CloneNotSupportedException {
-        Cell x = (Cell) super.clone();
-        x.setPos((Pos) this.getPosition().clone());
-        x.setProperty((Property)this.getProperty().clone());
-        return x;
-    }
-
     //getter method
-    public Property getProperty() throws CloneNotSupportedException {
-        Property x = (Property) super.clone();
-        x.setColour((Colour) this.property.getColour());
-        x.setNumber((int) this.property.getNumber());
-        return x;
+    public Property getProperty(){
+        return this.property;
     }
 
     //getter method
     public Pos getPosition(){
-        Pos x = this.pos;
-        return x;
+        return this.pos;
     }
 
     //getter method
@@ -45,23 +32,23 @@ public class Cell {
        return this.dice;
     }
 
-    public Boolean isOccupied(){
+    public boolean isOccupied(){
         return this.occupied;
     }
     //setter method
-    public void setOccupation(boolean x){
+    protected void setOccupation(boolean x){
         occupied = x;
     }
     //setter method
-    public void setPos(Pos x) {
+    protected void setPos(Pos x) {
         this.pos = x;
     }
     //setter method
-    public void setProperty(Property x){
+    protected void setProperty(Property x){
         this.property = x;
     }
     //setter method
-    public void setDice(Dice x){
+    protected void setDice(Dice x){
         this.dice = x;
     }
 }

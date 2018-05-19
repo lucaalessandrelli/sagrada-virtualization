@@ -1,10 +1,12 @@
 package it.polimi.ingsw.model.gameData;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Rules {
 
     private ArrayList<String> rules;
+    private String direction = "";
 
     public Rules(){
         this.rules = new ArrayList<String>();
@@ -33,33 +35,69 @@ public class Rules {
             case "Y,G,B,P,R":
                 this.varietycolours(window);
                 break;
-            case "YELLOW":
+            case "Y":
                 this.countcolor(window,Colour.YELLOW);
                 break;
-            case "GREEN":
+            case "G":
                 this.countcolor(window,Colour.GREEN);
                 break;
-            case "BLUE":
+            case "B":
                 this.countcolor(window,Colour.BLUE);
                 break;
-            case "PURPLE":
+            case "P":
                 this.countcolor(window,Colour.PURPLE);
                 break;
-            case "RED":
+            case "R":
                 this.countcolor(window,Colour.RED);
+                break;
+            case "ROW":
+                direction = rule;
+                break;
+            case"COLUMN":
+                direction = rule;
+                break;
+            case "NOCOLOR":
+            case "NOVALUE":
+                this.near(window,direction,rule);
+                break;
+            case "COLOR":
+                if(direction.equals("THREE"))
+                    this.diagonal(window);
+                else if(direction.equals("BOTH"))
+                    direction = "THREE";
+                break;
+            case "NEAR":
+                if(direction.equals("THREE"))
+                    this.diagonal(window);
+                else if(direction.equals("BOTH"))
+                    direction = "THREE";
+                break;
+            case "NOROW":
+                if(direction.equals("NOCOLUMN"))
+                    direction = "BOTH";
+                else
+                    direction = rule;
+                break;
+            case "NOCOLUMN":
+                if(direction.equals("NOROW"))
+                    direction = "BOTH";
+                else
+                    direction = rule;
                 break;
         }
         return result;
     }
 
-    public int couple(WindowPatternCard window, int first, int second){
+    private int couple(WindowPatternCard window, int first, int second){
         int countfirst = 0, countsecond = 0;
         int dicenumber;
-        Cell[][] w = window.getMatr();
-        for(int i = 0; i < w.length; i++){
-            for(int j = 0; j < w[i].length; j++){
-                if(w[i][j].isOccupied())
-                    dicenumber = w[i][j].getDice().getNumber();
+        ArrayList<ArrayList<Cell>> w = window.getMatr();
+        int x = w.size();
+        int y = w.get(0).size();
+        for(int i = 0; i < x; i++){
+            for(int j = 0; j < y; j++){
+                if(w.get(i).get(j).isOccupied())
+                    dicenumber = w.get(i).get(j).getDice().getNumber();
                 else break;
                 if ( dicenumber == first )
                     countfirst++;
@@ -73,15 +111,17 @@ public class Rules {
             return countsecond;
     }
 
-    public int five(WindowPatternCard window){
+    private int five(WindowPatternCard window){
         int arrayofvalues[] = new int[6];
         int dicenumber;
         int min = 20;
-        Cell[][] w = window.getMatr();
-        for(int i = 0; i < w.length; i++){
-            for(int j = 0; j < w[i].length; j++){
-                if(w[i][j].isOccupied())
-                    dicenumber = w[i][j].getDice().getNumber();
+        ArrayList<ArrayList<Cell>> w = window.getMatr();
+        int x = w.size();
+        int y = w.get(0).size();
+        for(int i = 0; i < x; i++){
+            for(int j = 0; j < y; j++){
+                if(w.get(i).get(j).isOccupied())
+                    dicenumber = w.get(i).get(j).getDice().getNumber();
                 else break;
                 switch (dicenumber){
                     //scale all the numbers in the array with +1 to find the real number you're searching for
@@ -100,9 +140,9 @@ public class Rules {
                 }
             }
         }
-        for(int x: arrayofvalues){
-            if(x < min)
-                min = x;
+        for(int h: arrayofvalues){
+            if(h < min)
+                min = h;
         }
         if(min == 20)
             return 0;
@@ -110,15 +150,17 @@ public class Rules {
             return min;
     }
 
-    public int varietycolours(WindowPatternCard window){
+    private int varietycolours(WindowPatternCard window){
         int arrayofvalues[] = new int[5];
         int min = 20;
         String color;
-        Cell[][] w = window.getMatr();
-        for(int i = 0; i < w.length; i++) {
-            for (int j = 0; j < w[i].length; j++) {
-                if(w[i][j].isOccupied())
-                    color = w[i][j].getDice().getColour().toString();
+        ArrayList<ArrayList<Cell>> w = window.getMatr();
+        int x = w.size();
+        int y = w.get(0).size();
+        for(int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                if(w.get(i).get(j).isOccupied())
+                    color = w.get(i).get(j).getDice().getColour().toString();
                 else break;
                 switch (color){
                     //scale all the numbers in the array with +1 to find the real number you're searching for
@@ -135,9 +177,9 @@ public class Rules {
                 }
             }
         }
-        for(int x: arrayofvalues){
-            if(x < min)
-                min = x;
+        for(int h: arrayofvalues){
+            if(h < min)
+                min = h;
         }
         if(min == 20)
             return 0;
@@ -145,15 +187,18 @@ public class Rules {
             return min;
     }
 
-    public int countcolor (WindowPatternCard window, Colour c){
-        Cell [][] w = window.getMatr();
+    private int countcolor (WindowPatternCard window, Colour c){
+        ArrayList<ArrayList<Cell>> w = window.getMatr();
         String color = c.toString();
         String k;
         int cont = 0;
-        for(int i = 0; i < w.length; i++) {
-            for (int j = 0; j < w[i].length; j++) {
-                if(w[i][j].isOccupied())
-                    k = w[i][j].getDice().getColour().toString();
+        int j;
+        int x = w.size();
+        int y = w.get(0).size();
+        for(int i = 0; i < x; i++) {
+            for (j = 0; j < y; j++) {
+                if(w.get(i).get(j).isOccupied())
+                    k = w.get(i).get(j).getDice().getColour().toString();
                 else break;
                 if(k.equals(color))
                     cont++;
@@ -161,4 +206,90 @@ public class Rules {
         }
         return cont;
     }
+
+    private int near(WindowPatternCard window, String direction, String type){
+        ArrayList<ArrayList<Cell>> w = window.getMatr();
+        int result = 0;
+        int j;
+        int x;
+        int y;
+        int sum;
+        boolean b = false;
+        if (direction.equals("COLUMN")) {
+            x = w.get(0).size();
+            y = w.size();
+            sum = 4;
+        }
+        else
+        {
+            x = w.size();
+            y = w.get(0).size();
+            sum = 5;
+        }
+        switch (type){
+            case "NOVALUE":
+                for(int i = 0; i < x; i++){
+                    b = false;
+                    for(j = 0; j < y; j++){
+                        if(w.get(i).get(j).isOccupied() && w.get(i).get(j).getDice().getNumber() ==
+                                w.get(i+1).get(j+1).getDice().getNumber()) {
+                            b = true;
+                            break;
+                        }
+                    }
+                    if(!b)
+                        result = result + sum;
+                }
+                break;
+            case "NOCOLOR":
+                for(int i = 0; i < x; i++){
+                    b = false;
+                    for(j = 0; j < y; j++){
+                        if(w.get(i).get(j).isOccupied() && w.get(i).get(j).getDice().getColour() ==
+                                w.get(i+1).get(j+1).getDice().getColour()) {
+                            b = true;
+                            break;
+                        }
+                    }
+                    if(!b)
+                        result = result + sum;
+                }
+                break;
+        }
+
+        return result;
+    }
+
+    private int diagonal(WindowPatternCard window){
+        ArrayList<ArrayList<Cell>> w = window.getMatr();
+        int result = 0;
+        int j;
+        for(int i = 0; i < 4; i++){
+            for(j = 0; j < 4; j++){
+                if(j == 0){
+                    if(w.get(i+1).get(j+1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
+                        result++;
+                    }
+                    break;
+                }
+                if(j == 3){
+                    if(w.get(i+1).get(j-1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
+                        result++;
+                    }
+                    break;
+                }
+                else{
+                    if(w.get(i+1).get(j-1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
+                        result++;
+                    }
+                    if(w.get(i+1).get(j+1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
+                        result++;
+                    }
+                }
+
+            }
+        }
+        return result;
+    }
+
 }

@@ -20,18 +20,20 @@ public class Dice implements Move {
 
     //getter
     public Colour getColour(){
-        Colour x = this.prop.getColour();
-        return x;
+        return prop.getColour();
     }
     //getter
     public int getNumber(){
         return  prop.getNumber();
     }
 
-    public Dice clone() throws CloneNotSupportedException {
-        Property x;
-        x = this.prop.clone();
-        Dice y = new Dice(x);
-        return y;
+
+
+    public boolean equals(Dice d) {
+        if (this.prop.getNumber() == d.prop.getNumber()){
+            if(this.prop.getColour().equals(d.prop.getColour()))
+                return true;
+        }
+        return false;
     }
 }
