@@ -1,13 +1,10 @@
 package it.polimi.ingsw.modelTest.gameDataTest;
 
-import it.polimi.ingsw.model.gameData.AlreadyBeenCalledException;
 import it.polimi.ingsw.model.gameData.CardContainer;
 import it.polimi.ingsw.model.gameData.ObjectiveCard;
+import it.polimi.ingsw.model.gameData.WindowPatternCard;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,52 +16,34 @@ public class CardContainerTest {
     public void TestPrivatePullout(){
         CardContainer tester = new CardContainer();
         ArrayList<ObjectiveCard> test = null;
-        try {
-            test = tester.pullOutPrivate(2);
-            for (ObjectiveCard x: test) {
-                System.out.println("Id number: " + x.getID() +
-                                    "\nName: " + x.getName() +
-                                    "\nDescription: " + x.getDescription() +
-                                    "\nType: " + x.getType() +
-                                    "\nPoints: " + x.getPoints() + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+        test = tester.pullOutPrivate(2);
+        for (ObjectiveCard x: test) {
+            System.out.println("Id number: " + x.getID() +
+                                "\nName: " + x.getName() +
+                                "\nDescription: " + x.getDescription() +
+                                "\nType: " + x.getType() +
+                                "\nPoints: " + x.getPoints() + "\n");
         }
         assertEquals(2, test.size());
     }
 
     @Test
-    public void TestPublicPullout() throws SAXException, ParserConfigurationException, AlreadyBeenCalledException, IOException {
+    public void TestPublicPullout(){
         CardContainer tester = new CardContainer();
         ArrayList<ObjectiveCard> test = null;
-        try {
-            test = tester.pullOutPublic();
-            for (ObjectiveCard x: test) {
-                System.out.println("Id number: " + x.getID() +
-                        "\nName: " + x.getName() +
-                        "\nDescription: " + x.getDescription() +
-                        "\nType: " + x.getType() +
-                        "\nPoints: " + x.getPoints() + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (AlreadyBeenCalledException e) {
-            e.printStackTrace();
+        test = tester.pullOutPublic();
+        for (ObjectiveCard x: test) {
+            System.out.println("Id number: " + x.getID() +
+                    "\nName: " + x.getName() +
+                    "\nDescription: " + x.getDescription() +
+                    "\nType: " + x.getType() +
+                    "\nPoints: " + x.getPoints() + "\n");
         }
         assertEquals(3, test.size());
     }
 
     @Test
-    public void TestPublicRules() throws SAXException, ParserConfigurationException, AlreadyBeenCalledException, IOException {
+    public void TestPublicRules() {
         CardContainer tester = new CardContainer();
         ArrayList<ObjectiveCard> test = new ArrayList<ObjectiveCard>();
         test = tester.pullOutPublic();
@@ -73,6 +52,17 @@ public class CardContainerTest {
              System.out.println("Regola: " + k + "\n");
             }
             assertTrue(!(x.getRules().getRules().isEmpty()));
+        }
+    }
+
+    @Test
+    public void TestPatternCards(){
+        CardContainer tester = new CardContainer();
+        ArrayList<WindowPatternCard> test = new ArrayList<>();
+        test = tester.pullOutPattern(2);
+        assertEquals(8,test.size());
+        for(WindowPatternCard x:test){
+            x.show();
         }
     }
 }

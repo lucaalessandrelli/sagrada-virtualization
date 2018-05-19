@@ -51,4 +51,11 @@ public class Cell {
     protected void setDice(Dice x){
         this.dice = x;
     }
+
+    public void show(){
+        if(this.isOccupied())
+            this.dice.show();
+        else
+            System.out.print("/");
+    }
 }

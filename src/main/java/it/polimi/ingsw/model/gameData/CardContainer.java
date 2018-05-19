@@ -13,18 +13,15 @@ import java.util.Random;
 
 public class CardContainer {
 
-    private ArrayList<Integer> pattern = new ArrayList<Integer>(12);
+    private ArrayList<Integer> pattern = new ArrayList<Integer>(24);
     private ArrayList<Integer> objectiveprivate = new ArrayList<Integer>(5);
     private ArrayList<Integer> objectivepublic = new ArrayList<Integer>(10);
-    public boolean privateused = false;
-    public boolean publicused = false;
-    public boolean patternused = false;
-
-    //String usr = document.getElementsByTagName("user").item(0).getTextContent();
-    //String pwd = document.getElementsByTagName("password").item(0).getTextContent();
+    private boolean privateused = false;
+    private boolean publicused = false;
+    private boolean patternused = false;
 
     public CardContainer(){
-        for(int i = 0; i < 12; i++) {
+        for(int i = 0; i < 24; i++) {
             pattern.add((i));
             if (i < 5)
             objectiveprivate.add(i);
@@ -35,21 +32,22 @@ public class CardContainer {
 
     //Pull out 4 WindowPatternCard given to the player to select one of them
     //!!!!Misses one part of the code!!!!
-    public ArrayList<WindowPatternCard> pullOutPattern(int numPlayers) throws IOException, SAXException, ParserConfigurationException {
-        int dimension = numPlayers;
+    public ArrayList<WindowPatternCard> pullOutPattern(int numPlayers) {
+        int dimension = numPlayers*4;
         ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
         try {
             if(this.patternused == true)
                 throw new AlreadyBeenCalledException();
             this.patternused = true;
             int randomNum;
-            int cont = pattern.size();
+            int cont = 23;
             Random rand = new Random();
-            for (int k = 0; k < dimension; k++) {
-                randomNum = rand.nextInt(cont - k);
-                //   ---->  Devi aggiungere il metodo per caricare i dati dal nuovo file
-                // tmp.add(this.readValues("C:/Users/Vincenzo/IdeaProjects/ProgettoIngSw/src/main/resources/public_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            for (int k = 0; k < dimension; k=k+2) {
+                randomNum = rand.nextInt(cont - (k+1));
+                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum+1))); //Supposing that z is the selected card from this "turn"
                 pattern.remove(randomNum);
+                pattern.remove(randomNum+1);
             }
         } catch (AlreadyBeenCalledException e){
             System.out.println(e.message);
@@ -59,7 +57,7 @@ public class CardContainer {
 
     //Pull out x Object Private Card given to the player to select one of them
     //!!!!Misses one part of the code!!!!
-    public ArrayList<ObjectiveCard> pullOutPrivate(int numPlayers) throws IOException, SAXException, ParserConfigurationException {
+    public ArrayList<ObjectiveCard> pullOutPrivate(int numPlayers) {
         int dimension = numPlayers;
         ArrayList<ObjectiveCard> tmp = new ArrayList<ObjectiveCard>(dimension);
         try {
@@ -82,7 +80,7 @@ public class CardContainer {
 
     //Pull out 3 Object Public Card given to the table
     //!!!!Misses one part of the code!!!!
-    public ArrayList<ObjectiveCard> pullOutPublic() throws IOException, SAXException, ParserConfigurationException, AlreadyBeenCalledException {
+    public ArrayList<ObjectiveCard> pullOutPublic(){
         int dimension = 3;
         ArrayList<ObjectiveCard> tmp = new ArrayList<ObjectiveCard>(dimension);
         try {
@@ -103,14 +101,28 @@ public class CardContainer {
         return tmp;
     }
 
-    private ObjectiveCard readValues(String namefile, int cont) throws ParserConfigurationException, IOException, SAXException {
+
+    //read the values in the xml file and create a objective card to return
+    private ObjectiveCard readValues(String namefile, int cont) {
         ObjectiveCard myobj = new ObjectiveCard();
         int result;
         String path = new File(namefile).getAbsolutePath();
         File file = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        Document document = documentBuilder.parse(file);
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        Document document = null;
+        try {
+            document = documentBuilder.parse(file);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String x = document.getElementsByTagName("NAME").item(cont).getTextContent();
         myobj.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
         myobj.setDescription(document.getElementsByTagName("DESCRIPTION").item(cont).getTextContent());
@@ -134,11 +146,47 @@ public class CardContainer {
         return myobj;
     }
 
+    //read values that are relevant only for public cards and not for private ones
     private void readRulesPublic(Document document, ArrayList<String> rules, int cont){
         rules.add(document.getElementsByTagName("WHERE").item(cont).getTextContent());
         rules.add(document.getElementsByTagName("PROP").item(cont).getTextContent());
         rules.add(document.getElementsByTagName("VALUES").item(cont).getTextContent());
         rules.add(document.getElementsByTagName("COLOR").item(cont).getTextContent());
+    }
+
+    private WindowPatternCard readPatterns(String namefile, int cont){
+        WindowPatternCard mypattern = new WindowPatternCard();
+        String all;
+        String path = new File(namefile).getAbsolutePath();
+        File file = new File(path);
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        Document document = null;
+        try {
+            document = documentBuilder.parse(file);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mypattern.setNum(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()));
+        mypattern.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
+        mypattern.setDifficulty(Integer.valueOf(document.getElementsByTagName("DIFFICULTY").item(cont).getTextContent()));
+        all = document.getElementsByTagName("RULES").item(cont).getTextContent();
+        System.out.println("\n" + mypattern.getName());
+        final int len = all.length();
+        for(int i = 0; i < len; i=i+4){
+            if(all.charAt(i) == ',')
+                continue;
+            System.out.print("\n" + i);
+            mypattern.addRestr(all.charAt(i),Integer.valueOf(all.charAt(i+1)),Integer.valueOf(all.charAt(i+2)));
+        }
+        return mypattern;
     }
 
 }

@@ -2,9 +2,15 @@ package it.polimi.ingsw.model.gameData;
 
 import it.polimi.ingsw.model.gameLogic.Move;
 
+import java.util.ArrayList;
+
 public class ToolCard extends Card implements Move {
     private boolean used;
     private int cost;
+    private ArrayList<String> stateList;
+    private ArrayList<String> cMethods;
+    private ArrayList<String> pMethods;
+    private ArrayList<String> automatedoperationlist;
 
     public ToolCard() {
         this.used = false;
@@ -13,7 +19,7 @@ public class ToolCard extends Card implements Move {
 
     @Override
     public void show() {
-        System.out.println("Name :" + this.getName() + "\nDescription :"
+        System.out.print("Name :" + this.getName() + "\nDescription :"
                             + this.getDescription() + "\nIdentification number:"
                             + this.getID() + "\nIs already been used? " + this.used);
     }
@@ -29,8 +35,22 @@ public class ToolCard extends Card implements Move {
     */
 
     public int getCost() {
-        return this.cost;
+        return cost;
     }
 
+    public ArrayList<String> getNameCMethods(){
+        return pMethods;
+    }
 
+    public ArrayList<String> getNamePMethods(){
+        return cMethods;
+    }
+
+    public ArrayList<String> getAutomatedoperationlist(){
+        return automatedoperationlist;
+    }
+
+    public ArrayList<String> getStateList(){
+        return stateList;
+    }
 }

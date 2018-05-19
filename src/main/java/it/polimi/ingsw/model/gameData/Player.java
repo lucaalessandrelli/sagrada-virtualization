@@ -45,9 +45,8 @@ public class Player {
         return myTable;
     }
 
-    public void setMyObjCard(){
-        myObjCard = myTable.getObjCard();
-
+    public void setMyObjCard(ObjectiveCard objCard){
+        this.myObjCard = objCard;
     }
     public void showMyObjCard(){
 

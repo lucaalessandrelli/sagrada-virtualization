@@ -71,7 +71,7 @@ public class ObjectiveCard extends Card{
 
     @Override
     public void show() {
-        System.out.println("Name :" + this.name + "\nDescription :"
+        System.out.print("Name :" + this.name + "\nDescription :"
         + this.description + "\nIdentification number:"
         + this.idnumber + "\nPoints:"
         + this.points + "\nType: "

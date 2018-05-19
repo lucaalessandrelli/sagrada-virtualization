@@ -13,8 +13,8 @@ public class WindowPatternCardTest{
     @Test
     public void TestMatrixLength(){
         WindowPatternCard tester = new WindowPatternCard(0,0,"No name");
-        assertEquals(5, tester.getMatr().size());
-        assertEquals(4, tester.getMatr().get(0).size());
+        assertEquals(4, tester.getMatr().size());
+        assertEquals(5, tester.getMatr().get(0).size());
     }
 
     //to do this we need to define the rules
@@ -36,14 +36,13 @@ public class WindowPatternCardTest{
     public void TestFull(){
         Dice d = new Dice();
         WindowPatternCard tester = new WindowPatternCard(0,0,"No name");
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 4; j++){
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 5; j++){
                 tester.placeDice(d,i,j);
             }
         }
-
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 4; j++){
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 5; j++){
                 assertTrue(tester.placeDice(d,i,j) == false);
             }
         }

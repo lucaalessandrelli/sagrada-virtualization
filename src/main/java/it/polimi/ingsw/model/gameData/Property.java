@@ -10,13 +10,15 @@ public class Property {
         this.number = 0;
     }
 
-    //constructor for dice
+    //constructor for colour
     public Property(Colour colour){
         this.colour = colour;
+        this.number = 0;
     }
-    //constructor for Window Pattern Card
-    public  Property(Colour colour, int value){
-        this.colour = colour;
+
+    //constructor for number
+    public Property(int value){
+        this.colour = Colour.WHITE;
         this.number = value;
     }
 
@@ -35,5 +37,9 @@ public class Property {
     //setter method
     protected void setNumber(int k){
         this.number = k;
+    }
+
+    public void show(){
+        System.out.print(this.colour.toString() + this.number);
     }
 }

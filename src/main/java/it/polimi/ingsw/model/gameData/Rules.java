@@ -20,35 +20,37 @@ public class Rules {
     public int verify(String rule, WindowPatternCard window){
         int result = 0;
         switch (rule){
+            case "-":
+                break;
             case "1,2":
-                this.couple(window,1,2);
+                result = this.couple(window,1,2);
                 break;
             case "3,4":
-                this.couple(window,3,4);
+                result = this.couple(window,3,4);
                 break;
             case "5,6":
-                this.couple(window,5,6);
+                result = this.couple(window,5,6);
                 break;
             case "1,2,3,4,5,6":
-                this.five(window);
+                result = this.five(window);
                 break;
             case "Y,G,B,P,R":
-                this.varietycolours(window);
+                result = this.varietycolours(window);
                 break;
             case "Y":
-                this.countcolor(window,Colour.YELLOW);
+                result = this.countcolor(window,Colour.YELLOW);
                 break;
             case "G":
-                this.countcolor(window,Colour.GREEN);
+                result = this.countcolor(window,Colour.GREEN);
                 break;
             case "B":
-                this.countcolor(window,Colour.BLUE);
+                result = this.countcolor(window,Colour.BLUE);
                 break;
             case "P":
-                this.countcolor(window,Colour.PURPLE);
+                result = this.countcolor(window,Colour.PURPLE);
                 break;
             case "R":
-                this.countcolor(window,Colour.RED);
+                result = this.countcolor(window,Colour.RED);
                 break;
             case "ROW":
                 direction = rule;
@@ -58,31 +60,14 @@ public class Rules {
                 break;
             case "NOCOLOR":
             case "NOVALUE":
-                this.near(window,direction,rule);
+                result = this.near(window,direction,rule);
                 break;
             case "COLOR":
-                if(direction.equals("THREE"))
-                    this.diagonal(window);
-                else if(direction.equals("BOTH"))
-                    direction = "THREE";
+                if(direction.equals("DIAGONAL"))
+                    result = this.diagonal(window);
                 break;
-            case "NEAR":
-                if(direction.equals("THREE"))
-                    this.diagonal(window);
-                else if(direction.equals("BOTH"))
-                    direction = "THREE";
-                break;
-            case "NOROW":
-                if(direction.equals("NOCOLUMN"))
-                    direction = "BOTH";
-                else
-                    direction = rule;
-                break;
-            case "NOCOLUMN":
-                if(direction.equals("NOROW"))
-                    direction = "BOTH";
-                else
-                    direction = rule;
+            case "DIAGONAL":
+                direction = rule;
                 break;
         }
         return result;
@@ -264,30 +249,31 @@ public class Rules {
         ArrayList<ArrayList<Cell>> w = window.getMatr();
         int result = 0;
         int j;
+        int adder = 2;
         for(int i = 0; i < 4; i++){
             for(j = 0; j < 4; j++){
                 if(j == 0){
                     if(w.get(i+1).get(j+1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
-                        result++;
+                        result = result + adder;
                     }
                     break;
                 }
                 if(j == 3){
                     if(w.get(i+1).get(j-1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
-                        result++;
+                        result = result + adder;
                     }
                     break;
                 }
                 else{
                     if(w.get(i+1).get(j-1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
-                        result++;
+                        result = result + adder;
                     }
                     if(w.get(i+1).get(j+1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
-                        result++;
+                        result = result + adder;
                     }
                 }
-
             }
+            adder = 1;
         }
         return result;
     }

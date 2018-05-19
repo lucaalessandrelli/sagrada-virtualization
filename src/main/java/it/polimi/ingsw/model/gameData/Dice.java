@@ -36,4 +36,8 @@ public class Dice implements Move {
         }
         return false;
     }
+
+    public void show(){
+        this.prop.show();
+    }
 }
