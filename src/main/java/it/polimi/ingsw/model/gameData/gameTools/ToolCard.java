@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameData.gameTools;
 
+import it.polimi.ingsw.model.gameData.Colour;
 import it.polimi.ingsw.model.gameLogic.Move;
 
 import java.util.ArrayList;
@@ -7,10 +8,11 @@ import java.util.ArrayList;
 public class ToolCard extends Card implements Move {
     private boolean used;
     private int cost;
-    private ArrayList<String> stateList;
-    private ArrayList<String> automatedoperationlist;
-    private ArrayList<String> cMethods;
-    private ArrayList<String> pMethods;
+    private Colour colour;
+    private ArrayList<String> stateList = new ArrayList<>();
+    private ArrayList<String> automatedoperationlist = new ArrayList<>();
+    private ArrayList<String> cMethods = new ArrayList<>();
+    private ArrayList<String> pMethods = new ArrayList<>();
 
     public ToolCard() {
         this.used = false;
@@ -19,9 +21,15 @@ public class ToolCard extends Card implements Move {
 
     @Override
     public void show() {
-        System.out.print("Name :" + this.getName() + "\nDescription :"
+        System.out.println("Name :" + this.getName() + "\nDescription :"
                             + this.getDescription() + "\nIdentification number:"
                             + this.getID() + "\nIs already been used? " + this.used);
+        for (String x: this.automatedoperationlist){
+            System.out.println("Automated: " + x);
+        }
+        for(String x : this.stateList){
+            System.out.println("Statelist: " + x);
+        }
     }
 
     public void setUsed() {
@@ -52,5 +60,9 @@ public class ToolCard extends Card implements Move {
 
     public ArrayList<String> getStateList(){
         return stateList;
+    }
+
+    public void setColour(Colour colour){
+        this.colour = colour;
     }
 }

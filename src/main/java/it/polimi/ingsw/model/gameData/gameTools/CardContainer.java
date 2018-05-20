@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameData.gameTools;
 
+import it.polimi.ingsw.model.gameData.Colour;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -9,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class CardContainer {
@@ -16,9 +18,11 @@ public class CardContainer {
     private ArrayList<Integer> pattern = new ArrayList<Integer>(24);
     private ArrayList<Integer> objectiveprivate = new ArrayList<Integer>(5);
     private ArrayList<Integer> objectivepublic = new ArrayList<Integer>(10);
+    private ArrayList<Integer> tools = new ArrayList<>(12);
     private boolean privateused = false;
     private boolean publicused = false;
     private boolean patternused = false;
+    private boolean toolsused = false;
 
     public CardContainer(){
         for(int i = 0; i < 24; i++) {
@@ -27,11 +31,12 @@ public class CardContainer {
             objectiveprivate.add(i);
             if( i < 10)
             objectivepublic.add(i);
+            if(i < 12)
+                tools.add(i);
         }
     }
 
     //Pull out 4 WindowPatternCard given to the player to select one of them
-    //!!!!Misses one part of the code!!!!
     public ArrayList<WindowPatternCard> pullOutPattern(int numPlayers) {
         int dimension = numPlayers*4;
         if(numPlayers < 1 || numPlayers > 4)
@@ -42,7 +47,7 @@ public class CardContainer {
                 throw new AlreadyBeenCalledException();
             this.patternused = true;
             int randomNum;
-            int cont = 23;
+            int cont = 24;
             int next = 0;
             Random rand = new Random();
             for (int k = 0; k < dimension; k=k+2) {
@@ -66,7 +71,6 @@ public class CardContainer {
     }
 
     //Pull out x Object Private Card given to the player to select one of them
-    //!!!!Misses one part of the code!!!!
     public ArrayList<ObjectiveCard> pullOutPrivate(int numPlayers) {
         int dimension = numPlayers;
         if(numPlayers < 1 || numPlayers > 4)
@@ -81,7 +85,7 @@ public class CardContainer {
             Random rand = new Random();
             for (int k = 0; k < dimension; k++) {
                 randomNum = rand.nextInt(cont - k);
-                tmp.add(this.readValues("src/main/resources/private_cards_formalization.xml", objectiveprivate.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                tmp.add(this.readObjective("src/main/resources/private_cards_formalization.xml", objectiveprivate.get(randomNum))); //Supposing that z is the selected card from this "turn"
                 objectiveprivate.remove(randomNum);
             }
         } catch (AlreadyBeenCalledException e){
@@ -91,7 +95,6 @@ public class CardContainer {
     }
 
     //Pull out 3 Object Public Card given to the table
-    //!!!!Misses one part of the code!!!!
     public ArrayList<ObjectiveCard> pullOutPublic(){
         int dimension = 3;
         ArrayList<ObjectiveCard> tmp = new ArrayList<ObjectiveCard>(dimension);
@@ -104,8 +107,32 @@ public class CardContainer {
             Random rand = new Random();
             for (int k = 0; k < dimension; k++) {
                 randomNum = rand.nextInt(cont - k);
-                tmp.add(this.readValues("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                tmp.add(this.readObjective("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
                 objectivepublic.remove(randomNum);
+            }
+        } catch (AlreadyBeenCalledException e){
+            System.out.println(e.message);
+        }
+        return tmp;
+    }
+
+    //Pull out 4 WindowPatternCard given to the player to select one of them
+    //!!!!Misses one part of the code!!!!
+    public ArrayList<ToolCard> pullOutTools() {
+        int dimension = 3;
+        ArrayList<ToolCard> tmp = new ArrayList<>(dimension);
+        try {
+            if(this.toolsused == true)
+                throw new AlreadyBeenCalledException();
+            this.toolsused = true;
+            int randomNum;
+            int cont = this.tools.size();
+            int next = 0;
+            Random rand = new Random();
+            for (int k = 0; k < dimension; k++) {
+                randomNum = rand.nextInt(cont - k);
+                tmp.add(this.readTools("src/main/resources/tool_cards_formalization.xml", tools.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                tools.remove(randomNum);
             }
         } catch (AlreadyBeenCalledException e){
             System.out.println(e.message);
@@ -115,7 +142,7 @@ public class CardContainer {
 
 
     //read the values in the xml file and create a objective card to return
-    private ObjectiveCard readValues(String namefile, int cont) {
+    private ObjectiveCard readObjective(String namefile, int cont) {
         ObjectiveCard myobj = new ObjectiveCard();
         int result;
         String path = new File(namefile).getAbsolutePath();
@@ -153,7 +180,7 @@ public class CardContainer {
         else {
             myobj.setID(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()) + 10);
             myobj.setPoints(1);
-            myobj.getRules().getRules().add(document.getElementsByTagName("COLOR").item(cont).getTextContent());
+            myobj.getRules().getRules().add(document.getElementsByTagName("COLOUR").item(cont).getTextContent());
         }
         return myobj;
     }
@@ -163,7 +190,7 @@ public class CardContainer {
         rules.add(document.getElementsByTagName("WHERE").item(cont).getTextContent());
         rules.add(document.getElementsByTagName("PROP").item(cont).getTextContent());
         rules.add(document.getElementsByTagName("VALUES").item(cont).getTextContent());
-        rules.add(document.getElementsByTagName("COLOR").item(cont).getTextContent());
+        rules.add(document.getElementsByTagName("COLOUR").item(cont).getTextContent());
     }
 
     private WindowPatternCard readPatterns(String namefile, int cont){
@@ -199,6 +226,60 @@ public class CardContainer {
             mypattern.addRestr(all.charAt(i),Integer.valueOf(all.charAt(i+1)),Integer.valueOf(all.charAt(i+2)));
         }
         return mypattern;
+    }
+
+    private ToolCard readTools(String namefile, int cont){
+        ToolCard mytool = new ToolCard();
+        String all;
+        Colour tmpc = null;
+        String path = new File(namefile).getAbsolutePath();
+        File file = new File(path);
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        Document document = null;
+        try {
+            document = documentBuilder.parse(file);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mytool.setID(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()));
+        mytool.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
+        tmpc = tmpc.isIn((document.getElementsByTagName("COLOUR").item(cont).getTextContent()).charAt(0));
+        mytool.setColour(tmpc);
+        all = document.getElementsByTagName("STATE").item(cont).getTextContent();
+        System.out.println("\n" + mytool.getName());
+        this.creatingStrings(false,all,mytool);
+        all = document.getElementsByTagName("AUTOMATED").item(cont).getTextContent();
+        this.creatingStrings(true,all,mytool);
+        mytool.setDescription((document.getElementsByTagName("DESCRIPTION").item(cont).getTextContent()));
+        return mytool;
+    }
+
+    private void creatingStrings(boolean method, String all, ToolCard mytool){
+        char[] toadd = new char[30];
+        int len = all.length();
+        int j;
+        int i;
+        for(i = 1, j = 0; i < len; i++) {
+            if (all.charAt(i) == ',') {
+                if(method)
+                    mytool.getAutomatedoperationlist().add(String.valueOf(toadd));
+                else
+                    mytool.getStateList().add(String.valueOf(toadd));
+                j = 0;
+                toadd = new char[23];
+            } else {
+                toadd[j] = all.charAt(i);
+                j++;
+            }
+        }
     }
 
 }

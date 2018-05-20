@@ -9,7 +9,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>R</COLOR>
+			<COLOUR>R</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -22,7 +22,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>Y</COLOR>
+			<COLOUR>Y</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -35,7 +35,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>G</COLOR>
+			<COLOUR>G</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -48,7 +48,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>B</COLOR>
+			<COLOUR>B</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -61,7 +61,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>P</COLOR>
+			<COLOUR>P</COLOUR>
 		</RULES>
 	</CARD>
 </PRIVATECARDS>

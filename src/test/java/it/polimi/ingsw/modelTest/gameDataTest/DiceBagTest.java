@@ -21,9 +21,15 @@ public class DiceBagTest {
     @Test
     public void TestEmptyBag(){
         DiceBag tester = new DiceBag();
+        ArrayList<Dice> d = new ArrayList<>();
         tester.setNumPlayers(4);
         for(int i = 0; i < 10; i++){
-            tester.pullOut();
+            d = tester.pullOut();
+            for(Dice x: d){
+                System.out.print("Dado: " );
+                x.show();
+                System.out.println();
+            }
         }
         assertEquals(0,tester.remainingDices());
     }

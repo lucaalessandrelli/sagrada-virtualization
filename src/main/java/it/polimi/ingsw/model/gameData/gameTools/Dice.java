@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.gameData.Colour;
 import it.polimi.ingsw.model.gameData.Property;
 import it.polimi.ingsw.model.gameLogic.Move;
 
+import java.util.Random;
+
 public class Dice implements Move {
     private Property prop;
 
@@ -28,7 +30,6 @@ public class Dice implements Move {
     public int getNumber(){
         return  prop.getNumber();
     }
-
 
 
     public boolean equals(Dice d) {

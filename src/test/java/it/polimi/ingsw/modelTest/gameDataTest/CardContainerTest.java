@@ -3,6 +3,7 @@ package it.polimi.ingsw.modelTest.gameDataTest;
 
 import it.polimi.ingsw.model.gameData.gameTools.CardContainer;
 import it.polimi.ingsw.model.gameData.gameTools.ObjectiveCard;
+import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import it.polimi.ingsw.model.gameData.gameTools.WindowPatternCard;
 import org.junit.jupiter.api.Test;
 
@@ -58,12 +59,23 @@ public class CardContainerTest {
     }
 
     @Test
-    public void TestPatternCards(){
+    public void TestPatternPullOut(){
         CardContainer tester = new CardContainer();
         ArrayList<WindowPatternCard> test = new ArrayList<>();
         test = tester.pullOutPattern(2);
         assertEquals(8,test.size());
         for(WindowPatternCard x:test){
+            x.show();
+        }
+    }
+
+    @Test
+    public void TestToolCardsPullOut(){
+        CardContainer tester = new CardContainer();
+        ArrayList<ToolCard> test = new ArrayList<>();
+        test = tester.pullOutTools();
+        assertEquals(3,test.size());
+        for(ToolCard x:test){
             x.show();
         }
     }

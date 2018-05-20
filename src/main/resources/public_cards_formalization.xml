@@ -9,7 +9,7 @@
 			<WHERE>ROW</WHERE>
 			<PROP>NOCOLOR</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -22,7 +22,7 @@
 			<WHERE>COLUMN</WHERE>
 			<PROP>NOCOLOR</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -35,7 +35,7 @@
 			<WHERE>ROW</WHERE>
 			<PROP>NOVALUE</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -48,7 +48,7 @@
 			<WHERE>COLUMN</WHERE>
 			<PROP>NOVALUE</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -61,7 +61,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>1,2</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -74,7 +74,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>3,4</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -87,7 +87,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>5,6</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -100,7 +100,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>1,2,3,4,5,6</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -113,7 +113,7 @@
 			<WHERE>DIAGONAL</WHERE>
 			<PROP>COLOR</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>-</COLOR>
+			<COLOUR>-</COLOUR>
 		</RULES>
 	</CARD>
 	<CARD>
@@ -126,7 +126,7 @@
 			<WHERE>-</WHERE>
 			<PROP>-</PROP>
 			<VALUES>-</VALUES>
-			<COLOR>Y,G,B,P,R</COLOR>
+			<COLOUR>Y,G,B,P,R</COLOUR>
 		</RULES>
 	</CARD>
 </PUBLICARDS>

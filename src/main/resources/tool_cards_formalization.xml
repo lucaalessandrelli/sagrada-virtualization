@@ -1,0 +1,98 @@
+<TOOLCARDS>
+	<CARD>
+		<NUMBER>1</NUMBER>
+		<NAME>Pinza Sgrossatrice</NAME>
+		<COLOUR>P</COLOUR>
+		<STATE>,IncDecValue,CheckPointState,</STATE>
+		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1. !!Non puoi cambiare un 6 in 1 o un 1 in 6!!</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>2</NUMBER>
+		<NAME>Pennello per Eglomise</NAME>
+		<COLOUR>B</COLOUR>
+		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Muovi un qualsiasi dado nella tua vetrata ignorando le restrizioni di COLOURe.  Devi rispettare tutte le altre restrizioni di piazzamento</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>3</NUMBER>
+		<NAME>Alesatore per lamine di rame</NAME>
+		<COLOUR>R</COLOUR>
+		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Muovi un qualsiasi dado nella tua vetrata ignorando le restrizioni di valore. Devi rispettare tutte le altre restrizioni di piazzamento</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>4</NUMBER>
+		<NAME>Lathekin</NAME>
+		<COLOUR>Y</COLOUR>
+		<STATE>,SelectingDice,MovingDice,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Muovi esattamente due dadi, rispettando tutte le restrizioni di piazzamento</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>5</NUMBER>
+		<NAME>Taglierina circolare</NAME>
+		<COLOUR>G</COLOUR>
+		<STATE>,SelectingDice,AutomatedOperation,CheckPointState,</STATE>
+		<AUTOMATED>changeDice,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Dopo aver scelto un dado, scambia quel dado con un dado sul Tracciato dei Round</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>6</NUMBER>
+		<NAME>Pennello per Pasta Salda</NAME>
+		<COLOUR>P</COLOUR>
+		<STATE>,AutomatedOperation,MovingDice,CheckPointState,</STATE>
+		<AUTOMATED>launchDice,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Dopo aver scelto un dado, tira nuovamente quel dado. Se non puoi piazzarlo, riponilo nella Riserva.</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>7</NUMBER>
+		<NAME>Martelletto</NAME>
+		<COLOUR>B</COLOUR>
+		<STATE>,AutomatedOperation,CheckPointState,</STATE>
+		<AUTOMATED>resetDraftPool,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Tira nuovamente tutti i dadi della Riserva. Questa carta può essere usata solo durante il tuo secondo turno, prima di scegliere il secondo dado</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>8</NUMBER>
+		<NAME>Tenaglia a Rotelle</NAME>
+		<COLOUR>R</COLOUR>
+		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Dopo il tuo primo turno scegli immediatamente un altro dado. Salta il tuo secondo turno in questo round</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>9</NUMBER>
+		<NAME>Riga in Sughero</NAME>
+		<COLOUR>Y</COLOUR>
+		<STATE>,MovingDice,CheckPointState,</STATE>
+		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Dopo aver scelto un dado, piazzalo in una casella che non sia adiacente a un altro dado. Devi rispettare tutte le restrizioni di piazzamento</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>10</NUMBER>
+		<NAME>Tampone Diamantato</NAME>
+		<COLOUR>G</COLOUR>
+		<STATE>,AutomatedOperation,CheckPointState,</STATE>
+		<AUTOMATED>spinDice,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Dopo aver scelto un dado, giralo sulla faccia opposta. !!6 diventa 1, 5 diventa 2, 4 diventa 3 ecc.!!</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>11</NUMBER>
+		<NAME>Diluente per Pasta Salda</NAME>
+		<COLOUR>P</COLOUR>
+		<STATE>,AutomatedOperation,SelectingValue,MovingDice,CheckPointState,</STATE>
+		<AUTOMATED>getNewDice,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Dopo aver scelto un dado, riponilo nel Sacchetto, poi pescane uno dal Sacchetto. Scegli il valore del nuovo dado e piazzalo, rispettando tutte le restrizioni di piazzamento.</DESCRIPTION>
+	</CARD>
+	<CARD>
+		<NUMBER>12</NUMBER>
+		<NAME>Taglierina Manuale</NAME>
+		<COLOUR>B</COLOUR>
+		<STATE>,SelectingDice,SelectingDice,MovingDice,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<DESCRIPTION>Muovi fino a due dadi dello stesso colore in un solo dado sul Tracciato dei Round. Devi rispettare tutte le restrizioni di piazzamento.</DESCRIPTION>
+	</CARD>
+</TOOLCARDS>

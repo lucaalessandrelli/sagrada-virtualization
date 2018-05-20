@@ -32,5 +32,16 @@ public abstract class  Card {
         return this.idnumber;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setID(int id) {
+        this.idnumber = id;
+    }
 
 }

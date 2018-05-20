@@ -30,18 +30,6 @@ public class ObjectiveCard extends Card {
         this.idnumber = idnumber;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public int getID(){
-        return this.idnumber;
-    }
-
     public int getPoints(){
         return this.points;
     }
@@ -54,21 +42,14 @@ public class ObjectiveCard extends Card {
         return this.rules;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
+
     public void setType(String type) {
         this.type = type;
     }
     public void setPoints(int points) {
         this.points = points;
     }
-    public void setID(int id) {
-        this.idnumber = id;
-    }
+
 
     @Override
     public void show() {

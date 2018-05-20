@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.gameData;
 
+import java.util.Random;
+
 //express property of dice and cells of Windows Pattern Card
 public class Property {
     private Colour colour;
@@ -13,7 +15,10 @@ public class Property {
     //constructor for colour
     public Property(Colour colour){
         this.colour = colour;
-        this.number = 0;
+        int randomNum;
+        Random rand = new Random();
+        randomNum = 1+ rand.nextInt(6);
+        this.number = randomNum;
     }
 
     //constructor for number
@@ -35,7 +40,7 @@ public class Property {
         this.colour = z;
     }
     //setter method
-    protected void setNumber(int k){
+    public void setNumber(int k){
         this.number = k;
     }
 
