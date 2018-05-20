@@ -37,18 +37,25 @@ public class PositionDice1 implements TurnState {
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) {
-        /*int cardId = toolCard.getID();
+        int cardId = toolCard.getID();
         if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards()))) {
             if ((cardId == 8 && turn.getFirstBracket()) || (cardId != 8)) {
-                turn.setState(new ToolBeforeDice(turn, toolCard));
+                //setting the toolCard used in this turn
+                //setting the list of states for the dynamic state machine
+                //setting the list of operations for the AutomatedOperation State
+                turn.setToolCardInfo(toolCard);
+                //setting the check point i need to return after the user do the moves of the toolCard
+                turn.setCheckPointState(new ToolAfterStdMove(turn));
+                //need to set dynamic current state
+                turn.setDynamicState(new Dice(),new Pos(), new Dice(), new Pos());
             }
         } else {
           //throw wrong toolCard exception
-        }*/
+        }
     }
 
     @Override
-    public void receiveMove(Dice dice) {
+    public void receiveMove(Dice dice,Pos pos) {
         //throw wrong move exception
     }
 

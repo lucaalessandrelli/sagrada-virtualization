@@ -3,6 +3,7 @@ package it.polimi.ingsw.turn;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 
 public class ToolAfterDice implements TurnState {
     private Turn turn;
@@ -24,17 +25,16 @@ public class ToolAfterDice implements TurnState {
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) {
-        System.out.println("tool");
+        //throw wrong move exception
     }
 
     @Override
-    public void receiveMove(Dice dice) {
-        System.out.println("dice");
+    public void receiveMove(Dice dice,Pos pos) {
     }
 
     @Override
     public void receiveMove(Pos pos) {
-        System.out.println("pos");
+        //throw wrong move exception
     }
 
     @Override

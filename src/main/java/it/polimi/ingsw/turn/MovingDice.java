@@ -9,14 +9,20 @@ import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
 public class MovingDice implements TurnState {
     private Turn turn;
     private Dice chosenDice;
+    private Dice toolDice;
+    private Pos posChosenDice;
+    private Pos toolPos;
     InspectorContext inspectorContext;
     InspectorPlace inspectorPlace;
 
-    public MovingDice(Turn turn, Dice dice) {
+    public MovingDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
+        this.toolDice = toolDice;
+        this.toolPos = toolPos;
+        this.posChosenDice = posChosenDice;
+        this.chosenDice = chosenDice;
         inspectorContext = turn.getInspectorContext();
         inspectorPlace = turn.getInspectorPlace();
-        this.chosenDice = dice;
     }
 
     @Override
@@ -36,17 +42,20 @@ public class MovingDice implements TurnState {
     }
 
     @Override
-    public void receiveMove(Dice dice) {
+    public void receiveMove(Dice dice, Pos pos) {
         //throw wrong move exception
     }
 
     @Override
     public void receiveMove(Pos pos) {
-        /*if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
-            turn.setDynamicState(new Dice());
+        //change inspector
+        if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
+            //call modifier
+            turn.getModifier().positionDice(chosenDice,posChosenDice,pos);
+            turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
             //throw wrong placement exception
-        }*/
+        }
     }
 
     @Override

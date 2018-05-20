@@ -7,12 +7,14 @@ import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
 
 public class ChooseDice2 implements TurnState {
     private Turn turn;
+    private Pos posDiceChosen;
     private Dice chosenDice;
     InspectorPlace inspectorPlace;
 
-    public ChooseDice2(Turn turn, Dice dice) {
-        this.chosenDice = dice;
+    public ChooseDice2(Turn turn, Dice chosenDice,Pos posDiceChosen, Dice emptyDice, Pos emptyPos) {
+        this.chosenDice = chosenDice;
         this.turn = turn;
+        this.posDiceChosen = posDiceChosen;
     }
 
     @Override
@@ -32,17 +34,20 @@ public class ChooseDice2 implements TurnState {
     }
 
     @Override
-    public void receiveMove(Dice dice) {
+    public void receiveMove(Dice dice,Pos pos) {
         //throw wrong move exception
     }
 
     @Override
     public void receiveMove(Pos pos) {
-        /*if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
+        if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
+            //move allowed, call the model modifier passing parameters: dice, posDiceChosen, pos
+            turn.getModifier().positionDice(chosenDice,posDiceChosen,pos);
+            //could end the turn here without calling another state
             turn.setState(new PositionDice2(turn));
         } else {
             //throw wrong placement exception
-        }*/
+        }
     }
 
     @Override

@@ -10,7 +10,7 @@ public interface TurnState {
 
     //receiving move methods
     public void receiveMove(ToolCard toolCard);
-    public void receiveMove(Dice dice);
+    public void receiveMove(Dice dice,Pos pos);
     public void receiveMove(Pos pos);
     public void receiveMove(String pass);
 
