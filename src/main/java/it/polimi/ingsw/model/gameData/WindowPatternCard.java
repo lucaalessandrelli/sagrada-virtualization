@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.gameData;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class WindowPatternCard {
     private int num;
@@ -140,23 +137,24 @@ public class WindowPatternCard {
                 "Scheme: \n" + "\n");
         int x = this.matr.size();
         int y = this.matr.get(0).size();
-        for(int i = 0; i < x; i++){
-            if(i != 0)
-                System.out.print(" " + i + " ");
-            for (int j = 0; j < y; j++) {
-                if (i == 0) {
-                    System.out.print(" " + j + " ");
-                }
-                else
-                    System.out.print(j + " " + matr.get(i).get(j) + " ");
-                if( j == matr.get(i).size()-1) {
-                    System.out.print("\n");
+        int i;
+        for(i = 0; i <= x; i++){
+            for(int j = 0; j <= y; j++){
+                if ( i == 0 && j == 0)
+                    System.out.print("   ");
+                else if( i == 0)
+                    System.out.print("  " + (j-1));
+                else if( j == 0)
+                    System.out.print("  " + (i-1));
+                else {
+                    System.out.print("  ");
+                    matr.get(i-1).get(j-1).show();
                 }
             }
+            System.out.print("\n");
         }
         System.out.println("\n");
     }
-
-
 }
+
 

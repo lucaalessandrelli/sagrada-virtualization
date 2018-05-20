@@ -2,15 +2,14 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.gameData.Player;
 import org.junit.jupiter.api.Test;
-
 import java.rmi.RemoteException;
-import java.util.List;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class TimerTest {
-    private List<Match> matches;
+    private ArrayList<Match> matches;
     Server server = new Server();
     WaitingRoom lobby = server.getLobby();
 

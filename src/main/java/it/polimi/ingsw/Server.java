@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Server extends UnicastRemoteObject implements ServerInterface {
     private WaitingRoom lobby;
-    private List<Match> matchList;
+    private ArrayList<Match> matchList;
     private int idMatch;
     private long timerWaitingRoom;
 
@@ -46,7 +46,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     //Getter methods
-    public List<Match> getMatchList() {
+    public ArrayList<Match> getMatchList() {
         return this.matchList;
     }
 

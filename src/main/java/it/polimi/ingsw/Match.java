@@ -3,19 +3,17 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.model.gameData.Player;
 import it.polimi.ingsw.model.gameLogic.Round;
 import it.polimi.ingsw.model.gameData.Table;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Match {
     private int id;
-    private List<Player> playerList;
+    private ArrayList<Player> playerList;
     private Server server;
     private Table table;
-    private List<Round> roundList;
+    private ArrayList<Round> roundList;
     private int roundNumber;
 
-    public Match(List<Player> playerList, Server server, int id) {
+    public Match(ArrayList<Player> playerList, Server server, int id) {
         //this need to be passed by copy from the server
         this.playerList = playerList;
         this.server = server;
@@ -24,7 +22,7 @@ public class Match {
     }
 
     public void start() {
-        table = new Table();
+        table = new Table(playerList);
 
         /*SETTING ROUNDS*/
         for(roundNumber = 1; roundNumber <= 10; roundNumber++) {
@@ -50,11 +48,11 @@ public class Match {
     }
 
     //Getter methods
-    public List<Player> getPlayerList() {
+    public ArrayList<Player> getPlayerList() {
         return this.playerList;
     }
 
-    public List<Round> getRoundList() {
+    public ArrayList<Round> getRoundList() {
         return this.roundList;
     }
 }

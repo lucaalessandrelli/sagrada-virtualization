@@ -8,9 +8,9 @@ public class ToolCard extends Card implements Move {
     private boolean used;
     private int cost;
     private ArrayList<String> stateList;
+    private ArrayList<String> automatedoperationlist;
     private ArrayList<String> cMethods;
     private ArrayList<String> pMethods;
-    private ArrayList<String> automatedoperationlist;
 
     public ToolCard() {
         this.used = false;

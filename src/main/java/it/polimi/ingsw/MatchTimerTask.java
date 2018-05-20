@@ -2,16 +2,16 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.gameData.Player;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.List;
 
 public class MatchTimerTask extends TimerTask {
     private WaitingRoom lobby;
     private long time;
     private long tempTime;
     private Timer timer;
-    private List<Player> playerList;
+    private ArrayList<Player> playerList;
 
     public MatchTimerTask(WaitingRoom lobby, long time, Timer timer) {
         this.lobby = lobby;

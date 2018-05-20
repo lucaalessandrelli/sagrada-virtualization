@@ -14,10 +14,11 @@ public class Table {
     private CardContainer container;
 
 
-    public Table(){
+    public Table(ArrayList<Player> players){
         this.diceBag = new DiceBag();
         this.draftPool = new DraftPool();
         this.container = new CardContainer();
+        this.myplayer = players;
         int i;
         for(i = 0; i < 3; i++){
             ToolCard x = new ToolCard();

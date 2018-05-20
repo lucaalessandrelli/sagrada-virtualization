@@ -34,6 +34,8 @@ public class CardContainer {
     //!!!!Misses one part of the code!!!!
     public ArrayList<WindowPatternCard> pullOutPattern(int numPlayers) {
         int dimension = numPlayers*4;
+        if(numPlayers < 1 || numPlayers > 4)
+            throw new IndexOutOfBoundsException();
         ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
         try {
             if(this.patternused == true)
@@ -41,13 +43,21 @@ public class CardContainer {
             this.patternused = true;
             int randomNum;
             int cont = 23;
+            int next = 0;
             Random rand = new Random();
             for (int k = 0; k < dimension; k=k+2) {
                 randomNum = rand.nextInt(cont - (k+1));
+                if(randomNum%2 == 0)
+                    if((randomNum - 1) >= 0)
+                        next = randomNum - 1;
+                    else
+                        next = pattern.size()-1;
+                else
+                    next = randomNum + 1;
                 tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
-                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum+1))); //Supposing that z is the selected card from this "turn"
+                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(next))); //Supposing that z is the selected card from this "turn"
                 pattern.remove(randomNum);
-                pattern.remove(randomNum+1);
+                pattern.remove(next-1);
             }
         } catch (AlreadyBeenCalledException e){
             System.out.println(e.message);
@@ -59,6 +69,8 @@ public class CardContainer {
     //!!!!Misses one part of the code!!!!
     public ArrayList<ObjectiveCard> pullOutPrivate(int numPlayers) {
         int dimension = numPlayers;
+        if(numPlayers < 1 || numPlayers > 4)
+            throw new IndexOutOfBoundsException();
         ArrayList<ObjectiveCard> tmp = new ArrayList<ObjectiveCard>(dimension);
         try {
             if(this.privateused == true)

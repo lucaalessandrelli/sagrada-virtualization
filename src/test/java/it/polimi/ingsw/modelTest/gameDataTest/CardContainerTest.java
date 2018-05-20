@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CardContainerTest {
@@ -64,5 +65,34 @@ public class CardContainerTest {
         for(WindowPatternCard x:test){
             x.show();
         }
+    }
+
+    @Test
+    public void TestNeverOutofBound(){
+        CardContainer tester = new CardContainer();
+        for(int i = 0; i < 200; i++){
+            tester.pullOutPattern(4);
+            tester = new CardContainer();
+        }
+    }
+
+    @Test
+    public void TestNeverCallTwoTimes(){
+        CardContainer tester = new CardContainer();
+        tester.pullOutPattern(2);
+        tester.pullOutPublic();
+        tester.pullOutPrivate(2);
+        tester.pullOutPrivate(3);
+        tester.pullOutPublic();
+        tester.pullOutPattern(4);
+    }
+
+    @Test
+    public void TestTooManyPlayers(){
+        CardContainer tester = new CardContainer();
+        assertThrows(IndexOutOfBoundsException.class,()->{tester.pullOutPattern(6);});
+        assertThrows(IndexOutOfBoundsException.class,()->{tester.pullOutPrivate(8);});
+        assertThrows(IndexOutOfBoundsException.class,()->{tester.pullOutPattern(-4);});
+        assertThrows(IndexOutOfBoundsException.class,()->{tester.pullOutPrivate(-2);});
     }
 }

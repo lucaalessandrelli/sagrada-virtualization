@@ -3,13 +3,12 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.model.gameData.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class WaitingRoom {
     private Server server;
-    private List<Player> playerList;
+    private ArrayList<Player> playerList;
     private Timer timer;
     private TimerTask task;
     private long time;
@@ -57,7 +56,7 @@ public class WaitingRoom {
     }
 
     //Getter methods
-    public List<Player> getPlayerList() {
+    public ArrayList<Player> getPlayerList() {
         //return clonePlayerList();
         return this.playerList;
     }
@@ -71,8 +70,8 @@ public class WaitingRoom {
         server.createMatch(this);
     }
 
-    /*public List<Player> clonePlayerList() {
-        List<Player> cloneList = new ArrayList<>();
+    /*public ArrayList<Player> clonePlayerList() {
+        ArrayList<Player> cloneList = new ArrayList<>();
 
         for (Player player: this.playerList) {
             cloneList.add(player.clonePlayer());

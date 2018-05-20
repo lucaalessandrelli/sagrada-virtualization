@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.gameData;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Rules {

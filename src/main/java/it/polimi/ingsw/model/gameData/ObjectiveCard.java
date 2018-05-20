@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.gameData;
 
-import java.util.ArrayList;
 
 //The strategy pattern will be implemented later
 public class ObjectiveCard extends Card{
