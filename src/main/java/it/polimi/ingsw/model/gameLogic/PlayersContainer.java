@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 
 public class PlayersContainer {
     private List<Player> players;
+    private boolean firstBracket;
 
     public PlayersContainer(List<Player> p){
         players = p;
+        firstBracket=true;
     }
 
     public boolean checkActivity(){
@@ -23,22 +25,30 @@ public class PlayersContainer {
         }
     }
 
+    public boolean isFirstBracket(){
+        return firstBracket;
+    }
+
+    private void setFirstBracket(boolean v){
+        firstBracket =v;
+    }
+
+
+
     public Iterator<Player> getIterator(){
         return new IterPlayer();
     }
 
     private class IterPlayer implements Iterator{
         private int i;
-        boolean firstTurn; //first bracket
 
         private IterPlayer() {
             i = -1;
-            firstTurn = true;
         }
 
         @Override
         public boolean hasNext() {
-            if(firstTurn) {
+            if(isFirstBracket()) {
                 if (i <= players.size()) {
                     return true;
                 } else {
@@ -55,12 +65,12 @@ public class PlayersContainer {
 
         @Override
         public Player next() {
-            if (i == players.size()-1 && firstTurn == true) {
-                firstTurn = false;
+            if (i == players.size()-1 && isFirstBracket()) {
+                setFirstBracket(false);
                 i++;
             }
             if (this.hasNext()) {
-                if (firstTurn) {
+                if (isFirstBracket()) {
                     i++;
                     return players.get(i);
                 } else {

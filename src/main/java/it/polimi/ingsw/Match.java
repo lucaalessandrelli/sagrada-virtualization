@@ -34,13 +34,13 @@ public class Match {
         this.computePlayerPoints();
     }
 
-    public void computePlayerPoints() {
+    private void computePlayerPoints() {
         for(Player player: playerList) {
             //player.calculatePoints();
         }
     }
 
-    public void startNextRound() {
+    private void startNextRound() {
             roundList.add(new Round(this.playerList, roundNumber));
             /* call on the round just created a method that start the round
             roundList.get(roundNumber-1).startRound();

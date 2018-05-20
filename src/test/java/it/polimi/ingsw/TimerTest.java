@@ -107,4 +107,22 @@ public class TimerTest {
 
         assertTrue(lobby.getPlayerList().size() == 0);
     }
+
+    @Test
+    public void disconnectTest() throws InterruptedException {
+        lobby.setServer(server);
+
+        Player player1 = new Player("1");
+        Player player2 = new Player("2");
+
+        server.connectPlayer(player1);
+        server.connectPlayer(player2);
+
+        lobby.getPlayerList().remove(player2);
+
+        Thread.sleep(15000);
+
+        assertTrue(lobby.getPlayerList().size() == 1);
+        assertTrue(server.getMatchList().size() == 0);
+    }
 }

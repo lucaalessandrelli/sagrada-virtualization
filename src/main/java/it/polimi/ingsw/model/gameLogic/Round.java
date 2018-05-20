@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model.gameLogic;
 
 
-import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.Player;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.turn.Turn;
 
 import java.util.*;
@@ -23,7 +23,7 @@ public class Round {
         while(i.hasNext()){
             p = i.next();
             if (p.isActive()){
-                Turn t = new Turn(p);
+                Turn t = new Turn(p,getRoundNumber(),players.isFirstBracket());
             }
             if(!players.checkActivity()){
                 throw new NotEnoughPlayersException();

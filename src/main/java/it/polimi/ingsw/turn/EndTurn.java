@@ -36,4 +36,8 @@ public class EndTurn implements TurnState {
     public void receiveMove(Pos pos) {
         System.out.println("pos");
     }
+
+    @Override
+    public void receiveMove(String pass) {
+    }
 }

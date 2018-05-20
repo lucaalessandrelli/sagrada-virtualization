@@ -3,16 +3,15 @@ package it.polimi.ingsw.turn;
 import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 
-public class ChooseDice2 implements TurnState {
+public class SelectingDice implements TurnState {
     private Turn turn;
-    private Dice chosenDice;
-    InspectorPlace inspectorPlace;
+    InspectorContext inspectorContext;
 
-    public ChooseDice2(Turn turn, Dice dice) {
-        this.chosenDice = dice;
+    public SelectingDice(Turn turn) {
         this.turn = turn;
+        inspectorContext = turn.getInspectorContext();
     }
 
     @Override
@@ -28,25 +27,25 @@ public class ChooseDice2 implements TurnState {
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) {
-        //throw wrong move exception
+        //throw move not valid exception
     }
 
     @Override
     public void receiveMove(Dice dice) {
-        //throw wrong move exception
-    }
-
-    @Override
-    public void receiveMove(Pos pos) {
-        /*if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
-            turn.setState(new PositionDice2(turn));
+        /*if(inspectorContext.check(dice,turn.getPlayer().getDraftPool()) {
+                turn.setDynamicState(dice);
         } else {
-            //throw wrong placement exception
+          //throw wrong Dice exception
         }*/
     }
 
     @Override
+    public void receiveMove(Pos pos) {
+        //throw move not valid exception
+    }
+
+    @Override
     public void receiveMove(String pass) {
-        //throw wrong move exception
+        //throw move not valid exception
     }
 }

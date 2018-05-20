@@ -3,16 +3,20 @@ package it.polimi.ingsw.turn;
 import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
 
-public class ChooseDice2 implements TurnState {
+public class MovingDice implements TurnState {
     private Turn turn;
     private Dice chosenDice;
+    InspectorContext inspectorContext;
     InspectorPlace inspectorPlace;
 
-    public ChooseDice2(Turn turn, Dice dice) {
-        this.chosenDice = dice;
+    public MovingDice(Turn turn, Dice dice) {
         this.turn = turn;
+        inspectorContext = turn.getInspectorContext();
+        inspectorPlace = turn.getInspectorPlace();
+        this.chosenDice = dice;
     }
 
     @Override
@@ -39,7 +43,7 @@ public class ChooseDice2 implements TurnState {
     @Override
     public void receiveMove(Pos pos) {
         /*if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
-            turn.setState(new PositionDice2(turn));
+            turn.setDynamicState(new Dice());
         } else {
             //throw wrong placement exception
         }*/

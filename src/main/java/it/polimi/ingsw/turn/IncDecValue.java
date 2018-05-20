@@ -1,18 +1,23 @@
 package it.polimi.ingsw.turn;
 
+
 import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
 
-public class ChooseDice2 implements TurnState {
+public class IncDecValue implements TurnState {
     private Turn turn;
     private Dice chosenDice;
+    InspectorContext inspectorContext;
     InspectorPlace inspectorPlace;
 
-    public ChooseDice2(Turn turn, Dice dice) {
-        this.chosenDice = dice;
+    public IncDecValue(Turn turn, Dice dice) {
         this.turn = turn;
+        this.chosenDice = dice;
+        inspectorContext = turn.getInspectorContext();
+        inspectorPlace = turn.getInspectorPlace();
     }
 
     @Override
@@ -33,16 +38,17 @@ public class ChooseDice2 implements TurnState {
 
     @Override
     public void receiveMove(Dice dice) {
-        //throw wrong move exception
+        //chiamare inspector diversi
+        /*if(inspectorContext.check(dice,turn.getPlayer().getDraftPool()) {
+                turn.setDynamicState(new Dice());
+        } else {
+          //throw wrong Dice exception
+        }*/
     }
 
     @Override
     public void receiveMove(Pos pos) {
-        /*if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
-            turn.setState(new PositionDice2(turn));
-        } else {
-            //throw wrong placement exception
-        }*/
+        //throw wrong move exception
     }
 
     @Override
