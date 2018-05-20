@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.gameData;
+package it.polimi.ingsw.model.gameData.gameTools;
 
 public class AlreadyBeenCalledException extends Exception {
     String message;

@@ -1,5 +1,7 @@
-package it.polimi.ingsw.model.gameData;
+package it.polimi.ingsw.model.gameData.gameTools;
 
+
+import it.polimi.ingsw.model.gameData.Colour;
 
 import java.util.ArrayList;
 import java.util.Random;

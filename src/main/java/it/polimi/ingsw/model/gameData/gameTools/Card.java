@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.gameData;
+package it.polimi.ingsw.model.gameData.gameTools;
 
 public abstract class  Card {
     private String name;

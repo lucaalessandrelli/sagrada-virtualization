@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.gameData;
 
+import it.polimi.ingsw.model.gameData.gameTools.Cell;
+import it.polimi.ingsw.model.gameData.gameTools.WindowPatternCard;
+
 import java.util.ArrayList;
 
 public class Rules {

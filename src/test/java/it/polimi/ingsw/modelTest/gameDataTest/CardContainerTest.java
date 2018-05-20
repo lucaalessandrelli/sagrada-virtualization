@@ -1,8 +1,9 @@
 package it.polimi.ingsw.modelTest.gameDataTest;
 
-import it.polimi.ingsw.model.gameData.CardContainer;
-import it.polimi.ingsw.model.gameData.ObjectiveCard;
-import it.polimi.ingsw.model.gameData.WindowPatternCard;
+
+import it.polimi.ingsw.model.gameData.gameTools.CardContainer;
+import it.polimi.ingsw.model.gameData.gameTools.ObjectiveCard;
+import it.polimi.ingsw.model.gameData.gameTools.WindowPatternCard;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

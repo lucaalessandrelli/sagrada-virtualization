@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.gameLogic.Checker;
 
-import it.polimi.ingsw.model.gameData.*;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
+import it.polimi.ingsw.model.gameData.gameTools.DraftPool;
+import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 
 import java.util.ArrayList;
 

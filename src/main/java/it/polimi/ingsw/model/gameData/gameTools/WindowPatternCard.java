@@ -1,4 +1,8 @@
-package it.polimi.ingsw.model.gameData;
+package it.polimi.ingsw.model.gameData.gameTools;
+
+import it.polimi.ingsw.model.gameData.Colour;
+import it.polimi.ingsw.model.gameData.Pos;
+import it.polimi.ingsw.model.gameData.Property;
 
 import java.util.ArrayList;
 

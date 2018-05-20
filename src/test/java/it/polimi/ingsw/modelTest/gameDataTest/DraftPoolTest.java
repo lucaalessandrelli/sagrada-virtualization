@@ -1,7 +1,7 @@
 package it.polimi.ingsw.modelTest.gameDataTest;
 
-import it.polimi.ingsw.model.gameData.Dice;
-import it.polimi.ingsw.model.gameData.DraftPool;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
+import it.polimi.ingsw.model.gameData.gameTools.DraftPool;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

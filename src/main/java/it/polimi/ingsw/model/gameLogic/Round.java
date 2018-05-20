@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.gameLogic;
 
 
-import it.polimi.ingsw.model.gameData.Dice;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.Player;
 import it.polimi.ingsw.turn.Turn;
 
@@ -35,7 +35,7 @@ public class Round {
 
     private void setLastDice(Player p) {
 
-        this.lastDice = p.getLastDice();
+       // this.lastDice = p.getLastDice();
     }
 
     public List<Dice> getLastDice() {

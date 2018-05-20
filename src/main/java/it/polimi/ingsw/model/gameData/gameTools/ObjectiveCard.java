@@ -1,8 +1,10 @@
-package it.polimi.ingsw.model.gameData;
+package it.polimi.ingsw.model.gameData.gameTools;
+
+import it.polimi.ingsw.model.gameData.Rules;
 
 
 //The strategy pattern will be implemented later
-public class ObjectiveCard extends Card{
+public class ObjectiveCard extends Card {
     private int points;
     private String type;
     private String name;

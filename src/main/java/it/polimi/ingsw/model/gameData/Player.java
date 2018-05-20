@@ -1,15 +1,18 @@
 package it.polimi.ingsw.model.gameData;
 
+import it.polimi.ingsw.model.gameData.gameTools.DraftPool;
+import it.polimi.ingsw.model.gameData.gameTools.ObjectiveCard;
+import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
+import it.polimi.ingsw.model.gameData.gameTools.WindowPatternCard;
 import it.polimi.ingsw.model.gameLogic.Move;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Player {
     private String username;
     private boolean active;
-    private Table myTable;
+    private PublicObjects publicObjects;
     private ObjectiveCard myObjCard;
     private WindowPatternCard myWindow;
     private int myFavTokens;
@@ -35,28 +38,18 @@ public class Player {
         return username;
     }
 
-    //setter method
-    public void setMyTable(Table table){
-        myTable= table;
-    }
 
-    //getter method
-    public Table getMyTable() {
-        return myTable;
-    }
 
-    public void setMyObjCard(ObjectiveCard objCard){
-        this.myObjCard = objCard;
+    public void setMyObjCard(ObjectiveCard obj){
+        myObjCard =obj;
+
     }
     public void showMyObjCard(){
 
     }
 
     //choose between 4 WindowsPatternCard and set MyFavTokens
-    public void ChooseWindow() {
-        ArrayList<WindowPatternCard> windows = myTable.getRandomWindows();
-     //   windows.forEach(i -> System.out.println(i.getNum())); player view
-     //   Scanner in = new Scanner(System.in);  player choose
+    public void ChooseWindow(ArrayList<WindowPatternCard> windows) {
         int chosenOne = 0;
         while (myWindow==null) {
             for (WindowPatternCard w : windows) {
@@ -94,10 +87,8 @@ public class Player {
         return myFavTokens;
     }
     //pull out dice at the beginning of round
-    public ArrayList<Dice> pullOutFirst(){
-        ArrayList<Dice> dice = myTable.getDiceFromBag();
-        return dice;
-    }
+
+
     //modify windowsPatternCard
     public void placeMove(Move move){
       //  myWindow.placeDice(move.getChosenDice(),move.getChosenPos().getX(),move.getChosenPos().getY());
@@ -107,14 +98,18 @@ public class Player {
     public void doYourMove(){
     }
 
-    //show myWindow
-    public void showMyWindow(){
+    public void setPublicObjects(PublicObjects publicObjects) {
+        this.publicObjects = publicObjects;
+    }
+    public ArrayList<ToolCard>getToolCards(){
+        return publicObjects.getToolCards();
+    }
+    public DraftPool getDraftPool(){
+        return publicObjects.getDraftPool();
+    }
+    public WindowPatternCard getWindowPatternCard(){
+        return myWindow;
     }
 
-
-    public List<Dice> getLastDice() {
-        List<Dice> remainingDice = myTable.getAllDraft();
-        return remainingDice;
-    }
 }
 

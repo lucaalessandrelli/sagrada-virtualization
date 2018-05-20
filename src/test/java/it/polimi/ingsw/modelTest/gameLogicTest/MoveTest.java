@@ -1,9 +1,8 @@
 package it.polimi.ingsw.modelTest.gameLogicTest;
 
-import it.polimi.ingsw.model.gameData.Dice;
-import it.polimi.ingsw.model.gameLogic.Move;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.Pos;
-import it.polimi.ingsw.model.gameData.ToolCard;
+import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import org.junit.jupiter.api.Test;
 
 

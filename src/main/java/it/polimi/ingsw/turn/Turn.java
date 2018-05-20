@@ -1,10 +1,9 @@
 package it.polimi.ingsw.turn;
 
-import it.polimi.ingsw.model.gameData.Dice;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.Player;
 import it.polimi.ingsw.model.gameData.Pos;
-import it.polimi.ingsw.model.gameData.ToolCard;
-import it.polimi.ingsw.model.gameLogic.Move;
+import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 
 public class Turn {
     private Player player;

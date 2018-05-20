@@ -29,7 +29,7 @@ public class PlayersContainer {
 
     private class IterPlayer implements Iterator{
         private int i;
-        boolean firstTurn;
+        boolean firstTurn; //first bracket
 
         private IterPlayer() {
             i = -1;

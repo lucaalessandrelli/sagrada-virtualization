@@ -1,8 +1,8 @@
 package it.polimi.ingsw.modelTest.gameDataTest;
 
 import it.polimi.ingsw.model.gameData.Colour;
-import it.polimi.ingsw.model.gameData.Dice;
-import it.polimi.ingsw.model.gameData.DiceBag;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
+import it.polimi.ingsw.model.gameData.gameTools.DiceBag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

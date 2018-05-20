@@ -1,4 +1,8 @@
-package it.polimi.ingsw.model.gameData;
+package it.polimi.ingsw.model.gameData.gameTools;
+
+import it.polimi.ingsw.model.gameData.Pos;
+import it.polimi.ingsw.model.gameData.Property;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
 
 public class Cell {
     private Property property;

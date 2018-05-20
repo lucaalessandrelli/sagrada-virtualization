@@ -1,8 +1,5 @@
 package it.polimi.ingsw.model.gameLogic;
 
-import it.polimi.ingsw.model.gameData.Dice;
-import it.polimi.ingsw.model.gameData.ToolCard;
-
 public interface Move {
 
 }
