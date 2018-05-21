@@ -6,11 +6,10 @@ import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 
 public class ToolAfterStdMove implements TurnState {
     private Turn turn;
-    private ToolCard toolCard;
 
-    public ToolAfterStdMove(Turn turn,ToolCard toolCard) {
+
+    public ToolAfterStdMove(Turn turn) {
         this.turn = turn;
-        this.toolCard = toolCard;
     }
 
     @Override
@@ -30,7 +29,7 @@ public class ToolAfterStdMove implements TurnState {
     }
 
     @Override
-    public void receiveMove(Dice dice) {
+    public void receiveMove(Dice dice,Pos pos) {
         System.out.println("dice");
     }
 

@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
-import it.polimi.ingsw.model.gameLogic.Move;
 
 import java.util.ArrayList;
 
@@ -38,28 +37,30 @@ public class StartTurn implements TurnState {
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) {
-        /*int cardId = toolCard.getID();
+        int cardId = toolCard.getID();
         if(toolList.contains(cardId) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards()))) {
             if ((cardId == 7 && !turn.getFirstBracket()) || (cardId != 7)) {
+                //setting the toolCard used in this turn
                 //setting the list of states for the dynamic state machine
-                turn.setToolStateList(toolCard.getStateList());
+                //setting the list of operations for the AutomatedOperation State
+                turn.setToolCardInfo(toolCard);
                 //setting the check point i need to return after the user do the moves of the toolCard
-                turn.setCheckPointState(new ToolBeforeDice(turn, toolCard));
+                turn.setCheckPointState(new ToolBeforeDice(turn));
                 //need to set dynamic current state
-                turn.setDynamicState(new Dice());
+                turn.setDynamicState(new Dice(), new Pos(),new Dice(), new Pos());
             }
         } else {
           //throw wrong toolCard exception
-        }*/
+        }
     }
 
     @Override
-    public void receiveMove(Dice dice) {
-        /*if(inspectorContext.check(dice,turn.getPlayer().getDraftPool()) {
-                turn.setState(new ChooseDice1(turn, dice));
+    public void receiveMove(Dice dice, Pos pos) {
+        if(inspectorContext.check(dice,pos,turn.getPlayer().getDraftPool())) {
+                turn.setState(new ChooseDice1(turn, dice, pos));
         } else {
           //throw wrong Dice exception
-        }*/
+        }
     }
 
     @Override

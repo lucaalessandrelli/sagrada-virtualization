@@ -4,20 +4,23 @@ package it.polimi.ingsw.turn;
 import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectContextTool;
 
 public class IncDecValue implements TurnState {
     private Turn turn;
     private Dice chosenDice;
-    InspectorContext inspectorContext;
-    InspectorPlace inspectorPlace;
+    private Dice toolDice;
+    private Pos posChosenDice;
+    private Pos toolPos;
+    private InspectContextTool inspectContextTool;
 
-    public IncDecValue(Turn turn, Dice dice) {
+    public IncDecValue(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
-        this.chosenDice = dice;
-        inspectorContext = turn.getInspectorContext();
-        inspectorPlace = turn.getInspectorPlace();
+        this.toolDice = toolDice;
+        this.toolPos = toolPos;
+        this.posChosenDice = posChosenDice;
+        this.chosenDice = chosenDice;
+        //this.inspectContextTool = new InspectContextTool();
     }
 
     @Override
@@ -37,10 +40,12 @@ public class IncDecValue implements TurnState {
     }
 
     @Override
-    public void receiveMove(Dice dice) {
+    public void receiveMove(Dice toolDice, Pos toolPos) {
         //chiamare inspector diversi
-        /*if(inspectorContext.check(dice,turn.getPlayer().getDraftPool()) {
-                turn.setDynamicState(new Dice());
+        /*if(inspectorContext.check(toolDice,toolPos,turn.getPlayer().getDraftPool())) {
+                //call modifier so the value of the dice will be changed
+                turn.getModifier().changeDiceValue(chosenDice,posDiceChosen,toolDice);
+                turn.setDynamicState(toolDice,toolPos,new Dice(),new Pos());
         } else {
           //throw wrong Dice exception
         }*/
