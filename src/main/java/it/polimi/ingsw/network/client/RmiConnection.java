@@ -12,14 +12,16 @@ public class RmiConnection implements ConnectionHandler,Serializable {
     static int PORT_RMI = 56789;
     ServerInterface server;
     Client client;
+    String address;
 
-    public RmiConnection(Client client){
+    public RmiConnection(Client client,String addr){
         this.client = client;
+        address = addr;
         try {
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1", PORT_RMI);
+            Registry registry = LocateRegistry.getRegistry(address, PORT_RMI);
             server = (ServerInterface) registry.lookup("server");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Server is not up");
         }
 
     }
@@ -34,8 +36,8 @@ public class RmiConnection implements ConnectionHandler,Serializable {
                     System.out.println("Already connected");
 
                 }
-            } catch (RemoteException e) {
-                System.out.println("server not up");
+            } catch (Exception e) {
+                System.out.println("Server not available");
             }
         }
     }
@@ -46,7 +48,7 @@ public class RmiConnection implements ConnectionHandler,Serializable {
         try {
             server.disconnect(client.getName(),client);
         } catch (RemoteException e) {
-            System.out.println("server not up");
+            System.out.println("Server not available");
         }
         System.out.println("Disconnected form server");
 
@@ -58,7 +60,7 @@ public class RmiConnection implements ConnectionHandler,Serializable {
             String asw =server.command(cmd);
             return asw;
         } catch (RemoteException e) {
-            return "server is not up";
+            return "Server not available";
         }
     }
 
@@ -66,4 +68,6 @@ public class RmiConnection implements ConnectionHandler,Serializable {
     public String ping() {
         return "pong";
     }
+
+
 }

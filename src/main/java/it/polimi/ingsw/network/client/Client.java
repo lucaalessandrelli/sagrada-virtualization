@@ -12,17 +12,17 @@ public class Client implements ClientInterface,Serializable {
     private int kindConnection;
     private ConnectionHandler connectionHandler;
 
-    public Client(String name,int conn){
+    public Client(String name,int conn, String addr){
         this.name=name;
         connected=false;
         kindConnection=conn;
         if(kindConnection==1){
-            connectionHandler = new SocketConnection(this);
+            connectionHandler = new SocketConnection(this,addr);
         }else if(kindConnection==2){
-            connectionHandler = new RmiConnection(this);
+            connectionHandler = new RmiConnection(this,addr);
         }else{
             System.out.println("Not valid choice, default connection : RMI");
-            connectionHandler = new RmiConnection(this);
+            connectionHandler = new RmiConnection(this,addr);
         }
     }
 
@@ -67,5 +67,15 @@ public class Client implements ClientInterface,Serializable {
 
     public void setName(String n) {
         name=n;
+    }
+
+    public void setAddress(String addr) {
+        if(kindConnection==1){
+            connectionHandler = new SocketConnection(this,addr);
+        }else if(kindConnection==2){
+            connectionHandler = new RmiConnection(this,addr);
+        }else{
+            connectionHandler = new RmiConnection(this,addr);
+        }
     }
 }
