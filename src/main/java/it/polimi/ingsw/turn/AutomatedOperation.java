@@ -65,7 +65,7 @@ public class AutomatedOperation implements TurnState {
                 i++;
             } else {
 
-                turn.setDynamicState(chosenDice,posChosenDice, new Dice(), new Pos());
+                turn.setDynamicState(chosenDice,posChosenDice, toolDice, toolPos);
             }
         }
     }

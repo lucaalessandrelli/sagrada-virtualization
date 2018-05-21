@@ -44,14 +44,7 @@ public class Turn {
 
     public void setState(TurnState state) {
         this.state = state;
-    }
-
-    public void startTurn() {
-        this.state = new StartTurn(this);
-    }
-
-    public void viewChoice() {
-        state.viewChoice();
+        this.checkEndState();
     }
 
     //GETTING MOVE METHODS
@@ -70,7 +63,7 @@ public class Turn {
     public void setDynamicState(Dice dice, Pos pos, Dice toolDice, Pos toolPos) {
         String nextStateName = toolStateList.get(indexList);
 
-        if(nextStateName != "CheckPointState") {
+        if(nextStateName.equals("CheckPointState")) {
             //use java reflection to create an instance of the dynamic state and call method setState(dynamicState);
             try {
                 Class cls = Class.forName("it.polimi.ingsw.turn."+ nextStateName);
@@ -85,7 +78,7 @@ public class Turn {
 
                 Constructor ct = cls.getConstructor(partypes);
 
-                Object arglist[] = new Object[4];
+                Object arglist[] = new Object[5];
                 arglist[0] = this;
                 arglist[1] = dice;
                 arglist[2] = pos;
@@ -94,7 +87,7 @@ public class Turn {
 
                 this.setState((TurnState)ct.newInstance(arglist));
 
-                if(nextStateName == "AutomatedOperation") {
+                if(nextStateName.equals("AutomatedOperation")) {
                     ((AutomatedOperation)state).doAutomatedOperations(toolAutomatedOperationList);
                 }
             } catch (Throwable e) {
@@ -137,6 +130,14 @@ public class Turn {
 
     public ModelModifier getModifier() {
         return modifier;
+    }
+
+    public void notifyEndRound() {
+        //call a method on round instance
+    }
+
+    private void checkEndState() {
+        state.automaticPass();
     }
 
     public void setToolCardInfo(ToolCard toolCard) {

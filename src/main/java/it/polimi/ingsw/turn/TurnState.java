@@ -5,13 +5,6 @@ import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 
 public interface TurnState {
-    default void viewChoice() {
-        //future use
-    }
-    default boolean doChoice() {
-        //future use
-        return true;
-    }
 
     //receiving move methods
     default void receiveMove(ToolCard toolCard) {
@@ -27,4 +20,7 @@ public interface TurnState {
         //throw wrong move exception
     }
 
+    default void automaticPass() {
+
+    }
 }

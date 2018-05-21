@@ -29,7 +29,7 @@ public class SelectingValue implements TurnState {
         if(inspectorContext.check(toolDice,toolPos,turn.getPlayer().getDraftPool())) {
                 //call modifier
                 turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);
-                turn.setDynamicState(chosenDice,posChosenDice,new Dice(), new Pos());
+                turn.setDynamicState(toolDice,toolPos,new Dice(), new Pos());
         } else {
           //throw wrong Dice exception
         }

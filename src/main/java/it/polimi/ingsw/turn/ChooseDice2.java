@@ -9,11 +9,15 @@ public class ChooseDice2 implements TurnState {
     private Turn turn;
     private Pos posDiceChosen;
     private Dice chosenDice;
+    private Dice toolDice;
+    private Pos toolPos;
     InspectorPlace inspectorPlace;
 
-    public ChooseDice2(Turn turn, Dice chosenDice,Pos posDiceChosen, Dice emptyDice, Pos emptyPos) {
+    public ChooseDice2(Turn turn, Dice chosenDice,Pos posDiceChosen, Dice toolDice, Pos toolPos) {
         this.chosenDice = chosenDice;
         this.turn = turn;
+        this.toolDice = toolDice;
+        this.toolPos = toolPos;
         this.posDiceChosen = posDiceChosen;
     }
 
@@ -25,7 +29,7 @@ public class ChooseDice2 implements TurnState {
             //move allowed, call the model modifier passing parameters: dice, posDiceChosen, pos
             turn.getModifier().positionDice(chosenDice,posDiceChosen,pos);
             //could end the turn here without calling another state
-            turn.setState(new PositionDice2(turn));
+            turn.setState(new EndTurn(turn));
         } else {
             //throw wrong placement exception
         }

@@ -22,6 +22,7 @@ public class ModelModifier {
     //parameters needed: used all 4
     public void switchDice(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         //switch dice
+        //switch also the copy of the dice
     }
 
     //parameters needed: used first 2
@@ -39,6 +40,7 @@ public class ModelModifier {
 
     }
 
+    //parameter needed: used first 2
     public void newDice(Dice choosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
 
     }

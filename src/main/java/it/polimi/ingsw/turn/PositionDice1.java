@@ -35,7 +35,7 @@ public class PositionDice1 implements TurnState {
                 //setting the list of operations for the AutomatedOperation State
                 turn.setToolCardInfo(toolCard);
                 //setting the check point i need to return after the user do the moves of the toolCard
-                turn.setCheckPointState(new ToolAfterStdMove(turn));
+                turn.setCheckPointState(new EndTurn(turn));
                 //need to set dynamic current state
                 turn.setDynamicState(new Dice(),new Pos(), new Dice(), new Pos());
             }
