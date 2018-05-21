@@ -63,7 +63,7 @@ public class Turn {
     public void setDynamicState(Dice dice, Pos pos, Dice toolDice, Pos toolPos) {
         String nextStateName = toolStateList.get(indexList);
 
-        if(nextStateName.equals("CheckPointState")) {
+        if(!nextStateName.equals("CheckPointState")) {
             //use java reflection to create an instance of the dynamic state and call method setState(dynamicState);
             try {
                 Class cls = Class.forName("it.polimi.ingsw.turn."+ nextStateName);
