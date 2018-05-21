@@ -44,7 +44,6 @@ public class Turn {
 
     public void setState(TurnState state) {
         this.state = state;
-        System.out.println("cambio stato");
     }
 
     public void startTurn() {

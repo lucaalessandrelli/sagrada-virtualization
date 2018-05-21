@@ -22,39 +22,15 @@ public class SelectingDice implements TurnState {
         inspectorContext = turn.getInspectorContext();
     }
 
-    @Override
-    public boolean doChoice() {
-        return false;
-    }
-
-    @Override
-    public void viewChoice() {
-
-    }
-
     //GETTING MOVE METHODS
     @Override
-    public void receiveMove(ToolCard toolCard) {
-        //throw move not valid exception
-    }
-
-    @Override
-    public void receiveMove(Dice toolDice,Pos toolPos) {
+    public void receiveMove(Dice chosenDice,Pos posChosenDice) {
         //change inspector
-        if(inspectorContext.check(toolDice,toolPos,turn.getPlayer().getDraftPool())) {
-                turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
+        if(inspectorContext.check(chosenDice,posChosenDice,turn.getPlayer().getDraftPool())) {
+            turn.setDynamicState(chosenDice,posChosenDice,new Dice(),new Pos());
         } else {
-          //throw wrong Dice exception
+            //throw wrong Dice exception
         }
     }
-
-    @Override
-    public void receiveMove(Pos pos) {
-        //throw move not valid exception
-    }
-
-    @Override
-    public void receiveMove(String pass) {
-        //throw move not valid exception
-    }
 }
+

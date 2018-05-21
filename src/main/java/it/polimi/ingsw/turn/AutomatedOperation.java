@@ -30,16 +30,6 @@ public class AutomatedOperation implements TurnState {
         this.chosenDice = chosenDice;
     }
 
-    @Override
-    public boolean doChoice() {
-        return false;
-    }
-
-    @Override
-    public void viewChoice() {
-
-    }
-
     public void doAutomatedOperations(ArrayList<String> toolAutomatedOperationList) {
         String nextOperationName;
         ModelModifier modifier = turn.getModifier();
@@ -80,24 +70,4 @@ public class AutomatedOperation implements TurnState {
         }
     }
 
-    //GETTING MOVE METHODS
-    @Override
-    public void receiveMove(ToolCard toolCard) {
-        //throw wrong move exception
-    }
-
-    @Override
-    public void receiveMove(Dice dice, Pos pos) {
-        //throw wrong move exception
-    }
-
-    @Override
-    public void receiveMove(Pos pos) {
-        //throw wrong move exception
-    }
-
-    @Override
-    public void receiveMove(String pass) {
-        //throw wrong move exception
-    }
 }

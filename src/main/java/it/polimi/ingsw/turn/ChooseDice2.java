@@ -17,26 +17,7 @@ public class ChooseDice2 implements TurnState {
         this.posDiceChosen = posDiceChosen;
     }
 
-    @Override
-    public boolean doChoice() {
-        return false;
-    }
-
-    @Override
-    public void viewChoice() {
-
-    }
-
     //GETTING MOVE METHODS
-    @Override
-    public void receiveMove(ToolCard toolCard) {
-        //throw wrong move exception
-    }
-
-    @Override
-    public void receiveMove(Dice dice,Pos pos) {
-        //throw wrong move exception
-    }
 
     @Override
     public void receiveMove(Pos pos) {
@@ -52,6 +33,6 @@ public class ChooseDice2 implements TurnState {
 
     @Override
     public void receiveMove(String pass) {
-        //throw wrong move exception
+        turn.setState(new EndTurn(turn));
     }
 }

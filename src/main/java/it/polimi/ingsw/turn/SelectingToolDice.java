@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 
-public class SelectingValue implements TurnState {
+public class SelectingToolDice implements TurnState {
     private Dice chosenDice;
     private Dice toolDice;
     private Pos posChosenDice;
@@ -13,7 +13,7 @@ public class SelectingValue implements TurnState {
     private Turn turn;
     InspectorContext inspectorContext;
 
-    public SelectingValue(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public SelectingToolDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
@@ -25,13 +25,16 @@ public class SelectingValue implements TurnState {
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(Dice toolDice,Pos toolPos) {
-        //chiamare inspector diversi
+        //change inspector
         if(inspectorContext.check(toolDice,toolPos,turn.getPlayer().getDraftPool())) {
-                //call modifier
-                turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);
-                turn.setDynamicState(chosenDice,posChosenDice,new Dice(), new Pos());
+                turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
           //throw wrong Dice exception
         }
+    }
+
+    @Override
+    public void receiveMove(String pass) {
+        turn.setState(new EndTurn(turn));
     }
 }
