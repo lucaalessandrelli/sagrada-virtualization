@@ -5,13 +5,26 @@ import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 
 public interface TurnState {
-    public void viewChoice();
-    public boolean doChoice();
+    default void viewChoice() {
+        //future use
+    }
+    default boolean doChoice() {
+        //future use
+        return true;
+    }
 
     //receiving move methods
-    public void receiveMove(ToolCard toolCard);
-    public void receiveMove(Dice dice,Pos pos);
-    public void receiveMove(Pos pos);
-    public void receiveMove(String pass);
+    default void receiveMove(ToolCard toolCard) {
+        //throw wrong move exception
+    }
+    default void receiveMove(Dice dice,Pos pos) {
+        //throw wrong move exception
+    }
+    default void receiveMove(Pos pos) {
+        //throw wrong move exception
+    }
+    default void receiveMove(String pass) {
+        //throw wrong move exception
+    }
 
 }

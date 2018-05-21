@@ -25,26 +25,7 @@ public class MovingDice implements TurnState {
         inspectorPlace = turn.getInspectorPlace();
     }
 
-    @Override
-    public boolean doChoice() {
-        return false;
-    }
-
-    @Override
-    public void viewChoice() {
-
-    }
-
     //GETTING MOVE METHODS
-    @Override
-    public void receiveMove(ToolCard toolCard) {
-        //throw wrong move exception
-    }
-
-    @Override
-    public void receiveMove(Dice dice, Pos pos) {
-        //throw wrong move exception
-    }
 
     @Override
     public void receiveMove(Pos pos) {
@@ -56,10 +37,5 @@ public class MovingDice implements TurnState {
         } else {
             //throw wrong placement exception
         }
-    }
-
-    @Override
-    public void receiveMove(String pass) {
-        //throw wrong move exception
     }
 }

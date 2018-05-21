@@ -24,16 +24,6 @@ public class StartTurn implements TurnState {
         toolList.add(7);
     }
 
-    @Override
-    public boolean doChoice() {
-        return false;
-    }
-
-    @Override
-    public void viewChoice() {
-
-    }
-
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) {
@@ -61,11 +51,6 @@ public class StartTurn implements TurnState {
         } else {
           //throw wrong Dice exception
         }
-    }
-
-    @Override
-    public void receiveMove(Pos pos) {
-        //throw wrong move exception
     }
 
     @Override

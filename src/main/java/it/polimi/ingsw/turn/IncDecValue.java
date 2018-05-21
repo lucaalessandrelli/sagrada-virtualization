@@ -23,22 +23,7 @@ public class IncDecValue implements TurnState {
         //this.inspectContextTool = new InspectContextTool();
     }
 
-    @Override
-    public boolean doChoice() {
-        return false;
-    }
-
-    @Override
-    public void viewChoice() {
-
-    }
-
     //GETTING MOVE METHODS
-    @Override
-    public void receiveMove(ToolCard toolCard) {
-        //throw wrong move exception
-    }
-
     @Override
     public void receiveMove(Dice toolDice, Pos toolPos) {
         //chiamare inspector diversi
@@ -49,15 +34,5 @@ public class IncDecValue implements TurnState {
         } else {
           //throw wrong Dice exception
         }*/
-    }
-
-    @Override
-    public void receiveMove(Pos pos) {
-        //throw wrong move exception
-    }
-
-    @Override
-    public void receiveMove(String pass) {
-        //throw wrong move exception
     }
 }

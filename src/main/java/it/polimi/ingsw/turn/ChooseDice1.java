@@ -30,16 +30,6 @@ public class ChooseDice1 implements TurnState {
         toolList.add(11);
     }
 
-    @Override
-    public boolean doChoice() {
-        return false;
-    }
-
-    @Override
-    public void viewChoice() {
-
-    }
-
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) {
@@ -58,11 +48,6 @@ public class ChooseDice1 implements TurnState {
     }
 
     @Override
-    public void receiveMove(Dice dice, Pos pos) {
-        //throw wrong move exception
-    }
-
-    @Override
     public void receiveMove(Pos pos) {
         if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
             //move allowed, call the model modifier passing parameters: dice, posDiceChosen, pos
@@ -75,6 +60,6 @@ public class ChooseDice1 implements TurnState {
 
     @Override
     public void receiveMove(String pass) {
-        //throw wrong move exception
+        turn.setState(new EndTurn(turn));
     }
 }

@@ -14,22 +14,7 @@ public class ToolBeforeDice implements TurnState {
         inspectorContext = turn.getInspectorContext();
     }
 
-    @Override
-    public boolean doChoice() {
-        return false;
-    }
-
-    @Override
-    public void viewChoice() {
-
-    }
-
     //GETTING MOVE METHODS
-    @Override
-    public void receiveMove(ToolCard toolCard) {
-        //throw wrong move exception
-    }
-
     @Override
     public void receiveMove(Dice dice,Pos pos) {
         if(inspectorContext.check(dice,pos,turn.getPlayer().getDraftPool())) {
@@ -40,16 +25,7 @@ public class ToolBeforeDice implements TurnState {
     }
 
     @Override
-    public void receiveMove(Pos pos) {
-        //throw wrong move exception
-    }
-
-    @Override
     public void receiveMove(String pass) {
         turn.setState(new EndTurn(turn));
     }
-
-
-
-
 }

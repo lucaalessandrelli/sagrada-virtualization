@@ -4,34 +4,38 @@ import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
 
-public class SelectingValue implements TurnState {
+public class MovingToolDice implements TurnState {
+    private Turn turn;
     private Dice chosenDice;
     private Dice toolDice;
     private Pos posChosenDice;
     private Pos toolPos;
-    private Turn turn;
     InspectorContext inspectorContext;
+    InspectorPlace inspectorPlace;
 
-    public SelectingValue(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public MovingToolDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
         inspectorContext = turn.getInspectorContext();
+        inspectorPlace = turn.getInspectorPlace();
     }
 
     //GETTING MOVE METHODS
+
     @Override
-    public void receiveMove(Dice toolDice,Pos toolPos) {
-        //chiamare inspector diversi
-        if(inspectorContext.check(toolDice,toolPos,turn.getPlayer().getDraftPool())) {
-                //call modifier
-                turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);
-                turn.setDynamicState(chosenDice,posChosenDice,new Dice(), new Pos());
+    public void receiveMove(Pos pos) {
+        //change inspector
+        if(inspectorPlace.check(toolDice,toolPos,turn.getPlayer().getWindowPatternCard())) {
+            //call modifier
+            turn.getModifier().positionDice(toolDice,toolPos,pos);
+            turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
-          //throw wrong Dice exception
+            //throw wrong placement exception
         }
     }
 }
