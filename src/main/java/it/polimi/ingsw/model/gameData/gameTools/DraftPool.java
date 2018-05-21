@@ -39,6 +39,10 @@ public class DraftPool {
 
     //show all dice in
     public void showDraftPool(){
+        System.out.print("This is the draftpool:" );
+        for (Dice x: this.draftPool) {
+            x.show();
+        }
     }
 
     //add new dices that have been drown out from the bag

@@ -137,7 +137,7 @@ public class WindowPatternCard {
 
     //shows every attribute of the Card, also the scheme
     public void show(){
-        System.out.print("ID number: " + num + "\n" + "Difficulty: " + difficulty + "\n" + "Name: " + name + "\n" +
+        System.out.print("\nWindow Pattern \nID number: " + num + "\n" + "Difficulty: " + difficulty + "\n" + "Name: " + name + "\n" +
                 "Scheme: \n" + "\n");
         int x = this.matr.size();
         int y = this.matr.get(0).size();

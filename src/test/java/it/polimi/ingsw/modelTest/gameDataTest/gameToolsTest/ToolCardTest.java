@@ -1,4 +1,4 @@
-package it.polimi.ingsw.modelTest.gameDataTest;
+package it.polimi.ingsw.modelTest.gameDataTest.gameToolsTest;
 
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import org.junit.jupiter.api.Test;

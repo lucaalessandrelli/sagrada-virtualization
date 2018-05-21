@@ -3,7 +3,7 @@
 		<NUMBER>1</NUMBER>
 		<NAME>Pinza Sgrossatrice</NAME>
 		<COLOUR>P</COLOUR>
-		<STATE>,IncDecValue,CheckPointState,</STATE>
+		<STATE>,IncDecValue,ChooseDice2,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
 		<DESCRIPTION>Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1. !!Non puoi cambiare un 6 in 1 o un 1 in 6!!</DESCRIPTION>
 	</CARD>
@@ -35,7 +35,7 @@
 		<NUMBER>5</NUMBER>
 		<NAME>Taglierina circolare</NAME>
 		<COLOUR>G</COLOUR>
-		<STATE>,SelectingDice,AutomatedOperation,CheckPointState,</STATE>
+		<STATE>,SelectingDice,AutomatedOperation,ChooseDice2,</STATE>
 		<AUTOMATED>changeDice,operationEndend,</AUTOMATED>
 		<DESCRIPTION>Dopo aver scelto un dado, scambia quel dado con un dado sul Tracciato dei Round</DESCRIPTION>
 	</CARD>
@@ -43,7 +43,7 @@
 		<NUMBER>6</NUMBER>
 		<NAME>Pennello per Pasta Salda</NAME>
 		<COLOUR>P</COLOUR>
-		<STATE>,AutomatedOperation,MovingDice,CheckPointState,</STATE>
+		<STATE>,AutomatedOperation,ChooseDice2,</STATE>
 		<AUTOMATED>launchDice,operationEndend,</AUTOMATED>
 		<DESCRIPTION>Dopo aver scelto un dado, tira nuovamente quel dado. Se non puoi piazzarlo, riponilo nella Riserva.</DESCRIPTION>
 	</CARD>
@@ -75,7 +75,7 @@
 		<NUMBER>10</NUMBER>
 		<NAME>Tampone Diamantato</NAME>
 		<COLOUR>G</COLOUR>
-		<STATE>,AutomatedOperation,CheckPointState,</STATE>
+		<STATE>,AutomatedOperation,ChooseDice2,</STATE>
 		<AUTOMATED>spinDice,operationEndend,</AUTOMATED>
 		<DESCRIPTION>Dopo aver scelto un dado, giralo sulla faccia opposta. !!6 diventa 1, 5 diventa 2, 4 diventa 3 ecc.!!</DESCRIPTION>
 	</CARD>
@@ -83,7 +83,7 @@
 		<NUMBER>11</NUMBER>
 		<NAME>Diluente per Pasta Salda</NAME>
 		<COLOUR>P</COLOUR>
-		<STATE>,AutomatedOperation,SelectingValue,MovingDice,CheckPointState,</STATE>
+		<STATE>,AutomatedOperation,SelectingValue,ChooseDice2,</STATE>
 		<AUTOMATED>getNewDice,operationEndend,</AUTOMATED>
 		<DESCRIPTION>Dopo aver scelto un dado, riponilo nel Sacchetto, poi pescane uno dal Sacchetto. Scegli il valore del nuovo dado e piazzalo, rispettando tutte le restrizioni di piazzamento.</DESCRIPTION>
 	</CARD>

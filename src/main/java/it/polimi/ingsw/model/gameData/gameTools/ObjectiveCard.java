@@ -7,32 +7,22 @@ import it.polimi.ingsw.model.gameData.Rules;
 public class ObjectiveCard extends Card {
     private int points;
     private String type;
-    private String name;
-    private String description;
-    private int idnumber;
     private Rules rules;
 
 
     public ObjectiveCard(){
         this.points = 0;
         this.type = "";
-        this.name = "";
-        this.description = "";
-        this.idnumber = 0;
         this.rules = new Rules();
     }
 
     public ObjectiveCard(int points, String type, String name, String description, int idnumber) {
         this.points = points;
         this.type = type;
-        this.name = name;
-        this.description = description;
-        this.idnumber = idnumber;
     }
 
-    public int getPoints(){
-        return this.points;
-    }
+    //getter
+    public int getPoints(){ return this.points; }
 
     public String getType(){
         return this.type;
@@ -42,10 +32,11 @@ public class ObjectiveCard extends Card {
         return this.rules;
     }
 
-
+    //setter
     public void setType(String type) {
         this.type = type;
     }
+
     public void setPoints(int points) {
         this.points = points;
     }
@@ -53,9 +44,9 @@ public class ObjectiveCard extends Card {
 
     @Override
     public void show() {
-        System.out.print("Name :" + this.name + "\nDescription :"
-        + this.description + "\nIdentification number:"
-        + this.idnumber + "\nPoints:"
+        System.out.print("Name :" + this.getName() + "\nDescription :"
+        + this.getDescription() + "\nIdentification number:"
+        + this.getID() + "\nPoints:"
         + this.points + "\nType: "
         + this.type);
     }

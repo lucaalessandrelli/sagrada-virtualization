@@ -1,6 +1,9 @@
-package it.polimi.ingsw.modelTest.gameDataTest;
+package it.polimi.ingsw.modelTest.gameDataTest.gameToolsTest;
 
+import it.polimi.ingsw.model.gameData.Colour;
+import it.polimi.ingsw.model.gameData.Property;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
+import it.polimi.ingsw.model.gameData.gameTools.DiceBag;
 import it.polimi.ingsw.model.gameData.gameTools.DraftPool;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +44,30 @@ public class DraftPoolTest{
         }
         assertTrue(tester.getNumOfDices() == 1);
         assertThrows(IndexOutOfBoundsException.class,()->{tester.chooseDice(0);});
+    }
+
+    @Test
+    public void TestAddDices(){
+        DraftPool tester = new DraftPool();
+        DiceBag test = new DiceBag();
+        tester.addNewDices(test.pullOut());
+    }
+
+    @Test
+    public void TestFindDice(){
+        DraftPool tester = new DraftPool();
+        Property prop = new Property(Colour.RED);
+        Dice d;
+        prop.setNumber(5);
+        for(int i = 0; i < 6; i++) {
+            d = new Dice();
+            assertTrue(tester.getDraftPool().add(d));
+        }
+        d = new Dice(prop);
+        assertFalse(tester.findDice(d));
+        assertTrue(tester.getDraftPool().add(d));
+        assertTrue(tester.findDice(d));
+        tester.showDraftPool();
     }
 
 

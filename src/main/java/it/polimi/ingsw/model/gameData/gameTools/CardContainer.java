@@ -2,7 +2,6 @@ package it.polimi.ingsw.model.gameData.gameTools;
 
 import it.polimi.ingsw.model.gameData.Colour;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,7 +9,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class CardContainer {
@@ -39,17 +37,22 @@ public class CardContainer {
     //Pull out 4 WindowPatternCard given to the player to select one of them
     public ArrayList<WindowPatternCard> pullOutPattern(int numPlayers) {
         int dimension = numPlayers*4;
+
         if(numPlayers < 1 || numPlayers > 4)
             throw new IndexOutOfBoundsException();
+
         ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
+
         try {
             if(this.patternused == true)
                 throw new AlreadyBeenCalledException();
+
             this.patternused = true;
             int randomNum;
             int cont = 24;
             int next = 0;
             Random rand = new Random();
+
             for (int k = 0; k < dimension; k=k+2) {
                 randomNum = rand.nextInt(cont - (k+1));
                 if(randomNum%2 == 0)
@@ -64,7 +67,7 @@ public class CardContainer {
                 pattern.remove(randomNum);
                 pattern.remove(next-1);
             }
-        } catch (AlreadyBeenCalledException e){
+        } catch (AlreadyBeenCalledException e) {
             System.out.println(e.message);
         }
         return tmp;
@@ -73,9 +76,12 @@ public class CardContainer {
     //Pull out x Object Private Card given to the player to select one of them
     public ArrayList<ObjectiveCard> pullOutPrivate(int numPlayers) {
         int dimension = numPlayers;
+
         if(numPlayers < 1 || numPlayers > 4)
             throw new IndexOutOfBoundsException();
+
         ArrayList<ObjectiveCard> tmp = new ArrayList<ObjectiveCard>(dimension);
+
         try {
             if(this.privateused == true)
                 throw new AlreadyBeenCalledException();
@@ -98,6 +104,7 @@ public class CardContainer {
     public ArrayList<ObjectiveCard> pullOutPublic(){
         int dimension = 3;
         ArrayList<ObjectiveCard> tmp = new ArrayList<ObjectiveCard>(dimension);
+
         try {
             if(this.publicused == true)
                 throw new AlreadyBeenCalledException();
@@ -120,6 +127,7 @@ public class CardContainer {
     //!!!!Misses one part of the code!!!!
     public ArrayList<ToolCard> pullOutTools() {
         int dimension = 3;
+
         ArrayList<ToolCard> tmp = new ArrayList<>(dimension);
         try {
             if(this.toolsused == true)
@@ -149,6 +157,7 @@ public class CardContainer {
         File file = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = null;
+
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
@@ -157,16 +166,15 @@ public class CardContainer {
         Document document = null;
         try {
             document = documentBuilder.parse(file);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException | org.xml.sax.SAXException e) {
             e.printStackTrace();
         }
-        String x = document.getElementsByTagName("NAME").item(cont).getTextContent();
+
         myobj.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
         myobj.setDescription(document.getElementsByTagName("DESCRIPTION").item(cont).getTextContent());
         myobj.setType(document.getElementsByTagName("TYPE").item(cont).getTextContent());
         String input = document.getElementsByTagName("POINTS").item(cont).getTextContent();
+
         if(!(input.equals("V"))) {
             if(input.equals("#"))
                 myobj.setPoints(1);
@@ -200,6 +208,7 @@ public class CardContainer {
         File file = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = null;
+
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
@@ -208,21 +217,19 @@ public class CardContainer {
         Document document = null;
         try {
             document = documentBuilder.parse(file);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException | org.xml.sax.SAXException e) {
             e.printStackTrace();
         }
+
         mypattern.setNum(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()));
         mypattern.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
         mypattern.setDifficulty(Integer.valueOf(document.getElementsByTagName("DIFFICULTY").item(cont).getTextContent()));
         all = document.getElementsByTagName("RULES").item(cont).getTextContent();
-        System.out.println("\n" + mypattern.getName());
+
         final int len = all.length();
         for(int i = 0; i < len; i=i+4){
             if(all.charAt(i) == ',')
                 continue;
-            System.out.print("\n" + i);
             mypattern.addRestr(all.charAt(i),Integer.valueOf(all.charAt(i+1)),Integer.valueOf(all.charAt(i+2)));
         }
         return mypattern;
@@ -236,6 +243,7 @@ public class CardContainer {
         File file = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = null;
+
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
@@ -244,21 +252,23 @@ public class CardContainer {
         Document document = null;
         try {
             document = documentBuilder.parse(file);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException | org.xml.sax.SAXException e) {
             e.printStackTrace();
         }
+
         mytool.setID(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()));
         mytool.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
+
         tmpc = tmpc.isIn((document.getElementsByTagName("COLOUR").item(cont).getTextContent()).charAt(0));
         mytool.setColour(tmpc);
+
         all = document.getElementsByTagName("STATE").item(cont).getTextContent();
-        System.out.println("\n" + mytool.getName());
         this.creatingStrings(false,all,mytool);
+
         all = document.getElementsByTagName("AUTOMATED").item(cont).getTextContent();
         this.creatingStrings(true,all,mytool);
         mytool.setDescription((document.getElementsByTagName("DESCRIPTION").item(cont).getTextContent()));
+
         return mytool;
     }
 

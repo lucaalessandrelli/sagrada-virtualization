@@ -1,9 +1,15 @@
 package it.polimi.ingsw.model.gameData;
 
 import it.polimi.ingsw.model.gameData.gameTools.Cell;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.WindowPatternCard;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class Rules {
 
@@ -196,50 +202,30 @@ public class Rules {
 
     private int near(WindowPatternCard window, String direction, String type){
         ArrayList<ArrayList<Cell>> w = window.getMatr();
+        List<Colour> colours = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         int result = 0;
-        int j;
-        int x;
-        int y;
-        int sum;
-        boolean b = false;
-        if (direction.equals("COLUMN")) {
-            x = w.get(0).size();
-            y = w.size();
-            sum = 4;
-        }
-        else
-        {
-            x = w.size();
-            y = w.get(0).size();
-            sum = 5;
-        }
-        switch (type){
+        int j,i,x,y,sum;
+        boolean column;
+        x = w.size();
+        y = w.get(0).size();
+        //misses the part for control on column, now controls only rows
+        switch (type) {
             case "NOVALUE":
-                for(int i = 0; i < x; i++){
-                    b = false;
-                    for(j = 0; j < y; j++){
-                        if(w.get(i).get(j).isOccupied() && w.get(i).get(j).getDice().getNumber() ==
-                                w.get(i+1).get(j+1).getDice().getNumber()) {
-                            b = true;
-                            break;
-                        }
-                    }
-                    if(!b)
-                        result = result + sum;
+                for(i = 0; i < x; i++){
+                    numbers = w.get(i).stream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getNumber).distinct().collect(Collectors.toList());
+                    if(colours.size() == 5)
+                        result++;
+                    System.out.println("Result tmp: " + result);
                 }
                 break;
+
             case "NOCOLOR":
-                for(int i = 0; i < x; i++){
-                    b = false;
-                    for(j = 0; j < y; j++){
-                        if(w.get(i).get(j).isOccupied() && w.get(i).get(j).getDice().getColour() ==
-                                w.get(i+1).get(j+1).getDice().getColour()) {
-                            b = true;
-                            break;
-                        }
-                    }
-                    if(!b)
-                        result = result + sum;
+                for(i = 0; i < x; i++){
+                    colours = w.get(i).stream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getColour).distinct().collect(Collectors.toList());
+                    if(colours.size() == 5)
+                        result++;
+                    System.out.println("Result tmp: " + result);
                 }
                 break;
         }
