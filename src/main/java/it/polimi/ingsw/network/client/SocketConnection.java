@@ -12,11 +12,11 @@ public class SocketConnection implements ConnectionHandler {
     Socket socket;
     InputComposer inputComposer;
 
-    public SocketConnection(Client client) {
+    public SocketConnection(Client client, String addr) {
         this.client = client;
         inputComposer = new InputComposer(client);
         try {
-            socket = new Socket("127.0.0.1",PORT_SOCKET);
+            socket = new Socket(addr,PORT_SOCKET);
         } catch (IOException e) {
            System.out.println("Connection lost");
         }
@@ -38,8 +38,8 @@ public class SocketConnection implements ConnectionHandler {
                     System.out.println(asw);
                 }
             }
-        } catch (IOException e) {
-            System.out.println("Connection lost");
+        } catch (Exception e) {
+            System.out.println("Server not available");
         }
 
 
@@ -83,4 +83,5 @@ public class SocketConnection implements ConnectionHandler {
     public String ping() {
         return null;
     }
+
 }
