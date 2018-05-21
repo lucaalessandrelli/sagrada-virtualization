@@ -64,7 +64,6 @@ public class Turn {
         String nextStateName = toolStateList.get(indexList);
 
         if(!nextStateName.equals("CheckPointState")) {
-            //use java reflection to create an instance of the dynamic state and call method setState(dynamicState);
             try {
                 Class cls = Class.forName("it.polimi.ingsw.turn."+ nextStateName);
 
