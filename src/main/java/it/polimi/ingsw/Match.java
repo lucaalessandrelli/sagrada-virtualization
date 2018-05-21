@@ -3,6 +3,8 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.model.gameData.Player;
 import it.polimi.ingsw.model.gameLogic.Round;
 import it.polimi.ingsw.model.gameData.Table;
+import it.polimi.ingsw.network.server.Server;
+
 import java.util.ArrayList;
 
 public class Match {
