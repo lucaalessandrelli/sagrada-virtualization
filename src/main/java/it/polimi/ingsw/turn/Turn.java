@@ -15,7 +15,7 @@ import java.lang.reflect.*;
 import java.util.ArrayList;
 
 /**
- * Turn class
+ * Turn class: manages the turn of a given player through a state machine
  */
 public class Turn {
     private Player player;
@@ -87,10 +87,6 @@ public class Turn {
         }
     }
 
-    /**
-     *
-     * @param pos
-     */
     public void receiveMove(Pos pos) {
         try {
             state.receiveMove(pos);

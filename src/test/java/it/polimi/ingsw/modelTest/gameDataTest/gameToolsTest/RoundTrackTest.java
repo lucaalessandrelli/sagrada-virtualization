@@ -14,7 +14,7 @@ public class RoundTrackTest {
 
 
     /**
-     * Testing getter & setter
+     * Testing getter and setter
      */
     @Test
     public void TestGet_And_Set(){
