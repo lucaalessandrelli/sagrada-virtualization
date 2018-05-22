@@ -29,13 +29,15 @@ public class NetworkManager {
         try {
             Registry registry = LocateRegistry.createRegistry(PORT_RMI);
             registry.bind("server", server);
-            ServerSocket serverSocket = new ServerSocket(PORT_SOCKET);
-            SocketContainer sc;
-            System.out.println("Server is up");
-            while (true) {
-                Socket socket = serverSocket.accept();
-                sc = new SocketContainer(socket,server);
-                new Thread(sc).start();
+            try (ServerSocket serverSocket = new ServerSocket(PORT_SOCKET)) {
+                SocketContainer sc;
+                System.out.println("Server is up");
+                do  {
+                    Socket socket = serverSocket.accept();
+                    sc = new SocketContainer(socket, server);
+                    new Thread(sc).start();
+                }while (20 > clients.size());
+                System.out.println("Too many users connected");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,8 +100,12 @@ public class NetworkManager {
                     }
                 }
 
-            } catch (IOException e) {
-                System.out.println(name + " is disconnected");
+            } catch (Exception e) {
+                try {
+                    server.disconnect(name,this);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
 
         }
