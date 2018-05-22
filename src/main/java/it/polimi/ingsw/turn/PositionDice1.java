@@ -29,7 +29,7 @@ public class PositionDice1 implements TurnState {
     public void receiveMove(ToolCard toolCard) {
         int cardId = toolCard.getID();
         if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards()))) {
-            if ((cardId == 8 && turn.getFirstBracket()) || (cardId != 8)) {
+            if ((cardId == 8 && turn.isFirstBracket()) || (cardId != 8)) {
                 //setting the toolCard used in this turn
                 //setting the list of states for the dynamic state machine
                 //setting the list of operations for the AutomatedOperation State

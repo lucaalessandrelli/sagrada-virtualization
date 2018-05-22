@@ -25,7 +25,7 @@ public class ChooseDice2 implements TurnState {
 
     @Override
     public void receiveMove(Pos pos) {
-        if(turn.getRoundNumber() == 1 && turn.getFirstBracket()) {
+        if(turn.getRoundNumber() == 1 && turn.isFirstBracket()) {
             if(inspectorPlace.checkFirst(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
                 turn.getModifier().positionDice(chosenDice,posDiceChosen,pos);
                 turn.setState(new EndTurn(turn));

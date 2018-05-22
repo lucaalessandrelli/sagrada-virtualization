@@ -53,15 +53,26 @@ public class Turn {
         this.modifier = new ModelModifier(player.getDraftPool(), player.getWindowPatternCard(),player.getRoundTrack());
     }
 
+    /**
+     * Called by Round to actually start the turn of a given player
+     */
     public void startTurn() {
         this.state = new StartTurn(this);
     }
 
+    /**
+     * Called by concrete states in order to change the state of the turn
+     * @param state New state to be set
+     */
     public void setState(TurnState state) {
         this.state = state;
         this.checkEndState();
     }
 
+    /**
+     * Called by concrete states in order to know which round is currently being played by a player
+     * @return The round number which is currently being played by a player
+     */
     public int getRoundNumber() {
         return this.roundNumber;
     }
@@ -153,10 +164,6 @@ public class Turn {
 
     public InspectContextTool getInspectContextTool() {
         return inspectContextTool;
-    }
-
-    public boolean getFirstBracket() {
-        return this.firstBracket;
     }
 
     public void setCheckPointState(TurnState checkPointState) {
