@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ClientMain {
 
 
-    public static void main(String arg[]) {
+    public static void main(String[] arg) {
         Scanner in = new Scanner(System.in);
         System.out.println("Choose kind of connection:\n 1)Socket\n 2)RMI");
         int conn = in.nextInt();

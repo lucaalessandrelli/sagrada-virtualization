@@ -72,8 +72,8 @@ public class SocketConnection implements ConnectionHandler {
             cmd = inputComposer.compose(cmd);
             pr.println(cmd);
             return in.nextLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Server not available");
         }
 
         return null;

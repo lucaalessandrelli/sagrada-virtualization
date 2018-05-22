@@ -3,6 +3,7 @@ package it.polimi.ingsw.network.server;
 import it.polimi.ingsw.network.ClientInterface;
 import it.polimi.ingsw.network.ServerInterface;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -36,7 +37,6 @@ public class NetworkManager {
                 sc = new SocketContainer(socket,server);
                 new Thread(sc).start();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +98,7 @@ public class NetworkManager {
                     }
                 }
 
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println(name + " is disconnected");
             }
 
