@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.gameData;
 
-import it.polimi.ingsw.model.gameData.gameTools.DraftPool;
-import it.polimi.ingsw.model.gameData.gameTools.ObjectiveCard;
-import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
-import it.polimi.ingsw.model.gameData.gameTools.WindowPatternCard;
+import it.polimi.ingsw.model.gameData.gameTools.*;
 import it.polimi.ingsw.model.gameLogic.Move;
 
 import java.util.ArrayList;
@@ -110,6 +107,8 @@ public class Player {
     public WindowPatternCard getWindowPatternCard(){
         return myWindow;
     }
-
+    public RoundTrack getRoundTrack(){
+        return publicObjects.getRoundTrack();
+    }
 }
 

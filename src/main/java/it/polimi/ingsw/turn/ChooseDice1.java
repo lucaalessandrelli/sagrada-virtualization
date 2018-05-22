@@ -12,7 +12,7 @@ public class ChooseDice1 implements TurnState {
     private Pos posDiceChosen;
     private Turn turn;
     private Dice chosenDice;
-    private ArrayList<Integer> toolList = new ArrayList<Integer>();
+    private ArrayList<Integer> toolList = new ArrayList<>();
     InspectorContext inspectorContext;
     InspectorPlace inspectorPlace;
 

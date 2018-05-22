@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class PositionDice1 implements TurnState {
     private Turn turn;
-    private ArrayList<Integer> toolList = new ArrayList<Integer>();
+    private ArrayList<Integer> toolList = new ArrayList<>();
     InspectorContext inspectorContext;
 
     public PositionDice1(Turn turn) {

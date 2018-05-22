@@ -22,7 +22,6 @@ public class Turn {
     private boolean firstBracket;
     private int roundNumber;
 
-    private ToolCard toolCard;
     private ArrayList<String> toolStateList;
     private ArrayList<String> toolAutomatedOperationList;
     private int indexList = 0;
@@ -35,11 +34,7 @@ public class Turn {
         inspectorPlace = new InspectorPlace();
         this.roundNumber = roundNumber;
         this.firstBracket = firstBracket;
-        //this.modifier = new ModelModifier(player.getDraftPool(), player.getWindowPatternCard(),player.getRoundTrack());
-    }
-
-    public TurnState getState() {
-        return state;
+        this.modifier = new ModelModifier(player.getDraftPool(), player.getWindowPatternCard(),player.getRoundTrack());
     }
 
     public void setState(TurnState state) {
@@ -67,24 +62,24 @@ public class Turn {
             try {
                 Class cls = Class.forName("it.polimi.ingsw.turn."+ nextStateName);
 
-                Class partypes[] = new Class[5];
-                partypes[0] = Turn.class;
-                partypes[1] = Dice.class;
-                partypes[2] = Pos.class;
-                partypes[3] = Dice.class;
-                partypes[4] = Pos.class;
+                Class[] parametersTypes = new Class[5];
+                parametersTypes [0] = Turn.class;
+                parametersTypes [1] = Dice.class;
+                parametersTypes [2] = Pos.class;
+                parametersTypes [3] = Dice.class;
+                parametersTypes [4] = Pos.class;
 
 
-                Constructor ct = cls.getConstructor(partypes);
+                Constructor ct = cls.getConstructor(parametersTypes );
 
-                Object arglist[] = new Object[5];
-                arglist[0] = this;
-                arglist[1] = dice;
-                arglist[2] = pos;
-                arglist[3] = toolDice;
-                arglist[4] = toolPos;
+                Object[] argumentList = new Object[5];
+                argumentList[0] = this;
+                argumentList[1] = dice;
+                argumentList[2] = pos;
+                argumentList[3] = toolDice;
+                argumentList[4] = toolPos;
 
-                this.setState((TurnState)ct.newInstance(arglist));
+                this.setState((TurnState)ct.newInstance(argumentList));
 
                 if(nextStateName.equals("AutomatedOperation")) {
                     ((AutomatedOperation)state).doAutomatedOperations(toolAutomatedOperationList);
@@ -115,16 +110,9 @@ public class Turn {
     public boolean getFirstBracket() {
         return this.firstBracket;
     }
-    public int getRoundNumber() {
-        return this.roundNumber;
-    }
 
     public void setCheckPointState(TurnState checkPointState) {
         this.checkPointState = checkPointState;
-    }
-
-    public TurnState getCheckPointState() {
-        return checkPointState;
     }
 
     public ModelModifier getModifier() {
@@ -140,7 +128,6 @@ public class Turn {
     }
 
     public void setToolCardInfo(ToolCard toolCard) {
-        this.toolCard = toolCard;
         this.setToolStateList(toolCard.getStateList());
         this.setToolAutomatedOperationList(toolCard.getAutomatedoperationlist());
     }

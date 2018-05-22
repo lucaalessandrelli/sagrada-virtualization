@@ -19,3 +19,4 @@ public class ToolAfterStdMove implements TurnState {
         turn.setState(new EndTurn(turn));
     }
 }
+

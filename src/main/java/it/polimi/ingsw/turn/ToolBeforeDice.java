@@ -2,7 +2,6 @@ package it.polimi.ingsw.turn;
 
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.Pos;
-import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 
 public class ToolBeforeDice implements TurnState {
