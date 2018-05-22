@@ -16,10 +16,10 @@ public class ObjectiveCard extends Card {
         this.rules = new Rules();
     }
 
-    public ObjectiveCard(int points, String type, String name, String description, int idnumber) {
+    /*public ObjectiveCard(int points, String type, String name, String description, int idnumber) {
         this.points = points;
         this.type = type;
-    }
+    }*/
 
     //getter
     public int getPoints(){ return this.points; }

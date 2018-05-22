@@ -1,0 +1,69 @@
+package it.polimi.ingsw.modelTest.gameDataTest.gameToolsTest;
+
+import it.polimi.ingsw.model.gameData.Colour;
+import it.polimi.ingsw.model.gameData.Property;
+import it.polimi.ingsw.model.gameData.gameTools.Dice;
+import it.polimi.ingsw.model.gameData.gameTools.RoundTrack;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class RoundTrackTest {
+
+
+    /**
+     * Testing getter & setter
+     */
+    @Test
+    public void TestGet_And_Set(){
+        RoundTrack roundTrack = new RoundTrack();
+        ArrayList<ArrayList<Dice>> arrayList = roundTrack.getRoundTrack(); //Testing the getter method
+        ArrayList<Dice> dices = new ArrayList<>();
+        Dice dice = new Dice(Colour.GREEN);
+        dices.add(dice);
+        roundTrack.setDiceOnRoundTrack(0,dices); //Testing the setter method
+        dices = new ArrayList<>();
+        addRandomDices(dices,10); //Using method to generate random dices with random colours and random numbers
+        roundTrack.setDiceOnRoundTrack(1,dices); //Adding dices to the round
+        assertFalse(arrayList.isEmpty()); //Assuring that the dices have been added
+        assertTrue(arrayList.contains(roundTrack.getDiceOnRoundtrack(0)));
+    }
+
+    /**
+     * Testing Find method and Switch method
+     */
+    @Test
+    public void TestFind_And_Switch(){
+        RoundTrack roundTrack = new RoundTrack();
+        ArrayList<Dice> dices = new ArrayList<>();
+        Dice dice = new Dice(Colour.GREEN);
+        dices.add(dice);
+        roundTrack.setDiceOnRoundTrack(0,dices); //Testing the setter method
+        dices = new ArrayList<>();
+        addRandomDices(dices,10); //Using method to generate random dices with random colours and random numbers
+        roundTrack.setDiceOnRoundTrack(1,dices); //Adding dices to the round
+        assertTrue(roundTrack.findDice(dice));
+        assertTrue(dice.equals(roundTrack.switchDice(dice)));
+    }
+
+    private void addRandomDices(ArrayList<Dice> dices,int num){
+        Dice dice;
+        int randomNum;
+        Random rand = new Random();
+        Colour coll[] = new Colour[5];
+        coll[0] = Colour.BLUE;
+        coll[1] = Colour.GREEN;
+        coll[2] = Colour.PURPLE;
+        coll[3] = Colour.RED;
+        coll[4] = Colour.YELLOW;
+        Property p;
+        for(int j = 0; j < num; j++) {
+            randomNum = rand.nextInt(4);
+            p = new Property(coll[randomNum],true);
+            dice = new Dice(p);
+            dices.add(dice);
+        }
+    }
+}

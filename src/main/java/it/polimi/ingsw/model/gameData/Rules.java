@@ -5,24 +5,23 @@ import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.WindowPatternCard;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 
 public class Rules {
 
-    private ArrayList<String> rules;
-    private String direction = "";
+    private ArrayList<String> myrules;
+    private String direction;
 
     public Rules(){
-        this.rules = new ArrayList<String>();
+        myrules = new ArrayList<>();
+        direction = "";
     }
 
 
     public ArrayList<String> getRules(){
-        return this.rules;
+        return this.myrules;
     }
 
     public int verify(String rule, WindowPatternCard window){
@@ -77,6 +76,7 @@ public class Rules {
             case "DIAGONAL":
                 direction = rule;
                 break;
+                default:
         }
         return result;
     }
@@ -130,6 +130,7 @@ public class Rules {
                         break;
                     case 6: arrayofvalues[5]++;
                         break;
+                        default:
                 }
             }
         }
@@ -167,6 +168,7 @@ public class Rules {
                         break;
                     case "BLUE": arrayofvalues[4]++;
                         break;
+                        default:
                 }
             }
         }
@@ -202,32 +204,63 @@ public class Rules {
 
     private int near(WindowPatternCard window, String direction, String type){
         ArrayList<ArrayList<Cell>> w = window.getMatr();
-        List<Colour> colours = new ArrayList<>();
-        List<Integer> numbers = new ArrayList<>();
+        List<Colour> colours;
+        List<Integer> numbers;
         int result = 0;
         int j,i,x,y,sum;
-        boolean column;
+        boolean column = direction.equals("COLUMN");
+        boolean find = false;
         x = w.size();
         y = w.get(0).size();
         //misses the part for control on column, now controls only rows
         switch (type) {
             case "NOVALUE":
-                for(i = 0; i < x; i++){
-                    numbers = w.get(i).stream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getNumber).distinct().collect(Collectors.toList());
-                    if(colours.size() == 5)
-                        result++;
-                    System.out.println("Result tmp: " + result);
+                if(!column){
+                    for(i = 0; i < x; i++){
+                        if (allDifferent(w.get(i),false,5))
+                            result++;
+                        System.out.println("Result tmp: " + result);
+                    }
+                }
+                else {
+                    for (i = 0; i < x; i++) {
+                        for (j = 0; j < y - 1; j++) {
+                            if (w.get(j).get(i).getDice().getNumber() == w.get(j + 1).get(x).getDice().getNumber())
+                                find = true;
+                        }
+                        if (!find)
+                            result++;
+                        else
+                            find = false;
+                        System.out.println("Result tmp:" + result);
+                    }
                 }
                 break;
 
             case "NOCOLOR":
-                for(i = 0; i < x; i++){
-                    colours = w.get(i).stream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getColour).distinct().collect(Collectors.toList());
-                    if(colours.size() == 5)
-                        result++;
-                    System.out.println("Result tmp: " + result);
+                if(!column){
+                    for(i = 0; i < x; i++){
+                        if(allDifferent(w.get(i),true,5))
+                            result++;
+                        System.out.println("Result tmp: " + result);
+                    }
                 }
+                else{
+                    for (i = 0; i < x; i++) {
+                        for (j = 0; j < y - 1; j++) {
+                            if (w.get(j).get(i).getDice().getColour().equals(w.get(j + 1).get(x).getDice().getColour()))
+                                find = true;
+                        }
+                        if (!find)
+                            result++;
+                        else
+                            find = false;
+                        System.out.println("Result tmp:" + result);
+                    }
+                }
+
                 break;
+                default:
         }
 
         return result;
@@ -240,30 +273,28 @@ public class Rules {
         int adder = 2;
         for(int i = 0; i < 4; i++){
             for(j = 0; j < 4; j++){
-                if(j == 0){
-                    if(w.get(i+1).get(j+1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
-                        result = result + adder;
-                    }
-                    break;
+                if(j != 3 && verifySameColour(w,i+1,j+1,i,j)){
+                    result = result + adder;
                 }
-                if(j == 3){
-                    if(w.get(i+1).get(j-1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
-                        result = result + adder;
-                    }
-                    break;
-                }
-                else{
-                    if(w.get(i+1).get(j-1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
-                        result = result + adder;
-                    }
-                    if(w.get(i+1).get(j+1).getDice().getColour() == w.get(i).get(j).getDice().getColour()){
-                        result = result + adder;
-                    }
+                if(j != 0 && verifySameColour(w,i+1,j-1,i,j)){
+                    result = result + adder;
                 }
             }
             adder = 1;
         }
         return result;
+    }
+
+    private boolean verifySameColour(ArrayList<ArrayList<Cell>> matrix, int i1, int i2, int i3, int i4){
+        return matrix.get(i1).get(i2).isOccupied() && matrix.get(i3).get(i4).isOccupied() &&
+                matrix.get(i1).get(i2).getDice().getColour().toString().equals(matrix.get(i3).get(i4).getDice().getColour().toString());
+    }
+
+    private boolean allDifferent(ArrayList<Cell> cells,boolean colour,int value){
+        if(colour)
+            return(cells.stream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getColour).distinct().collect(Collectors.toList()).size() == value);
+        else
+            return(cells.stream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getNumber).distinct().collect(Collectors.toList()).size() == value);
     }
 
 }

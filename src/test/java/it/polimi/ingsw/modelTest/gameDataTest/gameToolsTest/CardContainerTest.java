@@ -20,13 +20,6 @@ public class CardContainerTest {
         CardContainer tester = new CardContainer();
         ArrayList<ObjectiveCard> test = null;
         test = tester.pullOutPrivate(2);
-        for (ObjectiveCard x: test) {
-            System.out.println("Id number: " + x.getID() +
-                                "\nName: " + x.getName() +
-                                "\nDescription: " + x.getDescription() +
-                                "\nType: " + x.getType() +
-                                "\nPoints: " + x.getPoints() + "\n");
-        }
         assertEquals(2, test.size());
     }
 
@@ -35,13 +28,6 @@ public class CardContainerTest {
         CardContainer tester = new CardContainer();
         ArrayList<ObjectiveCard> test = null;
         test = tester.pullOutPublic();
-        for (ObjectiveCard x: test) {
-            System.out.println("Id number: " + x.getID() +
-                    "\nName: " + x.getName() +
-                    "\nDescription: " + x.getDescription() +
-                    "\nType: " + x.getType() +
-                    "\nPoints: " + x.getPoints() + "\n");
-        }
         assertEquals(3, test.size());
     }
 
@@ -51,9 +37,6 @@ public class CardContainerTest {
         ArrayList<ObjectiveCard> test = new ArrayList<ObjectiveCard>();
         test = tester.pullOutPublic();
         for (ObjectiveCard x: test) {
-            for (String k: x.getRules().getRules()){
-             System.out.println("Regola: " + k + "\n");
-            }
             assertTrue(!(x.getRules().getRules().isEmpty()));
         }
     }
@@ -61,23 +44,17 @@ public class CardContainerTest {
     @Test
     public void TestPatternPullOut(){
         CardContainer tester = new CardContainer();
-        ArrayList<WindowPatternCard> test = new ArrayList<>();
+        ArrayList<WindowPatternCard> test;
         test = tester.pullOutPattern(2);
         assertEquals(8,test.size());
-        for(WindowPatternCard x:test){
-            x.show();
-        }
+
     }
 
     @Test
     public void TestToolCardsPullOut(){
         CardContainer tester = new CardContainer();
-        ArrayList<ToolCard> test = new ArrayList<>();
-        test = tester.pullOutTools();
+        ArrayList<ToolCard> test = tester.pullOutTools();
         assertEquals(3,test.size());
-        for(ToolCard x:test){
-            x.show();
-        }
     }
 
     @Test

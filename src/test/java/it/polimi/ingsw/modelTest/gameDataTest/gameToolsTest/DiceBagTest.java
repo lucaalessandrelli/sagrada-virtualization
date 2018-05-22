@@ -24,12 +24,7 @@ public class DiceBagTest {
         ArrayList<Dice> d = new ArrayList<>();
         tester.setNumPlayers(4);
         for(int i = 0; i < 10; i++){
-            d = tester.pullOut();
-            for(Dice x: d){
-                System.out.print("Dado: " );
-                x.show();
-                System.out.println();
-            }
+            tester.pullOut();
         }
         assertEquals(0,tester.remainingDices());
     }

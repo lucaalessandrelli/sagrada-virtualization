@@ -13,12 +13,16 @@ public class Property {
     }
 
     //constructor for colour
-    public Property(Colour colour){
+    public Property(Colour colour,boolean isDice){
         this.colour = colour;
-        int randomNum;
-        Random rand = new Random();
-        randomNum = 1+ rand.nextInt(6);
-        this.number = randomNum;
+        if(isDice) {
+            int randomNum;
+            Random rand = new Random();
+            randomNum = 1 + rand.nextInt(6);
+            this.number = randomNum;
+        }
+        else
+            this.number = 0;
     }
 
     //constructor for number

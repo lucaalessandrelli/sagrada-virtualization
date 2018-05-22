@@ -10,7 +10,7 @@ public class Dice implements Move {
     private Property prop;
 
     public Dice(){
-        this.prop = new Property(Colour.WHITE);
+        this.prop = new Property(Colour.WHITE,true);
     }
 
     public Dice(Property x){
@@ -19,7 +19,7 @@ public class Dice implements Move {
 
 
     public Dice(Colour y){
-        this.prop = new Property(y);
+        this.prop = new Property(y,true);
     }
 
     //getter

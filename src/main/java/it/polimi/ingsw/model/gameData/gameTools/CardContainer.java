@@ -11,26 +11,47 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class CardContainer {
 
-    private ArrayList<Integer> pattern = new ArrayList<Integer>(24);
-    private ArrayList<Integer> objectiveprivate = new ArrayList<Integer>(5);
-    private ArrayList<Integer> objectivepublic = new ArrayList<Integer>(10);
+    private ArrayList<Integer> pattern = new ArrayList<>(24);
+    private ArrayList<Integer> objectiveprivate = new ArrayList<>(5);
+    private ArrayList<Integer> objectivepublic = new ArrayList<>(10);
     private ArrayList<Integer> tools = new ArrayList<>(12);
+
     private boolean privateused = false;
     private boolean publicused = false;
     private boolean patternused = false;
     private boolean toolsused = false;
 
+    private static final String NUMBER = "NUMBER";
+    private static final String NAME = "NAME";
+    private static final String DESCRIPTION = "DESCRIPTION";
+    private static final String TYPE = "TYPE";
+    private static final String POINTS = "POINTS";
+    private static final String V = "V";
+    private static final String CANC = "#";
+    private static final String COLOUR = "COLOUR";
+    private static final String WHERE = "WHERE";
+    private static final String PROPE = "PROP";
+    private static final String VALUES = "VALUES";
+    private static final String RULES = "RULES";
+    private static final String AUTOMATED = "AUTOMATED";
+    private static final String STATE = "STATE";
+    private static final String DIFFICULTY = "DIFFICULTY";
+
+
     public CardContainer(){
         for(int i = 0; i < 24; i++) {
             pattern.add((i));
-            if (i < 5)
-            objectiveprivate.add(i);
-            if( i < 10)
-            objectivepublic.add(i);
-            if(i < 12)
-                tools.add(i);
+            if (i < 5) {
+                objectiveprivate.add(i);
+                if (i < 10) {
+                    objectivepublic.add(i);
+                    if (i < 12)
+                        tools.add(i);
+                }
+            }
         }
     }
 
@@ -41,10 +62,10 @@ public class CardContainer {
         if(numPlayers < 1 || numPlayers > 4)
             throw new IndexOutOfBoundsException();
 
-        ArrayList<WindowPatternCard> tmp = new ArrayList<WindowPatternCard>(dimension);
+        ArrayList<WindowPatternCard> tmp = new ArrayList<>(dimension);
 
         try {
-            if(this.patternused == true)
+            if(this.patternused)
                 throw new AlreadyBeenCalledException();
 
             this.patternused = true;
@@ -170,35 +191,35 @@ public class CardContainer {
             e.printStackTrace();
         }
 
-        myobj.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
-        myobj.setDescription(document.getElementsByTagName("DESCRIPTION").item(cont).getTextContent());
-        myobj.setType(document.getElementsByTagName("TYPE").item(cont).getTextContent());
-        String input = document.getElementsByTagName("POINTS").item(cont).getTextContent();
+        myobj.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());
+        myobj.setDescription(document.getElementsByTagName(DESCRIPTION).item(cont).getTextContent());
+        myobj.setType(document.getElementsByTagName(TYPE).item(cont).getTextContent());
+        String input = document.getElementsByTagName(POINTS).item(cont).getTextContent();
 
-        if(!(input.equals("V"))) {
-            if(input.equals("#"))
+        if(!(input.equals(V))) {
+            if(input.equals(CANC))
                 myobj.setPoints(1);
             else{
                 result = Integer.valueOf(input);
                 myobj.setPoints(result);
             }
-            myobj.setID(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()));
+            myobj.setID(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()));
             this.readRulesPublic(document,myobj.getRules().getRules(),cont);
         }
         else {
-            myobj.setID(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()) + 10);
+            myobj.setID(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()) + 10);
             myobj.setPoints(1);
-            myobj.getRules().getRules().add(document.getElementsByTagName("COLOUR").item(cont).getTextContent());
+            myobj.getRules().getRules().add(document.getElementsByTagName(COLOUR).item(cont).getTextContent());
         }
         return myobj;
     }
 
     //read values that are relevant only for public cards and not for private ones
     private void readRulesPublic(Document document, ArrayList<String> rules, int cont){
-        rules.add(document.getElementsByTagName("WHERE").item(cont).getTextContent());
-        rules.add(document.getElementsByTagName("PROP").item(cont).getTextContent());
-        rules.add(document.getElementsByTagName("VALUES").item(cont).getTextContent());
-        rules.add(document.getElementsByTagName("COLOUR").item(cont).getTextContent());
+        rules.add(document.getElementsByTagName(WHERE).item(cont).getTextContent());
+        rules.add(document.getElementsByTagName(PROPE).item(cont).getTextContent());
+        rules.add(document.getElementsByTagName(VALUES).item(cont).getTextContent());
+        rules.add(document.getElementsByTagName(COLOUR).item(cont).getTextContent());
     }
 
     private WindowPatternCard readPatterns(String namefile, int cont){
@@ -221,16 +242,16 @@ public class CardContainer {
             e.printStackTrace();
         }
 
-        mypattern.setNum(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()));
-        mypattern.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
-        mypattern.setDifficulty(Integer.valueOf(document.getElementsByTagName("DIFFICULTY").item(cont).getTextContent()));
-        all = document.getElementsByTagName("RULES").item(cont).getTextContent();
-
+        mypattern.setNum(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()));
+        mypattern.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());
+        mypattern.setDifficulty(Integer.valueOf(document.getElementsByTagName(DIFFICULTY).item(cont).getTextContent()));
+        all = document.getElementsByTagName(RULES).item(cont).getTextContent();
         final int len = all.length();
         for(int i = 0; i < len; i=i+4){
-            if(all.charAt(i) == ',')
-                continue;
-            mypattern.addRestr(all.charAt(i),Integer.valueOf(all.charAt(i+1)),Integer.valueOf(all.charAt(i+2)));
+            if(all.charAt(i) == ',') {
+                i++;
+            }
+            mypattern.addRestr(all.charAt(i),Character.getNumericValue(all.charAt(i+1)),Character.getNumericValue(all.charAt(i+2)));
         }
         return mypattern;
     }
@@ -256,18 +277,18 @@ public class CardContainer {
             e.printStackTrace();
         }
 
-        mytool.setID(Integer.valueOf(document.getElementsByTagName("NUMBER").item(cont).getTextContent()));
-        mytool.setName(document.getElementsByTagName("NAME").item(cont).getTextContent());
+        mytool.setID(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()));
+        mytool.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());
 
-        tmpc = tmpc.isIn((document.getElementsByTagName("COLOUR").item(cont).getTextContent()).charAt(0));
+        tmpc = tmpc.isIn((document.getElementsByTagName(COLOUR).item(cont).getTextContent()).charAt(0));
         mytool.setColour(tmpc);
 
-        all = document.getElementsByTagName("STATE").item(cont).getTextContent();
+        all = document.getElementsByTagName(STATE).item(cont).getTextContent();
         this.creatingStrings(false,all,mytool);
 
-        all = document.getElementsByTagName("AUTOMATED").item(cont).getTextContent();
+        all = document.getElementsByTagName(AUTOMATED).item(cont).getTextContent();
         this.creatingStrings(true,all,mytool);
-        mytool.setDescription((document.getElementsByTagName("DESCRIPTION").item(cont).getTextContent()));
+        mytool.setDescription((document.getElementsByTagName(DESCRIPTION).item(cont).getTextContent()));
 
         return mytool;
     }

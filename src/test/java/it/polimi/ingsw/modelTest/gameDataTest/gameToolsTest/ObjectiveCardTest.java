@@ -1,13 +1,10 @@
 package it.polimi.ingsw.modelTest.gameDataTest.gameToolsTest;
 
 import it.polimi.ingsw.model.gameData.Colour;
-import it.polimi.ingsw.model.gameData.Pos;
-import it.polimi.ingsw.model.gameData.Property;
 import it.polimi.ingsw.model.gameData.gameTools.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,7 +17,12 @@ public class ObjectiveCardTest {
         ArrayList<ObjectiveCard> objectiveCards = new ArrayList<>();
         ArrayList<ArrayList<Cell>> matr = new ArrayList<>(4);
         WindowPatternCard windowPatternCard = new WindowPatternCard();
-        Dice d = new Dice(Colour.BLUE);
+        Dice db = new Dice(Colour.BLUE);
+        Dice dy = new Dice(Colour.YELLOW);
+        Dice dr = new Dice(Colour.RED);
+        Dice dp = new Dice(Colour.PURPLE);
+        Dice dg = new Dice(Colour.GREEN);
+
         objectiveCards = container.pullOutPublic();
         int i = 0, j = 1, k = 2;
         boolean x = true;
@@ -41,33 +43,48 @@ public class ObjectiveCardTest {
         }
         tester = objectiveCards.get(i);
         tester.show();
-        windowPatternCard.placeDice(d,0,0);
-        d = new Dice(Colour.YELLOW);
-        windowPatternCard.placeDice(d,0,1);
-        d = new Dice(Colour.RED);
-        windowPatternCard.placeDice(d,0,2);
-        d = new Dice(Colour.PURPLE);
-        windowPatternCard.placeDice(d,0,3);
-        d = new Dice(Colour.GREEN);
-        windowPatternCard.placeDice(d,0,4);
+        windowPatternCard.placeDice(db,0,0);
+        windowPatternCard.placeDice(dy,0,1);
+        windowPatternCard.placeDice(dr,0,2);
+        windowPatternCard.placeDice(dp,0,3);
+        windowPatternCard.placeDice(dg,0,4);
         windowPatternCard.show();
         assertEquals(6,tester.finalpoints(windowPatternCard));
-        int s1,s2;
+        int s1;
         s1 = windowPatternCard.getMatr().size();
         for(i = 1; i < s1; i++){
-            d = new Dice(Colour.BLUE);
-            windowPatternCard.placeDice(d,i,0);
-            d = new Dice(Colour.YELLOW);
-            windowPatternCard.placeDice(d,i,1);
-            d = new Dice(Colour.RED);
-            windowPatternCard.placeDice(d,i,2);
-            d = new Dice(Colour.PURPLE);
-            windowPatternCard.placeDice(d,i,3);
-            d = new Dice(Colour.GREEN);
-            windowPatternCard.placeDice(d,i,4);
+            windowPatternCard.placeDice(db,i,0);
+            windowPatternCard.placeDice(dy,i,1);
+            windowPatternCard.placeDice(dr,i,2);
+            windowPatternCard.placeDice(dp,i,3);
+            windowPatternCard.placeDice(dg,i,4);
             windowPatternCard.show();
             assertEquals((i+1)*6,tester.finalpoints(windowPatternCard));
         }
+
+        windowPatternCard = new WindowPatternCard();
+        tester.show();
+        windowPatternCard.placeDice(db,0,0);
+        windowPatternCard.placeDice(dy,0,1);
+        windowPatternCard.placeDice(dr,0,2);
+        windowPatternCard.placeDice(dp,0,3);
+        windowPatternCard.placeDice(dg,0,4);
+        windowPatternCard.show();
+        assertEquals(6,tester.finalpoints(windowPatternCard));
+        windowPatternCard.placeDice(db,1,0);
+        windowPatternCard.placeDice(db,1,1);
+        windowPatternCard.placeDice(dr,1,2);
+        windowPatternCard.placeDice(dp,1,3);
+        windowPatternCard.placeDice(dg,1,4);
+        windowPatternCard.show();
+        assertEquals(6,tester.finalpoints((windowPatternCard)));
+        windowPatternCard.placeDice(db,2,0);
+        windowPatternCard.placeDice(dy,2,1);
+        windowPatternCard.placeDice(dr,2,2);
+        windowPatternCard.placeDice(dp,2,3);
+        windowPatternCard.placeDice(dg,2,4);
+        windowPatternCard.show();
+        assertEquals(12,tester.finalpoints((windowPatternCard)));
     }
 
      /*How to extract random dices

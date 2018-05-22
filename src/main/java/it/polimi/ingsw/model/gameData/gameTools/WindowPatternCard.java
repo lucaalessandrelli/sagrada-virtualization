@@ -120,15 +120,12 @@ public class WindowPatternCard {
 
     public boolean addRestr(char c,int x, int y) {
         Pos p = new Pos(x, y);
-        System.out.print("This is x:" + x + "\nThis is y:" + y);
-        x = (int) c;
-        System.out.print("This is x:" + x + "\nThis is y:" + y);
-        if (x >= 65 && x<=90) {
-            Property pro = new Property(Colour.isIn(c));
+        if (Character.isLetter(c)) {
+            Property pro = new Property(Colour.isIn(c),false);
             this.getCell(p).setProperty(pro);
             return true;
-        } else if (x >= 48 && x <= 57) {
-            Property pro = new Property(Integer.valueOf(c));
+        } else if (Character.isDigit(c)) {
+            Property pro = new Property(Character.getNumericValue(c));
             this.getCell(p).setProperty(pro);
             return true;
         }
@@ -139,11 +136,21 @@ public class WindowPatternCard {
     public void show(){
         System.out.print("\nWindow Pattern \nID number: " + num + "\n" + "Difficulty: " + difficulty + "\n" + "Name: " + name + "\n" +
                 "Scheme: \n" + "\n");
+        this.showDices();
+        this.showRestrictions();
+        System.out.println("\n");
+    }
+
+    private void showDices(){
+        int i, j;
         int x = this.matr.size();
         int y = this.matr.get(0).size();
-        int i;
+
+        System.out.println("Showing dices placed on the board: ");
+
+        //shows dices placed on the board
         for(i = 0; i <= x; i++){
-            for(int j = 0; j <= y; j++){
+            for(j = 0; j <= y; j++){
                 if ( i == 0 && j == 0)
                     System.out.print("   ");
                 else if( i == 0)
@@ -157,7 +164,30 @@ public class WindowPatternCard {
             }
             System.out.print("\n");
         }
-        System.out.println("\n");
+    }
+
+    private void showRestrictions(){
+        int x = this.matr.size();
+        int y = this.matr.get(0).size();
+
+        System.out.println("Showing restrictions  on the board: ");
+
+        //shows the restrictions
+        for(int i = 0; i <= x; i++){
+            for(int j = 0; j <= y; j++){
+                if ( i == 0 && j == 0)
+                    System.out.print("   ");
+                else if( i == 0)
+                    System.out.print("  " + (j-1));
+                else if( j == 0)
+                    System.out.print("  " + (i-1));
+                else {
+                    System.out.print("  ");
+                    matr.get(i-1).get(j-1).getProperty().show();
+                }
+            }
+            System.out.print("\n");
+        }
     }
 }
 

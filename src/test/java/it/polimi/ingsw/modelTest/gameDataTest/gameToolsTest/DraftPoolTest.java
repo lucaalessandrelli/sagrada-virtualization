@@ -56,7 +56,7 @@ public class DraftPoolTest{
     @Test
     public void TestFindDice(){
         DraftPool tester = new DraftPool();
-        Property prop = new Property(Colour.RED);
+        Property prop = new Property(Colour.RED,true);
         Dice d;
         prop.setNumber(5);
         for(int i = 0; i < 6; i++) {
@@ -67,7 +67,6 @@ public class DraftPoolTest{
         assertFalse(tester.findDice(d));
         assertTrue(tester.getDraftPool().add(d));
         assertTrue(tester.findDice(d));
-        tester.showDraftPool();
     }
 
 

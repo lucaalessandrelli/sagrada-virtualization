@@ -18,7 +18,5 @@ public class CellTest {
         assertTrue(tester.getPosition() != null);
         assertTrue(tester.getProperty() != null);
         assertTrue(tester.isOccupied()==false);
-        tester.show();
-        tester = new Cell(p,pos);
     }
 }
