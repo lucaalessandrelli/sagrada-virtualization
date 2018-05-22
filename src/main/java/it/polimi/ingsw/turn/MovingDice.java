@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlaceTool;
 
 public class MovingDice implements TurnState {
     private Turn turn;
@@ -12,8 +13,9 @@ public class MovingDice implements TurnState {
     private Dice toolDice;
     private Pos posChosenDice;
     private Pos toolPos;
-    InspectorContext inspectorContext;
-    InspectorPlace inspectorPlace;
+    private InspectorContext inspectorContext;
+    private InspectorPlace inspectorPlace;
+    private InspectorPlaceTool inspectorPlaceTool;
 
     public MovingDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
@@ -30,6 +32,7 @@ public class MovingDice implements TurnState {
     @Override
     public void receiveMove(Pos pos) {
         //change inspector
+        //inspectorPlaceTool.check(chosenDice,pos,turn.getToolCard());
         if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
             //call modifier
             turn.getModifier().positionDice(chosenDice,posChosenDice,pos);

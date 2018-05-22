@@ -2,7 +2,6 @@ package it.polimi.ingsw.turn;
 
 import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
-import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
 
 public class ChooseDice2 implements TurnState {
@@ -11,27 +10,35 @@ public class ChooseDice2 implements TurnState {
     private Dice chosenDice;
     private Dice toolDice;
     private Pos toolPos;
-    InspectorPlace inspectorPlace;
+    private InspectorPlace inspectorPlace;
 
     public ChooseDice2(Turn turn, Dice chosenDice,Pos posDiceChosen, Dice toolDice, Pos toolPos) {
-        this.chosenDice = chosenDice;
         this.turn = turn;
+        this.chosenDice = chosenDice;
+        this.posDiceChosen = posDiceChosen;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
-        this.posDiceChosen = posDiceChosen;
+        this.inspectorPlace = turn.getInspectorPlace();
     }
 
     //GETTING MOVE METHODS
 
     @Override
     public void receiveMove(Pos pos) {
-        if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
-            //move allowed, call the model modifier passing parameters: dice, posDiceChosen, pos
-            turn.getModifier().positionDice(chosenDice,posDiceChosen,pos);
-            //could end the turn here without calling another state
-            turn.setState(new EndTurn(turn));
+        if(turn.getRoundNumber() == 1 && turn.getFirstBracket()) {
+            if(inspectorPlace.checkFirst(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
+                turn.getModifier().positionDice(chosenDice,posDiceChosen,pos);
+                turn.setState(new EndTurn(turn));
+            } else {
+                //throw wrong placement exception
+            }
         } else {
-            //throw wrong placement exception
+            if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
+                turn.getModifier().positionDice(chosenDice, posDiceChosen, pos);
+                turn.setState(new EndTurn(turn));
+            } else {
+                //throw wrong placement exception
+            }
         }
     }
 

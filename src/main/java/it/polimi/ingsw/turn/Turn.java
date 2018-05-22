@@ -1,26 +1,32 @@
 package it.polimi.ingsw.turn;
 
-
 import it.polimi.ingsw.model.gameData.Player;
 import it.polimi.ingsw.model.gameData.Pos;
 import it.polimi.ingsw.model.gameData.gameTools.Dice;
 import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectContextTool;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
+import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlaceTool;
 import it.polimi.ingsw.model.gameLogic.ModelModifier;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.lang.reflect.*;
-
 import java.util.ArrayList;
 
-
+/**
+ * Turn class
+ */
 public class Turn {
     private Player player;
     private TurnState state;
     private InspectorContext inspectorContext;
     private InspectorPlace inspectorPlace;
+    private InspectContextTool inspectContextTool;
+    private InspectorPlaceTool inspectorPlaceTool;
     private boolean firstBracket;
     private int roundNumber;
+    private ToolCard toolCard;
 
     private ArrayList<String> toolStateList;
     private ArrayList<String> toolAutomatedOperationList;
@@ -28,13 +34,27 @@ public class Turn {
     private TurnState checkPointState;
     private ModelModifier modifier;
 
+    /**
+     * Turn constructor
+     *
+     * @param player The player to whom the turn is assigned
+     * @param roundNumber The number of the current round
+     * @param firstBracket Boolean value: true if it's the player first turn in the current round
+     */
     public Turn(Player player,int roundNumber, boolean firstBracket) {
         this.player = player;
-        inspectorContext = new InspectorContext();
-        inspectorPlace = new InspectorPlace();
+        this.inspectorContext = new InspectorContext();
         this.roundNumber = roundNumber;
         this.firstBracket = firstBracket;
+
+        this.inspectorPlace = new InspectorPlace();
+        //this.inspectContextTool = new InspectContextTool(player.getWindowPatternCard(),player.getDraftPool(), player.getRoundTrack());
+        //this.inspectorPlaceTool = new InspectorPlaceTool(player.getWindowPatternCard());
         this.modifier = new ModelModifier(player.getDraftPool(), player.getWindowPatternCard(),player.getRoundTrack());
+    }
+
+    public void startTurn() {
+        this.state = new StartTurn(this);
     }
 
     public void setState(TurnState state) {
@@ -42,17 +62,41 @@ public class Turn {
         this.checkEndState();
     }
 
+    public int getRoundNumber() {
+        return this.roundNumber;
+    }
+
+    public boolean isFirstBracket() {
+        return this.firstBracket;
+    }
+
     //GETTING MOVE METHODS
     public void receiveMove(ToolCard toolCard) {
-        state.receiveMove(toolCard);
+        try {
+            state.receiveMove(toolCard);
+        } catch (WrongMoveException e) {
+
+        }
     }
 
     public void receiveMove(Dice dice, Pos pos) {
-        state.receiveMove(dice, pos);
+        try {
+            state.receiveMove(dice, pos);
+        } catch (WrongMoveException e) {
+
+        }
     }
 
+    /**
+     *
+     * @param pos
+     */
     public void receiveMove(Pos pos) {
-        state.receiveMove(pos);
+        try {
+            state.receiveMove(pos);
+        } catch (WrongMoveException e) {
+
+        }
     }
 
     public void setDynamicState(Dice dice, Pos pos, Dice toolDice, Pos toolPos) {
@@ -107,6 +151,14 @@ public class Turn {
         return inspectorPlace;
     }
 
+    public InspectorPlaceTool getInspectorPlaceTool() {
+        return inspectorPlaceTool;
+    }
+
+    public InspectContextTool getInspectContextTool() {
+        return inspectContextTool;
+    }
+
     public boolean getFirstBracket() {
         return this.firstBracket;
     }
@@ -128,6 +180,7 @@ public class Turn {
     }
 
     public void setToolCardInfo(ToolCard toolCard) {
+        this.setToolCard(toolCard);
         this.setToolStateList(toolCard.getStateList());
         this.setToolAutomatedOperationList(toolCard.getAutomatedoperationlist());
     }
@@ -138,5 +191,13 @@ public class Turn {
 
     private void setToolStateList(ArrayList<String> toolStateList) {
         this.toolStateList = toolStateList;
+    }
+
+    public void setToolCard(ToolCard toolCard) {
+        this.toolCard = toolCard;
+    }
+
+    public ToolCard getToolCard() {
+        return toolCard;
     }
 }

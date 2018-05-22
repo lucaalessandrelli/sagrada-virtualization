@@ -27,6 +27,7 @@ public class IncDecValue implements TurnState {
     @Override
     public void receiveMove(Dice toolDice, Pos toolPos) {
         //chiamare inspector diversi
+        //inspectContextTool.checkNumDice(chosenDice,posChosenDice,toolDice,toolPos);
         /*if(inspectorContext.check(toolDice,toolPos,turn.getPlayer().getDraftPool())) {
                 //call modifier so the value of the dice will be changed
                 turn.getModifier().changeDiceValue(chosenDice,posDiceChosen,toolDice);

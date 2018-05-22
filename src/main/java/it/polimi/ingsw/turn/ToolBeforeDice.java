@@ -6,11 +6,11 @@ import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
 
 public class ToolBeforeDice implements TurnState {
     private Turn turn;
-    InspectorContext inspectorContext;
+    private InspectorContext inspectorContext;
 
     public ToolBeforeDice(Turn turn) {
         this.turn = turn;
-        inspectorContext = turn.getInspectorContext();
+        this.inspectorContext = turn.getInspectorContext();
     }
 
     //GETTING MOVE METHODS

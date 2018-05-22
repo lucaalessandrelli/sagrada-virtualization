@@ -12,16 +12,16 @@ import java.util.ArrayList;
 public class PositionDice1 implements TurnState {
     private Turn turn;
     private ArrayList<Integer> toolList = new ArrayList<>();
-    InspectorContext inspectorContext;
+    private InspectorContext inspectorContext;
 
     public PositionDice1(Turn turn) {
         this.turn = turn;
-        inspectorContext = turn.getInspectorContext();
-        toolList.add(2);
-        toolList.add(3);
-        toolList.add(4);
-        toolList.add(8);
-        toolList.add(12);
+        this.inspectorContext = turn.getInspectorContext();
+        this.toolList.add(2);
+        this.toolList.add(3);
+        this.toolList.add(4);
+        this.toolList.add(8);
+        this.toolList.add(12);
     }
 
     //GETTING MOVE METHODS

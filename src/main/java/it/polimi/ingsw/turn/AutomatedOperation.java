@@ -8,18 +8,18 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class AutomatedOperation implements TurnState {
-    private Dice chosenDice;
-    private Dice toolDice;
-    private Pos posChosenDice;
-    private Pos toolPos;
     private Turn turn;
+    private Dice chosenDice;
+    private Pos posChosenDice;
+    private Dice toolDice;
+    private Pos toolPos;
 
     public AutomatedOperation(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
+        this.chosenDice = chosenDice;
+        this.posChosenDice = posChosenDice;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
-        this.posChosenDice = posChosenDice;
-        this.chosenDice = chosenDice;
     }
 
     public void doAutomatedOperations(ArrayList<String> toolAutomatedOperationList) {
@@ -49,7 +49,6 @@ public class AutomatedOperation implements TurnState {
                     System.out.println(e);
                 }
             } else {
-
                 turn.setDynamicState(chosenDice,posChosenDice, toolDice, toolPos);
             }
         }
