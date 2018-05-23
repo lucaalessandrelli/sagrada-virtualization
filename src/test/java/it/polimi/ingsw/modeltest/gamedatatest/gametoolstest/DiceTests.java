@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.gamedata.Property;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,7 +26,5 @@ public class DiceTests {
             tester = new Dice();
         }
         assertTrue(test.equals(tester));
-
-
     }
 }

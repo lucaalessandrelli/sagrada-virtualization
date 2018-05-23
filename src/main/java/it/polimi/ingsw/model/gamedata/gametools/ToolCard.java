@@ -12,7 +12,7 @@ public class ToolCard extends Card implements Move {
     private ArrayList<String> stateList = new ArrayList<>();
     private ArrayList<String> automatedoperationlist = new ArrayList<>();
     private ArrayList<String> cMethods = new ArrayList<>();
-    private ArrayList<String> pMethods = new ArrayList<>();
+    private ArrayList<ArrayList<String>> pMethods = new ArrayList<>();
 
     public ToolCard() {
         this.used = false;
@@ -47,11 +47,11 @@ public class ToolCard extends Card implements Move {
     }
 
     public ArrayList<String> getNameCMethods(){
-        return pMethods;
+        return cMethods;
     }
 
-    public ArrayList<String> getNamePMethods(){
-        return cMethods;
+    public ArrayList<ArrayList<String>> getNamePMethods(){
+        return pMethods;
     }
 
     public ArrayList<String> getAutomatedoperationlist(){
@@ -65,4 +65,5 @@ public class ToolCard extends Card implements Move {
     public void setColour(Colour colour){
         this.colour = colour;
     }
+
 }

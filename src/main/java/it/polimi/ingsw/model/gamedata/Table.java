@@ -11,6 +11,7 @@ public class Table {
     private ArrayList<ObjectiveCard> objectiveCards = new ArrayList<ObjectiveCard>(4);
     private ArrayList<ToolCard> toolCards = new ArrayList<ToolCard>(3);
     private ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<WindowPatternCard>();
+    private RoundTrack roundTrack;
     private DraftPool draftPool;
     private DiceBag diceBag;
     private CardContainer container;
@@ -91,8 +92,7 @@ public class Table {
 
     //NB!!!! This method is not ready to use because I need to write pullOutCards in the right way
     public ArrayList<WindowPatternCard> getRandomWindows() {
-        return null;
-        //return this.container.pullOutCards();
+        return this.container.pullOutPattern(myplayer.size());
     }
 
     public ArrayList<Dice> getDiceFromBag() {
@@ -101,5 +101,17 @@ public class Table {
 
     public List<Dice> getAllDraft() {
         return this.draftPool.getDraftPool();
+    }
+
+    public DraftPool getDraftPool(){
+        return this.draftPool;
+    }
+
+    public RoundTrack getRoundTrack(){
+        return this.roundTrack;
+    }
+
+    public void fillDraftPoll(){
+        this.draftPool.addNewDices(diceBag.pullOut());
     }
 }

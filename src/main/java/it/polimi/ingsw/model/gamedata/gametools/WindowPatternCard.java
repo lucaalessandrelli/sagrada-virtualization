@@ -118,6 +118,11 @@ public class WindowPatternCard {
         return false;
     }
 
+
+    public boolean findDice(Dice d, Pos p){
+        return (this.matr.get(p.getX()).get(p.getY()).getDice().equals(d));
+    }
+
     public boolean addRestr(char c,int x, int y) {
         Pos p = new Pos(x, y);
         if (Character.isLetter(c)) {
@@ -130,6 +135,10 @@ public class WindowPatternCard {
             return true;
         }
         return false;
+    }
+
+    public void removeDice(Pos pos){
+        this.matr.get(pos.getX()).get(pos.getY()).setOccupation(false);
     }
 
     //shows every attribute of the Card, also the scheme

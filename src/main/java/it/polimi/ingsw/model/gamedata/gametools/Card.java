@@ -44,4 +44,9 @@ public abstract class  Card {
         this.idnumber = id;
     }
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
+
 }

@@ -41,4 +41,17 @@ public class Dice implements Move {
     public void show(){
         this.prop.show();
     }
+
+    public void setNumber(int number){
+        this.prop.setNumber(number);
+    }
+
+    public void setDice(Dice d){
+        this.prop.setNumber(d.getNumber());
+        this.prop.setColour(d.getColour());
+    }
+
+    public void rollDice(){
+        this.prop.rollDice();
+    }
 }

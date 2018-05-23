@@ -6,13 +6,13 @@ public class DraftPool {
     private ArrayList<Dice> draftPool;
 
     public DraftPool(){
-        draftPool = new ArrayList<Dice>(0);
+        draftPool = new ArrayList<>(0);
     }
 
     //the number x is the number of players present in the match
     public DraftPool(int x){
         int y = (x * 2) + 1;
-        this.draftPool = new ArrayList<Dice>(y);
+        this.draftPool = new ArrayList<>(y);
     }
 
     //getter method
@@ -25,7 +25,6 @@ public class DraftPool {
         try {
             if (draftPool.size() > 1) {
                 Dice d = draftPool.get(i);
-                draftPool.remove(i);
                 return d;
             }
             else{
@@ -55,13 +54,34 @@ public class DraftPool {
         return draftPool.size();
     }
 
-    //find the dice d in the Draftpool
+    /*/**
+     * Returns true if the dices passed (d) is the same as the one that is at the position where of the draftpool
+     * @param d A dice
+     * @param where The position
+     * @return a boolean
+     */
+    /*public boolean findDice(Dice d, int where){
+        return this.draftPool.get(where).equals(d);
+    }*/
+
     public boolean findDice(Dice d){
-        for(Dice x: this.draftPool){
+        for (Dice x: this.draftPool){
             if (x.equals(d))
                 return true;
         }
         return false;
     }
 
+    /**
+     * Removes a dice from the array if is present
+     * @param where The position where the dice is
+     */
+    public void removeDice(int where){
+        this.draftPool.remove(where);
+    }
+
+
+    public void setDice(Dice d, int where){
+        this.draftPool.get(where).setDice(d);
+    }
 }

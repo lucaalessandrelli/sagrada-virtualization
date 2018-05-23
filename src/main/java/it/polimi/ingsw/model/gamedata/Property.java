@@ -16,10 +16,7 @@ public class Property {
     public Property(Colour colour,boolean isDice){
         this.colour = colour;
         if(isDice) {
-            int randomNum;
-            Random rand = new Random();
-            randomNum = 1 + rand.nextInt(6);
-            this.number = randomNum;
+            this.rollDice();
         }
         else
             this.number = 0;
@@ -40,7 +37,7 @@ public class Property {
         return this.number;
     }
     //setter method
-    protected void setColour(Colour z){
+    public void setColour(Colour z){
         this.colour = z;
     }
     //setter method
@@ -50,5 +47,12 @@ public class Property {
 
     public void show(){
         System.out.print(this.colour.toString() + this.number);
+    }
+
+    public void rollDice(){
+        int randomNum;
+        Random rand = new Random();
+        randomNum = 1 + rand.nextInt(6);
+        this.number = randomNum;
     }
 }

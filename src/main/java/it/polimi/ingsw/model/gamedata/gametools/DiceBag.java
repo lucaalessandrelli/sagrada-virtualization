@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DiceBag {
-    private ArrayList<Dice> dice = new ArrayList<Dice>(90);
+    private ArrayList<Dice> dicecontainer = new ArrayList<>(90);
     private int numPlayers;
 
     public DiceBag(){
@@ -21,10 +21,9 @@ public class DiceBag {
         for(i = 0; i <5; i++){
             for(j = 0; j <18; j++){
                 Dice x = new Dice(coll[i]);
-                dice.add(x);
+                dicecontainer.add(x);
             }
         }
-
     }
 
     //setter method
@@ -37,29 +36,39 @@ public class DiceBag {
 
     //getter method
     public int remainingDices(){
-        return dice.size();
+        return dicecontainer.size();
     }
 
     //pull out (2numPlayers + 1) dice from bag (Tested, should work)
     public ArrayList<Dice> pullOut(){
         int dimension = (2*numPlayers) + 1;
-        int cont = dice.size();
-        ArrayList<Dice> tmp = new ArrayList<Dice>(dimension);
-        Dice z;
-        int randomNum;
-        Random rand = new Random();
-        for(int k = 0; k < dimension; k++) {
-            randomNum = rand.nextInt((cont));
-            z = dice.get(randomNum);
-            dice.remove(randomNum);
-            cont--;
-            tmp.add(z);
-        }
+        ArrayList<Dice> result = new ArrayList<>(dimension);
+        randomPullOut(dimension,result,dicecontainer.size());
+        return result;
+    }
+
+    public void addDice(Dice dice){
+        this.dicecontainer.add(dice);
+    }
+
+
+    //pull out number dice from bag (Tested, should work)
+    public ArrayList<Dice> pullOut(int number){
+        ArrayList<Dice> tmp = new ArrayList<>(number);
+        randomPullOut(number,tmp,dicecontainer.size());
         return tmp;
     }
 
-    /*method for toolCard n 11
-    public Dice putIn(Dice d){
-
-    }*/
+    public void randomPullOut(int number, ArrayList<Dice> tmp, int cont){
+        int randomNum;
+        Random rand = new Random();
+        Dice randomdice;
+        for(int k = 0; k < number; k++) {
+            randomNum = rand.nextInt((cont));
+            randomdice = dicecontainer.get(randomNum);
+            tmp.add(randomdice);
+            dicecontainer.remove(randomNum);
+            cont--;
+        }
+    }
 }

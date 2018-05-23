@@ -25,7 +25,7 @@ public class DraftPoolTest{
         }
         tester.addNewDices(x);
         j = tester.getNumOfDices();
-        tester.chooseDice(1);
+        tester.removeDice(1);
         assertTrue(tester.getNumOfDices() == (j - 1));
     }
 
@@ -40,7 +40,7 @@ public class DraftPoolTest{
         }
         tester.addNewDices(x);
         for(i = 0; tester.getNumOfDices() > 1;){
-            tester.chooseDice(i);
+            tester.removeDice(i);
         }
         assertTrue(tester.getNumOfDices() == 1);
         assertThrows(IndexOutOfBoundsException.class,()->{tester.chooseDice(0);});
