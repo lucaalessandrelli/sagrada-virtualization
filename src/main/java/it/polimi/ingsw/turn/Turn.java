@@ -36,7 +36,6 @@ public class Turn {
 
     /**
      * Turn constructor
-     *
      * @param player The player to whom the turn is assigned
      * @param roundNumber The number of the current round
      * @param firstBracket Boolean value: true if it's the player first turn in the current round
@@ -61,51 +60,12 @@ public class Turn {
     }
 
     /**
-     * Called by concrete states in order to change the state of the turn
-     * @param state New state to be set
+     * Called by concrete states to change turn state dynamically
+     * @param dice Dice chosen before ToolCard
+     * @param pos Position of the dice
+     * @param toolDice Dice chosen during ToolCard moves
+     * @param toolPos Position of the toolDice
      */
-    public void setState(TurnState state) {
-        this.state = state;
-        this.checkEndState();
-    }
-
-    /**
-     * Called by concrete states in order to know which round is currently being played by a player
-     * @return The round number which is currently being played by a player
-     */
-    public int getRoundNumber() {
-        return this.roundNumber;
-    }
-
-    public boolean isFirstBracket() {
-        return this.firstBracket;
-    }
-
-    //GETTING MOVE METHODS
-    public void receiveMove(ToolCard toolCard) {
-        try {
-            state.receiveMove(toolCard);
-        } catch (WrongMoveException e) {
-
-        }
-    }
-
-    public void receiveMove(Dice dice, Pos pos) {
-        try {
-            state.receiveMove(dice, pos);
-        } catch (WrongMoveException e) {
-
-        }
-    }
-
-    public void receiveMove(Pos pos) {
-        try {
-            state.receiveMove(pos);
-        } catch (WrongMoveException e) {
-
-        }
-    }
-
     public void setDynamicState(Dice dice, Pos pos, Dice toolDice, Pos toolPos) {
         String nextStateName = toolStateList.get(indexList);
 
@@ -146,61 +106,198 @@ public class Turn {
         }
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public InspectorContext getInspectorContext() {
-        return inspectorContext;
-    }
-
-    public InspectorPlace getInspectorPlace() {
-        return inspectorPlace;
-    }
-
-    public InspectorPlaceTool getInspectorPlaceTool() {
-        return inspectorPlaceTool;
-    }
-
-    public InspectContextTool getInspectContextTool() {
-        return inspectContextTool;
-    }
-
-    public void setCheckPointState(TurnState checkPointState) {
-        this.checkPointState = checkPointState;
-    }
-
-    public ModelModifier getModifier() {
-        return modifier;
-    }
-
+    /**
+     * Notifies the round that the current turn ended
+     */
     public void notifyEndRound() {
         //call a method on round instance
     }
 
+    /**
+     * Method called every time the turn change state in order to know when the state is EndTurn
+     */
     private void checkEndState() {
         state.automaticPass();
     }
 
+
+
+    //SETTER METHODS
+
+    /**
+     * Called by concrete states in order to change the state of the turn
+     * @param state New state to be set
+     */
+    public void setState(TurnState state) {
+        this.state = state;
+        this.checkEndState();
+    }
+
+    /**
+     * Called by concrete states when entering a dynamic machine state in order to know where to return after the end of the toolCard moves
+     * @param checkPointState TurnState object
+     */
+    public void setCheckPointState(TurnState checkPointState) {
+        this.checkPointState = checkPointState;
+    }
+
+    /**
+     * Called by concrete states when the player choose a toolCard in order to save information about that will be used by the next states
+     * @param toolCard ToolCard object
+     */
     public void setToolCardInfo(ToolCard toolCard) {
         this.setToolCard(toolCard);
         this.setToolStateList(toolCard.getStateList());
         this.setToolAutomatedOperationList(toolCard.getAutomatedoperationlist());
     }
 
+    /**
+     * Set the list of the automated operation that need to be done by the given ToolCard
+     * @param toolAutomatedOperationList List object
+     */
     private void setToolAutomatedOperationList(ArrayList<String> toolAutomatedOperationList) {
         this.toolAutomatedOperationList = toolAutomatedOperationList;
     }
 
+    /**
+     * Set the list of the next states that manage the given ToolCard
+     * @param toolStateList List object
+     */
     private void setToolStateList(ArrayList<String> toolStateList) {
         this.toolStateList = toolStateList;
     }
 
+    /**
+     * Set the ToolCard chosen by the player
+     * @param toolCard ToolCard object
+     */
     public void setToolCard(ToolCard toolCard) {
         this.toolCard = toolCard;
     }
 
+
+    //GETTER METHODS
+    /**
+     * Called by concrete states in order to know which round is currently being played by a player
+     * @return The round number which is currently being played by a player
+     */
+    public int getRoundNumber() {
+        return this.roundNumber;
+    }
+
+    /**
+     * Called by concrete states in order to know if it's the player first turn in the current round
+     * @return firstBracket
+     */
+    public boolean isFirstBracket() {
+        return this.firstBracket;
+    }
+
+    /**
+     * Called by concrete states to know which player is currently playing
+     * @return The player which is playing the turn
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Called by concrete states in order to call context inspecting methods on a given player standard move
+     * @return InspectorContext object
+     */
+    public InspectorContext getInspectorContext() {
+        return inspectorContext;
+    }
+
+    /**
+     * Called by concrete states in order to call placing inspecting methods on a given player standard move
+     * @return InspectorPlace object
+     */
+    public InspectorPlace getInspectorPlace() {
+        return inspectorPlace;
+    }
+
+    /**
+     * Called by concrete states in order to call context inspecting methods on a given player tool move
+     * @return InspectorContextTool object
+     */
+    public InspectContextTool getInspectContextTool() {
+        return inspectContextTool;
+    }
+
+    /**
+     * Called by concrete states in order to call placing inspecting methods on a given player tool move
+     * @return InspectorPlaceTool object
+     */
+    public InspectorPlaceTool getInspectorPlaceTool() {
+        return inspectorPlaceTool;
+    }
+
+    /**
+     * Called by concrete states in order to call methods that modify the Model objects right after an accepted move
+     * @return ModelModifier object
+     */
+    public ModelModifier getModifier() {
+        return modifier;
+    }
+
+    /**
+     * Called by concrete states in order to let the inspector do his job
+     * @return ToolCardObject
+     */
     public ToolCard getToolCard() {
         return toolCard;
+    }
+
+
+    //GETTING MOVE METHODS
+
+    /**
+     * Passing dice and position of the dice the payer just chosen to the concrete state
+     * @param dice Dice object
+     * @param pos Pos object
+     */
+    public void receiveMove(Dice dice, Pos pos) {
+        try {
+            state.receiveMove(dice, pos);
+        } catch (WrongMoveException e) {
+
+        }
+    }
+
+    /**
+     * Passing the ToolCard the payer just chosen to the concrete state
+     * @param toolCard ToolCard object
+     */
+    public void receiveMove(ToolCard toolCard) {
+        try {
+            state.receiveMove(toolCard);
+        } catch (WrongMoveException e) {
+
+        }
+    }
+
+    /**
+     * Passing the position the payer just chosen to the concrete state
+     * @param pos Pos object
+     */
+    public void receiveMove(Pos pos) {
+        try {
+            state.receiveMove(pos);
+        } catch (WrongMoveException e) {
+
+        }
+    }
+
+    /**
+     * Letting know the concrete states that the player would like to pass his turn
+     * @param pass String object
+     */
+    public void receiveMove(String pass) {
+        try {
+            state.receiveMove(pass);
+        } catch (WrongMoveException e) {
+
+        }
     }
 }
