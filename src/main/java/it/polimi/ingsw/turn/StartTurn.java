@@ -41,7 +41,7 @@ public class StartTurn implements TurnState {
                 turn.setDynamicState(new Dice(), new Pos(),new Dice(), new Pos());
             }
         } else {
-            throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere la carta strumento "+ toolCard.toString() +" in questa fase del turno");
+            throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere la carta strumento "+ toolCard.toString() +".");
         }
     }
 
@@ -50,7 +50,7 @@ public class StartTurn implements TurnState {
         if(inspectorContext.check(dice,pos,turn.getPlayer().getDraftPool())) {
             turn.setState(new ChooseDice1(turn, dice, pos));
         } else {
-            throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado");
+            throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado. Selezionare un dado della Riserva.");
         }
     }
 

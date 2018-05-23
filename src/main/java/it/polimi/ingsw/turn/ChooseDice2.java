@@ -3,6 +3,7 @@ package it.polimi.ingsw.turn;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 public class ChooseDice2 implements TurnState {
     private Turn turn;
@@ -24,20 +25,20 @@ public class ChooseDice2 implements TurnState {
     //GETTING MOVE METHODS
 
     @Override
-    public void receiveMove(Pos pos) {
+    public void receiveMove(Pos pos) throws WrongMoveException{
         if(turn.getRoundNumber() == 1 && turn.isFirstBracket()) {
             if(inspectorPlace.checkFirst(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
                 turn.getModifier().positionDice(chosenDice,posDiceChosen,pos);
                 turn.setState(new EndTurn(turn));
             } else {
-                //throw wrong placement exception
+                throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole del primo piazzamento.");
             }
         } else {
             if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
                 turn.getModifier().positionDice(chosenDice, posDiceChosen, pos);
                 turn.setState(new EndTurn(turn));
             } else {
-                //throw wrong placement exception
+                throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento.");
             }
         }
     }

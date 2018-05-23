@@ -6,7 +6,9 @@ import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
+import javax.swing.text.WrappedPlainView;
 import java.util.ArrayList;
 
 public class PositionDice1 implements TurnState {
@@ -26,7 +28,7 @@ public class PositionDice1 implements TurnState {
 
     //GETTING MOVE METHODS
     @Override
-    public void receiveMove(ToolCard toolCard) {
+    public void receiveMove(ToolCard toolCard) throws WrongMoveException {
         int cardId = toolCard.getID();
         if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards()))) {
             if ((cardId == 8 && turn.isFirstBracket()) || (cardId != 8)) {
@@ -40,7 +42,7 @@ public class PositionDice1 implements TurnState {
                 turn.setDynamicState(new Dice(),new Pos(), new Dice(), new Pos());
             }
         } else {
-          //throw wrong toolCard exception
+            throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere la carta strumento "+ toolCard.toString() +".");
         }
     }
 

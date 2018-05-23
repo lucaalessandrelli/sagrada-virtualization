@@ -3,6 +3,7 @@ package it.polimi.ingsw.turn;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 public class ToolBeforeDice implements TurnState {
     private Turn turn;
@@ -15,11 +16,11 @@ public class ToolBeforeDice implements TurnState {
 
     //GETTING MOVE METHODS
     @Override
-    public void receiveMove(Dice dice,Pos pos) {
+    public void receiveMove(Dice dice,Pos pos) throws WrongMoveException {
         if(inspectorContext.check(dice,pos,turn.getPlayer().getDraftPool())) {
             turn.setState(new ChooseDice2(turn, dice, pos, new Dice(), new Pos()));
         } else {
-            //throw wrong Dice exception
+            throw new WrongMoveException("Mossa sbagliata: Non è possibile scegliere questo dado.");
         }
     }
 

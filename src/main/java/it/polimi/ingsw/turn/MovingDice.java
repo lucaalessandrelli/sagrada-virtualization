@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlaceTool;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 public class MovingDice implements TurnState {
     private Turn turn;
@@ -22,14 +23,14 @@ public class MovingDice implements TurnState {
         this.toolPos = toolPos;
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
-        inspectorContext = turn.getInspectorContext();
-        inspectorPlace = turn.getInspectorPlace();
+        this.inspectorContext = turn.getInspectorContext();
+        this.inspectorPlace = turn.getInspectorPlace();
     }
 
     //GETTING MOVE METHODS
 
     @Override
-    public void receiveMove(Pos pos) {
+    public void receiveMove(Pos pos) throws WrongMoveException {
         //change inspector
         //inspectorPlaceTool.check(chosenDice,pos,turn.getToolCard());
         if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
@@ -37,7 +38,7 @@ public class MovingDice implements TurnState {
             turn.getModifier().positionDice(chosenDice,posChosenDice,pos);
             turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
-            //throw wrong placement exception
+            throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");
         }
     }
 }

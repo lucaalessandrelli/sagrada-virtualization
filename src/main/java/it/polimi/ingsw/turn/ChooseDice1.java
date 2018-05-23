@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class ChooseDice1 implements TurnState {
 
     //GETTING MOVE METHODS
     @Override
-    public void receiveMove(ToolCard toolCard) {
+    public void receiveMove(ToolCard toolCard) throws WrongMoveException {
         if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards()))) {
             //setting the toolCard used in this turn
             //setting the list of states for the dynamic state machine
@@ -44,25 +45,25 @@ public class ChooseDice1 implements TurnState {
             //need to set dynamic current state
             turn.setDynamicState(chosenDice,posDiceChosen, new Dice(), new Pos());
         } else {
-          //throw wrong toolCard exception
+            throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere la carta strumento "+ toolCard.toString() +".");
         }
     }
 
     @Override
-    public void receiveMove(Pos pos) {
+    public void receiveMove(Pos pos) throws WrongMoveException {
         if(turn.getRoundNumber() == 1 && turn.isFirstBracket()) {
             if(inspectorPlace.checkFirst(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
                 turn.getModifier().positionDice(chosenDice, posDiceChosen, pos);
                 turn.setState(new PositionDice1(turn));
             } else {
-                //throw wrong placement exception
+                throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole del primo piazzamento.");
             }
         } else {
             if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
                 turn.getModifier().positionDice(chosenDice, posDiceChosen, pos);
                 turn.setState(new PositionDice1(turn));
             } else {
-                //throw wrong placement exception
+                throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento.");
             }
         }
     }

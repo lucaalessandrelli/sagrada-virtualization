@@ -19,7 +19,7 @@ public class IncDecValue implements TurnState {
         this.toolPos = toolPos;
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
-        //this.inspectContextTool = new InspectContextTool();
+        this.inspectContextTool = turn.getInspectorContextTool();
     }
 
     //GETTING MOVE METHODS
@@ -32,7 +32,7 @@ public class IncDecValue implements TurnState {
                 turn.getModifier().changeDiceValue(chosenDice,posDiceChosen,toolDice);
                 turn.setDynamicState(toolDice,toolPos,new Dice(),new Pos());
         } else {
-          //throw wrong Dice exception
+            throw new WrongMoveException("Mossa sbagliata: Decrementa o aumenta il valore del dado scelto di 1. Non puoi far diventare un 1 in un 6 e viceversa.");
         }*/
     }
 }
