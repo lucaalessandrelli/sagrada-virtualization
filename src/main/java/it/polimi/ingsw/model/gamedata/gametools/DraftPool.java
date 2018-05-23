@@ -60,9 +60,9 @@ public class DraftPool {
      * @param where The position
      * @return a boolean
      */
-    /*public boolean findDice(Dice d, int where){
+    public boolean findDice(Dice d, int where){
         return this.draftPool.get(where).equals(d);
-    }*/
+    }
 
     public boolean findDice(Dice d){
         for (Dice x: this.draftPool){

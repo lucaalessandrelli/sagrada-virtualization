@@ -6,10 +6,11 @@ import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.network.server.Server;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Match {
     private int id;
-    private ArrayList<Player> playerList;
+    private List<Player> playerList;
     private Server server;
     private Table table;
     private ArrayList<Round> roundList;
@@ -50,11 +51,11 @@ public class Match {
     }
 
     //Getter methods
-    public ArrayList<Player> getPlayerList() {
+    public List<Player> getPlayerList() {
         return this.playerList;
     }
 
-    public ArrayList<Round> getRoundList() {
+    public List<Round> getRoundList() {
         return this.roundList;
     }
 }

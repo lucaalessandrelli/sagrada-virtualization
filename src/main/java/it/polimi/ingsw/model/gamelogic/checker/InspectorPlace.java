@@ -5,85 +5,95 @@ import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 
+
+/**
+ * This class check if the position rules are checked.
+ */
 public class InspectorPlace {
-    private final static int MINCOL=0;
-    private final static int MAXCOL=4;
-    private final static int MINROW=0;
-    private final static int MAXROW=3;
+    static final int MINCOL=0;
+    static final int MAXCOL=4;
+    static final int MINROW=0;
+    static final int MAXROW=3;
 
+
+    /**
+     * Check if the dice could be placed on the chosen position at first turn
+     * @param dice Dice to place.
+     * @param pos Chosen position.
+     * @param window Player's pattern card where check rules.
+     * @return True if conditions are verified.
+     */
     public boolean checkFirst(Dice dice, Pos pos, WindowPatternCard window){
-        if(checkPos(pos, window)){
-            if (checkColour(window, pos, dice)){
-                if(checkNumber(window, pos, dice)){
-                    if(checkFrame(pos)){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return (checkPos(pos, window) && checkColour(window, pos, dice) && checkNumber(window, pos, dice) && checkFrame(pos));
     }
 
-
+    /**
+     * Check if the dice could be placed on the chosen position following classic rules.
+     * @param dice Dice to place.
+     * @param pos Chosen position.
+     * @param window Player's pattern card where check rules.
+     * @return True if conditions are verified.
+     */
     public boolean check(Dice dice, Pos pos, WindowPatternCard window) {
-        if(checkPos(pos,window)){
-            if(checkColour(window,pos,dice)) {
-                if (checkNumber(window,pos,dice)) {
-                    if (checkCol(pos,window,dice)) {
-                        if (checkRow(pos,window,dice)) {
-                            return true;
-                        }
-                    }
-
-                }
-            }
-        }
-        return false;
+        return (checkPos(pos,window) && checkColour(window,pos,dice) && checkNumber(window,pos,dice) && checkCol(pos,window,dice) && checkRow(pos,window,dice));
     }
 
+    /**
+     * Check if pos could be out of window's frame and if the position is occupied.
+     * @param pos Chosen position
+     * @param window Player's pattern card
+     * @return True if conditions are verified.
+     */
     protected boolean checkPos(Pos pos,WindowPatternCard window) {
-        if(pos.getX()>= MINCOL && pos.getX()<=MAXCOL)
-            if(pos.getY()>=MINROW && pos.getY()<=MAXROW){
-                if(!window.getCell(pos).isOccupied())
-                return true;
-            }
-        return false;
+        return (pos.getX()>= MINCOL && pos.getX()<=MAXCOL) && pos.getY()>=MINROW && pos.getY()<=MAXROW && !window.getCell(pos).isOccupied();
     }
 
+    /**
+     * Check colour restriction on the chosen pos.
+     * @param window Player's pattern card.
+     * @param pos Chosen position.
+     * @param dice Dice to place.
+     * @return True if the Cell doesn't have colour restriction or it is verified.
+     */
     protected boolean checkColour(WindowPatternCard window, Pos pos, Dice dice){
         Cell c =window.getCell(pos);
-        if(c.getProperty().getColour().toString()=="WHITE" || c.getProperty().getColour()==dice.getColour()){
-            return true;
-        }else{
-            return false;
-        }
+        return (c.getProperty().getColour().toString().equals("WHITE") || c.getProperty().getColour()==dice.getColour());
     }
 
+    /**
+     * Check number restriction on the chosen pos.
+     * @param window Player's pattern card.
+     * @param pos Chosen position.
+     * @param dice Dice to place.
+     * @return True if the Cell doesn't have number restriction or it is verified.
+     */
     protected boolean checkNumber(WindowPatternCard window, Pos pos, Dice dice){
         Cell c= window.getCell(pos);
-        if(c.getProperty().getNumber()== 0 || c.getProperty().getNumber()==dice.getNumber()){
-            return true;
-        }else{
-            return false;
+        return (c.getProperty().getNumber()== 0 || c.getProperty().getNumber()==dice.getNumber());
         }
-    }
 
-    protected boolean checkFrame(Pos pos){
+    /**
+     * Check if the chosen position is on the frame of window pattern card.
+     * @param pos Chosen pos.
+     * @return True if is on the frame.
+     */
+    private boolean checkFrame(Pos pos){
         int x = pos.getX();
         int y= pos.getY();
-        if(x>=MINCOL && x<=MAXCOL){
-            if(y==MINROW || y==MAXROW) {
+        if((x>=MINCOL && x<=MAXCOL) && (y==MINROW || y==MAXROW)){
                 return true;
-            }
         }
-        if(y>MINROW && y<MAXROW){
-            if(x == MINCOL || (x == MAXCOL)){
-                return true;
-            }
-        }
-        return false;
+        return(y>MINROW && y<MAXROW && (x == MINCOL || (x == MAXCOL)));
+
     }
 
+    /**
+     * Check if the chosen position check the colour and number restriction on the column nearby.
+     * @param pos Chosen position.
+     * @param window Player's window pattern card.
+     * @param dice Dice to place.
+     * @return True if conditions are verified.
+     */
     protected boolean checkCol(Pos pos,WindowPatternCard window, Dice dice){
         Pos p = new Pos(pos.getX(),pos.getY());
         if(p.getX()==MINCOL){
@@ -96,14 +106,18 @@ public class InspectorPlace {
             p.setX(p.getX()+1);
             if(checkSide(p,window,dice)){
                 p.setX(p.getX()-2);
-                if(checkSide(p,window,dice)){
-                    return true;
-                }
+                return checkSide(p, window, dice);
             }
             return false;
         }
     }
-    //0<=R<=3
+    /**
+     * Check if the chosen position check the colour and number restriction on the rows nearby.
+     * @param pos Chosen position.
+     * @param window Player's window pattern card.
+     * @param dice Dice to place.
+     * @return True if conditions are verified.
+     */
     protected boolean checkRow(Pos pos,WindowPatternCard window, Dice dice){
         Pos p = new Pos(pos.getX(),pos.getY());
         if(p.getY()==MINROW){
@@ -116,23 +130,24 @@ public class InspectorPlace {
             p.setY(p.getY()+1);
                 if(checkSide(p,window,dice)){
                     p.setY(p.getY()-2);
-                    if(checkSide(p,window,dice)){
-                        return true;
-                    }
+                    return checkSide(p, window, dice);
                 }
             return false;
         }
 
     }
 
+    /**
+     * Check if the side dice respect the number and colour restriction
+     * @param p Position where check the nearby dice.
+     * @param window Player's pattern card.
+     * @param dice Dice to place
+     * @return True if conditions are verified.
+     */
     private boolean checkSide(Pos p,WindowPatternCard window,Dice dice) {
         if(window.isIn(p)){
             Dice d = window.getDice(p);
-            if(d.getNumber()==dice.getNumber() || d.getColour()==dice.getColour()){
-                return false;
-            }else{
-                return true;
-            }
+            return d.getNumber() != dice.getNumber() && d.getColour() != dice.getColour();
         }else{
             return true;
         }

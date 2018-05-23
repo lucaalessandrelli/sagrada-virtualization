@@ -44,7 +44,7 @@ public class RoundTrackTest {
         dices = new ArrayList<>();
         addRandomDices(dices,10); //Using method to generate random dices with random colours and random numbers
         roundTrack.setDiceOnRoundTrack(1,dices); //Adding dices to the round
-        assertTrue(roundTrack.findDice(dice));
+        assertTrue(roundTrack.findDice(dice, pos));
         assertTrue(dice.equals(roundTrack.switchDice(dice)));
     }
 

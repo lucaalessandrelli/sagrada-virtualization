@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gamedata.gametools.*;
 import it.polimi.ingsw.model.gamelogic.Move;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Player {
@@ -98,7 +99,7 @@ public class Player {
     public void setPublicObjects(PublicObjects publicObjects) {
         this.publicObjects = publicObjects;
     }
-    public ArrayList<ToolCard>getToolCards(){
+    public List<ToolCard> getToolCards(){
         return publicObjects.getToolCards();
     }
     public DraftPool getDraftPool(){

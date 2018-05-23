@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.gamelogic;
 
 
 import it.polimi.ingsw.model.gamedata.Player;
+import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.turn.Turn;
 
@@ -11,10 +12,12 @@ public class Round {
     private int roundNumber;
     private PlayersContainer players;
     private List<Dice> lastDice;
+    private Table table;
 
-    public Round(List<Player> playerList, int roundNumber) {
+    public Round(List<Player> playerList, int roundNumber, Table table) {
         this.roundNumber = roundNumber;
         players = new PlayersContainer(playerList);
+        this.table=table;
     }
 
     public void start() throws NotEnoughPlayersException {

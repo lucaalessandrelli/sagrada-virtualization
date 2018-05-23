@@ -1,69 +1,117 @@
 package it.polimi.ingsw.model.gamelogic.checker;
 
+import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
 import java.util.ArrayList;
 
-public class InspectorContextTool extends InspectorTool {
-    RuleEngine ruleEngine;
-    ToolCard tool;
+/**
+ * The class is used to verify dynamically if, chosen the tool card, the chosen dice is taken from the right place.
+ * The parameters "pos" passed to the methods represent the exact position in the pattern card, draft pool or round track
+ */
+public class InspectorContextTool implements InspectorTool {
+    private WindowPatternCard windowPatternCard;
+    private DraftPool draftPool;
+    private RoundTrack roundTrack;
+    private int index;
 
-    public InspectorContextTool(Dice d, ToolCard t, WindowPatternCard w, DraftPool p, RoundTrack r){
-        ruleEngine = new RuleEngineC(d,w,p,r);
-        tool = t;
+    public InspectorContextTool(WindowPatternCard window, DraftPool draftPool, RoundTrack roundTrack){
+        this.windowPatternCard=window;
+        this.draftPool=draftPool;
+        this.roundTrack=roundTrack;
+        this.index=0;
     }
-    //check(Dice,Pos,toolcard); new Rule engine();
-    public boolean check(){
+
+    /**
+     * For every tool card, except n°1 and n°11, this method is called by patter state. It takes from the chosen tool card the rules (name of methods)
+     * to apply for checking dynamically if is taken from the right place and, using Java Reflection, calls on "ruleEngine" the right methods.
+     * @param dice Chosen dice.
+     * @param pos Position of chosen dice.
+     * @param tool Tool card where take the rules.
+     * @return True if the dice is taken from the right place.
+     */
+    public boolean check(Dice dice, Pos pos, ToolCard tool){
+        RuleEngine ruleEngine = new RuleEngineC(dice,pos,windowPatternCard,draftPool,roundTrack);
         ArrayList<String> nameMethods = tool.getNameCMethods();
-        return doMethods(nameMethods, ruleEngine);
+        String method = nameMethods.get(index);
+        index++;
+        return doMethods(method, ruleEngine);
     }
-    //check for toolcard 11 (oldDice,oldPos1, newDice, newPos) guarda meglio
-    public boolean checkColourDice(Dice oldDice, Dice newDice){
-        if(oldDice.getColour().toString().equals(newDice.getColour().toString())){
-            return true;
-        }
-        return false;
+
+    /**
+     * Check if the dice chosen thanks to tool card n°11 respects the rule.
+     * @param oldDice Dice pulled out from dice bag.
+     * @param oldPos Position of dice on draft pool.
+     * @param newDice Dice chosen from player.
+     * @param newPos Position of dice chosen from player.
+     * @return True if dice is chosen between all possibilities.
+     */
+    public boolean checkColourDice(Dice oldDice,Pos oldPos, Dice newDice, Pos newPos){
+        return oldPos.getX() == newPos.getX() && oldPos.getY() == newPos.getY() && oldDice.getColour().toString().equals(newDice.getColour().toString());
     }
-    //check for toolcard 1 (oldDice,oldPos1, newDice, newPos) check same position
-    public boolean checkNumDice(Dice oldDice, Dice newDice){
+
+    /**
+     * Check if the dice chosen thanks to tool card n°1 respects the rule.
+     * @param oldDice Dice to change the value.
+     * @param oldPos Position of oldDice on pattern card.
+     * @param newDice Dice chosen with new value.
+     * @param newPos Position of newDice on pattern card.
+     * @return True if player chooses the right value.
+     */
+    public boolean checkNumDice(Dice oldDice,Pos oldPos, Dice newDice, Pos newPos){
         int oldNum = oldDice.getNumber();
         int newNum = newDice.getNumber();
+        if(!(oldPos.getX()==newPos.getX() && (oldPos.getY()==newPos.getY()))){
+            return false;
+        }
         if(oldNum==1 && newNum==2){
             return true;
         }
         if(oldNum==6 && newNum==5){
             return true;
         }
-        if(oldNum == newNum+1 || oldNum==newNum-1){
-            return true;
-        }
-        return false;
+        return oldNum == newNum + 1 || oldNum == newNum - 1;
 
     }
 
+    /**
+     * This class contains all the implementation of the needed methods that check if the dice is taken from the right place.
+     */
     private class RuleEngineC implements RuleEngine{
         Dice dice;
         WindowPatternCard window;
         DraftPool pool;
         RoundTrack roundT;
-        private RuleEngineC(Dice d, WindowPatternCard w, DraftPool p,RoundTrack r) {
-            dice = d;
-            window = w;
-            pool = p;
-            roundT=r;
+        Pos pos;
+        private RuleEngineC(Dice dice, Pos pos, WindowPatternCard window, DraftPool draftPool, RoundTrack roundT) {
+            this.dice = dice;
+            this.window = window;
+            this.pool = draftPool;
+            this.roundT=roundT;
+            this.pos=pos;
         }
 
-        protected boolean InDraftPool(){
-            return pool.findDice(dice);
+        /**
+         * Check if dice is taken from draft pool.
+         * @return True if is inside it.
+         */
+        protected boolean inDraftPool(){
+            return pool.findDice(dice,pos.getX());
 
         }
-
-        protected boolean InPatCard(){
-            return window.findDice(dice);
+        /**
+         * Check if dice is taken from the player's pattern card.
+         * @return True if is inside it.
+         */
+        protected boolean inPatCard(){
+            return window.findDice(dice,pos);
         }
-
-        protected boolean InRoundTr(){
-            return roundT.findDice(dice);
+        /**
+         * Check if dice is taken from the round track.
+         * @return True if is inside it.
+         */
+        protected boolean inRoundTr(){
+            return roundT.findDice(dice,pos);
         }
 
     }

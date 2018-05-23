@@ -1,24 +1,27 @@
 package it.polimi.ingsw.model.gamedata.gametools;
 
+import it.polimi.ingsw.model.gamedata.Pos;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoundTrack {
-    private ArrayList<ArrayList<Dice>> diceOnRoundTrack;
+    private List<List<Dice>> diceOnRoundTrack;
 
     public RoundTrack(){
         diceOnRoundTrack = new ArrayList<>();
     }
 
-    public ArrayList<Dice> getDiceOnRoundtrack(int numRound){
+    public List<Dice> getDiceOnRoundtrack(int numRound){
         return diceOnRoundTrack.get(numRound);
     }
-    public void setDiceOnRoundTrack(int numRound, ArrayList<Dice> dice){
+    public void setDiceOnRoundTrack(int numRound, List<Dice> dice){
         diceOnRoundTrack.add(numRound, dice);
     }
-    public ArrayList<ArrayList<Dice>> getRoundTrack(){
+    public List<List<Dice>> getRoundTrack(){
         return diceOnRoundTrack;
     }
-    public boolean findDice(Dice dice){
+    public boolean findDice(Dice dice, Pos pos){
         for(int i=0; i<diceOnRoundTrack.size();i++){
             for(int j=0; j<diceOnRoundTrack.get(i).size();j++){
                 if(dice.equals(diceOnRoundTrack.get(i).get(j))) {
@@ -40,5 +43,8 @@ public class RoundTrack {
             }
         }
         throw new NullPointerException();
+    }
+    public Dice getDice(Dice dice, Pos pos){
+        return null;
     }
 }

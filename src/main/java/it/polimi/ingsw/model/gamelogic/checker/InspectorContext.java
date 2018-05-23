@@ -6,16 +6,32 @@ import it.polimi.ingsw.model.gamedata.gametools.DraftPool;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * This class check if the chosen object is chosen from the tools available on the table.
+ */
 public class InspectorContext {
 
-    //posizione dado in draftpool; (x,0)
 
+    /**
+     * This method check if the chosen dice si pulled out from dice bag.
+     * @param d Chosen dice.
+     * @param pos Position of chosen dice, x is the index where draft pool will check.
+     * @param draft Draft pool on the table.
+     * @return True if draft pool contains that dice in that position.
+     */
     public boolean check(Dice d, Pos pos, DraftPool draft){
-        return draft.findDice(d);
+        return draft.findDice(d,pos.getX());
     }
 
-    public boolean check (ToolCard tool, ArrayList<ToolCard> allTool){
+    /**
+     * This method check if the group of tool cards in the table contains the chosen tool card.
+     * @param tool Chosen tool card.
+     * @param allTool Group of tool card on the table.
+     * @return True if the chosen tool card is in the group.
+     */
+    public boolean check (ToolCard tool, List<ToolCard> allTool){
         for (ToolCard t : allTool){
             if (t.getID()==tool.getID()){
                 return true;

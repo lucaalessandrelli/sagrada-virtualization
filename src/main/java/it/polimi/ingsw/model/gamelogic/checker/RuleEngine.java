@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model.gamelogic.checker;
 
-public interface RuleEngine {
+/**
+ * Identifies the classes that has all the checking tool cards methods.
+ */
+interface RuleEngine {
 }

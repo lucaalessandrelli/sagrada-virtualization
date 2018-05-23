@@ -7,24 +7,38 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 
 import java.util.ArrayList;
 
-public class InspectorPlaceTool extends InspectorTool {
-    private final static int MINCOL=0;
-    private final static int MAXCOL=4;
-    private final static int MINROW=0;
-    private final static int MAXROW=3;
-    RuleEngine ruleEngine;
-    ToolCard tool;
+/**
+ * The class is used to verify dynamically if, chosen a tool card, the placing respect the specific rules of that tool card.
+ * In this case, the parameter "pos" represent the position where the player wants to move the dice.
+ */
+public class InspectorPlaceTool implements InspectorTool {
+    private WindowPatternCard window;
+    private int index;
 
-    public InspectorPlaceTool(Dice dice, Pos pos, WindowPatternCard window,ToolCard t){
-        tool = t;
-        ruleEngine = new RuleEngineP(dice,pos,window);
-    }
-    //check(Dice,Pos,toolcard); new Rule engine();
-    public boolean check(){
-        ArrayList<String> nameMethods = tool.getNamePMethods();
+    public InspectorPlaceTool(WindowPatternCard window){
+        this.window=window;
 
-        return doMethods(nameMethods,ruleEngine);
     }
+
+    /**
+     * This method is called every time the player wants to place the dice using a tool card.
+     * It creates an object "RuleEngineP" which implements every checker methods for the placing. The method gets from the tool card the name of
+     * the rights methods to invoke on RuleEngine, and it will do it in the right sequence.
+     * @param dice Dice to place.
+     * @param pos Where move the dice.
+     * @param tool Tool card chosen.
+     * @return True if the place is right using the tool card
+     */
+    public boolean check(Dice dice, Pos pos, ToolCard tool){
+        RuleEngine ruleEngine = new RuleEngineP(dice,pos,window);
+        ArrayList<ArrayList<String>> nameMethods = tool.getNamePMethods();
+        ArrayList<String> currMethods = nameMethods.get(index);
+        return doMethods(currMethods,ruleEngine);
+    }
+
+    /**
+     * The class contains every methods used to check the particular placing using the chosen tool card.
+     */
 
     private class RuleEngineP extends InspectorPlace implements RuleEngine{
         Dice dice;
@@ -37,60 +51,77 @@ public class InspectorPlaceTool extends InspectorTool {
 
         }
 
+        /**
+         * This method is used from tool card n°9.
+         * @return True if placing respect rules of tool card.
+         */
         protected boolean checkFrame(){
-            if(checkPos(pos,window)) {
-                if (checkColour(window, pos, dice)) {
-                    if (checkNumber(window, pos, dice)) {
-                        if(particularFrame(window,pos)){
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
+            return (checkPos() && checkColour() && checkNumber() && particularFrame());
         }
 
-        private boolean particularFrame(WindowPatternCard window, Pos pos) {
+        /**
+         * This method check if the placing is far from other dice.
+         * @return True if conditions are respected.
+         */
+        private boolean particularFrame() {
             int x = pos.getX();
             int y = pos.getY();
             for (int i = -1; i<=1; i++){
                 for(int j =1 ; j>= -1; j--){
-                    if(x+i>=MINCOL && x+i<=MAXCOL && y+j>=MINROW && y+j<=MAXROW){
-                        if(window.getCell(new Pos(x,y)).isOccupied()){
-                            return false;
-                        }
+                    if(x+i>=MINCOL && x+i<=MAXCOL && y+j>=MINROW && y+j<=MAXROW && window.getCell(new Pos(x,y)).isOccupied()){
+                        return false;
+
                     }
                 }
             }
             return true;
         }
 
+        /**
+         * This method is called to check the normal placing rules.
+         * @return True if placing is right.
+         */
         protected boolean checkAll(){
             return super.check(dice,pos,window);
         }
 
-        @Override
-        protected boolean checkPos(Pos pos,WindowPatternCard window) {
+        /**
+         * Check if pos could be out of window's frame and if the position is occupied.
+         * @return True if conditions are verified.
+         */
+        boolean checkPos() {
             return super.checkPos(pos,window);
         }
 
-        @Override
-        protected boolean checkColour(WindowPatternCard window, Pos pos, Dice dice) {
+        /**
+         * Check colour restriction on the chosen pos.
+         * @return True if the Cell doesn't have colour restriction or it is verified.
+         */
+        boolean checkColour() {
             return super.checkColour(window, pos, dice);
         }
 
-        @Override
-        protected boolean checkNumber(WindowPatternCard window, Pos pos, Dice dice) {
+        /**
+         * Check number restriction on the chosen pos.
+         * @return True if the Cell doesn't have number restriction or it is verified.
+         */
+        boolean checkNumber() {
             return super.checkNumber(window, pos, dice);
         }
 
-        @Override
-        protected boolean checkCol(Pos pos, WindowPatternCard window, Dice dice) {
+        /**
+         * Check if the chosen position check the colour and number restriction on the column nearby.
+         * @return True if conditions are verified.
+         */
+        protected boolean checkCol() {
             return super.checkCol(pos, window, dice);
         }
 
-        @Override
-        protected boolean checkRow(Pos pos, WindowPatternCard window, Dice dice) {
+        /**
+         * Check if the chosen position check the colour and number restriction on the rows nearby.
+         * @return True if conditions are verified.
+         */
+        protected boolean checkRow() {
             return super.checkRow(pos, window, dice);
         }
     }

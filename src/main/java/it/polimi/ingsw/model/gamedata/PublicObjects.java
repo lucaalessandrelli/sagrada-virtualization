@@ -5,20 +5,21 @@ package it.polimi.ingsw.model.gamedata;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PublicObjects {
-    private ArrayList<WindowPatternCard> othersWindows;
-    private ArrayList<ObjectiveCard> objectiveCards;
-    private ArrayList<ToolCard> toolCards;
+    private List<WindowPatternCard> othersWindows;
+    private List<ObjectiveCard> objectiveCards;
+    private List<ToolCard> toolCards;
     private RoundTrack roundTrack;
     private DraftPool draftPool;
-    private ArrayList<String> players;
+    private List<String> players;
 
     public PublicObjects(){
         roundTrack = new RoundTrack();
     }
 
-    public void addDice(int numRound,ArrayList<Dice> d){
+    public void addDice(int numRound,List<Dice> d){
         roundTrack.setDiceOnRoundTrack(numRound,d);
     }
 
@@ -26,35 +27,36 @@ public class PublicObjects {
         this.draftPool = draftPool;
     }
 
-    public void setObjectiveCards(ArrayList<ObjectiveCard> objectiveCards) {
+    public void setObjectiveCards(List<ObjectiveCard> objectiveCards) {
         this.objectiveCards = objectiveCards;
     }
 
-    public void setOthersWindows(ArrayList<WindowPatternCard> othersWindows) {
+    public void setOthersWindows(List<WindowPatternCard> othersWindows) {
         this.othersWindows = othersWindows;
     }
 
-    public void setPlayers(ArrayList<String> players) {
+    public void setPlayers(
+            List<String> players) {
         this.players = players;
     }
 
-    public void setToolCards(ArrayList<ToolCard> toolCards) {
+    public void setToolCards(List<ToolCard> toolCards) {
         this.toolCards = toolCards;
     }
 
-    public ArrayList<ObjectiveCard> getObjectiveCards() {
+    public List<ObjectiveCard> getObjectiveCards() {
         return objectiveCards;
     }
 
-    public ArrayList<String> getPlayers() {
+    public List<String> getPlayers() {
         return players;
     }
 
-    public ArrayList<ToolCard> getToolCards() {
+    public List<ToolCard> getToolCards() {
         return toolCards;
     }
 
-    public ArrayList<WindowPatternCard> getOthersWindows() {
+    public List<WindowPatternCard> getOthersWindows() {
         return othersWindows;
     }
 
