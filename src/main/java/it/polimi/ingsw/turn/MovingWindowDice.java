@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlaceTool;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
-public class MovingDice implements TurnState {
+public class MovingWindowDice implements TurnState {
     private Turn turn;
     private Dice chosenDice;
     private Dice toolDice;
@@ -17,7 +17,7 @@ public class MovingDice implements TurnState {
     private InspectorPlace inspectorPlace;
     private InspectorPlaceTool inspectorPlaceTool;
 
-    public MovingDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public MovingWindowDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
@@ -35,7 +35,7 @@ public class MovingDice implements TurnState {
         //inspectorPlaceTool.check(chosenDice,pos,turn.getToolCard());
         if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
             //call modifier
-            turn.getModifier().positionDice(chosenDice,posChosenDice,pos);
+            turn.getModifier().positionDiceFromWindow(chosenDice,posChosenDice,pos);
             turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");

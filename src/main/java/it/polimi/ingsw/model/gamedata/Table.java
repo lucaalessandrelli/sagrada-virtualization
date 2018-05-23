@@ -7,7 +7,7 @@ import java.util.List;
 
 //I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
 public class Table {
-    private ArrayList<Player> myplayer= new ArrayList<Player>();
+    private List<Player> myplayer= new ArrayList<Player>();
     private ArrayList<ObjectiveCard> objectiveCards = new ArrayList<ObjectiveCard>(4);
     private ArrayList<ToolCard> toolCards = new ArrayList<ToolCard>(3);
     private ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<WindowPatternCard>();
@@ -17,7 +17,7 @@ public class Table {
     private CardContainer container;
 
 
-    public Table(ArrayList<Player> players){
+    public Table(List<Player> players){
         this.diceBag = new DiceBag();
         this.draftPool = new DraftPool();
         this.container = new CardContainer();
@@ -111,7 +111,11 @@ public class Table {
         return this.roundTrack;
     }
 
-    public void fillDraftPoll(){
+    public void fillDraftPool(){
         this.draftPool.addNewDices(diceBag.pullOut());
+    }
+
+    public DiceBag getDiceBag() {
+        return this.diceBag;
     }
 }

@@ -44,7 +44,7 @@ public class RoundTrack {
         }
         throw new NullPointerException();
     }
-    public Dice getDice(Dice dice, Pos pos){
+    public Dice getDice(Pos pos){
         return null;
     }
 }

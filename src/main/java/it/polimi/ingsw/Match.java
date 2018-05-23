@@ -30,6 +30,7 @@ public class Match {
         /*SETTING ROUNDS*/
         for(roundNumber = 1; roundNumber <= 10; roundNumber++) {
             //reminder to implement exception management later (in case the match end before)
+            this.table.fillDraftPool();
             this.startNextRound();
         }
 
@@ -44,7 +45,7 @@ public class Match {
     }
 
     private void startNextRound() {
-            roundList.add(new Round(this.playerList, roundNumber));
+            roundList.add(new Round(this.playerList, roundNumber,table));
             /* call on the round just created a method that start the round
             roundList.get(roundNumber-1).startRound();
              */

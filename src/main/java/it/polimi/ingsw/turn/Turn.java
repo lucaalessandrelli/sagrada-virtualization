@@ -47,9 +47,10 @@ public class Turn {
         this.firstBracket = firstBracket;
 
         this.inspectorPlace = new InspectorPlace();
+        //this.table = table;
         //this.inspectorContextTool = new InspectorContextTool(player.getWindowPatternCard(),player.getDraftPool(), player.getRoundTrack());
         //this.inspectorPlaceTool = new InspectorPlaceTool(player.getWindowPatternCard());
-        this.modifier = new ModelModifier(player.getDraftPool(), player.getWindowPatternCard(),player.getRoundTrack());
+        //this.modifier = new ModelModifier(table,player);
     }
 
     /**
