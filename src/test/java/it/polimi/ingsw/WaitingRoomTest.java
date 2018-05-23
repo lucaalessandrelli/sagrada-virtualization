@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.model.gameData.Player;
+import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.server.Server;
 import org.junit.jupiter.api.Test;
 import java.rmi.RemoteException;

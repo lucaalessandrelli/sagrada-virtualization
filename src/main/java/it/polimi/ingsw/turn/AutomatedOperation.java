@@ -1,8 +1,8 @@
 package it.polimi.ingsw.turn;
 
-import it.polimi.ingsw.model.gameData.Pos;
-import it.polimi.ingsw.model.gameData.gameTools.Dice;
-import it.polimi.ingsw.model.gameLogic.ModelModifier;
+import it.polimi.ingsw.model.gamedata.Pos;
+import it.polimi.ingsw.model.gamedata.gametools.Dice;
+import it.polimi.ingsw.model.gamelogic.ModelModifier;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class AutomatedOperation implements TurnState {
         for (String nextOperationName: toolAutomatedOperationList) {
             if(!nextOperationName.equals("operationEnded")) {
                 try {
-                    Class cls = Class.forName("it.polimi.ingsw.model.gameLogic.ModelModifier");
+                    Class cls = Class.forName("it.polimi.ingsw.model.gamelogic.ModelModifier");
 
                     Class[] parametersType = new Class[4];
                     parametersType[0] = Dice.class;

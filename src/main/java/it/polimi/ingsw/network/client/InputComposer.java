@@ -1,6 +1,8 @@
 package it.polimi.ingsw.network.client;
 
-public class InputComposer {
+import java.io.Serializable;
+
+public class InputComposer implements Serializable {
     private Client client;
     public InputComposer(Client client) {
         this.client = client;

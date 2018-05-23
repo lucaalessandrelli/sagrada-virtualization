@@ -1,14 +1,14 @@
 package it.polimi.ingsw.turn;
 
-import it.polimi.ingsw.model.gameData.Player;
-import it.polimi.ingsw.model.gameData.Pos;
-import it.polimi.ingsw.model.gameData.gameTools.Dice;
-import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectContextTool;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlace;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectorPlaceTool;
-import it.polimi.ingsw.model.gameLogic.ModelModifier;
+import it.polimi.ingsw.model.gamedata.Player;
+import it.polimi.ingsw.model.gamedata.Pos;
+import it.polimi.ingsw.model.gamedata.gametools.Dice;
+import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
+import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
+import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
+import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
+import it.polimi.ingsw.model.gamelogic.checker.InspectorPlaceTool;
+import it.polimi.ingsw.model.gamelogic.ModelModifier;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.lang.reflect.*;
@@ -22,7 +22,7 @@ public class Turn {
     private TurnState state;
     private InspectorContext inspectorContext;
     private InspectorPlace inspectorPlace;
-    private InspectContextTool inspectContextTool;
+    private InspectorContextTool inspectorContextTool;
     private InspectorPlaceTool inspectorPlaceTool;
     private boolean firstBracket;
     private int roundNumber;
@@ -221,8 +221,8 @@ public class Turn {
      * Called by concrete states in order to call context inspecting methods on a given player tool move
      * @return InspectorContextTool object
      */
-    public InspectContextTool getInspectContextTool() {
-        return inspectContextTool;
+    public InspectorContextTool getInspectorContextTool() {
+        return inspectorContextTool;
     }
 
     /**

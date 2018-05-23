@@ -2,10 +2,11 @@ package it.polimi.ingsw.network.client;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class SocketConnection implements ConnectionHandler {
+public class SocketConnection implements ConnectionHandler, Serializable {
     static int PORT_SOCKET = 45678;
 
     Client client;

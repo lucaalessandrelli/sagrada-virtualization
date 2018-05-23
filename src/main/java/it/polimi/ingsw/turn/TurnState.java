@@ -1,8 +1,8 @@
 package it.polimi.ingsw.turn;
 
-import it.polimi.ingsw.model.gameData.gameTools.Dice;
-import it.polimi.ingsw.model.gameData.Pos;
-import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
+import it.polimi.ingsw.model.gamedata.gametools.Dice;
+import it.polimi.ingsw.model.gamedata.Pos;
+import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 public interface TurnState {

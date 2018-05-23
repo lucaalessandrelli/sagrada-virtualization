@@ -1,10 +1,9 @@
 package it.polimi.ingsw.turn;
 
-import it.polimi.ingsw.model.gameData.Pos;
-import it.polimi.ingsw.model.gameData.gameTools.Dice;
-import it.polimi.ingsw.model.gameData.gameTools.ToolCard;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectContextTool;
-import it.polimi.ingsw.model.gameLogic.Checker.InspectorContext;
+import it.polimi.ingsw.model.gamedata.Pos;
+import it.polimi.ingsw.model.gamedata.gametools.Dice;
+import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
+import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 
 public class SelectingDice implements TurnState {
     private Dice chosenDice;
@@ -13,7 +12,7 @@ public class SelectingDice implements TurnState {
     private Pos toolPos;
     private Turn turn;
     private InspectorContext inspectorContext;
-    private InspectContextTool inspectContextTool;
+    private InspectorContextTool inspectorContextTool;
 
     public SelectingDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
@@ -22,7 +21,7 @@ public class SelectingDice implements TurnState {
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
         this.inspectorContext = turn.getInspectorContext();
-        this.inspectContextTool = turn.getInspectContextTool();
+        this.inspectorContextTool = turn.getInspectorContextTool();
     }
 
     //GETTING MOVE METHODS

@@ -2,15 +2,16 @@ package it.polimi.ingsw.network.server;
 
 import it.polimi.ingsw.Match;
 import it.polimi.ingsw.WaitingRoom;
-import it.polimi.ingsw.model.gameData.Player;
+import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
 import it.polimi.ingsw.network.ServerInterface;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Server extends UnicastRemoteObject implements ServerInterface {
+public class Server extends UnicastRemoteObject implements ServerInterface, Serializable {
     private ArrayList<ClientInterface> clients;
     private WaitingRoom lobby;
     private ArrayList<Match> matchList;

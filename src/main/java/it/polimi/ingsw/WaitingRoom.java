@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.model.gameData.Player;
+import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.server.Server;
 
 import java.util.ArrayList;

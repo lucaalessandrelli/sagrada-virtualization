@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.model.gameData.Player;
+import it.polimi.ingsw.model.gamedata.Player;
 
 import java.util.ArrayList;
 import java.util.Timer;

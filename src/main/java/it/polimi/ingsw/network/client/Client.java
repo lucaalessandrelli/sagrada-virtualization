@@ -1,13 +1,11 @@
 package it.polimi.ingsw.network.client;
 
 import it.polimi.ingsw.network.ClientInterface;
-import it.polimi.ingsw.network.ServerInterface;
 
 import java.io.Serializable;
 
 public class Client implements ClientInterface,Serializable {
     private String name;
-    private ServerInterface server;
     private boolean connected;
     private int kindConnection;
     private ConnectionHandler connectionHandler;
