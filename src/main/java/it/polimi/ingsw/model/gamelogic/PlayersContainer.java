@@ -17,15 +17,11 @@ public class PlayersContainer {
     }
 
     public boolean checkActivity(){
-        List<Player> tmp = players.stream().filter(p -> p.isActive()).collect(Collectors.toCollection(ArrayList::new));
-        if(tmp.size()>1){
-            return true;
-        }else{
-            return false;
-        }
+        List<Player> tmp = players.stream().filter(Player::isActive).collect(Collectors.toCollection(ArrayList::new));
+        return tmp.size() > 1;
     }
 
-    public boolean isFirstBracket(){
+    boolean isFirstBracket(){
         return firstBracket;
     }
 
@@ -35,7 +31,7 @@ public class PlayersContainer {
 
 
 
-    public Iterator<Player> getIterator(){
+    public IterPlayer getIterator(){
         return new IterPlayer();
     }
 

@@ -11,6 +11,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import static java.lang.System.*;
+
 public class Server extends UnicastRemoteObject implements ServerInterface, Serializable {
     private ArrayList<ClientInterface> clients;
     private WaitingRoom lobby;
@@ -61,13 +63,13 @@ public class Server extends UnicastRemoteObject implements ServerInterface, Seri
     @Override
     public synchronized boolean login(String name,ClientInterface client){
         try {
-            System.out.println(name + " is connecting " + client.getTypeConnection());
+            out.println(name + " is connecting " + client.getTypeConnection());
         if(allPlayers.isAPlayerIn(name)){
-            System.out.println("Player " + name + " is already logged");
+            out.println("Player " + name + " is already logged");
             return false;
         }else{
             allPlayers.addPlayer(name,numOfMatch);
-            System.out.println("Player " + name + " is connected");
+            out.println("Player " + name + " is connected");
             clients.add(client);
             return true;
         }
@@ -90,7 +92,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface, Seri
     public void disconnect(String name, ClientInterface client){
         clients.remove(client);
         allPlayers.removePlayer(name);
-        System.out.println(name+ " is disconnected");
+        out.println(name+ " is disconnected");
     }
 
 }

@@ -4,6 +4,8 @@ import it.polimi.ingsw.network.ClientInterface;
 
 import java.io.Serializable;
 
+import static java.lang.System.*;
+
 public class Client implements ClientInterface,Serializable {
     private String name;
     private boolean connected;
@@ -19,12 +21,12 @@ public class Client implements ClientInterface,Serializable {
         }else if(kindConnection==2){
             connectionHandler = new RmiConnection(this,addr);
         }else{
-            System.out.println("Not valid choice, default connection : RMI");
+            out.println("Not valid choice, default connection : RMI");
             connectionHandler = new RmiConnection(this,addr);
         }
     }
 
-    protected void setConnected(boolean b){
+    void setConnected(boolean b){
         connected = b;
     }
 

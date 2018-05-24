@@ -111,5 +111,9 @@ public class Player {
     public RoundTrack getRoundTrack(){
         return publicObjects.getRoundTrack();
     }
+
+    public void notifyPlayer(String s) {
+        //calls view for him message and calls notify for all other players
+    }
 }
 
