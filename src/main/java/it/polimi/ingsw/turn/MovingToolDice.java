@@ -13,8 +13,6 @@ public class MovingToolDice implements TurnState {
     private Dice toolDice;
     private Pos posChosenDice;
     private Pos toolPos;
-    private InspectorContext inspectorContext;
-    private InspectorPlace inspectorPlace;
     private InspectorPlaceTool inspectorPlaceTool;
 
     public MovingToolDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
@@ -23,8 +21,6 @@ public class MovingToolDice implements TurnState {
         this.posChosenDice = posChosenDice;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
-        this.inspectorContext = turn.getInspectorContext();
-        this.inspectorPlace = turn.getInspectorPlace();
         this.inspectorPlaceTool = turn.getInspectorPlaceTool();
     }
 
@@ -32,9 +28,7 @@ public class MovingToolDice implements TurnState {
 
     @Override
     public void receiveMove(Pos pos) throws WrongMoveException {
-        //change inspector
-        //inspectorPlaceTool.check(toolDice,toolPos,turn.getToolCard());
-        if(inspectorPlace.check(toolDice,toolPos,turn.getPlayer().getWindowPatternCard())) {
+        if(inspectorPlaceTool.check(toolDice,toolPos,turn.getToolCard())) {
             //call modifier
             turn.getModifier().positionDiceFromWindow(toolDice,toolPos,pos);
             turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
@@ -42,4 +36,5 @@ public class MovingToolDice implements TurnState {
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");
         }
     }
+
 }

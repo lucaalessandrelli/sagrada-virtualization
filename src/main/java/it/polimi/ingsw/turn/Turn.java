@@ -2,8 +2,10 @@ package it.polimi.ingsw.turn;
 
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
+import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
+import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
@@ -27,6 +29,8 @@ public class Turn {
     private boolean firstBracket;
     private int roundNumber;
     private ToolCard toolCard;
+    private Round round;
+    private Table table;
 
     private ArrayList<String> toolStateList;
     private ArrayList<String> toolAutomatedOperationList;
@@ -40,17 +44,18 @@ public class Turn {
      * @param roundNumber The number of the current round
      * @param firstBracket Boolean value: true if it's the player first turn in the current round
      */
-    public Turn(Player player,int roundNumber, boolean firstBracket) {
+    public Turn(Player player,Round round,int roundNumber, boolean firstBracket,Table table) {
         this.player = player;
         this.inspectorContext = new InspectorContext();
         this.roundNumber = roundNumber;
         this.firstBracket = firstBracket;
 
         this.inspectorPlace = new InspectorPlace();
-        //this.table = table;
-        //this.inspectorContextTool = new InspectorContextTool(player.getWindowPatternCard(),player.getDraftPool(), player.getRoundTrack());
-        //this.inspectorPlaceTool = new InspectorPlaceTool(player.getWindowPatternCard());
-        //this.modifier = new ModelModifier(table,player);
+        this.table = table;
+        this.round = round;
+        this.inspectorContextTool = new InspectorContextTool(player.getWindowPatternCard(),player.getDraftPool(), player.getRoundTrack());
+        this.inspectorPlaceTool = new InspectorPlaceTool(player.getWindowPatternCard());
+        this.modifier = new ModelModifier(table,player);
     }
 
     /**

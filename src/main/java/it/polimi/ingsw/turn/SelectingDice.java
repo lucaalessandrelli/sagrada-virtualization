@@ -12,7 +12,6 @@ public class SelectingDice implements TurnState {
     private Dice toolDice;
     private Pos posChosenDice;
     private Pos toolPos;
-    private InspectorContext inspectorContext;
     private InspectorContextTool inspectorContextTool;
 
     public SelectingDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
@@ -21,16 +20,13 @@ public class SelectingDice implements TurnState {
         this.chosenDice = chosenDice;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
-        this.inspectorContext = turn.getInspectorContext();
         this.inspectorContextTool = turn.getInspectorContextTool();
     }
 
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(Dice chosenDice, Pos posChosenDice) throws WrongMoveException {
-        //change inspector
-        //inspectContextTool.check(chosenDice,posChosenDice,turn.getPlayer().getToolCard())
-        if (inspectorContext.check(chosenDice, posChosenDice, turn.getPlayer().getDraftPool())) {
+        if (inspectorContextTool.check(chosenDice,posChosenDice,turn.getToolCard())) {
             turn.setDynamicState(chosenDice, posChosenDice, new Dice(), new Pos());
         } else {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado.");

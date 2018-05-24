@@ -13,8 +13,6 @@ public class MovingDraftDice implements TurnState {
     private Dice toolDice;
     private Pos posChosenDice;
     private Pos toolPos;
-    private InspectorContext inspectorContext;
-    private InspectorPlace inspectorPlace;
     private InspectorPlaceTool inspectorPlaceTool;
 
     public MovingDraftDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
@@ -23,17 +21,14 @@ public class MovingDraftDice implements TurnState {
         this.toolPos = toolPos;
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
-        this.inspectorContext = turn.getInspectorContext();
-        this.inspectorPlace = turn.getInspectorPlace();
+        this.inspectorPlaceTool = turn.getInspectorPlaceTool();
     }
 
     //GETTING MOVE METHODS
 
     @Override
     public void receiveMove(Pos pos) throws WrongMoveException {
-        //change inspector
-        //inspectorPlaceTool.check(chosenDice,pos,turn.getToolCard());
-        if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
+        if(inspectorPlaceTool.check(chosenDice,pos,turn.getToolCard())) {
             //call modifier
             turn.getModifier().positionDiceFromDraft(chosenDice,posChosenDice,pos);
             turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);

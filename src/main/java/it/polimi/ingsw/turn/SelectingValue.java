@@ -12,7 +12,6 @@ public class SelectingValue implements TurnState {
     private Pos posChosenDice;
     private Dice toolDice;
     private Pos toolPos;
-    private InspectorContext inspectorContext;
     private InspectorContextTool inspectorContextTool;
 
     public SelectingValue(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
@@ -21,16 +20,13 @@ public class SelectingValue implements TurnState {
         this.posChosenDice = posChosenDice;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
-        this.inspectorContext = turn.getInspectorContext();
         this.inspectorContextTool = turn.getInspectorContextTool();
     }
 
     //GETTING MOVE METHODS
     @Override
-    public void receiveMove(Dice toolDice,Pos toolPos) throws WrongMoveException {
-        //chiamare inspector diversi
-        //inspectContextTool.checkColourDice(chosenDice,posChosenDice,toolDice,toolPos);
-        if(inspectorContext.check(toolDice,toolPos,turn.getPlayer().getDraftPool())) {
+    public void receiveMove(Dice chosenDice,Pos posChosenDice) throws WrongMoveException {
+        if(inspectorContextTool.checkColourDice(chosenDice,posChosenDice,toolDice,toolPos)) {
                 //call modifier
                 turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);
                 turn.setDynamicState(toolDice,toolPos,new Dice(), new Pos());
