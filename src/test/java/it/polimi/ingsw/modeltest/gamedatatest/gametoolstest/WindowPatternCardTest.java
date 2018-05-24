@@ -2,6 +2,7 @@ package it.polimi.ingsw.modeltest.gamedatatest.gametoolstest;
 
 import it.polimi.ingsw.model.gamedata.Colour;
 import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
+import it.polimi.ingsw.model.gamedata.gametools.Cell;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import org.junit.jupiter.api.Test;
@@ -71,44 +72,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Kaleidoscopic Dream", tester.getName());
 
-         assertEquals(Colour.YELLOW, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.YELLOW, tester.getMatr().get(0).get(0).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(0).getProperty().getNumber());
+         verify(arrayLists,Colour.YELLOW,0,0,0);
+         verify(arrayLists,Colour.BLUE,0,0,1);
+         verify(arrayLists,Colour.WHITE,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,1,0,4);
 
-         assertEquals(Colour.BLUE, tester.getMatr().get(0).get(1).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.GREEN,0,1,0);
+         verify(arrayLists,Colour.WHITE,0,1,1);
+         verify(arrayLists,Colour.WHITE,5,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,4,1,4);
 
-         assertEquals(1, tester.getMatr().get(0).get(4).getProperty().getNumber());
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(4).getProperty().getColour()); //COLOUR
+         verify(arrayLists,Colour.WHITE,3,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.RED,0,2,2);
+         verify(arrayLists,Colour.WHITE,0,2,3);
+         verify(arrayLists,Colour.GREEN,0,2,4);
 
-         assertEquals(Colour.GREEN, tester.getMatr().get(1).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(0).getProperty().getNumber()); //NUMBER
+         verify(arrayLists,Colour.WHITE,2,3,0);
+         verify(arrayLists,Colour.WHITE,0,3,1);
+         verify(arrayLists,Colour.WHITE,0,3,2);
+         verify(arrayLists,Colour.BLUE,0,3,3);
+         verify(arrayLists,Colour.YELLOW,0,3,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(1).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(1).get(4).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(2).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.RED, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(2).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(4).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(3).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.BLUE, tester.getMatr().get(3).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.YELLOW, tester.getMatr().get(3).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(4).getProperty().getNumber()); //NUMBER
 
      }
 
@@ -131,44 +120,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Virtus", tester.getName());
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(2).getProperty().getColour());
-         assertEquals(2, tester.getMatr().get(0).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,4,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.WHITE,2,0,2);
+         verify(arrayLists,Colour.WHITE,5,0,3);
+         verify(arrayLists,Colour.GREEN,0,0,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(3).getProperty().getColour());
-         assertEquals(5, tester.getMatr().get(0).get(3).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,0,1,1);
+         verify(arrayLists,Colour.WHITE,6,1,2);
+         verify(arrayLists,Colour.GREEN,0,1,3);
+         verify(arrayLists,Colour.WHITE,2,1,4);
 
-         assertEquals(Colour.GREEN, tester.getMatr().get(0).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(0).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,3,2,1);
+         verify(arrayLists,Colour.GREEN,0,2,2);
+         verify(arrayLists,Colour.WHITE,4,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(6, tester.getMatr().get(1).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(1).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(1).get(4).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(2).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(3).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(3).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(1, tester.getMatr().get(3).get(2).getProperty().getNumber()); //NUMBER
+         verify(arrayLists,Colour.WHITE,5,3,0);
+         verify(arrayLists,Colour.GREEN,0,3,1);
+         verify(arrayLists,Colour.WHITE,1,3,2);
+         verify(arrayLists,Colour.WHITE,0,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
 
      }
 
@@ -192,44 +168,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Aurorae Magnificus", tester.getName());
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.GREEN, tester.getMatr().get(0).get(1).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,5,0,0);
+         verify(arrayLists,Colour.GREEN,0,0,1);
+         verify(arrayLists,Colour.BLUE,0,0,2);
+         verify(arrayLists,Colour.PURPLE,0,0,3);
+         verify(arrayLists,Colour.WHITE,2,0,4);
 
-         assertEquals(Colour.BLUE, tester.getMatr().get(0).get(2).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.PURPLE,0,1,0);
+         verify(arrayLists,Colour.WHITE,0,1,1);
+         verify(arrayLists,Colour.WHITE,0,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.YELLOW,0,1,4);
 
-         assertEquals(Colour.PURPLE, tester.getMatr().get(0).get(3).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(3).getProperty().getNumber());
+         verify(arrayLists,Colour.YELLOW,0,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.WHITE,6,2,2);
+         verify(arrayLists,Colour.WHITE,0,2,3);
+         verify(arrayLists,Colour.PURPLE,0,2,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(0).get(4).getProperty().getNumber());
-
-         assertEquals(Colour.PURPLE, tester.getMatr().get(1).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.YELLOW, tester.getMatr().get(1).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(4).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.YELLOW, tester.getMatr().get(2).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(6, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.PURPLE, tester.getMatr().get(2).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(4).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(1, tester.getMatr().get(3).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(3).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(3).get(4).getProperty().getNumber()); //NUMBER
+         verify(arrayLists,Colour.WHITE,1,3,0);
+         verify(arrayLists,Colour.WHITE,0,3,1);
+         verify(arrayLists,Colour.WHITE,0,3,2);
+         verify(arrayLists,Colour.GREEN,0,3,3);
+         verify(arrayLists,Colour.WHITE,4,3,4);
 
      }
 
@@ -253,41 +216,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Via Lux", tester.getName());
 
-         assertEquals(Colour.YELLOW, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(2).getProperty().getColour());
-         assertEquals(6, tester.getMatr().get(0).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.YELLOW,0,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.WHITE,6,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,0,0,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(1).getProperty().getColour());
-         assertEquals(1, tester.getMatr().get(1).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,1,1,1);
+         verify(arrayLists,Colour.WHITE,5,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,2,1,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(2).getProperty().getColour());
-         assertEquals(5, tester.getMatr().get(1).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,3,2,0);
+         verify(arrayLists,Colour.YELLOW,0,2,1);
+         verify(arrayLists,Colour.RED,0,2,2);
+         verify(arrayLists,Colour.PURPLE,0,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(1).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.WHITE,0,3,1);
+         verify(arrayLists,Colour.WHITE,4,3,2);
+         verify(arrayLists,Colour.WHITE,3,3,3);
+         verify(arrayLists,Colour.RED,0,3,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(2).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.YELLOW, tester.getMatr().get(2).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.RED, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.PURPLE, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(3).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(3).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.RED, tester.getMatr().get(3).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(4).getProperty().getNumber()); //NUMBER
      }
 
      @Test
@@ -309,35 +263,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Sun Catcher", tester.getName());
 
-         assertEquals(Colour.BLUE, tester.getMatr().get(0).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(0).get(1).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(2).getProperty().getColour());
-         assertEquals(2, tester.getMatr().get(0).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.BLUE,0,0,1);
+         verify(arrayLists,Colour.WHITE,2,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.YELLOW,0,0,4);
 
-         assertEquals(Colour.YELLOW, tester.getMatr().get(0).get(4).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,4,1,1);
+         verify(arrayLists,Colour.WHITE,0,1,2);
+         verify(arrayLists,Colour.RED,0,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(1).getProperty().getColour());
-         assertEquals(4, tester.getMatr().get(1).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.WHITE,5,2,2);
+         verify(arrayLists,Colour.YELLOW,0,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
 
-         assertEquals(Colour.RED, tester.getMatr().get(1).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(3).getProperty().getNumber());
+         verify(arrayLists,Colour.GREEN,0,3,0);
+         verify(arrayLists,Colour.WHITE,3,3,1);
+         verify(arrayLists,Colour.WHITE,0,3,2);
+         verify(arrayLists,Colour.WHITE,0,3,3);
+         verify(arrayLists,Colour.PURPLE,0,3,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.YELLOW, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(3).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(3).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.PURPLE, tester.getMatr().get(3).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(4).getProperty().getNumber()); //NUMBER
      }
 
      @Test
@@ -359,38 +310,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Bellesguard", tester.getName());
 
-         assertEquals(Colour.BLUE, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(1).getProperty().getColour());
-         assertEquals(6, tester.getMatr().get(0).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.BLUE,0,0,0);
+         verify(arrayLists,Colour.WHITE,6,0,1);
+         verify(arrayLists,Colour.WHITE,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.YELLOW,0,0,4);
 
-         assertEquals(Colour.YELLOW, tester.getMatr().get(0).get(4).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,3,1,1);
+         verify(arrayLists,Colour.BLUE,0,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(1).getProperty().getColour());
-         assertEquals(3, tester.getMatr().get(1).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,5,2,1);
+         verify(arrayLists,Colour.WHITE,6,2,2);
+         verify(arrayLists,Colour.WHITE,2,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
 
-         assertEquals(Colour.BLUE, tester.getMatr().get(1).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.WHITE,4,3,1);
+         verify(arrayLists,Colour.WHITE,0,3,2);
+         verify(arrayLists,Colour.WHITE,1,3,3);
+         verify(arrayLists,Colour.GREEN,0,3,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(2).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(6, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(3).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(1, tester.getMatr().get(3).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(3).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(4).getProperty().getNumber()); //NUMBER
      }
 
      @Test
@@ -412,44 +357,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Firmitas", tester.getName());
 
-         assertEquals(Colour.PURPLE, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(1).getProperty().getColour());
-         assertEquals(6, tester.getMatr().get(0).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.PURPLE,0,0,0);
+         verify(arrayLists,Colour.WHITE,6,0,1);
+         verify(arrayLists,Colour.WHITE,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,3,0,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(4).getProperty().getColour());
-         assertEquals(3, tester.getMatr().get(0).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,5,1,0);
+         verify(arrayLists,Colour.PURPLE,0,1,1);
+         verify(arrayLists,Colour.WHITE,3,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(0).getProperty().getColour());
-         assertEquals(5, tester.getMatr().get(1).get(0).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,2,2,1);
+         verify(arrayLists,Colour.PURPLE,0,2,2);
+         verify(arrayLists,Colour.WHITE,1,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
 
-         assertEquals(Colour.PURPLE, tester.getMatr().get(1).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(1).getProperty().getNumber());
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(1).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(2).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.PURPLE, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(1, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(1, tester.getMatr().get(3).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(3).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.PURPLE, tester.getMatr().get(3).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(3).get(4).getProperty().getNumber()); //NUMBER
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.WHITE,1,3,1);
+         verify(arrayLists,Colour.WHITE,5,3,2);
+         verify(arrayLists,Colour.PURPLE,0,3,3);
+         verify(arrayLists,Colour.WHITE,4,3,4);
 
      }
 
@@ -469,47 +401,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          }
          tester = windows.get(i);
 
-         System.out.println("Name: " + tester.getName());
-         assertEquals("Symphony of Light", tester.getName());
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         verify(arrayLists,Colour.WHITE,2,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.WHITE,5,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,1,0,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(2).getProperty().getColour());
-         assertEquals(5, tester.getMatr().get(0).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.YELLOW,0,1,0);
+         verify(arrayLists,Colour.WHITE,6,1,1);
+         verify(arrayLists,Colour.PURPLE,0,1,2);
+         verify(arrayLists,Colour.WHITE,2,1,3);
+         verify(arrayLists,Colour.RED,0,1,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(4).getProperty().getColour());
-         assertEquals(1, tester.getMatr().get(0).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.BLUE,0,2,1);
+         verify(arrayLists,Colour.WHITE,4,2,2);
+         verify(arrayLists,Colour.GREEN,0,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
 
-         assertEquals(Colour.YELLOW, tester.getMatr().get(1).get(0).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(1).get(0).getProperty().getNumber());
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(6, tester.getMatr().get(1).get(1).getProperty().getNumber());
-
-         assertEquals(Colour.PURPLE, tester.getMatr().get(1).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(1).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.RED, tester.getMatr().get(1).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(4).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.BLUE, tester.getMatr().get(2).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(3).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(3).get(3).getProperty().getNumber()); //NUMBER
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.WHITE,3,3,1);
+         verify(arrayLists,Colour.WHITE,0,3,2);
+         verify(arrayLists,Colour.WHITE,5,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
 
      }
 
@@ -532,38 +448,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Aurora Sagradis", tester.getName());
 
-         assertEquals(Colour.RED, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.BLUE, tester.getMatr().get(0).get(2).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.RED,0,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.BLUE,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.YELLOW,0,0,4);
 
-         assertEquals(Colour.YELLOW, tester.getMatr().get(0).get(4).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,4,1,0);
+         verify(arrayLists,Colour.PURPLE,0,1,1);
+         verify(arrayLists,Colour.WHITE,3,1,2);
+         verify(arrayLists,Colour.GREEN,0,1,3);
+         verify(arrayLists,Colour.WHITE,2,1,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(0).getProperty().getColour());
-         assertEquals(4, tester.getMatr().get(1).get(0).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,1,2,1);
+         verify(arrayLists,Colour.WHITE,0,2,2);
+         verify(arrayLists,Colour.WHITE,5,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
 
-         assertEquals(Colour.PURPLE, tester.getMatr().get(1).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.WHITE,0,3,1);
+         verify(arrayLists,Colour.WHITE,6,3,2);
+         verify(arrayLists,Colour.WHITE,0,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(1).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.GREEN, tester.getMatr().get(1).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(1).get(4).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(1, tester.getMatr().get(2).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(6, tester.getMatr().get(3).get(2).getProperty().getNumber()); //NUMBER
      }
 
      @Test
@@ -585,44 +495,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Industria", tester.getName());
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(1, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.RED, tester.getMatr().get(0).get(1).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,1,0,0);
+         verify(arrayLists,Colour.RED,0,0,1);
+         verify(arrayLists,Colour.WHITE,3,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,6,0,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(2).getProperty().getColour());
-         assertEquals(3, tester.getMatr().get(0).get(2).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,5,1,0);
+         verify(arrayLists,Colour.WHITE,4,1,1);
+         verify(arrayLists,Colour.RED,0,1,2);
+         verify(arrayLists,Colour.WHITE,2,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(4).getProperty().getColour());
-         assertEquals(6, tester.getMatr().get(0).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.WHITE,5,2,2);
+         verify(arrayLists,Colour.RED,0,2,3);
+         verify(arrayLists,Colour.WHITE,1,2,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(1).get(0).getProperty().getNumber());
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(1).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.RED, tester.getMatr().get(1).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(2, tester.getMatr().get(1).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(2).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.RED, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(1, tester.getMatr().get(2).get(4).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(3).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.RED, tester.getMatr().get(3).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(4).getProperty().getNumber()); //NUMBER
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.WHITE,0,3,1);
+         verify(arrayLists,Colour.WHITE,0,3,2);
+         verify(arrayLists,Colour.WHITE,3,3,3);
+         verify(arrayLists,Colour.RED,0,3,4);
 
      }
 
@@ -645,46 +542,659 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          System.out.println("Name: " + tester.getName());
          assertEquals("Shadow Thief", tester.getName());
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(6, tester.getMatr().get(0).get(0).getProperty().getNumber()); //NUMBER
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
-         assertEquals(Colour.PURPLE, tester.getMatr().get(0).get(1).getProperty().getColour());
-         assertEquals(0, tester.getMatr().get(0).get(1).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,6,0,0);
+         verify(arrayLists,Colour.PURPLE,0,0,1);
+         verify(arrayLists,Colour.WHITE,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,5,0,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(0).get(4).getProperty().getColour());
-         assertEquals(5, tester.getMatr().get(0).get(4).getProperty().getNumber());
+         verify(arrayLists,Colour.WHITE,5,1,0);
+         verify(arrayLists,Colour.WHITE,0,1,1);
+         verify(arrayLists,Colour.PURPLE,0,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
 
-         assertEquals(Colour.WHITE, tester.getMatr().get(1).get(0).getProperty().getColour());
-         assertEquals(5, tester.getMatr().get(1).get(0).getProperty().getNumber());
+         verify(arrayLists,Colour.RED,0,2,0);
+         verify(arrayLists,Colour.WHITE,6,2,1);
+         verify(arrayLists,Colour.WHITE,0,2,2);
+         verify(arrayLists,Colour.PURPLE,0,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
 
-         assertEquals(Colour.PURPLE, tester.getMatr().get(1).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(1).get(2).getProperty().getNumber());
-
-         assertEquals(Colour.RED, tester.getMatr().get(2).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(2).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(6, tester.getMatr().get(2).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.PURPLE, tester.getMatr().get(2).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(2).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.YELLOW, tester.getMatr().get(3).get(0).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(0).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.RED, tester.getMatr().get(3).get(1).getProperty().getColour()); //COLOUR
-         assertEquals(0, tester.getMatr().get(3).get(1).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(2).getProperty().getColour()); //COLOUR
-         assertEquals(5, tester.getMatr().get(3).get(2).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(3).getProperty().getColour()); //COLOUR
-         assertEquals(4, tester.getMatr().get(3).get(3).getProperty().getNumber()); //NUMBER
-
-         assertEquals(Colour.WHITE, tester.getMatr().get(3).get(4).getProperty().getColour()); //COLOUR
-         assertEquals(3, tester.getMatr().get(3).get(4).getProperty().getNumber()); //NUMBER
+         verify(arrayLists,Colour.YELLOW,0,3,0);
+         verify(arrayLists,Colour.RED,0,3,1);
+         verify(arrayLists,Colour.WHITE,5,3,2);
+         verify(arrayLists,Colour.WHITE,4,3,3);
+         verify(arrayLists,Colour.WHITE,3,3,4);
 
      }
 
+     @Test
+     void TestTwelthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 12; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Batllo", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.WHITE,6,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,0,0,4);
+
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,5,1,1);
+         verify(arrayLists,Colour.BLUE,0,1,2);
+         verify(arrayLists,Colour.WHITE,4,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
+
+         verify(arrayLists,Colour.WHITE,3,2,0);
+         verify(arrayLists,Colour.GREEN,0,2,1);
+         verify(arrayLists,Colour.YELLOW,0,2,2);
+         verify(arrayLists,Colour.PURPLE,0,2,3);
+         verify(arrayLists,Colour.WHITE,2,2,4);
+
+         verify(arrayLists,Colour.WHITE,1,3,0);
+         verify(arrayLists,Colour.WHITE,4,3,1);
+         verify(arrayLists,Colour.RED,0,3,2);
+         verify(arrayLists,Colour.WHITE,5,3,3);
+         verify(arrayLists,Colour.WHITE,3,3,4);
+
+     }
+
+     @Test
+     void TestThirteenthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 13; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Gravitas", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,1,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.WHITE,3,0,2);
+         verify(arrayLists,Colour.BLUE,0,0,3);
+         verify(arrayLists,Colour.WHITE,0,0,4);
+
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,2,1,1);
+         verify(arrayLists,Colour.BLUE,0,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
+
+         verify(arrayLists,Colour.WHITE,6,2,0);
+         verify(arrayLists,Colour.BLUE,0,2,1);
+         verify(arrayLists,Colour.WHITE,0,2,2);
+         verify(arrayLists,Colour.WHITE,4,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
+
+         verify(arrayLists,Colour.BLUE,0,3,0);
+         verify(arrayLists,Colour.WHITE,5,3,1);
+         verify(arrayLists,Colour.WHITE,2,3,2);
+         verify(arrayLists,Colour.WHITE,0,3,3);
+         verify(arrayLists,Colour.WHITE,1,3,4);
+
+     }
+
+     @Test
+     void TestFourteenthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 14; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Fractal Drops", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.WHITE,4,0,1);
+         verify(arrayLists,Colour.WHITE,0,0,2);
+         verify(arrayLists,Colour.YELLOW,0,0,3);
+         verify(arrayLists,Colour.WHITE,6,0,4);
+
+         verify(arrayLists,Colour.RED,0,1,0);
+         verify(arrayLists,Colour.WHITE,0,1,1);
+         verify(arrayLists,Colour.WHITE,2,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
+
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.RED,0,2,2);
+         verify(arrayLists,Colour.PURPLE,0,2,3);
+         verify(arrayLists,Colour.WHITE,1,2,4);
+
+         verify(arrayLists,Colour.BLUE,0,3,0);
+         verify(arrayLists,Colour.YELLOW,0,3,1);
+         verify(arrayLists,Colour.WHITE,0,3,2);
+         verify(arrayLists,Colour.WHITE,0,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
+
+
+     }
+
+     @Test
+     void TestFifthteenCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 15; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Lux Astram", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.WHITE,1,0,1);
+         verify(arrayLists,Colour.GREEN,0,0,2);
+         verify(arrayLists,Colour.PURPLE,0,0,3);
+         verify(arrayLists,Colour.WHITE,4,0,4);
+
+         verify(arrayLists,Colour.WHITE,6,1,0);
+         verify(arrayLists,Colour.PURPLE,0,1,1);
+         verify(arrayLists,Colour.WHITE,2,1,2);
+         verify(arrayLists,Colour.WHITE,5,1,3);
+         verify(arrayLists,Colour.GREEN,0,1,4);
+
+         verify(arrayLists,Colour.WHITE,1,2,0);
+         verify(arrayLists,Colour.GREEN,0,2,1);
+         verify(arrayLists,Colour.WHITE,5,2,2);
+         verify(arrayLists,Colour.WHITE,3,2,3);
+         verify(arrayLists,Colour.PURPLE,0,2,4);
+
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.WHITE,0,3,1);
+         verify(arrayLists,Colour.WHITE,0,3,2);
+         verify(arrayLists,Colour.WHITE,0,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
+
+
+     }
+
+     @Test
+     void TestSixteenthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 16; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Chromatic Splendor", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.GREEN,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,0,0,4);
+
+         verify(arrayLists,Colour.WHITE,2,1,0);
+         verify(arrayLists,Colour.YELLOW,0,1,1);
+         verify(arrayLists,Colour.WHITE,5,1,2);
+         verify(arrayLists,Colour.BLUE,0,1,3);
+         verify(arrayLists,Colour.WHITE,1,1,4);
+
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.RED,0,2,1);
+         verify(arrayLists,Colour.WHITE,3,2,2);
+         verify(arrayLists,Colour.PURPLE,0,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
+
+         verify(arrayLists,Colour.WHITE,1,3,0);
+         verify(arrayLists,Colour.WHITE,0,3,1);
+         verify(arrayLists,Colour.WHITE,6,3,2);
+         verify(arrayLists,Colour.WHITE,0,3,3);
+         verify(arrayLists,Colour.WHITE,4,3,4);
+
+
+     }
+
+     @Test
+     void TestSeventeenthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 17; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Firelight", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,3,0,0);
+         verify(arrayLists,Colour.WHITE,4,0,1);
+         verify(arrayLists,Colour.WHITE,1,0,2);
+         verify(arrayLists,Colour.WHITE,5,0,3);
+         verify(arrayLists,Colour.WHITE,0,0,4);
+
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,6,1,1);
+         verify(arrayLists,Colour.WHITE,2,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.YELLOW,0,1,4);
+
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.WHITE,0,2,2);
+         verify(arrayLists,Colour.YELLOW,0,2,3);
+         verify(arrayLists,Colour.RED,0,2,4);
+
+         verify(arrayLists,Colour.WHITE,5,3,0);
+         verify(arrayLists,Colour.WHITE,0,3,1);
+         verify(arrayLists,Colour.YELLOW,0,3,2);
+         verify(arrayLists,Colour.RED,0,3,3);
+         verify(arrayLists,Colour.WHITE,6,3,4);
+
+
+     }
+
+     @Test
+     void TestEighteenthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 18; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Luz Celestial", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.RED,0,0,2);
+         verify(arrayLists,Colour.WHITE,5,0,3);
+         verify(arrayLists,Colour.WHITE,0,0,4);
+
+         verify(arrayLists,Colour.PURPLE,0,1,0);
+         verify(arrayLists,Colour.WHITE,4,1,1);
+         verify(arrayLists,Colour.WHITE,0,1,2);
+         verify(arrayLists,Colour.GREEN,0,1,3);
+         verify(arrayLists,Colour.WHITE,3,1,4);
+
+         verify(arrayLists,Colour.WHITE,6,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.WHITE,0,2,2);
+         verify(arrayLists,Colour.BLUE,0,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
+
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.YELLOW,0,3,1);
+         verify(arrayLists,Colour.WHITE,2,3,2);
+         verify(arrayLists,Colour.WHITE,0,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
+
+
+     }
+
+     @Test
+     void TestNineteenthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 19; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Water of Life", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,6,0,0);
+         verify(arrayLists,Colour.BLUE,0,0,1);
+         verify(arrayLists,Colour.WHITE,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,1,0,4);
+
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,5,1,1);
+         verify(arrayLists,Colour.BLUE,0,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,0,1,4);
+
+         verify(arrayLists,Colour.WHITE,4,2,0);
+         verify(arrayLists,Colour.RED,0,2,1);
+         verify(arrayLists,Colour.WHITE,2,2,2);
+         verify(arrayLists,Colour.BLUE,0,2,3);
+         verify(arrayLists,Colour.WHITE,0,2,4);
+
+         verify(arrayLists,Colour.GREEN,0,3,0);
+         verify(arrayLists,Colour.WHITE,6,3,1);
+         verify(arrayLists,Colour.YELLOW,0,3,2);
+         verify(arrayLists,Colour.WHITE,3,3,3);
+         verify(arrayLists,Colour.PURPLE,0,3,4);
+
+
+     }
+
+     @Test
+     void TestTwenteenthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 20; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Ripples of Light", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.WHITE,0,0,2);
+         verify(arrayLists,Colour.RED,0,0,3);
+         verify(arrayLists,Colour.WHITE,5,0,4);
+
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,0,1,1);
+         verify(arrayLists,Colour.PURPLE,0,1,2);
+         verify(arrayLists,Colour.WHITE,4,1,3);
+         verify(arrayLists,Colour.BLUE,0,1,4);
+
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.BLUE,0,2,1);
+         verify(arrayLists,Colour.WHITE,3,2,2);
+         verify(arrayLists,Colour.YELLOW,0,2,3);
+         verify(arrayLists,Colour.WHITE,6,2,4);
+
+         verify(arrayLists,Colour.YELLOW,0,3,0);
+         verify(arrayLists,Colour.WHITE,2,3,1);
+         verify(arrayLists,Colour.GREEN,0,3,2);
+         verify(arrayLists,Colour.WHITE,1,3,3);
+         verify(arrayLists,Colour.RED,0,3,4);
+
+
+     }
+
+     @Test
+     void TestTwentyfirstCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 21; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Lux Mundi", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.WHITE,1,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,0,0,4);
+
+         verify(arrayLists,Colour.WHITE,1,1,0);
+         verify(arrayLists,Colour.GREEN,0,1,1);
+         verify(arrayLists,Colour.WHITE,3,1,2);
+         verify(arrayLists,Colour.BLUE,0,1,3);
+         verify(arrayLists,Colour.WHITE,2,1,4);
+
+         verify(arrayLists,Colour.BLUE,0,2,0);
+         verify(arrayLists,Colour.WHITE,5,2,1);
+         verify(arrayLists,Colour.WHITE,4,2,2);
+         verify(arrayLists,Colour.WHITE,6,2,3);
+         verify(arrayLists,Colour.GREEN,0,2,4);
+
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.BLUE,0,3,1);
+         verify(arrayLists,Colour.WHITE,5,3,2);
+         verify(arrayLists,Colour.GREEN,0,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
+
+
+     }
+
+     @Test
+     void TestTwentysecondCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 22; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Comitas", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.YELLOW,0,0,0);
+         verify(arrayLists,Colour.WHITE,0,0,1);
+         verify(arrayLists,Colour.WHITE,2,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,6,0,4);
+
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,4,1,1);
+         verify(arrayLists,Colour.WHITE,0,1,2);
+         verify(arrayLists,Colour.WHITE,5,1,3);
+         verify(arrayLists,Colour.YELLOW,0,1,4);
+
+         verify(arrayLists,Colour.WHITE,0,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.WHITE,0,2,2);
+         verify(arrayLists,Colour.YELLOW,0,2,3);
+         verify(arrayLists,Colour.WHITE,5,2,4);
+
+         verify(arrayLists,Colour.WHITE,1,3,0);
+         verify(arrayLists,Colour.WHITE,2,3,1);
+         verify(arrayLists,Colour.YELLOW,0,3,2);
+         verify(arrayLists,Colour.WHITE,3,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
+
+
+     }
+
+     @Test
+     void TestTwentythirdCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 23; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Sun's Glory", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,1,0,0);
+         verify(arrayLists,Colour.PURPLE,0,0,1);
+         verify(arrayLists,Colour.YELLOW,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,4,0,4);
+
+         verify(arrayLists,Colour.PURPLE,0,1,0);
+         verify(arrayLists,Colour.YELLOW,0,1,1);
+         verify(arrayLists,Colour.WHITE,0,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.WHITE,6,1,4);
+
+         verify(arrayLists,Colour.YELLOW,0,2,0);
+         verify(arrayLists,Colour.WHITE,0,2,1);
+         verify(arrayLists,Colour.WHITE,0,2,2);
+         verify(arrayLists,Colour.WHITE,5,2,3);
+         verify(arrayLists,Colour.WHITE,3,2,4);
+
+         verify(arrayLists,Colour.WHITE,0,3,0);
+         verify(arrayLists,Colour.WHITE,5,3,1);
+         verify(arrayLists,Colour.WHITE,4,3,2);
+         verify(arrayLists,Colour.WHITE,2,3,3);
+         verify(arrayLists,Colour.WHITE,1,3,4);
+
+
+     }
+
+     @Test
+     void TestTwentyfourthCard() {
+         CardContainer container = new CardContainer();
+         WindowPatternCard tester;
+         ArrayList<WindowPatternCard> windows;
+         windows = container.pullOutPattern(4);
+         int i;
+         for (i = 0; i < windows.size() && windows.get(i).getNum() != 24; i++) {
+             if (i + 1 == windows.size()) {
+                 container = new CardContainer();
+                 windows = container.pullOutPattern(4);
+                 i = 0;
+             }
+         }
+         tester = windows.get(i);
+
+         System.out.println("Name: " + tester.getName());
+         assertEquals("Fulgor del Cielo", tester.getName());
+
+         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+
+         verify(arrayLists,Colour.WHITE,0,0,0);
+         verify(arrayLists,Colour.BLUE,0,0,1);
+         verify(arrayLists,Colour.RED,0,0,2);
+         verify(arrayLists,Colour.WHITE,0,0,3);
+         verify(arrayLists,Colour.WHITE,0,0,4);
+
+         verify(arrayLists,Colour.WHITE,0,1,0);
+         verify(arrayLists,Colour.WHITE,4,1,1);
+         verify(arrayLists,Colour.WHITE,5,1,2);
+         verify(arrayLists,Colour.WHITE,0,1,3);
+         verify(arrayLists,Colour.BLUE,0,1,4);
+
+         verify(arrayLists,Colour.BLUE,0,2,0);
+         verify(arrayLists,Colour.WHITE,2,2,1);
+         verify(arrayLists,Colour.WHITE,0,2,2);
+         verify(arrayLists,Colour.RED,0,2,3);
+         verify(arrayLists,Colour.WHITE,5,2,4);
+
+         verify(arrayLists,Colour.WHITE,6,3,0);
+         verify(arrayLists,Colour.RED,0,3,1);
+         verify(arrayLists,Colour.WHITE,3,3,2);
+         verify(arrayLists,Colour.WHITE,1,3,3);
+         verify(arrayLists,Colour.WHITE,0,3,4);
+
+
+     }
+
+     private void verify(ArrayList<ArrayList<Cell>> matr, Colour colour, int number, int x, int y){
+         assertEquals(colour, matr.get(x).get(y).getProperty().getColour()); //COLOUR
+         assertEquals(number, matr.get(x).get(y).getProperty().getNumber()); //NUMBER
+     }
  }
 
