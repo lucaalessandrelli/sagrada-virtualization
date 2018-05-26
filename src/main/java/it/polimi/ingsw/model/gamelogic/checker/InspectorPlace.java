@@ -45,7 +45,7 @@ public class InspectorPlace {
      * @return True if conditions are verified.
      */
     protected boolean checkPos(Pos pos,WindowPatternCard window) {
-        return (pos.getX()>= MINCOL && pos.getX()<=MAXCOL) && pos.getY()>=MINROW && pos.getY()<=MAXROW && !window.getCell(pos).isOccupied();
+        return (pos.getX()>= MINROW && pos.getX()<=MAXROW) && pos.getY()>=MINCOL && pos.getY()<=MAXCOL && !window.getCell(pos).isOccupied();
     }
 
     /**
@@ -57,7 +57,7 @@ public class InspectorPlace {
      */
     protected boolean checkColour(WindowPatternCard window, Pos pos, Dice dice){
         Cell c =window.getCell(pos);
-        return (c.getProperty().getColour().toString().equals("WHITE") || c.getProperty().getColour()==dice.getColour());
+        return (c.getProperty().getColour().toString().equals("W") || c.getProperty().getColour().equals(dice.getColour()));
     }
 
     /**
@@ -80,10 +80,10 @@ public class InspectorPlace {
     private boolean checkFrame(Pos pos){
         int x = pos.getX();
         int y= pos.getY();
-        if((x>=MINCOL && x<=MAXCOL) && (y==MINROW || y==MAXROW)){
+        if((x>=MINROW && x<=MAXROW) && (y==MINCOL || y==MAXCOL)){
                 return true;
         }
-        return(y>MINROW && y<MAXROW && (x == MINCOL || (x == MAXCOL)));
+        return(y>MINCOL && y<MAXCOL && (x == MINROW || (x == MAXROW)));
 
     }
 
