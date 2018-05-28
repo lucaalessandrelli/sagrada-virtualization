@@ -1,14 +1,15 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.server.Server;
 import org.junit.jupiter.api.Test;
 import java.rmi.RemoteException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+/*
 public class WaitingRoomTest {
-    Server server = new Server();
+    Manager server = new Manager();
     WaitingRoom lobby = server.getLobby();
 
     public WaitingRoomTest() throws RemoteException {
@@ -65,3 +66,4 @@ public class WaitingRoomTest {
         assertFalse(lobby.getPlayerList().contains(player2));
     }
 }
+*/

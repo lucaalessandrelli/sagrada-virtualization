@@ -1,9 +1,9 @@
-package it.polimi.ingsw.network.server;
+package it.polimi.ingsw.controller;
 
-class InputAnalyzer {
+public class InputAnalyzer {
 
 
-    protected String analyse(String in){
+    public String analyse(String in){
         if (in.startsWith("login")){
             return "login";
         }else if (in.startsWith("//exit")){
@@ -14,7 +14,7 @@ class InputAnalyzer {
         return "Command Not Valid";
     }
 
-    protected  String getData(String in){
+    public  String getData(String in){
         String tmp = in.replace("<User>","");
                 tmp=tmp.replace("login","");
                 tmp=tmp.trim();

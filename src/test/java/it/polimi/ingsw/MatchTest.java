@@ -7,13 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+/*
 
 public class MatchTest {
-    private ArrayList<Match> matches;
+    private List<Match> matches;
     Server server = new Server();
     WaitingRoom lobby = server.getLobby();
 
@@ -80,3 +81,5 @@ public class MatchTest {
 
     }
 }
+
+*/

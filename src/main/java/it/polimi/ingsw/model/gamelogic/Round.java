@@ -13,10 +13,10 @@ import java.util.*;
 public class Round extends Thread{
     private int roundNumber;
     private PlayersContainer players;
-    private List<Dice> lastDice;
     private Table table;
     private long timeSleep;
     private Turn turn;
+    private Player currTurn;
 
     public Round(List<Player> playerList, int roundNumber, Table table) {
         this.roundNumber = roundNumber;
@@ -27,38 +27,40 @@ public class Round extends Thread{
     }
 
     public void go() throws NotEnoughPlayersException {
-        Player p = null;
+        Player p;
         Iterator<Player> i = players.getIterator();
         while(i.hasNext()){
             p = i.next();
+            currTurn = p;
             if (p.isActive()){
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
-                p.notifyPlayer("It's your turn");
+                players.notifyTurn(p.getUsername());
                 try {
                     Thread.sleep(timeSleep);
-                    p.notifyPlayer("Time out");
+                    p.setActivity(false);
+                   // p.notifyPlayer("Time out"); messaggio per tutti
                 } catch (InterruptedException e) {
+                    players.notifyChanges();
                     //go on next player
                 }
 
             }
             if(!players.checkActivity()){
-                throw new NotEnoughPlayersException();
+                throw new NotEnoughPlayersException(players.getLastPlayer().getUsername());
             }
         }
-        setLastDice(p);
+        setLastDice();
     }
 
 
-    private void setLastDice(Player p) {
-
-       // this.lastDice = p.getLastDice();
-
+    private void setLastDice() {
+        table.setLastDices(roundNumber);
     }
 
-    public List<Dice> getLastDice() {
-        return this.lastDice;
+    public String getCurrTurn() {
+        return currTurn.getUsername();
     }
+
 
     public int getRoundNumber() {
         return this.roundNumber;

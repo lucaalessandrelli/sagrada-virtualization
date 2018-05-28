@@ -5,12 +5,13 @@ import it.polimi.ingsw.network.server.Server;
 import org.junit.jupiter.api.Test;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/*
 public class TimerTest {
-    private ArrayList<Match> matches;
+    private List<Match> matches;
     Server server = new Server();
     WaitingRoom lobby = server.getLobby();
 
@@ -127,3 +128,4 @@ public class TimerTest {
         assertTrue(server.getMatchList().size() == 0);
     }
 }
+*/

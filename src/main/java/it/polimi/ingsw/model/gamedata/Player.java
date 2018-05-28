@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.gamedata;
 
 import it.polimi.ingsw.model.gamedata.gametools.*;
 import it.polimi.ingsw.model.gamelogic.Move;
+import it.polimi.ingsw.view.ViewObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Player {
     private ObjectiveCard myObjCard;
     private WindowPatternCard myWindow;
     private int myFavTokens;
+    private ViewObserver observer;
 
 
     //just get the username from user
@@ -80,21 +82,7 @@ public class Player {
             }
         }
     }
-    //getter method
-    public int getFavTok(){
-        return myFavTokens;
-    }
-    //pull out dice at the beginning of round
 
-
-    //modify windowsPatternCard
-    public void placeMove(Move move){
-      //  myWindow.placeDice(move.getChosenDice(),move.getChosenPos().getX(),move.getChosenPos().getY());
-    }
-
-    //create a Move
-    public void doYourMove(){
-    }
 
     public void setPublicObjects(PublicObjects publicObjects) {
         this.publicObjects = publicObjects;
@@ -111,9 +99,21 @@ public class Player {
     public RoundTrack getRoundTrack(){
         return publicObjects.getRoundTrack();
     }
+    public void notifyPlayer() {
+        observer.updatePatternCard();
+    }
+    public void notifyTurn(String whoIsTurn) {
+        observer.updateStateTurn(whoIsTurn);
+    }
 
-    public void notifyPlayer(String s) {
-        //calls view for him message and calls notify for all other players
+    public void calculatePoints() {
+        int score = myObjCard.finalpoints(myWindow);
+        List<ObjectiveCard> cards = publicObjects.getObjectiveCards();
+        for(ObjectiveCard c : cards){
+            score = c.finalpoints(myWindow);
+        }
+        score = score + myFavTokens;
+        //notifica observer
     }
 }
 

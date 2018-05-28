@@ -35,6 +35,23 @@ public class PlayersContainer {
         return new IterPlayer();
     }
 
+    public void notifyChanges() {
+        players.forEach(p -> p.notifyPlayer());
+    }
+
+    public void notifyTurn(String username) {
+        players.forEach(p->p.notifyTurn(username));
+    }
+
+    public Player getLastPlayer() {
+        for (Player p : players){
+            if(p.isActive()){
+                return p;
+            }
+        }
+        return null;
+    }
+
     private class IterPlayer implements Iterator{
         private int i;
 
