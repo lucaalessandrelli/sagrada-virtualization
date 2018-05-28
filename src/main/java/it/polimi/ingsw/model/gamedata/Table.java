@@ -2,15 +2,16 @@ package it.polimi.ingsw.model.gamedata;
 
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
+import javax.tools.Tool;
 import java.util.ArrayList;
 import java.util.List;
 
 //I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
 public class Table {
-    private List<Player> myplayer= new ArrayList<Player>();
-    private ArrayList<ObjectiveCard> objectiveCards = new ArrayList<ObjectiveCard>(4);
-    private ArrayList<ToolCard> toolCards = new ArrayList<ToolCard>(3);
-    private ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<WindowPatternCard>();
+    private List<Player> myplayer= new ArrayList<>();
+    private ArrayList<ObjectiveCard> objectiveCards = new ArrayList<>(4);
+    private ArrayList<ToolCard> toolCards = new ArrayList<>(3);
+    private ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<>();
     private RoundTrack roundTrack;
     private DraftPool draftPool;
     private DiceBag diceBag;
@@ -22,6 +23,7 @@ public class Table {
         this.draftPool = new DraftPool();
         this.container = new CardContainer();
         this.myplayer = players;
+        this.roundTrack = new RoundTrack();
         int i;
         for(i = 0; i < 3; i++){
             ToolCard x = new ToolCard();
@@ -85,12 +87,11 @@ public class Table {
         this.showWindow();
     }
 
-    //method not ready to use
-    public ObjectiveCard getObjCard() {
-        return null;
+    //GETTER METHODS
+    public ArrayList<ObjectiveCard> getObjCard() {
+        return objectiveCards;
     }
 
-    //NB!!!! This method is not ready to use because I need to write pullOutCards in the right way
     public ArrayList<WindowPatternCard> getRandomWindows() {
         return this.container.pullOutPattern(myplayer.size());
     }
@@ -111,11 +112,21 @@ public class Table {
         return this.roundTrack;
     }
 
-    public void fillDraftPool(){
-        this.draftPool.addNewDices(diceBag.pullOut());
-    }
 
     public DiceBag getDiceBag() {
         return this.diceBag;
     }
+
+    public ArrayList<ToolCard> getToolCards(){
+        return this.toolCards;
+    }
+
+    public void setLastDices(int numRound){
+        this.roundTrack.setDiceOnRoundTrack(numRound,this.draftPool.getDraftPool());
+    }
+
+    public void fillDraftPool(){
+        this.draftPool.addNewDices(diceBag.pullOut());
+    }
+
 }
