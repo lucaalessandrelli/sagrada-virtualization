@@ -13,7 +13,7 @@ public class ViewMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("it.polimi.ingsw.view.gui.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/gui.fxml"));
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
