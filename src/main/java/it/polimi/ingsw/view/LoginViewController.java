@@ -47,11 +47,6 @@ public class LoginViewController implements Initializable, ViewInterface {
     public void handleMouseClicked(MouseEvent event) {
         username = usernameField.getText();
         setConnection();
-        try {
-            changeScene();
-        }catch(IOException e) {
-            System.out.println("Errore nel cambio di scena");
-        }
     }
 
     @FXML
@@ -59,11 +54,6 @@ public class LoginViewController implements Initializable, ViewInterface {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             username = usernameField.getText();
             setConnection();
-            try {
-                changeScene();
-            }catch(IOException e) {
-                System.out.println("Errore nel cambio di scena");
-            }
         }
     }
 
@@ -88,6 +78,11 @@ public class LoginViewController implements Initializable, ViewInterface {
             client.setName(username);
             client.setKindConnection(connectionType);
             client.connect();
+            try {
+                changeScene();
+            }catch(IOException e) {
+                System.out.println("Errore nel cambio di scena");
+            }
         }
     }
 
