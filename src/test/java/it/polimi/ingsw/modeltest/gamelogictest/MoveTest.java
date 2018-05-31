@@ -1,4 +1,4 @@
-package it.polimi.ingsw.modeltest.gametogictest;
+package it.polimi.ingsw.modeltest.gamelogictest;
 
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.Pos;

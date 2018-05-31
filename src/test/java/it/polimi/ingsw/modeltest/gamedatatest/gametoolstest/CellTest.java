@@ -5,18 +5,38 @@ import it.polimi.ingsw.model.gamedata.Property;
 import it.polimi.ingsw.model.gamedata.gametools.Cell;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CellTest {
 
     @Test
-    public void TestGetterandOccupation(){
+    public void TestGetDice(){
+        Cell tester = new Cell();
+        assertNotNull(tester.getDice());
+    }
+
+    @Test
+    public void TestGetPosition(){
         Cell tester = new Cell();
         Property p = new Property();
         Pos pos = new Pos();
-        assertTrue(tester.getDice() != null);
-        assertTrue(tester.getPosition() != null);
-        assertTrue(tester.getProperty() != null);
-        assertTrue(tester.isOccupied()==false);
+        assertNotNull(tester.getPosition());
     }
+
+    @Test
+    public void TestGetProperty(){
+        Cell tester = new Cell();
+        Property p = new Property();
+        Pos pos = new Pos();
+        assertTrue(tester.getProperty() != null);
+    }
+
+    @Test
+    public void TestisOccupied(){
+        Cell tester = new Cell();
+        assertFalse(tester.isOccupied());
+    }
+
 }

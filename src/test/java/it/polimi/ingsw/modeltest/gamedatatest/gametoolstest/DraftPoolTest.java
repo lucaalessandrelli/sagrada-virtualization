@@ -69,6 +69,40 @@ public class DraftPoolTest{
         assertTrue(tester.findDice(d));
     }
 
+    @Test
+    public void TestFindinPosition(){
+        DraftPool tester = new DraftPool();
+        Property prop = new Property(Colour.RED,true);
+        Dice d;
+        prop.setNumber(5);
+        for(int i = 0; i < 6; i++) {
+            d = new Dice();
+            assertTrue(tester.getDraftPool().add(d));
+        }
+        d = new Dice(prop);
+        tester.getDraftPool().add(d);
+        prop = new Property(Colour.GREEN,true);
+        assertTrue(tester.findDice(d,tester.getNumOfDices()-1));
+    }
+
+    @Test
+    public void removeDice(){
+        DraftPool tester = new DraftPool();
+        Dice d1 = new Dice(Colour.BLUE);
+        tester.getDraftPool().add(d1);
+        Dice d;
+        for(int i = 0; i < 6; i++) {
+            d = new Dice();
+            assertTrue(tester.getDraftPool().add(d));
+        }
+        assertTrue(tester.findDice(d1));
+        int numdices = tester.getNumOfDices();
+        tester.removeDice(tester.getNumOfDices()-1);
+        assertEquals(numdices-1, tester.getNumOfDices());
+        tester.findDice(d1);
+    }
+
+
 
 
 }

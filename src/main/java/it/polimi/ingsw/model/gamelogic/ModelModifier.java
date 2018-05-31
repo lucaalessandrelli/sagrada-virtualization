@@ -35,8 +35,8 @@ public class ModelModifier {
 
     //parameters needed: used first 2
     public void launchDice(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
-        //chosenDice.rollDice()
-        //draftPool.chooseDice(posChosenDice.getX()).setNumber(chosenDice.getNumber());
+        chosenDice.rollDice();
+        draftPool.chooseDice(posChosenDice.getX()).setNumber(chosenDice.getNumber());
     }
 
     /**
@@ -87,8 +87,9 @@ public class ModelModifier {
         draftPool.removeDice(posChosenDice.getX());
     }
     public void positionDiceFromWindow(Dice chosenDice, Pos posChosenDice, Pos pos) {
-        windowPatternCard.placeDice(windowPatternCard.getDice(posChosenDice), pos.getX(),pos.getY());
+        Dice d = windowPatternCard.getDice(posChosenDice);
         windowPatternCard.removeDice(posChosenDice);
+        windowPatternCard.placeDice(d, pos.getX(),pos.getY());
     }
 
     public void changeDiceValue(Dice chosenDice, Pos posChosenDice, Dice toolDice) {

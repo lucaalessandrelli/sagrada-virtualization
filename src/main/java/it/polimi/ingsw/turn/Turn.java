@@ -255,6 +255,14 @@ public class Turn {
         return toolCard;
     }
 
+    /**
+     * Called to know the current state
+     * @return TurnState state
+     */
+    public TurnState getState() {
+        return state;
+    }
+
 
     //GETTING MOVE METHODS
 

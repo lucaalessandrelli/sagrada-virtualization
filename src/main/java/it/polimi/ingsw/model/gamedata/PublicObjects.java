@@ -15,9 +15,6 @@ public class PublicObjects {
     private DraftPool draftPool;
     private List<String> players;
 
-    public PublicObjects(){
-        roundTrack = new RoundTrack();
-    }
 
     public void addDice(int numRound,List<Dice> d){
         roundTrack.setDiceOnRoundTrack(numRound,d);
@@ -43,6 +40,8 @@ public class PublicObjects {
     public void setToolCards(List<ToolCard> toolCards) {
         this.toolCards = toolCards;
     }
+
+    public void setRoundTrack(RoundTrack roundTrack){this.roundTrack = roundTrack;}
 
     public List<ObjectiveCard> getObjectiveCards() {
         return objectiveCards;

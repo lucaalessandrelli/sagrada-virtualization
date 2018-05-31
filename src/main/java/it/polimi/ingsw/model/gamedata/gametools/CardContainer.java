@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.gamedata.gametools;
 
 import it.polimi.ingsw.model.gamedata.Colour;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,18 +39,20 @@ public class CardContainer {
     private static final String RULES = "RULES";
     private static final String AUTOMATED = "AUTOMATED";
     private static final String STATE = "STATE";
+    private static final String CMETHODS = "CMETHODS";
+    private static final String PMETHODS = "PMETHODS";
     private static final String DIFFICULTY = "DIFFICULTY";
 
 
     public CardContainer(){
         for(int i = 0; i < 24; i++) {
             pattern.add((i));
-            if (i < 5) {
-                objectiveprivate.add(i);
+            if (i < 12) {
+                tools.add(i);
                 if (i < 10) {
                     objectivepublic.add(i);
-                    if (i < 12)
-                        tools.add(i);
+                    if (i < 5)
+                        objectiveprivate.add(i);
                 }
             }
         }
@@ -284,26 +287,38 @@ public class CardContainer {
         mytool.setColour(tmpc);
 
         all = document.getElementsByTagName(STATE).item(cont).getTextContent();
-        this.creatingStrings(false,all,mytool);
+        this.creatingStrings(mytool.getStateList(),all);
 
         all = document.getElementsByTagName(AUTOMATED).item(cont).getTextContent();
-        this.creatingStrings(true,all,mytool);
+        this.creatingStrings(mytool.getAutomatedoperationlist(),all);
+
+        all = document.getElementsByTagName(CMETHODS).item(cont).getTextContent();
+        this.creatingStrings(mytool.getNameCMethods(),all);
+
+
+
+        for(int i = 0; document.getElementsByTagName("PM" + Character.forDigit(i,10)).item(i).hasAttributes(); i++){
+            System.out.println("Indice: " + i);
+            all = document.getElementsByTagName(PMETHODS).item(cont).getChildNodes().item(0).getTextContent();
+            ArrayList<String> tofill = new ArrayList<>();
+            this.creatingStrings(tofill, all);
+            mytool.getNamePMethods().add(tofill);
+        }
+
         mytool.setDescription((document.getElementsByTagName(DESCRIPTION).item(cont).getTextContent()));
 
         return mytool;
     }
 
-    private void creatingStrings(boolean method, String all, ToolCard mytool){
+    private void creatingStrings(ArrayList<String> tofill, String all){
         char[] toadd = new char[30];
         int len = all.length();
         int j;
         int i;
+
         for(i = 1, j = 0; i < len; i++) {
             if (all.charAt(i) == ',') {
-                if(method)
-                    mytool.getAutomatedoperationlist().add(String.valueOf(toadd));
-                else
-                    mytool.getStateList().add(String.valueOf(toadd));
+                    tofill.add(String.valueOf(toadd));
                 j = 0;
                 toadd = new char[23];
             } else {

@@ -30,6 +30,14 @@ public class ToolCard extends Card implements Move {
         for(String x : this.stateList){
             System.out.println("Statelist: " + x);
         }
+        for (String x: this.cMethods){
+            System.out.println("CMethods: " + x);
+        }
+        for(int i = 0; i < this.pMethods.size(); i++){
+            for(int j = 0; j < this.pMethods.get(i).size();j++){
+                System.out.println(i + j + "_Methods: " + this.pMethods.get(i).get(j));
+            }
+        }
     }
 
     public void setUsed() {

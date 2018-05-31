@@ -5,6 +5,8 @@
 		<COLOUR>P</COLOUR>
 		<STATE>,IncDecValue,ChooseDice2,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<CMETHODS></CMETHODS>
+		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1. !!Non puoi cambiare un 6 in 1 o un 1 in 6!!</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -13,6 +15,10 @@
 		<COLOUR>B</COLOUR>
 		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<CMETHODS>,inPatCard,</CMETHODS>
+		<PMETHODS>
+			<PM0>,checkPos,checkNumber,checkCol,checkRow,</PM0>
+		</PMETHODS>
 		<DESCRIPTION>Muovi un qualsiasi dado nella tua vetrata ignorando le restrizioni di COLOURe.  Devi rispettare tutte le altre restrizioni di piazzamento</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -21,6 +27,11 @@
 		<COLOUR>R</COLOUR>
 		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<CMETHODS>,inPatCard,</CMETHODS>
+		<PMETHODS>
+			<PM0>,checkPos,checkColour,checkCol,checkRow,</PM0>
+		</PMETHODS>
+
 		<DESCRIPTION>Muovi un qualsiasi dado nella tua vetrata ignorando le restrizioni di valore. Devi rispettare tutte le altre restrizioni di piazzamento</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -29,6 +40,11 @@
 		<COLOUR>Y</COLOUR>
 		<STATE>,SelectingDice,MovingDice,SelectingDice,MovingDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<CMETHODS>,inPatCard,inPatCard,</CMETHODS>
+		<PMETHODS>
+			<PM0>,checkAll,</PM0>
+			<PM1>,checkAll,</PM1>
+		</PMETHODS>
 		<DESCRIPTION>Muovi esattamente due dadi, rispettando tutte le restrizioni di piazzamento</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -37,6 +53,8 @@
 		<COLOUR>G</COLOUR>
 		<STATE>,SelectingDice,AutomatedOperation,ChooseDice2,</STATE>
 		<AUTOMATED>changeDice,operationEndend,</AUTOMATED>
+		<CMETHODS>,inRoundTr,</CMETHODS>
+		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, scambia quel dado con un dado sul Tracciato dei Round</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -45,6 +63,8 @@
 		<COLOUR>P</COLOUR>
 		<STATE>,AutomatedOperation,ChooseDice2,</STATE>
 		<AUTOMATED>launchDice,operationEndend,</AUTOMATED>
+		<CMETHODS></CMETHODS>
+		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, tira nuovamente quel dado. Se non puoi piazzarlo, riponilo nella Riserva.</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -53,6 +73,8 @@
 		<COLOUR>B</COLOUR>
 		<STATE>,AutomatedOperation,CheckPointState,</STATE>
 		<AUTOMATED>resetDraftPool,operationEndend,</AUTOMATED>
+		<CMETHODS></CMETHODS>
+		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Tira nuovamente tutti i dadi della Riserva. Questa carta può essere usata solo durante il tuo secondo turno, prima di scegliere il secondo dado</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -61,6 +83,10 @@
 		<COLOUR>R</COLOUR>
 		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<CMETHODS>,inDraftPool,</CMETHODS>
+		<PMETHODS>
+			<PM0>,checkAll,</PM0>
+		</PMETHODS>
 		<DESCRIPTION>Dopo il tuo primo turno scegli immediatamente un altro dado. Salta il tuo secondo turno in questo round</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -69,6 +95,10 @@
 		<COLOUR>Y</COLOUR>
 		<STATE>,MovingDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<CMETHODS></CMETHODS>
+		<PMETHODS>
+			<PM0>,checkFrame,</PM0>
+		</PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, piazzalo in una casella che non sia adiacente a un altro dado. Devi rispettare tutte le restrizioni di piazzamento</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -77,6 +107,8 @@
 		<COLOUR>G</COLOUR>
 		<STATE>,AutomatedOperation,ChooseDice2,</STATE>
 		<AUTOMATED>spinDice,operationEndend,</AUTOMATED>
+		<CMETHODS></CMETHODS>
+		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, giralo sulla faccia opposta. !!6 diventa 1, 5 diventa 2, 4 diventa 3 ecc.!!</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -85,6 +117,8 @@
 		<COLOUR>P</COLOUR>
 		<STATE>,AutomatedOperation,SelectingValue,ChooseDice2,</STATE>
 		<AUTOMATED>getNewDice,operationEndend,</AUTOMATED>
+		<CMETHODS></CMETHODS>
+		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, riponilo nel Sacchetto, poi pescane uno dal Sacchetto. Scegli il valore del nuovo dado e piazzalo, rispettando tutte le restrizioni di piazzamento.</DESCRIPTION>
 	</CARD>
 	<CARD>
@@ -93,6 +127,11 @@
 		<COLOUR>B</COLOUR>
 		<STATE>,SelectingDice,SelectingDice,MovingDice,SelectingDice,MovingDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
+		<CMETHODS>,inRoundTr,inPatCard,inPatCard,</CMETHODS>
+		<PMETHODS>
+			<PM0>,checkAll,</PM0>
+			<PM1>,checkAll,</PM1>
+		</PMETHODS>
 		<DESCRIPTION>Muovi fino a due dadi dello stesso colore in un solo dado sul Tracciato dei Round. Devi rispettare tutte le restrizioni di piazzamento.</DESCRIPTION>
 	</CARD>
 </TOOLCARDS>

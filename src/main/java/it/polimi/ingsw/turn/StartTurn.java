@@ -48,6 +48,7 @@ public class StartTurn implements TurnState {
     @Override
     public void receiveMove(Dice dice, Pos pos) throws WrongMoveException {
         if(inspectorContext.check(dice,pos,turn.getPlayer().getDraftPool())) {
+            System.out.println("eccomi");
             turn.setState(new ChooseDice1(turn, dice, pos));
         } else {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado. Selezionare un dado della Riserva.");

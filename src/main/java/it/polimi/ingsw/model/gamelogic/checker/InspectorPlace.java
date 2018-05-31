@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gamelogic.checker;
 
+import com.sun.xml.internal.org.jvnet.mimepull.MIMEConfig;
 import it.polimi.ingsw.model.gamedata.gametools.Cell;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.Pos;
@@ -35,7 +36,7 @@ public class InspectorPlace {
      * @return True if conditions are verified.
      */
     public boolean check(Dice dice, Pos pos, WindowPatternCard window) {
-        return (checkPos(pos,window) && checkColour(window,pos,dice) && checkNumber(window,pos,dice) && checkCol(pos,window,dice) && checkRow(pos,window,dice));
+        return (checkPos(pos,window) && checkColour(window,pos,dice) && checkNumber(window,pos,dice) && checkCol(pos,window,dice) && checkRow(pos,window,dice) && !particularFrame(pos,window));
     }
 
     /**
@@ -45,7 +46,7 @@ public class InspectorPlace {
      * @return True if conditions are verified.
      */
     protected boolean checkPos(Pos pos,WindowPatternCard window) {
-        return (pos.getX()>= MINROW && pos.getX()<=MAXROW) && pos.getY()>=MINCOL && pos.getY()<=MAXCOL && !window.getCell(pos).isOccupied();
+        return pos.getX()>= MINROW && pos.getX()<=MAXROW && pos.getY()>=MINCOL && pos.getY()<=MAXCOL && (!window.getCell(pos).isOccupied());
     }
 
     /**
@@ -57,7 +58,7 @@ public class InspectorPlace {
      */
     protected boolean checkColour(WindowPatternCard window, Pos pos, Dice dice){
         Cell c =window.getCell(pos);
-        return (c.getProperty().getColour().toString().equals("W") || c.getProperty().getColour().equals(dice.getColour()));
+        return ((c.getProperty().getColour().toString().equals("W")) || (c.getProperty().getColour().equals(dice.getColour())));
     }
 
     /**
@@ -69,7 +70,7 @@ public class InspectorPlace {
      */
     protected boolean checkNumber(WindowPatternCard window, Pos pos, Dice dice){
         Cell c= window.getCell(pos);
-        return (c.getProperty().getNumber()== 0 || c.getProperty().getNumber()==dice.getNumber());
+        return ((c.getProperty().getNumber()== 0) || (c.getProperty().getNumber()==dice.getNumber()));
         }
 
     /**
@@ -79,10 +80,12 @@ public class InspectorPlace {
      */
     private boolean checkFrame(Pos pos){
         int x = pos.getX();
-        int y= pos.getY();
-        if((x>=MINROW && x<=MAXROW) && (y==MINCOL || y==MAXCOL)){
+        int y = pos.getY();
+        if((x>MINROW && x<MAXROW) && (y==MINCOL || y==MAXCOL)){
                 return true;
         }
+        else if(x == MINROW && y == MINCOL || x == MINROW && y == MAXCOL || x == MAXROW && y == MINCOL || x == MAXROW && y == MAXCOL)
+            return true;
         return(y>MINCOL && y<MAXCOL && (x == MINROW || (x == MAXROW)));
 
     }
@@ -94,12 +97,12 @@ public class InspectorPlace {
      * @param dice Dice to place.
      * @return True if conditions are verified.
      */
-    protected boolean checkCol(Pos pos,WindowPatternCard window, Dice dice){
+    protected boolean checkRow(Pos pos,WindowPatternCard window, Dice dice){
         Pos p = new Pos(pos.getX(),pos.getY());
-        if(p.getX()==MINCOL){
+        if(p.getX()==MINROW){
             p.setX(p.getX()+1);
             return checkSide(p,window,dice);
-        }else if(p.getX()==MAXCOL){
+        }else if(p.getX()==MAXROW){
             p.setX(p.getX()-1);
             return checkSide(p,window,dice);
         }else{
@@ -118,12 +121,12 @@ public class InspectorPlace {
      * @param dice Dice to place.
      * @return True if conditions are verified.
      */
-    protected boolean checkRow(Pos pos,WindowPatternCard window, Dice dice){
+    protected boolean checkCol(Pos pos,WindowPatternCard window, Dice dice){
         Pos p = new Pos(pos.getX(),pos.getY());
-        if(p.getY()==MINROW){
+        if(p.getY()==MINCOL){
             p.setY(p.getY()+1);
             return checkSide(p,window,dice);
-        }else if(p.getY()==MAXROW){
+        }else if(p.getY()==MAXCOL){
             p.setY(p.getY()-1);
             return checkSide(p,window,dice);
         }else{
@@ -147,9 +150,22 @@ public class InspectorPlace {
     private boolean checkSide(Pos p,WindowPatternCard window,Dice dice) {
         if(window.isIn(p)){
             Dice d = window.getDice(p);
-            return d.getNumber() != dice.getNumber() && d.getColour() != dice.getColour();
+            return (d.getNumber() != dice.getNumber() && d.getColour() != dice.getColour());
         }else{
             return true;
         }
+    }
+
+    private boolean particularFrame(Pos pos, WindowPatternCard window) {
+        int x = pos.getX();
+        int y = pos.getY();
+        for (int i = -1; i<=1; i++){
+            for(int j =1 ; j>= -1; j--){
+                if(x+i>=MINROW && x+i<=MAXROW && y+j>=MINCOL && y+j<=MAXCOL && window.getCell(new Pos(x+i,y+j)).isOccupied()){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

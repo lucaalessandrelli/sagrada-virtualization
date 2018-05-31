@@ -292,9 +292,9 @@ public class Rules {
 
     private boolean allDifferent(ArrayList<Cell> cells,boolean colour,int value){
         if(colour)
-            return(cells.stream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getColour).distinct().collect(Collectors.toList()).size() == value);
+            return(cells.parallelStream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getColour).distinct().collect(Collectors.toList()).size() == value);
         else
-            return(cells.stream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getNumber).distinct().collect(Collectors.toList()).size() == value);
+            return(cells.parallelStream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getNumber).distinct().collect(Collectors.toList()).size() == value);
     }
 
 }

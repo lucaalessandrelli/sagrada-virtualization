@@ -1,7 +1,6 @@
 package it.polimi.ingsw.modeltest.gamedatatest.gametoolstest;
 
 import it.polimi.ingsw.model.gamedata.Colour;
-import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
 import it.polimi.ingsw.model.gamedata.gametools.Cell;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
@@ -9,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static it.polimi.ingsw.modeltest.gamelogictest.InspectorPlaceTest.getWindowPatternCard;
+import static org.junit.jupiter.api.Assertions.*;
 
- class WindowPatternCardTest {
+class WindowPatternCardTest {
 
 
      @Test
@@ -22,19 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          assertEquals(5, tester.getMatr().get(0).size());
      }
 
-     //to do this we need to define the rules
-    /*@Test
-    public void TestPlacement(){
-
-    }
-*/
      @Test
      void TestOccupied() {
          WindowPatternCard tester = new WindowPatternCard(0, 0, "No name");
          int x = 0, y = 0;
          Dice d = new Dice();
-         assertTrue(tester.placeDice(d, x, y) == true);
-         assertTrue(tester.getMatr().get(x).get(y).isOccupied() == true);
+         assertTrue(tester.placeDice(d, x, y));
+         assertTrue(tester.getMatr().get(x).get(y).isOccupied());
      }
 
      @Test
@@ -48,26 +41,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
          }
          for (int i = 0; i < 4; i++) {
              for (int j = 0; j < 5; j++) {
-                 assertTrue(tester.placeDice(d, i, j) == false);
+                 assertFalse(tester.placeDice(d, i, j));
              }
          }
      }
 
      @Test
      void TestFirstCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 1; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(1);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Kaleidoscopic Dream", tester.getName());
@@ -103,19 +85,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestSecondCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 2; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(2);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Virtus", tester.getName());
@@ -151,19 +122,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestThirdCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 3; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(3);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Aurorae Magnificus", tester.getName());
@@ -199,19 +159,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestFourthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 4; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(4);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Via Lux", tester.getName());
@@ -246,19 +195,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestFifthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 5; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(5);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Sun Catcher", tester.getName());
@@ -293,19 +231,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestSixthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 6; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(6);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Bellesguard", tester.getName());
@@ -340,19 +267,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestSeventhCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 7; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(7);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Firmitas", tester.getName());
@@ -387,19 +303,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestEightCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 8; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(8);
 
          ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
 
@@ -431,19 +336,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestNinthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 9; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(9);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Aurora Sagradis", tester.getName());
@@ -478,19 +372,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestTenthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 10; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(10);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Industria", tester.getName());
@@ -525,19 +408,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestEleventhCard() {
-         CardContainer container = new CardContainer();
-         WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 11; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+        WindowPatternCard tester;
+         tester = this.pullOutCard(11);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Shadow Thief", tester.getName());
@@ -572,19 +444,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestTwelthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 12; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(12);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Batllo", tester.getName());
@@ -619,19 +480,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestThirteenthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 13; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(13);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Gravitas", tester.getName());
@@ -666,19 +516,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestFourteenthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 14; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(14);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Fractal Drops", tester.getName());
@@ -714,19 +553,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestFifthteenCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 15; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(15);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Lux Astram", tester.getName());
@@ -762,19 +590,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestSixteenthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 16; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(16);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Chromatic Splendor", tester.getName());
@@ -810,19 +627,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestSeventeenthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 17; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(17);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Firelight", tester.getName());
@@ -858,19 +664,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestEighteenthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 18; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(18);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Luz Celestial", tester.getName());
@@ -906,19 +701,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestNineteenthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 19; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(19);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Water of Life", tester.getName());
@@ -954,19 +738,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestTwenteenthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 20; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(20);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Ripples of Light", tester.getName());
@@ -1002,19 +775,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestTwentyfirstCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 21; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(21);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Lux Mundi", tester.getName());
@@ -1050,19 +812,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestTwentysecondCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 22; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(22);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Comitas", tester.getName());
@@ -1098,19 +849,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestTwentythirdCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 23; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(23);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Sun's Glory", tester.getName());
@@ -1146,19 +886,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
      @Test
      void TestTwentyfourthCard() {
-         CardContainer container = new CardContainer();
          WindowPatternCard tester;
-         ArrayList<WindowPatternCard> windows;
-         windows = container.pullOutPattern(4);
-         int i;
-         for (i = 0; i < windows.size() && windows.get(i).getNum() != 24; i++) {
-             if (i + 1 == windows.size()) {
-                 container = new CardContainer();
-                 windows = container.pullOutPattern(4);
-                 i = 0;
-             }
-         }
-         tester = windows.get(i);
+         tester = this.pullOutCard(24);
 
          System.out.println("Name: " + tester.getName());
          assertEquals("Fulgor del Cielo", tester.getName());
@@ -1195,6 +924,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
      private void verify(ArrayList<ArrayList<Cell>> matr, Colour colour, int number, int x, int y){
          assertEquals(colour, matr.get(x).get(y).getProperty().getColour()); //COLOUR
          assertEquals(number, matr.get(x).get(y).getProperty().getNumber()); //NUMBER
+     }
+
+     public WindowPatternCard pullOutCard(int value){
+         return getWindowPatternCard(value);
      }
  }
 

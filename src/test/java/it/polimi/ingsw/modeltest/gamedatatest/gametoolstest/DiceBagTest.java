@@ -7,15 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DiceBagTest {
 
     @Test
     public void TestCreation(){
         DiceBag tester = new DiceBag();
-        assertTrue(tester.remainingDices() == 90);
+        assertEquals( 90,tester.remainingDices());
     }
 
     @Test
@@ -61,4 +60,48 @@ public class DiceBagTest {
         assertEquals(0, w);
     }
 
+    @Test
+    public void TestSetNumPlayers(){
+        DiceBag tester = new DiceBag();
+        tester.setNumPlayers(5);
+        tester.setNumPlayers(2);
+    }
+
+    @Test
+    public void TestAddDice(){
+        DiceBag tester = new DiceBag();
+        Dice dice = new Dice();
+        int remaining = tester.remainingDices();
+        boolean ended = false;
+        tester.addDice(dice);
+        assertEquals(remaining+1,tester.remainingDices());
+        ArrayList<Dice> test = tester.pullOut(91);
+        for (Dice x: test){
+            if(x.equals(dice)){
+                if(x == dice) {
+                    assertTrue(true);
+                    ended = true;
+                }
+            }
+        }
+        if(!ended)
+            fail("Test failed");
+    }
+
+    @Test
+    public void TestPullOut(){
+        DiceBag tester = new DiceBag();
+        ArrayList<Dice> dices;
+        tester.setNumPlayers(3);
+        dices = tester.pullOut();
+        assertEquals(7,dices.size());
+    }
+
+    @Test
+    public void TestNumPullOut(){
+        DiceBag tester = new DiceBag();
+        ArrayList<Dice> dices;
+        dices = tester.pullOut(24);
+        assertEquals(24,dices.size());
+    }
 }

@@ -41,7 +41,7 @@ public class Cell {
     }
     //setter method
     protected void setOccupation(boolean x){
-        occupied = x;
+        this.occupied = x;
     }
     //setter method
     protected void setPos(Pos x) {

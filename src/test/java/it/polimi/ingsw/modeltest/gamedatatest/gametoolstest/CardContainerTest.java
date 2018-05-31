@@ -60,7 +60,7 @@ public class CardContainerTest {
     @Test
     public void TestNeverOutofBound(){
         CardContainer tester = new CardContainer();
-        for(int i = 0; i < 200; i++){
+        for(int i = 0; i < 50; i++){
             tester.pullOutPattern(4);
             tester = new CardContainer();
         }

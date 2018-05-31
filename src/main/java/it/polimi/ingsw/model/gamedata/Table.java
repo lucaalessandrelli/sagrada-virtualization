@@ -5,24 +5,24 @@ import it.polimi.ingsw.model.gamedata.gametools.*;
 import javax.tools.Tool;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
 public class Table {
-    private List<Player> myplayer= new ArrayList<>();
-    private ArrayList<ObjectiveCard> objectiveCards = new ArrayList<>(4);
+    private List<Player> myplayers;
+    private ArrayList<ObjectiveCard> objectiveCards;
     private ArrayList<ToolCard> toolCards = new ArrayList<>(3);
-    private ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<>();
+    private ArrayList<WindowPatternCard> windowPatternCards;
     private RoundTrack roundTrack;
     private DraftPool draftPool;
     private DiceBag diceBag;
     private CardContainer container;
 
-
     public Table(List<Player> players){
         this.diceBag = new DiceBag();
         this.draftPool = new DraftPool();
         this.container = new CardContainer();
-        this.myplayer = players;
+        this.myplayers = players;
         this.roundTrack = new RoundTrack();
         int i;
         for(i = 0; i < 3; i++){
@@ -31,33 +31,22 @@ public class Table {
             this.toolCards.add(x);
         }
             this.objectiveCards = this.container.pullOutPublic();
-            ArrayList<ObjectiveCard> tmp = this.container.pullOutPrivate(this.myplayer.size());
+            ArrayList<ObjectiveCard> tmp = this.container.pullOutPrivate(this.myplayers.size());
             i = 0;
-        for (Player p: this.myplayer){
+        for (Player p: this.myplayers){
             p.setMyObjCard(tmp.get(i));
             i++;
         }
-        this.windowPatternCards = this.container.pullOutPattern(this.myplayer.size());
+        this.windowPatternCards = this.container.pullOutPattern(this.myplayers.size());
+        for (Player p: this.myplayers) {
+            p.ChooseWindow(windowPatternCards);
+            windowPatternCards.remove(p.getWindowPatternCard());
+        }
     }
 
-    public Table(ArrayList<Player> myplayer, ArrayList<ObjectiveCard> objectiveCards, ArrayList<ToolCard> toolCards, ArrayList<WindowPatternCard> windowPatternCards) {
-        this.myplayer = myplayer;
-        this.objectiveCards = objectiveCards;
-        this.toolCards = toolCards;
-        this.windowPatternCards = windowPatternCards;
-    }
-
-    public boolean addCard(WindowPatternCard z) throws IndexOutOfBoundsException{
-            if(this.windowPatternCards.size() < 4) {
-                this.windowPatternCards.add(z);
-                return true;
-            }
-            else
-                return false;
-    }
     //Implement this in the other class
     public void showPlayers() {
-        for (Player x : this.myplayer) {
+        for (Player x : this.myplayers) {
             System.out.print("Player: " + x.getUsername() + "\n");
         }
     }
@@ -92,9 +81,9 @@ public class Table {
         return objectiveCards;
     }
 
-    public ArrayList<WindowPatternCard> getRandomWindows() {
-        return this.container.pullOutPattern(myplayer.size());
-    }
+    /*public ArrayList<WindowPatternCard> getRandomWindows() {
+        return this.container.pullOutPattern(myplayers.size());
+    }*/
 
     public ArrayList<Dice> getDiceFromBag() {
         return diceBag.pullOut();
@@ -129,4 +118,34 @@ public class Table {
         this.draftPool.addNewDices(diceBag.pullOut());
     }
 
+    public void setPublicObjects(){
+        for (Player p: this.myplayers) {
+            PublicObjects publicObjects = new PublicObjects();
+
+            publicObjects.setToolCards(this.getToolCards());
+
+            publicObjects.setObjectiveCards(this.getObjCard());
+
+            publicObjects.setDraftPool(this.getDraftPool());
+
+            publicObjects.setRoundTrack(this.roundTrack);
+
+            List<String> playernames = new ArrayList<>();
+            List<WindowPatternCard> otherwindows = new ArrayList<>();
+            for (Player player: this.myplayers){
+                if(!(player.getUsername().equals(p.getUsername()))) {
+                    //playernames.add(player.getUsername());
+                    otherwindows.add(player.getWindowPatternCard());
+                }
+            }
+
+            playernames = myplayers.parallelStream().map(Player::getUsername).filter(name -> (!name.equals(name))).collect(Collectors.toList());
+
+            publicObjects.setPlayers(playernames);
+
+            publicObjects.setOthersWindows(otherwindows);
+
+            p.setPublicObjects(publicObjects);
+        }
+    }
 }

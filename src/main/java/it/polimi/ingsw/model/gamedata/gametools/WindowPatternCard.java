@@ -11,30 +11,42 @@ public class WindowPatternCard {
     private ArrayList<ArrayList<Cell>> matr = new ArrayList<>(4);
     private int difficulty;
     private String name;
+    private String player;
 
 
     public WindowPatternCard(){
         this.num = 0;
         this.difficulty = 0;
         this.name ="Card not valid";
+        Cell y;
+        Pos p;
         for(int i = 0; i < 4; i++){
             ArrayList<Cell> x = new ArrayList<>(5);
             this.matr.add(x);
             for(int j = 0; j < 5; j++){
-                Cell y = new Cell();
+                y = new Cell();
+                p = new Pos(i,j);
+                y.setPos(p);
+                y.setOccupation(false);
                 this.matr.get(i).add(y);
             }
         }
     }
+
     public WindowPatternCard(int num, int difficulty, String name){
         this.num = num;
         this.difficulty = difficulty;
         this.name = name;
+        Cell y;
+        Pos p;
         for(int i = 0; i < 4; i++){
             ArrayList<Cell> x = new ArrayList<>(4);
             this.matr.add(x);
             for(int j = 0; j < 5; j++){
-                Cell y = new Cell();
+                y = new Cell();
+                p = new Pos(i,j);
+                y.setPos(p);
+                y.setOccupation(false);
                 this.matr.get(i).add(y);
             }
         }
@@ -59,52 +71,23 @@ public class WindowPatternCard {
     public ArrayList<ArrayList<Cell>> getMatr(){
         return this.matr;
     }
-    /*
-    public Cell[] getCell(){
-        return;
-    }
-*/
-    protected void setNum(int x){
-        this.num = x;
-    }
-
-    protected void setDifficulty(int x){
-        this.difficulty = x;
-    }
-
-    protected void setName(String x){
-        this.name = x;
-    }
-
-    protected void setMatr(ArrayList<ArrayList<Cell>> x){
-        this.matr = x;
-    }
-
-    //place the dice
-    public boolean placeDice(Dice d, int x, int y){
-        /*Here we need the validation of the rules*/
-        if((matr.get(x).get(y) != null) && matr.get(x).get(y).isOccupied())
-            return false;
-        else{
-            matr.get(x).get(y).setOccupation(true);
-            matr.get(x).get(y).setDice(d);
-            return true;
-        }
-    }
-
-    //verify is the cell in position p is occupied
-    public boolean isIn(Pos p){
-        if(this.matr.get(p.getX()).get(p.getY()).isOccupied())
-            return true;
-        return false;
-    }
 
     public Dice getDice(Pos p){
-        return (this.matr.get(p.getX()).get(p.getY()).getDice());
+        try {
+            if (!(this.getCell(p).isOccupied()))
+                throw new EmptyCellException();
+        } catch (EmptyCellException e){
+            System.out.println(e.message);
+        }
+        return (this.getCell(p).getDice());
     }
 
     public Cell getCell(Pos p){
         return (this.matr.get(p.getX()).get(p.getY()));
+    }
+
+    public String getPlayer(){
+        return this.player;
     }
 
     //find the dice d in the WindowPatternCard
@@ -119,8 +102,49 @@ public class WindowPatternCard {
     }
 
 
+    public void setNum(int x){
+        this.num = x;
+    }
+
+    public void setDifficulty(int x){
+        this.difficulty = x;
+    }
+
+    public void setName(String x){
+        this.name = x;
+    }
+
+    public void setMatr(ArrayList<ArrayList<Cell>> x){
+        this.matr = x;
+    }
+
+    public void setPlayer(String player){
+        this.player = player;
+    }
+
+    //place the dice
+    public boolean placeDice(Dice d, int x, int y){
+        /*Here we need the validation of the rules*/
+        Pos p = new Pos(x,y);
+        if(this.getCell(p).isOccupied() || d == null)
+            return false;
+        else{
+            this.getCell(p).setOccupation(true);
+            this.getCell(p).setDice(d);
+            return true;
+        }
+    }
+
+    //verify is the cell in position p is occupied
+    public boolean isIn(Pos p){
+        if(this.getCell(p).isOccupied())
+            return true;
+        return false;
+    }
+
+
     public boolean findDice(Dice d, Pos p){
-        return (this.matr.get(p.getX()).get(p.getY()).getDice().equals(d));
+        return (this.getCell(p).getDice().equals(d));
     }
 
     public boolean addRestr(char c,int x, int y) {
@@ -138,7 +162,7 @@ public class WindowPatternCard {
     }
 
     public void removeDice(Pos pos){
-        this.matr.get(pos.getX()).get(pos.getY()).setOccupation(false);
+        this.getCell(pos).setOccupation(false);
     }
 
     //shows every attribute of the Card, also the scheme
