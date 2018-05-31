@@ -1,21 +1,22 @@
 package it.polimi.ingsw.network.client;
 
-import it.polimi.ingsw.network.ClientInterface;
-
-import java.io.Serializable;
+import java.rmi.RemoteException;
 
 import static java.lang.System.*;
 
-public class Client implements ClientInterface,Serializable {
+public class Client  {
     private String name;
     private boolean connected;
     private int kindConnection;
     private ConnectionHandler connectionHandler;
+    private int numOfMatch;
+    private MessageQueue messages;
 
-    public Client(String name,int conn, String addr){
+    public Client(String name,int conn, String addr) throws RemoteException{
         this.name=name;
         connected=false;
         kindConnection=conn;
+        messages = new MessageQueue();
         if(kindConnection==1){
             connectionHandler = new SocketConnection(this,addr);
         }else if(kindConnection==2){
@@ -26,39 +27,57 @@ public class Client implements ClientInterface,Serializable {
         }
     }
 
-    void setConnected(boolean b){
+    synchronized void setConnected(boolean b){
         connected = b;
     }
 
 
-    public void connect(){
+    synchronized public void connect(){
         connectionHandler.connect();
     }
 
-    public String ping(){
+    synchronized public boolean ping(){
         return connectionHandler.ping();
     }
 
 
-    @Override
-    public void disconnect() {
+   /* @Override
+    synchronized public void disconnect() {
         connectionHandler.disconnect();
 
-    }
+    }*/
 
-    @Override
-    public String getName() {
+
+    synchronized public String getName() {
         return name;
     }
 
 
-    @Override
-    public String getTypeConnection() {
+
+    /*synchronized public String getTypeConnection() {
         return "(RMI)";
+    }*/
+
+
+    synchronized public void updateWindows(String allWindows) throws RemoteException {
+
     }
 
-    public String sendCommand(String cmd) {
-        return connectionHandler.sendCommand(cmd);
+
+    synchronized public void updateDraftPool(String draftPool) throws RemoteException {
+
+    }
+
+    synchronized public void updatePlayers(String playersIn) throws RemoteException {
+
+    }
+
+    synchronized public void updateTurn(String whoIsTurn) {
+
+    }
+
+    public void sendCommand(String cmd) {
+         connectionHandler.sendCommand(cmd);
     }
 
     public boolean connected() {
@@ -67,6 +86,7 @@ public class Client implements ClientInterface,Serializable {
 
     public void setName(String n) {
         name=n;
+        setAddress("127.0.0.1");
     }
 
     public void setAddress(String addr) {
@@ -77,5 +97,16 @@ public class Client implements ClientInterface,Serializable {
         }else{
             connectionHandler = new RmiConnection(this,addr);
         }
+    }
+
+    public void setServiceMessage(String serviceMessage) {
+        System.out.println(serviceMessage);
+    }
+
+    public void setNumMatch(int i) {
+        numOfMatch=i;
+    }
+    public synchronized void viewMessage(String s){
+        messages.add(s);
     }
 }

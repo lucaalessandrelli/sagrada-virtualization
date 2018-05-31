@@ -2,37 +2,41 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.network.client.Client;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
+import static java.lang.System.*;
+
 public class ClientMain {
+    private static String addr;
 
-
-    public static void main(String[] arg) {
+    public static void main(String[] arg) throws RemoteException {
+        /*if(arg!=null){
+            addr=arg[0];
+        }else{
+            addr="127.0.0.1";
+        }*/
+        addr="127.0.0.1";
         Scanner in = new Scanner(System.in);
-        System.out.println("Choose kind of connection:\n 1)Socket\n 2)RMI");
+        out.println("Choose kind of connection:\n 1)Socket\n 2)RMI");
         int conn = in.nextInt();
-        System.out.println("Insert server ip address:");
-        String addr = in.next();
-        System.out.println("Insert username:");
+        out.println("Insert username:");
         String name = in.next();
-        Client client = new Client(name,conn,addr);
+        Client client = new Client(name,conn,"addr");
         client.connect();
         while (!client.connected()) {
-            System.out.println("Insert valid username");
+            out.println("Insert valid username");
             client.setName(in.next());
-            System.out.println("Insert valid server ip address:");
-            client.setAddress(in.next());
             client.connect();
         }
         while (client.connected()) {
-            System.out.println("Insert command:");
+            client.viewMessage("Insert command:");
             String cmd = in.next();
-            String asw = client.sendCommand(cmd);
-            System.out.println(asw);
-            if (asw.equals("ok")) {
-                client.disconnect();
+            client.sendCommand(cmd);
+            //System.out.println(asw);
+            //if (asw.equals("ok")) {
+             //   client.disconnect();
             }
-        }
     }
 }
 

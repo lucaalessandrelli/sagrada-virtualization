@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Manager {
-    private List<ClientContainer> clients;
+    private List<ClientsContainer> clients;
     private List<Match> matches;
     private int numOfMatch;
     private WaitingRoom lobby;
@@ -19,7 +19,7 @@ public class Manager {
         clients = new ArrayList<>();
         matches = new ArrayList<>();
         numOfMatch = 0;
-        ClientContainer c = new ClientContainer(this);
+        ClientsContainer c = new ClientsContainer(this);
         clients.add(c);
         lobby = new WaitingRoom(5000, this, clients.get(numOfMatch));
         clientHandler = new ClientHandler();
@@ -32,7 +32,7 @@ public class Manager {
         matches.get(numOfMatch).start();
         lobby.getPlayerList().forEach(player -> clientHandler.addPlayer(player.getUsername(), numOfMatch));
         numOfMatch++;
-        ClientContainer c = new ClientContainer(this);
+        ClientsContainer c = new ClientsContainer(this);
         clients.add(c);
         lobby.restore(clients.get(numOfMatch));
     }
@@ -42,7 +42,7 @@ public class Manager {
     }
 
     public synchronized boolean checkIfPlayerIsLogged(String name) throws RemoteException {
-        for (ClientContainer cli : clients) {
+        for (ClientsContainer cli : clients) {
             if (cli.findClient(name)) {
                 return true;
             }
@@ -60,7 +60,7 @@ public class Manager {
     }
 
     public void remove(String name){
-        for (ClientContainer cli : clients) {
+        for (ClientsContainer cli : clients) {
             if (cli.remove(name)) {
                 return;
             }

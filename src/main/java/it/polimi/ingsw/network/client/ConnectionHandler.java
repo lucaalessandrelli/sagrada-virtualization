@@ -2,9 +2,9 @@ package it.polimi.ingsw.network.client;
 
 import java.io.Serializable;
 
-public interface ConnectionHandler extends Serializable {
+public interface ConnectionHandler {
      void connect();
-     void disconnect();
-     String sendCommand(String cmd);
-     String ping();
+     /*void disconnect();*/
+     void sendCommand(String cmd);
+     boolean ping();
 }

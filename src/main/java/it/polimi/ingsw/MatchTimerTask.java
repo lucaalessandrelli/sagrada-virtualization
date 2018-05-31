@@ -25,18 +25,18 @@ public class MatchTimerTask extends TimerTask {
     @Override
     public void run() {
         tempTime -= 1000;
-        List<Player> playerList = lobby.getPlayerList();
+//        List<Player> playerList = lobby.getPlayerList();
 
-        if(playerList.size() >= 2 && tempTime == 0) {
+        /*if(playerList.size() >= 2 && tempTime == 0) {
             lobby.resetTimer();
             //CREATE A REAL MATCH
             lobby.notifyManager();
-            out.println("Now the state is: StartedMatch");
-        } else if(playerList.size() < 2 && tempTime == 0) {
+            out.println("Now the state is: StartedMatch");*/
+          if(/*playerList.size() < 2 &&*/ tempTime == 0) {
             tempTime = time;
-            out.println("Timer:"+ tempTime);
+            //out.println("Timer:"+ tempTime);
         } else {
-            out.println("Timer:"+ tempTime);
+            //out.println("Timer:"+ tempTime);
         }
     }
 }

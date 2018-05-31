@@ -3,6 +3,8 @@ package it.polimi.ingsw.view.virtualview;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
 
+import java.rmi.RemoteException;
+
 public class VirtualView extends VirtualViewObserver {
     public VirtualView(ClientInterface s, Player player) {
     clientInterface=s;
@@ -21,7 +23,7 @@ public class VirtualView extends VirtualViewObserver {
     }
 
     @Override
-    public void updateStateTurn(String whoIsTurn) {
+    public void updateStateTurn(String whoIsTurn) throws RemoteException {
         //call class compose string
         clientInterface.updateTurn(whoIsTurn);
     }

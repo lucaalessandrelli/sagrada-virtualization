@@ -6,39 +6,44 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class SocketConnection implements ConnectionHandler, Serializable {
+public class SocketConnection implements ConnectionHandler {
     static int PORT_SOCKET = 45678;
 
     Client client;
     Socket socket;
     InputComposer inputComposer;
+    SocketListener listner;
 
     public SocketConnection(Client client, String addr) {
         this.client = client;
         inputComposer = new InputComposer(client);
         try {
-            socket = new Socket(addr,PORT_SOCKET);
+            socket = new Socket(addr, PORT_SOCKET);
         } catch (IOException e) {
-           System.out.println("Connection lost");
+            System.out.println("Connection lost");
         }
+    }
+
+    public void startListener(){
+        listner = new SocketListener(client, socket);
+        new Thread(listner).start();
     }
 
     @Override
     public void connect() {
         try {
-            PrintWriter pr = new PrintWriter(socket.getOutputStream(),true);
             Scanner in = new Scanner(socket.getInputStream());
-            if(!client.connected()){
-                String rqst =inputComposer.compose("login");
+            PrintWriter pr = new PrintWriter(socket.getOutputStream(), true);
+            if (!client.connected()) {
+                String rqst = inputComposer.compose("login");
                 pr.println(rqst);
-                String asw= in.nextLine();
-                if(asw.equals("Connected, Welcome!")){
+                String answ = in.nextLine();
+                if (answ.equals("Connected, Welcome!")) {
                     client.setConnected(true);
-                    System.out.println(asw);
-                }else{
-                    System.out.println(asw);
                 }
+                client.setServiceMessage(answ);
             }
+            startListener();
         } catch (Exception e) {
             System.out.println("Server not available");
         }
@@ -46,43 +51,35 @@ public class SocketConnection implements ConnectionHandler, Serializable {
 
     }
 
-    @Override
-    public void disconnect() {
+
+    /*public void disconnect() {
         try {
-            PrintWriter pr = new PrintWriter(socket.getOutputStream(),true);
-            Scanner in = new Scanner(socket.getInputStream());
+            PrintWriter pr = new PrintWriter(socket.getOutputStream(), true);
             client.setConnected(false);
             String rqst = inputComposer.compose("disconnect");
             pr.println(rqst);
-            String asw = in.nextLine();
-            System.out.println(asw);
             pr.close();
-            in.close();
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
     @Override
-    public String sendCommand(String cmd) {
+    public void sendCommand(String cmd) {
         try {
-            Scanner in = new Scanner(socket.getInputStream());
-            PrintWriter pr = new PrintWriter(socket.getOutputStream(),true);
+            PrintWriter pr = new PrintWriter(socket.getOutputStream(), true);
             cmd = inputComposer.compose(cmd);
             pr.println(cmd);
-            return in.nextLine();
         } catch (Exception e) {
             System.out.println("Server not available");
         }
 
-        return null;
     }
 
     @Override
-    public String ping() {
-        return null;
+    public boolean ping() {
+        return true;
     }
-
 }

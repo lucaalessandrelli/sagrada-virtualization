@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model.gamedata;
 
 import it.polimi.ingsw.model.gamedata.gametools.*;
-import it.polimi.ingsw.model.gamelogic.Move;
-import it.polimi.ingsw.view.ViewObserver;
+import it.polimi.ingsw.view.virtualview.VirtualViewObserver;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Player {
     private ObjectiveCard myObjCard;
     private WindowPatternCard myWindow;
     private int myFavTokens;
-    private ViewObserver observer;
+    private VirtualViewObserver observer;
 
 
     //just get the username from user
@@ -103,7 +103,11 @@ public class Player {
         observer.updatePatternCard();
     }
     public void notifyTurn(String whoIsTurn) {
-        observer.updateStateTurn(whoIsTurn);
+        try {
+            observer.updateStateTurn(whoIsTurn);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     public void calculatePoints() {
@@ -114,6 +118,9 @@ public class Player {
         }
         score = score + myFavTokens;
         //notifica observer
+    }
+    public void addObserver(VirtualViewObserver o){
+        observer=o;
     }
 }
 

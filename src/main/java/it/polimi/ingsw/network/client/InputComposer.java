@@ -11,10 +11,10 @@ public class InputComposer implements Serializable {
     public String compose(String cmd) {
         if(cmd.equals("login")){
             return "login " + " <User>" + client.getName() + "<User>";
-        }else if(cmd.equals("disconnect")){
-            return "//disconnect"+ " <User>" + client.getName() + "<User>";
+        /*}else if(cmd.equals("disconnect")){
+            return "//disconnect"+ " <User>" + client.getName() + "<User>";*/
         }else if(cmd.equals("exit")){
-            return "//exit";
+            return "exit";
         }
         return cmd;
     }

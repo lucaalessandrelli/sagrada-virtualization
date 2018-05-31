@@ -1,24 +1,28 @@
 package it.polimi.ingsw.network.client;
 
+import it.polimi.ingsw.network.ClientInterface;
 import it.polimi.ingsw.network.ServerInterface;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 
-public class RmiConnection implements ConnectionHandler,Serializable {
+public class RmiConnection implements ConnectionHandler {
     static int PORT_RMI = 56789;
     ServerInterface server;
     Client client;
     String address;
+    ClientInterface stub;
 
     public RmiConnection(Client client,String addr){
         this.client = client;
         address = addr;
         try {
-            Registry registry = LocateRegistry.getRegistry(address, PORT_RMI);
+            Registry registry = LocateRegistry.getRegistry("127.0.0.1",PORT_RMI);
+            ClientStub obj = new ClientStub(client);
+            stub = (ClientInterface) UnicastRemoteObject.exportObject(obj,0);
             server = (ServerInterface) registry.lookup("server");
         } catch (Exception e) {
             System.out.println("Server is not up");
@@ -28,7 +32,8 @@ public class RmiConnection implements ConnectionHandler,Serializable {
       public void connect(){
         if(!client.connected()) {
             try {
-                if (server.login(client.getName(),client)) {
+                String name = client.getName();
+                if (server.login(name,stub)) {
                     client.setConnected(true);
                     System.out.println("Connected, Welcome!");
                 } else {
@@ -36,37 +41,38 @@ public class RmiConnection implements ConnectionHandler,Serializable {
                     System.out.println("Already connected");
 
                 }
-            } catch (Exception e) {
+            } catch (RemoteException e) {
                 System.out.println("Server not available");
             }
         }
     }
 
-    @Override
     public void disconnect() {
         client.setConnected(false);
         try {
-            server.disconnect(client.getName(),client);
+            server.disconnect(client.getName(),stub);
         } catch (RemoteException e) {
-            System.out.println("Server not available");
+            client.setServiceMessage("Server not available");
         }
-        System.out.println("Disconnected form server");
+        client.setServiceMessage("Disconnected form server");
 
     }
 
     @Override
-    public String sendCommand(String cmd) {
+    public void sendCommand(String cmd) {
         try {
             String asw =server.command(cmd);
-            return asw;
+            if(asw.equals("service Disconnected form server")){
+                disconnect();
+            }
         } catch (RemoteException e) {
-            return "Server not available";
+            client.setServiceMessage("Server not available");
         }
     }
 
     @Override
-    public String ping() {
-        return "pong";
+    public boolean ping() {
+        return true;
     }
 
 

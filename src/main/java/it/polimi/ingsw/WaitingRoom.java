@@ -1,13 +1,10 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.controller.ClientContainer;
-import it.polimi.ingsw.controller.ClientHandler;
+import it.polimi.ingsw.controller.ClientsContainer;
 import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,9 +14,9 @@ public class WaitingRoom {
     private Timer timer;
     private TimerTask task;
     private long time;
-    private ClientContainer playerList;
+    private ClientsContainer playerList;
 
-    public WaitingRoom(long time, Manager manager, ClientContainer clientContainer) {
+    public WaitingRoom(long time, Manager manager, ClientsContainer clientContainer) {
         playerList = clientContainer;
         this.time = time;
         timer = new Timer();
@@ -56,7 +53,7 @@ public class WaitingRoom {
         timer = new Timer();
     }
 
-    public void restore(ClientContainer clientContainer) {
+    public void restore(ClientsContainer clientContainer) {
         this.playerList = clientContainer;
         //resetTimer
         this.resetTimer();

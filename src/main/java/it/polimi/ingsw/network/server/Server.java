@@ -16,13 +16,13 @@ import java.util.List;
 
 import static java.lang.System.*;
 
-public class Server extends UnicastRemoteObject implements ServerInterface, Serializable {
+public class Server implements ServerInterface {
     private Manager manager;
 
 
     public Server() throws RemoteException {
     }
-    void setManager(Manager m){
+    public void setManager(Manager m){
         manager = m;
     }
 
@@ -64,9 +64,9 @@ public class Server extends UnicastRemoteObject implements ServerInterface, Seri
     @Override
     public synchronized String command(String cmd) {
         if(cmd.equals("exit")){
-            return "ok";
+            return "service Disconnected form server";
         }else{
-           return "Invalid command";
+           return "service Invalid command";
         }
     }
 
