@@ -8,23 +8,23 @@ public class Client  {
     private String name;
     private boolean connected;
     private int kindConnection;
+    private String addr;
     private ConnectionHandler connectionHandler;
     private int numOfMatch;
     private MessageQueue messages;
 
-    public Client(String name,int conn, String addr) throws RemoteException{
-        this.name=name;
+    public Client(String addr) throws RemoteException{
         connected=false;
-        kindConnection=conn;
+        this.addr = addr;
         messages = new MessageQueue();
-        if(kindConnection==1){
+        /*if(kindConnection==1){
             connectionHandler = new SocketConnection(this,addr);
         }else if(kindConnection==2){
             connectionHandler = new RmiConnection(this,addr);
         }else{
             out.println("Not valid choice, default connection : RMI");
             connectionHandler = new RmiConnection(this,addr);
-        }
+        }*/
     }
 
     synchronized void setConnected(boolean b){
@@ -95,6 +95,18 @@ public class Client  {
         }else if(kindConnection==2){
             connectionHandler = new RmiConnection(this,addr);
         }else{
+            connectionHandler = new RmiConnection(this,addr);
+        }
+    }
+
+    public void setKindConnection(int kindConnection) {
+        this.kindConnection = kindConnection;
+        if(kindConnection==1){
+            connectionHandler = new SocketConnection(this,addr);
+        }else if(kindConnection==2){
+            connectionHandler = new RmiConnection(this,addr);
+        }else{
+            out.println("Not valid choice, default connection : RMI");
             connectionHandler = new RmiConnection(this,addr);
         }
     }

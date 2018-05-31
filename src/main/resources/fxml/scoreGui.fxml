@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="589.0" prefWidth="839.0" style="-fx-background-color: #a0a2ab;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.ScoreViewController">
+   <children>
+      <Pane layoutX="-1.0" layoutY="-3.0" prefHeight="156.0" prefWidth="839.0" style="-fx-background-color: #2D3647;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" layoutX="227.0" layoutY="32.0" prefHeight="93.0" prefWidth="385.0" text="Players score" textAlignment="CENTER">
+               <font>
+                  <Font size="64.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#3c58fa" />
+                        <Stop color="#aba2a2" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children></Pane>
+      <JFXButton fx:id="playAgainButton" layoutX="624.0" layoutY="497.0" prefHeight="37.0" prefWidth="138.0" style="-fx-background-color: #3C58FA;" text="Play again" textFill="#dbdce4" />
+      <TableView layoutX="153.0" layoutY="192.0" prefHeight="269.0" prefWidth="534.0">
+        <columns>
+          <TableColumn prefWidth="262.0" text="Player" />
+          <TableColumn prefWidth="271.0" text="Score" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

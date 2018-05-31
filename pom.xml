@@ -53,6 +53,11 @@
             <artifactId>dom</artifactId>
             <version>2.3.0-jaxb-1.0.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>8.0.4</version>
+        </dependency>
   </dependencies>
   <packaging>jar</packaging>
 

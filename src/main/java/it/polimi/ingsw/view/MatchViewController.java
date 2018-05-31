@@ -12,8 +12,11 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewFXController implements Initializable {
-    //private Client client;
+public class MatchViewController implements Initializable, ViewInterface {
+    private String draftPool;
+    private String restrictions;
+    private String diceWindow;
+    private ModeRep modeRep;
 
     @FXML
     private Text txt2;
@@ -81,6 +84,14 @@ public class ViewFXController implements Initializable {
         this.setMyWindow(windowplayer3,player3Window);
         this.setMyWindow(windowplayer4,player4Window);
         this.setRiserva();
+        this.modeRep = new ModeRep();
+    }
+
+    public void notifyNewModelRep(String draftPool, String restrictions, String diceWindow) {
+        this.draftPool = draftPool;
+        this.restrictions = restrictions;
+        this.diceWindow = diceWindow;
+        System.out.println(draftPool+"\n"+ restrictions +"\n"+diceWindow);
     }
 
     public void setMyWindow(GridPane gridPane, WindowFalsa window) {
@@ -177,5 +188,25 @@ public class ViewFXController implements Initializable {
             String str = "";
             source.setText(str);
         }
+    }
+
+    @Override
+    public void sendDraftPools(String draftPools) {
+
+    }
+
+    @Override
+    public void sendRestrictions(String restrictions) {
+
+    }
+
+    @Override
+    public void sendWindowPatternCards(String windowPatternCards) {
+
+    }
+
+    @Override
+    public void sendRoundTrack(String roundTrack) {
+
     }
 }

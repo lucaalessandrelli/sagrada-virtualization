@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #2D3647;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.LoginViewController">
+   <children>
+      <ImageView fitHeight="206.0" fitWidth="629.0" layoutX="152.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../viewLogo/SagradaLogo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="229.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../viewLogo/Contact.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="150.0" layoutX="229.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../viewLogo/Lock.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="usernameField" focusColor="#3c58fa" layoutX="260.0" layoutY="334.0" maxWidth="395.0" minWidth="280.0" onKeyPressed="#handleEnterPressed" prefHeight="37.0" prefWidth="395.0" promptText="Username" style="-fx-text-fill: white;" unFocusColor="#a0a2ab" />
+      <JFXTextField layoutX="260.0" layoutY="407.0" maxWidth="395.0" minWidth="280.0" prefHeight="37.0" prefWidth="395.0" promptText="Password" style="-fx-text-fill: white;" unFocusColor="#a0a2ab" />
+      <JFXButton fx:id="loginButton" layoutX="480.0" layoutY="486.0" onMouseClicked="#handleMouseClicked" prefHeight="37.0" prefWidth="85.0" style="-fx-background-color: #3C58FA;" text="Login" textFill="#dbdce4" />
+      <JFXCheckBox fx:id="socketBox" checkedColor="#3c58fa" layoutX="722.0" layoutY="361.0" onAction="#handleSocketBox" selected="true" text="Socket" textFill="#cdcfda" unCheckedColor="#a0a2ab" />
+      <JFXCheckBox fx:id="rmiBox" checkedColor="#3c58fa" layoutX="722.0" layoutY="389.0" onAction="#handleRmiBox" text="RMI" textFill="#cdcfda" unCheckedColor="#a0a2ab" />
+      <Label layoutX="677.0" layoutY="327.0" text="Type of connection :" textFill="#f8e7e7" />
+      <AnchorPane prefHeight="294.0" prefWidth="900.0" />
+   </children>
+</AnchorPane>

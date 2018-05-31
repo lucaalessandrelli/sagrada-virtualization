@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.GuiView;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
@@ -16,14 +17,14 @@ public class ClientMain {
         }else{
             addr="127.0.0.1";
         }*/
-        addr="127.0.0.1";
         Scanner in = new Scanner(System.in);
-        out.println("Choose kind of connection:\n 1)Socket\n 2)RMI");
-        int conn = in.nextInt();
-        out.println("Insert username:");
-        String name = in.next();
-        Client client = new Client(name,conn,"addr");
-        client.connect();
+        addr="127.0.0.1";
+
+        Client client = new Client(addr);
+
+        GuiView.setClient(client);
+        GuiView.launching();
+
         while (!client.connected()) {
             out.println("Insert valid username");
             client.setName(in.next());
