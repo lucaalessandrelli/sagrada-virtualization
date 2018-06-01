@@ -31,7 +31,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //dovrei riuscire a prendere il nome del player da client e aggiungerlo tra quelli che si sono connessi
-        loadPlayers();
+        //loadPlayers();
     }
 
     public void setClient(Client client) {
@@ -46,7 +46,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         this.list = list;
     }
 
-    private void loadPlayers() {
+    public void loadPlayers() {
         playerList.setItems(list);
         //textArea.appendText(player+" has connected.\n");
     }

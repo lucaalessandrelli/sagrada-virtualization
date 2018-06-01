@@ -109,6 +109,7 @@ public class LoginViewController implements Initializable, ViewInterface {
         controller.setStage(stage);
 
         Scene scene = new Scene(root);
+        controller.loadPlayers();
         stage.setScene(scene);
         stage.setTitle("Waiting room");
         stage.show();

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.network.client.MessageQueue;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 
 import java.util.ArrayList;
@@ -30,7 +31,15 @@ public class MessageAnalyzer {
             String draft =message.replace("moveDraft ","");
 
         }else if(message.startsWith("service")) {
-            view.handleService(FXCollections.observableArrayList(Arrays.asList(message.replace("service", "").split(","))));
+            String finalMessage = message;
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Update UI here.
+                    view.handleService(FXCollections.observableArrayList(Arrays.asList(finalMessage.replace("service ", "").trim().split(" "))));
+                }
+            });
+
         }else if(message.startsWith("alert")) {
             view.handleAlert(message.replace("alert ", ""));
         }else if(message.equals("Connected, Welcome!")) {
