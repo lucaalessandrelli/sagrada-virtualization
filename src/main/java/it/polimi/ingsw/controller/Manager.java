@@ -28,6 +28,7 @@ public class Manager {
     public void createMatch(WaitingRoom lobby) {
         matches.add(new Match(lobby.getPlayerList(), this, numOfMatch));
         clients.get(numOfMatch).notifyIdMatch(numOfMatch);
+        clients.get(numOfMatch).setMatchStarted(true);
         /*START MATCH*/
         matches.get(numOfMatch).start();
         lobby.getPlayerList().forEach(player -> clientHandler.addPlayer(player.getUsername(), numOfMatch));
@@ -55,7 +56,7 @@ public class Manager {
     }
 
 
-    public void notEnoughPlayer(String winnerName) {
+    public void notEnoughPlayer() {
         //notify and disconnect players
     }
 
@@ -65,5 +66,8 @@ public class Manager {
                 return;
             }
         }
+    }
+
+    public void notifyEnd(String name) {
     }
 }

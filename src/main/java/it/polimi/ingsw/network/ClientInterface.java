@@ -13,4 +13,5 @@ public interface ClientInterface extends Remote {
     void updateDraftPool(String draftPool) throws RemoteException;
     void updatePlayers(String playersIn) throws RemoteException;
     void updateTurn(String whoIsTurn) throws RemoteException;
+    void setNumMatch(int num) throws RemoteException;
 }

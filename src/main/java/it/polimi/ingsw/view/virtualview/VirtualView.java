@@ -1,13 +1,15 @@
 package it.polimi.ingsw.view.virtualview;
 
+import it.polimi.ingsw.controller.ClientBox;
+import it.polimi.ingsw.controller.VirtualViewParser;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
 
 import java.rmi.RemoteException;
 
 public class VirtualView extends VirtualViewObserver {
-    public VirtualView(ClientInterface s, Player player) {
-    clientInterface=s;
+    public VirtualView(ClientBox s, Player player) {
+    clientBox=s;
     this.player=player;
     }
 
@@ -15,23 +17,23 @@ public class VirtualView extends VirtualViewObserver {
     public void updatePatternCard() {
         String allWindows;
         String draftPool;
-        //call class compose string windows
-        //call class compose string draftpool
-        //clientInterface.updateWindows(allWindows);
-        //clientInterface.updateDraftPool(draftPool);
+        VirtualViewParser parser = new VirtualViewParser(player);
+        allWindows = parser.startParsing();
+        draftPool = parser.parseDraftPool();
+        try {
+            clientBox.updateWindows(allWindows);
+            clientBox.updateDraftPool(draftPool);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
     @Override
     public void updateStateTurn(String whoIsTurn) throws RemoteException {
-        //call class compose string
-        clientInterface.updateTurn(whoIsTurn);
+        clientBox.updateTurn("service "+whoIsTurn+" current turn.");
     }
 
-    @Override
-    public void updatePlayers() {
-        String allPlayers;
-        //player.getOtherPlayers-->
-       // clientInterface.updatePlayers(allPlayers);
-    }
+
 }

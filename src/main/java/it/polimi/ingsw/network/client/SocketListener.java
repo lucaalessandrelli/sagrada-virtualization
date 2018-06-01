@@ -6,21 +6,20 @@ import java.util.Scanner;
 
 public class SocketListener implements Runnable {
     Socket socket;
-    Client client;
+    MessageQueue queue;
 
-    public SocketListener(Client client, Socket socket) {
+    public SocketListener(MessageQueue q, Socket socket) {
         this.socket=socket;
-        this.client=client;
+        this.queue=q;
     }
 
     @Override
     public void run() {
         try {
             Scanner in = new Scanner(socket.getInputStream());
-            AnswerAnalyzer analyzer = new AnswerAnalyzer(client);
-            while(client.connected()) {
+            while(socket.isConnected()) {
                 String answer = in.nextLine();
-                analyzer.analyze(answer);
+                queue.add(answer);
             }
         } catch (IOException e) {
 

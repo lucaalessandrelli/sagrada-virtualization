@@ -25,7 +25,7 @@ public class SocketConnection implements ConnectionHandler {
     }
 
     public void startListener(){
-        listner = new SocketListener(client, socket);
+        listner = new SocketListener(client.getQueue(), socket);
         new Thread(listner).start();
     }
 
@@ -45,7 +45,7 @@ public class SocketConnection implements ConnectionHandler {
             }
             startListener();
         } catch (Exception e) {
-            System.out.println("Server not available");
+            System.out.println("alert Server not available");
         }
 
 
@@ -73,7 +73,7 @@ public class SocketConnection implements ConnectionHandler {
             cmd = inputComposer.compose(cmd);
             pr.println(cmd);
         } catch (Exception e) {
-            System.out.println("Server not available");
+            System.out.println("alert Server not available");
         }
 
     }

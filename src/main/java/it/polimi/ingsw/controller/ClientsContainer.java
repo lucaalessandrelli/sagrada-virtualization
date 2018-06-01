@@ -15,45 +15,50 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class ClientsContainer {
-    private Vector<ClientInterface> clients;
-    private Vector<String> nameClients;
+    private Vector<ClientBox> clients;
+    private boolean matchStarted;
     private Manager manager;
     ScheduledExecutorService exec;
 
 
     public ClientsContainer(Manager manager){
         clients = new Vector<>();
-        nameClients = new Vector<>();
         this.manager= manager;
+        matchStarted = false;
         exec = Executors.newScheduledThreadPool(1);
         exec.scheduleWithFixedDelay(() -> {
+            for (ClientBox c : clients) {
+                try {
+                    c.ping();
+                } catch (RemoteException e) {
+                    System.out.println(c.getName() + " is disconnected");
+                    clients.remove(c);
+                    notifyPlayers();
+                    if (clients.size() < 2) {
+                        if (matchStarted) {
+                            notifyWinner(clients.get(0).getName());
+                            manager.notifyEnd(clients.get(0).getName());
 
-                    for (ClientInterface c : clients) {
-                        try {
-                                c.ping();
-                        } catch (RemoteException e) {
-                            System.out.println(nameClients.get(clients.indexOf(c)) + " is disconnected");
-                            nameClients.remove(clients.indexOf(c));
-                            clients.remove(c);
-                            if (clients.size() < 2) {
-                                // manager.notEnoughPlayer();
-                            }
-                            //notify disconnection
+                        }else{
+                            manager.notEnoughPlayer();
                         }
                     }
-
-
-
+                }
+            }
         },0,1,TimeUnit.SECONDS);
 
     }
+
+    private void notifyWinner(String name) {
+    }
+
     synchronized public void addClient(ClientInterface c){
         try {
-            nameClients.add(c.getName());
+            clients.add(new ClientBox(c,c.getName(),c.getTypeConnection()));
+            notifyPlayers();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        clients.add(c);
     }
     synchronized public int sizeContainer(){
         return clients.size();
@@ -61,48 +66,66 @@ public class ClientsContainer {
 
     synchronized public List<Player>  getPlayerList(){
         List<Player> p = new ArrayList<>();
-        for (ClientInterface s : clients){
-            try {
+        for (ClientBox s : clients){
                 Player player = new Player(s.getName());
                 player.addObserver(new VirtualView(s,player));
                 p.add(player);
-            } catch (RemoteException e) {
                 clients.remove(s);
                 if (clients.size()<2) {
                   //  manager.notEnoughPlayer();
                 }
-            }
         }
         return p;
     }
     synchronized public boolean findClient(String name) {
-        for (ClientInterface cli : clients){
-            try {
+        for (ClientBox cli : clients){
                 if(cli.getName().equals(name)){
                     return true;
                 }
-            } catch (RemoteException e) {
-                return false;
-            }
         }
         return false;
     }
 
     synchronized public boolean remove(String name) {
-        for (ClientInterface cli : clients){
-            try {
+        for (ClientBox cli : clients){
                 if(cli.getName().equals(name)){
                     clients.remove(cli);
+                    notifyPlayers();
                     return true;
                 }
-            } catch (RemoteException e) {
-                return false;
-            }
         }
         return false;
     }
 
-   synchronized public void notifyIdMatch(int numOfMatch) {
+    synchronized void notifyPlayers(){
+        StringBuilder str = new StringBuilder();
+            for (ClientBox c : clients){
+                 str.append(" " + c.getName());
+            }
+            String playersIn = str.toString();
+            playersIn = "service " + playersIn;
+            String finalPlayersIn = playersIn;
+            clients.forEach(clientBox -> {
+                try {
+                    clientBox.updatePlayers(finalPlayersIn);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            });
+    }
+
+    public void setMatchStarted(boolean matchStarted) {
+        this.matchStarted = matchStarted;
+    }
+
+    synchronized public void notifyIdMatch(int numOfMatch) {
+        for (ClientBox c : clients){
+            try {
+                c.setNumMatch(numOfMatch);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 }

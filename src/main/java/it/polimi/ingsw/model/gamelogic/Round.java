@@ -26,7 +26,7 @@ public class Round extends Thread{
         timeSleep = t*1000;
     }
 
-    public void go() throws NotEnoughPlayersException {
+    public void go() {
         Player p;
         Iterator<Player> i = players.getIterator();
         while(i.hasNext()){
@@ -43,10 +43,6 @@ public class Round extends Thread{
                     players.notifyChanges();
                     //go on next player
                 }
-
-            }
-            if(!players.checkActivity()){
-                throw new NotEnoughPlayersException(players.getLastPlayer().getUsername());
             }
         }
         setLastDice();

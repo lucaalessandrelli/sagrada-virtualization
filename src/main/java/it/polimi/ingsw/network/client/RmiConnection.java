@@ -21,11 +21,11 @@ public class RmiConnection implements ConnectionHandler {
         address = addr;
         try {
             Registry registry = LocateRegistry.getRegistry("127.0.0.1",PORT_RMI);
-            ClientStub obj = new ClientStub(client);
+            ClientStub obj = new ClientStub(client.getQueue(),client.getName());
             stub = (ClientInterface) UnicastRemoteObject.exportObject(obj,0);
             server = (ServerInterface) registry.lookup("server");
         } catch (Exception e) {
-            System.out.println("Server is not up");
+            System.out.println("alert Server not available");
         }
 
     }
@@ -38,11 +38,11 @@ public class RmiConnection implements ConnectionHandler {
                     System.out.println("Connected, Welcome!");
                 } else {
                     client.setConnected(false);
-                    System.out.println("Already connected");
+                    System.out.println("alert Already connected");
 
                 }
             } catch (RemoteException e) {
-                System.out.println("Server not available");
+                System.out.println("alert Server not available");
             }
         }
     }
@@ -52,7 +52,7 @@ public class RmiConnection implements ConnectionHandler {
         try {
             server.disconnect(client.getName(),stub);
         } catch (RemoteException e) {
-            client.setServiceMessage("Server not available");
+            client.setServiceMessage("alert Server not available");
         }
         client.setServiceMessage("Disconnected form server");
 

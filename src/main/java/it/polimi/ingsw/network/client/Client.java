@@ -116,6 +116,10 @@ public class Client  {
         }
     }
 
+    public MessageQueue getQueue() {
+        return messages;
+    }
+
     public void setServiceMessage(String serviceMessage) {
         System.out.println(serviceMessage);
     }

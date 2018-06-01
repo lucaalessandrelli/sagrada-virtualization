@@ -175,5 +175,10 @@ public class NetworkManager {
         public void updateTurn(String whoIsTurn) {
 
         }
+
+        @Override
+        public void setNumMatch(int num) throws RemoteException {
+
+        }
     }
 }

@@ -39,7 +39,7 @@ public class Match {
             try {
                 this.startNextRound();
             } catch (NotEnoughPlayersException e) {
-                manager.notEnoughPlayer(e.getMessage()); //il giocatore rimasto vince
+                //manager.notEnoughPlayer(e.getMessage()); //il giocatore rimasto vince
             }
         }
 
