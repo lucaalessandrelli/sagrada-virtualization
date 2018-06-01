@@ -20,7 +20,7 @@ public class VirtualViewParser {
     public String startParsing(){
         this.parseWindowPatternRestrictions(player.getWindowPatternCard());
         this.parseWindowPatternDice(player.getWindowPatternCard());
-        this.parseDraftPool(player.getDraftPool());
+        //this.parseDraftPool();
 
         for(WindowPatternCard windowPatternCard : this.player.getPublicObjects().getOthersWindows()) {
             this.parseWindowPatternRestrictions(windowPatternCard);
@@ -65,12 +65,12 @@ public class VirtualViewParser {
         return builder.toString();
     }
 
-    private String parseDraftPool(DraftPool draftPool){
+    public String parseDraftPool(){
         String passing = "MoveDraftPool ";
         builder.append(passing);
         builder.append(this.player.getUsername());
         builder.append(",");
-        ArrayList<Dice> dice = draftPool.getDraftPool();
+        ArrayList<Dice> dice = this.player.getDraftPool().getDraftPool();
 
         for(int i = 0; i < dice.size(); i++){
             builder.append(dice.get(i).getColour().toString());
