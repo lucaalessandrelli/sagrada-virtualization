@@ -42,6 +42,10 @@ public class Table {
             p.ChooseWindow(windowPatternCards);
             windowPatternCards.remove(p.getWindowPatternCard());
         }
+
+        this.diceBag.setNumPlayers(this.myplayers.size());
+        this.draftPool.addNewDices(this.diceBag.pullOut());
+
     }
 
     //Implement this in the other class
@@ -110,6 +114,10 @@ public class Table {
         return this.toolCards;
     }
 
+    public int getNumPlayers(){
+        return this.myplayers.size();
+    }
+
     public void setLastDices(int numRound){
         this.roundTrack.setDiceOnRoundTrack(numRound,this.draftPool.getDraftPool());
     }
@@ -134,12 +142,10 @@ public class Table {
             List<WindowPatternCard> otherwindows = new ArrayList<>();
             for (Player player: this.myplayers){
                 if(!(player.getUsername().equals(p.getUsername()))) {
-                    //playernames.add(player.getUsername());
+                    playernames.add(player.getUsername());
                     otherwindows.add(player.getWindowPatternCard());
                 }
             }
-
-            playernames = myplayers.parallelStream().map(Player::getUsername).filter(name -> (!name.equals(name))).collect(Collectors.toList());
 
             publicObjects.setPlayers(playernames);
 

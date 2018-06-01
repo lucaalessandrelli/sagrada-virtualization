@@ -32,8 +32,6 @@ public class ToolCardTest {
         for (ToolCard x: toolCards){
             assertFalse(tester.getAutomatedoperationlist().isEmpty());
             assertFalse(tester.getStateList().isEmpty());
-            //assertFalse(tester.getNameCMethods().isEmpty()); need to implement the method to add strings to list
-            //assertFalse(tester.getNamePMethods().isEmpty()); same as line 37
         }
 
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.gametools.Cell;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.DraftPool;
@@ -8,33 +9,44 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import java.util.ArrayList;
 
 public class VirtualViewParser {
+    private StringBuilder builder = new StringBuilder();
 
-    String player = "";
+    private Player player;
 
-    public VirtualViewParser(String player){
+    public VirtualViewParser(Player player){
         this.player = player;
     }
 
-    public String parseWindowPatternRestrictions(WindowPatternCard window){
-        StringBuilder builder = new StringBuilder();
-        String passing = "MoveWindow ";
-        builder.append(passing);
-        builder.append(this.player);
-        builder.append(",");
+    public String startParsing(){
+        this.parseWindowPatternRestrictions(player.getWindowPatternCard());
+        this.parseWindowPatternDice(player.getWindowPatternCard());
+        this.parseDraftPool(player.getDraftPool());
 
-        for (ArrayList<Cell> cells: window.getMatr()){
-            this.addProperties(builder,cells);
+        for(WindowPatternCard windowPatternCard : this.player.getPublicObjects().getOthersWindows()) {
+            this.parseWindowPatternRestrictions(windowPatternCard);
+            this.parseWindowPatternDice(windowPatternCard);
         }
-
-
         return builder.toString();
     }
 
-    public String parseWindowPatternDice(WindowPatternCard window){
-        StringBuilder builder = new StringBuilder();
-        String passing = "MoveWindow ";
+    private String parseWindowPatternRestrictions(WindowPatternCard window){
+        String passing = "MoveRestrictions ";
         builder.append(passing);
-        builder.append(this.player);
+        builder.append(window.getPlayer());
+        builder.append(",");
+
+        for (ArrayList<Cell> cells: window.getMatr()){
+            this.addProperties(cells);
+        }
+
+        builder.append(";");
+        return builder.toString();
+    }
+
+    private String parseWindowPatternDice(WindowPatternCard window){
+        String passing = "MoveDices ";
+        builder.append(passing);
+        builder.append(window.getPlayer());
         builder.append(",");
         ArrayList<Cell> topass = new ArrayList<>();
 
@@ -49,14 +61,14 @@ public class VirtualViewParser {
                 }
             }
         }
+        builder.append(";");
         return builder.toString();
     }
 
-    public String parseDraftPool(DraftPool draftPool){
-        StringBuilder builder = new StringBuilder();
+    private String parseDraftPool(DraftPool draftPool){
         String passing = "MoveDraftPool ";
         builder.append(passing);
-        builder.append(this.player);
+        builder.append(this.player.getUsername());
         builder.append(",");
         ArrayList<Dice> dice = draftPool.getDraftPool();
 
@@ -65,22 +77,22 @@ public class VirtualViewParser {
             builder.append(dice.get(i).getNumber());
             builder.append(",");
         }
+        builder.append(";");
         return  builder.toString();
     }
 
-    public void setPlayer(String player){
+    public void setPlayer(Player player){
         this.player = player;
     }
 
 
-    public void addProperties(StringBuilder stringBuilder, ArrayList<Cell> cellArrayList){
+    private void addProperties(ArrayList<Cell> cellArrayList){
         for (Cell cell: cellArrayList){
-            stringBuilder.append(cell.getProperty().getColour().toString());
-            stringBuilder.append(cell.getProperty().getNumber());
-            stringBuilder.append(cell.getPosition().getX());
-            stringBuilder.append(cell.getPosition().getY());
-            stringBuilder.append(",");
-
+            builder.append(cell.getProperty().getColour().toString());
+            builder.append(cell.getProperty().getNumber());
+            builder.append(cell.getPosition().getX());
+            builder.append(cell.getPosition().getY());
+            builder.append(",");
         }
     }
 

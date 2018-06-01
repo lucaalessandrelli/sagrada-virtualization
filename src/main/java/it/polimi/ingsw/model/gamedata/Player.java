@@ -29,21 +29,55 @@ public class Player {
     }
 
 
+    //SETTER
+
     public void setActivity(boolean active) {
         this.active = active;
     }
-
-    //getter method
-    public String getUsername() {
-        return username;
-    }
-
 
 
     public void setMyObjCard(ObjectiveCard obj){
         myObjCard =obj;
 
     }
+
+    private void setMyWindow(WindowPatternCard w) {
+        myWindow = w;
+    }
+
+    private void setmyFavTokens() {
+        myFavTokens = myWindow.getDifficulty();
+    }
+
+    public void setPublicObjects(PublicObjects publicObjects) {
+        this.publicObjects = publicObjects;
+    }
+
+
+    //getter method
+    public String getUsername() {
+        return username;
+    }
+
+    public List<ToolCard> getToolCards(){
+        return publicObjects.getToolCards();
+    }
+
+    public DraftPool getDraftPool(){
+        return publicObjects.getDraftPool();
+    }
+
+    public WindowPatternCard getWindowPatternCard(){
+        return myWindow;
+    }
+
+    public RoundTrack getRoundTrack(){
+        return publicObjects.getRoundTrack();
+    }
+
+    public PublicObjects getPublicObjects(){return this.publicObjects;}
+
+
     public void showMyObjCard(){
 
     }
@@ -54,16 +88,9 @@ public class Player {
         // while (myWindow==null) {
         setMyWindow(windows.get(chosenOne));
         setmyFavTokens();
+        windows.get(chosenOne).setPlayer(this.username);
         // }
 
-    }
-
-    private void setMyWindow(WindowPatternCard w) {
-        myWindow = w;
-    }
-
-    private void setmyFavTokens() {
-        myFavTokens = myWindow.getDifficulty();
     }
 
     //decreases favTokens if ToolCard is used
@@ -78,26 +105,10 @@ public class Player {
             }
         }
     }
-
-
-    public void setPublicObjects(PublicObjects publicObjects) {
-        this.publicObjects = publicObjects;
-    }
-    public List<ToolCard> getToolCards(){
-        return publicObjects.getToolCards();
-    }
-    public DraftPool getDraftPool(){
-        return publicObjects.getDraftPool();
-    }
-    public WindowPatternCard getWindowPatternCard(){
-        return myWindow;
-    }
-    public RoundTrack getRoundTrack(){
-        return publicObjects.getRoundTrack();
-    }
     public void notifyPlayer() {
         observer.updatePatternCard();
     }
+
     public void notifyTurn(String whoIsTurn) {
         try {
             observer.updateStateTurn(whoIsTurn);
