@@ -15,14 +15,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class ClientsContainer {
-    private Vector<ClientBox> clients;
+    private List<ClientBox> clients;
     private boolean matchStarted;
     private Manager manager;
     ScheduledExecutorService exec;
 
 
     public ClientsContainer(Manager manager){
-        clients = new Vector<>();
+        clients = new ArrayList<>();
         this.manager= manager;
         matchStarted = false;
         exec = Executors.newScheduledThreadPool(1);

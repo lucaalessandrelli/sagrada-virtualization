@@ -15,9 +15,10 @@ public class Client  {
     private int numOfMatch;
     private MessageQueue messages;
 
-    public Client(String addr) throws RemoteException{
+    public Client(String addr, MessageAnalyzer messageAnalyzer) throws RemoteException{
         connected=false;
         this.addr = addr;
+        messages = new MessageQueue(messageAnalyzer);
         /*if(kindConnection==1){
             connectionHandler = new SocketConnection(this,addr);
         }else if(kindConnection==2){
@@ -28,9 +29,9 @@ public class Client  {
         }*/
     }
 
-    public void createMessageQueue(MessageAnalyzer messageAnalyzer) {
+    /*public void createMessageQueue(MessageAnalyzer messageAnalyzer) {
         messages = new MessageQueue(messageAnalyzer);
-    }
+    }*/
 
     synchronized void setConnected(boolean b){
         connected = b;

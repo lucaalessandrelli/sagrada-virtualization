@@ -21,8 +21,9 @@ public class ClientMain {
         Scanner in = new Scanner(System.in);
         addr="127.0.0.1";
 
-        Client client = new Client(addr);
         MessageAnalyzer messageAnalyzer = new MessageAnalyzer();
+        Client client = new Client(addr,messageAnalyzer);
+        messageAnalyzer.setMessageQueue(client.getQueue());
 
         GuiView.setClient(client);
         GuiView.setMessageAnalyzer(messageAnalyzer);

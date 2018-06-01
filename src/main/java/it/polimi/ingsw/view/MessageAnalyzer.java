@@ -33,19 +33,22 @@ public class MessageAnalyzer {
             view.handleService(FXCollections.observableArrayList(Arrays.asList(message.replace("service", "").split(","))));
         }else if(message.startsWith("alert")) {
             view.handleAlert(message.replace("alert ", ""));
-        }else if(message.equals("Connecter, Welcome!")) {
+        }else if(message.equals("Connected, Welcome!")) {
             view.handleConnected(message);
         }
     }
 
-    public void notifyMessage(MessageQueue messageQueue) {
+    public void setMessageQueue(MessageQueue messageQueue) {
         this.messageQueue = messageQueue;
+    }
+
+    public void notifyMessage() {
         readQueue();
     }
 
     private void readQueue() {
         //scorre la queue e chiama su ogni stringa il metodo analyze
-        for(int i = 0; i < messageQueue.size();i++) {
+        while(messageQueue.size()>0) {
             analyze(messageQueue.poll());
         }
     }

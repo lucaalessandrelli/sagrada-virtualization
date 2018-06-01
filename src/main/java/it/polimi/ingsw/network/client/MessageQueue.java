@@ -17,7 +17,7 @@ public class MessageQueue {
 
     synchronized void add(String s){
         messages.add(s);
-        //notify for view
+        messageAnalyzer.notifyMessage();
     }
     synchronized public String poll(){
         return messages.poll();
