@@ -168,7 +168,7 @@ public class NetworkManager {
 
         @Override
         public void updatePlayers(String playersIn) throws RemoteException {
-
+            pr.println(playersIn);
         }
 
         @Override

@@ -66,7 +66,7 @@ public class RmiConnection implements ConnectionHandler {
                 disconnect();
             }
         } catch (RemoteException e) {
-            client.setServiceMessage("Server not available");
+            client.setServiceMessage("alert Server not available");
         }
     }
 

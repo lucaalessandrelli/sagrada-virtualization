@@ -37,11 +37,11 @@ public class SocketConnection implements ConnectionHandler {
             if (!client.connected()) {
                 String rqst = inputComposer.compose("login");
                 pr.println(rqst);
-                String answ = in.nextLine();
+                /*String answ = in.nextLine();
                 if (answ.equals("Connected, Welcome!")) {
                     client.setConnected(true);
-                }
-                client.setServiceMessage(answ);
+                }*/
+                //client.setServiceMessage(answ);
             }
             startListener();
         } catch (Exception e) {

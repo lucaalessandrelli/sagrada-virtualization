@@ -122,7 +122,7 @@ public class Client  {
     }
 
     public void setServiceMessage(String serviceMessage) {
-        System.out.println(serviceMessage);
+        messages.add(serviceMessage);
     }
 
     public void setNumMatch(int i) {
