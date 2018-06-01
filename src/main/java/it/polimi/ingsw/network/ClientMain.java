@@ -2,6 +2,7 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.GuiView;
+import it.polimi.ingsw.view.MessageAnalyzer;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
@@ -21,11 +22,13 @@ public class ClientMain {
         addr="127.0.0.1";
 
         Client client = new Client(addr);
+        MessageAnalyzer messageAnalyzer = new MessageAnalyzer();
 
         GuiView.setClient(client);
+        GuiView.setMessageAnalyzer(messageAnalyzer);
         GuiView.launching();
 
-        while (!client.connected()) {
+       /* while (!client.connected()) {
             out.println("Insert valid username");
             client.setName(in.next());
             client.connect();
@@ -37,7 +40,7 @@ public class ClientMain {
             //System.out.println(asw);
             //if (asw.equals("ok")) {
              //   client.disconnect();
-            }
+            }*/
     }
 }
 

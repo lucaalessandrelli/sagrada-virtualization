@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.network.client.MessageQueue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -190,23 +191,18 @@ public class MatchViewController implements Initializable, ViewInterface {
         }
     }
 
+
     @Override
-    public void sendDraftPools(String draftPools) {
+    public void handleConnected(String message) {
+    }
+
+    @Override
+    public void handleService(ObservableList<String> list) {
 
     }
 
     @Override
-    public void sendRestrictions(String restrictions) {
-
-    }
-
-    @Override
-    public void sendWindowPatternCards(String windowPatternCards) {
-
-    }
-
-    @Override
-    public void sendRoundTrack(String roundTrack) {
-
+    public void handleAlert(String message) {
+        AlertWindow.display("Alert", message);
     }
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.network.client;
 
+import it.polimi.ingsw.view.MessageAnalyzer;
+
 import java.rmi.RemoteException;
 
 import static java.lang.System.*;
@@ -16,7 +18,6 @@ public class Client  {
     public Client(String addr) throws RemoteException{
         connected=false;
         this.addr = addr;
-        messages = new MessageQueue();
         /*if(kindConnection==1){
             connectionHandler = new SocketConnection(this,addr);
         }else if(kindConnection==2){
@@ -25,6 +26,10 @@ public class Client  {
             out.println("Not valid choice, default connection : RMI");
             connectionHandler = new RmiConnection(this,addr);
         }*/
+    }
+
+    public void createMessageQueue(MessageAnalyzer messageAnalyzer) {
+        messages = new MessageQueue(messageAnalyzer);
     }
 
     synchronized void setConnected(boolean b){

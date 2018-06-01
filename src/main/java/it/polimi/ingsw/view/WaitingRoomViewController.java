@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import com.jfoenix.controls.JFXListView;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.network.client.MessageQueue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,7 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.TextArea;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,9 +25,12 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
 
     @FXML
     private JFXListView<String> playerList;
+    @FXML
+    private TextArea textArea;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //dovrei riuscire a prendere il nome del player da client e aggiungerlo tra quelli che si sono connessi
         loadPlayers();
     }
 
@@ -36,12 +42,13 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         this.stage = stage;
     }
 
-    public void loadPlayers() {
-        String us1 = "Luca";
-        String us2 = "Vincenzo";
-        String us3 = "Gionny";
-        list.addAll(us1,us2,us3);
+    public void setList(ObservableList<String> list) {
+        this.list = list;
+    }
+
+    private void loadPlayers() {
         playerList.setItems(list);
+        //textArea.appendText(player+" has connected.\n");
     }
 
     public void changeScene() throws IOException {
@@ -55,23 +62,18 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         stage.show();
     }
 
+
     @Override
-    public void sendDraftPools(String draftPools) {
+    public void handleConnected(String message) {
+    }
+
+    @Override
+    public void handleService(ObservableList<String> list) {
 
     }
 
     @Override
-    public void sendRestrictions(String restrictions) {
-
-    }
-
-    @Override
-    public void sendWindowPatternCards(String windowPatternCards) {
-
-    }
-
-    @Override
-    public void sendRoundTrack(String roundTrack) {
-
+    public void handleAlert(String message) {
+        AlertWindow.display("Alert", message);
     }
 }

@@ -2,7 +2,10 @@ package it.polimi.ingsw.view;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.network.client.MessageQueue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginViewController implements Initializable, ViewInterface {
@@ -22,6 +26,7 @@ public class LoginViewController implements Initializable, ViewInterface {
     private String  username;
     private int connectionType = SOCKET;
     private Stage stage;
+    private MessageAnalyzer messageAnalyzer;
 
     @FXML
     private JFXTextField usernameField;
@@ -30,6 +35,8 @@ public class LoginViewController implements Initializable, ViewInterface {
     @FXML
     private JFXCheckBox rmiBox;
 
+    @FXML
+    private JFXTextField test;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,17 +50,25 @@ public class LoginViewController implements Initializable, ViewInterface {
         this.stage = stage;
     }
 
+    public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
+        this.messageAnalyzer = messageAnalyzer;
+    }
+
     @FXML
     public void handleMouseClicked(MouseEvent event) {
         username = usernameField.getText();
-        setConnection();
+        if (!username.equals("")) {
+            setConnection();
+        }
     }
 
     @FXML
     public void handleEnterPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             username = usernameField.getText();
-            setConnection();
+            if (!username.equals("")) {
+                setConnection();
+            }
         }
     }
 
@@ -75,18 +90,15 @@ public class LoginViewController implements Initializable, ViewInterface {
 
     public void setConnection() {
         if (!username.equals("")) {
+            messageAnalyzer.setView(this);
+            client.createMessageQueue(messageAnalyzer);
             client.setName(username);
             client.setKindConnection(connectionType);
             client.connect();
-            try {
-                changeScene();
-            }catch(IOException e) {
-                System.out.println("Errore nel cambio di scena");
-            }
         }
     }
 
-    public void changeScene() throws IOException {
+    public void changeScene(ObservableList<String> list) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/waitingRoomGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -94,6 +106,7 @@ public class LoginViewController implements Initializable, ViewInterface {
         WaitingRoomViewController controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
+        controller.setList(list);
         controller.setStage(stage);
 
         Scene scene = new Scene(root);
@@ -103,22 +116,25 @@ public class LoginViewController implements Initializable, ViewInterface {
     }
 
     @Override
-    public void sendDraftPools(String draftPools) {
-
+    public void handleConnected(String message) {
     }
 
     @Override
-    public void sendRestrictions(String restrictions) {
-
+    public void handleService(ObservableList<String> list) {
+        try {
+            changeScene(list);
+        } catch (IOException e) {
+            System.out.println("Errore nel cambio scene");
+        }
     }
 
     @Override
-    public void sendWindowPatternCards(String windowPatternCards) {
-
+    public void handleAlert(String message) {
+        AlertWindow.display("Alert", message);
     }
 
-    @Override
-    public void sendRoundTrack(String roundTrack) {
-
+    @FXML
+    public void handleTest(KeyEvent keyEvent) {
+        AlertWindow.display("Alert","Sbagliato a fare il login");
     }
 }

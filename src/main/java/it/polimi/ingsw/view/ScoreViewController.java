@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import com.jfoenix.controls.JFXListView;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.network.client.MessageQueue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,23 +52,18 @@ public class ScoreViewController implements Initializable, ViewInterface {
         stage.show();
     }*/
 
+
     @Override
-    public void sendDraftPools(String draftPools) {
+    public void handleConnected(String message) {
+    }
+
+    @Override
+    public void handleService(ObservableList<String> list) {
 
     }
 
     @Override
-    public void sendRestrictions(String restrictions) {
-
-    }
-
-    @Override
-    public void sendWindowPatternCards(String windowPatternCards) {
-
-    }
-
-    @Override
-    public void sendRoundTrack(String roundTrack) {
-
+    public void handleAlert(String message) {
+        AlertWindow.display("Alert", message);
     }
 }

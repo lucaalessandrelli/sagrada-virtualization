@@ -26,7 +26,7 @@
          </image>
       </ImageView>
       <JFXTextField fx:id="usernameField" focusColor="#3c58fa" layoutX="260.0" layoutY="334.0" maxWidth="395.0" minWidth="280.0" onKeyPressed="#handleEnterPressed" prefHeight="37.0" prefWidth="395.0" promptText="Username" style="-fx-text-fill: white;" unFocusColor="#a0a2ab" />
-      <JFXTextField layoutX="260.0" layoutY="407.0" maxWidth="395.0" minWidth="280.0" prefHeight="37.0" prefWidth="395.0" promptText="Password" style="-fx-text-fill: white;" unFocusColor="#a0a2ab" />
+      <JFXTextField fx:id="test" layoutX="260.0" layoutY="407.0" maxWidth="395.0" minWidth="280.0" onKeyPressed="#handleTest" prefHeight="37.0" prefWidth="395.0" promptText="Password" style="-fx-text-fill: white;" unFocusColor="#a0a2ab" />
       <JFXButton fx:id="loginButton" layoutX="480.0" layoutY="486.0" onMouseClicked="#handleMouseClicked" prefHeight="37.0" prefWidth="85.0" style="-fx-background-color: #3C58FA;" text="Login" textFill="#dbdce4" />
       <JFXCheckBox fx:id="socketBox" checkedColor="#3c58fa" layoutX="722.0" layoutY="361.0" onAction="#handleSocketBox" selected="true" text="Socket" textFill="#cdcfda" unCheckedColor="#a0a2ab" />
       <JFXCheckBox fx:id="rmiBox" checkedColor="#3c58fa" layoutX="722.0" layoutY="389.0" onAction="#handleRmiBox" text="RMI" textFill="#cdcfda" unCheckedColor="#a0a2ab" />
