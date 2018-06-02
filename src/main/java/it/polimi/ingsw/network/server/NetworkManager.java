@@ -51,7 +51,6 @@ public class NetworkManager {
 
     private class SocketContainer implements ClientInterface, Runnable{
         private Socket socket;
-        private InputAnalyzer analyzer;
         private ServerInterface server;
         private String name;
         private boolean connected;
@@ -60,7 +59,6 @@ public class NetworkManager {
 
         public SocketContainer(Socket socket, ServerInterface s){
             this.socket = socket;
-            analyzer = new InputAnalyzer();
             server = s;
             connected =false;
         }
@@ -87,6 +85,7 @@ public class NetworkManager {
             String message = in.nextLine();
             while (!connected) {
                 if (message.startsWith("login")) {
+                    InputAnalyzer analyzer = new InputAnalyzer();
                     String name = analyzer.getData(message);
                     setName(name);
                     if (server.login(name, this)) {
@@ -100,12 +99,11 @@ public class NetworkManager {
             }
         }
 
-        private void receiveCommand() throws Exception {
+        private void receiveCommand() throws RemoteException {
                 String message;
                 message = in.nextLine();
-                if (message.startsWith("exit")) {
-                    String asw = server.command("exit");
-                    pr.println(asw);
+                server.command(message);
+                   /* pr.println(asw);
                     server.disconnect(name, this);
                     connected = false;
                     in.close();
@@ -116,7 +114,7 @@ public class NetworkManager {
                 } else {
                     pr.println(server.command(message));
 
-                }
+                }*/
         }
 
 
@@ -157,14 +155,8 @@ public class NetworkManager {
         }
 
         @Override
-        public void updateWindows(String allWindows) throws RemoteException {
-            pr.println(allWindows);
-
-        }
-
-        @Override
-        public void updateDraftPool(String draftPool) throws RemoteException {
-            pr.println(draftPool);
+        public void update(String updateMove) throws RemoteException {
+            pr.println(updateMove);
 
         }
 
@@ -180,8 +172,18 @@ public class NetworkManager {
         }
 
         @Override
-        public void setNumMatch(int num) throws RemoteException {
+        public void setNumMatch(String num) throws RemoteException {
+            pr.println(num);
+        }
 
+        @Override
+        public void updateMessage(String message) throws RemoteException {
+            pr.println(message);
+        }
+
+        @Override
+        public void setTimer(String timer) throws RemoteException {
+            pr.println(timer);
         }
     }
 }

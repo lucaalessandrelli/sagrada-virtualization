@@ -12,7 +12,7 @@ public abstract class VirtualViewObserver {
     protected ClientBox clientBox;
     protected Player player;
     //this method will be called when a pattern card is modified
-    public abstract void updatePatternCard();
+    public abstract void update();
     // this method is called when is the turn passes to the next player
     public abstract void updateStateTurn(String whoIsTurn) throws RemoteException;
 

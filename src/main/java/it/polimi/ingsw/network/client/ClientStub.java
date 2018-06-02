@@ -35,14 +35,10 @@ public class ClientStub implements ClientInterface {
     }
 
     @Override
-    public void updateWindows(String allWindows) throws RemoteException {
-        queue.add(allWindows);
+    public void update(String updateMove) throws RemoteException {
+        queue.add(updateMove);
     }
 
-    @Override
-    public void updateDraftPool(String draftPool) throws RemoteException {
-        queue.add(draftPool);
-    }
 
     @Override
     public void updatePlayers(String playersIn) throws RemoteException {
@@ -55,7 +51,17 @@ public class ClientStub implements ClientInterface {
     }
 
     @Override
-    public void setNumMatch(int num) throws RemoteException {
+    public void setNumMatch(String num) throws RemoteException {
+        queue.add(num);
+    }
 
+    @Override
+    public void updateMessage(String message) throws RemoteException {
+        queue.add(message);
+    }
+
+    @Override
+    public void setTimer(String timer) throws RemoteException {
+        queue.add(timer);
     }
 }

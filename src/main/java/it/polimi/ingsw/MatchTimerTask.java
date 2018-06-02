@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.controller.ClientsContainer;
 import it.polimi.ingsw.model.gamedata.Player;
+import it.polimi.ingsw.network.client.Client;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +27,25 @@ public class MatchTimerTask extends TimerTask {
     @Override
     public void run() {
         tempTime -= 1000;
-//        List<Player> playerList = lobby.getPlayerList();
+        ClientsContainer playerList = lobby.getCliets();
 
-        /*if(playerList.size() >= 2 && tempTime == 0) {
+        if (playerList.sizeContainer() >= 2 && tempTime == 0) {
             lobby.resetTimer();
             //CREATE A REAL MATCH
             lobby.notifyManager();
-            out.println("Now the state is: StartedMatch");*/
-          if(/*playerList.size() < 2 &&*/ tempTime == 0) {
-            tempTime = time;
-            //out.println("Timer:"+ tempTime);
-        } else {
-            //out.println("Timer:"+ tempTime);
+            out.println("Now the state is: StartedMatch");
+            if (playerList.sizeContainer() < 2 && tempTime == 0) {
+                tempTime = time;
+                //out.println("Timer:"+ tempTime);
+            } else {
+                //out.println("Timer:"+ tempTime);
+            }
         }
     }
+
+        synchronized public long getTempTime () {
+            return tempTime;
+        }
+
+
 }

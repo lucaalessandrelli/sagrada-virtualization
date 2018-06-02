@@ -17,6 +17,7 @@ public class Round extends Thread{
     private long timeSleep;
     private Turn turn;
     private Player currTurn;
+    private Iterator<Player> iterator;
 
     public Round(List<Player> playerList, int roundNumber, Table table) {
         this.roundNumber = roundNumber;
@@ -28,9 +29,9 @@ public class Round extends Thread{
 
     public void go() {
         Player p;
-        Iterator<Player> i = players.getIterator();
-        while(i.hasNext()){
-            p = i.next();
+        iterator = players.getIterator();
+        while(iterator.hasNext()){
+            p = iterator.next();
             currTurn = p;
             if (p.isActive()){
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
@@ -38,10 +39,8 @@ public class Round extends Thread{
                 try {
                     Thread.sleep(timeSleep);
                     p.setActivity(false);
-                   // p.notifyPlayer("Time out"); messaggio per tutti
                 } catch (InterruptedException e) {
                     players.notifyChanges();
-                    //go on next player
                 }
             }
         }
@@ -56,7 +55,6 @@ public class Round extends Thread{
     public String getCurrTurn() {
         return currTurn.getUsername();
     }
-
 
     public int getRoundNumber() {
         return this.roundNumber;

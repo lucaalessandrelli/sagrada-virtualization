@@ -19,19 +19,8 @@ public class Client  {
         connected=false;
         this.addr = addr;
         messages = new MessageQueue(messageAnalyzer);
-        /*if(kindConnection==1){
-            connectionHandler = new SocketConnection(this,addr);
-        }else if(kindConnection==2){
-            connectionHandler = new RmiConnection(this,addr);
-        }else{
-            out.println("Not valid choice, default connection : RMI");
-            connectionHandler = new RmiConnection(this,addr);
-        }*/
     }
 
-    /*public void createMessageQueue(MessageAnalyzer messageAnalyzer) {
-        messages = new MessageQueue(messageAnalyzer);
-    }*/
 
     synchronized void setConnected(boolean b){
         connected = b;
@@ -42,9 +31,6 @@ public class Client  {
         connectionHandler.connect();
     }
 
-    synchronized public boolean ping(){
-        return connectionHandler.ping();
-    }
 
 
    /* @Override
@@ -60,27 +46,6 @@ public class Client  {
 
 
 
-    /*synchronized public String getTypeConnection() {
-        return "(RMI)";
-    }*/
-
-
-    synchronized public void updateWindows(String allWindows) throws RemoteException {
-
-    }
-
-
-    synchronized public void updateDraftPool(String draftPool) throws RemoteException {
-
-    }
-
-    synchronized public void updatePlayers(String playersIn) throws RemoteException {
-
-    }
-
-    synchronized public void updateTurn(String whoIsTurn) {
-
-    }
 
     public void sendCommand(String cmd) {
          connectionHandler.sendCommand(cmd);
@@ -95,7 +60,7 @@ public class Client  {
         setAddress(addr);
     }
 
-    public void setAddress(String addr) {
+    private void setAddress(String addr) {
         if(kindConnection==1){
             connectionHandler = new SocketConnection(this,addr);
         }else if(kindConnection==2){
@@ -107,14 +72,6 @@ public class Client  {
 
     public void setKindConnection(int kindConnection) {
         this.kindConnection = kindConnection;
-        /*if(kindConnection==1){
-            connectionHandler = new SocketConnection(this,addr);
-        }else if(kindConnection==2){
-            connectionHandler = new RmiConnection(this,addr);
-        }else{
-            out.println("Not valid choice, default connection : RMI");
-            connectionHandler = new RmiConnection(this,addr);
-        }*/
     }
 
     public MessageQueue getQueue() {
@@ -128,6 +85,7 @@ public class Client  {
     public void setNumMatch(int i) {
         numOfMatch=i;
     }
+    public int getNumOfMatch(){return numOfMatch;}
     public synchronized void viewMessage(String s){
         messages.add(s);
     }

@@ -20,12 +20,12 @@ public class RmiConnection implements ConnectionHandler {
         this.client = client;
         address = addr;
         try {
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1",PORT_RMI);
+            Registry registry = LocateRegistry.getRegistry(addr,PORT_RMI);
             ClientStub obj = new ClientStub(client.getQueue(),client.getName());
             stub = (ClientInterface) UnicastRemoteObject.exportObject(obj,0);
             server = (ServerInterface) registry.lookup("server");
         } catch (Exception e) {
-            System.out.println("alert Server not available");
+            client.setServiceMessage("alert Server not available");
         }
 
     }
@@ -35,14 +35,14 @@ public class RmiConnection implements ConnectionHandler {
                 String name = client.getName();
                 if (server.login(name,stub)) {
                     client.setConnected(true);
-                    System.out.println("Connected, Welcome!");
+                    client.setServiceMessage("Connected, Welcome!");
                 } else {
                     client.setConnected(false);
-                    System.out.println("alert Already connected");
+                    client.setServiceMessage("alert Already connected");
 
                 }
             } catch (RemoteException e) {
-                System.out.println("alert Server not available");
+                client.setServiceMessage("alert Server not available");
             }
         }
     }
@@ -61,19 +61,12 @@ public class RmiConnection implements ConnectionHandler {
     @Override
     public void sendCommand(String cmd) {
         try {
-            String asw =server.command(cmd);
-            if(asw.equals("service Disconnected form server")){
-                disconnect();
-            }
+            server.command(cmd);
         } catch (RemoteException e) {
             client.setServiceMessage("alert Server not available");
         }
     }
 
-    @Override
-    public boolean ping() {
-        return true;
-    }
 
 
 }

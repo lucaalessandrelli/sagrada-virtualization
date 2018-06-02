@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Match;
 import it.polimi.ingsw.WaitingRoom;
+import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.network.ClientInterface;
 
 import java.rmi.RemoteException;
@@ -14,6 +15,7 @@ public class Manager {
     private int numOfMatch;
     private WaitingRoom lobby;
     private ClientHandler clientHandler;
+    private InputAnalyzer analyzer;
 
     public Manager() {
         clients = new ArrayList<>();
@@ -21,8 +23,9 @@ public class Manager {
         numOfMatch = 0;
         ClientsContainer c = new ClientsContainer(this);
         clients.add(c);
-        lobby = new WaitingRoom(5000, this, clients.get(numOfMatch));
+        lobby = new WaitingRoom(30000, this, clients.get(numOfMatch));
         clientHandler = new ClientHandler();
+        analyzer = new InputAnalyzer(this);
     }
 
     public void createMatch(WaitingRoom lobby) {
@@ -69,5 +72,23 @@ public class Manager {
     }
 
     public void notifyEnd(String name) {
+    }
+
+    public void analyze(String cmd) {
+        analyzer.analyse(cmd);
+    }
+
+    void move(int match,String name, String move){
+        Round round = matches.get(match).getCurrRound();
+        if(round.getCurrTurn().equals(name)){
+            Proc processor = new Proc(round,move);
+            processor.process();
+        }
+        //cerca il nome del giocatore e manda una risposta
+    }
+
+    public void setPlayerInactive(String name) {
+        int numMatch = clientHandler.getGame(name);
+        matches.get(numMatch).setPlayerInactive(name);
     }
 }

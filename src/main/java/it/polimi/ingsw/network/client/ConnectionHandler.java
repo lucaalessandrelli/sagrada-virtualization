@@ -6,5 +6,4 @@ public interface ConnectionHandler {
      void connect();
      /*void disconnect();*/
      void sendCommand(String cmd);
-     boolean ping();
 }

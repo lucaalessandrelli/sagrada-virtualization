@@ -106,7 +106,7 @@ public class Player {
         }
     }
     public void notifyPlayer() {
-        observer.updatePatternCard();
+        observer.update();
     }
 
     public void notifyTurn(String whoIsTurn) {

@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class WaitingRoom {
     private Manager manager;
     private Timer timer;
-    private TimerTask task;
+    private MatchTimerTask task;
     private long time;
     private ClientsContainer playerList;
 
@@ -21,6 +21,7 @@ public class WaitingRoom {
         this.time = time;
         timer = new Timer();
         this.manager = manager;
+        task = new MatchTimerTask(this,time, timer);
     }
 
     //Modifier methods
@@ -28,10 +29,10 @@ public class WaitingRoom {
         if (playerList.sizeContainer() == 1) {
             playerList.addClient(player);
             //start the timer
-            task = new MatchTimerTask(this,time, timer);
             timer.schedule(task, 1000,1000);
         } else if (playerList.sizeContainer() < 4) {
             playerList.addClient(player);
+            playerList.notifyTimer(task.getTempTime());
             if(playerList.sizeContainer() == 4) {
                 //NOTIFY THE SERVER IT NEEDS TO CREATE A REAL MATCH AND ADD IT TO THE LIST OF MATCHES
                 this.notifyManager();
@@ -67,6 +68,10 @@ public class WaitingRoom {
 
     public void notifyManager() {
         manager.createMatch(this);
+    }
+
+    public ClientsContainer getCliets() {
+        return playerList;
     }
 
     /*public ArrayList<Player> clonePlayerList() {

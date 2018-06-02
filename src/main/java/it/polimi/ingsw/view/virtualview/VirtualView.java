@@ -14,15 +14,12 @@ public class VirtualView extends VirtualViewObserver {
     }
 
     @Override
-    public void updatePatternCard() {
-        String allWindows;
-        String draftPool;
+    public void update() {
+        String updateMove;
         VirtualViewParser parser = new VirtualViewParser(player);
-        allWindows = parser.startParsing();
-        draftPool = parser.parseDraftPool();
+        updateMove = parser.startParsing();
         try {
-            clientBox.updateWindows(allWindows);
-            clientBox.updateDraftPool(draftPool);
+            clientBox.update(updateMove);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

@@ -62,12 +62,8 @@ public class Server implements ServerInterface {
     }
 
     @Override
-    public synchronized String command(String cmd) {
-        if(cmd.equals("exit")){
-            return "service Disconnected form server";
-        }else{
-           return "service Invalid command";
-        }
+    public synchronized void command(String cmd) {
+        manager.analyze(cmd);
     }
 
 

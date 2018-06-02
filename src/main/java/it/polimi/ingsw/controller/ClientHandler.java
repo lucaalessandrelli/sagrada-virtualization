@@ -25,4 +25,8 @@ public class ClientHandler {
         allPlayers.remove(name);
         out.println(allPlayers.size() + " players logged");
     }
+
+    public int getGame(String name) {
+        return allPlayers.get(name);
+    }
 }

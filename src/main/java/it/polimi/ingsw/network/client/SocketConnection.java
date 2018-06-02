@@ -20,8 +20,7 @@ public class SocketConnection implements ConnectionHandler {
         try {
             socket = new Socket(addr, PORT_SOCKET);
         } catch (IOException e) {
-            System.out.println("Connection lost");
-        }
+            client.setServiceMessage("alert Server not available");        }
     }
 
     public void startListener(){
@@ -32,7 +31,6 @@ public class SocketConnection implements ConnectionHandler {
     @Override
     public void connect() {
         try {
-            Scanner in = new Scanner(socket.getInputStream());
             PrintWriter pr = new PrintWriter(socket.getOutputStream(), true);
             if (!client.connected()) {
                 String rqst = inputComposer.compose("login");
@@ -45,7 +43,7 @@ public class SocketConnection implements ConnectionHandler {
             }
             startListener();
         } catch (Exception e) {
-            System.out.println("alert Server not available");
+            client.setServiceMessage("alert Server not available");
         }
 
 
@@ -73,13 +71,9 @@ public class SocketConnection implements ConnectionHandler {
             cmd = inputComposer.compose(cmd);
             pr.println(cmd);
         } catch (Exception e) {
-            System.out.println("alert Server not available");
+            client.setServiceMessage("alert Server not available");
         }
 
     }
 
-    @Override
-    public boolean ping() {
-        return true;
-    }
 }

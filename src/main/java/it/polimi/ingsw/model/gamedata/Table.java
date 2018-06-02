@@ -44,6 +44,8 @@ public class Table {
         this.diceBag.setNumPlayers(this.myplayers.size());
         this.draftPool.addNewDices(this.diceBag.pullOut());
 
+        setPublicObjects();
+
     }
 
     //Implement this in the other class

@@ -32,6 +32,9 @@ public class ClientsContainer {
                     c.ping();
                 } catch (RemoteException e) {
                     System.out.println(c.getName() + " is disconnected");
+                    if(matchStarted) {
+                        manager.setPlayerInactive(c.getName());
+                    }
                     clients.remove(c);
                     notifyPlayers();
                     if (clients.size() < 2) {
@@ -103,7 +106,7 @@ public class ClientsContainer {
                  str.append(" " + c.getName());
             }
             String playersIn = str.toString();
-            playersIn = "service " + playersIn;
+            playersIn = "service" + playersIn;
             String finalPlayersIn = playersIn;
             clients.forEach(clientBox -> {
                 try {
@@ -127,5 +130,15 @@ public class ClientsContainer {
             }
         }
 
+    }
+
+    public void notifyTimer(long tempTime) {
+        for (ClientBox c : clients){
+            try {
+                c.setTimer(tempTime);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -73,4 +73,12 @@ public class Match {
     public Round getCurrRound() {
         return currRound;
     }
+
+    public void setPlayerInactive(String name) {
+        for (Player p : playerList){
+            if(p.getUsername().equals(name)){
+                p.setActivity(false);
+            }
+        }
+    }
 }

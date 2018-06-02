@@ -28,18 +28,20 @@ public class ClientBox {
     }
 
     public void setNumMatch(int numOfMatch) throws RemoteException {
-        client.setNumMatch(numOfMatch);
+        String num = String.valueOf(numOfMatch);
+        client.setNumMatch("match "+num);
     }
 
     public void updateTurn(String s) throws RemoteException {
         client.updateTurn(s);
     }
 
-    public void updateWindows(String allWindows) throws RemoteException {
-        client.updateWindows(allWindows);
+    public void update(String updateMove) throws RemoteException {
+        client.update(updateMove);
     }
 
-    public void updateDraftPool(String draftPool) throws RemoteException {
-        client.updateDraftPool(draftPool);
+    public void setTimer(long tempTime) throws RemoteException {
+        String timer = String.valueOf(tempTime);
+        client.setTimer("timer "+timer);
     }
 }
