@@ -92,7 +92,7 @@ public class Client  {
 
     public void setName(String n) {
         name=n;
-        setAddress("127.0.0.1");
+        setAddress(addr);
     }
 
     public void setAddress(String addr) {
@@ -107,14 +107,14 @@ public class Client  {
 
     public void setKindConnection(int kindConnection) {
         this.kindConnection = kindConnection;
-        if(kindConnection==1){
+        /*if(kindConnection==1){
             connectionHandler = new SocketConnection(this,addr);
         }else if(kindConnection==2){
             connectionHandler = new RmiConnection(this,addr);
         }else{
             out.println("Not valid choice, default connection : RMI");
             connectionHandler = new RmiConnection(this,addr);
-        }
+        }*/
     }
 
     public MessageQueue getQueue() {

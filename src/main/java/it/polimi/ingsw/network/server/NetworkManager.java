@@ -158,11 +158,13 @@ public class NetworkManager {
 
         @Override
         public void updateWindows(String allWindows) throws RemoteException {
+            pr.println(allWindows);
 
         }
 
         @Override
         public void updateDraftPool(String draftPool) throws RemoteException {
+            pr.println(draftPool);
 
         }
 
@@ -173,6 +175,7 @@ public class NetworkManager {
 
         @Override
         public void updateTurn(String whoIsTurn) {
+            pr.println(whoIsTurn);
 
         }
 
