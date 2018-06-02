@@ -92,7 +92,7 @@ public class Client  {
 
     public void setName(String n) {
         name=n;
-        setAddress("127.0.0.1");
+        setAddress(addr);
     }
 
     public void setAddress(String addr) {

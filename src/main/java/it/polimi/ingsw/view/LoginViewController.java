@@ -2,7 +2,6 @@ package it.polimi.ingsw.view;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.MessageQueue;
 import javafx.collections.ObservableList;

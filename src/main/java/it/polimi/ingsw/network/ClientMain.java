@@ -19,7 +19,7 @@ public class ClientMain {
             addr="127.0.0.1";
         }*/
         Scanner in = new Scanner(System.in);
-        addr="127.0.0.1";
+        addr=in.nextLine();
 
         MessageAnalyzer messageAnalyzer = new MessageAnalyzer();
         Client client = new Client(addr,messageAnalyzer);
