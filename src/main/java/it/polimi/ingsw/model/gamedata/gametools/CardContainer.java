@@ -149,7 +149,6 @@ public class CardContainer {
     }
 
     //Pull out 4 WindowPatternCard given to the player to select one of them
-    //!!!!Misses one part of the code!!!!
     public ArrayList<ToolCard> pullOutTools() {
         int dimension = 3;
 
@@ -175,7 +174,7 @@ public class CardContainer {
 
 
     //read the values in the xml file and create a objective card to return
-    private ObjectiveCard readObjective(String namefile, int cont) {
+    protected ObjectiveCard readObjective(String namefile, int cont) {
         ObjectiveCard myobj = new ObjectiveCard();
         int result;
         String path = new File(namefile).getAbsolutePath();
@@ -219,14 +218,14 @@ public class CardContainer {
     }
 
     //read values that are relevant only for public cards and not for private ones
-    private void readRulesPublic(Document document, ArrayList<String> rules, int cont){
+    protected void readRulesPublic(Document document, ArrayList<String> rules, int cont){
         rules.add(document.getElementsByTagName(WHERE).item(cont).getTextContent());
         rules.add(document.getElementsByTagName(PROPE).item(cont).getTextContent());
         rules.add(document.getElementsByTagName(VALUES).item(cont).getTextContent());
         rules.add(document.getElementsByTagName(COLOUR).item(cont).getTextContent());
     }
 
-    private WindowPatternCard readPatterns(String namefile, int cont){
+    protected WindowPatternCard readPatterns(String namefile, int cont){
         WindowPatternCard mypattern = new WindowPatternCard();
         String all;
         String path = new File(namefile).getAbsolutePath();
@@ -260,7 +259,7 @@ public class CardContainer {
         return mypattern;
     }
 
-    private ToolCard readTools(String namefile, int cont){
+    protected ToolCard readTools(String namefile, int cont){
         ToolCard mytool = new ToolCard();
         String all;
         Colour tmpc = null;

@@ -19,6 +19,11 @@ public class ToolCard extends Card implements Move {
         this.cost = 1;
     }
 
+    public ToolCard exactToolCard(int i){
+        CardContainer cardContainer = new CardContainer();
+        return cardContainer.readTools("src/main/resources/tool_cards_formalization.xml", i);
+    }
+
     @Override
     public void show() {
         System.out.println("Name :" + this.getName() + "\nDescription :"
