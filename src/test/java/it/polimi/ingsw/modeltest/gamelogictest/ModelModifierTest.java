@@ -153,7 +153,7 @@ public class ModelModifierTest {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.ChooseWindow(windows);
+        p1.chooseWindow(windows);
         players.add(p1);
         players.add(p2);
         players.add(p3);
@@ -209,7 +209,7 @@ public class ModelModifierTest {
 
         Pos poscard = new Pos(1,0);
 
-        p1.ChooseWindow(windows);
+        p1.chooseWindow(windows);
 
         p1.getWindowPatternCard().placeDice(d, posdice.getX(),posdice.getY());
 
@@ -254,7 +254,7 @@ public class ModelModifierTest {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.ChooseWindow(windows);
+        p1.chooseWindow(windows);
         players.add(p1);
         players.add(p2);
         players.add(p3);

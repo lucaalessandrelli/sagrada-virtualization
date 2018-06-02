@@ -4,7 +4,6 @@ package it.polimi.ingsw.model.gamedata;
 
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PublicObjects {

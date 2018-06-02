@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.gamelogic.checker;
 
-import com.sun.xml.internal.org.jvnet.mimepull.MIMEConfig;
 import it.polimi.ingsw.model.gamedata.gametools.Cell;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.Pos;

@@ -2,10 +2,8 @@ package it.polimi.ingsw.model.gamedata;
 
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
-import javax.tools.Tool;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 //I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
 public class Table {
@@ -39,7 +37,7 @@ public class Table {
         }
         this.windowPatternCards = this.container.pullOutPattern(this.myplayers.size());
         for (Player p: this.myplayers) {
-            p.ChooseWindow(windowPatternCards);
+            p.chooseWindow(windowPatternCards);
             windowPatternCards.remove(p.getWindowPatternCard());
         }
 

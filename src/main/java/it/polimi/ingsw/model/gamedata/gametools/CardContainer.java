@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.gamedata.gametools;
 
 import it.polimi.ingsw.model.gamedata.Colour;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -42,6 +42,7 @@ public class CardContainer {
     private static final String CMETHODS = "CMETHODS";
     private static final String PMETHODS = "PMETHODS";
     private static final String DIFFICULTY = "DIFFICULTY";
+    private String PM = "PM";
 
 
     public CardContainer(){
@@ -295,14 +296,27 @@ public class CardContainer {
         all = document.getElementsByTagName(CMETHODS).item(cont).getTextContent();
         this.creatingStrings(mytool.getNameCMethods(),all);
 
+        StringBuilder iterate = new StringBuilder();
+        iterate.append(PM);
 
-
-        for(int i = 0; document.getElementsByTagName("PM" + Character.forDigit(i,10)).item(i).hasAttributes(); i++){
+        /*for(int i = 0; document.getElementsByTagName(PMETHODS).item(cont).hasChildNodes(); i++){
             System.out.println("Indice: " + i);
-            all = document.getElementsByTagName(PMETHODS).item(cont).getChildNodes().item(0).getTextContent();
+            iterate.append(i);
+            all = document.getElementsByTagName(iterate.toString()).item(cont-1).getTextContent();
             ArrayList<String> tofill = new ArrayList<>();
             this.creatingStrings(tofill, all);
             mytool.getNamePMethods().add(tofill);
+            iterate.deleteCharAt(iterate.toString().length()-1);
+        }*/
+
+        NodeList nodelist = document.getElementsByTagName(PMETHODS).item(cont).getChildNodes();
+
+        for(int i = 1; i < nodelist.getLength() - 1; i++){
+            all = nodelist.item(i).getTextContent(); //here is i+1 because the first element in the nodelist is not a real element
+            ArrayList<String> tofill = new ArrayList<>();
+            this.creatingStrings(tofill, all);
+            mytool.getNamePMethods().add(tofill);
+            //iterate.deleteCharAt(iterate.toString().length()-1);
         }
 
         mytool.setDescription((document.getElementsByTagName(DESCRIPTION).item(cont).getTextContent()));
