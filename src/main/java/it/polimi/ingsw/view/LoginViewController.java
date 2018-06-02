@@ -90,8 +90,9 @@ public class LoginViewController implements Initializable, ViewInterface {
     public void setConnection() {
         if (!username.equals("")) {
             messageAnalyzer.setView(this);
-            client.setName(username);
+
             client.setKindConnection(connectionType);
+            client.setName(username);
             client.connect();
         }
     }
