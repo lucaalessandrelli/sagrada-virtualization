@@ -66,4 +66,19 @@ public class ScoreViewController implements Initializable, ViewInterface {
     public void handleAlert(String message) {
         AlertWindow.display("Alert", message);
     }
+
+    @Override
+    public void handleTimer(String time) {
+
+    }
+
+    @Override
+    public void handleMatchId(String idMatch) {
+
+    }
+
+    @Override
+    public void handleMatchSetup(String matchSetup) {
+
+    }
 }

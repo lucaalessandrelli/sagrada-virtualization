@@ -3,7 +3,7 @@ package it.polimi.ingsw.view;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.network.client.MessageQueue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginViewController implements Initializable, ViewInterface {
@@ -26,6 +25,7 @@ public class LoginViewController implements Initializable, ViewInterface {
     private int connectionType = SOCKET;
     private Stage stage;
     private MessageAnalyzer messageAnalyzer;
+    private ObservableList<String> list = FXCollections.observableArrayList();
 
     @FXML
     private JFXTextField usernameField;
@@ -33,9 +33,6 @@ public class LoginViewController implements Initializable, ViewInterface {
     private JFXCheckBox socketBox;
     @FXML
     private JFXCheckBox rmiBox;
-
-    @FXML
-    private JFXTextField test;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -97,7 +94,7 @@ public class LoginViewController implements Initializable, ViewInterface {
         }
     }
 
-    public void changeScene(ObservableList<String> list) throws IOException {
+    public void changeScene(String time) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/waitingRoomGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -106,10 +103,13 @@ public class LoginViewController implements Initializable, ViewInterface {
         // Set data in the controller
         controller.setClient(client);
         controller.setList(list);
+        controller.setTime(time);
         controller.setStage(stage);
+        controller.setMessageAnalyzer(messageAnalyzer);
 
         Scene scene = new Scene(root);
         controller.loadPlayers();
+        controller.startTimer();
         messageAnalyzer.setView(controller);
         stage.setScene(scene);
         stage.setTitle("Waiting room");
@@ -122,11 +122,7 @@ public class LoginViewController implements Initializable, ViewInterface {
 
     @Override
     public void handleService(ObservableList<String> list) {
-        try {
-            changeScene(list);
-        } catch (IOException e) {
-            System.out.println("Errore nel cambio scene");
-        }
+        this.list = list;
     }
 
     @Override
@@ -134,8 +130,22 @@ public class LoginViewController implements Initializable, ViewInterface {
         AlertWindow.display("Alert", message);
     }
 
-    @FXML
-    public void handleTest(KeyEvent keyEvent) {
-        AlertWindow.display("Alert","Sbagliato a fare il login");
+    @Override
+    public void handleTimer(String time) {
+        try {
+            changeScene(time);
+        } catch (IOException e) {
+            System.out.println("Errore nel cambio scene");
+        }
+    }
+
+    @Override
+    public void handleMatchId(String idMatch) {
+
+    }
+
+    @Override
+    public void handleMatchSetup(String matchSetup) {
+
     }
 }

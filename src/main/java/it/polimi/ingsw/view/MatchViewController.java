@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.MessageQueue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,19 +12,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MatchViewController implements Initializable, ViewInterface {
+    private Client client;
     private String draftPool;
     private String restrictions;
     private String diceWindow;
     private ModeRep modeRep;
-
-    @FXML
-    private Text txt2;
-
-    @FXML
-    private Text txt10;
+    private MessageAnalyzer messageAnalyzer;
 
     @FXML
     private GridPane mywindow;
@@ -88,6 +88,10 @@ public class MatchViewController implements Initializable, ViewInterface {
         this.modeRep = new ModeRep();
     }
 
+    public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
+        this.messageAnalyzer = messageAnalyzer;
+    }
+
     public void notifyNewModelRep(String draftPool, String restrictions, String diceWindow) {
         this.draftPool = draftPool;
         this.restrictions = restrictions;
@@ -149,6 +153,14 @@ public class MatchViewController implements Initializable, ViewInterface {
         clipboardContent.putString(source.getText());
         dragboard.setContent(clipboardContent);
 
+        int j = riserva.getColumnIndex(source);
+        int i = riserva.getRowIndex(source);
+        List<String> list = Arrays.asList(source.getText().split(" "));
+
+        String x = Integer.toString(3 * i + j);
+
+        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+list.get(1)+","+list.get(0)+","+x+",0");
+
         event.consume();
     }
 
@@ -178,6 +190,11 @@ public class MatchViewController implements Initializable, ViewInterface {
         System.out.println("RECEIVER \nColumn : "+ mywindow.getColumnIndex(textReceiver) +" ------- Row :"+ mywindow.getRowIndex(textReceiver));
         System.out.println("SOURCE -> \nColumn : "+ mywindow.getColumnIndex(source) +" ------- Row :"+ mywindow.getRowIndex(source));
 
+        int y = mywindow.getColumnIndex(textReceiver);
+        int x = mywindow.getRowIndex(textReceiver);
+
+        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);
+
         textReceiver.setText(str);
     }
 
@@ -204,5 +221,20 @@ public class MatchViewController implements Initializable, ViewInterface {
     @Override
     public void handleAlert(String message) {
         AlertWindow.display("Alert", message);
+    }
+
+    @Override
+    public void handleTimer(String time) {
+
+    }
+
+    @Override
+    public void handleMatchId(String idMatch) {
+
+    }
+
+    @Override
+    public void handleMatchSetup(String matchSetup) {
+
     }
 }
