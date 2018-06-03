@@ -37,9 +37,8 @@ public class VirtualViewParser {
     }
 
     private String parseWindowPatternRestrictions(WindowPatternCard window){
-        String passing = "restrictions";
+        String passing = "restrictions ";
         builder.append(passing);
-        builder.append(VIRG);
         builder.append(window.getPlayer());
         builder.append(VIRG);
 
@@ -52,9 +51,8 @@ public class VirtualViewParser {
     }
 
     private String parseWindowPatternDice(WindowPatternCard window){
-        String passing = ",dices";
+        String passing = "dices ";
         builder.append(passing);
-        builder.append(VIRG);
         builder.append(window.getPlayer());
         builder.append(VIRG);
         ArrayList<Cell> topass = new ArrayList<>();
@@ -75,9 +73,8 @@ public class VirtualViewParser {
     }
 
     public String parseDraftPool(){
-        String passing = "draftpool";
+        String passing = "draftpool ";
         builder.append(passing);
-        builder.append(VIRG);
         ArrayList<Dice> dice = this.player.getDraftPool().getDraftPool();
 
         for(int i = 0; i < dice.size(); i++){
@@ -90,16 +87,15 @@ public class VirtualViewParser {
     }
 
     public String parseObjectiveCard(){
-        String passing = "publiccards";
+        String passing = "publiccards ";
         builder.append(passing);
-        builder.append(VIRG);
 
         for (ObjectiveCard objective: player.getPublicObjects().getObjectiveCards()) {
             builder.append(objective.getID());
             builder.append(VIRG);
         }
         builder.append(SEP);
-        builder.append("privatecard");
+        builder.append("privatecard ");
         builder.append(VIRG);
         builder.append(player.getPrivateCard().getID());
         builder.append(SEP);
@@ -107,9 +103,8 @@ public class VirtualViewParser {
     }
 
     public String parseToolcards(){
-        String passing = "toolcards";
+        String passing = "toolcards ";
         builder.append(passing);
-        builder.append(VIRG);
 
         for(ToolCard toolCard : player.getPublicObjects().getToolCards()){
             builder.append(toolCard.getID());
@@ -120,10 +115,9 @@ public class VirtualViewParser {
     }
     
     public String parseFavorToken(){
-        String passing = "favors";
+        String passing = "favors ";
         builder.append(passing);
-        builder.append(VIRG);
-        
+
         builder.append(player.getWindowPatternCard().getDifficulty());
         builder.append(VIRG);
         builder.append(SEP);
@@ -131,9 +125,9 @@ public class VirtualViewParser {
     }
     
     public String parseRoundTrack(){
-        String passing = "roundtrack";
+        String passing = "roundtrack ";
         builder.append(passing);
-        builder.append(VIRG);
+
         List<List<Dice>> roundtrack = player.getPublicObjects().getRoundTrack().getRoundTrack();
         int size = roundtrack.size();
 
