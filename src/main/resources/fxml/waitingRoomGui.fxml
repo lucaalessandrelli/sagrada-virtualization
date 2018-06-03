@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="656.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.WaitingRoomViewController">
    <children>
-      <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" style="-fx-background-color: #2D3647;" text="You are currently in queue. Waiting for players...                       Timer : 30" textFill="WHITE" textOverrun="CLIP" wrapText="true" AnchorPane.bottomAnchor="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" style="-fx-background-color: #2D3647;" text="You are currently in queue. Waiting for players...                       Timer :" textFill="WHITE" textOverrun="CLIP" wrapText="true" AnchorPane.bottomAnchor="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="22.0" />
          </font>
