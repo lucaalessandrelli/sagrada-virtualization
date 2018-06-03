@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.turn.Turn;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.util.*;
 
@@ -61,19 +62,35 @@ public class Round extends Thread{
     }
 
     public void setTurn(Pos p){
-        turn.receiveMove(p);
+        try {
+            turn.receiveMove(p);
+        } catch (WrongMoveException e) {
+            currTurn.wrongMove(e.getMessage());
+        }
     }
 
     public void setTurn(String s){
-        turn.receiveMove(s);
+        try {
+            turn.receiveMove(s);
+        } catch (WrongMoveException e) {
+            currTurn.wrongMove(e.getMessage());
+        }
     }
 
     public void setTurn(ToolCard t){
-        turn.receiveMove(t);
+        try {
+            turn.receiveMove(t);
+        } catch (WrongMoveException e) {
+            currTurn.wrongMove(e.getMessage());
+        }
     }
 
     public void setTurn(Dice d, Pos p){
-        turn.receiveMove(d,p);
+        try {
+            turn.receiveMove(d,p);
+        } catch (WrongMoveException e) {
+            currTurn.wrongMove(e.getMessage());
+        }
     }
 
 }

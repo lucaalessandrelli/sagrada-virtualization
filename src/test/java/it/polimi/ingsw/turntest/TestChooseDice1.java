@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.turn.StartTurn;
 import it.polimi.ingsw.turn.Turn;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -55,11 +56,19 @@ public class TestChooseDice1 {
 
         Pos pos = new Pos(4,5);
 
-        tester.receiveMove(d,pos);
+        try {
+            tester.receiveMove(d,pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         pos.setX(1);
         pos.setY(4);
-        tester.receiveMove(pos);
+        try {
+            tester.receiveMove(pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
 
         assertEquals("PositionDice1",lastName(tester.getState().getClass().toString(),14));
@@ -104,11 +113,19 @@ public class TestChooseDice1 {
 
         Pos pos = new Pos(4,5);
 
-        tester.receiveMove(d,pos);
+        try {
+            tester.receiveMove(d,pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         pos.setX(1);
         pos.setY(4);
-        tester.receiveMove(pos);
+        try {
+            tester.receiveMove(pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("PositionDice1",lastName(tester.getState().getClass().toString(),14));
     }
@@ -161,11 +178,19 @@ public class TestChooseDice1 {
 
         Pos pos = new Pos(4,0);
 
-        tester.receiveMove(d1,pos);
+        try {
+            tester.receiveMove(d1,pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         pos = new Pos(1,0);
 
-        tester.receiveMove(pos);
+        try {
+            tester.receiveMove(pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("PositionDice1",lastName(tester.getState().getClass().toString(),14));
     }
@@ -210,11 +235,19 @@ public class TestChooseDice1 {
 
         Pos pos = new Pos(4,5);
 
-        tester.receiveMove(d,pos);
+        try {
+            tester.receiveMove(d,pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         String pass = "";
 
-        tester.receiveMove(pass);
+        try {
+            tester.receiveMove(pass);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("EndTurn", lastName(tester.getState().toString(),8));
     }

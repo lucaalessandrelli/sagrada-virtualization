@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.turn.Turn;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -102,23 +103,43 @@ public class ToolCard4Test {
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
-        turn.receiveMove(tester);
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
 
-        turn.receiveMove(d8, new Pos(2, 3));
+        try {
+            turn.receiveMove(d8, new Pos(2, 3));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
 
-        turn.receiveMove(new Pos(2, 0));
+        try {
+            turn.receiveMove(new Pos(2, 0));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
 
-        turn.receiveMove(d6, new Pos(3, 3));
+        try {
+            turn.receiveMove(d6, new Pos(3, 3));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
 
-        turn.receiveMove(new Pos(3, 1));
+        try {
+            turn.receiveMove(new Pos(3, 1));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
 
@@ -224,11 +245,19 @@ public class ToolCard4Test {
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
-        turn.receiveMove(tester);
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
 
-        turn.receiveMove(d8, new Pos(2, 2));
+        try {
+            turn.receiveMove(d8, new Pos(2, 2));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
 
@@ -326,23 +355,43 @@ public class ToolCard4Test {
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
-        turn.receiveMove(tester);
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
 
-        turn.receiveMove(d8, new Pos(2, 3));
+        try {
+            turn.receiveMove(d8, new Pos(2, 3));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
 
-        turn.receiveMove(new Pos(2, 0));
+        try {
+            turn.receiveMove(new Pos(2, 0));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
 
-        turn.receiveMove(d6, new Pos(3, 3));
+        try {
+            turn.receiveMove(d6, new Pos(3, 3));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
 
-        turn.receiveMove(new Pos(3, 1));
+        try {
+            turn.receiveMove(new Pos(3, 1));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
 
@@ -440,19 +489,35 @@ public class ToolCard4Test {
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
-        turn.receiveMove(tester);
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
 
-        turn.receiveMove(d8, new Pos(2, 3));
+        try {
+            turn.receiveMove(d8, new Pos(2, 3));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
 
-        turn.receiveMove(new Pos(2, 0));
+        try {
+            turn.receiveMove(new Pos(2, 0));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
 
-        turn.receiveMove(d6, new Pos(3, 2));
+        try {
+            turn.receiveMove(d6, new Pos(3, 2));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
 

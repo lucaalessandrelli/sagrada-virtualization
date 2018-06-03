@@ -271,46 +271,31 @@ public class Turn {
      * @param dice Dice object
      * @param pos Pos object
      */
-    public void receiveMove(Dice dice, Pos pos) {
-        try {
+    public void receiveMove(Dice dice, Pos pos) throws WrongMoveException {
             state.receiveMove(dice, pos);
-        } catch (WrongMoveException e) {
-
-        }
     }
 
     /**
      * Passing the ToolCard the player just chosen to the concrete state
      * @param toolCard ToolCard object
      */
-    public void receiveMove(ToolCard toolCard) {
-        try {
+    public void receiveMove(ToolCard toolCard) throws WrongMoveException {
             state.receiveMove(toolCard);
-        } catch (WrongMoveException e) {
-        }
     }
 
     /**
      * Passing the position the payer just chosen to the concrete state
      * @param pos Pos object
      */
-    public void receiveMove(Pos pos) {
-        try {
+    public void receiveMove(Pos pos) throws WrongMoveException {
             state.receiveMove(pos);
-        } catch (WrongMoveException e) {
-
-        }
     }
 
     /**
      * Letting know the concrete states that the player would like to pass his turn
      * @param pass String object
      */
-    public void receiveMove(String pass) {
-        try {
+    public void receiveMove(String pass) throws WrongMoveException {
             state.receiveMove(pass);
-        } catch (WrongMoveException e) {
-
-        }
     }
 }

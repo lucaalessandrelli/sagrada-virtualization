@@ -45,4 +45,8 @@ public class ClientBox {
         String timer = String.valueOf(tempTime);
         client.setTimer("timer "+timer);
     }
+
+    public void wrongMove(String s) throws RemoteException {
+        client.updateMessage("alert "+s);
+    }
 }

@@ -3,7 +3,6 @@ package it.polimi.ingsw.view.virtualview;
 import it.polimi.ingsw.controller.ClientBox;
 import it.polimi.ingsw.controller.VirtualViewParser;
 import it.polimi.ingsw.model.gamedata.Player;
-import it.polimi.ingsw.network.ClientInterface;
 
 import java.rmi.RemoteException;
 
@@ -28,8 +27,21 @@ public class VirtualView extends VirtualViewObserver {
     }
 
     @Override
-    public void updateStateTurn(String whoIsTurn) throws RemoteException {
-        clientBox.updateTurn("service "+whoIsTurn+" current turn.");
+    public void updateStateTurn(String whoIsTurn){
+        try {
+            clientBox.updateTurn("service "+whoIsTurn+" current turn.");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void wrongMove(String s){
+        try {
+            clientBox.wrongMove(s);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
 

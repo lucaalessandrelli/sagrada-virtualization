@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.turn.Turn;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -77,7 +78,11 @@ public class ToolCard5Test {
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
-        turn.receiveMove(tester);
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("SelectingToolDice",lastName(turn.getState().toString(),18));
 

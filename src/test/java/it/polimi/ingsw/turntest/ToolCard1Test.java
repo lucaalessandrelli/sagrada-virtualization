@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.turn.Turn;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -69,7 +70,11 @@ public class ToolCard1Test {
 
         turn.startTurn();
 
-        turn.receiveMove(tester);
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -139,13 +144,21 @@ public class ToolCard1Test {
 
         Pos pos = new Pos(3,2);
 
-        turn.receiveMove(dice,pos);
+        try {
+            turn.receiveMove(dice,pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         System.out.println(turn.getState().getClass());
 
         assertEquals("ChooseDice1", lastName(turn.getState().toString(),12));
 
-        turn.receiveMove(tester);
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("IncDecValue", lastName(turn.getState().toString(),12));
 
@@ -159,13 +172,21 @@ public class ToolCard1Test {
         else
             d.setNumber(dice.getNumber()+1);
 
-        turn.receiveMove(d,pos);
+        try {
+            turn.receiveMove(d,pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("ChooseDice2", lastName(turn.getState().toString(),12));
 
         System.out.println(turn.getState().getClass());
 
-        turn.receiveMove(pos);
+        try {
+            turn.receiveMove(pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("EndTurn", lastName(turn.getState().toString(),8));
 

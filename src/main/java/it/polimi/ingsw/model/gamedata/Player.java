@@ -112,11 +112,7 @@ public class Player {
     }
 
     public void notifyTurn(String whoIsTurn) {
-        try {
             observer.updateStateTurn(whoIsTurn);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
     }
 
     public void calculatePoints() {
@@ -130,6 +126,10 @@ public class Player {
     }
     public void addObserver(VirtualViewObserver o){
         observer=o;
+    }
+
+    public void wrongMove(String s) {
+        observer.wrongMove(s);
     }
 }
 

@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.turn.StartTurn;
 import it.polimi.ingsw.turn.Turn;
+import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -57,7 +58,11 @@ public class StartTurnTest {
 
         String pass = "";
 
-        tester.receiveMove(pass);
+        try {
+            tester.receiveMove(pass);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("EndTurn", lastName(tester.getState().toString(),8));
     }
@@ -103,7 +108,11 @@ public class StartTurnTest {
 
         Pos pos = new Pos(4,0);
 
-        tester.receiveMove(d,pos);
+        try {
+            tester.receiveMove(d,pos);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
         assertEquals("ChooseDice1",lastName(tester.getState().getClass().toString(),12));
     }
