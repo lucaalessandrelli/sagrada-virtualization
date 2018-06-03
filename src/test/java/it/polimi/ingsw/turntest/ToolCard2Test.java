@@ -1,13 +1,12 @@
 package it.polimi.ingsw.turntest;
 
 import it.polimi.ingsw.model.gamedata.Player;
-import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.PublicObjects;
 import it.polimi.ingsw.model.gamedata.Table;
-import it.polimi.ingsw.model.gamedata.gametools.Dice;
+import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
+import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
-import it.polimi.ingsw.turn.StartTurn;
 import it.polimi.ingsw.turn.Turn;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +15,27 @@ import java.util.ArrayList;
 import static it.polimi.ingsw.turntest.TurnTest.lastName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestPositionDice1 {
+public class ToolCard2Test {
 
     @Test
-    void TestGoingEndTurn(){
+    void TestingCard(){
+        ToolCard tester = new ToolCard();
+        CardContainer container = new CardContainer();
+        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
+
+        while(toolCardArrayList.get(0).getID()!=2 && toolCardArrayList.get(1).getID()!= 2 && toolCardArrayList.get(2).getID()!=2 ){
+            container = new CardContainer();
+            toolCardArrayList = container.pullOutTools();
+        }
+        if(toolCardArrayList.get(0).getID()==2)
+            tester = toolCardArrayList.get(0);
+
+        if(toolCardArrayList.get(1).getID()==2)
+            tester = toolCardArrayList.get(1);
+
+        if(toolCardArrayList.get(2).getID()==2)
+            tester = toolCardArrayList.get(2);
+
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");
@@ -31,6 +47,12 @@ public class TestPositionDice1 {
         players.add(p4);
 
         Table table = new Table(players);
+        table.setPublicObjects();
+
+        while(players.get(0).getToolCards().get(0).getID() != 1 && players.get(0).getToolCards().get(1).getID() != 1 && players.get(0).getToolCards().get(2).getID() != 1){
+            table = new Table(players);
+            table.setPublicObjects();
+        }
 
         Round round = new Round(players,1,table);
 
@@ -49,28 +71,14 @@ public class TestPositionDice1 {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn tester = new Turn(p1,round,1,true,table);
+        Turn turn = new Turn(p1,round,1,true,table);
 
-        StartTurn startTurn = new StartTurn(tester);
+        turn.startTurn();
 
-        tester.setState(startTurn);
+        System.out.println(turn.getState().getClass());
 
-        Dice d = table.getDraftPool().chooseDice(4);
+        assertEquals("StartTurn", lastName(turn.getState().toString(),10));
 
-        Pos pos = new Pos(4,5);
 
-        tester.receiveMove(d,pos);
-
-        String pass = "";
-
-        tester.receiveMove(d,pos);
-
-        pos.setX(1);
-        pos.setY(2);
-        tester.receiveMove(pos);
-
-        tester.receiveMove(pass);
-
-        assertEquals("EndTurn", lastName(tester.getState().toString(),8));
     }
 }

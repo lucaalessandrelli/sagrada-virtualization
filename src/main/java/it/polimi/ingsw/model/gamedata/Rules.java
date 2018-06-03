@@ -219,7 +219,6 @@ public class Rules {
                     for(i = 0; i < x; i++){
                         if (allDifferent(w.get(i),false,5))
                             result++;
-                        System.out.println("Result tmp: " + result);
                     }
                 }
                 else {
@@ -232,7 +231,6 @@ public class Rules {
                             result++;
                         else
                             find = false;
-                        System.out.println("Result tmp:" + result);
                     }
                 }
                 break;
@@ -242,7 +240,6 @@ public class Rules {
                     for(i = 0; i < x; i++){
                         if(allDifferent(w.get(i),true,5))
                             result++;
-                        System.out.println("Result tmp: " + result);
                     }
                 }
                 else{
@@ -255,7 +252,6 @@ public class Rules {
                             result++;
                         else
                             find = false;
-                        System.out.println("Result tmp:" + result);
                     }
                 }
 

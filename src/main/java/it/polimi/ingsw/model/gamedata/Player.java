@@ -77,6 +77,8 @@ public class Player {
 
     public PublicObjects getPublicObjects(){return this.publicObjects;}
 
+    public ObjectiveCard getPrivateCard(){return this.myObjCard;}
+
 
     public void showMyObjCard(){
 

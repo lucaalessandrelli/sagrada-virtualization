@@ -280,14 +280,13 @@ public class Turn {
     }
 
     /**
-     * Passing the ToolCard the payer just chosen to the concrete state
+     * Passing the ToolCard the player just chosen to the concrete state
      * @param toolCard ToolCard object
      */
     public void receiveMove(ToolCard toolCard) {
         try {
             state.receiveMove(toolCard);
         } catch (WrongMoveException e) {
-
         }
     }
 

@@ -23,14 +23,10 @@ public class Table {
         this.myplayers = players;
         this.roundTrack = new RoundTrack();
         int i;
-        for(i = 0; i < 3; i++){
-            ToolCard x = new ToolCard();
-            //x.getCard()?? To take a casual tool card
-            this.toolCards.add(x);
-        }
-            this.objectiveCards = this.container.pullOutPublic();
-            ArrayList<ObjectiveCard> tmp = this.container.pullOutPrivate(this.myplayers.size());
-            i = 0;
+        this.toolCards = this.container.pullOutTools();
+        this.objectiveCards = this.container.pullOutPublic();
+        ArrayList<ObjectiveCard> tmp = this.container.pullOutPrivate(this.myplayers.size());
+        i = 0;
         for (Player p: this.myplayers){
             p.setMyObjCard(tmp.get(i));
             i++;

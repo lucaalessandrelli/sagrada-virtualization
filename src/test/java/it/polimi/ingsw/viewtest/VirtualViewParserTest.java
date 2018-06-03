@@ -1,5 +1,6 @@
 package it.polimi.ingsw.viewtest;
 
+import it.polimi.ingsw.controller.Deparser;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Table;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.controller.VirtualViewParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -202,5 +204,69 @@ public class VirtualViewParserTest {
             assertEquals(table.getDraftPool().chooseDice(i).getNumber(), (Character.getNumericValue(parsed.charAt(134 + p1.getUsername().length() + (k+1)))));
         }
 
+    }
+
+    @Test
+    public void TestHowParse(){
+
+        ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<>();
+        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
+
+        Player p1 = new Player("Luca");
+
+        Player p2 = new Player("Giovanni");
+
+        Player p3 = new Player("Andrea");
+
+        Player p4 = new Player("Vincenzo");
+
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+        players.add(p4);
+
+        Table table = new Table(players);
+
+
+        windowPatternCards.add(windowPatternCard);
+        p1.chooseWindow(windowPatternCards);
+        windowPatternCards.remove(windowPatternCard);
+
+
+        windowPatternCards.add(windowPatternCard1);
+        p2.chooseWindow(windowPatternCards);
+        windowPatternCards.remove(windowPatternCard1);
+
+
+        windowPatternCards.add(windowPatternCard2);
+        p3.chooseWindow(windowPatternCards);
+        windowPatternCards.remove(windowPatternCard2);
+
+
+        windowPatternCards.add(windowPatternCard3);
+        p4.chooseWindow(windowPatternCards);
+        windowPatternCards.remove(windowPatternCard3);
+
+        table.setPublicObjects();
+
+        VirtualViewParser tester = new VirtualViewParser(p1);
+
+        String parsed = tester.startParsing();
+
+        System.out.println(parsed);
+
+        Deparser deparser = new Deparser();
+        System.out.println(deparser.DivideinStrings(tester.startParsing()));
+        List<String> strings = deparser.DivideinStrings(tester.startParsing());
+        for (String string: strings){
+            List <String> deparsed = deparser.Deparse(string);
+            for (String x: deparsed){
+                System.out.println(x);
+            }
+        }
     }
 }

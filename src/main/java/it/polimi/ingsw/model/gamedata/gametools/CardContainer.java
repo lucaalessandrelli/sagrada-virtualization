@@ -298,16 +298,6 @@ public class CardContainer {
         StringBuilder iterate = new StringBuilder();
         iterate.append(PM);
 
-        /*for(int i = 0; document.getElementsByTagName(PMETHODS).item(cont).hasChildNodes(); i++){
-            System.out.println("Indice: " + i);
-            iterate.append(i);
-            all = document.getElementsByTagName(iterate.toString()).item(cont-1).getTextContent();
-            ArrayList<String> tofill = new ArrayList<>();
-            this.creatingStrings(tofill, all);
-            mytool.getNamePMethods().add(tofill);
-            iterate.deleteCharAt(iterate.toString().length()-1);
-        }*/
-
         NodeList nodelist = document.getElementsByTagName(PMETHODS).item(cont).getChildNodes();
 
         for(int i = 1; i < nodelist.getLength() - 1; i++){
