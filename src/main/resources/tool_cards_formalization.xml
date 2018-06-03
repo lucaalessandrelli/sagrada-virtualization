@@ -13,7 +13,7 @@
 		<NUMBER>2</NUMBER>
 		<NAME>Pennello per Eglomise</NAME>
 		<COLOUR>B</COLOUR>
-		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<STATE>,SelectingDice,MovingWindowDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
 		<CMETHODS>,inPatCard,</CMETHODS>
 		<PMETHODS>
@@ -25,7 +25,7 @@
 		<NUMBER>3</NUMBER>
 		<NAME>Alesatore per lamine di rame</NAME>
 		<COLOUR>R</COLOUR>
-		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<STATE>,SelectingDice,MovingWindowDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
 		<CMETHODS>,inPatCard,</CMETHODS>
 		<PMETHODS>
@@ -38,7 +38,7 @@
 		<NUMBER>4</NUMBER>
 		<NAME>Lathekin</NAME>
 		<COLOUR>Y</COLOUR>
-		<STATE>,SelectingDice,MovingDice,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<STATE>,SelectingDice,MovingWindowDice,SelectingDice,MovingWindowDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
 		<CMETHODS>,inPatCard,inPatCard,</CMETHODS>
 		<PMETHODS>
@@ -51,8 +51,8 @@
 		<NUMBER>5</NUMBER>
 		<NAME>Taglierina circolare</NAME>
 		<COLOUR>G</COLOUR>
-		<STATE>,SelectingDice,AutomatedOperation,ChooseDice2,</STATE>
-		<AUTOMATED>,changeDice,operationEndend,</AUTOMATED>
+		<STATE>,SelectingToolDice,AutomatedOperation,ChooseDice2,</STATE>
+		<AUTOMATED>,switchDice,operationEndend,</AUTOMATED>
 		<CMETHODS>,inRoundTr,</CMETHODS>
 		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, scambia quel dado con un dado sul Tracciato dei Round</DESCRIPTION>
@@ -81,7 +81,7 @@
 		<NUMBER>8</NUMBER>
 		<NAME>Tenaglia a Rotelle</NAME>
 		<COLOUR>R</COLOUR>
-		<STATE>,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<STATE>,SelectingDice,MovingDraftDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
 		<CMETHODS>,inDraftPool,</CMETHODS>
 		<PMETHODS>
@@ -93,7 +93,7 @@
 		<NUMBER>9</NUMBER>
 		<NAME>Riga in Sughero</NAME>
 		<COLOUR>Y</COLOUR>
-		<STATE>,MovingDice,CheckPointState,</STATE>
+		<STATE>,MovingDraftDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS>
@@ -116,7 +116,7 @@
 		<NAME>Diluente per Pasta Salda</NAME>
 		<COLOUR>P</COLOUR>
 		<STATE>,AutomatedOperation,SelectingValue,ChooseDice2,</STATE>
-		<AUTOMATED>,getNewDice,operationEndend,</AUTOMATED>
+		<AUTOMATED>,newDice,operationEndend,</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, riponilo nel Sacchetto, poi pescane uno dal Sacchetto. Scegli il valore del nuovo dado e piazzalo, rispettando tutte le restrizioni di piazzamento.</DESCRIPTION>
@@ -125,7 +125,7 @@
 		<NUMBER>12</NUMBER>
 		<NAME>Taglierina Manuale</NAME>
 		<COLOUR>B</COLOUR>
-		<STATE>,SelectingDice,SelectingDice,MovingDice,SelectingDice,MovingDice,CheckPointState,</STATE>
+		<STATE>,SelectingDice,SelectingToolDice,MovingToolDice,SelectingToolDice,MovingToolDice,CheckPointState,</STATE>
 		<AUTOMATED>,operationEndend,</AUTOMATED>
 		<CMETHODS>,inRoundTr,inPatCard,inPatCard,</CMETHODS>
 		<PMETHODS>

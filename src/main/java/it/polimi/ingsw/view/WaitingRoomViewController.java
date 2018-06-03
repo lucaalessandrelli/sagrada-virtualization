@@ -76,14 +76,14 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
 
     private void countTimer() {
         if(!time.equals("0")) {
-            time = Integer.toString(Integer.parseInt(time) - 1);
+            time = Long.toString((Long.parseLong(time) - 1));
         } else {
             time = RESET_TIME;
         }
         timerLabel.setText("You are currently in queue. Waiting for players...                       Timer : " + time);
     }
 
-    public void changeScene(String idMatch) throws IOException {
+    public void changeScene() throws IOException {
         /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -96,15 +96,14 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         Parent root = fxmlLoader.load();
 
         // Get the Controller from the FXMLLoader
-        WaitingRoomViewController controller = fxmlLoader.getController();
+        MatchViewController controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
-        //controller.setTime(time);
         controller.setMessageAnalyzer(messageAnalyzer);
-
         controller.setStage(stage);
-        Scene scene = new Scene(root);
+        //controller.setTime(time);
 
+        Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         //controller.loadPlayers();
         //controller.startTimer();
@@ -137,15 +136,21 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
 
     @Override
     public void handleMatchId(String idMatch) {
-        //client.setMatchId(idMatch);
+        client.setNumMatch(Integer.parseInt(idMatch));
+        try {
+            changeScene();
+        } catch (IOException e) {
+            System.out.println("Errore cambio di scena: waitingRoom -> Match");
+        }
+
     }
 
     @Override
     public void handleMatchSetup(String matchSetup) {
-        try {
+        /*try {
             changeScene(matchSetup);
         } catch (IOException e) {
             System.out.println("Errore cambio di scena: waitingRoom -> Match");
-        }
+        }*/
     }
 }

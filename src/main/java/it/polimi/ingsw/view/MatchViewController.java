@@ -10,6 +10,7 @@ import javafx.scene.effect.Glow;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.ResourceBundle;
 
 public class MatchViewController implements Initializable, ViewInterface {
     private Client client;
+    private Stage stage;
     private String draftPool;
     private String restrictions;
     private String diceWindow;
@@ -88,6 +90,12 @@ public class MatchViewController implements Initializable, ViewInterface {
         this.modeRep = new ModeRep();
     }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
     public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
         this.messageAnalyzer = messageAnalyzer;
     }
@@ -235,6 +243,9 @@ public class MatchViewController implements Initializable, ViewInterface {
 
     @Override
     public void handleMatchSetup(String matchSetup) {
-
+        //ricevo la stringa con tutto il messaggione, ora creo una classe che mi analizza questo messaggione, dividendomelo in
+        //una lista di stringhe contenenti ognuna una parte della gui da aggiornare. Per ciascuna utilizzo un algoritmo che mi
+        //divide atomicamente le informazioni che mi servono per aggiornare la Gui, chiamo infine un metodo della gui che dato
+        //come parametro questa info mi aggiorna la gui.
     }
 }
