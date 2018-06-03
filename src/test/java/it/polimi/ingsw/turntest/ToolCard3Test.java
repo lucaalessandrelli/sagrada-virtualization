@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ToolCard2Test {
+public class ToolCard3Test {
 
     @Test
     void TestingAllowedMoves(){
@@ -24,17 +24,17 @@ public class ToolCard2Test {
         CardContainer container = new CardContainer();
         ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
 
-        while(toolCardArrayList.get(0).getID()!=2 && toolCardArrayList.get(1).getID()!= 2 && toolCardArrayList.get(2).getID()!=2 ){
+        while(toolCardArrayList.get(0).getID()!=3 && toolCardArrayList.get(1).getID()!= 3 && toolCardArrayList.get(2).getID()!=3 ){
             container = new CardContainer();
             toolCardArrayList = container.pullOutTools();
         }
-        if(toolCardArrayList.get(0).getID()==2)
+        if(toolCardArrayList.get(0).getID()==3)
             tester = toolCardArrayList.get(0);
 
-        if(toolCardArrayList.get(1).getID()==2)
+        if(toolCardArrayList.get(1).getID()==3)
             tester = toolCardArrayList.get(1);
 
-        if(toolCardArrayList.get(2).getID()==2)
+        if(toolCardArrayList.get(2).getID()==3)
             tester = toolCardArrayList.get(2);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -50,7 +50,7 @@ public class ToolCard2Test {
         Table table = new Table(players);
         table.setPublicObjects();
 
-        while(players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2){
+        while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
             table.setPublicObjects();
         }
@@ -104,25 +104,26 @@ public class ToolCard2Test {
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
+
     }
 
     @Test
-    void TestingRightMovesWithRestrictions() {
+    void TestingRightMovesWithRestrictions(){
         ToolCard tester = new ToolCard();
         CardContainer container = new CardContainer();
         ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
 
-        while (toolCardArrayList.get(0).getID() != 2 && toolCardArrayList.get(1).getID() != 2 && toolCardArrayList.get(2).getID() != 2) {
+        while(toolCardArrayList.get(0).getID()!=3 && toolCardArrayList.get(1).getID()!= 3 && toolCardArrayList.get(2).getID()!=3 ){
             container = new CardContainer();
             toolCardArrayList = container.pullOutTools();
         }
-        if (toolCardArrayList.get(0).getID() == 2)
+        if(toolCardArrayList.get(0).getID()==3)
             tester = toolCardArrayList.get(0);
 
-        if (toolCardArrayList.get(1).getID() == 2)
+        if(toolCardArrayList.get(1).getID()==3)
             tester = toolCardArrayList.get(1);
 
-        if (toolCardArrayList.get(2).getID() == 2)
+        if(toolCardArrayList.get(2).getID()==3)
             tester = toolCardArrayList.get(2);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -138,12 +139,12 @@ public class ToolCard2Test {
         Table table = new Table(players);
         table.setPublicObjects();
 
-        while (players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2) {
+        while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
             table.setPublicObjects();
         }
 
-        Round round = new Round(players, 1, table);
+        Round round = new Round(players,1,table);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -160,60 +161,62 @@ public class ToolCard2Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1,round,1,true,table);
 
         Dice d1 = new Dice(Colour.GREEN);
         Dice d2 = new Dice(Colour.RED);
         Dice d3 = new Dice(Colour.YELLOW);
+        d2.setNumber(3);
 
-        p1.getWindowPatternCard().placeDice(d1, 1, 0);
-        p1.getWindowPatternCard().placeDice(d2, 2, 1);
-        p1.getWindowPatternCard().placeDice(d3, 3, 2);
+        p1.getWindowPatternCard().placeDice(d1,1,0);
+        p1.getWindowPatternCard().placeDice(d2,2,3);
+        p1.getWindowPatternCard().placeDice(d3,3,3);
+
+        p1.getWindowPatternCard().addRestr('1',2,2);
 
         p1.getWindowPatternCard().show();
 
-
-        p1.getWindowPatternCard().addRestr('B', 2, 2);
         turn.startTurn();
 
         System.out.println(turn.getState().getClass());
 
-        assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
+        assertEquals("StartTurn", lastName(turn.getState().toString(),10));
 
         turn.receiveMove(tester);
 
-        assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
+        assertEquals("SelectingDice", lastName(turn.getState().toString(),14));
 
-        turn.receiveMove(d3, new Pos(3, 2));
+        turn.receiveMove(d2,new Pos(2,3));
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingWindowDice", lastName(turn.getState().toString(),17));
 
-        turn.receiveMove(new Pos(2, 2));
+        turn.receiveMove(new Pos(2,2));
 
-        assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
+        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
+
     }
 
 
     @Test
-    void TestingWrongSelection() {
+    void TestingWrongMove(){
         ToolCard tester = new ToolCard();
         CardContainer container = new CardContainer();
         ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
 
-        while (toolCardArrayList.get(0).getID() != 2 && toolCardArrayList.get(1).getID() != 2 && toolCardArrayList.get(2).getID() != 2) {
+        while(toolCardArrayList.get(0).getID()!=3 && toolCardArrayList.get(1).getID()!= 3 && toolCardArrayList.get(2).getID()!=3 ){
             container = new CardContainer();
             toolCardArrayList = container.pullOutTools();
         }
-        if (toolCardArrayList.get(0).getID() == 2)
+        if(toolCardArrayList.get(0).getID()==3)
             tester = toolCardArrayList.get(0);
 
-        if (toolCardArrayList.get(1).getID() == 2)
+        if(toolCardArrayList.get(1).getID()==3)
             tester = toolCardArrayList.get(1);
 
-        if (toolCardArrayList.get(2).getID() == 2)
+        if(toolCardArrayList.get(2).getID()==3)
             tester = toolCardArrayList.get(2);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -229,12 +232,12 @@ public class ToolCard2Test {
         Table table = new Table(players);
         table.setPublicObjects();
 
-        while (players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2) {
+        while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
             table.setPublicObjects();
         }
 
-        Round round = new Round(players, 1, table);
+        Round round = new Round(players,1,table);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -251,37 +254,40 @@ public class ToolCard2Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1,round,1,true,table);
 
         Dice d1 = new Dice(Colour.GREEN);
         Dice d2 = new Dice(Colour.RED);
         Dice d3 = new Dice(Colour.YELLOW);
-        d3.setNumber(3);
+        d2.setNumber(3);
 
-        p1.getWindowPatternCard().placeDice(d1, 1, 0);
-        p1.getWindowPatternCard().placeDice(d2, 2, 1);
-        p1.getWindowPatternCard().placeDice(d3, 3, 2);
+        p1.getWindowPatternCard().placeDice(d1,1,0);
+        p1.getWindowPatternCard().placeDice(d2,2,1);
+        p1.getWindowPatternCard().placeDice(d3,3,2);
+
+        p1.getWindowPatternCard().addRestr('P',2,2);
 
         p1.getWindowPatternCard().show();
-
-        p1.getWindowPatternCard().addRestr('5',2,2);
 
         turn.startTurn();
 
         System.out.println(turn.getState().getClass());
 
-        assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
+        assertEquals("StartTurn", lastName(turn.getState().toString(),10));
 
         turn.receiveMove(tester);
 
-        assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
+        assertEquals("SelectingDice", lastName(turn.getState().toString(),14));
 
-        turn.receiveMove(d3, new Pos(1, 1));
+        turn.receiveMove(d2,new Pos(2,3));
 
-        assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
+        assertEquals("MovingWindowDice", lastName(turn.getState().toString(),17));
 
-        assertTrue(p1.getWindowPatternCard().getCell(new Pos(3,2)).isOccupied());
-        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
+        turn.receiveMove(new Pos(2,2));
+
+        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
+
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
     }
-
 }
