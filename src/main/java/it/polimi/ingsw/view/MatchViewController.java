@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
 
 public class MatchViewController implements Initializable, ViewInterface {
     private Client client;
@@ -148,6 +149,7 @@ public class MatchViewController implements Initializable, ViewInterface {
 
     @FXML
     public void handleDragDetection(MouseEvent event) {
+
         source = (Text) event.getSource();
         Dragboard dragboard = source.startDragAndDrop(TransferMode.ANY);
         ClipboardContent clipboardContent = new ClipboardContent();
@@ -191,13 +193,15 @@ public class MatchViewController implements Initializable, ViewInterface {
 
         System.out.println("RECEIVER \nColumn : "+ mywindow.getColumnIndex(textReceiver) +" ------- Row :"+ mywindow.getRowIndex(textReceiver));
         System.out.println("SOURCE -> \nColumn : "+ mywindow.getColumnIndex(source) +" ------- Row :"+ mywindow.getRowIndex(source));
+        textReceiver.setText(str);
+
 
         int y = mywindow.getColumnIndex(textReceiver);
         int x = mywindow.getRowIndex(textReceiver);
 
         client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);
 
-        textReceiver.setText(str);
+
     }
 
     @FXML
