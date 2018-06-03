@@ -37,7 +37,7 @@ public class VirtualViewParser {
     }
 
     private String parseWindowPatternRestrictions(WindowPatternCard window){
-        String passing = "restrictions ";
+        String passing = "restrictions";
         builder.append(passing);
         builder.append(VIRG);
         builder.append(window.getPlayer());
@@ -52,7 +52,7 @@ public class VirtualViewParser {
     }
 
     private String parseWindowPatternDice(WindowPatternCard window){
-        String passing = "dices ";
+        String passing = ",dices";
         builder.append(passing);
         builder.append(VIRG);
         builder.append(window.getPlayer());
@@ -75,7 +75,7 @@ public class VirtualViewParser {
     }
 
     public String parseDraftPool(){
-        String passing = "draftpool ";
+        String passing = "draftpool";
         builder.append(passing);
         builder.append(VIRG);
         ArrayList<Dice> dice = this.player.getDraftPool().getDraftPool();
@@ -90,7 +90,7 @@ public class VirtualViewParser {
     }
 
     public String parseObjectiveCard(){
-        String passing = "publiccards ";
+        String passing = "publiccards";
         builder.append(passing);
         builder.append(VIRG);
 
@@ -99,7 +99,7 @@ public class VirtualViewParser {
             builder.append(VIRG);
         }
         builder.append(SEP);
-        builder.append("privatecard ");
+        builder.append("privatecard");
         builder.append(VIRG);
         builder.append(player.getPrivateCard().getID());
         builder.append(SEP);
@@ -107,7 +107,7 @@ public class VirtualViewParser {
     }
 
     public String parseToolcards(){
-        String passing = "toolcards ";
+        String passing = "toolcards";
         builder.append(passing);
         builder.append(VIRG);
 
@@ -120,7 +120,7 @@ public class VirtualViewParser {
     }
     
     public String parseFavorToken(){
-        String passing = "favors ";
+        String passing = "favors";
         builder.append(passing);
         builder.append(VIRG);
         
@@ -131,7 +131,7 @@ public class VirtualViewParser {
     }
     
     public String parseRoundTrack(){
-        String passing = "roundtrack ";
+        String passing = "roundtrack";
         builder.append(passing);
         builder.append(VIRG);
         List<List<Dice>> roundtrack = player.getPublicObjects().getRoundTrack().getRoundTrack();
