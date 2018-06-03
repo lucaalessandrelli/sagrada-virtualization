@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.gamedata.Colour;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 
+import java.util.concurrent.Executors;
+
 public class InputAnalyzer {
     Manager manager;
 

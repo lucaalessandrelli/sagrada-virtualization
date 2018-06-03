@@ -149,7 +149,6 @@ public class MatchViewController implements Initializable, ViewInterface {
 
     @FXML
     public void handleDragDetection(MouseEvent event) {
-
         source = (Text) event.getSource();
         Dragboard dragboard = source.startDragAndDrop(TransferMode.ANY);
         ClipboardContent clipboardContent = new ClipboardContent();
@@ -157,15 +156,22 @@ public class MatchViewController implements Initializable, ViewInterface {
         clipboardContent.putString(source.getText());
         dragboard.setContent(clipboardContent);
 
-        int j = draftPool.getColumnIndex(source);
-        int i = draftPool.getRowIndex(source);
-        List<String> list = Arrays.asList(source.getText().split(" "));
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
 
-        String x = Integer.toString(3 * i + j);
+                int j = draftPool.getColumnIndex(source);
+                int i = draftPool.getRowIndex(source);
+                List<String> list = Arrays.asList(source.getText().split(" "));
 
-        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+list.get(1)+","+list.get(0)+","+x+",0");
+                String x = Integer.toString(3 * i + j);
+
+                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+list.get(1)+","+list.get(0)+","+x+",0");
+            }
+        });
 
         event.consume();
+
     }
 
     @FXML
