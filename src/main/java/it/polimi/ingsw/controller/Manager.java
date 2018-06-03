@@ -10,35 +10,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Manager {
-    private List<ClientsContainer> clients;
-    private List<Match> matches;
+    private List<Game> games;
+    private ClientsContainer clients;
     private int numOfMatch;
     private WaitingRoom lobby;
     private ClientHandler clientHandler;
     private InputAnalyzer analyzer;
 
     public Manager() {
-        clients = new ArrayList<>();
-        matches = new ArrayList<>();
+        games = new ArrayList<>();
         numOfMatch = 0;
-        ClientsContainer c = new ClientsContainer(this);
-        clients.add(c);
-        lobby = new WaitingRoom(30000, this, clients.get(numOfMatch));
+        clients = new ClientsContainer(this);
+        lobby = new WaitingRoom(30000, this, clients);
         clientHandler = new ClientHandler();
         analyzer = new InputAnalyzer(this);
     }
 
     public void createMatch(WaitingRoom lobby) {
-        matches.add(new Match(lobby.getPlayerList(), this, numOfMatch));
-        clients.get(numOfMatch).notifyIdMatch(numOfMatch);
-        clients.get(numOfMatch).setMatchStarted(true);
+        Game g = new Game(clients,new Match(lobby.getPlayerList(), this, numOfMatch),numOfMatch);
+        g.notifyGame();
+        games.add(g);
         /*START MATCH*/
-        matches.get(numOfMatch).start();
+        g.start();
         lobby.getPlayerList().forEach(player -> clientHandler.addPlayer(player.getUsername(), numOfMatch));
         numOfMatch++;
-        ClientsContainer c = new ClientsContainer(this);
-        clients.add(c);
-        lobby.restore(clients.get(numOfMatch));
+        clients = new ClientsContainer(this);
+        lobby.restore(clients);
     }
 
     public synchronized void addPlayerInQueue(ClientInterface client) throws RemoteException {
@@ -46,8 +43,8 @@ public class Manager {
     }
 
     public synchronized boolean checkIfPlayerIsLogged(String name) throws RemoteException {
-        for (ClientsContainer cli : clients) {
-            if (cli.findClient(name)) {
+        for (Game g : games) {
+            if (g.findClient(name)) {
                 return true;
             }
         }
@@ -64,8 +61,8 @@ public class Manager {
     }
 
     public void remove(String name){
-        for (ClientsContainer cli : clients) {
-            if (cli.remove(name)) {
+        for (Game g : games) {
+            if (g.remove(name)) {
                 return;
             }
         }
@@ -79,7 +76,7 @@ public class Manager {
     }
 
     void move(int match,String name, String move){
-        Round round = matches.get(match).getCurrRound();
+        Round round = games.get(match).getCurrRound();
         if(round.getCurrTurn().equals(name)){
             Proc processor = new Proc(round,move);
             processor.process();
@@ -89,6 +86,17 @@ public class Manager {
 
     public void setPlayerInactive(String name) {
         int numMatch = clientHandler.getGame(name);
-        matches.get(numMatch).setPlayerInactive(name);
+        games.get(numMatch).setPlayerActivity(name,false);
+    }
+
+    public void reconnectPlayer(ClientInterface c) {
+        try {
+            ClientBox clientB = new ClientBox(c,c.getName(),c.getTypeConnection());
+            int num = clientHandler.getGame(clientB.getName());
+            clientB.setNumMatch(num);
+            games.get(num).reconnect(clientB);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }

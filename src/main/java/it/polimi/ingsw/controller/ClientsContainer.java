@@ -140,4 +140,8 @@ public class ClientsContainer {
             }
         }
     }
+
+    public void reconnect(ClientBox cb) {
+        clients.add(cb);
+    }
 }

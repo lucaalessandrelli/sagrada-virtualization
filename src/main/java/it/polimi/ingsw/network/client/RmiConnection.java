@@ -41,7 +41,7 @@ public class RmiConnection implements ConnectionHandler {
                     client.setServiceMessage("alert Already connected");
 
                 }
-            } catch (RemoteException e) {
+            } catch (Exception e) {
                 client.setServiceMessage("alert Server not available");
             }
         }

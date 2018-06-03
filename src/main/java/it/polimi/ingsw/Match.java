@@ -30,6 +30,9 @@ public class Match {
 
     public void start() {
         table = new Table(playerList);
+        for (Player p : playerList){
+            p.notifyPlayer();
+        }
         //table.inizialize();
 
         /*SETTING ROUNDS*/
@@ -74,10 +77,10 @@ public class Match {
         return currRound;
     }
 
-    public void setPlayerInactive(String name) {
+    public void setPlayerActivity(String name,boolean b) {
         for (Player p : playerList){
             if(p.getUsername().equals(name)){
-                p.setActivity(false);
+                p.setActivity(b);
             }
         }
     }

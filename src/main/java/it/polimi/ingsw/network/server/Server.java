@@ -48,6 +48,8 @@ public class Server implements ServerInterface {
                 return false;
             } else {
                 if (manager.checkIfPlayerIsPlaying(name)) {
+                    out.println("Reconnecting "+ name + " to the match");
+                    manager.reconnectPlayer(client);
                     //riconnetti il giocatore alla partita
                 } else {
                     manager.addPlayerInQueue(client);
