@@ -295,7 +295,7 @@ public class MatchViewController implements Initializable, ViewInterface {
             x = i/3;
             y = i%3;
             if(i < list.size()) {
-                ((Text) this.getChildrenByIndex(draftPool, x, y)).setText(list.get(i));
+                ((Text) this.getChildrenByIndex(draftPool, x, y)).setText(list.get(i).charAt(0)+" "+list.get(i).charAt(1));
             } else {
                 ((Text) this.getChildrenByIndex(draftPool, x, y)).setText("");
             }
