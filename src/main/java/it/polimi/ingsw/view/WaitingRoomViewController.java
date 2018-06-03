@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 import javafx.animation.Animation;
 
 public class WaitingRoomViewController implements Initializable, ViewInterface {
-    private final static String RESET_TIME = "30";
     private Client client;
     private Stage stage;
     private ObservableList<String> list = FXCollections.observableArrayList();
@@ -75,11 +74,14 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
     }
 
     private void countTimer() {
-        if(!time.equals("0")) {
-            time = Long.toString((Long.parseLong(time) - 1));
-        } else {
-            time = RESET_TIME;
+        if(list.size() >= 2) {
+            if (!time.equals("0")) {
+                time = Long.toString((Long.parseLong(time) - 1));
+            } else {
+                time = "0";
+            }
         }
+
         timerLabel.setText("You are currently in queue. Waiting for players...                       Timer : " + time);
     }
 
