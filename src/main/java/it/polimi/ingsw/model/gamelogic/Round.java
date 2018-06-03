@@ -38,7 +38,7 @@ public class Round extends Thread{
                 players.notifyTurn(p.getUsername());
                 try {
                     Thread.sleep(timeSleep);
-                    p.setActivity(false);
+                    //p.setActivity(false);
                 } catch (InterruptedException e) {
                     players.notifyChanges();
                 }

@@ -8,6 +8,7 @@ import it.polimi.ingsw.view.virtualview.VirtualView;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.Executors;
@@ -69,14 +70,12 @@ public class ClientsContainer {
 
     synchronized public List<Player>  getPlayerList(){
         List<Player> p = new ArrayList<>();
-        for (ClientBox s : clients){
-                Player player = new Player(s.getName());
-                player.addObserver(new VirtualView(s,player));
+        Iterator<ClientBox> i = clients.iterator();
+        while (i.hasNext()){
+            ClientBox c = i.next();
+                Player player = new Player(c.getName());
+                player.addObserver(new VirtualView(c,player));
                 p.add(player);
-                clients.remove(s);
-                if (clients.size()<2) {
-                  //  manager.notEnoughPlayer();
-                }
         }
         return p;
     }
