@@ -110,7 +110,9 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         //controller.loadPlayers();
         //controller.startTimer();
         messageAnalyzer.setView(controller);
+
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("Match");
         stage.show();
     }
