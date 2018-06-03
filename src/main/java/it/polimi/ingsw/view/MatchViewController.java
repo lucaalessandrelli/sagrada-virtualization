@@ -42,10 +42,8 @@ public class MatchViewController implements Initializable, ViewInterface {
     @FXML
     private GridPane riserva;
 
-    @FXML
-    private Text textReceiver;
 
-    @FXML
+    private Text textReceiver;
     private Text source;
 
     private String[][] window1 = {{"a1","a2","a3", "a4"},

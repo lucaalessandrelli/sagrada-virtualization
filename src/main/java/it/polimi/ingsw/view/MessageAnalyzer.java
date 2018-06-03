@@ -32,7 +32,15 @@ public class MessageAnalyzer {
                 }
             });
         }else if(message.startsWith("match")){
-            view.handleMatchId(message.replace("match ",""));
+            String match = message.replace("match ","");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Update UI here.
+                    view.handleMatchId(match);
+                }
+            });
+
         }else if(message.startsWith("timer")){
             String time = message.replace("timer ","");
             Platform.runLater(new Runnable() {
@@ -53,7 +61,15 @@ public class MessageAnalyzer {
             });
 
         }else if(message.startsWith("alert")) {
-            view.handleAlert(message.replace("alert ", ""));
+            String alert = message.replace("alert ", "");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Update UI here.
+                    view.handleAlert(alert);
+                }
+            });
+
         }else if(message.equals("Connected, Welcome!")) {
             view.handleConnected(message);
         }
