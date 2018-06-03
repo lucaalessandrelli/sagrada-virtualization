@@ -41,6 +41,7 @@ public class ClientBox {
     }
 
     public void setTimer(long tempTime) throws RemoteException {
+        tempTime = tempTime/1000;
         String timer = String.valueOf(tempTime);
         client.setTimer("timer "+timer);
     }

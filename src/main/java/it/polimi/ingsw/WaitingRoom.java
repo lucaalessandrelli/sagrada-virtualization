@@ -28,6 +28,7 @@ public class WaitingRoom {
     public void addPlayer(ClientInterface player) {
         if (playerList.sizeContainer() == 1) {
             playerList.addClient(player);
+            playerList.notifyTimer(task.getTempTime());
             //start the timer
             timer.schedule(task, 1000,1000);
         } else if (playerList.sizeContainer() < 4) {

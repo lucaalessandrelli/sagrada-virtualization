@@ -107,13 +107,13 @@ public class ClientsContainer {
             String playersIn = str.toString();
             playersIn = "service" + playersIn;
             String finalPlayersIn = playersIn;
-            clients.forEach(clientBox -> {
+            for(ClientBox c : clients){
                 try {
-                    clientBox.updatePlayers(finalPlayersIn);
+                    c.updatePlayers(finalPlayersIn);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
-            });
+            }
     }
 
     public void setMatchStarted(boolean matchStarted) {
