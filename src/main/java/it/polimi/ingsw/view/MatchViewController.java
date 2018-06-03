@@ -21,10 +21,6 @@ import java.util.ResourceBundle;
 public class MatchViewController implements Initializable, ViewInterface {
     private Client client;
     private Stage stage;
-    private String draftPool;
-    private String restrictions;
-    private String diceWindow;
-    private ModeRep modeRep;
     private MessageAnalyzer messageAnalyzer;
 
     @FXML
@@ -40,7 +36,7 @@ public class MatchViewController implements Initializable, ViewInterface {
     private GridPane windowplayer4;
 
     @FXML
-    private GridPane riserva;
+    private GridPane draftPool;
 
 
     private Text textReceiver;
@@ -76,16 +72,16 @@ public class MatchViewController implements Initializable, ViewInterface {
     private WindowFalsa player3Window = new WindowFalsa(window3);
     private WindowFalsa player4Window = new WindowFalsa(window4);
 
-    private RiservaFalsa riservaFalsa = new RiservaFalsa();
+    //private RiservaFalsa riservaFalsa = new RiservaFalsa();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.setMyWindow(mywindow,currentPlayerWindow);
-        this.setMyWindow(windowplayer2,player2Window);
-        this.setMyWindow(windowplayer3,player3Window);
-        this.setMyWindow(windowplayer4,player4Window);
-        this.setRiserva();
-        this.modeRep = new ModeRep();
+        //this.setMyWindow(mywindow,currentPlayerWindow);
+        //this.setMyWindow(windowplayer2,player2Window);
+        //this.setMyWindow(windowplayer3,player3Window);
+        //this.setMyWindow(windowplayer4,player4Window);
+        //this.setRiserva();
+        //this.modeRep = new ModeRep();
     }
 
     public void setClient(Client client) {
@@ -99,10 +95,10 @@ public class MatchViewController implements Initializable, ViewInterface {
     }
 
     public void notifyNewModelRep(String draftPool, String restrictions, String diceWindow) {
-        this.draftPool = draftPool;
-        this.restrictions = restrictions;
-        this.diceWindow = diceWindow;
-        System.out.println(draftPool+"\n"+ restrictions +"\n"+diceWindow);
+        //this.draftPool = draftPool;
+        //this.restrictions = restrictions;
+        //this.diceWindow = diceWindow;
+        //System.out.println(draftPool+"\n"+ restrictions +"\n"+diceWindow);
     }
 
     public void setMyWindow(GridPane gridPane, WindowFalsa window) {
@@ -120,7 +116,7 @@ public class MatchViewController implements Initializable, ViewInterface {
         }
     }
 
-    public void setRiserva() {
+    /*public void setRiserva() {
         Node text;
 
         for(int i = 0; i< 3;i++) {
@@ -137,7 +133,7 @@ public class MatchViewController implements Initializable, ViewInterface {
                 }
             }
         }
-    }
+    }*/
 
     private Node getChildrenByIndex(GridPane gridPane,final int i,final int y) {
         ObservableList<Node> textList = gridPane.getChildren();
@@ -159,8 +155,8 @@ public class MatchViewController implements Initializable, ViewInterface {
         clipboardContent.putString(source.getText());
         dragboard.setContent(clipboardContent);
 
-        int j = riserva.getColumnIndex(source);
-        int i = riserva.getRowIndex(source);
+        int j = draftPool.getColumnIndex(source);
+        int i = draftPool.getRowIndex(source);
         List<String> list = Arrays.asList(source.getText().split(" "));
 
         String x = Integer.toString(3 * i + j);
@@ -178,7 +174,7 @@ public class MatchViewController implements Initializable, ViewInterface {
         source.setEffect(glow);
 
         System.out.println(source.getText());
-        System.out.println("SOURCE -> \nColumn : "+ riserva.getColumnIndex(source) +" ------- Row :"+ riserva.getRowIndex(source));
+        System.out.println("SOURCE -> \nColumn : "+ draftPool.getColumnIndex(source) +" ------- Row :"+ draftPool.getRowIndex(source));
     }
 
     @FXML
@@ -240,10 +236,59 @@ public class MatchViewController implements Initializable, ViewInterface {
     }
 
     @Override
-    public void handleMatchSetup(String matchSetup) {
-        //ricevo la stringa con tutto il messaggione, ora creo una classe che mi analizza questo messaggione, dividendomelo in
-        //una lista di stringhe contenenti ognuna una parte della gui da aggiornare. Per ciascuna utilizzo un algoritmo che mi
-        //divide atomicamente le informazioni che mi servono per aggiornare la Gui, chiamo infine un metodo della gui che dato
-        //come parametro questa info mi aggiorna la gui.
+    public void updateBoard(String setup) {
+        /*ricevo la stringa con tutto il messaggione, ora creo una classe che mi analizza questo messaggione, dividendomelo in
+        una lista di stringhe contenenti ognuna una parte della gui da aggiornare. Per ciascuna utilizzo un algoritmo che mi
+        divide atomicamente le informazioni che mi servono per aggiornare la Gui, chiamo infine un metodo della gui che dato
+        come parametro questa info mi aggiorna la gui.*/
+
+
+        //divido la stringa grande con tutte le cose da aggiornare in più stringhe ognuna contenente solo un componente da aggiornare
+        List<String> messages = Arrays.asList(setup.split(";"));
+
+        for (String subMessage: messages) {
+            //qui ho il subMessage quindi devo fare starts with -> chiamo funzione sulla view diversa in base alla intestazione
+            if(subMessage.startsWith("draftpool")) {
+                this.updateDraftPool(subMessage.replace("draftpool ", ""));
+            } else if(subMessage.startsWith("toolcards")) {
+                subMessage.replace("toolcards ", "");
+
+            } else if(subMessage.startsWith("favors")) {
+                subMessage.replace("favors ", "");
+
+            } else if(subMessage.startsWith("publiccards")) {
+                subMessage.replace("publiccards ", "");
+
+            } else if(subMessage.startsWith("privatecard")) {
+                subMessage.replace("privatecard ", "");
+
+            } else if(subMessage.startsWith("roundtrack")) {
+                subMessage.replace("roundtrack ", "");
+
+            } else if(subMessage.startsWith("restrictions")) {
+                subMessage.replace("restrictions ", "");
+
+            } else if(subMessage.startsWith("dices")) {
+                subMessage.replace("dices ", "");
+            }
+
+        }
+    }
+
+    private void updateDraftPool(String draftPoolInfo) {
+        int i = 0;
+        int x = 0;
+        int y = 0;
+        List<String> list = Arrays.asList(draftPoolInfo.split(","));
+
+        for(; i < 9;i++) {
+            x = i/3;
+            y = i%3;
+            if(i < list.size()) {
+                ((Text) this.getChildrenByIndex(draftPool, x, y)).setText(list.get(i));
+            } else {
+                ((Text) this.getChildrenByIndex(draftPool, x, y)).setText("");
+            }
+        }
     }
 }

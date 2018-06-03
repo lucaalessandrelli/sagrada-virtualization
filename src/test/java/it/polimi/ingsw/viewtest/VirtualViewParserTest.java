@@ -1,6 +1,6 @@
 package it.polimi.ingsw.viewtest;
 
-import it.polimi.ingsw.controller.Deparser;
+import it.polimi.ingsw.view.Deparser;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Table;
@@ -259,7 +259,7 @@ public class VirtualViewParserTest {
 
         System.out.println(parsed);
 
-        Deparser deparser = new Deparser();
+        /*Deparser deparser = new Deparser();
         System.out.println(deparser.DivideinStrings(tester.startParsing()));
         List<String> strings = deparser.DivideinStrings(tester.startParsing());
         for (String string: strings){
@@ -267,6 +267,6 @@ public class VirtualViewParserTest {
             for (String x: deparsed){
                 System.out.println(x);
             }
-        }
+        }*/
     }
 }

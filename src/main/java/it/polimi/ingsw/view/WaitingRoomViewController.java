@@ -112,7 +112,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         messageAnalyzer.setView(controller);
 
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Match");
         stage.show();
     }
@@ -150,11 +150,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
     }
 
     @Override
-    public void handleMatchSetup(String matchSetup) {
-        /*try {
-            changeScene(matchSetup);
-        } catch (IOException e) {
-            System.out.println("Errore cambio di scena: waitingRoom -> Match");
-        }*/
+    public void updateBoard(String setup) {
+
     }
 }

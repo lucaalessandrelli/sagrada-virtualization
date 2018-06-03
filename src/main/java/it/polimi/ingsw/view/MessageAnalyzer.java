@@ -28,9 +28,10 @@ public class MessageAnalyzer {
                 @Override
                 public void run() {
                     // Update UI here.
-                    view.handleMatchSetup(setup);
+                    view.updateBoard(setup);
                 }
             });
+
         }else if(message.startsWith("match")){
             String match = message.replace("match ","");
             Platform.runLater(new Runnable() {

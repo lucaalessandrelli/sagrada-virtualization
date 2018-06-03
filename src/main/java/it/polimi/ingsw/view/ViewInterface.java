@@ -11,5 +11,5 @@ public interface ViewInterface {
     void handleService(ObservableList<String> list);
     void handleTimer(String string);
     void handleMatchId(String idMatch);
-    void handleMatchSetup(String matchSetup);
+    void updateBoard(String setup);
 }

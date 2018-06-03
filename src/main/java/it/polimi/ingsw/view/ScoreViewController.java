@@ -78,7 +78,7 @@ public class ScoreViewController implements Initializable, ViewInterface {
     }
 
     @Override
-    public void handleMatchSetup(String matchSetup) {
+    public void updateBoard(String setup) {
 
     }
 }
