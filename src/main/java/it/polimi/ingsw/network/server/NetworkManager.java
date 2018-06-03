@@ -92,7 +92,7 @@ public class NetworkManager {
                         pr.println("Connected, Welcome!");
                         connected = true;
                     } else {
-                        pr.println("Already connected");
+                        pr.println("alert Already connected");
                         message = in.nextLine();
                     }
                 }
