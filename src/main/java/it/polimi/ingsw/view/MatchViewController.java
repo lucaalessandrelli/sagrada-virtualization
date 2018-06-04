@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -35,6 +36,9 @@ public class MatchViewController implements Initializable, ViewInterface {
 
     @FXML
     private HBox boxObjectiveCards;
+
+    @FXML
+    private TextField notifyField;
 
     @FXML
     private HBox boxToolCards;
@@ -234,7 +238,13 @@ public class MatchViewController implements Initializable, ViewInterface {
 
     @Override
     public void handleService(ObservableList<String> list) {
+        String message = "";
 
+        for(int i = 0 ; i < list.size();i++) {
+            message += (list.get(i)+" ");
+        }
+
+        notifyField.setText(message);
     }
 
     @Override
