@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -31,6 +32,12 @@ public class MatchViewController implements Initializable, ViewInterface {
     private MessageAnalyzer messageAnalyzer;
     private ObservableList<String> list = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
+
+    @FXML
+    private HBox boxObjectiveCards;
+
+    @FXML
+    private HBox boxToolCards;
 
     @FXML
     private GridPane mywindow;
@@ -266,7 +273,7 @@ public class MatchViewController implements Initializable, ViewInterface {
                 subMessage.replace("favors ", "");
 
             } else if(subMessage.startsWith("publiccards")) {
-                subMessage.replace("publiccards ", "");
+                this.setObjectCard(subMessage.replace("publiccards ", ""));
 
             } else if(subMessage.startsWith("privatecard")) {
                 this.setPrivateCard(subMessage.replace("privatecard ", ""));
@@ -283,15 +290,27 @@ public class MatchViewController implements Initializable, ViewInterface {
         }
     }
 
+    public void setObjectCard(String objectCard) {
+        List<String> objectCardList = Arrays.asList(objectCard.split(","));
+
+        ObservableList<Node> boxChildren = boxObjectiveCards.getChildren();
+
+        for(int i = 0; i < objectCardList.size();i++) {
+            ((javafx.scene.image.ImageView)boxChildren.get(i)).setImage(new Image ("/objectivecards/public/"+objectCardList.get(i)+".png"));
+        }
+    }
+
     public void setPrivateCard(String privateCard) {
-        privateObjectiveCard.setImage(new Image ("/about.jpg"));
+        privateObjectiveCard.setImage(new Image ("/objectivecards/private/"+privateCard+".png"));
     }
 
     public void updateToolcards(String toolCard) {
         List<String> toolList = Arrays.asList(toolCard.split(","));
-        for (String numTool: toolList) {
-            //caricare nella image view la toolcard numero x
 
+        ObservableList<Node> boxChildren = boxToolCards.getChildren();
+
+        for(int i = 0; i < toolList.size();i++) {
+            ((javafx.scene.image.ImageView)boxChildren.get(i)).setImage(new Image ("/toolcards/"+toolList.get(i)+".png"));
         }
     }
 
