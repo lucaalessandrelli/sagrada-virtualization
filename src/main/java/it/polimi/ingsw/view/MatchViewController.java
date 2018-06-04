@@ -2,12 +2,16 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.MessageQueue;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.effect.Glow;
@@ -18,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.swing.text.html.ImageView;
 import java.net.URL;
@@ -33,9 +38,13 @@ public class MatchViewController implements Initializable, ViewInterface {
     private MessageAnalyzer messageAnalyzer;
     private ObservableList<String> list = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
+    private String time;
 
     @FXML
     private HBox boxObjectiveCards;
+
+    @FXML
+    private Label timerLabel;
 
     @FXML
     private TextField notifyField;
@@ -254,7 +263,8 @@ public class MatchViewController implements Initializable, ViewInterface {
 
     @Override
     public void handleTimer(String time) {
-
+        this.time = time;
+        startTimer();
     }
 
     @Override
@@ -404,4 +414,26 @@ public class MatchViewController implements Initializable, ViewInterface {
             }
         }
     }
+
+    public void startTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(1000),
+                ae -> countTimer()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
+    private void countTimer() {
+        if(list.size() >= 2) {
+            if (!time.equals("0")) {
+                time = Long.toString((Long.parseLong(time) - 1));
+            } else {
+                time = "0";
+            }
+        }
+
+        timerLabel.setText("You are currently in queue. Waiting for players...                       Timer : " + time);
+    }
 }
+
+
