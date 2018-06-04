@@ -294,10 +294,8 @@ public class MatchViewController implements Initializable, ViewInterface {
 
             } else if(subMessage.startsWith("publiccards")) {
                 this.setObjectCard(subMessage.replace("publiccards ", ""));
-
             } else if(subMessage.startsWith("privatecard")) {
                 this.setPrivateCard(subMessage.replace("privatecard ", ""));
-
             } else if(subMessage.startsWith("roundtrack")) {
                 subMessage.replace("roundtrack ", "");
 
@@ -432,7 +430,7 @@ public class MatchViewController implements Initializable, ViewInterface {
             }
         }
 
-        timerLabel.setText("You are currently in queue. Waiting for players...                       Timer : " + time);
+        timerLabel.setText("Timer :" + time);
     }
 }
 
