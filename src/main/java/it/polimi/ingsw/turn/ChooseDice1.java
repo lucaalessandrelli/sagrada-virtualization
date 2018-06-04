@@ -55,6 +55,7 @@ public class ChooseDice1 implements TurnState {
         if(turn.getRoundNumber() == 1 && turn.isFirstBracket()) {
             if(inspectorPlace.checkFirst(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
                 turn.getModifier().positionDiceFromDraft(chosenDice, posDiceChosen, pos);
+                turn.notifyModelModified();
                 turn.setState(new PositionDice1(turn));
             } else {
                 throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole del primo piazzamento.");
@@ -62,6 +63,7 @@ public class ChooseDice1 implements TurnState {
         } else {
             if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
                 turn.getModifier().positionDiceFromDraft(chosenDice, posDiceChosen, pos);
+                turn.notifyModelModified();
                 turn.setState(new PositionDice1(turn));
             } else {
                 throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento.");

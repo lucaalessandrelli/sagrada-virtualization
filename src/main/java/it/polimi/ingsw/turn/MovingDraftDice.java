@@ -31,6 +31,7 @@ public class MovingDraftDice implements TurnState {
         if(inspectorPlaceTool.check(chosenDice,pos,turn.getToolCard())) {
             //call modifier
             turn.getModifier().positionDiceFromDraft(chosenDice,posChosenDice,pos);
+            turn.notifyModelModified();
             turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");

@@ -31,6 +31,7 @@ public class MovingToolDice implements TurnState {
         if(inspectorPlaceTool.check(toolDice,toolPos,turn.getToolCard())) {
             //call modifier
             turn.getModifier().positionDiceFromWindow(toolDice,toolPos,pos);
+            turn.notifyModelModified();
             turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");

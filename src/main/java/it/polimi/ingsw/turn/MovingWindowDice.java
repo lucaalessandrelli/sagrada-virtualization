@@ -36,6 +36,7 @@ public class MovingWindowDice implements TurnState {
         if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {
             //call modifier
             turn.getModifier().positionDiceFromWindow(chosenDice,posChosenDice,pos);
+            turn.notifyModelModified();
             turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");

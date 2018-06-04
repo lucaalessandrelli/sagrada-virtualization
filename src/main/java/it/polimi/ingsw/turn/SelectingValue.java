@@ -27,9 +27,10 @@ public class SelectingValue implements TurnState {
     @Override
     public void receiveMove(Dice chosenDice,Pos posChosenDice) throws WrongMoveException {
         if(inspectorContextTool.checkColourDice(chosenDice,posChosenDice,toolDice,toolPos)) {
-                //call modifier
-                turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);
-                turn.setDynamicState(toolDice,toolPos,new Dice(), new Pos());
+            //call modifier
+            turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);
+            turn.notifyModelModified();
+            turn.setDynamicState(toolDice,toolPos,new Dice(), new Pos());
         } else {
             throw new WrongMoveException("Mossa sbagliata: selezionare un valore da assegnare al dado scelto.");
         }
