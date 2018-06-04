@@ -111,6 +111,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         //controller.loadPlayers();
         //controller.startTimer();
         controller.setWindows();
+        controller.startTimer();
         messageAnalyzer.setView(controller);
 
         stage.setScene(scene);

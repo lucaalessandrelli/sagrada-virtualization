@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -187,17 +188,17 @@
                                        <children>
                                           <HBox fx:id="boxToolCards" alignment="CENTER" layoutX="119.0" layoutY="14.0" prefHeight="164.0" prefWidth="637.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <ImageView fx:id="toolcard1" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
+                                                <ImageView fx:id="toolcard1" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
                                                    <image>
                                                       <Image url="@../toolcards/cover.png" />
                                                    </image>
                                                 </ImageView>
-                                                <ImageView fx:id="toolcard2" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
+                                                <ImageView fx:id="toolcard2" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
                                                    <image>
                                                       <Image url="@../toolcards/cover.png" />
                                                    </image>
                                                 </ImageView>
-                                                <ImageView fx:id="toolcard3" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
+                                                <ImageView fx:id="toolcard3" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
                                                    <image>
                                                       <Image url="@../toolcards/cover.png" />
                                                    </image>
@@ -283,7 +284,7 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
-                        <SplitPane dividerPositions="0.2, 0.5" layoutX="604.0" layoutY="155.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane dividerPositions="0.2, 0.5, 0.93" layoutX="604.0" layoutY="155.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
@@ -338,7 +339,7 @@
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                     <children>
-                                        <TitledPane fx:id="myTitle" animated="false" layoutX="95.0" layoutY="99.0" prefHeight="366.0" prefWidth="768.0" text="La tua Vetrata" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <TitledPane fx:id="myTitle" animated="false" layoutX="95.0" layoutY="99.0" prefHeight="324.0" prefWidth="639.0" text="La tua Vetrata" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                     <children>
@@ -385,6 +386,15 @@
                                         </TitledPane>
                                     </children>
                                 </AnchorPane>
+                        <AnchorPane prefHeight="324.0" prefWidth="475.0">
+                           <children>
+                              <JFXButton fx:id="passButton" alignment="CENTER" layoutY="-1.0" onMouseClicked="#handlePassClicked" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #3C58FA;" text="Ho finito" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
                             </items>
                         </SplitPane>
                     </children>

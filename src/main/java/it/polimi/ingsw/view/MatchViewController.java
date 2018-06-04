@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import com.jfoenix.controls.JFXButton;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.MessageQueue;
 import javafx.animation.Animation;
@@ -39,6 +40,9 @@ public class MatchViewController implements Initializable, ViewInterface {
     private ObservableList<String> list = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
     private String time;
+
+    @FXML
+    private JFXButton passButton;
 
     @FXML
     private HBox boxObjectiveCards;
@@ -195,6 +199,17 @@ public class MatchViewController implements Initializable, ViewInterface {
     }
 
     @FXML
+    public void handlePassClicked(MouseEvent event) {
+        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" pass");
+    }
+
+    @FXML
+    public void handleToolCardClicked(MouseEvent event) {
+        event.getSource();
+
+    }
+
+    @FXML
     public void handleMouseClicked(MouseEvent event) {
         source = (Text) event.getSource();
 
@@ -264,7 +279,6 @@ public class MatchViewController implements Initializable, ViewInterface {
     @Override
     public void handleTimer(String time) {
         this.time = time;
-        startTimer();
     }
 
     @Override
@@ -422,12 +436,10 @@ public class MatchViewController implements Initializable, ViewInterface {
     }
 
     private void countTimer() {
-        if(list.size() >= 2) {
-            if (!time.equals("0")) {
-                time = Long.toString((Long.parseLong(time) - 1));
-            } else {
-                time = "0";
-            }
+        if (!time.equals("0")) {
+            time = Long.toString((Long.parseLong(time) - 1));
+        } else {
+            time = "0";
         }
 
         timerLabel.setText("Timer :" + time);
