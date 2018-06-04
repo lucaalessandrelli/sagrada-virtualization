@@ -43,6 +43,9 @@ public class Manager {
     }
 
     public synchronized boolean checkIfPlayerIsLogged(String name) throws RemoteException {
+        if(clients.findClient(name)){
+            return true;
+        }
         for (Game g : games) {
             if (g.findClient(name)) {
                 return true;

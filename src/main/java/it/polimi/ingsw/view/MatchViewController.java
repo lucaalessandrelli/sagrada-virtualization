@@ -367,8 +367,8 @@ public class MatchViewController implements Initializable, ViewInterface {
 
         for (String cell: cellList) {
             if(!cell.equals(player)) {
-                int x = cell.charAt(2);
-                int y = cell.charAt(3);
+                int x = Character.getNumericValue(cell.charAt(2));
+                int y = Character.getNumericValue(cell.charAt(3));
                 text = this.getChildrenByIndex(currentWindow,x,y);
                 if(text == null) {
                     System.out.println("Sbagliato");
