@@ -96,7 +96,6 @@ public class VirtualViewParser {
         }
         builder.append(SEP);
         builder.append("privatecard ");
-        builder.append(VIRG);
         builder.append(player.getPrivateCard().getID());
         builder.append(SEP);
         return builder.toString();

@@ -2,16 +2,22 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.MessageQueue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.TitledPane;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
 import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,55 +29,32 @@ public class MatchViewController implements Initializable, ViewInterface {
     private Client client;
     private Stage stage;
     private MessageAnalyzer messageAnalyzer;
+    private ObservableList<String> list = FXCollections.observableArrayList();
+    private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
 
     @FXML
     private GridPane mywindow;
 
     @FXML
-    private GridPane windowplayer2;
+    private TitledPane myTitle;
 
     @FXML
-    private GridPane windowplayer3;
+    private javafx.scene.image.ImageView privateObjectiveCard;
 
     @FXML
-    private GridPane windowplayer4;
+    private TitledPane titlePlayer2;
+
+    @FXML
+    private TitledPane titlePlayer3;
+
+    @FXML
+    private TitledPane titlePlayer4;
 
     @FXML
     private GridPane draftPool;
 
-
     private Text textReceiver;
     private Text source;
-
-    private String[][] window1 = {{"a1","a2","a3", "a4"},
-            {"b1","b2","b3","b4"},
-            {"c1","c2","c3","c4"},
-            {"d1","d2","d3","d4"},
-            {"e1","e2","e3","e4"}};
-
-    private String[][] window2 = {{"p21","a2","a3", "a4"},
-            {"b1","b2","b3","b4"},
-            {"c1","c2","c3","c4"},
-            {"d1","d2","d3","d4"},
-            {"e1","e2","e3","e4"}};
-
-    private String[][] window3 = {{"p31","a2","a3", "a4"},
-            {"b1","b2","b3","b4"},
-            {"c1","c2","c3","c4"},
-            {"d1","d2","d3","d4"},
-            {"e1","e2","e3","e4"}};
-
-    private String[][] window4 = {{"p41","a2","a3", "a4"},
-            {"b1","b2","b3","b4"},
-            {"c1","c2","c3","c4"},
-            {"d1","d2","d3","d4"},
-            {"e1","e2","e3","e4"}};
-
-
-    private WindowFalsa currentPlayerWindow = new WindowFalsa(window1);
-    private WindowFalsa player2Window = new WindowFalsa(window2);
-    private WindowFalsa player3Window = new WindowFalsa(window3);
-    private WindowFalsa player4Window = new WindowFalsa(window4);
 
     //private RiservaFalsa riservaFalsa = new RiservaFalsa();
 
@@ -85,6 +68,19 @@ public class MatchViewController implements Initializable, ViewInterface {
         //this.modeRep = new ModeRep();
     }
 
+    public void setWindows() {
+        listTitle.addAll(myTitle,titlePlayer2,titlePlayer3,titlePlayer4);
+        myTitle.setText(client.getName());
+        int j = 1;
+
+        for(int i = 0; i < list.size(); i++) {
+            if(!list.get(i).equals(client.getName())) {
+                listTitle.get(j).setText(list.get(i));
+                j++;
+            }
+        }
+    }
+
     public void setClient(Client client) {
         this.client = client;
     }
@@ -93,6 +89,10 @@ public class MatchViewController implements Initializable, ViewInterface {
     }
     public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
         this.messageAnalyzer = messageAnalyzer;
+    }
+
+    public void setList(ObservableList<String> list) {
+        this.list = list;
     }
 
     public void notifyNewModelRep(String draftPool, String restrictions, String diceWindow) {
@@ -261,8 +261,7 @@ public class MatchViewController implements Initializable, ViewInterface {
             if(subMessage.startsWith("draftpool")) {
                 this.updateDraftPool(subMessage.replace("draftpool ", ""));
             } else if(subMessage.startsWith("toolcards")) {
-                subMessage.replace("toolcards ", "");
-
+                this.updateToolcards(subMessage.replace("toolcards ", ""));
             } else if(subMessage.startsWith("favors")) {
                 subMessage.replace("favors ", "");
 
@@ -270,18 +269,93 @@ public class MatchViewController implements Initializable, ViewInterface {
                 subMessage.replace("publiccards ", "");
 
             } else if(subMessage.startsWith("privatecard")) {
-                subMessage.replace("privatecard ", "");
+                this.setPrivateCard(subMessage.replace("privatecard ", ""));
 
             } else if(subMessage.startsWith("roundtrack")) {
                 subMessage.replace("roundtrack ", "");
 
             } else if(subMessage.startsWith("restrictions")) {
-                subMessage.replace("restrictions ", "");
-
+                this.updateRestriction(subMessage.replace("restrictions ", ""));
             } else if(subMessage.startsWith("dices")) {
-                subMessage.replace("dices ", "");
+                this.updateWindowCards(subMessage.replace("dices ", ""));
             }
 
+        }
+    }
+
+    public void setPrivateCard(String privateCard) {
+        privateObjectiveCard.setImage(new Image ("/about.jpg"));
+    }
+
+    public void updateToolcards(String toolCard) {
+        List<String> toolList = Arrays.asList(toolCard.split(","));
+        for (String numTool: toolList) {
+            //caricare nella image view la toolcard numero x
+
+        }
+    }
+
+    private void updateWindowCards(String windowPatternCard) {
+        List<String> cellList = Arrays.asList(windowPatternCard.split(","));
+
+        String player = cellList.get(0);
+        TitledPane container = new TitledPane();
+
+        Node node = new Text();
+
+        for (TitledPane titlePane: listTitle) {
+            if(titlePane.getText().equals(player)) {
+                node = titlePane.getContent();
+            }
+        }
+
+
+        GridPane currentWindow = (GridPane)((Parent) node).getChildrenUnmodifiable().get(0);
+
+        Node text;
+
+        for (String cell: cellList) {
+            if(!cell.equals(player)) {
+                int x = cell.charAt(2);
+                int y = cell.charAt(3);
+                text = this.getChildrenByIndex(currentWindow,x,y);
+                if(text == null) {
+                    System.out.println("Sbagliato");
+                } else {
+                    ((Text)text).setText(cell.charAt(0)+" "+cell.charAt(1));
+                }
+            }
+        }
+    }
+
+    private void updateRestriction(String resctriction) {
+        List<String> restrictionList = Arrays.asList(resctriction.split(","));
+
+        String player = restrictionList.get(0);
+        TitledPane container = new TitledPane();
+
+        Node node = new Text();
+
+        for (TitledPane titlePane: listTitle) {
+            if(titlePane.getText().equals(player)) {
+                node = titlePane.getContent();
+            }
+        }
+
+
+        GridPane currentWindow = (GridPane)((Parent) node).getChildrenUnmodifiable().get(0);
+
+        Node text;
+
+        for(int i = 0; i< 4;i++) {
+            for(int j = 0; j<5;j++) {
+                text = this.getChildrenByIndex(currentWindow,i,j);
+                if(text == null) {
+                    System.out.println("Sbagliato");
+                } else {
+                    ((Text)text).setText(restrictionList.get(5*i+j+1));
+                }
+            }
         }
     }
 
@@ -289,13 +363,13 @@ public class MatchViewController implements Initializable, ViewInterface {
         int i = 0;
         int x = 0;
         int y = 0;
-        List<String> list = Arrays.asList(draftPoolInfo.split(","));
+        List<String> draftList = Arrays.asList(draftPoolInfo.split(","));
 
         for(; i < 9;i++) {
             x = i/3;
             y = i%3;
-            if(i < list.size()) {
-                ((Text) this.getChildrenByIndex(draftPool, x, y)).setText(list.get(i).charAt(0)+" "+list.get(i).charAt(1));
+            if(i < draftList.size()) {
+                ((Text) this.getChildrenByIndex(draftPool, x, y)).setText(draftList.get(i).charAt(0)+" "+draftList.get(i).charAt(1));
             } else {
                 ((Text) this.getChildrenByIndex(draftPool, x, y)).setText("");
             }

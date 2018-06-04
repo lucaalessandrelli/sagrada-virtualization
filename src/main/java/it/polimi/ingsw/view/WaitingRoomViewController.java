@@ -103,12 +103,14 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         controller.setClient(client);
         controller.setMessageAnalyzer(messageAnalyzer);
         controller.setStage(stage);
+        controller.setList(list);
         //controller.setTime(time);
 
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         //controller.loadPlayers();
         //controller.startTimer();
+        controller.setWindows();
         messageAnalyzer.setView(controller);
 
         stage.setScene(scene);
