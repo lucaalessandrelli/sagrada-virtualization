@@ -14,6 +14,8 @@ import it.polimi.ingsw.model.gamelogic.ModelModifier;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.lang.reflect.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -77,7 +79,9 @@ public class Turn {
 
         if(!nextStateName.equals("CheckPointState")) {
             try {
-                Class cls = Class.forName("it.polimi.ingsw.turn."+ nextStateName);
+
+                String path =("it.polimi.ingsw.turn."+nextStateName).replaceAll("\\s+","");
+                Class cls = Class.forName(path);
 
                 Class[] parametersTypes = new Class[5];
                 parametersTypes [0] = Turn.class;
@@ -102,7 +106,7 @@ public class Turn {
                     ((AutomatedOperation)state).doAutomatedOperations(toolAutomatedOperationList);
                 }
             } catch (Throwable e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
 
             //increase indexList

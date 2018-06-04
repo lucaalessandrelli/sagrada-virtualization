@@ -99,4 +99,8 @@ public class Manager {
             e.printStackTrace();
         }
     }
+
+    public void matchEnded(String username) {
+        clientHandler.removePlayer(username);
+    }
 }

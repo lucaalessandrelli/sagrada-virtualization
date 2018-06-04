@@ -39,8 +39,8 @@ public class PlayersContainer {
         players.forEach(p -> p.notifyPlayer());
     }
 
-    public void notifyTurn(String username) {
-        players.forEach(p->p.notifyTurn(username));
+    public void notifyTurn(String username, long timeSleep) {
+        players.forEach(p->p.notifyTurn(username,timeSleep));
     }
 
     public Player getLastPlayer() {

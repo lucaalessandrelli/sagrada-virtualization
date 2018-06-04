@@ -24,7 +24,7 @@ public class Round extends Thread{
         this.roundNumber = roundNumber;
         this.players = new PlayersContainer(playerList);
         this.table=table;
-        int t =5;
+        int t =30;
         timeSleep = t*1000;
     }
 
@@ -36,7 +36,8 @@ public class Round extends Thread{
             currTurn = p;
             if (p.isActive()){
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
-                players.notifyTurn(p.getUsername());
+                turn.startTurn();
+                players.notifyTurn(p.getUsername(),timeSleep);
                 try {
                     Thread.sleep(timeSleep);
                     //p.setActivity(false);
@@ -55,6 +56,10 @@ public class Round extends Thread{
 
     public String getCurrTurn() {
         return currTurn.getUsername();
+    }
+
+    public void notifyPlayers(){
+        players.notifyChanges();
     }
 
     public int getRoundNumber() {

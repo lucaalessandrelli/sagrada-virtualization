@@ -71,7 +71,7 @@ public class NetworkManager {
                 while (connected) {
                     receiveCommand();
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 try {
                     server.disconnect(name,this);
                 } catch (Exception e1) {

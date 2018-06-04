@@ -111,8 +111,8 @@ public class Player {
         observer.update();
     }
 
-    public void notifyTurn(String whoIsTurn) {
-            observer.updateStateTurn(whoIsTurn);
+    public void notifyTurn(String whoIsTurn, long timeSleep) {
+            observer.updateStateTurn(whoIsTurn,timeSleep);
     }
 
     public void calculatePoints() {

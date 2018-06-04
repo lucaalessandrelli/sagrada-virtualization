@@ -13,7 +13,9 @@ public abstract class VirtualViewObserver {
     //this method will be called when a pattern card is modified
     public abstract void update();
     // this method is called when is the turn passes to the next player
-    public abstract void updateStateTurn(String whoIsTurn);
+    public abstract void updateStateTurn(String whoIsTurn, long timeSleep);
 
     public abstract void wrongMove(String s);
+
+
 }

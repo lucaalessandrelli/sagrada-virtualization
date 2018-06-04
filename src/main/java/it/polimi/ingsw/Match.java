@@ -38,9 +38,13 @@ public class Match {
         /*SETTING ROUNDS*/
         for(roundNumber = 1; roundNumber <= 10; roundNumber++) {
             //reminder to implement exception management later (in case the match end before)
-            this.table.fillDraftPool();
+
             try {
                 this.startNextRound();
+                this.table.fillDraftPool();
+                for (Player p : playerList){
+                    p.notifyPlayer();
+                }
             } catch (NotEnoughPlayersException e) {
                 //manager.notEnoughPlayer(e.getMessage()); //il giocatore rimasto vince
             }
@@ -48,6 +52,9 @@ public class Match {
 
         //match is now ended - call methods to calculate player points
         this.computePlayerPoints();
+        for(Player p : playerList){
+            manager.matchEnded(p.getUsername());
+        }
     }
 
     private void computePlayerPoints() {
