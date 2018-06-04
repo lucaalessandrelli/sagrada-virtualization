@@ -210,7 +210,7 @@ public class CardContainer {
             this.readRulesPublic(document,myobj.getRules().getRules(),cont);
         }
         else {
-            myobj.setID(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()) + 10);
+            myobj.setID(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()));
             myobj.setPoints(1);
             myobj.getRules().getRules().add(document.getElementsByTagName(COLOUR).item(cont).getTextContent());
         }
