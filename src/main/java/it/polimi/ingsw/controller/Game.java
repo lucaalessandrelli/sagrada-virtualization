@@ -1,9 +1,8 @@
 package it.polimi.ingsw.controller;
 
-import com.sun.deploy.ClientContainer;
+
 import it.polimi.ingsw.Match;
 import it.polimi.ingsw.model.gamelogic.Round;
-import it.polimi.ingsw.network.client.Client;
 
 public class Game {
     private ClientsContainer clients;
