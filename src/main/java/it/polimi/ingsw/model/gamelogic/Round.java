@@ -11,7 +11,7 @@ import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.util.*;
 
-public class Round extends Thread{
+public class Round {
     private int roundNumber;
     private PlayersContainer players;
     private Table table;
@@ -19,6 +19,7 @@ public class Round extends Thread{
     private Turn turn;
     private Player currTurn;
     private Iterator<Player> iterator;
+    private Object mon;
 
     public Round(List<Player> playerList, int roundNumber, Table table) {
         this.roundNumber = roundNumber;
@@ -38,12 +39,21 @@ public class Round extends Thread{
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
                 turn.startTurn();
                 players.notifyTurn(p.getUsername(),timeSleep);
-                try {
+                mon = new Object();
+                synchronized (mon){
+                    try {
+                        mon.wait(timeSleep);
+                    } catch (InterruptedException e) {
+                        players.notifyChanges();
+                    }
+                }
+
+                /*try {
                     Thread.sleep(timeSleep);
                     //p.setActivity(false);
                 } catch (InterruptedException e) {
                     players.notifyChanges();
-                }
+                }*/
             }
         }
         setLastDice();
@@ -95,6 +105,11 @@ public class Round extends Thread{
             turn.receiveMove(d,p);
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
+        }
+    }
+    public  void interrupt(){
+        synchronized (mon) {
+            mon.notify();
         }
     }
 

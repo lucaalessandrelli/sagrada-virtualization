@@ -33,7 +33,7 @@ public class Proc {
             ToolCard t = new ToolCard().exactToolCard(Integer.parseInt(res));
             round.setTurn(t);
         }else if(move.equals("pass")){
-            round.interrupt();
+            round.setTurn("pass");
         }
     }
 }

@@ -120,7 +120,7 @@ public class Turn {
      * Notifies the round that the current turn ended
      */
     public void notifyEndRound() {
-        //call a method on round instance
+        round.interrupt();
     }
 
     /**
