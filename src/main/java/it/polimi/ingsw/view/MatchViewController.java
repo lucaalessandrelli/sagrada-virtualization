@@ -39,6 +39,7 @@ public class MatchViewController implements Initializable, ViewInterface {
     private MessageAnalyzer messageAnalyzer;
     private ObservableList<String> list = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
+    private List<String> toolList;
     private String time;
 
     @FXML
@@ -205,8 +206,19 @@ public class MatchViewController implements Initializable, ViewInterface {
 
     @FXML
     public void handleToolCardClicked(MouseEvent event) {
-        event.getSource();
+        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" T;"+toolList.get(findNodeIndexIntoHbox(boxToolCards,(Node)event.getSource())));
+    }
 
+    private int findNodeIndexIntoHbox(HBox boxToolCards, Node toolcard) {
+        ObservableList<Node> nodeList = boxToolCards.getChildren();
+        for(int i = 0; i < nodeList.size();i++) {
+            if(nodeList.get(i) == toolcard) {
+                return i;
+            }
+        }
+
+        //cambia,sbagliato
+        return 0;
     }
 
     @FXML
@@ -240,9 +252,12 @@ public class MatchViewController implements Initializable, ViewInterface {
         int y = mywindow.getColumnIndex(textReceiver);
         int x = mywindow.getRowIndex(textReceiver);
 
-        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);
-
-
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);
+            }
+        });
     }
 
     @FXML
@@ -337,7 +352,7 @@ public class MatchViewController implements Initializable, ViewInterface {
     }
 
     public void updateToolcards(String toolCard) {
-        List<String> toolList = Arrays.asList(toolCard.split(","));
+        toolList = Arrays.asList(toolCard.split(","));
 
         ObservableList<Node> boxChildren = boxToolCards.getChildren();
 

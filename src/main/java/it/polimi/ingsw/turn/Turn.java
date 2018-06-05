@@ -124,13 +124,6 @@ public class Turn {
     }
 
     /**
-     * Notifie that the model has changed due to a player move
-     */
-    public void notifyModelModified() {
-       round.notifyPlayers();
-    }
-
-    /**
      * Method called every time the turn change state in order to know when the state is EndTurn
      */
     private void checkEndState() {

@@ -29,7 +29,6 @@ public class IncDecValue implements TurnState {
         if(inspectContextTool.checkNumDice(chosenDice,posChosenDice,toolDice,toolPos)) {
             //call modifier so the value of the dice will be changed
             turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);
-            turn.notifyModelModified();
             turn.setDynamicState(toolDice,toolPos,new Dice(),new Pos());
         } else {
             throw new WrongMoveException("Mossa sbagliata: Decrementa o aumenta il valore del dado scelto di 1. Non puoi far diventare un 1 in un 6 e viceversa.");
