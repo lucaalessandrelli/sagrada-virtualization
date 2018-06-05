@@ -80,7 +80,7 @@ public class Turn {
         if(!nextStateName.equals("CheckPointState")) {
             try {
 
-                String path =("it.polimi.ingsw.turn."+nextStateName).replaceAll("\\s+","");
+                String path =("it.polimi.ingsw.turn."+ (nextStateName.replaceAll("\\s+","")));
                 Class cls = Class.forName(path);
 
                 Class[] parametersTypes = new Class[5];

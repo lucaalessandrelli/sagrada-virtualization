@@ -17,7 +17,7 @@ public class InspectorPlaceTool implements InspectorTool {
 
     public InspectorPlaceTool(WindowPatternCard window){
         this.window=window;
-
+        index = 0;
     }
 
     /**
@@ -33,6 +33,7 @@ public class InspectorPlaceTool implements InspectorTool {
         RuleEngine ruleEngine = new RuleEngineP(dice,pos,window);
         ArrayList<ArrayList<String>> nameMethods = tool.getNamePMethods();
         ArrayList<String> currMethods = nameMethods.get(index);
+        index++;
         return doMethods(currMethods,ruleEngine);
     }
 

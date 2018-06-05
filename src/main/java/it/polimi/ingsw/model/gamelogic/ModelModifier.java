@@ -24,6 +24,7 @@ public class ModelModifier {
     public void switchDice(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         Dice draftDice = draftPool.chooseDice(posChosenDice.getX());
         Dice roundDice = roundTrack.getDice(toolPos);
+        draftPool.removeDice(posChosenDice.getX());
 
         //draftPool.setDice(roundDice,posChosenDice.getX());
         //roundTrack.setDice(draftDice,toolPos);

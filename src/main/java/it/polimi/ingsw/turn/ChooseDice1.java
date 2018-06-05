@@ -35,7 +35,6 @@ public class ChooseDice1 implements TurnState {
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) throws WrongMoveException {
-        System.out.println("sono qui" + toolList.contains(toolCard.getID()) + "e adesso qui" + inspectorContext.check(toolCard, turn.getPlayer().getToolCards()));
         if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards()))) {
             //setting the toolCard used in this turn
             //setting the list of states for the dynamic state machine

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.viewtest;
 
-import it.polimi.ingsw.view.Deparser;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Table;
@@ -9,7 +8,6 @@ import it.polimi.ingsw.controller.VirtualViewParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,11 +15,6 @@ public class VirtualViewParserTest {
 
     @Test
     void TestParsingRestrictions(){
-        ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
 
         Player p1 = new Player("Luca");
 
@@ -39,33 +32,13 @@ public class VirtualViewParserTest {
 
         Table table = new Table(players);
 
-
-        windowPatternCards.add(windowPatternCard);
-        p1.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard);
-
-
-        windowPatternCards.add(windowPatternCard1);
-        p2.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard1);
-
-
-        windowPatternCards.add(windowPatternCard2);
-        p3.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard2);
-
-
-        windowPatternCards.add(windowPatternCard3);
-        p4.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard3);
-
         table.setPublicObjects();
 
         VirtualViewParser tester = new VirtualViewParser(p1);
 
         String parsed = tester.startParsing();
 
-        System.out.println(parsed);
+        parsed = parsed.substring(parsed.indexOf("restrictions Luca,")+18,parsed.length());
 
         int k = 0;
         Pos pos = new Pos();
@@ -74,40 +47,21 @@ public class VirtualViewParserTest {
                 pos.setX(i);
                 pos.setY(j);
 
-                assertEquals(p1.getWindowPatternCard().getCell(pos).getProperty().getColour().toString().charAt(0), (parsed.charAt(18 + p1.getUsername().length() + k)));
 
-                assertEquals(p1.getWindowPatternCard().getCell(pos).getProperty().getNumber(),(Character.getNumericValue(parsed.charAt(18 + p1.getUsername().length() + (k+1)))));
+                assertEquals(p1.getWindowPatternCard().getCell(pos).getProperty().getColour().toString().charAt(0), (parsed.charAt(k)));
+
+                assertEquals(p1.getWindowPatternCard().getCell(pos).getProperty().getNumber(),(Character.getNumericValue(parsed.charAt((k+1)))));
             }
         }
     }
 
     @Test
     void TestParsingDraftPool(){
-        ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
 
         Player p1 = new Player("Luca");
-        windowPatternCards.add(windowPatternCard);
-        p1.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard);
-
         Player p2 = new Player("Giovanni");
-        windowPatternCards.add(windowPatternCard);
-        p2.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard1);
-
         Player p3 = new Player("Andrea");
-        windowPatternCards.add(windowPatternCard);
-        p3.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard2);
-
         Player p4 = new Player("Vincenzo");
-        windowPatternCards.add(windowPatternCard);
-        p4.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard3);
 
         ArrayList<Player> players = new ArrayList<>();
         players.add(p1);
@@ -129,24 +83,18 @@ public class VirtualViewParserTest {
 
         String parsed = tester.parseDraftPool();
 
-        System.out.println(parsed);
+        parsed = parsed.substring(parsed.indexOf("draftpool ")+10,parsed.length());
 
         for(int i = 0, k = 0; i < table.getDraftPool().getNumOfDices(); i++, k = k+3){
-            assertEquals(table.getDraftPool().chooseDice(i).getColour().toString().charAt(0), (parsed.charAt(15 + p1.getUsername().length() + k)));
+            assertEquals(table.getDraftPool().chooseDice(i).getColour().toString().charAt(0), (parsed.charAt(k)));
 
-            assertEquals(table.getDraftPool().chooseDice(i).getNumber(), (Character.getNumericValue(parsed.charAt(15 + p1.getUsername().length() + (k+1)))));
+            assertEquals(table.getDraftPool().chooseDice(i).getNumber(), (Character.getNumericValue(parsed.charAt((k+1)))));
         }
 
     }
 
     @Test
     void TestParsingWindowDices(){
-
-        ArrayList<WindowPatternCard> windowPatternCards = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
 
         Player p1 = new Player("Luca");
 
@@ -163,20 +111,6 @@ public class VirtualViewParserTest {
         players.add(p4);
 
         Table table = new Table(players);
-
-
-        windowPatternCards.add(windowPatternCard);
-        p1.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard);
-        windowPatternCards.add(windowPatternCard1);
-        p2.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard1);
-        windowPatternCards.add(windowPatternCard2);
-        p3.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard2);
-        windowPatternCards.add(windowPatternCard3);
-        p4.chooseWindow(windowPatternCards);
-        windowPatternCards.remove(windowPatternCard3);
 
         table.setPublicObjects();
 
@@ -197,11 +131,13 @@ public class VirtualViewParserTest {
 
         String parsed = tester.startParsing();
 
+        parsed = parsed.substring(parsed.indexOf("dices Luca,")+11,parsed.length());
+
         for(int i = 0, k = 0; i < 5 ; i++, k = k+5){
 
-            assertEquals(table.getDraftPool().chooseDice(i).getColour().toString().charAt(0), (parsed.charAt(134 + p1.getUsername().length() +k)));
+            assertEquals(table.getDraftPool().chooseDice(i).getColour().toString().charAt(0), (parsed.charAt(k)));
 
-            assertEquals(table.getDraftPool().chooseDice(i).getNumber(), (Character.getNumericValue(parsed.charAt(134 + p1.getUsername().length() + (k+1)))));
+            assertEquals(table.getDraftPool().chooseDice(i).getNumber(), (Character.getNumericValue(parsed.charAt((k+1)))));
         }
 
     }

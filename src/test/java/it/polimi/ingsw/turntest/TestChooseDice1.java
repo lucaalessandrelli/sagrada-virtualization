@@ -29,7 +29,10 @@ public class TestChooseDice1 {
         players.add(p3);
         players.add(p4);
 
+
+
         Table table = new Table(players);
+        table.setPublicObjects();
 
         Round round = new Round(players, 1, table);
 

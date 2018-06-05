@@ -119,11 +119,11 @@ public class TableTest {
 
         tester.fillDraftPool();
 
-        tester.setLastDices(0);
+        tester.setLastDices(1);
 
         tester.fillDraftPool();
 
-        tester.setLastDices(1);
+        tester.setLastDices(2);
 
         for(int i = 0; i < tester.getRoundTrack().getRoundTrack().size();i++){
             if(tester.getRoundTrack().getRoundTrack().get(i)!=null){

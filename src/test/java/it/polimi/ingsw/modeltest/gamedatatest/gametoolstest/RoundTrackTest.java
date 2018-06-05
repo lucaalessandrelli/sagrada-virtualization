@@ -25,10 +25,10 @@ public class RoundTrackTest {
         ArrayList<Dice> dices = new ArrayList<>();
         Dice dice = new Dice(Colour.GREEN);
         dices.add(dice);
-        roundTrack.setDiceOnRoundTrack(0,dices); //Testing the setter method
+        roundTrack.setDiceOnRoundTrack(1,dices); //Testing the setter method
         dices = new ArrayList<>();
         addRandomDices(dices,10); //Using method to generate random dices with random colours and random numbers
-        roundTrack.setDiceOnRoundTrack(1,dices); //Adding dices to the round
+        roundTrack.setDiceOnRoundTrack(2,dices); //Adding dices to the round
         assertFalse(arrayList.isEmpty()); //Assuring that the dices have been added
         assertTrue(arrayList.contains(roundTrack.getDiceOnRoundtrack(0)));
     }
@@ -42,10 +42,10 @@ public class RoundTrackTest {
         ArrayList<Dice> dices = new ArrayList<>();
         Dice dice = new Dice(Colour.GREEN);
         dices.add(dice);
-        roundTrack.setDiceOnRoundTrack(0,dices); //Testing the setter method
+        roundTrack.setDiceOnRoundTrack(1,dices); //Testing the setter method
         dices = new ArrayList<>();
         addRandomDices(dices,10); //Using method to generate random dices with random colours and random numbers
-        roundTrack.setDiceOnRoundTrack(1,dices); //Adding dices to the round
+        roundTrack.setDiceOnRoundTrack(2,dices); //Adding dices to the round
         assertTrue(roundTrack.findDice(dice,new Pos(1,1)));
         assertTrue(dice.equals(roundTrack.switchDice(dice)));
     }

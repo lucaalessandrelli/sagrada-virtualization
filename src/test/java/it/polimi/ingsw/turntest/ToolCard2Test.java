@@ -13,9 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.turntest.TurnTest.lastName;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ToolCard2Test {
 
@@ -117,6 +115,28 @@ public class ToolCard2Test {
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
+
+
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 4)).isOccupied());
+
+
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(1, 0)).isOccupied());
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(3, 2)).isOccupied());
     }
 
     @Test
@@ -217,8 +237,30 @@ public class ToolCard2Test {
 
         assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
 
-        assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
-        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
+
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 4)).isOccupied());
+
+
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(1, 0)).isOccupied());
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(2, 1)).isOccupied());
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(2, 2)).isOccupied());
+
     }
 
 
@@ -305,16 +347,36 @@ public class ToolCard2Test {
 
         assertEquals("SelectingDice", lastName(turn.getState().toString(), 14));
 
-        try {
-            turn.receiveMove(d3, new Pos(1, 1));
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
-        }
+            assertThrows(WrongMoveException.class,()->{turn.receiveMove(d3, new Pos(1, 1));});
+
 
         assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
 
+
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(1,0)).isOccupied());
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(3,2)).isOccupied());
-        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
+
+
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 4)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 1)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 2)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 3)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 4)).isOccupied());
+
     }
 
 }

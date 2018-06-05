@@ -76,6 +76,7 @@ public class ToolCard1Test {
             e.printStackTrace();
         }
 
+        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
     }
 
     @Test
