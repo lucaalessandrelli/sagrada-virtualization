@@ -41,6 +41,7 @@ public class Match {
 
             try {
                 this.startNextRound();
+                changeOrder();
                 this.table.fillDraftPool();
                 for (Player p : playerList){
                     p.notifyPlayer();
@@ -69,6 +70,17 @@ public class Match {
             // call on the round just created a method that start the round
             roundList.get(roundNumber-1).go();
 
+    }
+
+    private synchronized void changeOrder(){
+        List<Player> tmpList = new ArrayList();
+        Player tmp;
+        tmp = playerList.get(0);
+        for (int i = 1; i<playerList.size();i++){
+            tmpList.add(playerList.get(i));
+        }
+        tmpList.add(tmp);
+        playerList = tmpList;
     }
 
     //Getter methods
