@@ -79,6 +79,7 @@ public class Round {
     public void setTurn(Pos p){
         try {
             turn.receiveMove(p);
+            players.notifyChanges();
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
         }
@@ -87,6 +88,7 @@ public class Round {
     public void setTurn(String s){
         try {
             turn.receiveMove(s);
+            players.notifyChanges();
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
         }
@@ -95,6 +97,7 @@ public class Round {
     public void setTurn(ToolCard t){
         try {
             turn.receiveMove(t);
+            players.notifyChanges();
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
         }
@@ -103,6 +106,7 @@ public class Round {
     public void setTurn(Dice d, Pos p){
         try {
             turn.receiveMove(d,p);
+            players.notifyChanges();
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
         }
