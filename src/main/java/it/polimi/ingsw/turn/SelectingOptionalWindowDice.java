@@ -3,10 +3,9 @@ package it.polimi.ingsw.turn;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
-import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
-public class SelectingDice implements TurnState {
+public class SelectingOptionalWindowDice implements TurnState {
     private Turn turn;
     private Dice chosenDice;
     private Dice toolDice;
@@ -14,7 +13,7 @@ public class SelectingDice implements TurnState {
     private Pos toolPos;
     private InspectorContextTool inspectorContextTool;
 
-    public SelectingDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public SelectingOptionalWindowDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
@@ -31,5 +30,10 @@ public class SelectingDice implements TurnState {
         } else {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado.");
         }
+    }
+
+    @Override
+    public void receiveMove(String pass) {
+        turn.setState(new EndTurn(turn));
     }
 }

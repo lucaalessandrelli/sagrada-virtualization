@@ -95,7 +95,7 @@ public class ToolCard3Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingDice", lastName(turn.getState().toString(),14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),14));
 
         try {
             turn.receiveMove(d2,new Pos(2,1));
@@ -219,7 +219,7 @@ public class ToolCard3Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingDice", lastName(turn.getState().toString(),14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),14));
 
         try {
             turn.receiveMove(d2,new Pos(2,3));
@@ -346,7 +346,7 @@ public class ToolCard3Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingDice", lastName(turn.getState().toString(),14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),14));
 
         assertThrows(WrongMoveException.class,()->{turn.receiveMove(d3, new Pos(2, 3));});
 

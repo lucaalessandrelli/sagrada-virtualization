@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
-public class SelectingToolDice implements TurnState {
+public class SelectingRoundTrackDice implements TurnState {
     private Turn turn;
     private Dice chosenDice;
     private Pos posChosenDice;
@@ -14,7 +14,7 @@ public class SelectingToolDice implements TurnState {
     private Pos toolPos;
     private InspectorContextTool inspectorContextTool;
 
-    public SelectingToolDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public SelectingRoundTrackDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
         this.chosenDice = chosenDice;
         this.posChosenDice = posChosenDice;
@@ -31,18 +31,5 @@ public class SelectingToolDice implements TurnState {
         } else {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado.");
         }
-
-        /*
-        * Se l'inspector mi dice che ho scelto un dado dalla riserva allora vuol dire che il giocatore vuole andare avanti
-        * probema: ho già preso il dado e la sua posizione. Ora dovrei andare nello stato ChoseDice2 ma non posso
-        * perchè altrimenti posso far posizionare due dadi se la carta 12 la utilizzo dopo aver scelto e posizionato un dado.
-        *
-        * Possibile soluzione?
-        * */
-    }
-
-    @Override
-    public void receiveMove(String pass) {
-        turn.setState(new EndTurn(turn));
     }
 }
