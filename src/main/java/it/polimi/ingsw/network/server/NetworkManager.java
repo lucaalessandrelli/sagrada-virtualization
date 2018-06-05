@@ -71,7 +71,7 @@ public class NetworkManager {
                 while (connected) {
                     receiveCommand();
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 try {
                     server.disconnect(name,this);
                 } catch (Exception e1) {
@@ -99,7 +99,7 @@ public class NetworkManager {
             }
         }
 
-        private void receiveCommand() throws RemoteException {
+        private void receiveCommand() throws IOException {
                 String message;
                 message = in.nextLine();
                 server.command(message);
