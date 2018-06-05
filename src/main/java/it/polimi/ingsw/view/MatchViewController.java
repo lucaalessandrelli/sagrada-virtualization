@@ -2,7 +2,6 @@ package it.polimi.ingsw.view;
 
 import com.jfoenix.controls.JFXButton;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.network.client.MessageQueue;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,16 +17,13 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.text.html.ImageView;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
