@@ -34,6 +34,6 @@ public class SelectingOptionalWindowDice implements TurnState {
 
     @Override
     public void receiveMove(String pass) {
-        turn.setState(new EndTurn(turn));
+        turn.setStateToCheckPoint();
     }
 }

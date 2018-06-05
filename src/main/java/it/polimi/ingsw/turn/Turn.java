@@ -112,8 +112,12 @@ public class Turn {
             //increase indexList
             indexList++;
         } else {
-            this.setState(checkPointState);
+            this.setStateToCheckPoint();
         }
+    }
+
+    public void setStateToCheckPoint() {
+        this.setState(checkPointState);
     }
 
     /**
