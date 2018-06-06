@@ -14,6 +14,7 @@ public class MovingDraftDice implements TurnState {
     private Pos posChosenDice;
     private Pos toolPos;
     private InspectorPlaceTool inspectorPlaceTool;
+    private InspectorPlace inspectorPlace;
 
     public MovingDraftDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
@@ -22,18 +23,29 @@ public class MovingDraftDice implements TurnState {
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
         this.inspectorPlaceTool = turn.getInspectorPlaceTool();
+        this.inspectorPlace = turn.getInspectorPlace();
     }
 
     //GETTING MOVE METHODS
 
     @Override
     public void receiveMove(Pos pos) throws WrongMoveException {
-        if(inspectorPlaceTool.check(chosenDice,pos,turn.getToolCard())) {
-            //call modifier
-            turn.getModifier().positionDiceFromDraft(chosenDice,posChosenDice,pos);
-            turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
+        if(turn.getRoundNumber() == 1 && turn.isFirstBracket()) {
+            if (inspectorPlace.checkFirst(chosenDice,pos,turn.getPlayer().getWindowPatternCard()) && inspectorPlaceTool.check(chosenDice, pos, turn.getToolCard())) {
+                //call modifier
+                turn.getModifier().positionDiceFromDraft(chosenDice, posChosenDice, pos);
+                turn.setDynamicState(chosenDice, posChosenDice, toolDice, toolPos);
+            } else {
+                throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole del primo piazzamento e relative alla carta selezionata.");
+            }
         } else {
-            throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");
+            if (inspectorPlaceTool.check(chosenDice, pos, turn.getToolCard())) {
+                //call modifier
+                turn.getModifier().positionDiceFromDraft(chosenDice, posChosenDice, pos);
+                turn.setDynamicState(chosenDice, posChosenDice, toolDice, toolPos);
+            } else {
+                throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");
+            }
         }
     }
 }

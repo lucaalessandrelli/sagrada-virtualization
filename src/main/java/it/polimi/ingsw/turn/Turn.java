@@ -116,6 +116,9 @@ public class Turn {
         }
     }
 
+    /**
+     * Set the current concrete turn state to the checkpointState
+     */
     public void setStateToCheckPoint() {
         this.setState(checkPointState);
     }
