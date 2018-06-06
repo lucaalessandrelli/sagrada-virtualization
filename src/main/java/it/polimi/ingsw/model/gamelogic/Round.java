@@ -43,17 +43,11 @@ public class Round {
                 synchronized (mon){
                     try {
                         mon.wait(timeSleep);
+                        //p.setActivity(false);
                     } catch (InterruptedException e) {
                         players.notifyChanges();
                     }
                 }
-
-                /*try {
-                    Thread.sleep(timeSleep);
-                    //p.setActivity(false);
-                } catch (InterruptedException e) {
-                    players.notifyChanges();
-                }*/
             }
         }
         setLastDice();

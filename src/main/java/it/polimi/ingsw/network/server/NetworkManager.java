@@ -142,11 +142,8 @@ public class NetworkManager {
 
         @Override
         public boolean ping()  {
-            if(socket.isConnected()){
-                return true;
-            }else{
-                return false;
-            }
+            pr.println("ping");
+            return true;
         }
 
         @Override
@@ -155,7 +152,7 @@ public class NetworkManager {
         }
 
         @Override
-        public void update(String updateMove) throws RemoteException {
+        public void update(String updateMove) {
             pr.println(updateMove);
 
         }

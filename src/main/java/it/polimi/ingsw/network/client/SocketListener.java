@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class SocketListener implements Runnable {
+public class SocketListener extends Thread {
     Socket socket;
     MessageQueue queue;
 
@@ -21,8 +21,8 @@ public class SocketListener implements Runnable {
                 String answer = in.nextLine();
                 queue.add(answer);
             }
-        } catch (IOException e) {
-
+        } catch (Exception e) {
+            this.interrupt();
         }
 
     }
