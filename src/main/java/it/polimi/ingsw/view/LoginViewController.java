@@ -116,6 +116,41 @@ public class LoginViewController implements Initializable, ViewInterface {
         stage.show();
     }
 
+    public void changeScene() throws IOException {
+        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Match");
+        stage.setResizable(true);
+        stage.show();*/
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
+        Parent root = fxmlLoader.load();
+
+        // Get the Controller from the FXMLLoader
+        MatchViewController controller = fxmlLoader.getController();
+        // Set data in the controller
+        controller.setClient(client);
+        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setStage(stage);
+        controller.setList(list);
+        //controller.setTime(time);
+
+        Scene scene = new Scene(root);
+        //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
+        //controller.loadPlayers();
+        //controller.startTimer();
+        controller.setWindows();
+        controller.startTimer();
+        messageAnalyzer.setView(controller);
+
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.setTitle("Match");
+        stage.show();
+    }
+
     @Override
     public void handleConnected(String message) {
     }
@@ -141,6 +176,12 @@ public class LoginViewController implements Initializable, ViewInterface {
 
     @Override
     public void handleMatchId(String idMatch) {
+        client.setNumMatch(Integer.parseInt(idMatch));
+        try {
+            changeScene();
+        } catch (IOException e) {
+            System.out.println("Errore cambio di scena: waitingRoom -> Match");
+        }
 
     }
 

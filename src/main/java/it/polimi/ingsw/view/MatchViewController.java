@@ -77,16 +77,10 @@ public class MatchViewController implements Initializable, ViewInterface {
     private Text textReceiver;
     private Text source;
 
-    //private RiservaFalsa riservaFalsa = new RiservaFalsa();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //this.setMyWindow(mywindow,currentPlayerWindow);
-        //this.setMyWindow(windowplayer2,player2Window);
-        //this.setMyWindow(windowplayer3,player3Window);
-        //this.setMyWindow(windowplayer4,player4Window);
-        //this.setRiserva();
-        //this.modeRep = new ModeRep();
+
     }
 
     public void setWindows() {
@@ -111,51 +105,9 @@ public class MatchViewController implements Initializable, ViewInterface {
     public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
         this.messageAnalyzer = messageAnalyzer;
     }
-
     public void setList(ObservableList<String> list) {
         this.list = list;
     }
-
-    public void notifyNewModelRep(String draftPool, String restrictions, String diceWindow) {
-        //this.draftPool = draftPool;
-        //this.restrictions = restrictions;
-        //this.diceWindow = diceWindow;
-        //System.out.println(draftPool+"\n"+ restrictions +"\n"+diceWindow);
-    }
-
-    public void setMyWindow(GridPane gridPane, WindowFalsa window) {
-        Node text;
-
-        for(int i = 0; i< 5;i++) {
-            for(int j = 0; j<4;j++) {
-                text = this.getChildrenByIndex(gridPane,i,j);
-                if(text == null) {
-                    System.out.println("Sbagliato");
-                } else {
-                    ((Text)text).setText(window.getStr(i,j));
-                }
-            }
-        }
-    }
-
-    /*public void setRiserva() {
-        Node text;
-
-        for(int i = 0; i< 3;i++) {
-            for(int j = 0; j<3;j++) {
-                text = this.getChildrenByIndex(riserva,i,j);
-                if(text == null) {
-                    System.out.println("Sbagliato");
-                } else {
-                    if(3*i+j < riservaFalsa.getRiserva().size()) {
-                        ((Text) text).setText(riservaFalsa.getRiserva().get(3 * i + j));
-                    } else {
-                        ((Text) text).setText("");
-                    }
-                }
-            }
-        }
-    }*/
 
     private Node getChildrenByIndex(GridPane gridPane,final int i,final int y) {
         ObservableList<Node> textList = gridPane.getChildren();
