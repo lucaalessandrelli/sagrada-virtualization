@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.gamelogic.ModelModifier;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -217,7 +218,7 @@ public class ModelModifierTest {
 
         int cont = 0;
 
-        for (ArrayList<Cell> x: p1.getWindowPatternCard().getMatr()){
+        for (List<Cell> x: p1.getWindowPatternCard().getMatr()){
             for (Cell cell: x){
                 if(cell.isOccupied())
                     cont++;
@@ -228,7 +229,7 @@ public class ModelModifierTest {
 
         int cont2 = 0;
 
-        for (ArrayList<Cell> x: p1.getWindowPatternCard().getMatr()){
+        for (List<Cell> x: p1.getWindowPatternCard().getMatr()){
             for (Cell cell: x){
                 if(cell.isOccupied())
                     cont2++;

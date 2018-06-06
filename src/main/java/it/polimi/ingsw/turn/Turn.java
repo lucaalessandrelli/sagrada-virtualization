@@ -17,6 +17,7 @@ import java.lang.reflect.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Turn class: manages the turn of a given player through a state machine
@@ -34,8 +35,8 @@ public class Turn {
     private Round round;
     private Table table;
 
-    private ArrayList<String> toolStateList;
-    private ArrayList<String> toolAutomatedOperationList;
+    private List<String> toolStateList;
+    private List<String> toolAutomatedOperationList;
     private int indexList = 0;
     private TurnState checkPointState;
     private ModelModifier modifier;
@@ -79,8 +80,9 @@ public class Turn {
 
         if(!nextStateName.equals("CheckPointState")) {
             try {
+                String path =("it.polimi.ingsw.turn."+ (nextStateName));
 
-                String path =("it.polimi.ingsw.turn."+ (nextStateName.replaceAll("\\s+","")));
+
                 Class cls = Class.forName(path);
 
                 Class[] parametersTypes = new Class[5];
@@ -172,7 +174,7 @@ public class Turn {
      * Set the list of the automated operation that need to be done by the given ToolCard
      * @param toolAutomatedOperationList List object
      */
-    private void setToolAutomatedOperationList(ArrayList<String> toolAutomatedOperationList) {
+    private void setToolAutomatedOperationList(List<String> toolAutomatedOperationList) {
         this.toolAutomatedOperationList = toolAutomatedOperationList;
     }
 
@@ -180,7 +182,7 @@ public class Turn {
      * Set the list of the next states that manage the given ToolCard
      * @param toolStateList List object
      */
-    private void setToolStateList(ArrayList<String> toolStateList) {
+    private void setToolStateList(List<String> toolStateList) {
         this.toolStateList = toolStateList;
     }
 

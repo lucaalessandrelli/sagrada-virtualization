@@ -8,6 +8,8 @@ import it.polimi.ingsw.controller.VirtualViewParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +34,7 @@ public class VirtualViewParserTest {
 
         Table table = new Table(players);
 
-        table.setPublicObjects();
+        table.initialize();
 
         VirtualViewParser tester = new VirtualViewParser(p1);
 
@@ -70,7 +72,7 @@ public class VirtualViewParserTest {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
 
         p1.getWindowPatternCard().placeDice(table.getDraftPool().chooseDice(0),0,0);
@@ -112,7 +114,7 @@ public class VirtualViewParserTest {
 
         Table table = new Table(players);
 
-        table.setPublicObjects();
+        table.initialize();
 
         p1.getWindowPatternCard().placeDice(table.getDraftPool().chooseDice(0),0,0);
         p1.getWindowPatternCard().placeDice(table.getDraftPool().chooseDice(1),0,2);
@@ -187,13 +189,21 @@ public class VirtualViewParserTest {
         p4.chooseWindow(windowPatternCards);
         windowPatternCards.remove(windowPatternCard3);
 
-        table.setPublicObjects();
+        table.initialize();
 
         VirtualViewParser tester = new VirtualViewParser(p1);
 
         String parsed = tester.startParsing();
 
-        System.out.println(parsed);
+       /* System.out.println(parsed);
+
+        List<String> x = Arrays.asList(parsed.split(";"));
+        for (String s: x){
+            List<String> k = Arrays.asList(s.split(","));
+            for (String z: k){
+                System.out.println(z);
+            }
+        }*/
 
         /*Deparser deparser = new Deparser();
         System.out.println(deparser.DivideinStrings(tester.startParsing()));

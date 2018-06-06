@@ -10,6 +10,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 
@@ -287,13 +289,13 @@ public class CardContainer {
         mytool.setColour(tmpc);
 
         all = document.getElementsByTagName(STATE).item(cont).getTextContent();
-        this.creatingStrings(mytool.getStateList(),all);
+        mytool.setStateList(Arrays.asList(all.split(",")));
 
         all = document.getElementsByTagName(AUTOMATED).item(cont).getTextContent();
-        this.creatingStrings(mytool.getAutomatedoperationlist(),all);
+        mytool.setAutomatedoperationlist(Arrays.asList(all.split(",")));
 
         all = document.getElementsByTagName(CMETHODS).item(cont).getTextContent();
-        this.creatingStrings(mytool.getNameCMethods(),all);
+        mytool.setNameCMethods(Arrays.asList(all.split(",")));
 
         StringBuilder iterate = new StringBuilder();
         iterate.append(PM);
@@ -302,33 +304,13 @@ public class CardContainer {
 
         for(int i = 1; i < nodelist.getLength() - 1; i++){
             all = nodelist.item(i).getTextContent(); //here is i+1 because the first element in the nodelist is not a real element
-            ArrayList<String> tofill = new ArrayList<>();
-            this.creatingStrings(tofill, all);
-            mytool.getNamePMethods().add(tofill);
+            mytool.getNamePMethods().add(Arrays.asList(all.split(",")));
             //iterate.deleteCharAt(iterate.toString().length()-1);
         }
 
         mytool.setDescription((document.getElementsByTagName(DESCRIPTION).item(cont).getTextContent()));
 
         return mytool;
-    }
-
-    private void creatingStrings(ArrayList<String> tofill, String all){
-        char[] toadd = new char[30];
-        int len = all.length();
-        int j;
-        int i;
-
-        for(i = 1, j = 0; i < len; i++) {
-            if (all.charAt(i) == ',') {
-                    tofill.add(String.valueOf(toadd));
-                j = 0;
-                toadd = new char[23];
-            } else {
-                toadd[j] = all.charAt(i);
-                j++;
-            }
-        }
     }
 
 }

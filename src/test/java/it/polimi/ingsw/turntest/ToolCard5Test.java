@@ -51,11 +51,11 @@ public class ToolCard5Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 5 && players.get(0).getToolCards().get(1).getID() != 5 && players.get(0).getToolCards().get(2).getID() != 5) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 2, table);
@@ -148,11 +148,11 @@ public class ToolCard5Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 5 && players.get(0).getToolCards().get(1).getID() != 5 && players.get(0).getToolCards().get(2).getID() != 5) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 2, table);
@@ -227,11 +227,11 @@ public class ToolCard5Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 5 && players.get(0).getToolCards().get(1).getID() != 5 && players.get(0).getToolCards().get(2).getID() != 5) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 2, table);
@@ -327,11 +327,11 @@ public class ToolCard5Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 5 && players.get(0).getToolCards().get(1).getID() != 5 && players.get(0).getToolCards().get(2).getID() != 5) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 1, table);

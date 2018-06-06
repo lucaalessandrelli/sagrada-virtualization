@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.gamelogic.ModelModifier;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AutomatedOperation implements TurnState {
     private Turn turn;
@@ -22,7 +23,7 @@ public class AutomatedOperation implements TurnState {
         this.toolPos = toolPos;
     }
 
-    public void doAutomatedOperations(ArrayList<String> toolAutomatedOperationList) {
+    public void doAutomatedOperations(List<String> toolAutomatedOperationList) {
         ModelModifier modifier = turn.getModifier();
 
         for (String nextOperationName: toolAutomatedOperationList) {

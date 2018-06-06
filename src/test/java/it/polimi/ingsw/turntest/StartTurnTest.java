@@ -20,53 +20,6 @@ import static it.polimi.ingsw.turntest.TurnTest.lastName;
 
 public class StartTurnTest {
 
-    @Test
-    void TestGoingEndTurn(){ArrayList<Player> players = new ArrayList<>();
-        Player p1 = new Player("one");
-        Player p2 = new Player("two");
-        Player p3 = new Player("three");
-        Player p4 = new Player("four");
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-        players.add(p4);
-
-        Table table = new Table(players);
-
-        Round round = new Round(players,1,table);
-
-        ArrayList<WindowPatternCard> windows = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
-
-        table.getDiceBag().setNumPlayers(4);
-        table.getDraftPool().addNewDices(table.getDiceFromBag());
-
-        PublicObjects publicObjects = new PublicObjects();
-        publicObjects.setDraftPool(table.getDraftPool());
-        publicObjects.setObjectiveCards(table.getObjCard());
-        publicObjects.setToolCards(table.getToolCards());
-
-        p1.setPublicObjects(publicObjects);
-
-        Turn tester = new Turn(p1,round,1,true,table);
-
-        StartTurn startTurn = new StartTurn(tester);
-
-        tester.setState(startTurn);
-
-        String pass = "";
-
-        try {
-            tester.receiveMove(pass);
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals("EndTurn", lastName(tester.getState().toString(),8));
-    }
-
 
     @Test
     void TestPlacingDice() {

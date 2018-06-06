@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class is used to verify dynamically if, chosen the tool card, the chosen dice is taken from the right place.
@@ -32,7 +33,7 @@ public class InspectorContextTool implements InspectorTool {
      */
     public boolean check(Dice dice, Pos pos, ToolCard tool){
         RuleEngine ruleEngine = new RuleEngineC(dice,pos,windowPatternCard,draftPool,roundTrack);
-        ArrayList<String> nameMethods = tool.getNameCMethods();
+        List<String> nameMethods = tool.getNameCMethods();
         String method = nameMethods.get(index);
         index++;
         return doMethods(method, ruleEngine);

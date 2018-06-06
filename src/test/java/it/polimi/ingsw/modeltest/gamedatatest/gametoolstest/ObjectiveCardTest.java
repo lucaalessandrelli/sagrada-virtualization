@@ -42,13 +42,13 @@ public class ObjectiveCardTest {
             }
         }
         tester = objectiveCards.get(i);
-        tester.show();
+        //tester.show();
         windowPatternCard.placeDice(db,0,0);
         windowPatternCard.placeDice(dy,0,1);
         windowPatternCard.placeDice(dr,0,2);
         windowPatternCard.placeDice(dp,0,3);
         windowPatternCard.placeDice(dg,0,4);
-        windowPatternCard.show();
+        //windowPatternCard.show();
         assertEquals(6,tester.finalpoints(windowPatternCard));
         int s1;
         s1 = windowPatternCard.getMatr().size();
@@ -58,32 +58,32 @@ public class ObjectiveCardTest {
             windowPatternCard.placeDice(dr,i,2);
             windowPatternCard.placeDice(dp,i,3);
             windowPatternCard.placeDice(dg,i,4);
-            windowPatternCard.show();
+            //windowPatternCard.show();
             assertEquals((i+1)*6,tester.finalpoints(windowPatternCard));
         }
 
         windowPatternCard = new WindowPatternCard();
-        tester.show();
+        //tester.show();
         windowPatternCard.placeDice(db,0,0);
         windowPatternCard.placeDice(dy,0,1);
         windowPatternCard.placeDice(dr,0,2);
         windowPatternCard.placeDice(dp,0,3);
         windowPatternCard.placeDice(dg,0,4);
-        windowPatternCard.show();
+        //windowPatternCard.show();
         assertEquals(6,tester.finalpoints(windowPatternCard));
         windowPatternCard.placeDice(db,1,0);
         windowPatternCard.placeDice(db,1,1);
         windowPatternCard.placeDice(dr,1,2);
         windowPatternCard.placeDice(dp,1,3);
         windowPatternCard.placeDice(dg,1,4);
-        windowPatternCard.show();
+        //windowPatternCard.show();
         assertEquals(6,tester.finalpoints((windowPatternCard)));
         windowPatternCard.placeDice(db,2,0);
         windowPatternCard.placeDice(dy,2,1);
         windowPatternCard.placeDice(dr,2,2);
         windowPatternCard.placeDice(dp,2,3);
         windowPatternCard.placeDice(dg,2,4);
-        windowPatternCard.show();
+        //windowPatternCard.show();
         assertEquals(12,tester.finalpoints((windowPatternCard)));
     }
 

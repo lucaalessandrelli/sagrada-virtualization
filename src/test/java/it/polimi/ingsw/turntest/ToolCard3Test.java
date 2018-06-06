@@ -47,11 +47,11 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players,1,table);
@@ -81,7 +81,7 @@ public class ToolCard3Test {
         p1.getWindowPatternCard().placeDice(d2,2,1);
         p1.getWindowPatternCard().placeDice(d3,3,2);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 
@@ -168,11 +168,11 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players,1,table);
@@ -205,7 +205,7 @@ public class ToolCard3Test {
 
         p1.getWindowPatternCard().addRestr('1',2,2);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 
@@ -295,11 +295,11 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players,1,table);
@@ -332,7 +332,7 @@ public class ToolCard3Test {
 
         p1.getWindowPatternCard().addRestr('P',2,2);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 

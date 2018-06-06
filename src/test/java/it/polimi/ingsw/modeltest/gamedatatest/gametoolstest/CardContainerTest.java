@@ -55,9 +55,9 @@ public class CardContainerTest {
         CardContainer tester = new CardContainer();
         ArrayList<ToolCard> test = tester.pullOutTools();
 
-        for (ToolCard toolcard : test){
+        /*for (ToolCard toolcard : test){
             toolcard.show();
-        }
+        }*/
         assertEquals(3,test.size());
     }
 

@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class is used to verify dynamically if, chosen a tool card, the placing respect the specific rules of that tool card.
@@ -31,8 +32,8 @@ public class InspectorPlaceTool implements InspectorTool {
      */
     public boolean check(Dice dice, Pos pos, ToolCard tool){
         RuleEngine ruleEngine = new RuleEngineP(dice,pos,window);
-        ArrayList<ArrayList<String>> nameMethods = tool.getNamePMethods();
-        ArrayList<String> currMethods = nameMethods.get(index);
+        List<List<String>> nameMethods = tool.getNamePMethods();
+        List<String> currMethods = nameMethods.get(index);
         index++;
         return doMethods(currMethods,ruleEngine);
     }

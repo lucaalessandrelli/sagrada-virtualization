@@ -1,9 +1,10 @@
 package it.polimi.ingsw.model.gamedata.gametools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DraftPool {
-    private ArrayList<Dice> draftPool;
+    private List<Dice> draftPool;
 
     public DraftPool(){
         draftPool = new ArrayList<>(0);
@@ -16,7 +17,7 @@ public class DraftPool {
     }
 
     //getter method
-    public ArrayList<Dice> getDraftPool() {
+    public List<Dice> getDraftPool() {
         return this.draftPool;
     }
 
@@ -45,7 +46,7 @@ public class DraftPool {
     }
 
     //add new dices that have been drown out from the bag
-    public void addNewDices(ArrayList<Dice> newDice){
+    public void addNewDices(List<Dice> newDice){
         this.draftPool = newDice;
     }
 

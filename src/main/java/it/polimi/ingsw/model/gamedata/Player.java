@@ -38,7 +38,6 @@ public class Player {
 
     public void setMyObjCard(ObjectiveCard obj){
         myObjCard =obj;
-
     }
 
     private void setMyWindow(WindowPatternCard w) {

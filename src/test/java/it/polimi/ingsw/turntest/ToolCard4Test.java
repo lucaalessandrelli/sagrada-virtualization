@@ -47,11 +47,11 @@ public class ToolCard4Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 1, table);
@@ -104,7 +104,7 @@ public class ToolCard4Test {
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
         p1.getWindowPatternCard().placeDice(d6, 3, 3);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 
@@ -213,11 +213,11 @@ public class ToolCard4Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 1, table);
@@ -270,7 +270,7 @@ public class ToolCard4Test {
         p1.getWindowPatternCard().placeDice(d6, 3, 3);
 
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 
@@ -344,11 +344,11 @@ public class ToolCard4Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 1, table);
@@ -401,7 +401,7 @@ public class ToolCard4Test {
         p1.getWindowPatternCard().placeDice(d6, 3, 3);
 
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 
@@ -485,11 +485,11 @@ public class ToolCard4Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 1, table);
@@ -542,7 +542,7 @@ public class ToolCard4Test {
         p1.getWindowPatternCard().placeDice(d6, 3, 3);
 
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 
@@ -637,11 +637,11 @@ public class ToolCard4Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 1, table);
@@ -694,7 +694,7 @@ public class ToolCard4Test {
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
         p1.getWindowPatternCard().placeDice(d6, 3, 3);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 

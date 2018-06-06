@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static it.polimi.ingsw.modeltest.gamelogictest.InspectorPlaceTest.getWindowPatternCard;
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,7 +55,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Kaleidoscopic Dream", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.YELLOW,0,0,0);
          verify(arrayLists,Colour.BLUE,0,0,1);
@@ -91,7 +92,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Virtus", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,4,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -128,7 +129,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Aurorae Magnificus", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,5,0,0);
          verify(arrayLists,Colour.GREEN,0,0,1);
@@ -165,7 +166,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Via Lux", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.YELLOW,0,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -201,7 +202,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Sun Catcher", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.BLUE,0,0,1);
@@ -237,7 +238,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Bellesguard", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.BLUE,0,0,0);
          verify(arrayLists,Colour.WHITE,6,0,1);
@@ -273,7 +274,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Firmitas", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.PURPLE,0,0,0);
          verify(arrayLists,Colour.WHITE,6,0,1);
@@ -306,7 +307,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(8);
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,2,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -342,7 +343,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Aurora Sagradis", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.RED,0,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -378,7 +379,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Industria", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,1,0,0);
          verify(arrayLists,Colour.RED,0,0,1);
@@ -414,7 +415,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Shadow Thief", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,6,0,0);
          verify(arrayLists,Colour.PURPLE,0,0,1);
@@ -450,7 +451,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Batllo", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -486,7 +487,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Gravitas", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,1,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -522,7 +523,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Fractal Drops", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.WHITE,4,0,1);
@@ -559,7 +560,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Lux Astram", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.WHITE,1,0,1);
@@ -596,7 +597,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Chromatic Splendor", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -633,7 +634,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Firelight", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,3,0,0);
          verify(arrayLists,Colour.WHITE,4,0,1);
@@ -670,7 +671,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Luz Celestial", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -707,7 +708,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Water of Life", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,6,0,0);
          verify(arrayLists,Colour.BLUE,0,0,1);
@@ -744,7 +745,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Ripples of Light", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -781,7 +782,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Lux Mundi", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -818,7 +819,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Comitas", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.YELLOW,0,0,0);
          verify(arrayLists,Colour.WHITE,0,0,1);
@@ -855,7 +856,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Sun's Glory", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,1,0,0);
          verify(arrayLists,Colour.PURPLE,0,0,1);
@@ -892,7 +893,7 @@ class WindowPatternCardTest {
          System.out.println("Name: " + tester.getName());
          assertEquals("Fulgor del Cielo", tester.getName());
 
-         ArrayList<ArrayList<Cell>> arrayLists = tester.getMatr();
+         List<List<Cell>> arrayLists = tester.getMatr();
 
          verify(arrayLists,Colour.WHITE,0,0,0);
          verify(arrayLists,Colour.BLUE,0,0,1);
@@ -921,7 +922,7 @@ class WindowPatternCardTest {
 
      }
 
-     private void verify(ArrayList<ArrayList<Cell>> matr, Colour colour, int number, int x, int y){
+     private void verify(List<List<Cell>> matr, Colour colour, int number, int x, int y){
          assertEquals(colour, matr.get(x).get(y).getProperty().getColour()); //COLOUR
          assertEquals(number, matr.get(x).get(y).getProperty().getNumber()); //NUMBER
      }

@@ -42,7 +42,7 @@ public class VirtualViewParser {
         builder.append(window.getPlayer());
         builder.append(VIRG);
 
-        for (ArrayList<Cell> cells: window.getMatr()){
+        for (List<Cell> cells: window.getMatr()){
             this.addProperties(cells);
         }
 
@@ -57,7 +57,7 @@ public class VirtualViewParser {
         builder.append(VIRG);
         ArrayList<Cell> topass = new ArrayList<>();
 
-        for(ArrayList<Cell> cells: window.getMatr()){
+        for(List<Cell> cells: window.getMatr()){
             for (Cell cell: cells){
                 if(cell.isOccupied()) {
                     builder.append(cell.getDice().getColour().toString());
@@ -75,7 +75,7 @@ public class VirtualViewParser {
     public String parseDraftPool(){
         String passing = "draftpool ";
         builder.append(passing);
-        ArrayList<Dice> dice = this.player.getDraftPool().getDraftPool();
+        List<Dice> dice = this.player.getDraftPool().getDraftPool();
 
         for(int i = 0; i < dice.size(); i++){
             builder.append(dice.get(i).getColour().toString());
@@ -148,7 +148,7 @@ public class VirtualViewParser {
     }
 
 
-    private void addProperties(ArrayList<Cell> cellArrayList){
+    private void addProperties(List<Cell> cellArrayList){
         for (Cell cell: cellArrayList){
             builder.append(cell.getProperty().getColour().toString());
             builder.append(cell.getProperty().getNumber());

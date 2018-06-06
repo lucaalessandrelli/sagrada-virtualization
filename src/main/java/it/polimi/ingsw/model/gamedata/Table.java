@@ -10,7 +10,6 @@ public class Table {
     private List<Player> myplayers;
     private ArrayList<ObjectiveCard> objectiveCards;
     private ArrayList<ToolCard> toolCards = new ArrayList<>(3);
-    private ArrayList<WindowPatternCard> windowPatternCards;
     private RoundTrack roundTrack;
     private DraftPool draftPool;
     private DiceBag diceBag;
@@ -22,6 +21,11 @@ public class Table {
         this.container = new CardContainer();
         this.myplayers = players;
         this.roundTrack = new RoundTrack();
+
+    }
+
+    public void initialize(){
+        ArrayList<WindowPatternCard> windowPatternCards;
         int i;
         this.toolCards = this.container.pullOutTools();
         this.objectiveCards = this.container.pullOutPublic();
@@ -31,7 +35,7 @@ public class Table {
             p.setMyObjCard(tmp.get(i));
             i++;
         }
-        this.windowPatternCards = this.container.pullOutPattern(this.myplayers.size());
+        windowPatternCards = this.container.pullOutPattern(this.myplayers.size());
         for (Player p: this.myplayers) {
             p.chooseWindow(windowPatternCards);
             windowPatternCards.remove(p.getWindowPatternCard());
@@ -41,31 +45,30 @@ public class Table {
         this.draftPool.addNewDices(this.diceBag.pullOut());
 
         setPublicObjects();
-
     }
 
     //Implement this in the other class
-    public void showPlayers() {
+    private void showPlayers() {
         for (Player x : this.myplayers) {
             System.out.print("Player: " + x.getUsername() + "\n");
         }
     }
 
-    public void showObjective() {
+    private void showObjective() {
         for (ObjectiveCard y : this.objectiveCards) {
             y.show();
         }
     }
 
-    public void showTool() {
+    private void showTool() {
         for (ToolCard z : this.toolCards) {
             z.show();
         }
     }
 
-    public void showWindow() {
-        for (WindowPatternCard k : this.windowPatternCards) {
-            k.show();
+    private void showWindow() {
+        for(Player p: this.myplayers){
+            p.getWindowPatternCard().show();
         }
     }
 
@@ -77,7 +80,7 @@ public class Table {
     }
 
     //GETTER METHODS
-    public ArrayList<ObjectiveCard> getObjCard() {
+    public List<ObjectiveCard> getObjCard() {
         return objectiveCards;
     }
 
@@ -85,7 +88,7 @@ public class Table {
         return this.container.pullOutPattern(myplayers.size());
     }*/
 
-    public ArrayList<Dice> getDiceFromBag() {
+    public List<Dice> getDiceFromBag() {
         return diceBag.pullOut();
     }
 
@@ -106,7 +109,7 @@ public class Table {
         return this.diceBag;
     }
 
-    public ArrayList<ToolCard> getToolCards(){
+    public List<ToolCard> getToolCards(){
         return this.toolCards;
     }
 
@@ -122,7 +125,7 @@ public class Table {
         this.draftPool.addNewDices(diceBag.pullOut());
     }
 
-    public void setPublicObjects(){
+    private void setPublicObjects(){
         for (Player p: this.myplayers) {
             PublicObjects publicObjects = new PublicObjects();
 

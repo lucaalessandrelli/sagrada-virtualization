@@ -5,10 +5,11 @@ import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Property;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WindowPatternCard {
     private int num;
-    private ArrayList<ArrayList<Cell>> matr = new ArrayList<>(4);
+    private List<List<Cell>> matr = new ArrayList<>(4);
     private int difficulty;
     private String name;
     private String player;
@@ -68,7 +69,7 @@ public class WindowPatternCard {
     }
 
 
-    public ArrayList<ArrayList<Cell>> getMatr(){
+    public List<List<Cell>> getMatr(){
         return this.matr;
     }
 
@@ -92,7 +93,7 @@ public class WindowPatternCard {
 
     //find the dice d in the WindowPatternCard
     public boolean findDice(Dice d){
-        for(ArrayList<Cell> x: this.matr){
+        for(List<Cell> x: this.matr){
             for (Cell y: x) {
                 if(y.getDice().equals(d))
                     return true;
@@ -114,7 +115,7 @@ public class WindowPatternCard {
         this.name = x;
     }
 
-    public void setMatr(ArrayList<ArrayList<Cell>> x){
+    public void setMatr(List<List<Cell>> x){
         this.matr = x;
     }
 

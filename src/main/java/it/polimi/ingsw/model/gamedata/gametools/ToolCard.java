@@ -4,15 +4,16 @@ import it.polimi.ingsw.model.gamedata.Colour;
 import it.polimi.ingsw.model.gamelogic.Move;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ToolCard extends Card implements Move {
     private boolean used;
     private int cost;
     private Colour colour;
-    private ArrayList<String> stateList = new ArrayList<>();
-    private ArrayList<String> automatedoperationlist = new ArrayList<>();
-    private ArrayList<String> cMethods = new ArrayList<>();
-    private ArrayList<ArrayList<String>> pMethods = new ArrayList<>();
+    private List<String> stateList;
+    private List<String> automatedoperationlist = new ArrayList<>();
+    private List<String> cMethods = new ArrayList<>();
+    private List<List<String>> pMethods = new ArrayList<>();
 
     public ToolCard() {
         this.used = false;
@@ -59,24 +60,41 @@ public class ToolCard extends Card implements Move {
         return cost;
     }
 
-    public ArrayList<String> getNameCMethods(){
+    public List<String> getNameCMethods(){
         return cMethods;
     }
 
-    public ArrayList<ArrayList<String>> getNamePMethods(){
+    public List<List<String>> getNamePMethods(){
         return pMethods;
     }
 
-    public ArrayList<String> getAutomatedoperationlist(){
+    public List<String> getAutomatedoperationlist(){
         return automatedoperationlist;
     }
 
-    public ArrayList<String> getStateList(){
+    public List<String> getStateList(){
         return stateList;
     }
 
     public void setColour(Colour colour){
         this.colour = colour;
+    }
+
+
+    public void setNameCMethods(List<String> x){
+         this.cMethods = x;
+    }
+
+    public void setNamePMethods(List<List<String>> x){
+        this.pMethods = x;
+    }
+
+    public void setAutomatedoperationlist(List<String> x){
+        this.automatedoperationlist = x;
+    }
+
+    public void setStateList(List<String> x){
+        this.stateList = x;
     }
 
 }

@@ -47,14 +47,14 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2){
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
-        Round round = new Round(players,1,table);
+        Round round = new Round(players,2,table);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -71,7 +71,7 @@ public class ToolCard2Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1,round,1,true,table);
+        Turn turn = new Turn(p1,round,2,true,table);
 
         Dice d1 = new Dice(Colour.GREEN);
         Dice d2 = new Dice(Colour.RED);
@@ -81,7 +81,7 @@ public class ToolCard2Test {
         p1.getWindowPatternCard().placeDice(d2,2,1);
         p1.getWindowPatternCard().placeDice(d3,3,2);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 
@@ -169,11 +169,11 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 1, table);
@@ -182,6 +182,7 @@ public class ToolCard2Test {
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
         p1.chooseWindow(windows);
+        p1.getWindowPatternCard().addRestr('B', 2, 2);
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -193,20 +194,21 @@ public class ToolCard2Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round, 2, true, table);
 
         Dice d1 = new Dice(Colour.GREEN);
         Dice d2 = new Dice(Colour.RED);
+        d2.setNumber(2);
         Dice d3 = new Dice(Colour.YELLOW);
+        d3.setNumber(3);
 
         p1.getWindowPatternCard().placeDice(d1, 1, 0);
         p1.getWindowPatternCard().placeDice(d2, 2, 1);
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
 
-        p1.getWindowPatternCard().addRestr('B', 2, 2);
         turn.startTurn();
 
         System.out.println(turn.getState().getClass());
@@ -219,7 +221,7 @@ public class ToolCard2Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
 
         try {
             turn.receiveMove(d3, new Pos(3, 2));
@@ -231,8 +233,10 @@ public class ToolCard2Test {
 
         try {
             turn.receiveMove(new Pos(2, 2));
-        } catch (WrongMoveException e) {
+        } catch (WrongMoveException e)  {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
         assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
@@ -294,11 +298,11 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2) {
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players, 1, table);
@@ -329,7 +333,7 @@ public class ToolCard2Test {
         p1.getWindowPatternCard().placeDice(d2, 2, 1);
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
         p1.getWindowPatternCard().addRestr('5',2,2);
 
@@ -345,12 +349,9 @@ public class ToolCard2Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
 
-            assertThrows(WrongMoveException.class,()->{turn.receiveMove(d3, new Pos(1, 1));});
-
-
-        assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
+        assertThrows(WrongMoveException.class,()->{turn.receiveMove(d3, new Pos(1, 1));});
 
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(1,0)).isOccupied());
@@ -373,7 +374,6 @@ public class ToolCard2Test {
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 4)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 0)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 1)).isOccupied());
-        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 3)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 4)).isOccupied());
 

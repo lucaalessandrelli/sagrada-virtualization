@@ -70,13 +70,9 @@ public class ToolCard1Test {
 
         turn.startTurn();
 
-        try {
-            turn.receiveMove(tester);
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
-        }
+        ToolCard finalTester = tester;
+        assertThrows(WrongMoveException.class,()->{turn.receiveMove(finalTester);});
 
-        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
     }
 
     @Test
@@ -109,11 +105,11 @@ public class ToolCard1Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.setPublicObjects();
+        table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 1 && players.get(0).getToolCards().get(1).getID() != 1 && players.get(0).getToolCards().get(2).getID() != 1){
             table = new Table(players);
-            table.setPublicObjects();
+            table.initialize();
         }
 
         Round round = new Round(players,1,table);
@@ -182,14 +178,6 @@ public class ToolCard1Test {
         assertEquals("ChooseDice2", lastName(turn.getState().toString(),12));
 
         System.out.println(turn.getState().getClass());
-
-        try {
-            turn.receiveMove(pos);
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
 
     }
 }
