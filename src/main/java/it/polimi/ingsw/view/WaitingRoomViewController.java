@@ -18,6 +18,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import javafx.animation.Animation;
@@ -25,12 +26,12 @@ import javafx.animation.Animation;
 public class WaitingRoomViewController implements Initializable, ViewInterface {
     private Client client;
     private Stage stage;
-    private ObservableList<String> list = FXCollections.observableArrayList();
+    private ObservableList<String> playerList = FXCollections.observableArrayList();
     private String time;
     private MessageAnalyzer messageAnalyzer;
 
     @FXML
-    private JFXListView<String> playerList;
+    private JFXListView<String> playerListView;
     @FXML
     private TextArea textArea;
     @FXML
@@ -49,7 +50,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
     }
 
     public void setList(ObservableList<String> list) {
-        this.list = list;
+        this.playerList = list;
     }
 
     public void setTime(String time) {
@@ -61,8 +62,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
     }
 
     public void loadPlayers() {
-        playerList.setItems(list);
-        //textArea.appendText(player+" has connected.\n");
+        playerListView.setItems(playerList);
     }
 
     public void startTimer() {
@@ -74,7 +74,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
     }
 
     private void countTimer() {
-        if(list.size() >= 2) {
+        if(playerList.size() >= 2) {
             if (!time.equals("0")) {
                 time = Long.toString((Long.parseLong(time) - 1));
             } else {
@@ -103,7 +103,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         controller.setClient(client);
         controller.setMessageAnalyzer(messageAnalyzer);
         controller.setStage(stage);
-        controller.setList(list);
+        controller.setList(playerList);
         //controller.setTime(time);
 
         Scene scene = new Scene(root);
@@ -126,8 +126,8 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
     }
 
     @Override
-    public void handleService(ObservableList<String> list) {
-        this.list = list;
+    public void handleService(String playerList) {
+        this.playerList = FXCollections.observableArrayList(Arrays.asList(playerList.split(" ")));
         loadPlayers();
     }
 

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class LoginViewController implements Initializable, ViewInterface {
@@ -156,8 +157,8 @@ public class LoginViewController implements Initializable, ViewInterface {
     }
 
     @Override
-    public void handleService(ObservableList<String> list) {
-        this.list = list;
+    public void handleService(String list) {
+        this.list = FXCollections.observableArrayList(Arrays.asList(list.split(" ")));
     }
 
     @Override

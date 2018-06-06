@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import it.polimi.ingsw.network.client.Client;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -19,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -33,7 +35,7 @@ public class MatchViewController implements Initializable, ViewInterface {
     private Client client;
     private Stage stage;
     private MessageAnalyzer messageAnalyzer;
-    private ObservableList<String> list = FXCollections.observableArrayList();
+    private ObservableList<String> playerlist = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
     private List<String> toolList;
     private String time;
@@ -45,10 +47,13 @@ public class MatchViewController implements Initializable, ViewInterface {
     private HBox boxObjectiveCards;
 
     @FXML
+    private JFXListView playersStatus;
+
+    @FXML
     private Label timerLabel;
 
     @FXML
-    private TextField notifyField;
+    private TextField turnOwnerField;
 
     @FXML
     private HBox boxToolCards;
@@ -88,9 +93,9 @@ public class MatchViewController implements Initializable, ViewInterface {
         myTitle.setText(client.getName());
         int j = 1;
 
-        for(int i = 0; i < list.size(); i++) {
-            if(!list.get(i).equals(client.getName())) {
-                listTitle.get(j).setText(list.get(i));
+        for(int i = 0; i < playerlist.size(); i++) {
+            if(!playerlist.get(i).equals(client.getName())) {
+                listTitle.get(j).setText(playerlist.get(i));
                 j++;
             }
         }
@@ -105,8 +110,8 @@ public class MatchViewController implements Initializable, ViewInterface {
     public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
         this.messageAnalyzer = messageAnalyzer;
     }
-    public void setList(ObservableList<String> list) {
-        this.list = list;
+    public void setList(ObservableList<String> playerlist) {
+        this.playerlist = playerlist;
     }
 
     private Node getChildrenByIndex(GridPane gridPane,final int i,final int y) {
@@ -224,14 +229,14 @@ public class MatchViewController implements Initializable, ViewInterface {
     }
 
     @Override
-    public void handleService(ObservableList<String> list) {
-        String message = "";
+    public void handleService(String message) {
+        /*String text = "";
 
         for(int i = 0 ; i < list.size();i++) {
-            message += (list.get(i)+" ");
-        }
+            text += (list.get(i)+" ");
+        }*/
 
-        notifyField.setText(message);
+        turnOwnerField.setText(message);
     }
 
     @Override
@@ -251,12 +256,6 @@ public class MatchViewController implements Initializable, ViewInterface {
 
     @Override
     public void updateBoard(String setup) {
-        /*ricevo la stringa con tutto il messaggione, ora creo una classe che mi analizza questo messaggione, dividendomelo in
-        una lista di stringhe contenenti ognuna una parte della gui da aggiornare. Per ciascuna utilizzo un algoritmo che mi
-        divide atomicamente le informazioni che mi servono per aggiornare la Gui, chiamo infine un metodo della gui che dato
-        come parametro questa info mi aggiorna la gui.*/
-
-
         //divido la stringa grande con tutte le cose da aggiornare in più stringhe ognuna contenente solo un componente da aggiornare
         List<String> messages = Arrays.asList(setup.split(";"));
 
@@ -280,9 +279,14 @@ public class MatchViewController implements Initializable, ViewInterface {
                 this.updateRestriction(subMessage.replace("restrictions ", ""));
             } else if(subMessage.startsWith("dices")) {
                 this.updateWindowCards(subMessage.replace("dices ", ""));
+            } else if(subMessage.startsWith("playersstatus")) {
+                this.updatePlayersStatus(subMessage.replace("playersstatus ", ""));
             }
-
         }
+    }
+
+    public void updatePlayersStatus(String status) {
+        playersStatus.setItems(FXCollections.observableArrayList(Arrays.asList(status.split(","))));
     }
 
     public void setObjectCard(String objectCard) {
@@ -315,16 +319,16 @@ public class MatchViewController implements Initializable, ViewInterface {
         String player = cellList.get(0);
         TitledPane container = new TitledPane();
 
-        Node node = new Text();
+        VBox vBox = new VBox();
 
         for (TitledPane titlePane: listTitle) {
             if(titlePane.getText().equals(player)) {
-                node = titlePane.getContent();
+                vBox = (VBox)((Parent) titlePane.getContent()).getChildrenUnmodifiable().get(0);
             }
         }
 
-
-        GridPane currentWindow = (GridPane)((Parent) node).getChildrenUnmodifiable().get(0);
+        ObservableList<Node> boxChildren = vBox.getChildren();
+        GridPane currentWindow = (GridPane)(boxChildren.get(0));
 
         Node text;
 
@@ -348,16 +352,16 @@ public class MatchViewController implements Initializable, ViewInterface {
         String player = restrictionList.get(0);
         TitledPane container = new TitledPane();
 
-        Node node = new Text();
+        VBox vBox = new VBox();
 
         for (TitledPane titlePane: listTitle) {
             if(titlePane.getText().equals(player)) {
-                node = titlePane.getContent();
+                vBox = (VBox)((Parent) titlePane.getContent()).getChildrenUnmodifiable().get(0);
             }
         }
 
-
-        GridPane currentWindow = (GridPane)((Parent) node).getChildrenUnmodifiable().get(0);
+        ObservableList<Node> boxChildren = vBox.getChildren();
+        GridPane currentWindow = (GridPane)(boxChildren.get(0));
 
         Node text;
 

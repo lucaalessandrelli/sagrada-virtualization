@@ -6,10 +6,10 @@ import javafx.collections.ObservableList;
 import java.util.SplittableRandom;
 
 public interface ViewInterface {
-    void handleAlert(String message);
-    void handleConnected(String message);
-    void handleService(ObservableList<String> list);
-    void handleTimer(String string);
+    void handleAlert(String alert);
+    void handleConnected(String messageConnection);
+    void handleService(String playerlist);
+    void handleTimer(String timer);
     void handleMatchId(String idMatch);
     void updateBoard(String setup);
 }

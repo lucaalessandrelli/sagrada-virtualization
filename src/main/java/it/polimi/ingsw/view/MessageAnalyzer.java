@@ -52,12 +52,12 @@ public class MessageAnalyzer {
                 }
             });
         }else if(message.startsWith("service")) {
-            String finalMessage = message;
+            String playerList = message.replace("service ","");
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     // Update UI here.
-                    view.handleService(FXCollections.observableArrayList(Arrays.asList(finalMessage.replace("service ", "").trim().split(" "))));
+                    view.handleService(playerList);
                 }
             });
 
