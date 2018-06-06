@@ -155,7 +155,11 @@ public class InspectorPlace {
         }
     }
 
-    private boolean particularFrame(Pos pos, WindowPatternCard window) {
+    /**
+     * This method check if the placing is far from other dice.
+     * @return True if conditions are respected.
+     */
+    protected boolean particularFrame(Pos pos, WindowPatternCard window) {
         int x = pos.getX();
         int y = pos.getY();
         for (int i = -1; i<=1; i++){

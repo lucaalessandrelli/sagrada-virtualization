@@ -31,8 +31,8 @@ public class Manager {
         g.notifyGame();
         games.add(g);
         /*START MATCH*/
-        g.start();
         lobby.getPlayerList().forEach(player -> clientHandler.addPlayer(player.getUsername(), numOfMatch));
+        g.start();
         numOfMatch++;
         clients = new ClientsContainer(this);
         lobby.restore(clients);
@@ -83,13 +83,14 @@ public class Manager {
         if(round.getCurrTurn().equals(name)){
             Proc processor = new Proc(round,move);
             processor.process();
+        }else{
+            setPlayerActivity(name,true);
         }
-        //cerca il nome del giocatore e manda una risposta
     }
 
-    public void setPlayerInactive(String name) {
+    public void setPlayerActivity(String name,boolean b) {
         int numMatch = clientHandler.getGame(name);
-        games.get(numMatch).setPlayerActivity(name,false);
+        games.get(numMatch).setPlayerActivity(name,b);
     }
 
     public void reconnectPlayer(ClientInterface c) {

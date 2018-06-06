@@ -19,7 +19,7 @@ public class ClientsContainer {
     private List<ClientBox> clients;
     private boolean matchStarted;
     private Manager manager;
-    ScheduledExecutorService exec;
+    private ScheduledExecutorService exec;
 
 
     public ClientsContainer(Manager manager){
@@ -31,13 +31,9 @@ public class ClientsContainer {
             for (ClientBox c : clients) {
                 try {
                     c.ping();
-                } catch (RemoteException e) {
+                } catch (IOException e) {
                     System.out.println(c.getName() + " is disconnected");
-                    if(matchStarted) {
-                        manager.setPlayerInactive(c.getName());
-                    }
-                    clients.remove(c);
-                    notifyPlayers();
+                    remove(c.getName());
                     if (clients.size() < 2) {
                         if (matchStarted) {
                             notifyWinner(clients.get(0).getName());
@@ -92,6 +88,9 @@ public class ClientsContainer {
         for (ClientBox cli : clients){
                 if(cli.getName().equals(name)){
                     clients.remove(cli);
+                    if(matchStarted) {
+                        manager.setPlayerActivity(cli.getName(),false);
+                    }
                     notifyPlayers();
                     return true;
                 }
@@ -106,10 +105,10 @@ public class ClientsContainer {
             }
             String playersIn = str.toString();
             playersIn = "service" + playersIn;
-            String finalPlayersIn = playersIn;
+            String PlayersIn = playersIn;
             for(ClientBox c : clients){
                 try {
-                    c.updatePlayers(finalPlayersIn);
+                    c.updatePlayers(PlayersIn);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }

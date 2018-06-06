@@ -65,17 +65,7 @@ public class InspectorPlaceTool implements InspectorTool {
          * @return True if conditions are respected.
          */
         private boolean particularFrame() {
-            int x = pos.getX();
-            int y = pos.getY();
-            for (int i = -1; i<=1; i++){
-                for(int j =1 ; j>= -1; j--){
-                    if(x+i>=MINCOL && x+i<=MAXCOL && y+j>=MINROW && y+j<=MAXROW && window.getCell(new Pos(x,y)).isOccupied()){
-                        return false;
-
-                    }
-                }
-            }
-            return true;
+            return super.particularFrame(pos,window);
         }
 
         /**
