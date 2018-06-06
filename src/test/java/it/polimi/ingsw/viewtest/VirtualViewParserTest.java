@@ -34,7 +34,7 @@ public class VirtualViewParserTest {
 
         Table table = new Table(players);
 
-        table.initialize();
+        ////table.initialize();
 
         VirtualViewParser tester = new VirtualViewParser(p1);
 
@@ -72,7 +72,7 @@ public class VirtualViewParserTest {
         players.add(p4);
 
         Table table = new Table(players);
-        table.initialize();
+        //table.initialize();
 
 
         p1.getWindowPatternCard().placeDice(table.getDraftPool().chooseDice(0),0,0);
@@ -114,7 +114,7 @@ public class VirtualViewParserTest {
 
         Table table = new Table(players);
 
-        table.initialize();
+        //table.initialize();
 
         p1.getWindowPatternCard().placeDice(table.getDraftPool().chooseDice(0),0,0);
         p1.getWindowPatternCard().placeDice(table.getDraftPool().chooseDice(1),0,2);
@@ -189,7 +189,7 @@ public class VirtualViewParserTest {
         p4.chooseWindow(windowPatternCards);
         windowPatternCards.remove(windowPatternCard3);
 
-        table.initialize();
+        //table.initialize();
 
         VirtualViewParser tester = new VirtualViewParser(p1);
 

@@ -120,7 +120,17 @@ public class VirtualViewParser {
         builder.append(player.getWindowPatternCard().getDifficulty());
         builder.append(VIRG);
         builder.append(SEP);
-        return builder.toString();
+        /*for(WindowPatternCard windowPatternCard :player.getPublicObjects().getOthersWindows()){
+            builder.append(passing);
+
+            builder.append(windowPatternCard.getPlayer());
+            builder.append(VIRG);
+            builder.append(windowPatternCard.getDifficulty());
+            builder.append(VIRG);
+            builder.append(SEP);
+        }*/
+
+            return builder.toString();
     }
     
     public String parseRoundTrack(){

@@ -84,7 +84,7 @@ public class Player {
     }
 
     //choose between 4 WindowsPatternCard and set MyFavTokens
-    public void chooseWindow(ArrayList<WindowPatternCard> windows) {
+    public void chooseWindow(List<WindowPatternCard> windows) {
         int chosenOne = 0;
         // while (myWindow==null) {
         setMyWindow(windows.get(chosenOne));

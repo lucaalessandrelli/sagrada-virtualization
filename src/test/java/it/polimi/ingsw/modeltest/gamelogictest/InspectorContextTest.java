@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InspectorContextTest {
 
@@ -16,7 +17,7 @@ public class InspectorContextTest {
         InspectorContext tester = new InspectorContext();
         CardContainer container = new CardContainer();
         ToolCard toolcard;
-        ArrayList<ToolCard> toolCardArrayList;
+        List<ToolCard> toolCardArrayList;
         toolCardArrayList = container.pullOutTools();
 
         toolcard = toolCardArrayList.get(2);

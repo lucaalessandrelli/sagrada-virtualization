@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,7 +19,7 @@ public class CardContainerTest {
     @Test
     public void TestPrivatePullout(){
         CardContainer tester = new CardContainer();
-        ArrayList<ObjectiveCard> test = null;
+        List<ObjectiveCard> test = null;
         test = tester.pullOutPrivate(2);
         assertEquals(2, test.size());
     }
@@ -26,7 +27,7 @@ public class CardContainerTest {
     @Test
     public void TestPublicPullout(){
         CardContainer tester = new CardContainer();
-        ArrayList<ObjectiveCard> test = null;
+        List<ObjectiveCard> test = null;
         test = tester.pullOutPublic();
         assertEquals(3, test.size());
     }
@@ -34,7 +35,7 @@ public class CardContainerTest {
     @Test
     public void TestPublicRules() {
         CardContainer tester = new CardContainer();
-        ArrayList<ObjectiveCard> test = new ArrayList<ObjectiveCard>();
+        List<ObjectiveCard> test = new ArrayList<ObjectiveCard>();
         test = tester.pullOutPublic();
         for (ObjectiveCard x: test) {
             assertTrue(!(x.getRules().getRules().isEmpty()));
@@ -44,7 +45,7 @@ public class CardContainerTest {
     @Test
     public void TestPatternPullOut(){
         CardContainer tester = new CardContainer();
-        ArrayList<WindowPatternCard> test;
+        List<WindowPatternCard> test;
         test = tester.pullOutPattern(2);
         assertEquals(8,test.size());
 
@@ -53,7 +54,7 @@ public class CardContainerTest {
     @Test
     public void TestToolCardsPullOut(){
         CardContainer tester = new CardContainer();
-        ArrayList<ToolCard> test = tester.pullOutTools();
+        List<ToolCard> test = tester.pullOutTools();
 
         /*for (ToolCard toolcard : test){
             toolcard.show();

@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gamedata.gametools.DraftPool;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +20,7 @@ public class DraftPoolTest{
         DraftPool tester = new DraftPool(4);
         Dice y = new Dice();
         int j;
-        ArrayList<Dice> x = new ArrayList<Dice>(9);
+        List<Dice> x = new ArrayList<Dice>(9);
         for(int i = 0; i < 9; i++){
             x.add(y);
         }
@@ -34,7 +35,7 @@ public class DraftPoolTest{
         int i;
         DraftPool tester = new DraftPool();
         Dice y = new Dice();
-        ArrayList<Dice> x = new ArrayList<Dice>(9);
+        List<Dice> x = new ArrayList<Dice>(9);
         for(i = 0; i < 9; i++){
             x.add(y);
         }

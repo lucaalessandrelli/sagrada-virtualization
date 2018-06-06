@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.gamedata.gametools.DiceBag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +21,7 @@ public class DiceBagTest {
     @Test
     public void TestEmptyBag(){
         DiceBag tester = new DiceBag();
-        ArrayList<Dice> d = new ArrayList<>();
+        List<Dice> d = new ArrayList<>();
         tester.setNumPlayers(4);
         for(int i = 0; i < 10; i++){
             tester.pullOut();
@@ -32,7 +33,7 @@ public class DiceBagTest {
     @Test
     public void TestExactNumber(){
         DiceBag tester = new DiceBag();
-        ArrayList<Dice> tmp;
+        List<Dice> tmp;
         int r = 0,g = 0,y = 0,b = 0,p = 0,w = 0;
         tester.setNumPlayers(4);
         for(int i = 0; i < 10; i++) {
@@ -75,7 +76,7 @@ public class DiceBagTest {
         boolean ended = false;
         tester.addDice(dice);
         assertEquals(remaining+1,tester.remainingDices());
-        ArrayList<Dice> test = tester.pullOut(91);
+        List<Dice> test = tester.pullOut(91);
         for (Dice x: test){
             if(x.equals(dice)){
                 if(x == dice) {
@@ -91,7 +92,7 @@ public class DiceBagTest {
     @Test
     public void TestPullOut(){
         DiceBag tester = new DiceBag();
-        ArrayList<Dice> dices;
+        List<Dice> dices;
         tester.setNumPlayers(3);
         dices = tester.pullOut();
         assertEquals(7,dices.size());
@@ -100,7 +101,7 @@ public class DiceBagTest {
     @Test
     public void TestNumPullOut(){
         DiceBag tester = new DiceBag();
-        ArrayList<Dice> dices;
+        List<Dice> dices;
         dices = tester.pullOut(24);
         assertEquals(24,dices.size());
     }

@@ -27,7 +27,7 @@ public class TableTest {
 
         Table tester = new Table(players);
 
-        tester.initialize();
+        //tester.initialize();
 
         assertFalse(tester.getDraftPool().getDraftPool().isEmpty());
 
@@ -61,7 +61,7 @@ public class TableTest {
         players.add(p4);
 
         Table tester = new Table(players);
-        tester.initialize();
+        //tester.initialize();
 
 
         assertNotNull(tester.getToolCards());
@@ -86,7 +86,7 @@ public class TableTest {
         players.add(p4);
 
         Table tester = new Table(players);
-        tester.initialize();
+        //tester.initialize();
 
 
         tester.fillDraftPool();
@@ -115,7 +115,7 @@ public class TableTest {
 
         Table tester = new Table(players);
 
-        tester.initialize();
+        ////tester.initialize();
 
         tester.fillDraftPool();
 

@@ -8,8 +8,8 @@ import java.util.List;
 //I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
 public class Table {
     private List<Player> myplayers;
-    private ArrayList<ObjectiveCard> objectiveCards;
-    private ArrayList<ToolCard> toolCards = new ArrayList<>(3);
+    private List<ObjectiveCard> objectiveCards;
+    private List<ToolCard> toolCards = new ArrayList<>(3);
     private RoundTrack roundTrack;
     private DraftPool draftPool;
     private DiceBag diceBag;
@@ -21,15 +21,15 @@ public class Table {
         this.container = new CardContainer();
         this.myplayers = players;
         this.roundTrack = new RoundTrack();
-
+        this.initialize();
     }
 
     public void initialize(){
-        ArrayList<WindowPatternCard> windowPatternCards;
+        List<WindowPatternCard> windowPatternCards;
         int i;
         this.toolCards = this.container.pullOutTools();
         this.objectiveCards = this.container.pullOutPublic();
-        ArrayList<ObjectiveCard> tmp = this.container.pullOutPrivate(this.myplayers.size());
+        List<ObjectiveCard> tmp = this.container.pullOutPrivate(this.myplayers.size());
         i = 0;
         for (Player p: this.myplayers){
             p.setMyObjCard(tmp.get(i));

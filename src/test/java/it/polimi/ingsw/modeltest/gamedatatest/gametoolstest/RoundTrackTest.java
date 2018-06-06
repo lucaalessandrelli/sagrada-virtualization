@@ -22,7 +22,7 @@ public class RoundTrackTest {
     public void TestGet_And_Set(){
         RoundTrack roundTrack = new RoundTrack();
         List<List<Dice>> arrayList = roundTrack.getRoundTrack(); //Testing the getter method
-        ArrayList<Dice> dices = new ArrayList<>();
+        List<Dice> dices = new ArrayList<>();
         Dice dice = new Dice(Colour.GREEN);
         dices.add(dice);
         roundTrack.setDiceOnRoundTrack(1,dices); //Testing the setter method
@@ -39,7 +39,7 @@ public class RoundTrackTest {
     @Test
     public void TestFind_And_Switch(){
         RoundTrack roundTrack = new RoundTrack();
-        ArrayList<Dice> dices = new ArrayList<>();
+        List<Dice> dices = new ArrayList<>();
         Dice dice = new Dice(Colour.GREEN);
         dices.add(dice);
         roundTrack.setDiceOnRoundTrack(1,dices); //Testing the setter method
@@ -50,7 +50,7 @@ public class RoundTrackTest {
         assertTrue(dice.equals(roundTrack.switchDice(dice)));
     }
 
-    private void addRandomDices(ArrayList<Dice> dices,int num){
+    private void addRandomDices(List<Dice> dices,int num){
         Dice dice;
         int randomNum;
         Random rand = new Random();
