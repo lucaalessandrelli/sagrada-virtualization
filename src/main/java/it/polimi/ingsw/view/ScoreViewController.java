@@ -58,7 +58,7 @@ public class ScoreViewController implements Initializable, ViewInterface {
     }
 
     @Override
-    public void handleService(ObservableList<String> list) {
+    public void handleService(String list) {
 
     }
 
