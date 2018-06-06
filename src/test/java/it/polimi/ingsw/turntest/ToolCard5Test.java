@@ -89,7 +89,7 @@ public class ToolCard5Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingToolDice",lastName(turn.getState().toString(),18));
+        assertEquals("SelectingRoundTrackDice",lastName(turn.getState().toString(),18));
 
         Dice d = new Dice(p1.getRoundTrack().getDice(new Pos(0,0)).getColour());
         d.setNumber(p1.getRoundTrack().getDice(new Pos(0,0)).getNumber());
@@ -186,7 +186,7 @@ public class ToolCard5Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingToolDice", lastName(turn.getState().toString(), 18));
+        assertEquals("SelectingRoundTrackDice", lastName(turn.getState().toString(), 18));
 
         Dice d = new Dice(p1.getRoundTrack().getDice(new Pos(0, 0)).getColour());
         d.setNumber(p1.getRoundTrack().getDice(new Pos(0, 0)).getNumber());
@@ -265,7 +265,7 @@ public class ToolCard5Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingToolDice", lastName(turn.getState().toString(), 18));
+        assertEquals("SelectingRoundTrackDice", lastName(turn.getState().toString(), 18));
 
         Dice d = new Dice(p1.getRoundTrack().getDice(new Pos(0, 0)).getColour());
         d.setNumber(p1.getRoundTrack().getDice(new Pos(0, 0)).getNumber());
