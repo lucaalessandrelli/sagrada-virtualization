@@ -7,18 +7,13 @@ import it.polimi.ingsw.model.gamedata.gametools.*;
 import java.util.List;
 
 public class PublicObjects {
-    private List<WindowPatternCard> othersWindows;
+    private List<Player> players;
     private List<ObjectiveCard> objectiveCards;
     private List<ToolCard> toolCards;
     private RoundTrack roundTrack;
     private DraftPool draftPool;
-    private List<String> players;
 
-
-    public void addDice(int numRound,List<Dice> d){
-        roundTrack.setDiceOnRoundTrack(numRound,d);
-    }
-
+    
     public void setDraftPool(DraftPool draftPool) {
         this.draftPool = draftPool;
     }
@@ -27,12 +22,7 @@ public class PublicObjects {
         this.objectiveCards = objectiveCards;
     }
 
-    public void setOthersWindows(List<WindowPatternCard> othersWindows) {
-        this.othersWindows = othersWindows;
-    }
-
-    public void setPlayers(
-            List<String> players) {
+    public void setOthersPlayers(List<Player> players) {
         this.players = players;
     }
 
@@ -46,16 +36,12 @@ public class PublicObjects {
         return objectiveCards;
     }
 
-    public List<String> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
     public List<ToolCard> getToolCards() {
         return toolCards;
-    }
-
-    public List<WindowPatternCard> getOthersWindows() {
-        return othersWindows;
     }
 
     public DraftPool getDraftPool() {
