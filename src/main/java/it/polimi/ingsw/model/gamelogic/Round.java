@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.gamelogic;
 
 
+import it.polimi.ingsw.Match;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Table;
@@ -19,14 +20,15 @@ public class Round {
     private Turn turn;
     private Player currTurn;
     private Iterator<Player> iterator;
-    private Object mon;
+    private Match match;
 
-    public Round(List<Player> playerList, int roundNumber, Table table) {
+    public Round(List<Player> playerList, int roundNumber, Table table,Match m) {
         this.roundNumber = roundNumber;
         this.players = new PlayersContainer(playerList);
         this.table=table;
         int t =30;
         timeSleep = t*1000;
+        match = m;
     }
 
     public void go() {
@@ -39,15 +41,12 @@ public class Round {
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
                 turn.startTurn();
                 players.notifyTurn(p.getUsername(),timeSleep);
-                mon = new Object();
-                synchronized (mon){
                     try {
-                        mon.wait(timeSleep);
-                        //p.setActivity(false);
+                        Thread.sleep(timeSleep);
+                        p.setActivity(false);
                     } catch (InterruptedException e) {
                         players.notifyChanges();
                     }
-                }
             }
         }
         setLastDice();
@@ -106,9 +105,7 @@ public class Round {
         }
     }
     public  void interrupt(){
-        synchronized (mon) {
-            mon.notify();
-        }
+        match.interrupt();
     }
 
 }

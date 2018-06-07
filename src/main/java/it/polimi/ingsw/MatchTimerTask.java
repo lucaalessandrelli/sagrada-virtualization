@@ -15,13 +15,11 @@ public class MatchTimerTask extends TimerTask {
     private WaitingRoom lobby;
     private long time;
     private long tempTime;
-    private Timer timer;
 
-    public MatchTimerTask(WaitingRoom lobby, long time, Timer timer) {
+    public MatchTimerTask(WaitingRoom lobby, long time) {
         this.lobby = lobby;
         this.time = time;
         this.tempTime = time;
-        this.timer = timer;
     }
 
     @Override
@@ -33,14 +31,15 @@ public class MatchTimerTask extends TimerTask {
             lobby.resetTimer();
             //CREATE A REAL MATCH
             lobby.notifyManager();
-            out.println("Now the state is: StartedMatch");
-            if (playerList.sizeContainer() < 2 && tempTime == 0) {
-                tempTime = time;
-                //out.println("Timer:"+ tempTime);
-            } else {
-                //out.println("Timer:"+ tempTime);
-            }
         }
+        //out.println("Now the state is: StartedMatch");
+        if (playerList.sizeContainer() < 2 && tempTime == 0) {
+            tempTime = time;
+            //out.println("Timer:"+ tempTime);
+        } else {
+            //out.println("Timer:"+ tempTime);
+        }
+
     }
 
         synchronized public long getTempTime () {

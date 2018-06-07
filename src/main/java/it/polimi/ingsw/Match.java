@@ -10,7 +10,7 @@ import it.polimi.ingsw.network.server.Server;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Match {
+public class Match extends Thread {
     private  Manager manager;
     private int id;
     private List<Player> playerList;
@@ -28,7 +28,7 @@ public class Match {
         this.manager=manager;
     }
 
-    public void start() {
+    public void run() {
         table = new Table(playerList);
         for (Player p : playerList){
             p.notifyPlayer();
@@ -65,7 +65,7 @@ public class Match {
     }
 
     private void startNextRound() throws NotEnoughPlayersException {
-            currRound = new Round(this.playerList, roundNumber,table);
+            currRound = new Round(this.playerList, roundNumber,table,this);
             roundList.add(currRound);
             // call on the round just created a method that start the round
             roundList.get(roundNumber-1).go();

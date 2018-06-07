@@ -8,10 +8,12 @@ import it.polimi.ingsw.network.ClientInterface;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class WaitingRoom {
     private Manager manager;
-    private Timer timer;
     private MatchTimerTask task;
     private long time;
     private ClientsContainer playerList;
@@ -19,9 +21,8 @@ public class WaitingRoom {
     public WaitingRoom(long time, Manager manager, ClientsContainer clientContainer) {
         playerList = clientContainer;
         this.time = time;
-        timer = new Timer();
         this.manager = manager;
-        task = new MatchTimerTask(this,time, timer);
+        task = new MatchTimerTask(this,time);
     }
 
     //Modifier methods
@@ -30,7 +31,8 @@ public class WaitingRoom {
             playerList.addClient(player);
             playerList.notifyTimer(task.getTempTime());
             //start the timer
-            timer.schedule(task, 1000,1000);
+            ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+            exec.scheduleWithFixedDelay(task,0,1000,TimeUnit.MILLISECONDS);
         } else if (playerList.sizeContainer() < 4) {
             playerList.addClient(player);
             playerList.notifyTimer(task.getTempTime());
@@ -51,8 +53,7 @@ public class WaitingRoom {
     }*/
 
     public void resetTimer() {
-        timer.cancel();
-        timer = new Timer();
+        task = new MatchTimerTask(this,time);
     }
 
     public void restore(ClientsContainer clientContainer) {

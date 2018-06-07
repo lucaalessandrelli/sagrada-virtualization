@@ -1,6 +1,8 @@
 package it.polimi.ingsw.turntest;
 
 
+import it.polimi.ingsw.Match;
+import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.*;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
@@ -34,7 +36,9 @@ public class TestChooseDice1 {
         Table table = new Table(players);
         //table.initialize();
 
-        Round round = new Round(players, 1, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 1, table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -91,7 +95,9 @@ public class TestChooseDice1 {
 
         Table table = new Table(players);
 
-        Round round = new Round(players, 2, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 2, table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -163,7 +169,9 @@ public class TestChooseDice1 {
 
         p1.setPublicObjects(publicObjects);
 
-        Round round = new Round(players, 1, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 1, table,match);
 
         Turn tester = new Turn(p1, round, 1, false, table);
 

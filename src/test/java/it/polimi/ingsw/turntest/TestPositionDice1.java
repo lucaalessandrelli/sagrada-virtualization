@@ -1,5 +1,7 @@
 package it.polimi.ingsw.turntest;
 
+import it.polimi.ingsw.Match;
+import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.PublicObjects;
@@ -33,7 +35,9 @@ public class TestPositionDice1 {
 
         Table table = new Table(players);
 
-        Round round = new Round(players,1,table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players,1,table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -115,7 +119,9 @@ public class TestPositionDice1 {
 
         Table table = new Table(players);
 
-        Round round = new Round(players, 1, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 1, table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -169,7 +175,9 @@ public class TestPositionDice1 {
 
         Table table = new Table(players);
 
-        Round round = new Round(players, 4, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 4, table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();

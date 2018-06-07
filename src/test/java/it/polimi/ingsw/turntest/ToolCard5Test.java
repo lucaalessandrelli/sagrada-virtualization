@@ -1,5 +1,7 @@
 package it.polimi.ingsw.turntest;
 
+import it.polimi.ingsw.Match;
+import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.PublicObjects;
@@ -58,7 +60,9 @@ public class ToolCard5Test {
             table.initialize();
         }
 
-        Round round = new Round(players, 2, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 2, table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -155,7 +159,9 @@ public class ToolCard5Test {
             table.initialize();
         }
 
-        Round round = new Round(players, 2, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 2, table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -234,7 +240,9 @@ public class ToolCard5Test {
             table.initialize();
         }
 
-        Round round = new Round(players, 2, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 2, table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -334,7 +342,9 @@ public class ToolCard5Test {
             table.initialize();
         }
 
-        Round round = new Round(players, 1, table);
+        Match match = new Match(players,new Manager(),0);
+
+        Round round = new Round(players, 1, table,match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
