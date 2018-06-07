@@ -41,9 +41,10 @@ public class Dice implements Move {
 
     public boolean equals(Dice d) {
         if (this.prop.getNumber() == d.prop.getNumber()){
-            if(this.prop.getColour().equals(d.prop.getColour()))
-                selected=true;
+            if(this.prop.getColour().equals(d.prop.getColour())) {
+                selected = true;
                 return true;
+            }
         }
         return false;
     }

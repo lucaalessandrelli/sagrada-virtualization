@@ -137,18 +137,14 @@ public class Table {
 
             publicObjects.setRoundTrack(this.roundTrack);
 
-            List<String> playernames = new ArrayList<>();
-            List<WindowPatternCard> otherwindows = new ArrayList<>();
+            List<Player> players = new ArrayList<>();
             for (Player player: this.myplayers){
                 if(!(player.getUsername().equals(p.getUsername()))) {
-                    playernames.add(player.getUsername());
-                    otherwindows.add(player.getWindowPatternCard());
+                    players.add(player);
                 }
             }
 
-            publicObjects.setPlayers(playernames);
-
-            publicObjects.setOthersWindows(otherwindows);
+            publicObjects.setOthersPlayers(players);
 
             p.setPublicObjects(publicObjects);
         }

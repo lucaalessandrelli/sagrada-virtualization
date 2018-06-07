@@ -29,9 +29,9 @@ public class VirtualViewParser {
         this.parseWindowPatternRestrictions(player.getWindowPatternCard());
         this.parseWindowPatternDice(player.getWindowPatternCard());
 
-        for(WindowPatternCard windowPatternCard : this.player.getPublicObjects().getOthersWindows()) {
-            this.parseWindowPatternRestrictions(windowPatternCard);
-            this.parseWindowPatternDice(windowPatternCard);
+        for(Player p : this.player.getPublicObjects().getPlayers()) {
+            this.parseWindowPatternRestrictions(p.getWindowPatternCard());
+            this.parseWindowPatternDice(p.getWindowPatternCard());
         }
         return builder.toString();
     }

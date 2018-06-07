@@ -59,11 +59,13 @@ public class DraftPoolTest{
         DraftPool tester = new DraftPool();
         Property prop = new Property(Colour.RED,true);
         Dice d;
-        prop.setNumber(5);
-        for(int i = 0; i < 6; i++) {
-            d = new Dice();
+        for(int i = 0; i < 5; i++) {
+            d = new Dice(prop);
+            d.setNumber(i+1);
             assertTrue(tester.getDraftPool().add(d));
         }
+        prop = new Property(Colour.YELLOW,true);
+        prop.setNumber(5);
         d = new Dice(prop);
         assertFalse(tester.findDice(d));
         assertTrue(tester.getDraftPool().add(d));

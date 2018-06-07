@@ -109,7 +109,6 @@ public class ToolCard1Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 1 && players.get(0).getToolCards().get(1).getID() != 1 && players.get(0).getToolCards().get(2).getID() != 1){
             table = new Table(players);
