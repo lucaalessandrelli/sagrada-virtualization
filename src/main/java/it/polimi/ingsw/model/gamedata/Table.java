@@ -153,4 +153,10 @@ public class Table {
             p.setPublicObjects(publicObjects);
         }
     }
+
+    public void resetSelection() {
+        myplayers.forEach(player -> player.getWindowPatternCard().resetSelection());
+        roundTrack.resetSelection();
+        draftPool.resetSelection();
+    }
 }

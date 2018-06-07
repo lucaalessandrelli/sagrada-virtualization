@@ -223,6 +223,10 @@ public class WindowPatternCard {
             System.out.print("\n");
         }
     }
+
+    public void resetSelection() {
+        matr.forEach(cells -> cells.forEach(cell -> cell.getDice().deSelect()));
+    }
 }
 
 

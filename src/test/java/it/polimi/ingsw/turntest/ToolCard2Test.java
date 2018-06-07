@@ -49,11 +49,11 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.initialize();
+        //table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2){
             table = new Table(players);
-            table.initialize();
+            //table.initialize();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -173,11 +173,11 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.initialize();
+        //table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2) {
             table = new Table(players);
-            table.initialize();
+            //table.initialize();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -214,6 +214,7 @@ public class ToolCard2Test {
 
         //p1.getWindowPatternCard().show();
 
+        table.resetSelection();
 
         turn.startTurn();
 
@@ -245,6 +246,7 @@ public class ToolCard2Test {
             System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
+        //l'assert fallisce perchè la macchina a stati va nello stato di "check point"
         assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
 
 
@@ -304,11 +306,11 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.initialize();
+        //table.initialize();
 
         while (players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2) {
             table = new Table(players);
-            table.initialize();
+            //table.initialize();
         }
 
         Match match = new Match(players,new Manager(),0);

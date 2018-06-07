@@ -6,18 +6,27 @@ import it.polimi.ingsw.model.gamelogic.Move;
 
 public class Dice implements Move {
     private Property prop;
+    private boolean selected;
 
     public Dice(){
         this.prop = new Property(Colour.WHITE,true);
+        selected = false;
     }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
 
     public Dice(Property x){
         this.prop = x;
+        selected = false;
     }
 
 
     public Dice(Colour y){
         this.prop = new Property(y,true);
+        selected = false;
     }
 
     //getter
@@ -33,6 +42,7 @@ public class Dice implements Move {
     public boolean equals(Dice d) {
         if (this.prop.getNumber() == d.prop.getNumber()){
             if(this.prop.getColour().equals(d.prop.getColour()))
+                selected=true;
                 return true;
         }
         return false;
@@ -49,9 +59,14 @@ public class Dice implements Move {
     public void setDice(Dice d){
         this.prop.setNumber(d.getNumber());
         this.prop.setColour(d.getColour());
+        selected=false;
     }
 
     public void rollDice(){
         this.prop.rollDice();
+    }
+
+    public void deSelect() {
+        selected=false;
     }
 }

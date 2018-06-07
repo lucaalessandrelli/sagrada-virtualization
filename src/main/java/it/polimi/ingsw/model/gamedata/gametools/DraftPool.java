@@ -85,4 +85,8 @@ public class DraftPool {
     public void setDice(Dice d, int where){
         this.draftPool.get(where).setDice(d);
     }
+
+    public void resetSelection() {
+        draftPool.forEach(dice -> dice.deSelect());
+    }
 }

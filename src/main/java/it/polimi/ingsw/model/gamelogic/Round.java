@@ -47,6 +47,9 @@ public class Round {
                     } catch (InterruptedException e) {
                         players.notifyChanges();
                     }
+                    finally {
+                        table.resetSelection();
+                    }
             }
         }
         setLastDice();

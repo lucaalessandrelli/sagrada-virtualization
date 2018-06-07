@@ -24,7 +24,7 @@ public class RoundTrack {
     public boolean findDice(Dice dice, Pos pos){
         for(int i=0; i<diceOnRoundTrack.size();i++){
             for(int j=0; j<diceOnRoundTrack.get(i).size();j++){
-                if(dice.equals(diceOnRoundTrack.get(i).get(j))) {
+                if((diceOnRoundTrack.get(i).get(j)).equals(dice)) {
                     return true;
                 }
             }
@@ -46,5 +46,9 @@ public class RoundTrack {
     }
     public Dice getDice(Pos pos){
         return null;
+    }
+
+    public void resetSelection() {
+        diceOnRoundTrack.forEach(dice -> dice.forEach(dice1 -> dice1.deSelect()));
     }
 }
