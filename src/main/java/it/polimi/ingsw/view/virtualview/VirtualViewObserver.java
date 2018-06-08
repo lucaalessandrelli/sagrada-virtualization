@@ -2,8 +2,10 @@ package it.polimi.ingsw.view.virtualview;
 
 import it.polimi.ingsw.controller.ClientBox;
 import it.polimi.ingsw.model.gamedata.Player;
+import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 //observer interface, it will be implemented by gui and cli
 public abstract class VirtualViewObserver {
@@ -16,6 +18,12 @@ public abstract class VirtualViewObserver {
     public abstract void updateStateTurn(String whoIsTurn, long timeSleep);
 
     public abstract void wrongMove(String s);
+    
+    public abstract void chooseWindow(List<WindowPatternCard> windows);
 
+    public abstract void timerChoose(long timerWindows);
 
+    public abstract void notifyState(String state);
+
+    public abstract void notifyScore(String s);
 }

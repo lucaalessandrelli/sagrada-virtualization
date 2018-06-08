@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamelogic.NotEnoughPlayersException;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.model.gamedata.Table;
-import it.polimi.ingsw.network.server.Server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +13,11 @@ public class Match extends Thread {
     private  Manager manager;
     private int id;
     private List<Player> playerList;
-    private Server server;
     private Table table;
     private List<Round> roundList;
     private int roundNumber;
     private Round currRound;
+    private long timerWindows = 10*1000;
 
     public Match(List<Player> playerList, Manager manager, int id) {
         //this need to be passed by copy from the server
@@ -30,9 +29,17 @@ public class Match extends Thread {
 
     public void run() {
         table = new Table(playerList);
-        for (Player p : playerList){
-            p.notifyPlayer();
+        playerList.forEach(player -> player.timerChoose(timerWindows));
+        try {
+            Thread.sleep(timerWindows);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        playerList.stream().filter(player -> player.getWindowPatternCard()==null).forEach(player -> table.setWindow(player.getUsername()));
+
+
+        playerList.forEach(player -> player.notifyPlayer());
+
         //table.inizialize();
 
         /*SETTING ROUNDS*/
@@ -47,21 +54,29 @@ public class Match extends Thread {
                     p.notifyPlayer();
                 }
             } catch (NotEnoughPlayersException e) {
-                //manager.notEnoughPlayer(e.getMessage()); //il giocatore rimasto vince
+                playerList.stream().filter(player -> player.isActive())
+                        .forEach(player -> player.notifyScore("score "+ player.getUsername()+player.calculatePoints()));
+                return;
             }
         }
 
         //match is now ended - call methods to calculate player points
-        this.computePlayerPoints();
+
+        //send points and name winner(to do)
+        playerList.forEach(player -> player.notifyScore(computePlayerPoints()));
         for(Player p : playerList){
             manager.matchEnded(p.getUsername());
         }
     }
 
-    private void computePlayerPoints() {
+    private String computePlayerPoints() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("score ");
         for(Player player: playerList) {
-            player.calculatePoints();
+            builder.append(player.getUsername()+" ");
+            builder.append(player.calculatePoints()+",");
         }
+        return builder.toString();
     }
 
     private void startNextRound() throws NotEnoughPlayersException {
@@ -73,7 +88,7 @@ public class Match extends Thread {
     }
 
     private synchronized void changeOrder(){
-        List<Player> tmpList = new ArrayList();
+        ArrayList tmpList = new ArrayList();
         Player tmp;
         tmp = playerList.get(0);
         for (int i = 1; i<playerList.size();i++){
@@ -100,6 +115,13 @@ public class Match extends Thread {
         for (Player p : playerList){
             if(p.getUsername().equals(name)){
                 p.setActivity(b);
+            }
+        }
+    }
+    public void setPlayerWindow(String name,int idCard){
+        for(Player p : playerList){
+            if (p.getUsername().equals(name)) {
+                table.setWindow(p,id);
             }
         }
     }

@@ -72,7 +72,7 @@ public class WaitingRoom {
         manager.createMatch(this);
     }
 
-    public ClientsContainer getCliets() {
+    public ClientsContainer getClients() {
         return playerList;
     }
 

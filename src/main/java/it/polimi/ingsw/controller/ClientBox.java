@@ -9,6 +9,12 @@ public class ClientBox {
     private ClientInterface client;
     private String name;
     private String typeConnection;
+    final static private String connected="connectedPlayers";
+    final static private String match="match ";
+    final static private String time="timer ";
+    final static private String alert="alert ";
+
+
     public ClientBox(ClientInterface c, String n,String t){
         client=c;
         name=n;
@@ -24,12 +30,13 @@ public class ClientBox {
     }
 
     public void updatePlayers(String finalPlayersIn) throws RemoteException {
+        finalPlayersIn = connected + finalPlayersIn;
         client.updatePlayers(finalPlayersIn);
     }
 
     public void setNumMatch(int numOfMatch) throws RemoteException {
         String num = String.valueOf(numOfMatch);
-        client.setNumMatch("match "+num);
+        client.setNumMatch(match+num);
     }
 
     public void updateTurn(String s) throws RemoteException {
@@ -43,10 +50,14 @@ public class ClientBox {
     public void setTimer(long tempTime) throws RemoteException {
         tempTime = tempTime/1000;
         String timer = String.valueOf(tempTime);
-        client.setTimer("timer "+timer);
+        client.setTimer(time+timer);
     }
 
     public void wrongMove(String s) throws RemoteException {
-        client.updateMessage("alert "+s);
+        client.updateMessage(alert+s);
+    }
+
+    public void chooseWindow(String windows) throws RemoteException {
+        client.updateMessage(windows);
     }
 }

@@ -31,25 +31,26 @@ public class Round {
         match = m;
     }
 
-    public void go() {
+    public void go() throws NotEnoughPlayersException {
         Player p;
         iterator = players.getIterator();
         while(iterator.hasNext()){
             p = iterator.next();
             currTurn = p;
-            if (p.isActive()){
+            if (p.isActive()) {
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
                 turn.startTurn();
-                players.notifyTurn(p.getUsername(),timeSleep);
-                    try {
-                        Thread.sleep(timeSleep);
-                        p.setActivity(false);
-                    } catch (InterruptedException e) {
-                        players.notifyChanges();
-                    }
-                    finally {
-                        table.resetSelection();
-                    }
+                players.notifyTurn(p.getUsername(), timeSleep);
+                try {
+                    Thread.sleep(timeSleep);
+                    p.setActivity(false);
+                } catch (InterruptedException e) {
+                    players.notifyChanges();
+                }
+                if (!players.checkActivity()) {
+                    throw new NotEnoughPlayersException();
+                }
+                table.resetSelection();
             }
         }
         setLastDice();
@@ -72,10 +73,15 @@ public class Round {
         return this.roundNumber;
     }
 
+    private void updateAfterMove(){
+        players.notifyChanges();
+        currTurn.notifyState(turn.getState().getClass().getName());
+    }
+
     public void setTurn(Pos p){
         try {
             turn.receiveMove(p);
-            players.notifyChanges();
+            updateAfterMove();
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
         }
@@ -84,7 +90,7 @@ public class Round {
     public void setTurn(String s){
         try {
             turn.receiveMove(s);
-            players.notifyChanges();
+            updateAfterMove();
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
         }
@@ -93,7 +99,7 @@ public class Round {
     public void setTurn(ToolCard t){
         try {
             turn.receiveMove(t);
-            players.notifyChanges();
+            updateAfterMove();
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
         }
@@ -102,7 +108,7 @@ public class Round {
     public void setTurn(Dice d, Pos p){
         try {
             turn.receiveMove(d,p);
-            players.notifyChanges();
+            updateAfterMove();
         } catch (WrongMoveException e) {
             currTurn.wrongMove(e.getMessage());
         }

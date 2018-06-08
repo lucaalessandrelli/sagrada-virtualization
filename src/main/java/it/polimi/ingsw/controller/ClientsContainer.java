@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
-import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.virtualview.VirtualView;
 
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +24,7 @@ public class ClientsContainer {
         clients = new ArrayList<>();
         this.manager= manager;
         matchStarted = false;
-        exec = Executors.newScheduledThreadPool(1);
+        exec = Executors.newSingleThreadScheduledExecutor();
         exec.scheduleWithFixedDelay(() -> {
             for (ClientBox c : clients) {
                 try {
@@ -34,23 +32,13 @@ public class ClientsContainer {
                 } catch (IOException e) {
                     System.out.println(c.getName() + " is disconnected");
                     remove(c.getName());
-                    if (clients.size() < 2) {
-                        if (matchStarted) {
-                            notifyWinner(clients.get(0).getName());
-                            manager.notifyEnd(clients.get(0).getName());
 
-                        }else{
-                            manager.notEnoughPlayer();
-                        }
-                    }
                 }
             }
         },0,1,TimeUnit.SECONDS);
 
     }
 
-    private void notifyWinner(String name) {
-    }
 
     synchronized public void addClient(ClientInterface c){
         try {
@@ -104,11 +92,9 @@ public class ClientsContainer {
                  str.append(" " + c.getName());
             }
             String playersIn = str.toString();
-            playersIn = "service" + playersIn;
-            String PlayersIn = playersIn;
             for(ClientBox c : clients){
                 try {
-                    c.updatePlayers(PlayersIn);
+                    c.updatePlayers(playersIn);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -142,5 +128,15 @@ public class ClientsContainer {
 
     public void reconnect(ClientBox cb) {
         clients.add(cb);
+    }
+
+    public void sendWinner(String message) {
+        for(ClientBox c : clients){
+            try {
+                c.update(message);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

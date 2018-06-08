@@ -50,7 +50,7 @@ public class Server implements ServerInterface {
                 if (manager.checkIfPlayerIsPlaying(name)) {
                     out.println("Reconnecting "+ name + " to the match");
                     manager.reconnectPlayer(client);
-                    //riconnetti il giocatore alla partita
+                    return true;
                 } else {
                     manager.addPlayerInQueue(client);
                     out.println("Player " + name + " is connected");
@@ -60,7 +60,6 @@ public class Server implements ServerInterface {
         } catch (RemoteException e) {
             return false;
         }
-        return false;
     }
 
     @Override

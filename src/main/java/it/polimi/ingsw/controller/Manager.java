@@ -59,10 +59,6 @@ public class Manager {
     }
 
 
-    public void notEnoughPlayer() {
-        //notify and disconnect players
-    }
-
     public void remove(String name){
         for (Game g : games) {
             if (g.remove(name)) {
@@ -106,5 +102,9 @@ public class Manager {
 
     public void matchEnded(String username) {
         clientHandler.removePlayer(username);
+    }
+
+    public void setPlayerWindow(int num, String name, String window) {
+        games.get(num).setPlayerWindow(name,Integer.parseInt(window));
     }
 }

@@ -44,4 +44,9 @@ public class Game {
     public void setPlayerActivity(String name, boolean b) {
         match.setPlayerActivity(name,b);
     }
+
+
+    public void setPlayerWindow(String name, int idWindow) {
+        match.setPlayerWindow(name,idWindow);
+    }
 }

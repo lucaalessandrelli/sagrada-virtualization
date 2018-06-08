@@ -19,6 +19,7 @@ import java.util.Scanner;
 public class NetworkManager {
     final static int PORT_RMI = 56789;
     final static int PORT_SOCKET = 45678;
+    final static String alert = "alert ";
 
     private ArrayList<ClientInterface> clients;
     private Server server;
@@ -92,7 +93,7 @@ public class NetworkManager {
                         pr.println("Connected, Welcome!");
                         connected = true;
                     } else {
-                        pr.println("alert Already connected");
+                        pr.println(alert+"Already connected");
                         message = in.nextLine();
                     }
                 }
