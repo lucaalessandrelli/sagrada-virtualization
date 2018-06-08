@@ -235,7 +235,7 @@ public class VirtualViewParserTest {
 
         String parsed = tester.startParsing();
 
-        System.out.println(parsed);
+        /*System.out.println(parsed);
 
         List<String> x = Arrays.asList(parsed.split(";"));
         for (String s: x){
@@ -243,7 +243,7 @@ public class VirtualViewParserTest {
             for (String z: k){
                 System.out.println(z);
             }
-        }
+        }*/
 
         /*Deparser deparser = new Deparser();
         System.out.println(deparser.DivideinStrings(tester.startParsing()));
