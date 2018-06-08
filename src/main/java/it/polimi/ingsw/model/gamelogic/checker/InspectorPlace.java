@@ -149,12 +149,7 @@ public class InspectorPlace {
     private boolean checkSide(Pos p,WindowPatternCard window,Dice dice) {
         if(window.isIn(p)){
             Dice d = window.getDice(p);
-            if(d.getNumber() != dice.getNumber() || !d.getColour().equals(dice.getColour())|| d.isSelected()){
-                return true;
-            }else{
-                return false;
-            }
-            //return !((d.getNumber() == dice.getNumber() || d.getColour() == dice.getColour())&&!d.isSelected());
+            return (d.getNumber() != dice.getNumber() && !d.getColour().equals(dice.getColour())) || d.isSelected();
         }else{
             return true;
         }
