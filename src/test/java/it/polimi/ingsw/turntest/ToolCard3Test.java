@@ -49,11 +49,11 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.initialize();
+        //table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            table.initialize();
+            //table.initialize();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -172,11 +172,11 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.initialize();
+        //table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            table.initialize();
+            //table.initialize();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -301,11 +301,11 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        table.initialize();
+        //table.initialize();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            table.initialize();
+            //table.initialize();
         }
 
         Match match = new Match(players,new Manager(),0);

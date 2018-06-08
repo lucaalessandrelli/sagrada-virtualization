@@ -220,7 +220,9 @@ public class ToolCard2Test {
 
         System.out.println(turn.getState().getClass());
 
-        assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
+        String state = "StartTurn";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
             turn.receiveMove(tester);
@@ -228,7 +230,8 @@ public class ToolCard2Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        state = "SelectingWindowDice";
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
             turn.receiveMove(d3, new Pos(3, 2));
@@ -236,7 +239,8 @@ public class ToolCard2Test {
             e.printStackTrace();
         }
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        state = "MovingWindowDice";
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
             turn.receiveMove(new Pos(2, 2));
@@ -246,8 +250,9 @@ public class ToolCard2Test {
             System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
+        state = "CheckPointState";
         //l'assert fallisce perchè la macchina a stati va nello stato di "check point"
-        assertEquals("EndTurn", lastName(turn.getState().toString(), 8));
+        assertEquals(state, lastName(turn.getState().toString(), state.length()));
 
 
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 0)).isOccupied());

@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gamedata.gametools.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 //I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
 public class Table {
@@ -14,6 +15,7 @@ public class Table {
     private DraftPool draftPool;
     private DiceBag diceBag;
     private CardContainer container;
+    List<WindowPatternCard> windowPatternCards;
 
     public Table(List<Player> players){
         this.diceBag = new DiceBag();
@@ -25,7 +27,6 @@ public class Table {
     }
 
     public void initialize(){
-        List<WindowPatternCard> windowPatternCards;
         int i;
         this.toolCards = this.container.pullOutTools();
         this.objectiveCards = this.container.pullOutPublic();
@@ -119,6 +120,30 @@ public class Table {
 
     public void setLastDices(int numRound){
         this.roundTrack.setDiceOnRoundTrack(numRound,this.draftPool.getDraftPool());
+    }
+
+    public void setWindow(String p){
+        Random random = new Random();
+        int i = 0;
+        while (i < this.myplayers.size() && !(p.equals(this.myplayers.get(i).getUsername()))) {
+            i++;
+        }
+        Player player = this.myplayers.get(i);
+        player.setMyWindow(windowPatternCards.get(random.nextInt(4) + 4*i));
+    }
+
+    public void setWindow(Player p, int id){
+        int k = 0;
+        int i = 0;
+        while (k < this.windowPatternCards.size() && (this.windowPatternCards.get(k).getNum()!= id)){
+            k++;
+        }
+        while (i < this.myplayers.size() && !(p.equals(this.myplayers.get(i).getUsername()))) {
+            i++;
+        }
+        Player player = this.myplayers.get(i);
+
+        player.setMyWindow(windowPatternCards.get(k));
     }
 
     public void fillDraftPool(){

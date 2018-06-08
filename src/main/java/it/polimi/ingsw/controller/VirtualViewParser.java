@@ -3,27 +3,43 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
-import java.sql.BatchUpdateException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class VirtualViewParser {
     private StringBuilder builder = new StringBuilder();
 
     private Player player;
-    
+
+    private static final String SPACE = " ";
     private static final String VIRG = ",";
     private static final String SEP = ";";
+    private static final String PLAYERS = "gamePlayers ";
+    private static final String DRAFT = "draftpool ";
+    private static final String TOOL = "toolcards ";
+    private static final String FAV = "favors ";
+    private static final String STATE = "state ";
+    private static final String PUBLIC = "publiccards ";
+    private static final String PRIV = "privatecard ";
+    private static final String TRACK = "roundtrack ";
+    private static final String RESTR = "restrictions ";
+    private static final String DICES = "dices ";
+    private static final String SETUP = "setup ";
+    private static final String CHOSE = "choseWindow ";
+    private static final String WINDOW = "window";
+
+
 
     public VirtualViewParser(Player player){
         this.player = player;
     }
 
     public String startParsing(){
-        builder.append("setup ");
+        builder.append(SETUP);
+        this.parsePlayers();
         this.parseDraftPool();
         this.parseToolcards();
         this.parseFavorToken();
+        this.parseStatePlayers();
         this.parseObjectiveCard();
         this.parseRoundTrack();
         this.parseWindowPatternRestrictions(player.getWindowPatternCard());
@@ -36,45 +52,20 @@ public class VirtualViewParser {
         return builder.toString();
     }
 
-    private String parseWindowPatternRestrictions(WindowPatternCard window){
-        String passing = "restrictions ";
-        builder.append(passing);
-        builder.append(window.getPlayer());
-        builder.append(VIRG);
+    private String parsePlayers(){
+        builder.append(PLAYERS);
 
-        for (List<Cell> cells: window.getMatr()){
-            this.addProperties(cells);
-        }
-
-        builder.append(SEP);
-        return builder.toString();
-    }
-
-    private String parseWindowPatternDice(WindowPatternCard window){
-        String passing = "dices ";
-        builder.append(passing);
-        builder.append(window.getPlayer());
-        builder.append(VIRG);
-        ArrayList<Cell> topass = new ArrayList<>();
-
-        for(List<Cell> cells: window.getMatr()){
-            for (Cell cell: cells){
-                if(cell.isOccupied()) {
-                    builder.append(cell.getDice().getColour().toString());
-                    builder.append(cell.getDice().getNumber());
-                    builder.append(cell.getPosition().getX());
-                    builder.append(cell.getPosition().getY());
-                    builder.append(VIRG);
-                }
-            }
+        builder.append(this.player.getUsername());
+        for (Player p: this.player.getPublicObjects().getPlayers()) {
+            builder.append(VIRG);
+            builder.append(p.getUsername());
         }
         builder.append(SEP);
         return builder.toString();
     }
 
     public String parseDraftPool(){
-        String passing = "draftpool ";
-        builder.append(passing);
+        builder.append(DRAFT);
         List<Dice> dice = this.player.getDraftPool().getDraftPool();
 
         for(int i = 0; i < dice.size(); i++){
@@ -82,59 +73,85 @@ public class VirtualViewParser {
             builder.append(dice.get(i).getNumber());
             builder.append(VIRG);
         }
+
+        if(builder.charAt(builder.length()-1) == VIRG.charAt(0)){
+            builder.deleteCharAt(builder.length()-1);
+        }
         builder.append(SEP);
         return  builder.toString();
     }
 
-    public String parseObjectiveCard(){
-        String passing = "publiccards ";
-        builder.append(passing);
-
-        for (ObjectiveCard objective: player.getPublicObjects().getObjectiveCards()) {
-            builder.append(objective.getID());
-            builder.append(VIRG);
-        }
-        builder.append(SEP);
-        builder.append("privatecard ");
-        builder.append(player.getPrivateCard().getID());
-        builder.append(SEP);
-        return builder.toString();
-    }
-
-    public String parseToolcards(){
-        String passing = "toolcards ";
-        builder.append(passing);
+    private String parseToolcards(){
+        builder.append(TOOL);
 
         for(ToolCard toolCard : player.getPublicObjects().getToolCards()){
             builder.append(toolCard.getID());
             builder.append(VIRG);
         }
+        if(builder.charAt(builder.length()-1) == VIRG.charAt(0)){
+            builder.deleteCharAt(builder.length()-1);
+        }
         builder.append(SEP);
         return builder.toString();
     }
-    
-    public String parseFavorToken(){
-        String passing = "favors ";
-        builder.append(passing);
 
-        builder.append(player.getWindowPatternCard().getDifficulty());
+    private String parseFavorToken(){
+        builder.append(FAV);
+
+        builder.append(this.player.getUsername());
         builder.append(VIRG);
+        builder.append(player.getWindowPatternCard().getDifficulty());
         builder.append(SEP);
-        /*for(WindowPatternCard windowPatternCard :player.getPublicObjects().getOthersWindows()){
-            builder.append(passing);
+        for(Player p :player.getPublicObjects().getPlayers()){
+            builder.append(FAV);
 
-            builder.append(windowPatternCard.getPlayer());
+            builder.append(p.getUsername());
             builder.append(VIRG);
-            builder.append(windowPatternCard.getDifficulty());
-            builder.append(VIRG);
+            builder.append(p.getWindowPatternCard().getDifficulty());
             builder.append(SEP);
-        }*/
+        }
 
-            return builder.toString();
+        return builder.toString();
     }
-    
-    public String parseRoundTrack(){
-        String passing = "roundtrack ";
+
+    private String parseStatePlayers() {
+        builder.append(STATE);
+        builder.append(this.player.getUsername());
+        builder.append(VIRG);
+        builder.append(this.player.isActive());
+        builder.append(SEP);
+
+        for (Player p : this.player.getPublicObjects().getPlayers()) {
+            builder.append(STATE);
+            builder.append(p.getUsername());
+            builder.append(VIRG);
+            builder.append(p.isActive());
+            builder.append(SEP);
+        }
+
+        return builder.toString();
+    }
+
+    private String parseObjectiveCard(){
+        builder.append(PUBLIC);
+
+        for (ObjectiveCard objective: player.getPublicObjects().getObjectiveCards()) {
+            builder.append(objective.getID());
+            builder.append(VIRG);
+        }
+        if(builder.charAt(builder.length()-1) == VIRG.charAt(0)){
+            builder.deleteCharAt(builder.length()-1);
+        }
+
+        builder.append(SEP);
+        builder.append(PRIV);
+        builder.append(player.getPrivateCard().getID());
+        builder.append(SEP);
+        return builder.toString();
+    }
+
+    private String parseRoundTrack(){
+        String passing = TRACK;
         builder.append(passing);
 
         List<List<Dice>> roundtrack = player.getPublicObjects().getRoundTrack().getRoundTrack();
@@ -149,8 +166,62 @@ public class VirtualViewParser {
                 builder.append(VIRG);
             }
         }
+
+        if(builder.charAt(builder.length()-1) == VIRG.charAt(0)){
+            builder.deleteCharAt(builder.length()-1);
+        }
         builder.append(SEP);
         return builder.toString();
+    }
+
+    private String parseWindowPatternRestrictions(WindowPatternCard window){
+        builder.append(RESTR);
+        builder.append(window.getPlayer());
+        builder.append(VIRG);
+
+        builder.append(this.restrictions(window));
+
+        builder.append(SEP);
+        return builder.toString();
+    }
+
+    private String parseWindowPatternDice(WindowPatternCard window){
+        builder.append(DICES);
+        builder.append(window.getPlayer());
+        builder.append(VIRG);
+
+        for(List<Cell> cells: window.getMatr()){
+            for (Cell cell: cells){
+                if(cell.isOccupied()) {
+                    builder.append(cell.getDice().getColour().toString());
+                    builder.append(cell.getDice().getNumber());
+                    builder.append(cell.getPosition().getX());
+                    builder.append(cell.getPosition().getY());
+                    builder.append(VIRG);
+                }
+            }
+        }
+
+        if(builder.charAt(builder.length()-1) == VIRG.charAt(0)){
+            builder.deleteCharAt(builder.length()-1);
+        }
+
+        builder.append(SEP);
+        return builder.toString();
+    }
+
+    public String extractedWindows(List<WindowPatternCard> windows){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(CHOSE);
+
+        for(int i = 0; i < windows.size(); i++){
+            stringBuilder.append(WINDOW);
+            stringBuilder.append(i+1);
+            stringBuilder.append(SPACE);
+            stringBuilder.append(this.restrictions(windows.get(i)));
+            stringBuilder.append(SEP);
+        }
+        return stringBuilder.toString();
     }
     
     public void setPlayer(Player player){
@@ -158,7 +229,7 @@ public class VirtualViewParser {
     }
 
 
-    private void addProperties(List<Cell> cellArrayList){
+    private StringBuilder addProperties(List<Cell> cellArrayList, StringBuilder builder){
         for (Cell cell: cellArrayList){
             builder.append(cell.getProperty().getColour().toString());
             builder.append(cell.getProperty().getNumber());
@@ -166,6 +237,15 @@ public class VirtualViewParser {
             builder.append(cell.getPosition().getY());
             builder.append(VIRG);
         }
+        return builder;
+    }
+
+    private StringBuilder restrictions(WindowPatternCard window){
+        StringBuilder topass = new StringBuilder();
+        for (List<Cell> cells: window.getMatr()){
+            this.addProperties(cells,topass);
+        }
+        return topass;
     }
 
 }

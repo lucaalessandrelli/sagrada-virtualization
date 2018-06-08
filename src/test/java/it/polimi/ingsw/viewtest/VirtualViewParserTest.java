@@ -16,6 +16,46 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VirtualViewParserTest {
 
     @Test
+    void TestParsingPlayers(){
+
+        Player p1 = new Player("Luca");
+        Player p2 = new Player("Giovanni");
+        Player p3 = new Player("Andrea");
+        Player p4 = new Player("Vincenzo");
+
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+        players.add(p4);
+
+        Table table = new Table(players);
+        //table.initialize();
+
+        VirtualViewParser tester = new VirtualViewParser(p1);
+
+        String parsed = tester.startParsing();
+
+        parsed = parsed.substring(parsed.indexOf("gamePlayers ")+12,parsed.length()-1);
+        List<String> pv = Arrays.asList(parsed.split(";"));
+
+        List<String> splitted = Arrays.asList(pv.get(0).split(","));
+
+        assertEquals(4,splitted.size());
+        assertTrue(!splitted.get(0).equals(splitted.get(1)) && !splitted.get(0).equals(splitted.get(2)) &&
+                !splitted.get(0).equals(splitted.get(3)));
+        assertTrue(!splitted.get(1).equals(splitted.get(2)) && !splitted.get(1).equals(splitted.get(3)));
+        assertTrue(!splitted.get(2).equals(splitted.get(3)));
+
+        for (String name: splitted) {
+            assertTrue(name.equals(p1.getUsername()) || name.equals(p1.getPublicObjects().getPlayers().get(0).getUsername())
+                    || name.equals(p1.getPublicObjects().getPlayers().get(1).getUsername())
+                    || name.equals(p1.getPublicObjects().getPlayers().get(2).getUsername()));
+        }
+
+    }
+
+    @Test
     void TestParsingRestrictions(){
 
         Player p1 = new Player("Luca");
@@ -195,7 +235,7 @@ public class VirtualViewParserTest {
 
         String parsed = tester.startParsing();
 
-       /* System.out.println(parsed);
+        System.out.println(parsed);
 
         List<String> x = Arrays.asList(parsed.split(";"));
         for (String s: x){
@@ -203,7 +243,7 @@ public class VirtualViewParserTest {
             for (String z: k){
                 System.out.println(z);
             }
-        }*/
+        }
 
         /*Deparser deparser = new Deparser();
         System.out.println(deparser.DivideinStrings(tester.startParsing()));

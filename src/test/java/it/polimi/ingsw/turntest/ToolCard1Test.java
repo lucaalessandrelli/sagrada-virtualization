@@ -112,7 +112,6 @@ public class ToolCard1Test {
 
         while(players.get(0).getToolCards().get(0).getID() != 1 && players.get(0).getToolCards().get(1).getID() != 1 && players.get(0).getToolCards().get(2).getID() != 1){
             table = new Table(players);
-            table.initialize();
         }
 
         Match match = new Match(players,new Manager(),0);
