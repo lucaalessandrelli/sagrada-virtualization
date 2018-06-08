@@ -40,11 +40,8 @@ public class Player {
         myObjCard =obj;
     }
 
-    private void setMyWindow(WindowPatternCard w) {
+    public void setMyWindow(WindowPatternCard w) {
         myWindow = w;
-    }
-
-    private void setmyFavTokens() {
         myFavTokens = myWindow.getDifficulty();
     }
 
@@ -85,12 +82,13 @@ public class Player {
 
     //choose between 4 WindowsPatternCard and set MyFavTokens
     public void chooseWindow(List<WindowPatternCard> windows) {
-        int chosenOne = 0;
+        observer.chooseWindow(windows);
+        /*int chosenOne = 0;
         // while (myWindow==null) {
         setMyWindow(windows.get(chosenOne));
         setmyFavTokens();
         windows.get(chosenOne).setPlayer(this.username);
-        // }
+        */
 
     }
 
@@ -114,14 +112,14 @@ public class Player {
             observer.updateStateTurn(whoIsTurn,timeSleep);
     }
 
-    public void calculatePoints() {
+    public int calculatePoints() {
         int score = myObjCard.finalpoints(myWindow);
         List<ObjectiveCard> cards = publicObjects.getObjectiveCards();
         for(ObjectiveCard c : cards){
-            score = c.finalpoints(myWindow);
+            score = score + c.finalpoints(myWindow);
         }
-        score = score + myFavTokens;
-        //notifica observer
+        return score + myFavTokens;
+
     }
     public void addObserver(VirtualViewObserver o){
         observer=o;
@@ -129,6 +127,18 @@ public class Player {
 
     public void wrongMove(String s) {
         observer.wrongMove(s);
+    }
+
+    public void timerChoose(long timerWindows) {
+        observer.timerChoose(timerWindows);
+    }
+
+    public void notifyState(String state) {
+        observer.notifyState(state);
+    }
+
+    public void notifyScore(String s) {
+        observer.notifyScore(s);
     }
 }
 
