@@ -33,6 +33,9 @@ public class Player {
 
     public void setActivity(boolean active) {
         this.active = active;
+        if(active){
+            notifyPlayer();
+        }
     }
 
 

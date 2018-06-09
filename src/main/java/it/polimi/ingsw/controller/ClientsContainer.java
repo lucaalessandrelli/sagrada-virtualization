@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
+import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.virtualview.VirtualView;
 
 import java.io.IOException;
@@ -40,9 +41,11 @@ public class ClientsContainer {
     }
 
 
-    synchronized public void addClient(ClientInterface c){
+    synchronized public void addClient(ClientInterface c, long tempTime){
         try {
-            clients.add(new ClientBox(c,c.getName(),c.getTypeConnection()));
+            ClientBox cli =new ClientBox(c,c.getName(),c.getTypeConnection());
+            cli.setTimer(tempTime);
+            clients.add(cli);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
