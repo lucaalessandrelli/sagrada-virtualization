@@ -179,7 +179,6 @@ public class LoginViewController implements Initializable, ViewInterface {
     @Override
     public void handleTimer(String time) {
         this.time = time;
-        System.out.println("ci sono passato");
     }
 
     @Override
