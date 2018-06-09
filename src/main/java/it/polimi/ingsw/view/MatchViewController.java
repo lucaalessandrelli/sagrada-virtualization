@@ -9,9 +9,12 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
@@ -25,6 +28,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +43,7 @@ public class MatchViewController implements Initializable, ViewInterface {
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
     private List<String> toolList;
     private String time;
+    private String score;
 
     @FXML
     private JFXButton passButton;
@@ -112,6 +117,9 @@ public class MatchViewController implements Initializable, ViewInterface {
     }
     public void setList(ObservableList<String> playerlist) {
         this.playerlist = playerlist;
+    }
+    public void setTime(String time) {
+        this.time = time;
     }
 
     private Node getChildrenByIndex(GridPane gridPane,final int i,final int y) {
@@ -223,35 +231,80 @@ public class MatchViewController implements Initializable, ViewInterface {
         }
     }
 
+    public void changeScene() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/scoreGui.fxml"));
+        Parent root = fxmlLoader.load();
 
-    @Override
-    public void handleConnected(String message) {
+        // Get the Controller from the FXMLLoader
+        ScoreViewController controller = fxmlLoader.getController();
+        // Set data in the controller
+        controller.setClient(client);
+        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setStage(stage);
+
+        Scene scene = new Scene(root);
+        //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
+        controller.loadScores(score);
+        messageAnalyzer.setView(controller);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Match");
+        stage.show();
     }
 
     @Override
-    public void handleService(String message) {
-        /*String text = "";
+    public void handleClientConnected(String message) {
+    }
 
-        for(int i = 0 ; i < list.size();i++) {
-            text += (list.get(i)+" ");
-        }*/
+    @Override
+    public void handleTurnMessage(String turnMessage) {
+        turnOwnerField.setText(turnMessage);
+    }
 
-        turnOwnerField.setText(message);
+    @Override
+    public void handleConnectedPlayers(String message) {
     }
 
     @Override
     public void handleAlert(String message) {
-        AlertWindow.display("Alert", message);
+        //AlertWindow.display("Alert", message);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 
     @Override
-    public void handleTimer(String time) {
-        this.time = time;
+    public void handleTimer(String time){
+        this.setTime(time);
     }
 
     @Override
     public void handleMatchId(String idMatch) {
 
+    }
+
+    @Override
+    public void setPatternCards(String setup) {
+
+    }
+
+    @Override
+    public void handleGameState(String gameState) {
+
+    }
+
+    @Override
+    public void handleScore(String score) {
+        this.score = score;
+        try {
+            changeScene();
+        } catch (IOException e) {
+            System.out.println("Errore cambio di scena: matchView -> scoreView");
+        }
     }
 
     @Override
@@ -281,12 +334,41 @@ public class MatchViewController implements Initializable, ViewInterface {
                 this.updateWindowCards(subMessage.replace("dices ", ""));
             } else if(subMessage.startsWith("playersstatus")) {
                 this.updatePlayersStatus(subMessage.replace("playersstatus ", ""));
+            } else if(subMessage.startsWith("favors")) {
+                this.updateFavTokens(subMessage.replace("favors ", ""));
             }
         }
     }
 
     public void updatePlayersStatus(String status) {
         playersStatus.setItems(FXCollections.observableArrayList(Arrays.asList(status.split(","))));
+    }
+
+    public void updateFavTokens(String favors) {
+        List<String> favorsList = Arrays.asList(favors.split(","));
+
+        String player = favorsList.get(0);
+        TitledPane container = new TitledPane();
+
+        VBox vBox = new VBox();
+
+        for (TitledPane titlePane: listTitle) {
+            if(titlePane.getText().equals(player)) {
+                vBox = (VBox)((Parent) titlePane.getContent()).getChildrenUnmodifiable().get(0);
+            }
+        }
+
+        ObservableList<Node> boxChildren = vBox.getChildren();
+        HBox favorBox = (HBox)(boxChildren.get(1));
+
+        ObservableList<Node> tokenList = favorBox.getChildren();
+
+        for(int i = 0; i < tokenList.size();i++) {
+            if(i >= Integer.parseInt(favorsList.get(1))) {
+                tokenList.get(i).setVisible(false);
+            }
+        }
+
     }
 
     public void setObjectCard(String objectCard) {
@@ -412,5 +494,3 @@ public class MatchViewController implements Initializable, ViewInterface {
         timerLabel.setText("Timer :" + time);
     }
 }
-
-
