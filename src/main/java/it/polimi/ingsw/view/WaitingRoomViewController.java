@@ -106,7 +106,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
 
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Match");
+        stage.setTitle("PatternCard Choice");
         stage.show();
     }
 
@@ -142,7 +142,7 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         try {
             changeScene();
         } catch (IOException e) {
-            System.out.println("Errore cambio di scena: waitingRoom -> Match");
+            System.out.println("Errore cambio di scena: waitingRoom -> PatternCardChoiceView");
         }
     }
 
