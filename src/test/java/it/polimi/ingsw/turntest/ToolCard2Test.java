@@ -49,11 +49,13 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        //table.initialize();
+        table.initialize();
+        table.setPublicObjects();
 
         while(players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2){
             table = new Table(players);
-            //table.initialize();
+            table.initialize();
+            table.setPublicObjects();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -63,7 +65,7 @@ public class ToolCard2Test {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        p1.setMyWindow(windows.get(0));
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -99,7 +101,7 @@ public class ToolCard2Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),"SelectingWindowDice".length()+1));
 
         try {
             turn.receiveMove(d2,new Pos(2,1));
@@ -110,12 +112,15 @@ public class ToolCard2Test {
         assertEquals("MovingWindowDice", lastName(turn.getState().toString(),17));
 
         try {
-            turn.receiveMove(new Pos(2,2));
-        } catch (WrongMoveException e) {
+            turn.receiveMove(new Pos(2, 2));
+        } catch (WrongMoveException e)  {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
-        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
+        assertEquals("ToolBeforeDice", lastName(turn.getState().toString(),"ToolBeforeDice".length()+1));
+
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
@@ -173,21 +178,25 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        //table.initialize();
+        table.initialize();
+        table.setPublicObjects();
 
         while (players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2) {
             table = new Table(players);
-            //table.initialize();
+            table.initialize();
+            table.setPublicObjects();
         }
 
         Match match = new Match(players,new Manager(),0);
 
         Round round = new Round(players, 1, table,match);
 
-        ArrayList<WindowPatternCard> windows = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        ArrayList<WindowPatternCard> windows = container.pullOutPattern(4);
+        p1.setMyWindow(windows.get(0));
+        p2.setMyWindow(windows.get(1));
+        p3.setMyWindow(windows.get(2));
+        p4.setMyWindow(windows.get(3));
+
         p1.getWindowPatternCard().addRestr('B', 2, 2);
 
         table.getDiceBag().setNumPlayers(4);
@@ -250,9 +259,8 @@ public class ToolCard2Test {
             System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
-        state = "CheckPointState";
-        //l'assert fallisce perchè la macchina a stati va nello stato di "check point"
-        assertEquals(state, lastName(turn.getState().toString(), state.length()));
+        state = "ToolBeforeDice";
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
 
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 0)).isOccupied());
@@ -311,11 +319,13 @@ public class ToolCard2Test {
         players.add(p4);
 
         Table table = new Table(players);
-        //table.initialize();
+        table.initialize();
+        table.setPublicObjects();
 
         while (players.get(0).getToolCards().get(0).getID() != 2 && players.get(0).getToolCards().get(1).getID() != 2 && players.get(0).getToolCards().get(2).getID() != 2) {
             table = new Table(players);
-            //table.initialize();
+            table.initialize();
+            table.setPublicObjects();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -325,7 +335,7 @@ public class ToolCard2Test {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        p1.setMyWindow(windows.get(0));
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());

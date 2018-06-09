@@ -45,7 +45,7 @@ public class RoundTrack {
         throw new NullPointerException();
     }
     public Dice getDice(Pos pos){
-        return null;
+        return this.diceOnRoundTrack.get(pos.getX()).get(pos.getY());
     }
 
     public void resetSelection() {

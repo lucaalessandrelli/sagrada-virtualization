@@ -42,7 +42,7 @@ public class TestPositionDice1 {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        p1.setMyWindow(windows.get(0));
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -126,7 +126,7 @@ public class TestPositionDice1 {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        p1.setMyWindow(windows.get(0));
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -182,7 +182,7 @@ public class TestPositionDice1 {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        p1.setMyWindow(windows.get(0));
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());

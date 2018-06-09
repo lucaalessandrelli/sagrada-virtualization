@@ -49,11 +49,13 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        //table.initialize();
+        table.initialize();
+        table.setPublicObjects();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            //table.initialize();
+            table.initialize();
+            table.setPublicObjects();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -63,7 +65,7 @@ public class ToolCard3Test {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        p1.setMyWindow(windows.get(0));
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -89,8 +91,6 @@ public class ToolCard3Test {
 
         turn.startTurn();
 
-        System.out.println(turn.getState().getClass());
-
         assertEquals("StartTurn", lastName(turn.getState().toString(),10));
 
         try {
@@ -99,7 +99,13 @@ public class ToolCard3Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),20));
+        if(d1.getNumber()==1)
+            d2.setNumber(2);
+        else if(d1.getNumber()==6)
+            d2.setNumber(5);
+        else
+            d2.setNumber(d1.getNumber()+1);
 
         try {
             turn.receiveMove(d2,new Pos(2,1));
@@ -110,14 +116,16 @@ public class ToolCard3Test {
         assertEquals("MovingWindowDice", lastName(turn.getState().toString(),17));
 
         try {
-            turn.receiveMove(new Pos(2,2));
-        } catch (WrongMoveException e) {
+            turn.receiveMove(new Pos(1, 1));
+        } catch (WrongMoveException e)  {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
-        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
+        assertEquals("ToolBeforeDice", lastName(turn.getState().toString(),"ToolBeforeDice".length()+1));
 
-        assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
+        assertTrue(p1.getWindowPatternCard().getCell(new Pos(1,1)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
 
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 0)).isOccupied());
@@ -125,11 +133,11 @@ public class ToolCard3Test {
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 3)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 4)).isOccupied());
-        assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 1)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 3)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(1, 4)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 0)).isOccupied());
+        assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 3)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 4)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 0)).isOccupied());
@@ -172,11 +180,13 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        //table.initialize();
+        table.initialize();
+        table.setPublicObjects();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            //table.initialize();
+            table.initialize();
+            table.setPublicObjects();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -186,7 +196,7 @@ public class ToolCard3Test {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        p1.setMyWindow(windows.get(0));
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -215,8 +225,6 @@ public class ToolCard3Test {
 
         turn.startTurn();
 
-        System.out.println(turn.getState().getClass());
-
         assertEquals("StartTurn", lastName(turn.getState().toString(),10));
 
         try {
@@ -225,7 +233,7 @@ public class ToolCard3Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),20));
 
         try {
             turn.receiveMove(d2,new Pos(2,3));
@@ -236,12 +244,14 @@ public class ToolCard3Test {
         assertEquals("MovingWindowDice", lastName(turn.getState().toString(),17));
 
         try {
-            turn.receiveMove(new Pos(2,2));
-        } catch (WrongMoveException e) {
+            turn.receiveMove(new Pos(2, 2));
+        } catch (WrongMoveException e)  {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
-        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
+        assertEquals("ToolBeforeDice", lastName(turn.getState().toString(),"ToolBeforeDice".length()+1));
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,3)).isOccupied());
@@ -260,7 +270,6 @@ public class ToolCard3Test {
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2, 4)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 0)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 1)).isOccupied());
-        assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 3)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(3, 4)).isOccupied());
 
 
@@ -301,11 +310,13 @@ public class ToolCard3Test {
         players.add(p4);
 
         Table table = new Table(players);
-        //table.initialize();
+        table.initialize();
+        table.setPublicObjects();
 
         while(players.get(0).getToolCards().get(0).getID() != 3 && players.get(0).getToolCards().get(1).getID() != 3 && players.get(0).getToolCards().get(2).getID() != 3){
             table = new Table(players);
-            //table.initialize();
+            table.initialize();
+            table.setPublicObjects();
         }
 
         Match match = new Match(players,new Manager(),0);
@@ -315,7 +326,7 @@ public class ToolCard3Test {
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         windows.add(windowPatternCard);
-        p1.chooseWindow(windows);
+        p1.setMyWindow(windows.get(0));
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -344,7 +355,6 @@ public class ToolCard3Test {
 
         turn.startTurn();
 
-        System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(),10));
 
@@ -354,11 +364,10 @@ public class ToolCard3Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),14));
+        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),20));
 
         assertThrows(WrongMoveException.class,()->{turn.receiveMove(d3, new Pos(2, 3));});
 
-        assertEquals("EndTurn", lastName(turn.getState().toString(),8));
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(2,3)).isOccupied());

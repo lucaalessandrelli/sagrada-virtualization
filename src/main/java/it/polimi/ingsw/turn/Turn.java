@@ -104,15 +104,15 @@ public class Turn {
 
                 this.setState((TurnState)ct.newInstance(argumentList));
 
+                //increase indexList
+                indexList++;
+
                 if(nextStateName.equals("AutomatedOperation")) {
                     ((AutomatedOperation)state).doAutomatedOperations(toolAutomatedOperationList);
                 }
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-
-            //increase indexList
-            indexList++;
         } else {
             this.setStateToCheckPoint();
         }

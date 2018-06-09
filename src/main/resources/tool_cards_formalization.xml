@@ -4,7 +4,7 @@
 		<NAME>Pinza Sgrossatrice</NAME>
 		<COLOUR>P</COLOUR>
 		<STATE>IncDecValue,ChooseDice2</STATE>
-		<AUTOMATED>operationEndend</AUTOMATED>
+		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, aumenta o diminuisci il valore del dado scelto di 1. !!Non puoi cambiare un 6 in 1 o un 1 in 6!!</DESCRIPTION>
@@ -14,7 +14,7 @@
 		<NAME>Pennello per Eglomise</NAME>
 		<COLOUR>B</COLOUR>
 		<STATE>SelectingWindowDice,MovingWindowDice,CheckPointState</STATE>
-		<AUTOMATED>operationEndend</AUTOMATED>
+		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS>inPatCard</CMETHODS>
 		<PMETHODS>
 			<PM0>checkPos,checkNumber,checkCol,checkRow</PM0>
@@ -26,7 +26,7 @@
 		<NAME>Alesatore per lamine di rame</NAME>
 		<COLOUR>R</COLOUR>
 		<STATE>SelectingWindowDice,MovingWindowDice,CheckPointState</STATE>
-		<AUTOMATED>operationEndend</AUTOMATED>
+		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS>inPatCard</CMETHODS>
 		<PMETHODS>
 			<PM0>checkPos,checkColour,checkCol,checkRow</PM0>
@@ -39,7 +39,7 @@
 		<NAME>Lathekin</NAME>
 		<COLOUR>Y</COLOUR>
 		<STATE>SelectingWindowDice,MovingWindowDice,SelectingWindowDice,MovingWindowDice,CheckPointState</STATE>
-		<AUTOMATED>operationEndend</AUTOMATED>
+		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS>inPatCard,inPatCard</CMETHODS>
 		<PMETHODS>
 			<PM0>checkAll</PM0>
@@ -52,7 +52,7 @@
 		<NAME>Taglierina circolare</NAME>
 		<COLOUR>G</COLOUR>
 		<STATE>SelectingRoundTrackDice,AutomatedOperation,ChooseDice2</STATE>
-		<AUTOMATED>switchDice,operationEndend</AUTOMATED>
+		<AUTOMATED>switchDice,operationEnded</AUTOMATED>
 		<CMETHODS>inRoundTr</CMETHODS>
 		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, scambia quel dado con un dado sul Tracciato dei Round</DESCRIPTION>
@@ -62,7 +62,7 @@
 		<NAME>Pennello per Pasta Salda</NAME>
 		<COLOUR>P</COLOUR>
 		<STATE>AutomatedOperation,ChooseDice2</STATE>
-		<AUTOMATED>launchDice,operationEndend</AUTOMATED>
+		<AUTOMATED>launchDice,operationEnded</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, tira nuovamente quel dado. Se non puoi piazzarlo, riponilo nella Riserva.</DESCRIPTION>
@@ -72,7 +72,7 @@
 		<NAME>Martelletto</NAME>
 		<COLOUR>B</COLOUR>
 		<STATE>AutomatedOperation,CheckPointState</STATE>
-		<AUTOMATED>resetDraftPool,operationEndend</AUTOMATED>
+		<AUTOMATED>resetDraftPool,operationEnded</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Tira nuovamente tutti i dadi della Riserva. Questa carta può essere usata solo durante il tuo secondo turno, prima di scegliere il secondo dado</DESCRIPTION>
@@ -82,7 +82,7 @@
 		<NAME>Tenaglia a Rotelle</NAME>
 		<COLOUR>R</COLOUR>
 		<STATE>SelectingDraftDice,MovingDraftDice,CheckPointState</STATE>
-		<AUTOMATED>operationEndend</AUTOMATED>
+		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS>inDraftPool</CMETHODS>
 		<PMETHODS>
 			<PM0>checkAll</PM0>
@@ -94,7 +94,7 @@
 		<NAME>Riga in Sughero</NAME>
 		<COLOUR>Y</COLOUR>
 		<STATE>MovingDraftDice,CheckPointState</STATE>
-		<AUTOMATED>operationEndend</AUTOMATED>
+		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS>
 			<PM0>checkFrame</PM0>
@@ -106,7 +106,7 @@
 		<NAME>Tampone Diamantato</NAME>
 		<COLOUR>G</COLOUR>
 		<STATE>AutomatedOperation,ChooseDice2</STATE>
-		<AUTOMATED>spinDice,operationEndend</AUTOMATED>
+		<AUTOMATED>spinDice,operationEnded</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, giralo sulla faccia opposta. !!6 diventa 1, 5 diventa 2, 4 diventa 3 ecc.!!</DESCRIPTION>
@@ -116,7 +116,7 @@
 		<NAME>Diluente per Pasta Salda</NAME>
 		<COLOUR>P</COLOUR>
 		<STATE>AutomatedOperation,SelectingValue,ChooseDice2</STATE>
-		<AUTOMATED>newDice,operationEndend</AUTOMATED>
+		<AUTOMATED>newDice,operationEnded</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS></PMETHODS>
 		<DESCRIPTION>Dopo aver scelto un dado, riponilo nel Sacchetto, poi pescane uno dal Sacchetto. Scegli il valore del nuovo dado e piazzalo, rispettando tutte le restrizioni di piazzamento.</DESCRIPTION>
@@ -126,7 +126,7 @@
 		<NAME>Taglierina Manuale</NAME>
 		<COLOUR>B</COLOUR>
 		<STATE>SelectingRoundTrackDice,SelectingWindowDice,MovingWindowDice,SelectingOptionalWindowDice,MovingWindowDice</STATE>
-		<AUTOMATED>operationEndend</AUTOMATED>
+		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS>inRoundTr,inPatCard,inPatCard</CMETHODS>
 		<PMETHODS>
 			<PM0>checkAll</PM0>

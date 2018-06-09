@@ -1,8 +1,9 @@
 package it.polimi.ingsw.modeltest.gamedatatest;
 
 import it.polimi.ingsw.model.gamedata.Player;
+import it.polimi.ingsw.model.gamedata.PublicObjects;
 import it.polimi.ingsw.model.gamedata.Table;
-import it.polimi.ingsw.model.gamedata.gametools.Dice;
+import it.polimi.ingsw.model.gamedata.gametools.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ public class TableTest {
 
         Table tester = new Table(players);
 
-        //tester.initialize();
+        tester.initialize();
+
+        tester.setPublicObjects();
 
         assertFalse(tester.getDraftPool().getDraftPool().isEmpty());
 
@@ -61,7 +64,7 @@ public class TableTest {
         players.add(p4);
 
         Table tester = new Table(players);
-        //tester.initialize();
+        tester.initialize();
 
 
         assertNotNull(tester.getToolCards());
@@ -86,7 +89,8 @@ public class TableTest {
         players.add(p4);
 
         Table tester = new Table(players);
-        //tester.initialize();
+        tester.initialize();
+        tester.setPublicObjects();
 
 
         tester.fillDraftPool();
@@ -115,7 +119,9 @@ public class TableTest {
 
         Table tester = new Table(players);
 
-        ////tester.initialize();
+        tester.initialize();
+
+        tester.setPublicObjects();
 
         tester.fillDraftPool();
 

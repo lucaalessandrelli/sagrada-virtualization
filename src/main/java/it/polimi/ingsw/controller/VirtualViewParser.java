@@ -42,12 +42,12 @@ public class VirtualViewParser {
         this.parseStatePlayers();
         this.parseObjectiveCard();
         this.parseRoundTrack();
-        this.parseWindowPatternRestrictions(player.getWindowPatternCard());
-        this.parseWindowPatternDice(player.getWindowPatternCard());
+        this.parseWindowPatternRestrictions(player);
+        this.parseWindowPatternDice(player);
 
         for(Player p : this.player.getPublicObjects().getPlayers()) {
-            this.parseWindowPatternRestrictions(p.getWindowPatternCard());
-            this.parseWindowPatternDice(p.getWindowPatternCard());
+            this.parseWindowPatternRestrictions(p);
+            this.parseWindowPatternDice(p);
         }
         return builder.toString();
     }
@@ -174,23 +174,23 @@ public class VirtualViewParser {
         return builder.toString();
     }
 
-    private String parseWindowPatternRestrictions(WindowPatternCard window){
+    private String parseWindowPatternRestrictions(Player player){
         builder.append(RESTR);
-        builder.append(window.getPlayer());
+        builder.append(player.getUsername());
         builder.append(VIRG);
 
-        builder.append(this.restrictions(window));
+        builder.append(this.restrictions(player.getWindowPatternCard()));
 
         builder.append(SEP);
         return builder.toString();
     }
 
-    private String parseWindowPatternDice(WindowPatternCard window){
+    private String parseWindowPatternDice(Player player){
         builder.append(DICES);
-        builder.append(window.getPlayer());
+        builder.append(player.getUsername());
         builder.append(VIRG);
 
-        for(List<Cell> cells: window.getMatr()){
+        for(List<Cell> cells: player.getWindowPatternCard().getMatr()){
             for (Cell cell: cells){
                 if(cell.isOccupied()) {
                     builder.append(cell.getDice().getColour().toString());

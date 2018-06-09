@@ -23,7 +23,6 @@ public class Table {
         this.container = new CardContainer();
         this.myplayers = players;
         this.roundTrack = new RoundTrack();
-        this.initialize();
     }
 
     public void initialize(){
@@ -37,17 +36,20 @@ public class Table {
             i++;
         }
         windowPatternCards = this.container.pullOutPattern(this.myplayers.size());
-        for (Player p: this.myplayers) {
-            p.chooseWindow(windowPatternCards);
-            windowPatternCards.remove(p.getWindowPatternCard());
-        }
 
         this.diceBag.setNumPlayers(this.myplayers.size());
         this.draftPool.addNewDices(this.diceBag.pullOut());
 
-        setPublicObjects();
     }
 
+
+    public void selectWindowCards(){
+        for (Player p: this.myplayers) {
+            p.chooseWindow(windowPatternCards);
+            windowPatternCards.remove(p.getWindowPatternCard());
+        }
+        setPublicObjects();
+    }
     //Implement this in the other class
     private void showPlayers() {
         for (Player x : this.myplayers) {
@@ -150,7 +152,7 @@ public class Table {
         this.draftPool.addNewDices(diceBag.pullOut());
     }
 
-    private void setPublicObjects(){
+    public void setPublicObjects(){
         for (Player p: this.myplayers) {
             PublicObjects publicObjects = new PublicObjects();
 
