@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.*;
 import javafx.stage.Stage;
 
@@ -26,7 +27,8 @@ public class LoginViewController implements Initializable, ViewInterface {
     private int connectionType = SOCKET;
     private Stage stage;
     private MessageAnalyzer messageAnalyzer;
-    private ObservableList<String> list = FXCollections.observableArrayList();
+    private ObservableList<String> connectedPlayerList = FXCollections.observableArrayList();
+    private String time;
 
     @FXML
     private JFXTextField usernameField;
@@ -95,7 +97,7 @@ public class LoginViewController implements Initializable, ViewInterface {
         }
     }
 
-    public void changeScene(String time) throws IOException {
+    public void changeSceneToWaitingRoom() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/waitingRoomGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -103,7 +105,7 @@ public class LoginViewController implements Initializable, ViewInterface {
         WaitingRoomViewController controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
-        controller.setList(list);
+        controller.setList(connectedPlayerList);
         controller.setTime(time);
         controller.setStage(stage);
         controller.setMessageAnalyzer(messageAnalyzer);
@@ -113,19 +115,12 @@ public class LoginViewController implements Initializable, ViewInterface {
         controller.startTimer();
         messageAnalyzer.setView(controller);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("Waiting room");
         stage.show();
     }
 
-    public void changeScene() throws IOException {
-        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
-        Parent root = fxmlLoader.load();
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Match");
-        stage.setResizable(true);
-        stage.show();*/
+    public void changeSceneToMatch() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -135,7 +130,7 @@ public class LoginViewController implements Initializable, ViewInterface {
         controller.setClient(client);
         controller.setMessageAnalyzer(messageAnalyzer);
         controller.setStage(stage);
-        controller.setList(list);
+        controller.setList(connectedPlayerList);
         //controller.setTime(time);
 
         Scene scene = new Scene(root);
@@ -147,47 +142,72 @@ public class LoginViewController implements Initializable, ViewInterface {
         messageAnalyzer.setView(controller);
 
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setTitle("Match");
         stage.show();
     }
 
     @Override
-    public void handleConnected(String message) {
+    public void handleClientConnected(String message) {
     }
 
     @Override
-    public void handleService(String list) {
-        this.list = FXCollections.observableArrayList(Arrays.asList(list.split(" ")));
+    public void handleTurnMessage(String turnMessage) {
+    }
+
+    @Override
+    public void handleConnectedPlayers(String list) {
+        this.connectedPlayerList = FXCollections.observableArrayList(Arrays.asList(list.split(" ")));
+        try {
+            changeSceneToWaitingRoom();
+        } catch (IOException e) {
+            System.out.println("Errore cambio di scena: login -> waitingRoom");
+        }
     }
 
     @Override
     public void handleAlert(String message) {
-        AlertWindow.display("Alert", message);
+        //AlertWindow.display("Alert", message);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 
     @Override
     public void handleTimer(String time) {
-        try {
-            changeScene(time);
-        } catch (IOException e) {
-            System.out.println("Errore nel cambio scene");
-        }
+        this.time = time;
     }
 
     @Override
     public void handleMatchId(String idMatch) {
         client.setNumMatch(Integer.parseInt(idMatch));
         try {
-            changeScene();
+            changeSceneToMatch();
         } catch (IOException e) {
-            System.out.println("Errore cambio di scena: waitingRoom -> Match");
+            System.out.println("Errore cambio di scena: login -> Match");
         }
-
     }
 
     @Override
     public void updateBoard(String setup) {
+
+    }
+
+    @Override
+    public void setPatternCards(String setup) {
+
+    }
+
+    @Override
+    public void handleGameState(String gameState) {
+
+    }
+
+    @Override
+    public void handleScore(String score) {
 
     }
 }

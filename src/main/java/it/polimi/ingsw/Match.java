@@ -25,36 +25,32 @@ public class Match extends Thread {
         this.id = id;
         this.roundList = new ArrayList<>();
         this.manager=manager;
+        playerList.forEach(player -> player.timerChoose(timerWindows));
     }
+    
 
+    @Override
     public void run() {
         table = new Table(playerList);
-        playerList.forEach(player -> player.timerChoose(timerWindows));
+        table.initialize();
+        //table.
         try {
             Thread.sleep(timerWindows);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         playerList.stream().filter(player -> player.getWindowPatternCard()==null).forEach(player -> table.setWindow(player.getUsername()));
-
-
-        playerList.forEach(player -> player.notifyPlayer());
-
-        //table.inizialize();
-
+        playerList.forEach(Player::notifyPlayer);
         /*SETTING ROUNDS*/
         for(roundNumber = 1; roundNumber <= 10; roundNumber++) {
             //reminder to implement exception management later (in case the match end before)
-
             try {
                 this.startNextRound();
                 changeOrder();
                 this.table.fillDraftPool();
-                for (Player p : playerList){
-                    p.notifyPlayer();
-                }
+                playerList.forEach(Player::notifyPlayer);
             } catch (NotEnoughPlayersException e) {
-                playerList.stream().filter(player -> player.isActive())
+                playerList.stream().filter(Player::isActive)
                         .forEach(player -> player.notifyScore("score "+ player.getUsername()+player.calculatePoints()));
                 return;
             }
@@ -73,8 +69,8 @@ public class Match extends Thread {
         StringBuilder builder = new StringBuilder();
         builder.append("score ");
         for(Player player: playerList) {
-            builder.append(player.getUsername()+" ");
-            builder.append(player.calculatePoints()+",");
+            builder.append(player.getUsername()).append(" ");
+            builder.append(player.calculatePoints()).append(",");
         }
         return builder.toString();
     }
@@ -121,7 +117,7 @@ public class Match extends Thread {
     public void setPlayerWindow(String name,int idCard){
         for(Player p : playerList){
             if (p.getUsername().equals(name)) {
-                table.setWindow(p,id);
+                table.setWindow(p,idCard);
             }
         }
     }

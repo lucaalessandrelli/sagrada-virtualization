@@ -42,7 +42,17 @@ public class MessageAnalyzer {
                 }
             });
 
-        }else if(message.startsWith("timer")){
+        }else if(message.startsWith("turn")){
+            String turnMessage = message.replace("turn ","");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Update UI here.
+                    view.handleTurnMessage(turnMessage);
+                }
+            });
+
+        } else if(message.startsWith("timer")){
             String time = message.replace("timer ","");
             Platform.runLater(new Runnable() {
                 @Override
@@ -51,13 +61,13 @@ public class MessageAnalyzer {
                     view.handleTimer(time);
                 }
             });
-        }else if(message.startsWith("service")) {
-            String playerList = message.replace("service ","");
+        }else if(message.startsWith("connectedPlayers")) {
+            String playerList = message.replace("connectedPlayers ","");
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     // Update UI here.
-                    view.handleService(playerList);
+                    view.handleConnectedPlayers(playerList);
                 }
             });
 
@@ -72,7 +82,34 @@ public class MessageAnalyzer {
             });
 
         }else if(message.equals("Connected, Welcome!")) {
-            view.handleConnected(message);
+            view.handleClientConnected(message);
+        }else if(message.startsWith("choseWindow")) {
+            String windwos = message.replace("choseWindow ", "");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Update UI here.
+                    view.setPatternCards(windwos);
+                }
+            });
+        }else if(message.startsWith("gamestate")) {
+            String gameState = message.replace("gamestate ", "");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Update UI here.
+                    view.handleGameState(gameState);
+                }
+            });
+        }else if(message.startsWith("score")) {
+            String score = message.replace("score ", "");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    // Update UI here.
+                    view.handleScore(score);
+                }
+            });
         }
     }
 
