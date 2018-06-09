@@ -43,7 +43,6 @@ public class ClientsContainer {
     synchronized public void addClient(ClientInterface c){
         try {
             clients.add(new ClientBox(c,c.getName(),c.getTypeConnection()));
-            notifyPlayers();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -86,7 +85,7 @@ public class ClientsContainer {
         return false;
     }
 
-    synchronized void notifyPlayers(){
+    public synchronized void notifyPlayers(){
         StringBuilder str = new StringBuilder();
             for (ClientBox c : clients){
                  str.append(" " + c.getName());

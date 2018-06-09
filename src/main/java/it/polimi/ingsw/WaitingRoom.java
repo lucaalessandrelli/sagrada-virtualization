@@ -30,12 +30,14 @@ public class WaitingRoom {
         if (playerList.sizeContainer() == 1) {
             playerList.addClient(player);
             playerList.notifyTimer(task.getTempTime());
+            playerList.notifyPlayers();
             //start the timer
             ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
             exec.scheduleWithFixedDelay(task,0,1000,TimeUnit.MILLISECONDS);
         } else if (playerList.sizeContainer() < 4) {
             playerList.addClient(player);
             playerList.notifyTimer(task.getTempTime());
+            playerList.notifyPlayers();
             if(playerList.sizeContainer() == 4) {
                 //NOTIFY THE SERVER IT NEEDS TO CREATE A REAL MATCH AND ADD IT TO THE LIST OF MATCHES
                 this.notifyManager();
