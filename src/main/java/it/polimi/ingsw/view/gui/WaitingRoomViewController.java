@@ -1,7 +1,9 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.view.gui;
 
 import com.jfoenix.controls.JFXListView;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.MessageAnalyzer;
+import it.polimi.ingsw.view.ViewInterface;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;

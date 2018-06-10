@@ -1,11 +1,12 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.MessageAnalyzer;
+import it.polimi.ingsw.view.ViewInterface;
+import it.polimi.ingsw.view.gui.MatchViewController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,10 +18,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class PatternCardChoiceViewController implements Initializable, ViewInterface {

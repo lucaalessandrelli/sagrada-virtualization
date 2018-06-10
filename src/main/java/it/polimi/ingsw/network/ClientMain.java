@@ -1,13 +1,11 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.view.GuiView;
+import it.polimi.ingsw.view.gui.GuiView;
 import it.polimi.ingsw.view.MessageAnalyzer;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
-
-import static java.lang.System.*;
 
 public class ClientMain {
     private static String addr;
