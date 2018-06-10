@@ -249,7 +249,7 @@ public class MatchViewController implements Initializable, ViewInterface {
 
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Match");
+        stage.setTitle("Score");
         stage.show();
     }
 

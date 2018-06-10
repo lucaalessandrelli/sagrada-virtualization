@@ -29,6 +29,7 @@ public class LoginViewController implements Initializable, ViewInterface {
     private MessageAnalyzer messageAnalyzer;
     private ObservableList<String> connectedPlayerList = FXCollections.observableArrayList();
     private String time;
+    private String setup;
 
     @FXML
     private JFXTextField usernameField;
@@ -130,16 +131,12 @@ public class LoginViewController implements Initializable, ViewInterface {
         controller.setClient(client);
         controller.setMessageAnalyzer(messageAnalyzer);
         controller.setStage(stage);
-        controller.setList(connectedPlayerList);
-        //controller.setTime(time);
+        controller.setTime(time);
 
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
-        //controller.loadPlayers();
-        //controller.startTimer();
-        controller.setWindows();
         controller.startTimer();
-        messageAnalyzer.setView(controller);
+        controller.updateBoard(setup);
 
         stage.setScene(scene);
         stage.setResizable(false);
@@ -193,7 +190,7 @@ public class LoginViewController implements Initializable, ViewInterface {
 
     @Override
     public void updateBoard(String setup) {
-
+        this.setup = setup;
     }
 
     @Override

@@ -29,6 +29,7 @@ public class PatternCardChoiceViewController implements Initializable, ViewInter
     private String cardChoiceTimer;
     private String matchTimer;
     private MessageAnalyzer messageAnalyzer;
+    private String setup;
 
     @FXML
     private Label timerLabel;
@@ -92,6 +93,7 @@ public class PatternCardChoiceViewController implements Initializable, ViewInter
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         controller.startTimer();
+        controller.updateBoard(setup);
         messageAnalyzer.setView(controller);
 
         stage.setScene(scene);
@@ -140,7 +142,7 @@ public class PatternCardChoiceViewController implements Initializable, ViewInter
 
     @Override
     public void updateBoard(String setup) {
-
+        this.setup = setup;
     }
 
     @Override
