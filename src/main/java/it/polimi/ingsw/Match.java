@@ -33,7 +33,7 @@ public class Match extends Thread {
     public void run() {
         table = new Table(playerList);
         table.initialize();
-        //table.
+        table.selectWindowCards();
         try {
             Thread.sleep(timerWindows);
         } catch (InterruptedException e) {
@@ -114,7 +114,7 @@ public class Match extends Thread {
             }
         }
     }
-    public void setPlayerWindow(String name,int idCard){
+    public synchronized void setPlayerWindow(String name,int idCard){
         for(Player p : playerList){
             if (p.getUsername().equals(name)) {
                 table.setWindow(p,idCard);
