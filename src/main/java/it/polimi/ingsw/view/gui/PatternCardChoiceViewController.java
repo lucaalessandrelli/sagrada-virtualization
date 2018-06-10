@@ -22,12 +22,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PatternCardChoiceViewController implements Initializable, ViewInterface {
+public class PatternCardChoiceViewController implements Initializable, GuiInterface {
     private Client client;
     private Stage stage;
     private String cardChoiceTimer;
     private String matchTimer;
-    private MessageAnalyzer messageAnalyzer;
+    private GuiHandler guiHandler;
     private String setup;
 
     @FXML
@@ -49,8 +49,8 @@ public class PatternCardChoiceViewController implements Initializable, ViewInter
     public void setTime(String time) {
         this.cardChoiceTimer = time;
     }
-    public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
-        this.messageAnalyzer = messageAnalyzer;
+    public void setGuiHandler(GuiHandler guiHandler) {
+        this.guiHandler = guiHandler;
     }
 
     public void startTimer() {
@@ -85,7 +85,7 @@ public class PatternCardChoiceViewController implements Initializable, ViewInter
         MatchViewController controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
-        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
         controller.setTime(matchTimer);
 
@@ -93,7 +93,7 @@ public class PatternCardChoiceViewController implements Initializable, ViewInter
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         controller.startTimer();
         controller.updateBoard(setup);
-        messageAnalyzer.setView(controller);
+        guiHandler.setGui(controller);
 
         stage.setScene(scene);
         stage.setResizable(false);

@@ -37,10 +37,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 
-public class MatchViewController implements Initializable, ViewInterface {
+public class MatchViewController implements Initializable, GuiInterface {
     private Client client;
     private Stage stage;
-    private MessageAnalyzer messageAnalyzer;
+    private GuiHandler guiHandler;
     private ObservableList<String> playerlist = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
     private List<String> toolList;
@@ -114,8 +114,8 @@ public class MatchViewController implements Initializable, ViewInterface {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
-        this.messageAnalyzer = messageAnalyzer;
+    public void setGuiHandler(GuiHandler guiHandler) {
+        this.guiHandler = guiHandler;
     }
     public void setList(ObservableList<String> playerlist) {
         this.playerlist = playerlist;
@@ -241,13 +241,13 @@ public class MatchViewController implements Initializable, ViewInterface {
         ScoreViewController controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
-        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
 
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         controller.loadScores(score);
-        messageAnalyzer.setView(controller);
+        guiHandler.setGui(controller);
 
         stage.setScene(scene);
         stage.setResizable(false);

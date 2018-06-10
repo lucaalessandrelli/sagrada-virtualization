@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class GuiView extends Application {
     private static Client client;
-    private static MessageAnalyzer messageAnalyzer;
+    private static GuiHandler guiHandler;
     private LoginViewController controller;
 
     public GuiView() {
@@ -20,8 +20,8 @@ public class GuiView extends Application {
         client = c;
     }
 
-    public static void setMessageAnalyzer(MessageAnalyzer analyzer) {
-        messageAnalyzer = analyzer;
+    public static void setGuiHandler(GuiHandler handler) {
+        guiHandler = handler;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class GuiView extends Application {
         controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
-        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setGuiHandler(guiHandler);
         controller.setStage(primaryStage);
 
         Scene scene = new Scene(root);

@@ -21,14 +21,14 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class LoginViewController implements Initializable, ViewInterface {
+public class LoginViewController implements Initializable, GuiInterface {
     private static final int SOCKET = 1;
     private static final int RMI = 2;
     private Client client;
     private String  username;
     private int connectionType = SOCKET;
     private Stage stage;
-    private MessageAnalyzer messageAnalyzer;
+    private GuiHandler guiHandler;
     private ObservableList<String> connectedPlayerList = FXCollections.observableArrayList();
     private String time;
     private String setup;
@@ -52,8 +52,8 @@ public class LoginViewController implements Initializable, ViewInterface {
         this.stage = stage;
     }
 
-    public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
-        this.messageAnalyzer = messageAnalyzer;
+    public void setGuiHandler(GuiHandler guiHandler) {
+        this.guiHandler = guiHandler;
     }
 
     @FXML
@@ -92,7 +92,7 @@ public class LoginViewController implements Initializable, ViewInterface {
 
     public void setConnection() {
         if (!username.equals("")) {
-            messageAnalyzer.setView(this);
+            guiHandler.setGui(this);
 
             client.setKindConnection(connectionType);
             client.setName(username);
@@ -111,12 +111,12 @@ public class LoginViewController implements Initializable, ViewInterface {
         controller.setList(connectedPlayerList);
         controller.setTime(time);
         controller.setStage(stage);
-        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setGuiHandler(guiHandler);
 
         Scene scene = new Scene(root);
         controller.loadPlayers();
         controller.startTimer();
-        messageAnalyzer.setView(controller);
+        guiHandler.setGui(controller);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Waiting room");
@@ -131,7 +131,7 @@ public class LoginViewController implements Initializable, ViewInterface {
         MatchViewController controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
-        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
         controller.setTime(time);
 
@@ -139,6 +139,7 @@ public class LoginViewController implements Initializable, ViewInterface {
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         controller.startTimer();
         controller.updateBoard(setup);
+        guiHandler.setGui(controller);
 
         stage.setScene(scene);
         stage.setResizable(false);

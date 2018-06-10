@@ -18,12 +18,12 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class ScoreViewController implements Initializable, ViewInterface {
+public class ScoreViewController implements Initializable, GuiInterface {
     private Client client;
     private Stage stage;
     private ObservableList<String> connectedPlayerList = FXCollections.observableArrayList();
     private String time;
-    private MessageAnalyzer messageAnalyzer;
+    private GuiHandler guiHandler;
 
     @FXML
     private JFXListView<String> scoreList;
@@ -38,8 +38,8 @@ public class ScoreViewController implements Initializable, ViewInterface {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
-        this.messageAnalyzer = messageAnalyzer;
+    public void setGuiHandler(GuiHandler guiHandler) {
+        this.guiHandler = guiHandler;
     }
 
 
@@ -64,12 +64,12 @@ public class ScoreViewController implements Initializable, ViewInterface {
         controller.setList(connectedPlayerList);
         controller.setTime(time);
         controller.setStage(stage);
-        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setGuiHandler(guiHandler);
 
         Scene scene = new Scene(root);
         controller.loadPlayers();
         controller.startTimer();
-        messageAnalyzer.setView(controller);
+        guiHandler.setGui(controller);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Waiting room");

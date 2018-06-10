@@ -26,14 +26,14 @@ import java.util.ResourceBundle;
 
 import javafx.animation.Animation;
 
-public class WaitingRoomViewController implements Initializable, ViewInterface {
+public class WaitingRoomViewController implements Initializable, GuiInterface {
     private Client client;
     private Stage stage;
     private ObservableList<String> playerList = FXCollections.observableArrayList();
     private String fixedTime;
     private String tempTime;
     private String choseCardTimer;
-    private MessageAnalyzer messageAnalyzer;
+    private GuiHandler guiHandler;
 
     @FXML
     private JFXListView<String> playerListView;
@@ -63,8 +63,8 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         this.tempTime = time;
     }
 
-    public void setMessageAnalyzer(MessageAnalyzer messageAnalyzer) {
-        this.messageAnalyzer = messageAnalyzer;
+    public void setGuiHandler(GuiHandler guiHandler) {
+        this.guiHandler = guiHandler;
     }
 
     public void loadPlayers() {
@@ -97,14 +97,14 @@ public class WaitingRoomViewController implements Initializable, ViewInterface {
         PatternCardChoiceViewController controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
-        controller.setMessageAnalyzer(messageAnalyzer);
+        controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
         controller.setTime(choseCardTimer);
 
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         controller.startTimer();
-        messageAnalyzer.setView(controller);
+        guiHandler.setGui(controller);
 
         stage.setScene(scene);
         stage.setResizable(false);
