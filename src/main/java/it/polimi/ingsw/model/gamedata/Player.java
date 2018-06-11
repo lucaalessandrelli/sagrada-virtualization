@@ -3,8 +3,6 @@ package it.polimi.ingsw.model.gamedata;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 import it.polimi.ingsw.view.virtualview.VirtualViewObserver;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,14 +22,14 @@ public class Player {
         active = true;
     }
 
-    public boolean isActive() {
+    public synchronized boolean isActive() {
         return active;
     }
 
 
     //SETTER
 
-    public void setActivity(boolean active) {
+    public synchronized void setActivity(boolean active) {
         this.active = active;
         if(active){
             notifyPlayer();

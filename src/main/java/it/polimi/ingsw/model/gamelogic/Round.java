@@ -11,6 +11,9 @@ import it.polimi.ingsw.turn.Turn;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Round {
     private int roundNumber;
@@ -21,6 +24,7 @@ public class Round {
     private Player currTurn;
     private Iterator<Player> iterator;
     private Match match;
+    private ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 
     public Round(List<Player> playerList, int roundNumber, Table table,Match m) {
         this.roundNumber = roundNumber;
@@ -54,6 +58,9 @@ public class Round {
             }
         }
         setLastDice();
+        if(!exec.isTerminated()){
+            exec.shutdown();
+        }
     }
 
 
@@ -113,6 +120,16 @@ public class Round {
             currTurn.wrongMove(e.getMessage());
         }
     }
+
+    public void inactivatePlayer(Player p) {
+        if (currTurn != p) {
+            exec.scheduleWithFixedDelay(() -> {
+                    p.setActivity(false);
+
+            }, 0, 500, TimeUnit.MILLISECONDS);
+        }
+    }
+
     public  void interrupt(){
         match.interrupt();
     }
