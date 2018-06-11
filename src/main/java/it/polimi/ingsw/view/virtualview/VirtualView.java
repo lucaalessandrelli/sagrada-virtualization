@@ -56,8 +56,12 @@ public class VirtualView extends VirtualViewObserver {
     public void chooseWindow(List<WindowPatternCard> windows) {
         VirtualViewParser parser = new VirtualViewParser(player);
 
-       //String windows;
-       //clientBox.chooseWindow(windows);
+       String wind= parser.extractedWindows(windows);
+        try {
+            clientBox.chooseWindow(wind);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
