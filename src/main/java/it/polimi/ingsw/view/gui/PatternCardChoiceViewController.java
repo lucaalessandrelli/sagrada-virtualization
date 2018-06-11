@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -34,7 +35,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
     private Label timerLabel;
 
     @FXML
-    private HBox patternCardBox;
+    private GridPane patternCardGrid;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

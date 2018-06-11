@@ -161,13 +161,17 @@ public class Turn {
     }
 
     /**
-     * Called by concrete states when the player choose a toolCard in order to save information about that will be used by the next states
+     * Called by concrete states when the player choose a toolCard in order to save information for next states, if the user plays toolcard8 then
+     * a method on round, which makes this player inactive for the second turn of the round, is called
      * @param toolCard ToolCard object
      */
     public void setToolCardInfo(ToolCard toolCard) {
         this.setToolCard(toolCard);
         this.setToolStateList(toolCard.getStateList());
         this.setToolAutomatedOperationList(toolCard.getAutomatedoperationlist());
+        if(toolCard.getID() == 8) {
+            round.inactivatePlayer(player);
+        }
     }
 
     /**

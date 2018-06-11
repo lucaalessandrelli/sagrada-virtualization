@@ -4,27 +4,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1221.0" style="-fx-background-color: #a0a2ab;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.PatternCardChoiceViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #a0a2ab;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.PatternCardChoiceViewController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2D3647;" AnchorPane.bottomAnchor="550.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="180.0" prefWidth="1200.0" style="-fx-background-color: #2D3647;" AnchorPane.bottomAnchor="620.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label alignment="CENTER" layoutX="86.0" layoutY="34.0" prefHeight="170.0" prefWidth="1221.0" text="Scegli la tua Vetrata" textFill="WHITE" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="74.0" />
                </font>
             </Label>
-            <Label fx:id="timerLabel" alignment="CENTER" layoutX="833.0" layoutY="146.0" prefHeight="75.0" prefWidth="1221.0" text="Timer : " textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="146.0">
+            <Label fx:id="timerLabel" alignment="CENTER" layoutX="833.0" layoutY="119.0" prefHeight="51.0" prefWidth="900.0" text="Timer : " textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
                <font>
                   <Font size="35.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <HBox fx:id="patternCardBox" layoutX="24.0" layoutY="340.0" prefHeight="281.0" prefWidth="1173.0" spacing="40.0">
+      <GridPane fx:id="patternCardGrid" alignment="CENTER" hgap="100.0" layoutX="111.0" layoutY="223.0" prefHeight="541.0" prefWidth="978.0" vgap="30.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.0" minWidth="10.0" prefWidth="390.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="400.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
             <GridPane gridLinesVisible="true" onMouseClicked="#handleCardChoice">
               <columnConstraints>
@@ -41,7 +48,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane gridLinesVisible="true" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleCardChoice">
+            <GridPane gridLinesVisible="true" onMouseClicked="#handleCardChoice" GridPane.columnIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -56,7 +63,22 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <GridPane gridLinesVisible="true" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleCardChoice">
+            <GridPane gridLinesVisible="true" onMouseClicked="#handleCardChoice" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane gridLinesVisible="true" onMouseClicked="#handleCardChoice" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -72,6 +94,6 @@
                </rowConstraints>
             </GridPane>
          </children>
-      </HBox>
+      </GridPane>
    </children>
 </AnchorPane>
