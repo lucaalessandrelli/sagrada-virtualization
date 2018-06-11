@@ -44,9 +44,14 @@ public class Table {
 
 
     public void selectWindowCards(){
-        for (Player p: this.myplayers) {
-            p.chooseWindow(windowPatternCards);
-            windowPatternCards.remove(p.getWindowPatternCard());
+        List<WindowPatternCard> patterns = new ArrayList<>();
+        for (int i = 0; i < myplayers.size()-1;i++) {
+            patterns.add(windowPatternCards.get((i*4)));
+            patterns.add(windowPatternCards.get((i*4)+1));
+            patterns.add(windowPatternCards.get((i*4)+2));
+            patterns.add(windowPatternCards.get((i*4)+3));
+            myplayers.get(i).chooseWindow(patterns);
+            patterns.clear();
         }
         setPublicObjects();
     }
@@ -140,7 +145,7 @@ public class Table {
         while (k < this.windowPatternCards.size() && (this.windowPatternCards.get(k).getNum()!= id)){
             k++;
         }
-        while (i < this.myplayers.size() && !(p.equals(this.myplayers.get(i).getUsername()))) {
+        while (i < this.myplayers.size() && !(p.getUsername().equals(this.myplayers.get(i).getUsername()))) {
             i++;
         }
         Player player = this.myplayers.get(i);

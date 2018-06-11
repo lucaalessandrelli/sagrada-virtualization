@@ -22,12 +22,14 @@ public class ModelModifier {
 
     //parameters needed: used all 4
     public void switchDice(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
-        Dice draftDice = draftPool.chooseDice(posChosenDice.getX());
-        Dice roundDice = roundTrack.getDice(toolPos);
-        draftPool.removeDice(posChosenDice.getX());
+        Dice draftDice = new Dice(draftPool.chooseDice(posChosenDice.getX()).getColour());
+        draftDice.setNumber(draftPool.chooseDice(posChosenDice.getX()).getNumber());
+        Dice roundDice = new Dice(roundTrack.getDice(toolPos).getColour());
+        roundDice.setNumber(roundTrack.getDice(toolPos).getNumber());
+        //draftPool.removeDice(posChosenDice.getX());
 
-        //draftPool.setDice(roundDice,posChosenDice.getX());
-        //roundTrack.setDice(draftDice,toolPos);
+        draftPool.setDice(roundDice,posChosenDice.getX());
+        roundTrack.setDice(draftDice,toolPos);
 
         //switch also the copy of the dice
         chosenDice = toolDice;
@@ -47,12 +49,18 @@ public class ModelModifier {
      * @param toolDice Dice chosen during toolCard
      * @param toolPos Position of the dice chosen during toolCard
      */
-    public void resetDraftPool(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    /*public void resetDraftPool(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         for (Dice dice: draftPool.getDraftPool()) {
             diceBag.addDice(dice);
         }
 
         draftPool.addNewDices(diceBag.pullOut(draftPool.getNumOfDices()));
+    }*/
+
+    public void resetDraftPool(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos){
+        for(Dice dice: draftPool.getDraftPool()){
+            dice.rollDice();
+        }
     }
 
     //parameter needed: used first 2

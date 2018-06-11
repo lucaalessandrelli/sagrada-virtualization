@@ -21,15 +21,15 @@ public class RoundTrack {
     public List<List<Dice>> getRoundTrack(){
         return diceOnRoundTrack;
     }
-    public boolean findDice(Dice dice, Pos pos){
+    public boolean findDice(Dice dice, Pos pos){/*
         for(int i=0; i<diceOnRoundTrack.size();i++){
             for(int j=0; j<diceOnRoundTrack.get(i).size();j++){
                 if((diceOnRoundTrack.get(i).get(j)).equals(dice)) {
                     return true;
                 }
             }
-        }
-        return false;
+        }*/
+        return this.getDice(pos).equals(dice);
     }
     public Dice switchDice(Dice dice) throws NullPointerException {
         for(int i=0; i<diceOnRoundTrack.size();i++) {
@@ -46,6 +46,10 @@ public class RoundTrack {
     }
     public Dice getDice(Pos pos){
         return this.diceOnRoundTrack.get(pos.getX()).get(pos.getY());
+    }
+
+    public void setDice(Dice d,Pos p){
+        this.getDice(p).setDice(d);
     }
 
     public void resetSelection() {

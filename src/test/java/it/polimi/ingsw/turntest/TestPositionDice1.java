@@ -12,9 +12,11 @@ import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.turn.StartTurn;
 import it.polimi.ingsw.turn.Turn;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.view.virtualview.VirtualViewObserver;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static it.polimi.ingsw.turntest.TurnTest.lastName;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,6 +36,48 @@ public class TestPositionDice1 {
         players.add(p4);
 
         Table table = new Table(players);
+
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
 
         Match match = new Match(players,new Manager(),0);
 
@@ -119,6 +163,48 @@ public class TestPositionDice1 {
 
         Table table = new Table(players);
 
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
+
         Match match = new Match(players,new Manager(),0);
 
         Round round = new Round(players, 1, table,match);
@@ -174,6 +260,48 @@ public class TestPositionDice1 {
         players.add(p4);
 
         Table table = new Table(players);
+
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
 
         Match match = new Match(players,new Manager(),0);
 

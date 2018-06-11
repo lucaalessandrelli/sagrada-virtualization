@@ -1,13 +1,13 @@
 package it.polimi.ingsw.turntest;
 
-
 import it.polimi.ingsw.Match;
 import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.*;
+import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
+import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
-import it.polimi.ingsw.turn.StartTurn;
 import it.polimi.ingsw.turn.Turn;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import it.polimi.ingsw.view.virtualview.VirtualViewObserver;
@@ -17,12 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static it.polimi.ingsw.turntest.TurnTest.lastName;
+import static it.polimi.ingsw.turntest.TurnTest.pullOutThatCard;
+import static it.polimi.ingsw.turntest.TurnTest.setThatCard;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestChooseDice1 {
+public class ToolCard9Test {
 
     @Test
-    void TestFirstTurn(){
+    void TestAllowedMoves() {
+        ToolCard tester = pullOutThatCard(9);
+
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");
@@ -33,10 +37,149 @@ public class TestChooseDice1 {
         players.add(p3);
         players.add(p4);
 
+        Table table = setThatCard(9,players);
 
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
+
+        Match match = new Match(players, new Manager(), 0);
+
+        Round round = new Round(players, 2, table, match);
+
+        ArrayList<WindowPatternCard> windows = new ArrayList<>();
+        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        windows.add(windowPatternCard);
+        p1.setMyWindow(windows.get(0));
+
+        table.getDiceBag().setNumPlayers(4);
+        table.getDraftPool().addNewDices(table.getDiceFromBag());
+
+        PublicObjects publicObjects = new PublicObjects();
+        publicObjects.setDraftPool(table.getDraftPool());
+        publicObjects.setObjectiveCards(table.getObjCard());
+        publicObjects.setToolCards(table.getToolCards());
+
+        p1.setPublicObjects(publicObjects);
+
+        Dice d1 = new Dice(Colour.GREEN);
+        d1.setNumber(5);
+        Dice d2 = new Dice(Colour.YELLOW);
+        d2.setNumber(4);
+        Dice d3 = new Dice(Colour.PURPLE);
+        d3.setNumber(4);
+        Dice tmp = p1.getDraftPool().chooseDice(2);
+
+        p1.getWindowPatternCard().placeDice(d1,2,3);
+        p1.getWindowPatternCard().placeDice(d2,1,3);
+        p1.getWindowPatternCard().placeDice(d3,2,4);
+
+
+        Turn turn = new Turn(p1, round, 2, true, table);
+
+
+        turn.startTurn();
+
+        String state = "StartTurn";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
+
+        try {
+            turn.receiveMove(p1.getDraftPool().chooseDice(2),new Pos(2,0));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
+
+        state = "ChooseDice1";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
+
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
+
+        state = "MovingDraftDice";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
+
+        try {
+            turn.receiveMove(new Pos(3,1));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
+
+
+        state = "EndTurn";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
+
+        assertNotSame(tmp, p1.getDraftPool().chooseDice(2));
+
+    }
+
+    @Test
+    void TestAllowedMovesWithRestrictions(){
+        ToolCard tester = pullOutThatCard(9);
+
+        ArrayList<Player> players = new ArrayList<>();
+        Player p1 = new Player("one");
+        Player p2 = new Player("two");
+        Player p3 = new Player("three");
+        Player p4 = new Player("four");
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+        players.add(p4);
 
         Table table = new Table(players);
         table.initialize();
+        table.setPublicObjects();
+
+        while (players.get(0).getToolCards().get(0).getID() != 9 && players.get(0).getToolCards().get(1).getID() != 9 && players.get(0).getToolCards().get(2).getID() != 9) {
+            table = new Table(players);
+            table.initialize();
+            table.setPublicObjects();
+        }
 
         VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
             @Override
@@ -80,123 +223,9 @@ public class TestChooseDice1 {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players,new Manager(),0);
+        Match match = new Match(players, new Manager(), 0);
 
-        Round round = new Round(players, 1, table,match);
-
-        ArrayList<WindowPatternCard> windows = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windows.add(windowPatternCard);
-        p1.setMyWindow(windows.get(0));
-
-        table.getDiceBag().setNumPlayers(4);
-        table.getDraftPool().addNewDices(table.getDiceFromBag());
-
-        PublicObjects publicObjects = new PublicObjects();
-        publicObjects.setDraftPool(table.getDraftPool());
-        publicObjects.setObjectiveCards(table.getObjCard());
-        publicObjects.setToolCards(table.getToolCards());
-
-        p1.setPublicObjects(publicObjects);
-
-        Turn tester = new Turn(p1, round, 1, true, table);
-
-        tester.startTurn();
-
-        Dice d = table.getDraftPool().chooseDice(4);
-
-        Pos pos = new Pos(4,5);
-
-        try {
-            tester.receiveMove(d,pos);
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
-        }
-
-        pos.setX(1);
-        pos.setY(4);
-        try {
-            tester.receiveMove(pos);
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
-        }
-
-
-        assertEquals("PositionDice1",lastName(tester.getState().getClass().toString(),14));
-
-
-
-        try {
-            tester.receiveMove("pass");
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
-        }
-
-
-        String state = "EndTurn";
-
-        assertEquals(state, lastName(tester.getState().toString(),state.length()+1));
-    }
-
-    @Test
-    void TestNotFirstRound(){
-        ArrayList<Player> players = new ArrayList<>();
-        Player p1 = new Player("one");
-        Player p2 = new Player("two");
-        Player p3 = new Player("three");
-        Player p4 = new Player("four");
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-        players.add(p4);
-
-        Table table = new Table(players);
-
-        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
-            @Override
-            public void update() {
-
-            }
-
-            @Override
-            public void updateStateTurn(String whoIsTurn, long timeSleep) {
-
-            }
-
-            @Override
-            public void wrongMove(String s) {
-
-            }
-
-            @Override
-            public void chooseWindow(List<WindowPatternCard> windows) {
-
-            }
-
-            @Override
-            public void timerChoose(long timerWindows) {
-
-            }
-
-            @Override
-            public void notifyState(String state) {
-
-            }
-
-            @Override
-            public void notifyScore(String s) {
-
-            }
-        };
-
-        p1.addObserver(virtualViewObserver);
-        p2.addObserver(virtualViewObserver);
-        p3.addObserver(virtualViewObserver);
-        p4.addObserver(virtualViewObserver);
-
-        Match match = new Match(players,new Manager(),0);
-
-        Round round = new Round(players, 2, table,match);
+        Round round = new Round(players, 2, table, match);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -213,33 +242,70 @@ public class TestChooseDice1 {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn tester = new Turn(p1, round, 1, true, table);
+        Dice d1 = new Dice(Colour.GREEN);
+        d1.setNumber(5);
+        Dice d2 = new Dice(Colour.YELLOW);
+        d2.setNumber(4);
+        Dice d3 = new Dice(Colour.PURPLE);
+        d3.setNumber(4);
+        Dice tmp = p1.getDraftPool().chooseDice(2);
 
-        tester.startTurn();
+        p1.getWindowPatternCard().placeDice(d1,2,3);
+        p1.getWindowPatternCard().placeDice(d2,1,3);
+        p1.getWindowPatternCard().placeDice(d3,2,4);
 
-        Dice d = table.getDraftPool().chooseDice(4);
+        p1.getDraftPool().chooseDice(2).setDice(new Dice(Colour.YELLOW));
 
-        Pos pos = new Pos(4,5);
+        p1.getWindowPatternCard().addRestr('Y',3,1);
+
+
+        Turn turn = new Turn(p1, round, 2, true, table);
+
+
+        turn.startTurn();
+
+        String state = "StartTurn";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
-            tester.receiveMove(d,pos);
+            turn.receiveMove(p1.getDraftPool().chooseDice(2),new Pos(2,0));
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }
 
-        pos.setX(1);
-        pos.setY(4);
+        state = "ChooseDice1";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
+
         try {
-            tester.receiveMove(pos);
+            turn.receiveMove(tester);
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }
 
-        assertEquals("PositionDice1",lastName(tester.getState().getClass().toString(),14));
+        state = "MovingDraftDice";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
+
+        try {
+            turn.receiveMove(new Pos(3,1));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
+
+
+        state = "EndTurn";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
+
+        assertNotSame(tmp, p1.getDraftPool().chooseDice(2));
+
     }
 
     @Test
-    void TestNotOneWay(){
+    void TestWrongRestriction(){
+        ToolCard tester = pullOutThatCard(9);
 
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
@@ -252,21 +318,15 @@ public class TestChooseDice1 {
         players.add(p4);
 
         Table table = new Table(players);
+        table.initialize();
+        table.setPublicObjects();
 
-        ArrayList<WindowPatternCard> windows = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windows.add(windowPatternCard);
-        p1.setMyWindow(windows.get(0));
+        while (players.get(0).getToolCards().get(0).getID() != 9 && players.get(0).getToolCards().get(1).getID() != 9 && players.get(0).getToolCards().get(2).getID() != 9) {
+            table = new Table(players);
+            table.initialize();
+            table.setPublicObjects();
+        }
 
-        table.getDiceBag().setNumPlayers(4);
-        table.getDraftPool().addNewDices(table.getDiceFromBag());
-
-        PublicObjects publicObjects = new PublicObjects();
-        publicObjects.setDraftPool(table.getDraftPool());
-        publicObjects.setObjectiveCards(table.getObjCard());
-        publicObjects.setToolCards(table.getToolCards());
-
-        p1.setPublicObjects(publicObjects);
         VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
             @Override
             public void update() {
@@ -309,45 +369,72 @@ public class TestChooseDice1 {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players,new Manager(),0);
+        Match match = new Match(players, new Manager(), 0);
 
-        Round round = new Round(players, 1, table,match);
+        Round round = new Round(players, 2, table, match);
 
-        Turn tester = new Turn(p1, round, 1, false, table);
+        ArrayList<WindowPatternCard> windows = new ArrayList<>();
+        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        windows.add(windowPatternCard);
+        p1.setMyWindow(windows.get(0));
 
-        StartTurn startTurn = new StartTurn(tester);
-        tester.setState(startTurn);
+        table.getDiceBag().setNumPlayers(4);
+        table.getDraftPool().addNewDices(table.getDiceFromBag());
 
-        Dice d = new Dice(Colour.GREEN);
-        d.setNumber(2);
-        p1.getWindowPatternCard().placeDice(d,0,0);
+        PublicObjects publicObjects = new PublicObjects();
+        publicObjects.setDraftPool(table.getDraftPool());
+        publicObjects.setObjectiveCards(table.getObjCard());
+        publicObjects.setToolCards(table.getToolCards());
+
+        p1.setPublicObjects(publicObjects);
+
+        Dice d1 = new Dice(Colour.GREEN);
+        d1.setNumber(5);
+        Dice d2 = new Dice(Colour.YELLOW);
+        d2.setNumber(4);
+        Dice d3 = new Dice(Colour.PURPLE);
+        d3.setNumber(4);
+        Dice tmp = p1.getDraftPool().chooseDice(2);
+
+        p1.getWindowPatternCard().placeDice(d1,2,3);
+        p1.getWindowPatternCard().placeDice(d2,1,3);
+        p1.getWindowPatternCard().placeDice(d3,2,4);
+
+        p1.getDraftPool().chooseDice(2).setDice(new Dice(Colour.YELLOW));
+
+        p1.getWindowPatternCard().addRestr('B',3,1);
 
 
-        Dice d1 = new Dice(Colour.BLUE);
-        d1.setNumber(3);
-        table.getDraftPool().setDice(d1,4);
+        Turn turn = new Turn(p1, round, 2, true, table);
 
-        Pos pos = new Pos(4,0);
+
+        turn.startTurn();
+
+        String state = "StartTurn";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
-            tester.receiveMove(d1,pos);
+            turn.receiveMove(p1.getDraftPool().chooseDice(2),new Pos(2,0));
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }
 
-        pos = new Pos(1,0);
-        String state = "ChooseDice1";
-        assertEquals(state,lastName(tester.getState().getClass().toString(),state.length()+1));
+        state = "ChooseDice1";
 
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
-            tester.receiveMove(pos);
+            turn.receiveMove(tester);
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }
 
-        state = "PositionDice1";
+        state = "MovingDraftDice";
 
-        assertEquals(state,lastName(tester.getState().getClass().toString(),state.length()+1));
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
+
+        assertThrows(WrongMoveException.class,()->{turn.receiveMove(new Pos(3,1));});
+
     }
 }

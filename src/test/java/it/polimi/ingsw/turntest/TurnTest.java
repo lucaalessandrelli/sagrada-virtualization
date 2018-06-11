@@ -5,13 +5,17 @@ import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.PublicObjects;
 import it.polimi.ingsw.model.gamedata.Table;
+import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
+import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
 import it.polimi.ingsw.turn.Turn;
+import it.polimi.ingsw.view.virtualview.VirtualViewObserver;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,6 +34,48 @@ public class TurnTest {
         players.add(p4);
 
         Table table = new Table(players);
+
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
 
         Match match = new Match(players,new Manager(),0);
 
@@ -61,5 +107,39 @@ public class TurnTest {
 
     public static String lastName(String type,int x){
         return type.substring((type.lastIndexOf(".")+1),(type.lastIndexOf(".")+x));
+    }
+
+    public static ToolCard pullOutThatCard(int num){
+        CardContainer container = new CardContainer();
+        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
+        while (toolCardArrayList.get(0).getID() != num && toolCardArrayList.get(1).getID() != num && toolCardArrayList.get(2).getID() != num) {
+            container = new CardContainer();
+            toolCardArrayList = container.pullOutTools();
+        }
+        ToolCard tester = null;
+        if (toolCardArrayList.get(0).getID() == num)
+            tester = toolCardArrayList.get(0);
+
+        if (toolCardArrayList.get(1).getID() == num)
+            tester = toolCardArrayList.get(1);
+
+        if (toolCardArrayList.get(2).getID() == num)
+            tester = toolCardArrayList.get(2);
+
+        return tester;
+    }
+
+    public static Table setThatCard(int num, List<Player> players){
+        Table table = new Table(players);
+        table.initialize();
+        table.setPublicObjects();
+
+        while (players.get(0).getToolCards().get(0).getID() != num && players.get(0).getToolCards().get(1).getID() != num && players.get(0).getToolCards().get(2).getID() != num) {
+            table = new Table(players);
+            table.initialize();
+            table.setPublicObjects();
+        }
+
+        return table;
     }
 }

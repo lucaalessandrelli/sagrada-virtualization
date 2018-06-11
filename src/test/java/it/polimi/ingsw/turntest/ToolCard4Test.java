@@ -10,33 +10,22 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.turn.Turn;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.view.virtualview.VirtualViewObserver;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static it.polimi.ingsw.turntest.TurnTest.lastName;
+import static it.polimi.ingsw.turntest.TurnTest.pullOutThatCard;
+import static it.polimi.ingsw.turntest.TurnTest.setThatCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ToolCard4Test {
 
     @Test
     void TestingAllowedMoves() {
-        ToolCard tester = new ToolCard();
-        CardContainer container = new CardContainer();
-        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
-
-        while (toolCardArrayList.get(0).getID() != 4 && toolCardArrayList.get(1).getID() != 4 && toolCardArrayList.get(2).getID() != 4) {
-            container = new CardContainer();
-            toolCardArrayList = container.pullOutTools();
-        }
-        if (toolCardArrayList.get(0).getID() == 4)
-            tester = toolCardArrayList.get(0);
-
-        if (toolCardArrayList.get(1).getID() == 4)
-            tester = toolCardArrayList.get(1);
-
-        if (toolCardArrayList.get(2).getID() == 4)
-            tester = toolCardArrayList.get(2);
+        ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
@@ -48,15 +37,49 @@ public class ToolCard4Test {
         players.add(p3);
         players.add(p4);
 
-        Table table = new Table(players);
-        table.initialize();
-        table.setPublicObjects();
+        Table table = setThatCard(4,players);
 
-        while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
-            table = new Table(players);
-            table.initialize();
-            table.setPublicObjects();
-        }
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
 
         Match match = new Match(players,new Manager(),0);
 
@@ -183,26 +206,24 @@ public class ToolCard4Test {
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(2, 2)).isOccupied());
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(3, 2)).isOccupied());
 
+
+
+        try {
+            turn.receiveMove("pass");
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
+
+
+        String state = "EndTurn";
+
+        assertEquals(state, lastName(turn.getState().toString(),state.length()+1));
+
     }
 
     @Test
     void TestingWrongFirstSelection() {
-        ToolCard tester = new ToolCard();
-        CardContainer container = new CardContainer();
-        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
-
-        while (toolCardArrayList.get(0).getID() != 4 && toolCardArrayList.get(1).getID() != 4 && toolCardArrayList.get(2).getID() != 4) {
-            container = new CardContainer();
-            toolCardArrayList = container.pullOutTools();
-        }
-        if (toolCardArrayList.get(0).getID() == 4)
-            tester = toolCardArrayList.get(0);
-
-        if (toolCardArrayList.get(1).getID() == 4)
-            tester = toolCardArrayList.get(1);
-
-        if (toolCardArrayList.get(2).getID() == 4)
-            tester = toolCardArrayList.get(2);
+        ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
@@ -214,15 +235,49 @@ public class ToolCard4Test {
         players.add(p3);
         players.add(p4);
 
-        Table table = new Table(players);
-        table.initialize();
-        table.setPublicObjects();
+        Table table = setThatCard(4,players);
 
-        while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
-            table = new Table(players);
-            table.initialize();
-            table.setPublicObjects();
-        }
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
 
         Match match = new Match(players,new Manager(),0);
 
@@ -322,22 +377,7 @@ public class ToolCard4Test {
 
     @Test
     void TestingWrongPositioning() {
-        ToolCard tester = new ToolCard();
-        CardContainer container = new CardContainer();
-        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
-
-        while (toolCardArrayList.get(0).getID() != 4 && toolCardArrayList.get(1).getID() != 4 && toolCardArrayList.get(2).getID() != 4) {
-            container = new CardContainer();
-            toolCardArrayList = container.pullOutTools();
-        }
-        if (toolCardArrayList.get(0).getID() == 4)
-            tester = toolCardArrayList.get(0);
-
-        if (toolCardArrayList.get(1).getID() == 4)
-            tester = toolCardArrayList.get(1);
-
-        if (toolCardArrayList.get(2).getID() == 4)
-            tester = toolCardArrayList.get(2);
+        ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
@@ -349,15 +389,49 @@ public class ToolCard4Test {
         players.add(p3);
         players.add(p4);
 
-        Table table = new Table(players);
-        table.initialize();
-        table.setPublicObjects();
+        Table table = setThatCard(4,players);
 
-        while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
-            table = new Table(players);
-            table.initialize();
-            table.setPublicObjects();
-        }
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
 
         Match match = new Match(players,new Manager(),0);
 
@@ -465,22 +539,7 @@ public class ToolCard4Test {
 
     @Test
     void TestingWrongSecondSelection() {
-        ToolCard tester = new ToolCard();
-        CardContainer container = new CardContainer();
-        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
-
-        while (toolCardArrayList.get(0).getID() != 4 && toolCardArrayList.get(1).getID() != 4 && toolCardArrayList.get(2).getID() != 4) {
-            container = new CardContainer();
-            toolCardArrayList = container.pullOutTools();
-        }
-        if (toolCardArrayList.get(0).getID() == 4)
-            tester = toolCardArrayList.get(0);
-
-        if (toolCardArrayList.get(1).getID() == 4)
-            tester = toolCardArrayList.get(1);
-
-        if (toolCardArrayList.get(2).getID() == 4)
-            tester = toolCardArrayList.get(2);
+        ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
@@ -492,15 +551,49 @@ public class ToolCard4Test {
         players.add(p3);
         players.add(p4);
 
-        Table table = new Table(players);
-        table.initialize();
-        table.setPublicObjects();
+        Table table = setThatCard(4,players);
 
-        while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
-            table = new Table(players);
-            table.initialize();
-            table.setPublicObjects();
-        }
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
 
         Match match = new Match(players,new Manager(),0);
 
@@ -616,22 +709,7 @@ public class ToolCard4Test {
 
     @Test
     void TestingWrongSecondPlacement() {
-        ToolCard tester = new ToolCard();
-        CardContainer container = new CardContainer();
-        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
-
-        while (toolCardArrayList.get(0).getID() != 4 && toolCardArrayList.get(1).getID() != 4 && toolCardArrayList.get(2).getID() != 4) {
-            container = new CardContainer();
-            toolCardArrayList = container.pullOutTools();
-        }
-        if (toolCardArrayList.get(0).getID() == 4)
-            tester = toolCardArrayList.get(0);
-
-        if (toolCardArrayList.get(1).getID() == 4)
-            tester = toolCardArrayList.get(1);
-
-        if (toolCardArrayList.get(2).getID() == 4)
-            tester = toolCardArrayList.get(2);
+        ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
@@ -643,15 +721,49 @@ public class ToolCard4Test {
         players.add(p3);
         players.add(p4);
 
-        Table table = new Table(players);
-        table.initialize();
-        table.setPublicObjects();
+        Table table = setThatCard(4,players);
 
-        while (players.get(0).getToolCards().get(0).getID() != 4 && players.get(0).getToolCards().get(1).getID() != 4 && players.get(0).getToolCards().get(2).getID() != 4) {
-            table = new Table(players);
-            table.initialize();
-            table.setPublicObjects();
-        }
+        VirtualViewObserver virtualViewObserver = new VirtualViewObserver() {
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void updateStateTurn(String whoIsTurn, long timeSleep) {
+
+            }
+
+            @Override
+            public void wrongMove(String s) {
+
+            }
+
+            @Override
+            public void chooseWindow(List<WindowPatternCard> windows) {
+
+            }
+
+            @Override
+            public void timerChoose(long timerWindows) {
+
+            }
+
+            @Override
+            public void notifyState(String state) {
+
+            }
+
+            @Override
+            public void notifyScore(String s) {
+
+            }
+        };
+
+        p1.addObserver(virtualViewObserver);
+        p2.addObserver(virtualViewObserver);
+        p3.addObserver(virtualViewObserver);
+        p4.addObserver(virtualViewObserver);
 
         Match match = new Match(players,new Manager(),0);
 
