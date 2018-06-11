@@ -95,7 +95,7 @@ public class MatchViewController implements Initializable, GuiInterface {
 
     }
 
-    public void setWindows() {
+    public void setTitleWindowPatternCard() {
         listTitle.addAll(myTitle,titlePlayer2,titlePlayer3,titlePlayer4);
         myTitle.setText(client.getName());
         int j = 1;
@@ -316,13 +316,12 @@ public class MatchViewController implements Initializable, GuiInterface {
 
         for (String subMessage: messages) {
             //qui ho il subMessage quindi devo fare starts with -> chiamo funzione sulla view diversa in base alla intestazione
-            if(subMessage.startsWith("draftpool")) {
+            if(subMessage.startsWith("gamePlayers")) {
+                this.handleGamePlayers(subMessage.replace("gamePlayers ", ""));
+            } else if(subMessage.startsWith("draftpool")) {
                 this.updateDraftPool(subMessage.replace("draftpool ", ""));
             } else if(subMessage.startsWith("toolcards")) {
                 this.updateToolcards(subMessage.replace("toolcards ", ""));
-            } else if(subMessage.startsWith("favors")) {
-                subMessage.replace("favors ", "");
-
             } else if(subMessage.startsWith("publiccards")) {
                 this.setObjectCard(subMessage.replace("publiccards ", ""));
             } else if(subMessage.startsWith("privatecard")) {
@@ -334,12 +333,17 @@ public class MatchViewController implements Initializable, GuiInterface {
                 this.updateRestriction(subMessage.replace("restrictions ", ""));
             } else if(subMessage.startsWith("dices")) {
                 this.updateWindowCards(subMessage.replace("dices ", ""));
-            } else if(subMessage.startsWith("playersstatus")) {
+            } else if(subMessage.startsWith("state")) {
                 this.updatePlayersStatus(subMessage.replace("playersstatus ", ""));
             } else if(subMessage.startsWith("favors")) {
                 this.updateFavTokens(subMessage.replace("favors ", ""));
             }
         }
+    }
+
+    private void handleGamePlayers(String gamePlayers) {
+        playerlist = FXCollections.observableArrayList(Arrays.asList(gamePlayers.split(",")));
+        this.setTitleWindowPatternCard();
     }
 
     public void updatePlayersStatus(String status) {
