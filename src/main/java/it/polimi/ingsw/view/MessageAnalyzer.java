@@ -49,8 +49,8 @@ public class MessageAnalyzer {
         }else if(message.equals("Connected, Welcome!")) {
             view.handleClientConnected(message);
         }else if(message.startsWith("choseWindow")) {
-            String windwos = message.replace("choseWindow ", "");
-            view.setPatternCards(windwos);
+            String windows = message.replace("choseWindow ", "");
+            view.setPatternCards(windows);
 
         }else if(message.startsWith("gamestate")) {
             String gameState = message.replace("gamestate ", "");

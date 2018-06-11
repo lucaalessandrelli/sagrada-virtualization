@@ -30,7 +30,7 @@ public class MovingDraftDice implements TurnState {
 
     @Override
     public void receiveMove(Pos pos) throws WrongMoveException {
-        if(turn.getRoundNumber() == 1 && turn.isFirstBracket()) {
+        if(turn.getRoundNumber() == 1 && turn.isFirstBracket() && turn.getToolCard().getID() != 8) {
             if (inspectorPlace.checkFirst(chosenDice,pos,turn.getPlayer().getWindowPatternCard()) && inspectorPlaceTool.check(chosenDice, pos, turn.getToolCard())) {
                 //call modifier
                 turn.getModifier().positionDiceFromDraft(chosenDice, posChosenDice, pos);
