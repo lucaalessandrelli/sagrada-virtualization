@@ -22,7 +22,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -92,7 +94,6 @@ public class MatchViewController implements Initializable, GuiInterface {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     public void setTitleWindowPatternCard() {
@@ -455,13 +456,33 @@ public class MatchViewController implements Initializable, GuiInterface {
 
         for(int i = 0; i< 4;i++) {
             for(int j = 0; j<5;j++) {
-                text = this.getChildrenByIndex(currentWindow,i,j);
-                if(text == null) {
-                    System.out.println("Sbagliato");
-                } else {
-                    ((Text)text).setText(restrictionList.get(5*i+j+1));
-                }
+                this.setRestriction(restrictionList.get(5*i+j+1) , currentWindow.getChildren().get(5*i+j+1));
             }
+        }
+    }
+
+    public void setRestriction(String restriction, Node anchorPane) {
+        char colorRestriction = restriction.charAt(0);
+        char shadeRestriction = restriction.charAt(1);
+
+
+        if(colorRestriction == 'P') {
+            anchorPane.setStyle("-fx-background-color: purple");
+        } else if(colorRestriction == 'R') {
+            anchorPane.setStyle("-fx-background-color: red");
+        } else if(colorRestriction == 'B') {
+            anchorPane.setStyle("-fx-background-color: blue");
+        } else if(colorRestriction == 'Y') {
+            anchorPane.setStyle("-fx-background-color: yellow");
+        } else if(colorRestriction == 'G') {
+            anchorPane.setStyle("-fx-background-color: green");
+        }
+
+        if(shadeRestriction!= '0') {
+            anchorPane.setStyle("-fx-background-image: url('/restrictions/"+shadeRestriction+".png');"+
+                                "-fx-background-size: contain;"+
+                                "-fx-background-repeat: no-repeat;"+
+                                "-fx-background-position: center center;");
         }
     }
 
@@ -472,12 +493,16 @@ public class MatchViewController implements Initializable, GuiInterface {
         List<String> draftList = Arrays.asList(draftPoolInfo.split(","));
 
         for(; i < 9;i++) {
-            x = i/3;
+            /*x = i/3;
             y = i%3;
             if(i < draftList.size()) {
                 ((Text) this.getChildrenByIndex(draftPool, x, y)).setText(draftList.get(i).charAt(0)+" "+draftList.get(i).charAt(1));
             } else {
                 ((Text) this.getChildrenByIndex(draftPool, x, y)).setText("");
+            }*/
+
+            if(i < draftList.size()) {
+                draftPool.getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
             }
         }
     }

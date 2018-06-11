@@ -22,11 +22,11 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="858.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.MatchViewController">
     <children>
         <TextField fx:id="turnOwnerField" editable="false" layoutX="105.0" layoutY="28.0" prefHeight="31.0" prefWidth="1157.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="133.0" AnchorPane.topAnchor="0.0" />
-      <Label fx:id="timerLabel" alignment="CENTER" layoutX="1207.0" layoutY="5.0" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: #2D3647;" text="Timer : " textFill="#ebebeb" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
+        <Label fx:id="timerLabel" alignment="CENTER" layoutX="1207.0" layoutY="5.0" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: #2D3647;" text="Timer : " textFill="#ebebeb" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
         <SplitPane dividerPositions="0.25, 0.5, 0.6" layoutX="555.0" layoutY="340.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -38,101 +38,101 @@
                                         <TitledPane fx:id="titlePlayer2" animated="false" layoutX="138.0" layoutY="130.0" prefHeight="448.0" prefWidth="425.0" text="non connesso" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <VBox alignment="CENTER" layoutX="-9.0" layoutY="-88.0" prefHeight="169.0" prefWidth="423.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <GridPane fx:id="windowplayer2" gridLinesVisible="true" prefHeight="169.0" prefWidth="423.0">
-                                                   <columnConstraints>
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                   </columnConstraints>
-                                                   <rowConstraints>
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                   </rowConstraints>
-                                                   <children>
-                                                      <Text fx:id="txt111" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt021" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt321" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt121" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt031" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt131" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt041" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt141" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt211" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt221" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt231" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt241" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt311" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt011" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt331" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt341" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt001" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt101" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt201" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt301" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                   </children>
-                                                </GridPane>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
-                                                   <children>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
+                                                    <children>
+                                                        <VBox alignment="CENTER" layoutX="-9.0" layoutY="-88.0" prefHeight="169.0" prefWidth="423.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <GridPane fx:id="windowplayer2" gridLinesVisible="true" prefHeight="169.0" prefWidth="423.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                    <children>
+                                                                        <Text fx:id="txt111" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt021" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt321" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt121" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt031" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt131" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt041" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt141" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt211" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt221" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt231" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt241" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt311" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt011" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt331" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt341" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt001" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt101" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt201" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt301" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                    </children>
+                                                                </GridPane>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                                    <children>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                    </children>
+                                                                    <VBox.margin>
+                                                                        <Insets />
+                                                                    </VBox.margin>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
                                                 </AnchorPane>
                                             </content>
                                         </TitledPane>
@@ -143,98 +143,98 @@
                                         <TitledPane fx:id="titlePlayer3" animated="false" layoutX="14.0" layoutY="83.0" prefHeight="448.0" prefWidth="206.0" text="non connesso" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <VBox layoutX="-50.0" layoutY="-86.0" prefHeight="169.0" prefWidth="418.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <GridPane fx:id="windowplayer3" gridLinesVisible="true" prefHeight="169.0" prefWidth="418.0">
-                                                   <columnConstraints>
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                   </columnConstraints>
-                                                   <rowConstraints>
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                   </rowConstraints>
-                                                   <children>
-                                                      <Text fx:id="txt112" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt022" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt322" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt122" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt032" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt132" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt042" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt142" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt212" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt222" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt232" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt242" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt312" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt012" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt332" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt342" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt002" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt102" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt202" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt302" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                   </children>
-                                                </GridPane>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
-                                                   <children>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
+                                                    <children>
+                                                        <VBox layoutX="-50.0" layoutY="-86.0" prefHeight="169.0" prefWidth="418.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <GridPane fx:id="windowplayer3" gridLinesVisible="true" prefHeight="169.0" prefWidth="418.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                    <children>
+                                                                        <Text fx:id="txt112" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt022" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt322" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt122" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt032" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt132" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt042" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt142" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt212" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt222" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt232" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt242" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt312" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt012" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt332" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt342" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt002" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt102" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt202" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt302" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                    </children>
+                                                                </GridPane>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                                    <children>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
                                                 </AnchorPane>
                                             </content>
                                         </TitledPane>
@@ -245,98 +245,98 @@
                                         <TitledPane fx:id="titlePlayer4" animated="false" layoutX="181.0" layoutY="136.0" prefHeight="448.0" prefWidth="639.0" text="non connesso" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <VBox layoutX="-36.0" layoutY="-88.0" prefHeight="169.0" prefWidth="423.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <GridPane fx:id="windowplayer4" gridLinesVisible="true" prefHeight="169.0" prefWidth="423.0">
-                                                   <columnConstraints>
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                   </columnConstraints>
-                                                   <rowConstraints>
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                   </rowConstraints>
-                                                   <children>
-                                                      <Text fx:id="txt113" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt023" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt323" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt123" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt033" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt133" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt043" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt143" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt213" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt223" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt233" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt243" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt313" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt013" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt333" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt343" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt003" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt103" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt203" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                      <Text fx:id="txt303" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                   </children>
-                                                </GridPane>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
-                                                   <children>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
+                                                    <children>
+                                                        <VBox layoutX="-36.0" layoutY="-88.0" prefHeight="169.0" prefWidth="423.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <GridPane fx:id="windowplayer4" gridLinesVisible="true" prefHeight="169.0" prefWidth="423.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
+                                                                    <children>
+                                                                        <Text fx:id="txt113" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt023" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt323" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt123" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt033" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt133" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt043" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt143" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt213" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt223" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt233" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt243" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt313" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt013" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt333" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt343" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt003" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt103" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt203" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                                        <Text fx:id="txt303" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                    </children>
+                                                                </GridPane>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                                    <children>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
                                                 </AnchorPane>
                                             </content>
                                         </TitledPane>
@@ -346,103 +346,103 @@
                         </SplitPane>
                     </children>
                 </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                           <children>
-                              <TitledPane layoutX="120.0" layoutY="-2.0" prefHeight="196.0" prefWidth="639.0" text="ToolCard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <content>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                       <children>
-                                          <HBox fx:id="boxToolCards" alignment="CENTER" layoutX="119.0" layoutY="14.0" prefHeight="164.0" prefWidth="637.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <ImageView fx:id="toolcard1" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../toolcards/cover.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fx:id="toolcard2" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../toolcards/cover.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fx:id="toolcard3" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../toolcards/cover.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                           </children>
-                        </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                           <children>
-                              <TitledPane prefHeight="196.0" prefWidth="639.0" text="Carte Obiettivo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <content>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                       <children>
-                                          <HBox fx:id="boxObjectiveCards" alignment="CENTER" layoutX="149.0" layoutY="50.0" prefHeight="174.0" prefWidth="637.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <ImageView fx:id="cartaobiettivo1" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../objectivecards/public/cover.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fx:id="cartaobiettivo2" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../objectivecards/public/cover.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fx:id="cartaobiettivo3" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../objectivecards/public/cover.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
-               </children>
-            </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <children>
+                                        <TitledPane layoutX="120.0" layoutY="-2.0" prefHeight="196.0" prefWidth="639.0" text="ToolCard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <content>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <HBox fx:id="boxToolCards" alignment="CENTER" layoutX="119.0" layoutY="14.0" prefHeight="164.0" prefWidth="637.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <ImageView fx:id="toolcard1" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
+                                                                    <image>
+                                                                        <Image url="@../toolcards/cover.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                                <ImageView fx:id="toolcard2" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
+                                                                    <image>
+                                                                        <Image url="@../toolcards/cover.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                                <ImageView fx:id="toolcard3" fitHeight="279.0" fitWidth="206.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true">
+                                                                    <image>
+                                                                        <Image url="@../toolcards/cover.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            </padding>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <children>
+                                        <TitledPane prefHeight="196.0" prefWidth="639.0" text="Carte Obiettivo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <content>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <HBox fx:id="boxObjectiveCards" alignment="CENTER" layoutX="149.0" layoutY="50.0" prefHeight="174.0" prefWidth="637.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <ImageView fx:id="cartaobiettivo1" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
+                                                                    <image>
+                                                                        <Image url="@../objectivecards/public/cover.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                                <ImageView fx:id="cartaobiettivo2" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
+                                                                    <image>
+                                                                        <Image url="@../objectivecards/public/cover.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                                <ImageView fx:id="cartaobiettivo3" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true">
+                                                                    <image>
+                                                                        <Image url="@../objectivecards/public/cover.png" />
+                                                                    </image>
+                                                                </ImageView>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            </padding>
+                                                        </HBox>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </children>
+                </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
                         <TitledPane animated="false" layoutX="67.0" layoutY="-58.0" prefHeight="75.0" prefWidth="1288.0" text="Traccia dei Round" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <HBox alignment="CENTER" layoutX="24.0" layoutY="-28.0" prefHeight="43.0" prefWidth="1286.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
-                                 </children>
-                              </HBox>
-                           </children>
+                                    <children>
+                                        <HBox alignment="CENTER" layoutX="24.0" layoutY="-28.0" prefHeight="43.0" prefWidth="1286.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: aaaaaa;" />
+                                            </children>
+                                        </HBox>
+                                    </children>
                                 </AnchorPane>
                             </content>
                         </TitledPane>
@@ -452,22 +452,22 @@
                     <children>
                         <SplitPane dividerPositions="0.183, 0.4, 0.75" layoutX="604.0" layoutY="155.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                           <children>
-                              <TitledPane animated="false" layoutX="164.0" layoutY="108.0" prefHeight="366.0" prefWidth="510.0" text="Carta Obiettivo privata" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fx:id="privateObjectiveCard" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <image>
-                                                <Image url="@../objectivecards/private/cover.png" />
-                                             </image></ImageView>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                           </children>
-                        </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <children>
+                                        <TitledPane animated="false" layoutX="164.0" layoutY="108.0" prefHeight="366.0" prefWidth="510.0" text="Carta Obiettivo privata" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ImageView fx:id="privateObjectiveCard" fitHeight="279.0" fitWidth="206.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <image>
+                                                                <Image url="@../objectivecards/private/cover.png" />
+                                                            </image></ImageView>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                    </children>
+                                </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                     <children>
                                         <TitledPane animated="false" layoutX="164.0" layoutY="108.0" prefHeight="366.0" prefWidth="510.0" text="Riserva" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -509,112 +509,112 @@
                                             <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                     <children>
-                                          <VBox layoutX="121.0" layoutY="-100.0" prefHeight="292.0" prefWidth="441.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                              <GridPane fx:id="mywindow" gridLinesVisible="true" prefHeight="282.0" prefWidth="417.0">
-                                                                  <columnConstraints>
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                  </columnConstraints>
-                                                                  <rowConstraints>
-                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  </rowConstraints>
-                                                                  <children>
-                                                                      <Text fx:id="txt11" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt02" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt32" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt12" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt03" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt13" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt04" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt14" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt21" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt22" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt23" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt24" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt31" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt01" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt33" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt34" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt00" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt10" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt20" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                                      <Text fx:id="txt30" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                                                                  </children>
-                                                              </GridPane>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                        <VBox layoutX="121.0" layoutY="-100.0" prefHeight="292.0" prefWidth="441.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <GridPane fx:id="mywindow" gridLinesVisible="true" prefHeight="282.0" prefWidth="417.0">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                    </rowConstraints>
                                                    <children>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
                                                    </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
+                                                                </GridPane>
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                                    <children>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                            <HBox.margin>
+                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                            </HBox.margin>
+                                                                        </Circle>
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
                                                     </children>
                                                 </AnchorPane>
                                             </content>
                                         </TitledPane>
                                     </children>
                                 </AnchorPane>
-                        <AnchorPane prefHeight="324.0" prefWidth="475.0">
-                           <children>
-                              <JFXButton fx:id="passButton" alignment="CENTER" layoutY="-1.0" onMouseClicked="#handlePassClicked" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #3C58FA;" text="Ho finito" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXListView fx:id="playersStatus" layoutY="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
-                           </children>
-                        </AnchorPane>
+                                <AnchorPane prefHeight="324.0" prefWidth="475.0">
+                                    <children>
+                                        <JFXButton fx:id="passButton" alignment="CENTER" layoutY="-1.0" onMouseClicked="#handlePassClicked" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #3C58FA;" text="Ho finito" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                            <font>
+                                                <Font name="System Bold" size="15.0" />
+                                            </font>
+                                        </JFXButton>
+                                        <JFXListView fx:id="playersStatus" layoutY="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                                    </children>
+                                </AnchorPane>
                             </items>
                         </SplitPane>
                     </children>

@@ -1,9 +1,6 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.view.MessageAnalyzer;
-import it.polimi.ingsw.view.ViewInterface;
-import it.polimi.ingsw.view.gui.MatchViewController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -36,6 +32,9 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
 
     @FXML
     private GridPane patternCardGrid;
+
+    @FXML
+    private GridPane provaGrid;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,6 +71,23 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
         timerLabel.setText("Timer : " + cardChoiceTimer);
     }
 
+    public void prova() {
+        provaGrid.getChildren().get(1).setStyle("-fx-background-color: red;");
+        //provaGrid.getChildren().get(3).setStyle("-fx-background-image: url('/objectiveCards/dadi.png');");
+        /*provaGrid.getChildren().get(3).setStyle("-fx-background-size: contain;");
+        provaGrid.getChildren().get(3).setStyle("-fx-background-repeat: no-repeat;");*/
+        provaGrid.setStyle("-fx-background-color: yellow;");
+
+        provaGrid.getChildren().get(3).setStyle(
+                "-fx-background-image: url(" +
+                        "'/objectiveCards/dadi.png'" +
+                        "); " +
+                        "-fx-background-size: contain;"+
+                        "-fx-background-repeat: no-repeat;"+
+                        "-fx-background-position: center center;"
+        );
+    }
+
     @FXML
     public void handleCardChoice(javafx.scene.input.MouseEvent event) {
         //gestisci evento
@@ -79,7 +95,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
     }
 
     public void changeScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui2.fxml"));
         Parent root = fxmlLoader.load();
 
         // Get the Controller from the FXMLLoader
@@ -146,7 +162,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
     }
 
     @Override
-    public void setPatternCards(String setup) {
+    public void setPatternCards(String windows) {
         //setCards
     }
 
