@@ -100,6 +100,12 @@ public class ToolCard7Test {
         publicObjects.setDraftPool(table.getDraftPool());
         publicObjects.setObjectiveCards(table.getObjCard());
         publicObjects.setToolCards(table.getToolCards());
+        publicObjects.setRoundTrack(table.getRoundTrack());
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        publicObjects.setOthersPlayers(playerList);
 
         p1.setPublicObjects(publicObjects);
 
@@ -215,6 +221,12 @@ public class ToolCard7Test {
         publicObjects.setDraftPool(table.getDraftPool());
         publicObjects.setObjectiveCards(table.getObjCard());
         publicObjects.setToolCards(table.getToolCards());
+        publicObjects.setRoundTrack(table.getRoundTrack());
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        publicObjects.setOthersPlayers(playerList);
 
         p1.setPublicObjects(publicObjects);
 
@@ -317,6 +329,12 @@ public class ToolCard7Test {
         publicObjects.setDraftPool(table.getDraftPool());
         publicObjects.setObjectiveCards(table.getObjCard());
         publicObjects.setToolCards(table.getToolCards());
+        publicObjects.setRoundTrack(table.getRoundTrack());
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        publicObjects.setOthersPlayers(playerList);
 
         p1.setPublicObjects(publicObjects);
 

@@ -74,8 +74,6 @@ public class Rules {
         int countsecond = 0;
         int dicenumber;
         List<List<Cell>> w = window.getMatr();
-        //int x = w.size();
-        //int y = w.get(0).size();
 
 
         for(List<Cell> cells: w){
@@ -107,7 +105,9 @@ public class Rules {
             }
         }
         for(int h: arrayofvalues){
-            if(h < min)
+            if(h == 0)
+                return 0;
+            else if(h < min)
                 min = h;
         }
         if(min == 20)
@@ -117,7 +117,7 @@ public class Rules {
     }
 
     private int varietycolours(WindowPatternCard window){
-        int arrayofvalues[] = new int[4];
+        int[] arrayofvalues = new int[5];
         int min = 20;
         String color;
         List<List<Cell>> w = window.getMatr();
@@ -126,7 +126,6 @@ public class Rules {
                 if(cell.isOccupied()) {
                     color = cell.getDice().getColour().toString();
                     switch (color) {
-                        //scale all the numbers in the array with +1 to find the real number you're searching for
                         case "Y":
                             arrayofvalues[0]++;
                             break;
@@ -148,7 +147,9 @@ public class Rules {
             }
         }
         for(int h: arrayofvalues){
-            if(h < min)
+            if(h == 0)
+                return 0;
+            else if(h < min)
                 min = h;
         }
         if(min == 20)
@@ -160,11 +161,10 @@ public class Rules {
     private int countcolor (WindowPatternCard window, Colour c){
         List<List<Cell>> w = window.getMatr();
         String color = c.toString();
-        String k;
         int cont = 0;
         for(List<Cell> cells: w){
             for(Cell cell: cells){
-                if(cell.isOccupied() && cell.getDice().getColour().equals(c))
+                if(cell.isOccupied() && cell.getDice().getColour().toString().equals(color))
                     cont = cont + cell.getDice().getNumber();
             }
         }
@@ -173,10 +173,8 @@ public class Rules {
 
     private int near(WindowPatternCard window, String direction, String type){
         List<List<Cell>> w = window.getMatr();
-        List<Colour> colours;
-        List<Integer> numbers;
         int result = 0;
-        int j,i,x,y,sum;
+        int j,i,x,y,k;
         boolean column = direction.equals("COLUMN");
         boolean find = false;
         x = w.size();
@@ -188,10 +186,12 @@ public class Rules {
                         result++;
                 }
             } else {
-                for (i = 0; i < x; i++) {
-                    for (j = 0; j < y - 1 && !find; j++) {
-                        if (w.get(j).get(i).getDice().getNumber() == w.get(j + 1).get(x).getDice().getNumber())
-                            find = true;
+                for (i = 0; i < y; i++) {
+                    for (j = 0; j < x - 1 && !find; j++) {
+                        for(k = j; k < x -1 && !find; k++){
+                            if (w.get(k).get(i).getDice().getNumber() == w.get(k + 1).get(i).getDice().getNumber())
+                                find = true;
+                        }
                     }
                     if (!find)
                         result++;
@@ -203,14 +203,18 @@ public class Rules {
         else if (type.equals("NOCOLOR")) {
                 if (!column) {
                     for (i = 0; i < x; i++) {
-                        if (allDifferent(w.get(i), true, 5))
+                        if (allDifferent(w.get(i), true, 5)) {
+                            System.out.println(allDifferent(w.get(i), true, 5));
                             result++;
+                        }
                     }
                 } else {
-                    for (i = 0; i < x; i++) {
-                        for (j = 0; j < y - 1; j++) {
-                            if (w.get(j).get(i).getDice().getColour().equals(w.get(j + 1).get(x).getDice().getColour()))
-                                find = true;
+                    for (i = 0; i < y; i++) {
+                        for (j = 0; j < x - 1 && !find; j++) {
+                            for(k = j; k < x -1 && !find; k++){
+                                if (w.get(k).get(i).getDice().getColour().equals(w.get(k + 1).get(i).getDice().getColour()))
+                                    find = true;
+                            }
                         }
                         if (!find)
                             result++;
@@ -225,19 +229,38 @@ public class Rules {
 
     private int diagonal(WindowPatternCard window){
         List<List<Cell>> w = window.getMatr();
+        boolean[][] verified = new boolean[3][4];
         int result = 0;
         int j;
-        int adder = 2;
-        for(int i = 0; i < 3; i++){
-            for(j = 0; j < 5; j++){
-                if(j != 4 && verifySameColour(w,i+1,j+1,i,j)){
+        int adder;
+        int x = w.size();
+        int y = w.get(0).size();
+        for(int i = 0; i < 4; i++){
+            for(int k = 0; k < 5; k++){
+                verified[i][k] = false;
+            }
+        }
+        for(int i = 0; i < x; i++){
+            for(j = 0; j < y; j++){
+                if(j != 4 && verifySameColour(w,i,j,i+1,j+1)){
+                    if(verified[i][j] || verified[i+1][j+1])
+                        adder = 1;
+                    else
+                        adder = 2;
                     result = result + adder;
+                    verified[i][j] = true;
+                    verified[i+1][j+1] = true;
                 }
-                if(j != 0 && verifySameColour(w,i+1,j-1,i,j)){
+                if(j != 0 && verifySameColour(w,i,j,i+1,j-1)){
+                    if(verified[i][j])
+                        adder = 1;
+                    else
+                        adder = 2;
                     result = result + adder;
+                    verified[i][j] = true;
+                    verified[i+1][j+1] = true;
                 }
             }
-            adder = 1;
         }
         return result;
     }

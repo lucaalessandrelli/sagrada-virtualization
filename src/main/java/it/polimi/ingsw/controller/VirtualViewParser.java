@@ -25,7 +25,6 @@ public class VirtualViewParser {
     private static final String DICES = "dices ";
     private static final String SETUP = "setup ";
     private static final String CHOSE = "choseWindow ";
-    private static final String WINDOW = "window";
 
 
 
@@ -213,12 +212,15 @@ public class VirtualViewParser {
     public String extractedWindows(List<WindowPatternCard> windows){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(CHOSE);
+        WindowPatternCard window;
 
         for(int i = 0; i < windows.size(); i++){
-            stringBuilder.append(WINDOW);
-            stringBuilder.append(i+1);
+            window = windows.get(i);
+            stringBuilder.append(window.getNum());
             stringBuilder.append(SPACE);
-            stringBuilder.append(this.restrictions(windows.get(i)));
+            stringBuilder.append(window.getDifficulty());
+            stringBuilder.append(SPACE);
+            stringBuilder.append(this.restrictions(window));
             stringBuilder.append(SEP);
         }
         return stringBuilder.toString();

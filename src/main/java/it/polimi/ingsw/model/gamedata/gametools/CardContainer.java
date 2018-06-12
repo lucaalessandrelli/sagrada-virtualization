@@ -302,8 +302,8 @@ public class CardContainer {
 
         NodeList nodelist = document.getElementsByTagName(PMETHODS).item(cont).getChildNodes();
 
-        for(int i = 1; i < nodelist.getLength() - 1; i++){
-            all = nodelist.item(i).getTextContent(); //here is i+1 because the first element in the nodelist is not a real element
+        for(int i = 1; i < nodelist.getLength() - 1; i = i+2){
+            all = nodelist.item(i).getTextContent(); //here the counter i starts from 1 because the first element in the nodelist is not a real element
             mytool.getNamePMethods().add(Arrays.asList(all.split(",")));
             //iterate.deleteCharAt(iterate.toString().length()-1);
         }

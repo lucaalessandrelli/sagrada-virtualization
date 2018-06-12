@@ -25,7 +25,7 @@ public class SelectingValue implements TurnState {
 
     //GETTING MOVE METHODS
     @Override
-    public void receiveMove(Dice chosenDice,Pos posChosenDice) throws WrongMoveException {
+    public void receiveMove(Dice toolDice,Pos toolPos) throws WrongMoveException {
         if(inspectorContextTool.checkColourDice(chosenDice,posChosenDice,toolDice,toolPos)) {
             //call modifier
             turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);

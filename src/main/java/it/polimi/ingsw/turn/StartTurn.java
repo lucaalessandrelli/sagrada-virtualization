@@ -29,7 +29,8 @@ public class StartTurn implements TurnState {
     @Override
     public void receiveMove(ToolCard toolCard) throws WrongMoveException {
         int cardId = toolCard.getID();
-        if(toolList.contains(cardId) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards())) && ((cardId == 7 && !turn.isFirstBracket()) || (cardId != 7))) {
+        if(toolList.contains(cardId) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards())) && ((cardId != 7) ||
+                (!turn.isFirstBracket())) && ((cardId!=12) || (turn.getRoundNumber()!=1))) {
             //setting the toolCard used in this turn
             //setting the list of states for the dynamic state machine
             //setting the list of operations for the AutomatedOperation State

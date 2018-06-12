@@ -30,17 +30,15 @@ public class PositionDice1 implements TurnState {
     @Override
     public void receiveMove(ToolCard toolCard) throws WrongMoveException {
         int cardId = toolCard.getID();
-        if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards()))) {
-            if ((cardId == 8 && turn.isFirstBracket()) || (cardId != 8)) {
-                //setting the toolCard used in this turn
-                //setting the list of states for the dynamic state machine
-                //setting the list of operations for the AutomatedOperation State
-                turn.setToolCardInfo(toolCard);
-                //setting the check point i need to return after the user do the moves of the toolCard
-                turn.setCheckPointState(new EndTurn(turn));
-                //need to set dynamic current state
-                turn.setDynamicState(new Dice(),new Pos(), new Dice(), new Pos());
-            }
+        if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards())) && ((cardId == 8 && turn.isFirstBracket()) || (cardId != 8))) {
+           //setting the toolCard used in this turn
+           //setting the list of states for the dynamic state machine
+           //setting the list of operations for the AutomatedOperation State
+           turn.setToolCardInfo(toolCard);
+           //setting the check point i need to return after the user do the moves of the toolCard
+           turn.setCheckPointState(new EndTurn(turn));
+           //need to set dynamic current state
+           turn.setDynamicState(new Dice(),new Pos(), new Dice(), new Pos());
         } else {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere la carta strumento "+ toolCard.toString() +".");
         }

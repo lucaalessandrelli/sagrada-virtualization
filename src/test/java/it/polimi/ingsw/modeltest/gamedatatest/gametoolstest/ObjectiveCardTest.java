@@ -58,7 +58,7 @@ public class ObjectiveCardTest {
             windowPatternCard.placeDice(dr,i,2);
             windowPatternCard.placeDice(dp,i,3);
             windowPatternCard.placeDice(dg,i,4);
-            //windowPatternCard.show();
+            windowPatternCard.show();
             assertEquals((i+1)*6,tester.finalpoints(windowPatternCard));
         }
 

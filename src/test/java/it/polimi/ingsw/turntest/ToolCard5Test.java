@@ -301,6 +301,12 @@ public class ToolCard5Test {
         publicObjects.setDraftPool(table.getDraftPool());
         publicObjects.setObjectiveCards(table.getObjCard());
         publicObjects.setToolCards(table.getToolCards());
+        publicObjects.setRoundTrack(table.getRoundTrack());
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        publicObjects.setOthersPlayers(playerList);
 
 
         Dice d4 = new Dice(Colour.YELLOW);
@@ -410,6 +416,12 @@ public class ToolCard5Test {
         publicObjects.setDraftPool(table.getDraftPool());
         publicObjects.setObjectiveCards(table.getObjCard());
         publicObjects.setToolCards(table.getToolCards());
+        publicObjects.setRoundTrack(table.getRoundTrack());
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        publicObjects.setOthersPlayers(playerList);
 
         Dice d4 = new Dice(Colour.YELLOW);
         p1.getWindowPatternCard().placeDice(d4, 1, 1);
@@ -525,6 +537,7 @@ public class ToolCard5Test {
         publicObjects.setDraftPool(table.getDraftPool());
         publicObjects.setObjectiveCards(table.getObjCard());
         publicObjects.setToolCards(table.getToolCards());
+            publicObjects.setRoundTrack(table.getRoundTrack());
 
         p1.setPublicObjects(publicObjects);
 

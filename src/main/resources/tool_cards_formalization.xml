@@ -125,7 +125,7 @@
 		<NUMBER>12</NUMBER>
 		<NAME>Taglierina Manuale</NAME>
 		<COLOUR>B</COLOUR>
-		<STATE>SelectingRoundTrackDice,SelectingWindowDice,MovingWindowDice,SelectingOptionalWindowDice,MovingWindowDice</STATE>
+		<STATE>SelectingRoundTrackDice,SelectingWindowDice,MovingWindowDice,SelectingOptionalWindowDice,MovingWindowDice,CheckPointState</STATE>
 		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS>inRoundTr,inPatCard,inPatCard</CMETHODS>
 		<PMETHODS>

@@ -13,7 +13,7 @@ public class RoundTrack {
     }
 
     public List<Dice> getDiceOnRoundtrack(int numRound){
-        return diceOnRoundTrack.get(numRound);
+        return diceOnRoundTrack.get(numRound-1);
     }
     public void setDiceOnRoundTrack(int numRound, List<Dice> dice){
         diceOnRoundTrack.add(numRound-1, dice);

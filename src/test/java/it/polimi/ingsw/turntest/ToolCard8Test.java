@@ -2,10 +2,7 @@ package it.polimi.ingsw.turntest;
 
 import it.polimi.ingsw.Match;
 import it.polimi.ingsw.controller.Manager;
-import it.polimi.ingsw.model.gamedata.Player;
-import it.polimi.ingsw.model.gamedata.Pos;
-import it.polimi.ingsw.model.gamedata.PublicObjects;
-import it.polimi.ingsw.model.gamedata.Table;
+import it.polimi.ingsw.model.gamedata.*;
 import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
@@ -23,6 +20,8 @@ import static it.polimi.ingsw.turntest.TurnTest.lastName;
 import static it.polimi.ingsw.turntest.TurnTest.pullOutThatCard;
 import static it.polimi.ingsw.turntest.TurnTest.setThatCard;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ToolCard8Test {
 
@@ -100,8 +99,17 @@ public class ToolCard8Test {
         publicObjects.setDraftPool(table.getDraftPool());
         publicObjects.setObjectiveCards(table.getObjCard());
         publicObjects.setToolCards(table.getToolCards());
+        publicObjects.setRoundTrack(table.getRoundTrack());
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(p2);
+        playerList.add(p3);
+        playerList.add(p4);
+        publicObjects.setOthersPlayers(playerList);
 
         p1.setPublicObjects(publicObjects);
+
+        Dice di = new Dice(Colour.RED);
+        p1.getWindowPatternCard().placeDice(di,1,0);
 
         Turn turn = new Turn(p1, round, 1, true, table);
 
@@ -155,6 +163,22 @@ public class ToolCard8Test {
         }
 
 
+        state = "MovingDraftDice";
+
+        assertEquals(state, lastName(turn.getState().getClass().toString(), state.length()+1));
+
+        try {
+            turn.receiveMove(new Pos(2,1));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
+
+        assertFalse(turn.getPlayer().isActive());
+
+
+        state = "EndTurn";
+
+        assertEquals(state, lastName(turn.getState().getClass().toString(), state.length()+1));
 
     }
 
