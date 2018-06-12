@@ -1,9 +1,7 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.network.server;
 
 
 import it.polimi.ingsw.controller.Manager;
-import it.polimi.ingsw.network.server.NetworkManager;
-import it.polimi.ingsw.network.server.Server;
 
 public class ServerMain {
 
