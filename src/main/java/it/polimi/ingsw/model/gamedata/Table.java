@@ -45,7 +45,7 @@ public class Table {
 
     public void selectWindowCards(){
         List<WindowPatternCard> patterns = new ArrayList<>();
-        for (int i = 0; i < myplayers.size()-1;i++) {
+        for (int i = 0; i < myplayers.size();i++) {
             patterns.add(windowPatternCards.get((i*4)));
             patterns.add(windowPatternCards.get((i*4)+1));
             patterns.add(windowPatternCards.get((i*4)+2));
