@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -33,6 +35,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
     private GuiHandler guiHandler;
     private String setup;
     private List<String> givenPatternCards = new ArrayList<>();
+    private boolean isChosen = false;
 
     @FXML
     private Label timerLabel;
@@ -78,8 +81,28 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
 
     @FXML
     public void handleCardChoice(javafx.scene.input.MouseEvent event) {
-        //gestisci evento
-        //risali al numero della carta scelta e mandalo al client
+        /*int indexChosen;
+
+        if(!isChosen) {
+            GridPane source = (GridPane) event.getSource();
+            for(int i = 0; i < children.size();i++) {
+                if(children.get(i) == source) {
+                    indexChosen = i;
+                }
+            }
+        }
+
+        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);*/
+        if (!isChosen) {
+            Node source = (Node) event.getSource();
+            int y = patternCardGrid.getColumnIndex(source);
+            int x = patternCardGrid.getRowIndex(source);
+
+            String patternCardToSend = givenPatternCards.get(2 * x + y);
+
+            client.sendCommand("chooseCard "+patternCardToSend);
+            isChosen = true;
+        }
     }
 
     public void changeScene() throws IOException {
@@ -158,8 +181,21 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
             List<String> substring = FXCollections.observableArrayList(Arrays.asList(patternCardList.get(k).split(" ")));
 
             givenPatternCards.add(substring.get(0));
-            List<String> restrictionList = FXCollections.observableArrayList(Arrays.asList(substring.get(1).split(",")));
-            GridPane currentWindow = (GridPane)(children.get(k));
+            String numFavors = substring.get(1);
+            List<String> restrictionList = FXCollections.observableArrayList(Arrays.asList(substring.get(2).split(",")));
+
+            VBox currentVbox = (VBox)children.get(k);
+            ObservableList<Node> boxChildren = currentVbox.getChildren();
+
+            GridPane currentWindow = (GridPane)(boxChildren.get(0));
+            HBox favorBox = (HBox)(boxChildren.get(1));
+            ObservableList<Node> tokenList = favorBox.getChildren();
+
+            for(int i = 0; i < tokenList.size();i++) {
+                if(i >= Integer.parseInt(numFavors)) {
+                    tokenList.get(i).setVisible(false);
+                }
+            }
 
             for(int i = 0; i< 4;i++) {
                 for(int j = 0; j<5;j++) {
