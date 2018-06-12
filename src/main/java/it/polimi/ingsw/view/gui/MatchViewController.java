@@ -456,7 +456,7 @@ public class MatchViewController implements Initializable, GuiInterface {
 
         for(int i = 0; i< 4;i++) {
             for(int j = 0; j<5;j++) {
-                this.setRestriction(restrictionList.get(5*i+j+1) , currentWindow.getChildren().get(5*i+j+1));
+                this.setRestriction(restrictionList.get(5*i+j+1) , currentWindow.getChildren().get(5*i+j));
             }
         }
     }

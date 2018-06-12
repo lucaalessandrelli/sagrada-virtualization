@@ -4,9 +4,12 @@ import it.polimi.ingsw.network.client.Client;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -17,6 +20,9 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PatternCardChoiceViewController implements Initializable, GuiInterface {
@@ -26,6 +32,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
     private String matchTimer;
     private GuiHandler guiHandler;
     private String setup;
+    private List<String> givenPatternCards = new ArrayList<>();
 
     @FXML
     private Label timerLabel;
@@ -33,8 +40,6 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
     @FXML
     private GridPane patternCardGrid;
 
-    @FXML
-    private GridPane provaGrid;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,23 +74,6 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
         }
 
         timerLabel.setText("Timer : " + cardChoiceTimer);
-    }
-
-    public void prova() {
-        provaGrid.getChildren().get(1).setStyle("-fx-background-color: red;");
-        //provaGrid.getChildren().get(3).setStyle("-fx-background-image: url('/objectiveCards/dadi.png');");
-        /*provaGrid.getChildren().get(3).setStyle("-fx-background-size: contain;");
-        provaGrid.getChildren().get(3).setStyle("-fx-background-repeat: no-repeat;");*/
-        provaGrid.setStyle("-fx-background-color: yellow;");
-
-        provaGrid.getChildren().get(3).setStyle(
-                "-fx-background-image: url(" +
-                        "'/objectiveCards/dadi.png'" +
-                        "); " +
-                        "-fx-background-size: contain;"+
-                        "-fx-background-repeat: no-repeat;"+
-                        "-fx-background-position: center center;"
-        );
     }
 
     @FXML
@@ -163,7 +151,47 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
 
     @Override
     public void setPatternCards(String windows) {
-        //setCards
+        ObservableList<Node> children = patternCardGrid.getChildren();
+        ObservableList<String> patternCardList = FXCollections.observableArrayList(Arrays.asList(windows.split(";")));
+
+        for(int k = 0; k < patternCardList.size();k++) {
+            List<String> substring = FXCollections.observableArrayList(Arrays.asList(patternCardList.get(k).split(" ")));
+
+            givenPatternCards.add(substring.get(0));
+            List<String> restrictionList = FXCollections.observableArrayList(Arrays.asList(substring.get(1).split(",")));
+            GridPane currentWindow = (GridPane)(children.get(k));
+
+            for(int i = 0; i< 4;i++) {
+                for(int j = 0; j<5;j++) {
+                    this.setRestriction(restrictionList.get(5*i+j) , currentWindow.getChildren().get(5*i+j));
+                }
+            }
+        }
+    }
+
+    public void setRestriction(String restriction, Node anchorPane) {
+        char colorRestriction = restriction.charAt(0);
+        char shadeRestriction = restriction.charAt(1);
+
+
+        if(colorRestriction == 'P') {
+            anchorPane.setStyle("-fx-background-color: purple");
+        } else if(colorRestriction == 'R') {
+            anchorPane.setStyle("-fx-background-color: red");
+        } else if(colorRestriction == 'B') {
+            anchorPane.setStyle("-fx-background-color: blue");
+        } else if(colorRestriction == 'Y') {
+            anchorPane.setStyle("-fx-background-color: yellow");
+        } else if(colorRestriction == 'G') {
+            anchorPane.setStyle("-fx-background-color: green");
+        }
+
+        if(shadeRestriction!= '0') {
+            anchorPane.setStyle("-fx-background-image: url('/restrictions/"+shadeRestriction+".png');"+
+                    "-fx-background-size: contain;"+
+                    "-fx-background-repeat: no-repeat;"+
+                    "-fx-background-position: center center;");
+        }
     }
 
     @Override

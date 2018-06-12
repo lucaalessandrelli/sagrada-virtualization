@@ -104,7 +104,6 @@ public class WaitingRoomViewController implements Initializable, GuiInterface {
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         controller.startTimer();
-        controller.prova();
         guiHandler.setGui(controller);
 
         stage.setScene(scene);
