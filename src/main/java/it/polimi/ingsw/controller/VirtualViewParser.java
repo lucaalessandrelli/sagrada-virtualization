@@ -123,7 +123,6 @@ public class VirtualViewParser {
         builder.append(SEP);
 
         for (Player p : this.player.getPublicObjects().getPlayers()) {
-            builder.append(STATE);
             builder.append(p.getUsername());
             builder.append(VIRG);
             builder.append(this.active(p));
