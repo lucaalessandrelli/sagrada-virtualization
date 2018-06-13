@@ -2,12 +2,15 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
+import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamelogic.NotEnoughPlayersException;
 import it.polimi.ingsw.model.gamelogic.Round;
-import it.polimi.ingsw.model.gamedata.Table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Match extends Thread {
     private  Manager manager;
@@ -36,12 +39,22 @@ public class Match extends Thread {
         table = new Table(playerList);
         table.initialize();
         table.selectWindowCards();
+        ScheduledExecutorService exec = Executors.newScheduledThreadPool(10);
+        exec.scheduleWithFixedDelay(() -> {
+            for(Player p : playerList){
+                if(p.getWindowPatternCard()==null){
+                    return;
+                }
+            }
+            this.interrupt();
+
+        }, 0, 500, TimeUnit.MILLISECONDS);
         try {
             Thread.sleep(timerCard);
+            playerList.stream().filter(player -> player.getWindowPatternCard()==null).forEach(player -> table.setWindow(player.getUsername()));
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            exec.shutdown();
         }
-        playerList.stream().filter(player -> player.getWindowPatternCard()==null).forEach(player -> table.setWindow(player.getUsername()));
         playerList.forEach(Player::notifyPlayer);
         /*SETTING ROUNDS*/
         for(roundNumber = 1; roundNumber <= 10; roundNumber++) {

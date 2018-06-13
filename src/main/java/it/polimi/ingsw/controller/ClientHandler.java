@@ -18,12 +18,12 @@ public class ClientHandler {
 
     public synchronized void addPlayer(String name, int idMatch){
         allPlayers.put(name,idMatch);
-        out.println(allPlayers.size() + " players logged");
+        out.println(allPlayers.size() + " players playing");
     }
 
     public synchronized void removePlayer(String name){
         allPlayers.remove(name);
-        out.println(allPlayers.size() + " players logged");
+        out.println(allPlayers.size() + " players playing");
     }
 
     public int getGame(String name) {
