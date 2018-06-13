@@ -13,6 +13,8 @@ public class VirtualViewParser {
     private static final String SPACE = " ";
     private static final String VIRG = ",";
     private static final String SEP = ";";
+    private static final String ACTIVE = "Active";
+    private static final String INACTIVE = "Inactive";
     private static final String PLAYERS = "gamePlayers ";
     private static final String DRAFT = "draftpool ";
     private static final String TOOL = "toolcards ";
@@ -117,14 +119,14 @@ public class VirtualViewParser {
         builder.append(STATE);
         builder.append(this.player.getUsername());
         builder.append(VIRG);
-        builder.append(this.player.isActive());
+        builder.append(this.active(this.player));
         builder.append(SEP);
 
         for (Player p : this.player.getPublicObjects().getPlayers()) {
             builder.append(STATE);
             builder.append(p.getUsername());
             builder.append(VIRG);
-            builder.append(p.isActive());
+            builder.append(this.active(p));
             builder.append(SEP);
         }
 
@@ -249,5 +251,16 @@ public class VirtualViewParser {
         }
         return topass;
     }
+
+    private StringBuilder active(Player p){
+        StringBuilder topass = new StringBuilder();
+        if(p.isActive()){
+            topass.append(ACTIVE);
+        }
+        else
+            topass.append(INACTIVE);
+        return topass;
+    }
+
 
 }
