@@ -36,7 +36,9 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
     private GuiHandler guiHandler;
     private String setup;
     private List<String> givenPatternCards = new ArrayList<>();
+    private ObservableList<String> playerList;
     private boolean isChosen = false;
+    private String idMatch;
 
     @FXML
     private Label timerLabel;
@@ -60,6 +62,10 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
     }
     public void setGuiHandler(GuiHandler guiHandler) {
         this.guiHandler = guiHandler;
+    }
+
+    public void setList(ObservableList<String> playerList) {
+        this.playerList = playerList;
     }
 
     public void startTimer() {
@@ -102,7 +108,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
             int x = patternCardGrid.getRowIndex(source);
 
             String patternCardToSend = givenPatternCards.get(2 * x + y);
-            client.sendCommand("chooseCard "+patternCardToSend);
+            client.sendCommand("chooseCard "+idMatch+" "+client.getName()+" "+patternCardToSend);
             isChosen = true;
         }
     }
@@ -118,6 +124,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
         controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
         controller.setTime(matchTimer);
+        controller.setList(playerList);
 
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
@@ -167,6 +174,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
 
     @Override
     public void handleMatchId(String idMatch) {
+        this.idMatch = idMatch;
         client.setNumMatch(Integer.parseInt(idMatch));
     }
 

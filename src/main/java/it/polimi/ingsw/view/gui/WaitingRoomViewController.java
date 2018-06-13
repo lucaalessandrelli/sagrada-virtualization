@@ -100,6 +100,7 @@ public class WaitingRoomViewController implements Initializable, GuiInterface {
         controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
         controller.setTime(choseCardTimer);
+        controller.setList(playerList);
 
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui

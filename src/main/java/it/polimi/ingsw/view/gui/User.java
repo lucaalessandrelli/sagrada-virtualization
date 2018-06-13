@@ -3,7 +3,7 @@ package it.polimi.ingsw.view.gui;
 public class User {
     private String username;
     private String status = "xxx";
-    private String score = "xxx";
+    private String score = "";
 
     public User(String username) {
         this.username = username;

@@ -65,7 +65,7 @@ public class MatchViewController implements Initializable, GuiInterface {
     private HBox boxObjectiveCards;
 
     @FXML
-    private TableView playersStatus;
+    private TableView statusTable;
 
     @FXML
     private Label timerLabel;
@@ -127,7 +127,7 @@ public class MatchViewController implements Initializable, GuiInterface {
     public void setGuiHandler(GuiHandler guiHandler) {
         this.guiHandler = guiHandler;
     }
-    public void setList(ObservableList<String> playerlist) {
+    public void setList(ObservableList<String> connectedPlayers) {
         this.connectedPlayers = connectedPlayers;
     }
     public void setTime(String time) {
@@ -354,23 +354,23 @@ public class MatchViewController implements Initializable, GuiInterface {
     }
 
     public void updateStatusTable() {
-        for (User user:userList) {
+        /*for (User user:userList) {
             userList.remove(user);
-        }
+        }*/
+        userList = FXCollections.observableArrayList();
 
         ObservableList<String> playerInfo;
 
         for (String username:connectedPlayers) {
             for (String player: playerStatusList) {
-                playerInfo = FXCollections.observableArrayList(Arrays.asList(player.split(",")));
+                playerInfo = FXCollections.observableArrayList(Arrays.asList(player.split(" ")));
                 userList.add(new User(username,playerInfo.get(1)));
             }
         }
 
         userNameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         userStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-        playersStatus.setItems(userList);
-
+        statusTable.setItems(userList);
     }
 
     private void handleGamePlayers(String gamePlayers) {
@@ -379,7 +379,7 @@ public class MatchViewController implements Initializable, GuiInterface {
     }
 
     public void updatePlayersStatus(String status) {
-        playerStatusList = FXCollections.observableArrayList(Arrays.asList(status.split(";")));
+        playerStatusList = FXCollections.observableArrayList(Arrays.asList(status.split(",")));
         this.updateStatusTable();
     }
 

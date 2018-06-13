@@ -11,6 +11,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,7 +27,16 @@ public class ScoreViewController implements Initializable, GuiInterface {
     private ObservableList<String> connectedPlayerList = FXCollections.observableArrayList();
     private String time;
     private GuiHandler guiHandler;
+    private ObservableList<User> userList = FXCollections.observableArrayList();
 
+    @FXML
+    private TableView scoreTable;
+
+    @FXML
+    private TableColumn<User,String> playerColumn;
+
+    @FXML
+    private TableColumn<User,String> scoreColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,8 +52,19 @@ public class ScoreViewController implements Initializable, GuiInterface {
         this.guiHandler = guiHandler;
     }
 
-    public void loadScores(String score) {
+    public void loadScores(String playerScore) {
+        ObservableList<String> scoreList = FXCollections.observableArrayList(Arrays.asList(playerScore.split(",")));
 
+        for (String score:scoreList) {
+            ObservableList<String> currentPlayerScore = FXCollections.observableArrayList(Arrays.asList(score.split(" ")));
+            User user = new User(currentPlayerScore.get(0));
+            user.setScore(currentPlayerScore.get(1));
+            userList.add(user);
+        }
+
+        playerColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
+        scoreTable.setItems(userList);
     }
 
     public void changeScene() throws IOException {

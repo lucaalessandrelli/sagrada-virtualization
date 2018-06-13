@@ -29,10 +29,10 @@
             </Label>
          </children></Pane>
       <JFXButton fx:id="playAgainButton" layoutX="624.0" layoutY="497.0" prefHeight="37.0" prefWidth="138.0" style="-fx-background-color: #3C58FA;" text="Play again" textFill="#dbdce4" />
-      <TableView layoutX="153.0" layoutY="192.0" prefHeight="269.0" prefWidth="534.0">
+      <TableView fx:id="scoreTable" layoutX="153.0" layoutY="192.0" prefHeight="269.0" prefWidth="534.0">
         <columns>
-          <TableColumn prefWidth="262.0" text="Player" />
-          <TableColumn prefWidth="271.0" text="Score" />
+          <TableColumn fx:id="playerColumn" prefWidth="262.0" text="Player" />
+          <TableColumn fx:id="scoreColumn" prefWidth="271.0" text="Score" />
         </columns>
       </TableView>
    </children>

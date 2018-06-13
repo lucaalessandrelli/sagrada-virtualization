@@ -606,7 +606,7 @@
             </AnchorPane>
          </content>
       </TitledPane>
-      <TableView fx:id="playersStatus" layoutX="1236.0" layoutY="667.0" prefHeight="337.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TableView fx:id="statusTable" layoutX="1236.0" layoutY="667.0" prefHeight="337.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <columns>
             <TableColumn fx:id="userNameColumn" prefWidth="145.0" text="Player" />
             <TableColumn fx:id="userStatusColumn" prefWidth="145.0" text="Status" />
