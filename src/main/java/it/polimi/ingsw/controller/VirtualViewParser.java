@@ -118,16 +118,17 @@ public class VirtualViewParser {
     private String parseStatePlayers() {
         builder.append(STATE);
         builder.append(this.player.getUsername());
-        builder.append(VIRG);
+        builder.append(SPACE);
         builder.append(this.active(this.player));
-        builder.append(SEP);
+        builder.append(VIRG);
 
         for (Player p : this.player.getPublicObjects().getPlayers()) {
             builder.append(p.getUsername());
-            builder.append(VIRG);
+            builder.append(SPACE);
             builder.append(this.active(p));
-            builder.append(SEP);
+            builder.append(VIRG);
         }
+        builder.append(SEP);
 
         return builder.toString();
     }
