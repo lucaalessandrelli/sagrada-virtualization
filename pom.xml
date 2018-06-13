@@ -21,7 +21,7 @@
                 <version>2.4</version>
                 <executions>
                     <execution>
-                        <id>build-publisher</id>
+                        <id>Server</id>
                         <configuration>
                             <appendAssemblyId>false</appendAssemblyId>
                             <archive>
@@ -40,7 +40,7 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>build-logReader</id>
+                        <id>Client</id>
                         <configuration>
                             <appendAssemblyId>false</appendAssemblyId>
                             <archive>
@@ -103,6 +103,11 @@
             <groupId>org.fusesource.jansi</groupId>
             <artifactId>jansi</artifactId>
             <version>1.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jopt-simple</groupId>
+            <artifactId>jopt-simple</artifactId>
+            <version>6.0-alpha-2</version>
         </dependency>
     </dependencies>
   <packaging>jar</packaging>

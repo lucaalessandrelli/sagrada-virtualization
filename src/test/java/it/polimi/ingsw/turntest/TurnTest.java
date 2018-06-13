@@ -32,6 +32,8 @@ public class TurnTest {
         players.add(p2);
         players.add(p3);
         players.add(p4);
+        long timerCard = 0;
+        long timerMove = 0;
 
         Table table = new Table(players);
 
@@ -77,9 +79,9 @@ public class TurnTest {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players,new Manager(),0);
+        Match match = new Match(players,new Manager(0,0,0),0, timerCard, timerMove);
 
-        Round round = new Round(players,1,table,match);
+        Round round = new Round(players,1,table,match, timerMove);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();

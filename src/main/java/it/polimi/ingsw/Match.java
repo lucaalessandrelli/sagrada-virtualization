@@ -17,15 +17,17 @@ public class Match extends Thread {
     private List<Round> roundList;
     private int roundNumber;
     private Round currRound;
-    private long timerWindows = 10*1000;
+    private long timerCard;
+    private long timerMove;
 
-    public Match(List<Player> playerList, Manager manager, int id) {
-        //this need to be passed by copy from the server
+    public Match(List<Player> playerList, Manager manager, int id, long timerCard, long timerMove) {
+        this.timerCard=timerCard;
+        this.timerMove=timerMove;
         this.playerList = playerList;
         this.id = id;
         this.roundList = new ArrayList<>();
         this.manager=manager;
-        playerList.forEach(player -> player.timerChoose(timerWindows));
+        playerList.forEach(player -> player.timerChoose(timerCard));
     }
     
 
@@ -35,7 +37,7 @@ public class Match extends Thread {
         table.initialize();
         table.selectWindowCards();
         try {
-            Thread.sleep(timerWindows);
+            Thread.sleep(timerCard);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -76,7 +78,7 @@ public class Match extends Thread {
     }
 
     private void startNextRound() throws NotEnoughPlayersException {
-            currRound = new Round(this.playerList, roundNumber,table,this);
+            currRound = new Round(this.playerList, roundNumber,table,this,timerMove);
             roundList.add(currRound);
             // call on the round just created a method that start the round
             roundList.get(roundNumber-1).go();

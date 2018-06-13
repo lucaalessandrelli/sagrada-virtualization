@@ -16,18 +16,25 @@ public class Manager {
     private WaitingRoom lobby;
     private ClientHandler clientHandler;
     private InputAnalyzer analyzer;
+    private long timerRoom;
+    private long timerCard;
+    private long timerMove;
 
-    public Manager() {
+    public Manager(int timerRoom,int timerCard, int timerMove) {
+        this.timerRoom=timerRoom*1000;
+        this.timerCard=timerCard*1000;
+        this.timerMove=timerMove*1000;
         games = new ArrayList<>();
         numOfMatch = 0;
         clients = new ClientsContainer(this);
-        lobby = new WaitingRoom(30000, this, clients);
+        lobby = new WaitingRoom(this.timerRoom*1000, this, clients);
         clientHandler = new ClientHandler();
         analyzer = new InputAnalyzer(this);
+
     }
 
     public void createMatch(WaitingRoom lobby) {
-        Game g = new Game(clients,new Match(lobby.getPlayerList(), this, numOfMatch),numOfMatch);
+        Game g = new Game(clients,new Match(lobby.getPlayerList(), this, numOfMatch,timerCard,timerMove),numOfMatch);
         g.notifyGame();
         games.add(g);
         /*START MATCH*/

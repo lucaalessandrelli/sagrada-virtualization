@@ -19,19 +19,18 @@ public class Round {
     private int roundNumber;
     private PlayersContainer players;
     private Table table;
-    private long timeSleep;
     private Turn turn;
     private Player currTurn;
     private Iterator<Player> iterator;
     private Match match;
+    private long timerMove;
     private ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 
-    public Round(List<Player> playerList, int roundNumber, Table table,Match m) {
+    public Round(List<Player> playerList, int roundNumber, Table table, Match m, long timerMove) {
         this.roundNumber = roundNumber;
         this.players = new PlayersContainer(playerList);
         this.table=table;
-        int t =30;
-        timeSleep = t*1000;
+        this.timerMove =timerMove;
         match = m;
     }
 
@@ -44,9 +43,9 @@ public class Round {
             if (p.isActive()) {
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
                 turn.startTurn();
-                players.notifyTurn(p.getUsername(), timeSleep);
+                players.notifyTurn(p.getUsername(), timerMove);
                 try {
-                    Thread.sleep(timeSleep);
+                    Thread.sleep(timerMove);
                     p.setActivity(false);
                 } catch (InterruptedException e) {
                     players.notifyChanges();

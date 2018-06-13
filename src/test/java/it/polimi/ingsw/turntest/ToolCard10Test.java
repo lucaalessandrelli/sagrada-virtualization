@@ -21,6 +21,8 @@ import static it.polimi.ingsw.turntest.TurnTest.setThatCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ToolCard10Test {
+    long timerCard = 0;
+    long timerMove = 0;
 
     @Test
     void TestAllowedMoves() {
@@ -80,9 +82,9 @@ public class ToolCard10Test {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players, new Manager(), 0);
+        Match match = new Match(players, new Manager(0,0,0), 0, timerCard, timerMove);
 
-        Round round = new Round(players, 1, table, match);
+        Round round = new Round(players, 1, table, match, timerMove);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -228,9 +230,9 @@ public class ToolCard10Test {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players, new Manager(), 0);
+        Match match = new Match(players, new Manager(0,0,0), 0, timerCard, timerMove);
 
-        Round round = new Round(players, 1, table, match);
+        Round round = new Round(players, 1, table, match, timerMove);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();

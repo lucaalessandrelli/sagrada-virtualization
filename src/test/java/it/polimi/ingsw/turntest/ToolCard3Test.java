@@ -3,7 +3,6 @@ package it.polimi.ingsw.turntest;
 import it.polimi.ingsw.Match;
 import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.*;
-import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
@@ -22,6 +21,8 @@ import static it.polimi.ingsw.turntest.TurnTest.setThatCard;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ToolCard3Test {
+    long timerCard = 0;
+    long timerMove = 0;
 
     @Test
     void TestingAllowedMoves(){
@@ -81,9 +82,9 @@ public class ToolCard3Test {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players,new Manager(),0);
+        Match match = new Match(players,new Manager(0,0,0),0, timerCard, timerMove);
 
-        Round round = new Round(players,1,table,match);
+        Round round = new Round(players,1,table,match, timerMove);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -250,9 +251,9 @@ public class ToolCard3Test {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players,new Manager(),0);
+        Match match = new Match(players,new Manager(0,0,0),0, timerCard, timerMove);
 
-        Round round = new Round(players,1,table,match);
+        Round round = new Round(players,1,table,match, timerMove);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
@@ -417,9 +418,9 @@ public class ToolCard3Test {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players,new Manager(),0);
+        Match match = new Match(players,new Manager(0,0,0),0, timerCard, timerMove);
 
-        Round round = new Round(players,1,table, match);
+        Round round = new Round(players,1,table, match, timerMove);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();

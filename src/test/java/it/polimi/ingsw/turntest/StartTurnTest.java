@@ -23,7 +23,8 @@ import static it.polimi.ingsw.turntest.TurnTest.lastName;
 
 
 public class StartTurnTest {
-
+    long timerCard = 0;
+    long timerMove = 0;
 
     @Test
     void TestPlacingDice() {
@@ -81,9 +82,9 @@ public class StartTurnTest {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        Match match = new Match(players,new Manager(),0);
+        Match match = new Match(players,new Manager(0,0,0),0, timerCard, timerMove);
 
-        Round round = new Round(players, 1, table,match);
+        Round round = new Round(players, 1, table,match, timerMove);
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
