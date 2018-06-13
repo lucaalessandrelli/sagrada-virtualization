@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.MessageAnalyzer;
 import it.polimi.ingsw.view.ViewInterface;
@@ -16,10 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,6 +31,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -43,11 +43,20 @@ public class MatchViewController implements Initializable, GuiInterface {
     private Client client;
     private Stage stage;
     private GuiHandler guiHandler;
-    private ObservableList<String> playerlist = FXCollections.observableArrayList();
+    private ObservableList<String> connectedPlayers = FXCollections.observableArrayList();
+    private ObservableList<String> gamePlayerlist = FXCollections.observableArrayList();
+    private ObservableList<String> playerStatusList = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
     private List<String> toolList;
     private String time;
     private String score;
+    private ObservableList<User> userList = FXCollections.observableArrayList();
+
+    @FXML
+    private TableColumn<User,String> userNameColumn;
+
+    @FXML
+    private TableColumn<User,String> userStatusColumn;
 
     @FXML
     private JFXButton passButton;
@@ -56,7 +65,7 @@ public class MatchViewController implements Initializable, GuiInterface {
     private HBox boxObjectiveCards;
 
     @FXML
-    private JFXListView playersStatus;
+    private TableView playersStatus;
 
     @FXML
     private Label timerLabel;
@@ -101,9 +110,9 @@ public class MatchViewController implements Initializable, GuiInterface {
         myTitle.setText(client.getName());
         int j = 1;
 
-        for(int i = 0; i < playerlist.size(); i++) {
-            if(!playerlist.get(i).equals(client.getName())) {
-                listTitle.get(j).setText(playerlist.get(i));
+        for(int i = 0; i < gamePlayerlist.size(); i++) {
+            if(!gamePlayerlist.get(i).equals(client.getName())) {
+                listTitle.get(j).setText(gamePlayerlist.get(i));
                 j++;
             }
         }
@@ -119,7 +128,7 @@ public class MatchViewController implements Initializable, GuiInterface {
         this.guiHandler = guiHandler;
     }
     public void setList(ObservableList<String> playerlist) {
-        this.playerlist = playerlist;
+        this.connectedPlayers = connectedPlayers;
     }
     public void setTime(String time) {
         this.time = time;
@@ -266,7 +275,9 @@ public class MatchViewController implements Initializable, GuiInterface {
     }
 
     @Override
-    public void handleConnectedPlayers(String message) {
+    public void handleConnectedPlayers(String connPlayers) {
+        connectedPlayers = FXCollections.observableArrayList(Arrays.asList(connPlayers.split(",")));
+        this.updateStatusTable();
     }
 
     @Override
@@ -335,20 +346,41 @@ public class MatchViewController implements Initializable, GuiInterface {
             } else if(subMessage.startsWith("dices")) {
                 this.updateWindowCards(subMessage.replace("dices ", ""));
             } else if(subMessage.startsWith("state")) {
-                this.updatePlayersStatus(subMessage.replace("playersstatus ", ""));
+                this.updatePlayersStatus(subMessage.replace("state ", ""));
             } else if(subMessage.startsWith("favors")) {
                 this.updateFavTokens(subMessage.replace("favors ", ""));
             }
         }
     }
 
+    public void updateStatusTable() {
+        for (User user:userList) {
+            userList.remove(user);
+        }
+
+        ObservableList<String> playerInfo;
+
+        for (String username:connectedPlayers) {
+            for (String player: playerStatusList) {
+                playerInfo = FXCollections.observableArrayList(Arrays.asList(player.split(",")));
+                userList.add(new User(username,playerInfo.get(1)));
+            }
+        }
+
+        userNameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        userStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        playersStatus.setItems(userList);
+
+    }
+
     private void handleGamePlayers(String gamePlayers) {
-        playerlist = FXCollections.observableArrayList(Arrays.asList(gamePlayers.split(",")));
+        gamePlayerlist = FXCollections.observableArrayList(Arrays.asList(gamePlayers.split(",")));
         this.setTitleWindowPatternCard();
     }
 
     public void updatePlayersStatus(String status) {
-        playersStatus.setItems(FXCollections.observableArrayList(Arrays.asList(status.split(","))));
+        playerStatusList = FXCollections.observableArrayList(Arrays.asList(status.split(";")));
+        this.updateStatusTable();
     }
 
     public void updateFavTokens(String favors) {
@@ -502,7 +534,7 @@ public class MatchViewController implements Initializable, GuiInterface {
             }*/
 
             if(i < draftList.size()) {
-                draftPool.getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
+                ((AnchorPane)(draftPool.getChildren().get(i))).getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
             }
         }
     }

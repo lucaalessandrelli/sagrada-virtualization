@@ -25,8 +25,6 @@ public class ScoreViewController implements Initializable, GuiInterface {
     private String time;
     private GuiHandler guiHandler;
 
-    @FXML
-    private JFXListView<String> scoreList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,15 +40,8 @@ public class ScoreViewController implements Initializable, GuiInterface {
         this.guiHandler = guiHandler;
     }
 
-
-
-
     public void loadScores(String score) {
-        String us1 = "Luca";
-        String us2 = "Vincenzo";
-        String us3 = "Gionny";
-        connectedPlayerList.addAll(us1,us2,us3);
-        scoreList.setItems(connectedPlayerList);
+
     }
 
     public void changeScene() throws IOException {

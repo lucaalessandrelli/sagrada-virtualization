@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.effect.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -95,11 +96,12 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
         client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);*/
         if (!isChosen) {
             Node source = (Node) event.getSource();
+            //Lighting lightingEffect = new Lighting();
+            source.setEffect(new DropShadow());
             int y = patternCardGrid.getColumnIndex(source);
             int x = patternCardGrid.getRowIndex(source);
 
             String patternCardToSend = givenPatternCards.get(2 * x + y);
-
             client.sendCommand("chooseCard "+patternCardToSend);
             isChosen = true;
         }
@@ -121,6 +123,7 @@ public class PatternCardChoiceViewController implements Initializable, GuiInterf
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         controller.startTimer();
         controller.updateBoard(setup);
+        controller.updateStatusTable();
         guiHandler.setGui(controller);
 
         stage.setScene(scene);
