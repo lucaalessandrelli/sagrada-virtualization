@@ -27,7 +27,7 @@ public class Manager {
         games = new ArrayList<>();
         numOfMatch = 0;
         clients = new ClientsContainer(this);
-        lobby = new WaitingRoom(this.timerRoom*1000, this, clients);
+        lobby = new WaitingRoom(this.timerRoom, this, clients);
         clientHandler = new ClientHandler();
         analyzer = new InputAnalyzer(this);
 
