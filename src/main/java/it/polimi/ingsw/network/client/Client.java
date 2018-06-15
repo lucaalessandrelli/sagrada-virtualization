@@ -4,8 +4,6 @@ import it.polimi.ingsw.view.MessageAnalyzer;
 
 import java.rmi.RemoteException;
 
-import static java.lang.System.*;
-
 public class Client  {
     private String name;
     private boolean connected;
@@ -57,7 +55,7 @@ public class Client  {
 
     public void setName(String n) {
         name=n;
-        setAddress(addr);
+
     }
 
     private void setAddress(String addr) {
@@ -72,6 +70,7 @@ public class Client  {
 
     public void setKindConnection(int kindConnection) {
         this.kindConnection = kindConnection;
+        setAddress(addr);
     }
 
     public MessageQueue getQueue() {

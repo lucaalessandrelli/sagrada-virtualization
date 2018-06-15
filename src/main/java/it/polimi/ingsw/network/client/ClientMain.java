@@ -20,9 +20,7 @@ public class ClientMain {
         OptionSet options = parser.parse(args);
         addr = (String) options.valueOf("a");
         int ui;
-        if(options.has("gui")){
-            ui=1;
-        }else if(options.has("cli")){
+        if(options.has("cli")){
             ui=2;
         }else{
             ui=1;
@@ -31,17 +29,15 @@ public class ClientMain {
         Client client = new Client(addr,messageAnalyzer);
 
         if(ui==1) {
-            //User chose GUI, so we need to create a GuiHandler object and set the the attribute ViewInterface in the MessageAnalyzer object
             GuiHandler guiHandler = new GuiHandler();
             messageAnalyzer.setView(guiHandler);
-            //Add the guiHandler to the guiView so we can set the right controller object into the attribute GuiInterface in the GuiHandler object
             GuiView.setGuiHandler(guiHandler);
 
             messageAnalyzer.setMessageQueue(client.getQueue());
 
             GuiView.setClient(client);
             GuiView.launching();
-        }else if(ui==2) {
+        }else{
             CliHandler cliHandler = new CliHandler(client);
             messageAnalyzer.setView(cliHandler);
             messageAnalyzer.setMessageQueue(client.getQueue());

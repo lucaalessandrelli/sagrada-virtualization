@@ -2,9 +2,7 @@ package it.polimi.ingsw.network.client;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class SocketConnection implements ConnectionHandler {
     static int PORT_SOCKET = 45678;
@@ -20,7 +18,7 @@ public class SocketConnection implements ConnectionHandler {
         try {
             socket = new Socket(addr, PORT_SOCKET);
         } catch (IOException e) {
-            client.setServiceMessage("alert Server not available");        }
+            client.setServiceMessage("alert Connection not available");        }
     }
 
     public void startListener(){

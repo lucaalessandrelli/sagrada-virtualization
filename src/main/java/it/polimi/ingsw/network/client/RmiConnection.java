@@ -25,7 +25,7 @@ public class RmiConnection implements ConnectionHandler {
             stub = (ClientInterface) UnicastRemoteObject.exportObject(obj,0);
             server = (ServerInterface) registry.lookup("server");
         } catch (Exception e) {
-            client.setServiceMessage("alert Server not available");
+            client.setServiceMessage("alert Connection not available");
         }
 
     }
