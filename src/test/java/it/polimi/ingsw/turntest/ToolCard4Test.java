@@ -24,7 +24,7 @@ public class ToolCard4Test {
     long timerCard = 0;
     long timerMove = 0;
     @Test
-    void TestingAllowedMoves() {
+    public void testingAllowedMoves() {
         ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -229,7 +229,7 @@ public class ToolCard4Test {
     }
 
     @Test
-    void TestingWrongFirstSelection() {
+    public void testingWrongFirstSelection() {
         ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -389,7 +389,7 @@ public class ToolCard4Test {
     }
 
     @Test
-    void TestingWrongPositioning() {
+    public void testingWrongPositioning() {
         ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -557,7 +557,7 @@ public class ToolCard4Test {
     }
 
     @Test
-    void TestingWrongSecondSelection() {
+    public void testingWrongSecondSelection() {
         ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -733,7 +733,7 @@ public class ToolCard4Test {
     }
 
     @Test
-    void TestingWrongSecondPlacement() {
+    public void testingWrongSecondPlacement() {
         ToolCard tester = pullOutThatCard(4);
 
         ArrayList<Player> players = new ArrayList<>();

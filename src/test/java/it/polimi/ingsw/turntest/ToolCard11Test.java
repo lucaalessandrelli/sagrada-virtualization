@@ -23,7 +23,7 @@ public class ToolCard11Test {
     long timerMove = 0;
 
     @Test
-    void TestAllowedMoves() {
+    public void testAllowedMoves() {
         ToolCard tester = pullOutThatCard(11);
 
         ArrayList<Player> players = new ArrayList<>();

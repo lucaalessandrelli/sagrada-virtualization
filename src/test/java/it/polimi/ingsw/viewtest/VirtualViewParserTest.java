@@ -1,23 +1,30 @@
 package it.polimi.ingsw.viewtest;
 
+import it.polimi.ingsw.model.gamedata.Colour;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
+import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import it.polimi.ingsw.controller.VirtualViewParser;
+import it.polimi.ingsw.view.cli.Printer;
+import org.fusesource.jansi.Ansi;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.System.out;
+import static org.fusesource.jansi.Ansi.ansi;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class VirtualViewParserTest {
+    private static final String BLOCK = "⚀";
 
     @Test
-    void TestParsingPlayers(){
+    public void TestParsingPlayers(){
 
         Player p1 = new Player("Luca");
         Player p2 = new Player("Giovanni");
@@ -67,7 +74,7 @@ public class VirtualViewParserTest {
     }
 
     @Test
-    void TestParsingRestrictions(){
+    public void TestParsingRestrictions(){
 
         Player p1 = new Player("Luca");
 
@@ -218,7 +225,7 @@ public class VirtualViewParserTest {
     }
 
     @Test
-    public void TestHowParse(){
+    public void testHowParse(){
 
         Player p1 = new Player("Luca");
 
@@ -241,6 +248,19 @@ public class VirtualViewParserTest {
         p4.setMyWindow(windowPatternCards.get(3));
 
 
+        Dice d1 = new Dice(Colour.GREEN);
+        d1.setNumber(5);
+        Dice d2 = new Dice(Colour.YELLOW);
+        d2.setNumber(4);
+        Dice d3 = new Dice(Colour.PURPLE);
+        d3.setNumber(4);
+
+        p1.getWindowPatternCard().placeDice(d1,2,3);
+        p1.getWindowPatternCard().placeDice(d2,1,3);
+        p1.getWindowPatternCard().placeDice(d3,2,4);
+
+
+
         Table table = new Table(players);
 
         table.initialize();
@@ -251,15 +271,39 @@ public class VirtualViewParserTest {
 
         String parsed = tester.startParsing();
 
-        System.out.println(parsed);
+        //System.out.println(parsed);
 
         List<String> x = Arrays.asList(parsed.split(";"));
         for (String s: x){
             List<String> k = Arrays.asList(s.split(","));
             for (String z: k){
-                System.out.println(z);
+                //System.out.println(z);
             }
         }
+
+        Printer printer = new Printer();
+        String lu = "restrictions Luca,";
+        String tmp = parsed.substring(parsed.indexOf(lu) + lu.length(), parsed.length());
+        tmp = tmp.substring(0,tmp.indexOf(";"));
+        //System.out.println(tmp);
+
+        //printer.welcome();
+        //printer.timer("30");
+        //printer.printPatternCard(Arrays.asList(tmp.split(",")));
+        //printer.startTimer("30");
+        //container = new CardContainer();
+        //String k = tester.extractedWindows(container.pullOutPattern(1));
+        //k = k.replace("choseWindow ", "");
+        //printer.choosePatternCard(k);
+
+        //lu = "dices Luca,";
+        //String tmp2 = parsed.substring(parsed.indexOf(lu)+lu.length(),parsed.length());
+        //tmp2 = tmp2.substring(0,tmp2.indexOf(";"));
+
+
+        //printer.printPatternCard(Arrays.asList(tmp.split(",")));
+        //printer.printPlacedDices(Arrays.asList(tmp2.split(",")));
+
 
         /*Deparser deparser = new Deparser();
         System.out.println(deparser.DivideinStrings(tester.startParsing()));

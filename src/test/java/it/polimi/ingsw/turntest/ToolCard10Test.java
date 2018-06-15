@@ -25,7 +25,7 @@ public class ToolCard10Test {
     long timerMove = 0;
 
     @Test
-    void TestAllowedMoves() {
+    public void testAllowedMoves() {
         ToolCard tester = pullOutThatCard(10);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -173,7 +173,7 @@ public class ToolCard10Test {
     }
 
     @Test
-    void TestNotFromDraftPool() {
+    public void testNotFromDraftPool() {
         ToolCard tester = pullOutThatCard(10);
 
         ArrayList<Player> players = new ArrayList<>();

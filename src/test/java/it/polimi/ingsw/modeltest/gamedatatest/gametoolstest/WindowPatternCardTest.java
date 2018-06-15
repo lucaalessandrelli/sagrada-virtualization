@@ -16,14 +16,14 @@ class WindowPatternCardTest {
 
 
      @Test
-     void TestMatrixLength() {
+     public void testMatrixLength() {
          WindowPatternCard tester = new WindowPatternCard(0, 0, "No name");
          assertEquals(4, tester.getMatr().size());
          assertEquals(5, tester.getMatr().get(0).size());
      }
 
      @Test
-     void TestOccupied() {
+     public void testOccupied() {
          WindowPatternCard tester = new WindowPatternCard(0, 0, "No name");
          int x = 0, y = 0;
          Dice d = new Dice();
@@ -32,7 +32,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestFull() {
+     public void testFull() {
          Dice d = new Dice();
          WindowPatternCard tester = new WindowPatternCard(0, 0, "No name");
          for (int i = 0; i < 4; i++) {
@@ -48,7 +48,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestFirstCard() {
+     public void testFirstCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(1);
 
@@ -85,7 +85,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestSecondCard() {
+     public void testSecondCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(2);
 
@@ -122,7 +122,7 @@ class WindowPatternCardTest {
 
 
      @Test
-     void TestThirdCard() {
+     public void testThirdCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(3);
 
@@ -159,7 +159,7 @@ class WindowPatternCardTest {
 
 
      @Test
-     void TestFourthCard() {
+     public void testFourthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(4);
 
@@ -195,7 +195,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestFifthCard() {
+     public void testFifthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(5);
 
@@ -231,7 +231,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestSixthCard() {
+     public void testSixthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(6);
 
@@ -267,7 +267,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestSeventhCard() {
+     public void testSeventhCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(7);
 
@@ -303,7 +303,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestEightCard() {
+     public void testEightCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(8);
 
@@ -336,7 +336,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestNinthCard() {
+     public void testNinthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(9);
 
@@ -372,7 +372,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestTenthCard() {
+     public void testTenthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(10);
 
@@ -408,7 +408,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestEleventhCard() {
+     public void testEleventhCard() {
         WindowPatternCard tester;
          tester = this.pullOutCard(11);
 
@@ -444,7 +444,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestTwelthCard() {
+     public void testTwelthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(12);
 
@@ -480,7 +480,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestThirteenthCard() {
+     public void testThirteenthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(13);
 
@@ -516,7 +516,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestFourteenthCard() {
+     public void testFourteenthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(14);
 
@@ -553,7 +553,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestFifthteenCard() {
+     public void testFifthteenCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(15);
 
@@ -590,7 +590,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestSixteenthCard() {
+     public void testSixteenthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(16);
 
@@ -627,7 +627,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestSeventeenthCard() {
+     public void testSeventeenthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(17);
 
@@ -664,7 +664,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestEighteenthCard() {
+     public void testEighteenthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(18);
 
@@ -701,7 +701,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestNineteenthCard() {
+     public void testNineteenthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(19);
 
@@ -738,7 +738,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestTwenteenthCard() {
+     public void testTwenteenthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(20);
 
@@ -775,7 +775,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestTwentyfirstCard() {
+     public void testTwentyfirstCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(21);
 
@@ -812,7 +812,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestTwentysecondCard() {
+     public void testTwentysecondCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(22);
 
@@ -849,7 +849,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestTwentythirdCard() {
+     public void testTwentythirdCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(23);
 
@@ -886,7 +886,7 @@ class WindowPatternCardTest {
      }
 
      @Test
-     void TestTwentyfourthCard() {
+     public void testTwentyfourthCard() {
          WindowPatternCard tester;
          tester = this.pullOutCard(24);
 

@@ -19,7 +19,7 @@ public class InspectorPlaceTest {
      * Verify is you can place the first dice
      */
     @Test
-    void TestCheckFirst(){
+    public void testCheckFirst(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
         windowPatternCard = pullOutCard(1);
@@ -35,7 +35,7 @@ public class InspectorPlaceTest {
      * Verify if you can place the first dice in a cell that doesn't match the color
      */
     @Test
-    void TestCheckFirstRestrictionColour(){
+    public void testCheckFirstRestrictionColour(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
         windowPatternCard = pullOutCard(1);
@@ -57,7 +57,7 @@ public class InspectorPlaceTest {
      * Verify if you can place a dice in a central cell, doing a wrong move
      */
     @Test
-    void TestCheckFirstBoundaryCell(){
+    public void testCheckFirstBoundaryCell(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
         windowPatternCard = pullOutCard(1);
@@ -85,7 +85,7 @@ public class InspectorPlaceTest {
      * Verify that the second placement, even if is right, is done near a placed dice
      */
     @Test
-    void TestCheckSecondPlacement(){
+    public void testCheckSecondPlacement(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
 
@@ -117,7 +117,7 @@ public class InspectorPlaceTest {
      * Verify that the moves goes by
      */
     @Test
-    void TestCheckRightMove(){
+    public void testCheckRightMove(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
 
@@ -197,7 +197,7 @@ public class InspectorPlaceTest {
      * Verify if allows you to place a dice near other dices
      */
     @Test
-    void TestCheckNearWithRestrictions(){
+    public void testCheckNearWithRestrictions(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
 
@@ -231,7 +231,7 @@ public class InspectorPlaceTest {
      * the restriction of the color
      */
     @Test
-    void TestCheckNearWrongRestrictionColour(){
+    public void testCheckNearWrongRestrictionColour(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
 
@@ -261,7 +261,7 @@ public class InspectorPlaceTest {
      * Verify that you can't place a dice near a dice that has the same number
      */
     @Test
-    void TestCheckNearWrongRestrictionNumber(){
+    public void testCheckNearWrongRestrictionNumber(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
 
@@ -295,7 +295,7 @@ public class InspectorPlaceTest {
      * two near dices that have the same color
      */
     @Test
-    void TestCheckRightNumberWrongColour(){
+    public void testCheckRightNumberWrongColour(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
 

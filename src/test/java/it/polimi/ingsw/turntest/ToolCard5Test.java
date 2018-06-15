@@ -24,7 +24,7 @@ public class ToolCard5Test {
     long timerCard = 0;
     long timerMove = 0;
     @Test
-    void TestingAllowedMoves() {
+    public void testingAllowedMoves() {
         ToolCard tester = pullOutThatCard(5);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -205,20 +205,23 @@ public class ToolCard5Test {
         state = "ChooseDice2";
         assertEquals(state,lastName(turn.getState().toString(),state.length()+1));
 
-        try {
-            turn.receiveMove(new Pos(2, 1));
-        } catch (WrongMoveException e)  {
-            e.printStackTrace();
-        } catch (NullPointerException e){
-            System.out.println("If this is printed we have a NullPointerException that is right");
+        p1.getDraftPool().chooseDice(2).setNumber(5);
+
+        if(!p1.getDraftPool().chooseDice(2).getColour().equals(d6.getColour())) {
+            try {
+                turn.receiveMove(new Pos(3, 4));
+            } catch (WrongMoveException e) {
+                e.printStackTrace();
+            } catch (NullPointerException e) {
+                System.out.println("If this is printed we have a NullPointerException that is right");
+            }
         }
-
-
-
-        try {
-            turn.receiveMove("pass");
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
+        else {
+            try {
+                turn.receiveMove("pass");
+            } catch (WrongMoveException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -228,7 +231,7 @@ public class ToolCard5Test {
     }
 
     @Test
-    void TestingFirstSelectionWrong() {
+    public void testingFirstSelectionWrong() {
         ToolCard tester = pullOutThatCard(5);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -343,7 +346,7 @@ public class ToolCard5Test {
     }
 
     @Test
-    void TestingAutomatedOperationListIsRight() {
+    public void testingAutomatedOperationListIsRight() {
         ToolCard tester = pullOutThatCard(5);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -455,8 +458,8 @@ public class ToolCard5Test {
 
     }
 
-        @Test
-    void TestingNotAllowedInFirstRound() {
+    @Test
+    public void testingNotAllowedInFirstRound() {
         ToolCard tester = pullOutThatCard(5);
 
         ArrayList<Player> players = new ArrayList<>();

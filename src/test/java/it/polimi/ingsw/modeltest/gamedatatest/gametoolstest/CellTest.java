@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CellTest {
 
     @Test
-    public void TestGetDice(){
+    public void testGetDice(){
         Cell tester = new Cell();
         assertNotNull(tester.getDice());
     }
 
     @Test
-    public void TestGetPosition(){
+    public void testGetPosition(){
         Cell tester = new Cell();
         Property p = new Property();
         Pos pos = new Pos();
@@ -26,7 +26,7 @@ public class CellTest {
     }
 
     @Test
-    public void TestGetProperty(){
+    public void testGetProperty(){
         Cell tester = new Cell();
         Property p = new Property();
         Pos pos = new Pos();
@@ -34,7 +34,7 @@ public class CellTest {
     }
 
     @Test
-    public void TestisOccupied(){
+    public void testisOccupied(){
         Cell tester = new Cell();
         assertFalse(tester.isOccupied());
     }

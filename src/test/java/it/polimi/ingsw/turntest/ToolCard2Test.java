@@ -26,7 +26,7 @@ public class ToolCard2Test {
     long timerCard = 0;
     long timerMove = 0;
     @Test
-    void TestingAllowedMoves(){
+    public void testingAllowedMoves(){
         ToolCard tester = new ToolCard();
         CardContainer container = new CardContainer();
         ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
@@ -224,7 +224,7 @@ public class ToolCard2Test {
     }
 
     @Test
-    void TestingRightMovesWithRestrictions() {
+    public void testingRightMovesWithRestrictions() {
         ToolCard tester = pullOutThatCard(2);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -402,7 +402,7 @@ public class ToolCard2Test {
 
 
     @Test
-    void TestingWrongSelection() {
+    public void testingWrongSelection() {
         ToolCard tester = pullOutThatCard(2);
 
         ArrayList<Player> players = new ArrayList<>();

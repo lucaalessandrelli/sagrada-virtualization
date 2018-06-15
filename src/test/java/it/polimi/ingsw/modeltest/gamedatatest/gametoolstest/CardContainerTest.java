@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CardContainerTest {
 
     @Test
-    public void TestPrivatePullout(){
+    public void testPrivatePullout(){
         CardContainer tester = new CardContainer();
         List<ObjectiveCard> test = null;
         test = tester.pullOutPrivate(2);
@@ -25,7 +25,7 @@ public class CardContainerTest {
     }
 
     @Test
-    public void TestPublicPullout(){
+    public void testPublicPullout(){
         CardContainer tester = new CardContainer();
         List<ObjectiveCard> test = null;
         test = tester.pullOutPublic();
@@ -33,7 +33,7 @@ public class CardContainerTest {
     }
 
     @Test
-    public void TestPublicRules() {
+    public void testPublicRules() {
         CardContainer tester = new CardContainer();
         List<ObjectiveCard> test = new ArrayList<ObjectiveCard>();
         test = tester.pullOutPublic();
@@ -43,7 +43,7 @@ public class CardContainerTest {
     }
 
     @Test
-    public void TestPatternPullOut(){
+    public void testPatternPullOut(){
         CardContainer tester = new CardContainer();
         List<WindowPatternCard> test;
         test = tester.pullOutPattern(2);
@@ -52,7 +52,7 @@ public class CardContainerTest {
     }
 
     @Test
-    public void TestToolCardsPullOut(){
+    public void testToolCardsPullOut(){
         CardContainer tester = new CardContainer();
         List<ToolCard> test = tester.pullOutTools();
 
@@ -63,7 +63,7 @@ public class CardContainerTest {
     }
 
     @Test
-    public void TestNeverOutofBound(){
+    public void testNeverOutofBound(){
         CardContainer tester = new CardContainer();
         for(int i = 0; i < 50; i++){
             tester.pullOutPattern(4);
@@ -72,7 +72,7 @@ public class CardContainerTest {
     }
 
     @Test
-    public void TestNeverCallTwoTimes(){
+    public void testNeverCallTwoTimes(){
         CardContainer tester = new CardContainer();
         tester.pullOutPattern(2);
         tester.pullOutPublic();
@@ -83,7 +83,7 @@ public class CardContainerTest {
     }
 
     @Test
-    public void TestTooManyPlayers(){
+    public void testTooManyPlayers(){
         CardContainer tester = new CardContainer();
         assertThrows(IndexOutOfBoundsException.class,()->{tester.pullOutPattern(6);});
         assertThrows(IndexOutOfBoundsException.class,()->{tester.pullOutPrivate(8);});

@@ -26,7 +26,7 @@ public class ToolCard1Test {
     long timerMove = 0;
 
     @Test
-    void TestingCardWrongMoves(){
+    public void testingCardWrongMoves(){
         ToolCard tester = pullOutThatCard(1);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -118,7 +118,7 @@ public class ToolCard1Test {
     }
 
     @Test
-    void TestingCard(){
+    public void testingCard(){
         ToolCard tester = pullOutThatCard(1);
 
         ArrayList<Player> players = new ArrayList<>();

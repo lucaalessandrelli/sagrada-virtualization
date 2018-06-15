@@ -25,7 +25,7 @@ public class ToolCard9Test {
     long timerCard = 0;
     long timerMove = 0;
     @Test
-    void TestAllowedMoves() {
+    public void testAllowedMoves() {
         ToolCard tester = pullOutThatCard(9);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -165,7 +165,7 @@ public class ToolCard9Test {
     }
 
     @Test
-    void TestAllowedMovesWithRestrictions(){
+    public void testAllowedMovesWithRestrictions(){
         ToolCard tester = pullOutThatCard(9);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -317,7 +317,7 @@ public class ToolCard9Test {
     }
 
     @Test
-    void TestWrongRestriction(){
+    public void testWrongRestriction(){
         ToolCard tester = pullOutThatCard(9);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -458,7 +458,7 @@ public class ToolCard9Test {
     }
 
     @Test
-    void TestWrongNumberRestriction(){
+    public void testWrongNumberRestriction(){
         ToolCard tester = pullOutThatCard(9);
 
         ArrayList<Player> players = new ArrayList<>();

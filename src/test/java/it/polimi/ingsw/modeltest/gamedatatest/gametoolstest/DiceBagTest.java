@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DiceBagTest {
 
     @Test
-    public void TestCreation(){
+    public void testCreation(){
         DiceBag tester = new DiceBag();
         assertEquals( 90,tester.remainingDices());
     }
 
     @Test
-    public void TestEmptyBag(){
+    public void testEmptyBag(){
         DiceBag tester = new DiceBag();
         List<Dice> d = new ArrayList<>();
         tester.setNumPlayers(4);
@@ -31,7 +31,7 @@ public class DiceBagTest {
 
     //tests that we have the exact number of dices in the dicebag: 18 of yellow,green,purple,red,blue and 0 of white.
     @Test
-    public void TestExactNumber(){
+    public void testExactNumber(){
         DiceBag tester = new DiceBag();
         List<Dice> tmp;
         int r = 0,g = 0,y = 0,b = 0,p = 0,w = 0;
@@ -62,14 +62,14 @@ public class DiceBagTest {
     }
 
     @Test
-    public void TestSetNumPlayers(){
+    public void testSetNumPlayers(){
         DiceBag tester = new DiceBag();
         tester.setNumPlayers(5);
         tester.setNumPlayers(2);
     }
 
     @Test
-    public void TestAddDice(){
+    public void testAddDice(){
         DiceBag tester = new DiceBag();
         Dice dice = new Dice();
         int remaining = tester.remainingDices();
@@ -90,7 +90,7 @@ public class DiceBagTest {
     }
 
     @Test
-    public void TestPullOut(){
+    public void testPullOut(){
         DiceBag tester = new DiceBag();
         List<Dice> dices;
         tester.setNumPlayers(3);
@@ -99,7 +99,7 @@ public class DiceBagTest {
     }
 
     @Test
-    public void TestNumPullOut(){
+    public void testNumPullOut(){
         DiceBag tester = new DiceBag();
         List<Dice> dices;
         dices = tester.pullOut(24);

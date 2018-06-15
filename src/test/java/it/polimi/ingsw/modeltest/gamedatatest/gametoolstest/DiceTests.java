@@ -15,21 +15,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DiceTests {
 
     @Test
-    public void TestGetNumber(){
+    public void testGetNumber(){
         Dice tester = new Dice();
         assertTrue(tester.getNumber() > 0 && tester.getNumber() < 7);
 
     }
 
     @Test
-    public void TestGetColour(){
+    public void testGetColour(){
         Dice tester = new Dice();
         assertNotNull(tester.getColour());
 
     }
 
     @Test
-    public void TestEquals(){
+    public void testEquals(){
         Dice tester = new Dice();
         Dice test = new Dice();
         while(test.getNumber()!=tester.getNumber()){
@@ -41,7 +41,7 @@ public class DiceTests {
     }
 
     @Test
-    public void TestSetDice(){
+    public void testSetDice(){
         Dice tester = new Dice(Colour.GREEN);
         Dice test = new Dice(Colour.BLUE);
         assertFalse(tester.equals(test));
@@ -50,7 +50,7 @@ public class DiceTests {
     }
 
     @Test
-    void TestRollDice(){
+    void testRollDice(){
         Dice tester = new Dice();
         tester.rollDice();
         assertTrue(tester.getNumber() >=1 && tester.getNumber() <=6);

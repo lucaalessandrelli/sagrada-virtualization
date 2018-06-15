@@ -27,7 +27,7 @@ public class StartTurnTest {
     long timerMove = 0;
 
     @Test
-    void TestPlacingDice() {
+    public void testPlacingDice() {
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");

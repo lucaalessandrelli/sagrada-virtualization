@@ -25,7 +25,7 @@ public class ToolCard3Test {
     long timerMove = 0;
 
     @Test
-    void TestingAllowedMoves(){
+    public void testingAllowedMoves(){
         ToolCard tester = pullOutThatCard(3);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -194,7 +194,7 @@ public class ToolCard3Test {
     }
 
     @Test
-    void TestingRightMovesWithRestrictions(){
+    public void testingRightMovesWithRestrictions(){
         ToolCard tester = pullOutThatCard(3);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -361,7 +361,7 @@ public class ToolCard3Test {
 
 
     @Test
-    void TestingWrongMove(){
+    public void testingWrongMove(){
         ToolCard tester = pullOutThatCard(3);
 
         ArrayList<Player> players = new ArrayList<>();

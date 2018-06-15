@@ -27,7 +27,7 @@ public class ToolCard6Test {
     long timerMove = 0;
 
     @Test
-    void TestingAllowedMoves() {
+    public void testingAllowedMoves() {
         ToolCard tester = pullOutThatCard(6);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -110,7 +110,7 @@ public class ToolCard6Test {
 
         p1.getRoundTrack().setDiceOnRoundTrack(1, p1.getDraftPool().getDraftPool());
 
-        Dice d = new Dice(Colour.WHITE);
+        Dice d = new Dice(Colour.RED);
         p1.getWindowPatternCard().placeDice(d,2,0);
 
         Turn turn = new Turn(p1, round, 2, true, table);
@@ -149,16 +149,27 @@ public class ToolCard6Test {
             else
                 chosenone.setNumber(d.getNumber()+1);
 
-
-        try {
-            turn.receiveMove(new Pos(2,1));
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
+        if(!d.getColour().equals(chosenone.getColour())) {
+            try {
+                turn.receiveMove(new Pos(2, 1));
+            } catch (WrongMoveException e) {
+                e.printStackTrace();
+            }
         }
+        else {
+            try {
+                turn.receiveMove("pass");
+            } catch (WrongMoveException e) {
+                e.printStackTrace();
+            }
+        }
+
+        state = "EndTurn";
+        assertEquals(state,lastName(state,state.length()+1));
     }
 
     @Test
-    void TestingPassingAfterCard() {
+    public void testingPassingAfterCard() {
         ToolCard tester = pullOutThatCard(6);
 
         ArrayList<Player> players = new ArrayList<>();

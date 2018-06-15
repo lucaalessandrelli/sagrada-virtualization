@@ -13,7 +13,7 @@ import java.util.List;
 public class InspectorContextTest {
 
     @Test
-    public void TestCheckTools(){
+    public void testCheckTools(){
         InspectorContext tester = new InspectorContext();
         CardContainer container = new CardContainer();
         ToolCard toolcard;
@@ -27,7 +27,7 @@ public class InspectorContextTest {
     }
 
     @Test
-    void TestCheckPlaceDice(){
+    public void testCheckPlaceDice(){
         InspectorContext tester = new InspectorContext();
         CardContainer container = new CardContainer();
         DiceBag diceBag = new DiceBag();

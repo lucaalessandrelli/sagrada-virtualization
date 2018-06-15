@@ -46,7 +46,7 @@ public class ClientMain {
             messageAnalyzer.setView(cliHandler);
             messageAnalyzer.setMessageQueue(client.getQueue());
             cliHandler.initialize();
-            cliHandler.reciveCommand();
+            cliHandler.receiveCommand();
         }
 
     }

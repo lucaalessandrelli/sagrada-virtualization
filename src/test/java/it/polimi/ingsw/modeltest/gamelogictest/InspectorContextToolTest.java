@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class InspectorContextToolTest {
 
     @Test
-    void TestColour_And_Number(){
+    public void testColour_And_Number(){
         DiceBag diceBag = new DiceBag();
         DraftPool draftPool = new DraftPool();
         draftPool.addNewDices(diceBag.pullOut(4));

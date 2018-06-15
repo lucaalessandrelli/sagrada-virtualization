@@ -20,12 +20,10 @@ public class CliHandler implements ViewInterface {
     @Override
     public void handleClientConnected(String messageConnection) {
         printer.print(messageConnection);
-
     }
 
     @Override
     public void handleConnectedPlayers(String playerlist) {
-
     }
 
     @Override
@@ -72,7 +70,7 @@ public class CliHandler implements ViewInterface {
         }
     }
 
-    public void reciveCommand(){
+    public void receiveCommand(){
         while(client.connected()){
             client.sendCommand(printer.getCommand());
         }

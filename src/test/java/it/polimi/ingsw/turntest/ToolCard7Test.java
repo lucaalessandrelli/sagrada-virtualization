@@ -27,7 +27,7 @@ public class ToolCard7Test {
     long timerMove = 0;
 
     @Test
-    void TestinAllowedMoves() {
+    public void testinAllowedMoves() {
         ToolCard tester = pullOutThatCard(7);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -148,7 +148,7 @@ public class ToolCard7Test {
     }
 
     @Test
-    void TestingNotInSecondTurn() {
+    public void testingNotInSecondTurn() {
         ToolCard tester = pullOutThatCard(7);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -245,18 +245,13 @@ public class ToolCard7Test {
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
-        try {
-            turn.receiveMove(tester);
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
-        }
 
         ToolCard finalTester = tester;
         assertThrows(WrongMoveException.class,()->{turn.receiveMove(finalTester);});
     }
 
     @Test
-    void TestAfterSecondDice() {
+    public void testAfterSecondDice() {
         ToolCard tester = pullOutThatCard(7);
 
         ArrayList<Player> players = new ArrayList<>();

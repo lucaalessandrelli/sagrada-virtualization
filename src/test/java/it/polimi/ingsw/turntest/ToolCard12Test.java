@@ -25,7 +25,7 @@ public class ToolCard12Test {
     long timerCard = 0;
     long timerMove = 0;
     @Test
-    void TestAllowedMoves() {
+    public void testAllowedMoves(){
         ToolCard tester = pullOutThatCard(12);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -256,7 +256,7 @@ public class ToolCard12Test {
     }
 
     @Test
-    void TestAllowedMovesAfterPositioning_WithDiceJutsPlaced() {
+    public void testAllowedMovesAfterPositioning_WithDiceJutsPlaced(){
         ToolCard tester = pullOutThatCard(12);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -464,11 +464,11 @@ public class ToolCard12Test {
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
-            try {
-                turn.receiveMove(new Pos(2, 3));
-            } catch (WrongMoveException e) {
-                e.printStackTrace();
-            }
+        try {
+            turn.receiveMove(new Pos(2, 3));
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
 
 
         state = "PositionDice1";
@@ -550,10 +550,10 @@ public class ToolCard12Test {
         assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(3,1)).isOccupied());
         assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(3,2)).isOccupied());
 
-        }
+    }
 
     @Test
-    void TestMovingOnlyOneDice() {
+    public void testMovingOnlyOneDice() {
         ToolCard tester = pullOutThatCard(12);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -817,7 +817,7 @@ public class ToolCard12Test {
     }
 
     @Test
-    void TestNotInFirstRound() {
+    public void testNotInFirstRound() {
         ToolCard tester = pullOutThatCard(12);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -929,3 +929,4 @@ public class ToolCard12Test {
     }
 
 }
+

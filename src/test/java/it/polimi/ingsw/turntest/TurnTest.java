@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TurnTest {
 
     @Test
-    void TestStartTurn(){
+    public void testStartTurn(){
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");

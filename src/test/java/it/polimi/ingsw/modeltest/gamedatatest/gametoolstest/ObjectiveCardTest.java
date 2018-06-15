@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ObjectiveCardTest {
 
     @Test
-    public void TestCardOne(){
+    public void testCardOne(){
         ObjectiveCard tester = new ObjectiveCard();
         CardContainer container = new CardContainer();
         ArrayList<ObjectiveCard> objectiveCards = new ArrayList<>();

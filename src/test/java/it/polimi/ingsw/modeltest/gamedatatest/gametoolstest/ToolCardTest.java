@@ -16,7 +16,7 @@ public class ToolCardTest {
 
     //testing the increasing cost of a ToolCard after it's been used
     @Test
-    public void TestIncreasingCost() {
+    public void testIncreasingCost() {
         ToolCard toolCard1 = new ToolCard();
 
         assertEquals(1,toolCard1.getCost());
@@ -26,7 +26,7 @@ public class ToolCardTest {
     }
 
     @Test
-    public void TestGetter(){
+    public void testGetter(){
         ToolCard tester = new ToolCard();
         CardContainer container = new CardContainer();
         List<ToolCard> toolCards = container.pullOutTools();

@@ -16,7 +16,7 @@ public class DraftPoolTest{
 
 
     @Test
-    public void TestRemoveDice(){
+    public void testRemoveDice(){
         DraftPool tester = new DraftPool(4);
         Dice y = new Dice();
         int j;
@@ -31,7 +31,7 @@ public class DraftPoolTest{
     }
 
     @Test
-    public void TestNeverEmpty(){
+    public void testNeverEmpty(){
         int i;
         DraftPool tester = new DraftPool();
         Dice y = new Dice();
@@ -48,14 +48,14 @@ public class DraftPoolTest{
     }
 
     @Test
-    public void TestAddDices(){
+    public void testAddDices(){
         DraftPool tester = new DraftPool();
         DiceBag test = new DiceBag();
         tester.addNewDices(test.pullOut());
     }
 
     @Test
-    public void TestFindDice(){
+    public void testFindDice(){
         DraftPool tester = new DraftPool();
         Property prop = new Property(Colour.RED,true);
         Dice d;
@@ -73,7 +73,7 @@ public class DraftPoolTest{
     }
 
     @Test
-    public void TestFindinPosition(){
+    public void testFindinPosition(){
         DraftPool tester = new DraftPool();
         Property prop = new Property(Colour.RED,true);
         Dice d;
@@ -89,7 +89,7 @@ public class DraftPoolTest{
     }
 
     @Test
-    public void removeDice(){
+    public void testremoveDice(){
         DraftPool tester = new DraftPool();
         Dice d1 = new Dice(Colour.BLUE);
         tester.getDraftPool().add(d1);

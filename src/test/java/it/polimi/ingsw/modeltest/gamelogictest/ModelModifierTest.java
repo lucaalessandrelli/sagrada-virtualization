@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ModelModifierTest {
 
     @Test
-    void TestLaunchDice(){
+    public void testLaunchDice(){
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");
@@ -52,7 +52,7 @@ public class ModelModifierTest {
     }
 
     @Test
-    void TestResetDraftpool() {
+    public void testResetDraftpool() {
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");
@@ -75,7 +75,7 @@ public class ModelModifierTest {
     }
 
     @Test
-    void TestSpinDice(){
+    public void testSpinDice(){
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");
@@ -118,7 +118,7 @@ public class ModelModifierTest {
     }
 
     @Test
-    void TestNewDice(){
+    public void testNewDice(){
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");
@@ -145,7 +145,7 @@ public class ModelModifierTest {
     }
 
     @Test
-    void TestPositionDiceFromDraft(){
+    public void testPositionDiceFromDraft(){
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");
@@ -181,7 +181,7 @@ public class ModelModifierTest {
     }
 
     @Test
-    void TestPositionDiceFromWindow(){
+    public void testPositionDiceFromWindow(){
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");
@@ -246,7 +246,7 @@ public class ModelModifierTest {
     }
 
     @Test
-    void TestChangeDiceValue(){
+    public void testChangeDiceValue(){
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");

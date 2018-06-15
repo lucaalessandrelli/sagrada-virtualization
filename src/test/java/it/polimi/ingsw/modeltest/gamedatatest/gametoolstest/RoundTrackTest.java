@@ -19,7 +19,7 @@ public class RoundTrackTest {
      * Testing getter and setter
      */
     @Test
-    public void TestGet_And_Set(){
+    public void testGet_And_Set(){
         RoundTrack roundTrack = new RoundTrack();
         List<List<Dice>> arrayList = roundTrack.getRoundTrack(); //Testing the getter method
         List<Dice> dices = new ArrayList<>();
@@ -37,7 +37,7 @@ public class RoundTrackTest {
      * Testing Find method and Switch method
      */
     @Test
-    public void TestFind_And_Switch(){
+    public void testFind_And_Switch(){
         RoundTrack roundTrack = new RoundTrack();
         List<Dice> dices = new ArrayList<>();
         Dice dice = new Dice(Colour.GREEN);
