@@ -51,7 +51,8 @@ public class Match extends Thread {
         }, 0, 500, TimeUnit.MILLISECONDS);
         try {
             Thread.sleep(timerCard);
-            playerList.stream().filter(player -> player.getWindowPatternCard()==null).forEach(player -> table.setWindow(player.getUsername()));
+            playerList.stream().filter(player -> player.getWindowPatternCard()==null)
+                    .forEach(player -> table.setWindow(player.getUsername()));
         } catch (InterruptedException e) {
             exec.shutdown();
         }
@@ -67,6 +68,7 @@ public class Match extends Thread {
             } catch (NotEnoughPlayersException e) {
                 playerList.stream().filter(Player::isActive)
                         .forEach(player -> player.notifyScore("score "+ player.getUsername()+player.calculatePoints()));
+                playerList.forEach(player -> manager.matchEnded(player.getUsername()));
                 return;
             }
         }
@@ -75,9 +77,8 @@ public class Match extends Thread {
 
         //send points and name winner(to do)
         playerList.forEach(player -> player.notifyScore(computePlayerPoints()));
-        for(Player p : playerList){
-            manager.matchEnded(p.getUsername());
-        }
+        playerList.forEach(player -> manager.matchEnded(player.getUsername()));
+        manager.endGame(id);
     }
 
     private String computePlayerPoints() {

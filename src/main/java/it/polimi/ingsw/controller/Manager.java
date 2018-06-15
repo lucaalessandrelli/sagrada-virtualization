@@ -6,11 +6,14 @@ import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.network.ClientInterface;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Manager {
-    private List<Game> games;
+    private HashMap<Integer,Game> games;
     private ClientsContainer clients;
     private int numOfMatch;
     private WaitingRoom lobby;
@@ -24,19 +27,18 @@ public class Manager {
         this.timerRoom=timerRoom*1000;
         this.timerCard=timerCard*1000;
         this.timerMove=timerMove*1000;
-        games = new ArrayList<>();
+        games = new HashMap<>();
         numOfMatch = 0;
         clients = new ClientsContainer(this);
         lobby = new WaitingRoom(this.timerRoom, this, clients);
         clientHandler = new ClientHandler();
         analyzer = new InputAnalyzer(this);
-
     }
 
     public void createMatch(WaitingRoom lobby) {
         Game g = new Game(clients,new Match(lobby.getPlayerList(), this, numOfMatch,timerCard,timerMove),numOfMatch);
         g.notifyGame();
-        games.add(g);
+        games.put(numOfMatch, g);
         /*START MATCH*/
         lobby.getPlayerList().forEach(player -> clientHandler.addPlayer(player.getUsername(), numOfMatch));
         g.start();
@@ -53,12 +55,18 @@ public class Manager {
         if(clients.findClient(name)){
             return true;
         }
-        for (Game g : games) {
-            if (g.findClient(name)) {
+        for (Map.Entry<Integer, Game> pair : games.entrySet()) {
+            if (pair.getValue().findClient(name)) {
                 return true;
             }
         }
         return false;
+        /*for (Game g : games) {
+            if (g.findClient(name)) {
+                return true;
+            }
+        }
+        return false;*/
     }
 
     public boolean checkIfPlayerIsPlaying(String name) {
@@ -67,11 +75,16 @@ public class Manager {
 
 
     public void remove(String name){
-        for (Game g : games) {
-            if (g.remove(name)) {
+        for (Map.Entry<Integer,Game> pair : games.entrySet()) {
+            if (pair.getValue().remove(name)) {
                 return;
             }
         }
+        /*for (Game g : games) {
+            if (g.remove(name)) {
+                return;
+            }
+        }*/
     }
 
     public void notifyEnd(String name) {
@@ -113,5 +126,31 @@ public class Manager {
 
     public void setPlayerWindow(int num, String name, String window) {
         games.get(num).setPlayerWindow(name,Integer.parseInt(window));
+    }
+
+    public void disconnectPlayer(int num, String name) {
+        games.get(num).remove(name);
+    }
+
+    public void endGame(int id) {
+        games.get(id).setEnd();
+    }
+    public void checkEndGame(){
+        ScheduledExecutorService exec = Executors.newScheduledThreadPool(10);
+        exec.scheduleWithFixedDelay(() -> {
+            for (Map.Entry<Integer,Game> pair : games.entrySet()) {
+                if(pair.getValue().endedMatch()&&pair.getValue().sizeClient()==0){
+                    games.remove(pair.getValue());
+                }
+            }
+        }, 0, 1, TimeUnit.SECONDS);
+    }
+
+    public void revenge(String name) {
+        for (Map.Entry<Integer,Game> pair : games.entrySet()){
+            if(pair.getValue().findClient(name)){
+                lobby.addPlayer(pair.getValue().getClientBox(name));
+            }
+        }
     }
 }

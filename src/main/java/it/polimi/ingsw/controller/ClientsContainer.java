@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
-import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.virtualview.VirtualView;
 
 import java.io.IOException;
@@ -140,5 +139,15 @@ public class ClientsContainer {
                 e.printStackTrace();
             }
         }
+    }
+
+    public ClientInterface getClientBox(String name) {
+        for (ClientBox c : clients){
+            if (c.getName().equals(name)){
+                clients.remove(c);
+                return c.getInterface();
+            }
+        }
+        return null;
     }
 }

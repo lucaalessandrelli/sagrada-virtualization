@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.network.ClientInterface;
-import it.polimi.ingsw.network.client.Client;
 
 import java.rmi.RemoteException;
 
@@ -59,5 +58,9 @@ public class ClientBox {
 
     public void chooseWindow(String windows) throws RemoteException {
         client.updateMessage(windows);
+    }
+
+    public ClientInterface getInterface() {
+        return client;
     }
 }

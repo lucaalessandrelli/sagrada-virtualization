@@ -20,6 +20,7 @@ public class ServerMain {
             Manager manager = new Manager((Integer) options.valueOf("timerRoom"),(Integer)options.valueOf("timerCard"),
                     (Integer)options.valueOf("timerMove"));
             server.setManager(manager);
+            manager.checkEndGame();
             NetworkManager networkManager = new NetworkManager(server);
             networkManager.start();
         } catch (Exception e) {
