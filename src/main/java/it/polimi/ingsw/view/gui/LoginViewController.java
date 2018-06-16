@@ -3,8 +3,7 @@ package it.polimi.ingsw.view.gui;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.view.MessageAnalyzer;
-import it.polimi.ingsw.view.ViewInterface;
+import it.polimi.ingsw.view.SceneInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.input.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class LoginViewController implements Initializable, GuiInterface {
+public class LoginViewController implements Initializable, SceneInterface {
     private static final int SOCKET = 1;
     private static final int RMI = 2;
     private Client client;

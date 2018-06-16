@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.SceneInterface;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -28,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PatternCardChoiceViewController implements Initializable, GuiInterface {
+public class PatternCardChoiceViewController implements Initializable, SceneInterface {
     private Client client;
     private Stage stage;
     private String cardChoiceTimer;

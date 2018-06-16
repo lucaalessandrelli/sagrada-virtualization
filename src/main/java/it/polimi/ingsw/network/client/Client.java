@@ -1,6 +1,6 @@
 package it.polimi.ingsw.network.client;
 
-import it.polimi.ingsw.view.MessageAnalyzer;
+import it.polimi.ingsw.view.AbstractView;
 
 import java.rmi.RemoteException;
 
@@ -13,10 +13,14 @@ public class Client  {
     private int numOfMatch;
     private MessageQueue messages;
 
-    public Client(String addr, MessageAnalyzer messageAnalyzer) throws RemoteException{
+    public Client(String addr/*, ViewInterface view*/) throws RemoteException{
         connected=false;
         this.addr = addr;
-        messages = new MessageQueue(messageAnalyzer);
+        //messages = new MessageQueue(view);
+    }
+
+    public void setQueue(AbstractView view){
+        messages = new MessageQueue(view);
     }
 
 

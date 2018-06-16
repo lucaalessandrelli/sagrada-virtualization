@@ -2,8 +2,8 @@ package it.polimi.ingsw.view.gui;
 
 import com.jfoenix.controls.JFXListView;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.view.MessageAnalyzer;
-import it.polimi.ingsw.view.ViewInterface;
+import it.polimi.ingsw.view.SceneInterface;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -15,8 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -24,9 +24,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import javafx.animation.Animation;
-
-public class WaitingRoomViewController implements Initializable, GuiInterface {
+public class WaitingRoomViewController implements Initializable, SceneInterface {
     private Client client;
     private Stage stage;
     private ObservableList<String> playerList = FXCollections.observableArrayList();

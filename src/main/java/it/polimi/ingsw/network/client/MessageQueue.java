@@ -1,22 +1,24 @@
 package it.polimi.ingsw.network.client;
 
 
-import it.polimi.ingsw.view.MessageAnalyzer;
+import it.polimi.ingsw.view.AbstractView;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MessageQueue {
     private ConcurrentLinkedQueue<String> messages;
-    private MessageAnalyzer messageAnalyzer;
+    //private MessageAnalyzer messageAnalyzer;
+    private AbstractView view;
 
-    public MessageQueue(MessageAnalyzer messageAnalyzer){
-        this.messageAnalyzer = messageAnalyzer;
+
+    public MessageQueue(AbstractView view){
+        this.view = view;
         messages = new ConcurrentLinkedQueue<>();
     }
 
     synchronized void add(String s){
         messages.add(s);
-        messageAnalyzer.notifyMessage();
+        view.notifyMessage();
     }
     synchronized public String poll(){
         return messages.poll();

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.network.client;
 
-import it.polimi.ingsw.view.MessageAnalyzer;
 import it.polimi.ingsw.view.cli.CliHandler;
 import it.polimi.ingsw.view.gui.GuiHandler;
 import it.polimi.ingsw.view.gui.GuiView;
@@ -25,22 +24,19 @@ public class ClientMain {
         }else{
             ui=1;
         }
-        MessageAnalyzer messageAnalyzer = new MessageAnalyzer();
-        Client client = new Client(addr,messageAnalyzer);
+        Client client = new Client(addr);
 
         if(ui==1) {
             GuiHandler guiHandler = new GuiHandler();
-            messageAnalyzer.setView(guiHandler);
+            client.setQueue(guiHandler);
+            guiHandler.setQueue(client.getQueue());
             GuiView.setGuiHandler(guiHandler);
-
-            messageAnalyzer.setMessageQueue(client.getQueue());
-
             GuiView.setClient(client);
             GuiView.launching();
         }else{
             CliHandler cliHandler = new CliHandler(client);
-            messageAnalyzer.setView(cliHandler);
-            messageAnalyzer.setMessageQueue(client.getQueue());
+            client.setQueue(cliHandler);
+            cliHandler.setQueue(client.getQueue());
             cliHandler.initialize();
             cliHandler.receiveCommand();
         }

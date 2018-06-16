@@ -1,6 +1,6 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view;
 
-public interface GuiInterface {
+public interface SceneInterface {
 
     default void handleAlert(String alert) {
 
@@ -26,9 +26,7 @@ public interface GuiInterface {
 
     }
 
-    default void updateBoard(String setup) {
-
-    }
+    default void updateBoard(String setup) {}
 
     default void setPatternCards(String patternCards) {
 

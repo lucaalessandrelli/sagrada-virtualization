@@ -1,126 +1,87 @@
 package it.polimi.ingsw.view.gui;
 
-import it.polimi.ingsw.view.ViewInterface;
+import it.polimi.ingsw.view.AbstractView;
+import it.polimi.ingsw.view.SceneInterface;
 import javafx.application.Platform;
 
-public class GuiHandler implements ViewInterface {
-    private GuiInterface gui;
+public class GuiHandler extends AbstractView implements SceneInterface {
 
+    SceneInterface view;
     public GuiHandler() {
-
+        scene=this;
     }
 
-    public void setGui(GuiInterface gui) {
-        this.gui = gui;
+    public void setGui(SceneInterface gui) {
+        this.view = gui;
     }
 
-    @Override
     public void handleAlert(String alert) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.handleAlert(alert);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.handleAlert(alert);
         });
     }
 
-    @Override
     public void handleClientConnected(String messageConnection) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.handleClientConnected(messageConnection);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.handleClientConnected(messageConnection);
         });
     }
 
-    @Override
     public void handleConnectedPlayers(String playerlist) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.handleConnectedPlayers(playerlist);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.handleConnectedPlayers(playerlist);
         });
     }
 
-    @Override
     public void handleTimer(String timer){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.handleTimer(timer);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.handleTimer(timer);
         });
     }
 
-    @Override
     public void handleMatchId(String idMatch) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.handleMatchId(idMatch);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.handleMatchId(idMatch);
         });
     }
 
-    @Override
     public void handleTurnMessage(String turnMessage) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.handleTurnMessage(turnMessage);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.handleTurnMessage(turnMessage);
         });
     }
 
-    @Override
     public void updateBoard(String setup) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.updateBoard(setup);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.updateBoard(setup);
         });
     }
 
-    @Override
     public void setPatternCards(String patternCards) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.setPatternCards(patternCards);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.setPatternCards(patternCards);
         });
     }
 
-    @Override
     public void handleGameState(String gameState) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.handleGameState(gameState);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.handleGameState(gameState);
         });
     }
 
-    @Override
     public void handleScore(String score) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // Update UI here.
-                gui.handleScore(score);
-            }
+        Platform.runLater(() -> {
+            // Update UI here.
+            view.handleScore(score);
         });
     }
 }

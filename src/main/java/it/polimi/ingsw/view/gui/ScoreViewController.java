@@ -1,9 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
-import com.jfoenix.controls.JFXListView;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.view.MessageAnalyzer;
-import it.polimi.ingsw.view.ViewInterface;
+import it.polimi.ingsw.view.SceneInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +19,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class ScoreViewController implements Initializable, GuiInterface {
+public class ScoreViewController implements Initializable, SceneInterface {
     private Client client;
     private Stage stage;
     private ObservableList<String> connectedPlayerList = FXCollections.observableArrayList();

@@ -1,11 +1,8 @@
 package it.polimi.ingsw.view.gui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.view.MessageAnalyzer;
-import it.polimi.ingsw.view.ViewInterface;
+import it.polimi.ingsw.view.SceneInterface;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,7 +28,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -39,7 +35,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 
-public class MatchViewController implements Initializable, GuiInterface {
+public class MatchViewController implements Initializable, SceneInterface {
     private Client client;
     private Stage stage;
     private GuiHandler guiHandler;
