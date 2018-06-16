@@ -87,7 +87,7 @@ public class Printer {
         return in.nextInt();
     }
 
-    public void print(String messageConnection) {
+    public void printConnection(String messageConnection) {
         out.println(ansi().fg(GREEN).a(messageConnection).reset()); //add a colour maybe
     }
 
@@ -110,10 +110,27 @@ public class Printer {
     }
 
 
-
-    public void timer(String timer){
-        out.println(ansi().a("The timer is setted to: " + timer +"s"));
+    public void printtimer(String timer, String output){
+        out.print(ansi().saveCursorPosition());
+        out.print(ansi().a(output + timer));
+        out.print(ansi().restoreCursorPosition());
     }
+
+    public void printplayersConnected(List<String> players){
+        out.print(ansi().saveCursorPosition());
+        out.print(ansi().a("Players connected:").cursorLeft("Players connected:".length()));
+        out.print(ansi().cursorDown(1));
+        for (String player: players) {
+            out.print(ansi().a(player));
+            out.print(ansi().cursorLeft(player.length()).cursorDown(1));
+        }
+        out.print(ansi().restoreCursorPosition());
+    }
+
+    /*public void timer(String timer){
+        out.println(ansi().a("The match will start in.." + timer));
+    }
+
 
     public void startTimer(String timer){
         int time = Integer.parseInt(timer);
@@ -129,26 +146,27 @@ public class Printer {
 
     public void resetTimer(String timer){
         out.println(ansi().fg(RED).a("Not enough player to start the match, the timer will be resetted to" + timer));
-    }
+    }*/
 
-    public void choosePatternCard(String windows){
-        out.println(ansi().eraseScreen());
-        out.print(ansi().eraseLine());
-        List<String> space = Arrays.asList(windows.split(";"));
-        for(int k = 0; k < space.size(); k++){
-            List <String> list = Arrays.asList(space.get(k).split(" "));
-            out.print("Id card number: " + list.get(0)); //prints the id number of the card
-            out.print("    Difficulty: " + list.get(1)); //prints the difficulty of the card
-            List<String> restr = Arrays.asList(list.get(2).split(","));
+    public void printchoosePatternCard(String id, String difficulty){
             out.println();
             out.println();
-            this.printPatternCard(restr);
+            out.print(ansi().a("Id number:" + id + "     Difficulty:"+difficulty));
             out.println();
         }
-    }
 
     public String getCommand() {
         return in.nextLine();
+    }
+
+    public void printCoordinates(){
+        out.print(ansi().saveCursorPosition());
+        out.println(ansi().a("   j0 j1 j2 j3 j4"));
+        for(int i = 0; i < 4; i++){
+            out.println("i"+i);
+        }
+        out.print(ansi().restoreCursorPosition());
+        out.print(ansi().cursorDown(1).cursorRight(3));
     }
 
     public void printPatternCard(List<String> restr){
@@ -159,15 +177,15 @@ public class Printer {
             else
                 printBackground(restr.get(i).charAt(0));
             out.print(ansi().reset());
-            if((restr.get(i).charAt(3)-'0')==4)
-                out.println();
+            if((restr.get(i).charAt(3)-'0')==4) {
+                out.print(ansi().cursorDown(1).cursorLeft(15));
+            }
         }
     }
 
     public void printPlacedDices(List<String> dices){
         int updown;
         int leftright;
-        out.print(ansi().cursorLeft(50));
         out.print(ansi().cursorUp(4));
         out.print(ansi().saveCursorPosition());
         for(int i = 0; i < dices.size(); i++){
@@ -185,36 +203,54 @@ public class Printer {
     }
 
     private void printBackground(Character c){
-        if(c == 'W')
-            out.print(ansi().bg(WHITE).fg(WHITE).a(" 0 ").reset());
-        if(c == 'B')
-            out.print(ansi().bg(BLUE).fg(BLUE).a(" 0 ").reset());
-        if(c == 'Y')
-            out.print(ansi().bg(YELLOW).fg(YELLOW).a(" 0 ").reset());
-        if(c == 'R')
-            out.print(ansi().bg(RED).fg(RED).a(" 0 ").reset());
-        if(c == 'G')
-            out.print(ansi().bg(GREEN).fg(GREEN).a(" 0 ").reset());
-        if(c == 'P')
-            out.print(ansi().bg(MAGENTA).fg(MAGENTA).a(" 0 ").reset());
+        switch (c){
+            case 'W':
+                out.print(ansi().bg(WHITE).fg(WHITE).a(" 0 ").reset());
+                break;
+            case 'B':
+                out.print(ansi().bg(BLUE).fg(BLUE).a(" 0 ").reset());
+                break;
+            case 'Y':
+                out.print(ansi().bg(YELLOW).fg(YELLOW).a(" 0 ").reset());
+                break;
+            case 'R':
+                out.print(ansi().bg(RED).fg(RED).a(" 0 ").reset());
+                break;
+            case 'G':
+                out.print(ansi().bg(GREEN).fg(GREEN).a(" 0 ").reset());
+                break;
+            case 'P':
+                out.print(ansi().bg(MAGENTA).fg(MAGENTA).a(" 0 ").reset());
+                break;
+            default:
+        }
     }
 
     private void printDice(Character colour, Character number){
         try{
             PrintStream outStream = new PrintStream(System.out, true, "UTF-8");
             Character num = whatNumber(number);
-            if(colour == 'W')
-                outStream.print(ansi().fg(WHITE).a(" " + num +" ").reset());
-            if(colour == 'B')
-                outStream.print(ansi().bg(Color.WHITE).fg(BLUE).a(" " + num +" ").reset());
-            if(colour == 'Y')
-                outStream.print(ansi().bg(Color.WHITE).fg(YELLOW).a(" " + num +" ").reset());
-            if(colour == 'R')
-                outStream.print(ansi().bg(Color.WHITE).fg(RED).a(" " + num +" ").reset());
-            if(colour == 'G')
-                outStream.print(ansi().bg(Color.WHITE).fg(GREEN).a(" " + num +" ").reset());
-            if(colour == 'P')
-                outStream.print(ansi().bg(Color.WHITE).fg(MAGENTA).a(" " + num +" ").reset());
+            switch (colour){
+                case 'W':
+                    outStream.print(ansi().fg(WHITE).a(" " + num +" ").reset());
+                    break;
+                case 'B':
+                    outStream.print(ansi().bg(Color.WHITE).fg(BLUE).a(" " + num +" ").reset());
+                    break;
+                case 'Y':
+                    outStream.print(ansi().bg(Color.WHITE).fg(YELLOW).a(" " + num +" ").reset());
+                    break;
+                case 'R':
+                    outStream.print(ansi().bg(Color.WHITE).fg(RED).a(" " + num +" ").reset());
+                    break;
+                case 'G':
+                    outStream.print(ansi().bg(Color.WHITE).fg(GREEN).a(" " + num +" ").reset());
+                    break;
+                case 'P':
+                    outStream.print(ansi().bg(Color.WHITE).fg(MAGENTA).a(" " + num +" ").reset());
+                    break;
+                default:
+            }
         } catch(UnsupportedEncodingException e){
             System.out.println("Caught exception: " + e.getMessage());
         }
@@ -222,24 +258,41 @@ public class Printer {
 
     private Character whatNumber(Character number){
         int intValue = 0;
-        if(number == '1'){
-            intValue = Integer.parseInt(ONE, 16);
-        }
-        if(number == '2'){
-            intValue = Integer.parseInt(TWO, 16);
-        }
-        if(number == '3'){
-            intValue = Integer.parseInt(THREE, 16);
-        }
-        if(number == '4'){
-            intValue = Integer.parseInt(FOUR, 16);
-        }
-        if(number == '5'){
-            intValue = Integer.parseInt(FIVE, 16);
-        }
-        if(number == '6'){
-            intValue = Integer.parseInt(SIX, 16);
+        switch (number){
+            case '1':
+                intValue = Integer.parseInt(ONE, 16);
+                break;
+            case '2':
+                intValue = Integer.parseInt(TWO, 16);
+                break;
+            case '3':
+                intValue = Integer.parseInt(THREE, 16);
+                break;
+            case '4':
+                intValue = Integer.parseInt(FOUR, 16);
+                break;
+            case '5':
+                intValue = Integer.parseInt(FIVE, 16);
+                break;
+            case '6':
+                intValue = Integer.parseInt(SIX, 16);
+                break;
+            default:
         }
         return (char)intValue;
+    }
+
+    public void printWaitingRoom(String timer, List<String> players, String output){
+        out.print(ansi().saveCursorPosition().eraseScreen(Erase.ALL));
+
+        this.printtimer(timer,output);
+        out.print(ansi().cursorRight(output.length()+timer.length()+10));
+        this.printplayersConnected(players);
+    }
+
+
+    public void rePrintChoseCard(String output, String timer){
+        out.print(ansi().cursorLeft(50));
+        this.printtimer(timer,output+"  ");
     }
 }
