@@ -109,6 +109,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
             int x = patternCardGrid.getRowIndex(source);
 
             String patternCardToSend = givenPatternCards.get(2 * x + y);
+            System.out.println("Carta Scelta: "+patternCardToSend);
             client.sendCommand("chooseCard "+idMatch+" "+client.getName()+" "+patternCardToSend);
             isChosen = true;
         }
@@ -187,14 +188,14 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
     @Override
     public void setPatternCards(String windows) {
         ObservableList<Node> children = patternCardGrid.getChildren();
-        ObservableList<String> patternCardList = FXCollections.observableArrayList(Arrays.asList(windows.split(";")));
+        List<String> patternCardList = Arrays.asList(windows.split(";"));
 
         for(int k = 0; k < patternCardList.size();k++) {
-            List<String> substring = FXCollections.observableArrayList(Arrays.asList(patternCardList.get(k).split(" ")));
+            List<String> substring = Arrays.asList(patternCardList.get(k).split(" "));
 
             givenPatternCards.add(substring.get(0));
             String numFavors = substring.get(1);
-            List<String> restrictionList = FXCollections.observableArrayList(Arrays.asList(substring.get(2).split(",")));
+            List<String> restrictionList = Arrays.asList(substring.get(2).split(","));
 
             VBox currentVbox = (VBox)children.get(k);
             ObservableList<Node> boxChildren = currentVbox.getChildren();

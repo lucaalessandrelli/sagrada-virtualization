@@ -46,7 +46,6 @@ public class MatchViewController implements Initializable, SceneInterface {
     private List<String> toolList;
     private String time;
     private String score;
-    private ObservableList<User> userList = FXCollections.observableArrayList();
 
     @FXML
     private TableColumn<User,String> userNameColumn;
@@ -350,17 +349,16 @@ public class MatchViewController implements Initializable, SceneInterface {
     }
 
     public void updateStatusTable() {
-        /*for (User user:userList) {
-            userList.remove(user);
-        }*/
-        userList = FXCollections.observableArrayList();
+        ObservableList<User> userList = FXCollections.observableArrayList();
 
         ObservableList<String> playerInfo;
 
         for (String username:connectedPlayers) {
             for (String player: playerStatusList) {
                 playerInfo = FXCollections.observableArrayList(Arrays.asList(player.split(" ")));
-                userList.add(new User(username,playerInfo.get(1)));
+                if(username.equals(playerInfo.get(0))) {
+                    userList.add(new User(username,playerInfo.get(1)));
+                }
             }
         }
 

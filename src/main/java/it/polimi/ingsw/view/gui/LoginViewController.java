@@ -125,7 +125,7 @@ public class LoginViewController implements Initializable, SceneInterface {
     }
 
     public void changeSceneToMatch() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui2.fxml"));
         Parent root = fxmlLoader.load();
 
         // Get the Controller from the FXMLLoader
@@ -140,6 +140,7 @@ public class LoginViewController implements Initializable, SceneInterface {
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
         controller.startTimer();
         controller.updateBoard(setup);
+        controller.updateStatusTable();
         guiHandler.setGui(controller);
 
         stage.setScene(scene);
