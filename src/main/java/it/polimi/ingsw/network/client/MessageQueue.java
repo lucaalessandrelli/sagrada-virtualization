@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MessageQueue {
     private ConcurrentLinkedQueue<String> messages;
-    //private MessageAnalyzer messageAnalyzer;
     private AbstractView view;
 
 

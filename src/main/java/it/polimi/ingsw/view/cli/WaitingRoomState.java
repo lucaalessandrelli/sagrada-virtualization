@@ -30,8 +30,8 @@ public class WaitingRoomState implements SceneInterface {
 
     @Override
     public void handleConnectedPlayers(String playerlist) {
-        printer.printWaitingRoom(tmpTimer,players,message);
         players = Arrays.asList(playerlist.split(" "));
+        printer.printWaitingRoom(tmpTimer,players,message);
         if(players.size()==2){
             ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
             exec.scheduleWithFixedDelay(() -> {
