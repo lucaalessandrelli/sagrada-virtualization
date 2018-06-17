@@ -22,7 +22,6 @@ public class LoginState implements SceneInterface {
     @Override
     public void handleClientConnected(String messageConnection) {
         printer.printConnection(messageConnection);
-        cliHandler.setState(new WaitingRoomState(printer,cliHandler));
     }
 
     @Override
@@ -32,6 +31,7 @@ public class LoginState implements SceneInterface {
 
     @Override
     public void handleTimer(String timer) {
+        cliHandler.setState(new WaitingRoomState(printer,cliHandler,timer));
     }
 
     @Override

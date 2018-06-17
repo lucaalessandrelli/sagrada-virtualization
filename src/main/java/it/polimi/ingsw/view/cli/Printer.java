@@ -1,11 +1,5 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
-import org.fusesource.jansi.AnsiRenderer;
-
-import javax.management.timer.Timer;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -294,5 +288,15 @@ public class Printer {
     public void rePrintChoseCard(String output, String timer){
         out.print(ansi().cursorLeft(50));
         this.printtimer(timer,output+"  ");
+    }
+
+    public void printChoose(String patternCards, String timer) {
+
+        //print all 4 windows and the timer (il timer deve essere fisso altrimenti il giocatore non può scrivere)
+    }
+
+    public void printMatch(String setup, String timer, List<String> players, String turnState) {
+
+        //print all match layout (statico)
     }
 }

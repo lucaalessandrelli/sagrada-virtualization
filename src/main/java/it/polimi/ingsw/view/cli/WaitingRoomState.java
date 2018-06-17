@@ -16,15 +16,16 @@ public class WaitingRoomState implements SceneInterface {
     String tmpTimer;
     List<String> players;
 
-    public WaitingRoomState(Printer printer, CliHandler cliHandler) {
+    public WaitingRoomState(Printer printer, CliHandler cliHandler,String timer) {
+        this.timer=timer;
         this.printer=printer;
         this.cliHandler=cliHandler;
+        this.tmpTimer=timer;
     }
 
     @Override
     public void handleTimer(String timer) {
-        this.timer=timer;
-        this.tmpTimer=timer;
+        cliHandler.setState(new ChooseWindowState(printer,cliHandler,timer));
     }
 
     @Override

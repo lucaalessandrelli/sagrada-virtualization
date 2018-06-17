@@ -4,6 +4,10 @@ import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.AbstractView;
 import it.polimi.ingsw.view.SceneInterface;
 
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class CliHandler extends AbstractView {
     private Client client;
     private Printer printer;
@@ -25,9 +29,20 @@ public class CliHandler extends AbstractView {
     }
 
     public void receiveCommand(){
-        while(client.connected()) {
+        /*while(client.connected()) {
             client.sendCommand(printer.getCommand());
-        }
+        }*/
+        ExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+        exec.execute(new Runnable() {
+            @Override
+            public void run() {
+                Scanner in = new Scanner(System.in);
+                while (client.connected()){
+                    client.sendCommand(in.nextLine());
+                }
+            }
+        });
+
     }
 
     public void setState(SceneInterface newState) {
@@ -36,5 +51,9 @@ public class CliHandler extends AbstractView {
 
     public void welcome() {
         printer.welcome();
+    }
+
+    public void setIdMatch(Integer num) {
+        client.setNumMatch(num);
     }
 }
