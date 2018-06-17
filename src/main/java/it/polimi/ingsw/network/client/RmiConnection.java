@@ -35,7 +35,7 @@ public class RmiConnection implements ConnectionHandler {
                 String name = client.getName();
                 if (server.login(name,stub)) {
                     client.setConnected(true);
-                    client.setServiceMessage("Connected, Welcome!");
+                    //client.setServiceMessage("Connected, Welcome!");
                 } else {
                     client.setConnected(false);
                     client.setServiceMessage("alert Already connected");

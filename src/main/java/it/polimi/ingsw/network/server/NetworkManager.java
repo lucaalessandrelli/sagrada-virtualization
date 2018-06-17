@@ -4,7 +4,6 @@ import it.polimi.ingsw.controller.InputAnalyzer;
 import it.polimi.ingsw.network.ClientInterface;
 import it.polimi.ingsw.network.ServerInterface;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -90,7 +89,7 @@ public class NetworkManager {
                     String name = analyzer.getData(message);
                     setName(name);
                     if (server.login(name, this)) {
-                        pr.println("Connected, Welcome!");
+                        //pr.println("Connected, Welcome!");
                         connected = true;
                     } else {
                         pr.println(alert+"Already connected");

@@ -7,15 +7,16 @@ import it.polimi.ingsw.view.SceneInterface;
 public class CliHandler extends AbstractView {
     private Client client;
     private Printer printer;
+    //private CommandAnalyzer analyzer;
 
     public CliHandler(Client client){
         this.client= client;
         this.printer = new Printer();
         this.scene = new LoginState(printer,client,this);
+        //this.analyzer = new CommandAnalyzer();
     }
 
     public void initialize() {
-        printer.welcome();
         while (!client.connected()) {
             client.setName(printer.getName());
             client.setKindConnection(printer.getConnection());
@@ -24,12 +25,16 @@ public class CliHandler extends AbstractView {
     }
 
     public void receiveCommand(){
-        while(client.connected()){
+        while(client.connected()) {
             client.sendCommand(printer.getCommand());
         }
     }
 
     public void setState(SceneInterface newState) {
         this.scene =newState;
+    }
+
+    public void welcome() {
+        printer.welcome();
     }
 }

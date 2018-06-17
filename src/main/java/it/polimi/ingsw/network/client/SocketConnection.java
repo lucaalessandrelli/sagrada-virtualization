@@ -3,6 +3,7 @@ package it.polimi.ingsw.network.client;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class SocketConnection implements ConnectionHandler {
     static int PORT_SOCKET = 45678;
@@ -21,25 +22,26 @@ public class SocketConnection implements ConnectionHandler {
             client.setServiceMessage("alert Connection not available");        }
     }
 
-    public void startListener(){
-        listner = new SocketListener(client.getQueue(), socket);
+    public void startListener(Scanner in){
+        listner = new SocketListener(client.getQueue(), socket,in);
         new Thread(listner).start();
     }
 
     @Override
     public void connect() {
         try {
+            Scanner in = new Scanner(socket.getInputStream());
             PrintWriter pr = new PrintWriter(socket.getOutputStream(), true);
             if (!client.connected()) {
                 String rqst = inputComposer.compose("login");
                 pr.println(rqst);
-                /*String answ = in.nextLine();
+                String answ = in.nextLine();
                 if (answ.equals("Connected, Welcome!")) {
                     client.setConnected(true);
-                }*/
-                //client.setServiceMessage(answ);
+                }
+                client.setServiceMessage(answ);
             }
-            startListener();
+            startListener(in);
         } catch (Exception e) {
             client.setServiceMessage("alert Server not available");
         }

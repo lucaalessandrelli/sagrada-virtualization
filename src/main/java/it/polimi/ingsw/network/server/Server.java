@@ -1,20 +1,12 @@
 package it.polimi.ingsw.network.server;
 
-import it.polimi.ingsw.Match;
-import it.polimi.ingsw.WaitingRoom;
-import it.polimi.ingsw.controller.ClientHandler;
 import it.polimi.ingsw.controller.Manager;
-import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
 import it.polimi.ingsw.network.ServerInterface;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.List;
 
-import static java.lang.System.*;
+import static java.lang.System.out;
 
 public class Server implements ServerInterface {
     private Manager manager;
@@ -52,6 +44,7 @@ public class Server implements ServerInterface {
                     manager.reconnectPlayer(client);
                     return true;
                 } else {
+                    client.updateMessage("Connected, Welcome!");
                     manager.addPlayerInQueue(client);
                     out.println("Player " + name + " is connected");
                     return true;

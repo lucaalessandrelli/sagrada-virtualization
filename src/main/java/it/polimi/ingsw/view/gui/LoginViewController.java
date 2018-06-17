@@ -95,8 +95,8 @@ public class LoginViewController implements Initializable, SceneInterface {
         if (!username.equals("")) {
             guiHandler.setGui(this);
 
-            client.setKindConnection(connectionType);
             client.setName(username);
+            client.setKindConnection(connectionType);
             client.connect();
         }
     }

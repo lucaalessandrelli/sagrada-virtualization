@@ -13,7 +13,7 @@ public class Client  {
     private int numOfMatch;
     private MessageQueue messages;
 
-    public Client(String addr/*, ViewInterface view*/) throws RemoteException{
+    public Client(String addr) throws RemoteException{
         connected=false;
         this.addr = addr;
         //messages = new MessageQueue(view);
@@ -24,7 +24,7 @@ public class Client  {
     }
 
 
-    synchronized void setConnected(boolean b){
+    synchronized public void setConnected(boolean b){
         connected = b;
     }
 
@@ -53,7 +53,7 @@ public class Client  {
          connectionHandler.sendCommand(cmd);
     }
 
-    public boolean connected() {
+    public synchronized boolean connected() {
         return connected;
     }
 
@@ -91,5 +91,9 @@ public class Client  {
     public int getNumOfMatch(){return numOfMatch;}
     public synchronized void viewMessage(String s){
         messages.add(s);
+    }
+
+    public void retryConnection(String command) {
+
     }
 }

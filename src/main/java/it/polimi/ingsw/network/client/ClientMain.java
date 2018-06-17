@@ -37,8 +37,10 @@ public class ClientMain {
             CliHandler cliHandler = new CliHandler(client);
             client.setQueue(cliHandler);
             cliHandler.setQueue(client.getQueue());
+            cliHandler.welcome();
             cliHandler.initialize();
             cliHandler.receiveCommand();
+
         }
 
     }
