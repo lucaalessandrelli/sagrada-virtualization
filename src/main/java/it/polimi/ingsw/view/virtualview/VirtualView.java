@@ -35,9 +35,9 @@ public class VirtualView extends VirtualViewObserver {
     @Override
     public void updateStateTurn(String whoIsTurn,long timeSleep){
         try {
-            clientBox.updateTurn(turn+whoIsTurn+" current turn.");
             timeSleep=timeSleep/1000;
             clientBox.updateTurn(timer+String.valueOf(timeSleep));
+            clientBox.updateTurn(turn+whoIsTurn+" current turn.");
         } catch (RemoteException e) {
             e.printStackTrace();
         }
