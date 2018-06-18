@@ -299,4 +299,8 @@ public class Printer {
 
         //print all match layout (statico)
     }
+
+    public void printScore(String score) {
+        //print players score
+    }
 }
