@@ -5,16 +5,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="589.0" prefWidth="839.0" style="-fx-background-color: #a0a2ab;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.ScoreViewController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #a0a2ab;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.ScoreViewController">
    <children>
-      <Pane layoutX="-1.0" layoutY="-3.0" prefHeight="156.0" prefWidth="839.0" style="-fx-background-color: #2D3647;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="156.0" prefWidth="1000.0" style="-fx-background-color: #2D3647;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" layoutX="227.0" layoutY="32.0" prefHeight="93.0" prefWidth="385.0" text="Players score" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="93.0" prefWidth="385.0" text="Players score" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="64.0" />
                </font>
@@ -27,13 +26,19 @@
                   </LinearGradient>
                </textFill>
             </Label>
-         </children></Pane>
-      <JFXButton fx:id="playAgainButton" layoutX="624.0" layoutY="497.0" prefHeight="37.0" prefWidth="138.0" style="-fx-background-color: #3C58FA;" text="Play again" textFill="#dbdce4" />
-      <TableView fx:id="scoreTable" layoutX="153.0" layoutY="192.0" prefHeight="269.0" prefWidth="534.0">
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="playAgainButton" layoutX="426.0" layoutY="610.0" onMouseClicked="#handleMouseClicked" prefHeight="54.0" prefWidth="149.0" style="-fx-background-color: #3C58FA;" text="Play again" textFill="#dbdce4" />
+      <TableView fx:id="scoreTable" layoutX="232.0" layoutY="270.0" prefHeight="310.0" prefWidth="538.0">
         <columns>
-          <TableColumn fx:id="playerColumn" prefWidth="262.0" text="Player" />
-          <TableColumn fx:id="scoreColumn" prefWidth="271.0" text="Score" />
+          <TableColumn fx:id="playerColumn" prefWidth="268.0" text="Player" />
+          <TableColumn fx:id="scoreColumn" prefWidth="265.0" text="Score" />
         </columns>
       </TableView>
+      <Label fx:id="announcementLabel" alignment="CENTER" layoutY="165.0" prefHeight="93.0" prefWidth="441.0" textFill="#110000" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

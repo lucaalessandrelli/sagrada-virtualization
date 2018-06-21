@@ -20,10 +20,7 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -61,6 +58,9 @@ public class MatchViewController implements Initializable, SceneInterface {
     private HBox boxObjectiveCards;
 
     @FXML
+    private GridPane objectiveCardGrid;
+
+    @FXML
     private TableView statusTable;
 
     @FXML
@@ -71,6 +71,9 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @FXML
     private HBox boxToolCards;
+
+    @FXML
+    private GridPane toolCardGrid;
 
     @FXML
     private GridPane mywindow;
@@ -99,26 +102,18 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         fitToParent(privateObjectiveCard,(AnchorPane)privateObjectiveCard.getParent());
+        for (Node node:toolCardGrid.getChildren()) {
+            ImageView img = (ImageView) node;
+            img.fitWidthProperty().bind(toolCardGrid.widthProperty().divide(3));
+            img.fitHeightProperty().bind(toolCardGrid.heightProperty());
+        }
 
-        /*for (Node node:boxObjectiveCards.getChildren()) {
-            fitToParent((ImageView)((AnchorPane)node).getChildren().get(0), (AnchorPane) node);
-        }*/
-        /*ImageView img1 = (ImageView) boxToolCards.getChildren().get(0);
-        img1.fitHeightProperty().bind(boxToolCards.heightProperty());
-        img1.fitWidthProperty().bind(boxToolCards.widthProperty());
-
-
-        ImageView img2 = (ImageView) boxToolCards.getChildren().get(1);
-        img2.fitHeightProperty().bind(boxToolCards.heightProperty());
-        img2.fitWidthProperty().bind(boxToolCards.widthProperty());
-
-
-        ImageView img3 = (ImageView) boxToolCards.getChildren().get(2);
-        img3.fitHeightProperty().bind(boxToolCards.heightProperty());
-        img3.fitWidthProperty().bind(boxToolCards.widthProperty());*/
-
+        for (Node node:objectiveCardGrid.getChildren()) {
+            ImageView img = (ImageView) node;
+            img.fitWidthProperty().bind(objectiveCardGrid.widthProperty().divide(3));
+            img.fitHeightProperty().bind(objectiveCardGrid.heightProperty());
+        }
     }
 
     public void setTitleWindowPatternCard() {
@@ -428,10 +423,16 @@ public class MatchViewController implements Initializable, SceneInterface {
     public void setObjectCard(String objectCard) {
         List<String> objectCardList = Arrays.asList(objectCard.split(","));
 
-        ObservableList<Node> boxChildren = boxObjectiveCards.getChildren();
+        /*ObservableList<Node> boxChildren = boxObjectiveCards.getChildren();
 
         for(int i = 0; i < objectCardList.size();i++) {
             ((javafx.scene.image.ImageView)boxChildren.get(i)).setImage(new Image ("/objectivecards/public/"+objectCardList.get(i)+".png"));
+        }*/
+
+        ObservableList<Node> gridChildren = objectiveCardGrid.getChildren();
+
+        for(int i = 0; i < toolList.size();i++) {
+            ((javafx.scene.image.ImageView)gridChildren.get(i)).setImage(new Image ("/objectivecards/public/"+objectCardList.get(i)+".png"));
         }
     }
 
@@ -442,10 +443,16 @@ public class MatchViewController implements Initializable, SceneInterface {
     public void updateToolcards(String toolCard) {
         toolList = Arrays.asList(toolCard.split(","));
 
-        ObservableList<Node> boxChildren = boxToolCards.getChildren();
+        /*ObservableList<Node> boxChildren = boxToolCards.getChildren();
 
         for(int i = 0; i < toolList.size();i++) {
             ((javafx.scene.image.ImageView)boxChildren.get(i)).setImage(new Image ("/toolcards/"+toolList.get(i)+".png"));
+        }*/
+
+        ObservableList<Node> gridChildren = toolCardGrid.getChildren();
+
+        for(int i = 0; i < toolList.size();i++) {
+            ((javafx.scene.image.ImageView)gridChildren.get(i)).setImage(new Image ("/toolcards/"+toolList.get(i)+".png"));
         }
     }
 
@@ -540,15 +547,18 @@ public class MatchViewController implements Initializable, SceneInterface {
             if(i < draftList.size()) {
                 ImageView image = new ImageView("/dice/" + draftList.get(i) + ".png");
                 AnchorPane pane = ((AnchorPane)(draftPool.getChildren().get(i)));
-                fitToParent(image,pane);
                 pane.getChildren().add(image);
+
+                image.fitWidthProperty().bind(draftPool.widthProperty().divide(3));
+                image.fitHeightProperty().bind(draftPool.heightProperty().divide(3));
+                //fitToParent(image,pane);
 
                 //((AnchorPane)(draftPool.getChildren().get(i))).getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
             }
         }
     }
 
-    public void fitToParent(ImageView image, AnchorPane pane) {
+    private void fitToParent(ImageView image, AnchorPane pane) {
         image.fitWidthProperty().bind(pane.widthProperty());
         image.fitHeightProperty().bind(pane.heightProperty());
     }

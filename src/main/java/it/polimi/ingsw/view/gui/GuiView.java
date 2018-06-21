@@ -41,9 +41,11 @@ public class GuiView extends Application {
         primaryStage.setTitle("Sagrada");
 
         primaryStage.setOnCloseRequest(event -> {
-            System.out.println("Ho chiuso la finestra");
-            //client.sendCommand("Disconnect");
-            System.exit(0);
+            //If the numOfMatch in the client isn't the default one
+            /*if(client.getNumOfMatch() >= 0) {
+                client.sendCommand("disconnect " + client.getNumOfMatch() + " " + client.getName());
+            }
+            System.exit(0);*/
         });
 
         primaryStage.show();
