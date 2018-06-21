@@ -116,7 +116,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
     }
 
     public void changeScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGuiResizable.fxml"));
         Parent root = fxmlLoader.load();
 
         // Get the Controller from the FXMLLoader
@@ -136,7 +136,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
         guiHandler.setGui(controller);
 
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Match");
         stage.show();
     }

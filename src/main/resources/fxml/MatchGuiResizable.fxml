@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="990.0" prefWidth="1650.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.MatchViewController">
+    <children>
+      <SplitPane dividerPositions="0.045, 0.35" orientation="VERTICAL" prefHeight="990.0" prefWidth="1650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <SplitPane dividerPositions="0.7" prefHeight="40.0" prefWidth="1648.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TextField fx:id="turnOwnerField" editable="false" prefHeight="158.0" prefWidth="55.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="timerLabel" alignment="CENTER" prefHeight="158.0" prefWidth="135.0" style="-fx-background-color: #2D3647;" text="Timer : " textFill="#ebebeb" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <SplitPane dividerPositions="0.21, 0.42, 0.63" prefHeight="294.0" prefWidth="1648.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TitledPane fx:id="titlePlayer2" animated="false" collapsible="false" prefHeight="341.0" prefWidth="325.0" text="non connesso" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="348.0">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="248.0" prefWidth="348.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <GridPane fx:id="windowplayer2" gridLinesVisible="true" prefHeight="217.0" prefWidth="324.0" style="-fx-background-color: white;">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                   </children>
+                                                </GridPane>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                   <children>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TitledPane fx:id="titlePlayer3" animated="false" collapsible="false" prefHeight="341.0" prefWidth="321.0" text="non connesso" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="348.0">
+                                       <children>
+                                          <VBox layoutX="-50.0" layoutY="-86.0" prefHeight="218.0" prefWidth="348.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <GridPane fx:id="windowplayer3" gridLinesVisible="true" prefHeight="217.0" prefWidth="324.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Text fx:id="txt112" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt022" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt322" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt122" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt032" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt132" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt042" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt142" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt212" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt222" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt232" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt242" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt312" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt012" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt332" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt342" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt002" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt102" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt202" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt302" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                   </children>
+                                                </GridPane>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                   <children>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TitledPane fx:id="titlePlayer4" animated="false" collapsible="false" prefHeight="341.0" prefWidth="322.0" text="non connesso" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="265.0" prefWidth="348.0">
+                                       <children>
+                                          <VBox layoutX="-36.0" layoutY="-88.0" prefHeight="278.0" prefWidth="348.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <GridPane fx:id="windowplayer4" gridLinesVisible="true" prefHeight="217.0" prefWidth="324.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Text fx:id="txt113" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt023" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt323" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt123" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt033" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt133" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt043" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt143" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt213" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt223" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt233" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt243" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt313" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt013" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt333" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt343" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="text" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt003" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt103" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt203" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                                      <Text fx:id="txt303" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" strokeType="OUTSIDE" strokeWidth="0.0" text="textffff" textAlignment="CENTER" wrappingWidth="113.21435546875" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                   </children>
+                                                </GridPane>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                   <children>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Circle fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TitledPane animated="false" collapsible="false" prefHeight="311.0" prefWidth="684.0" text="Carte Obiettivo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane prefHeight="282.0" prefWidth="594.0">
+                                       <children>
+                                          <HBox fx:id="boxObjectiveCards" alignment="CENTER" layoutX="24.0" layoutY="24.0" prefHeight="279.0" prefWidth="682.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <ImageView fx:id="cartaobiettivo1" fitHeight="251.0" fitWidth="180.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../objectivecards/public/cover.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fx:id="cartaobiettivo2" fitHeight="252.0" fitWidth="180.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../objectivecards/public/cover.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fx:id="cartaobiettivo3" fitHeight="260.0" fitWidth="180.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../objectivecards/public/cover.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <SplitPane dividerPositions="0.4" prefHeight="638.0" prefWidth="1648.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TitledPane animated="false" collapsible="false" prefHeight="636.0" prefWidth="654.0" text="Tracciato dei Round" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="655.0" prefWidth="800.0">
+                                       <children>
+                                          <HBox alignment="CENTER" layoutX="24.0" layoutY="24.0" prefHeight="319.0" prefWidth="1048.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                                   <children>
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                                   <children>
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                                   <children>
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
+                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                                   <children>
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                      <TextField prefHeight="45.0" prefWidth="69.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="636.0" prefWidth="984.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.29797979797979796" prefHeight="313.0" prefWidth="982.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                        <TitledPane animated="false" collapsible="false" prefHeight="311.0" prefWidth="288.0" text="Riserva" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="316.0">
+                                                                    <children>
+                                                                        <GridPane fx:id="draftPool" gridLinesVisible="true" layoutX="24.0" layoutY="149.0" prefHeight="279.0" prefWidth="286.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <columnConstraints>
+                                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                            </columnConstraints>
+                                                                            <rowConstraints>
+                                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                            </rowConstraints>
+                                                                            <children>
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                            </children>
+                                                                        </GridPane>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </TitledPane>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                        <TitledPane animated="false" collapsible="false" prefHeight="311.0" prefWidth="684.0" text="ToolCard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <content>
+                                                                <AnchorPane prefHeight="282.0" prefWidth="594.0">
+                                                                    <children>
+                                                                        <HBox fx:id="boxToolCards" alignment="CENTER" layoutX="24.0" layoutY="24.0" prefHeight="279.0" prefWidth="682.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <children>
+                                                                                <ImageView fx:id="toolcard1" fitHeight="251.0" fitWidth="180.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true">
+                                                                                    <image>
+                                                                                        <Image url="@../toolcards/cover.png" />
+                                                                                    </image>
+                                                                                </ImageView>
+                                                                                <ImageView fx:id="toolcard2" fitHeight="252.0" fitWidth="180.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true">
+                                                                                    <image>
+                                                                                        <Image url="@../toolcards/cover.png" />
+                                                                                    </image>
+                                                                                </ImageView>
+                                                                                <ImageView fx:id="toolcard3" fitHeight="260.0" fitWidth="180.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true">
+                                                                                    <image>
+                                                                                        <Image url="@../toolcards/cover.png" />
+                                                                                    </image>
+                                                                                </ImageView>
+                                                                            </children>
+                                                                        </HBox>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </TitledPane>
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.35, 0.59, 0.85" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                        <TitledPane fx:id="myTitle" animated="false" collapsible="false" prefHeight="286.0" prefWidth="338.0" text="La tua Vetrata" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="512.0">
+                                                                    <children>
+                                                                        <VBox layoutX="121.0" layoutY="-100.0" prefHeight="292.0" prefWidth="441.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <children>
+                                                                                <GridPane fx:id="mywindow" gridLinesVisible="true" prefHeight="282.0" prefWidth="417.0" style="-fx-background-color: white;">
+                                                                                    <columnConstraints>
+                                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                                    </columnConstraints>
+                                                                                    <rowConstraints>
+                                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                                    </rowConstraints>
+                                                                                    <children>
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                                                    </children>
+                                                                                </GridPane>
+                                                                                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="399.0">
+                                                                                    <children>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                        <Circle fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                                                            <HBox.margin>
+                                                                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                                            </HBox.margin>
+                                                                                        </Circle>
+                                                                                    </children>
+                                                                                </HBox>
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </TitledPane>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                        <TitledPane animated="false" collapsible="false" prefHeight="311.0" prefWidth="227.0" text="Carta Obiettivo privata" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="305.0" prefWidth="220.0">
+                                                                    <children>
+                                                                        <ImageView fx:id="privateObjectiveCard" fitHeight="310.0" fitWidth="200.0" layoutX="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <image>
+                                                                                <Image url="@../objectivecards/private/cover.png" />
+                                                                            </image>
+                                                                        </ImageView>
+                                                                    </children>
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </padding>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </TitledPane>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                        <TableView fx:id="statusTable" prefHeight="337.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <columns>
+                                                                <TableColumn fx:id="userNameColumn" prefWidth="145.0" text="Player" />
+                                                                <TableColumn fx:id="userStatusColumn" prefWidth="145.0" text="Status" />
+                                                            </columns>
+                                                        </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                            </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+    </children>
+</AnchorPane>

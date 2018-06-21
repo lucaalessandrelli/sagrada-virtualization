@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.omg.CORBA.IMP_LIMIT;
 
 import java.io.IOException;
 import java.net.URL;
@@ -98,6 +99,26 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        fitToParent(privateObjectiveCard,(AnchorPane)privateObjectiveCard.getParent());
+
+        /*for (Node node:boxObjectiveCards.getChildren()) {
+            fitToParent((ImageView)((AnchorPane)node).getChildren().get(0), (AnchorPane) node);
+        }*/
+        /*ImageView img1 = (ImageView) boxToolCards.getChildren().get(0);
+        img1.fitHeightProperty().bind(boxToolCards.heightProperty());
+        img1.fitWidthProperty().bind(boxToolCards.widthProperty());
+
+
+        ImageView img2 = (ImageView) boxToolCards.getChildren().get(1);
+        img2.fitHeightProperty().bind(boxToolCards.heightProperty());
+        img2.fitWidthProperty().bind(boxToolCards.widthProperty());
+
+
+        ImageView img3 = (ImageView) boxToolCards.getChildren().get(2);
+        img3.fitHeightProperty().bind(boxToolCards.heightProperty());
+        img3.fitWidthProperty().bind(boxToolCards.widthProperty());*/
+
     }
 
     public void setTitleWindowPatternCard() {
@@ -513,24 +534,23 @@ public class MatchViewController implements Initializable, SceneInterface {
     }
 
     private void updateDraftPool(String draftPoolInfo) {
-        int i = 0;
-        int x = 0;
-        int y = 0;
         List<String> draftList = Arrays.asList(draftPoolInfo.split(","));
 
-        for(; i < 9;i++) {
-            /*x = i/3;
-            y = i%3;
+        for(int i = 0; i < 9;i++) {
             if(i < draftList.size()) {
-                ((Text) this.getChildrenByIndex(draftPool, x, y)).setText(draftList.get(i).charAt(0)+" "+draftList.get(i).charAt(1));
-            } else {
-                ((Text) this.getChildrenByIndex(draftPool, x, y)).setText("");
-            }*/
+                ImageView image = new ImageView("/dice/" + draftList.get(i) + ".png");
+                AnchorPane pane = ((AnchorPane)(draftPool.getChildren().get(i)));
+                fitToParent(image,pane);
+                pane.getChildren().add(image);
 
-            if(i < draftList.size()) {
-                ((AnchorPane)(draftPool.getChildren().get(i))).getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
+                //((AnchorPane)(draftPool.getChildren().get(i))).getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
             }
         }
+    }
+
+    public void fitToParent(ImageView image, AnchorPane pane) {
+        image.fitWidthProperty().bind(pane.widthProperty());
+        image.fitHeightProperty().bind(pane.heightProperty());
     }
 
     public void startTimer() {
