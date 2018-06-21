@@ -102,17 +102,16 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fitToParent(privateObjectiveCard,(AnchorPane)privateObjectiveCard.getParent());
+        fitImageToParent(privateObjectiveCard,(AnchorPane)privateObjectiveCard.getParent());
+
         for (Node node:toolCardGrid.getChildren()) {
             ImageView img = (ImageView) node;
-            img.fitWidthProperty().bind(toolCardGrid.widthProperty().divide(3));
-            img.fitHeightProperty().bind(toolCardGrid.heightProperty());
+            fitImageToParent(img,toolCardGrid);
         }
 
         for (Node node:objectiveCardGrid.getChildren()) {
             ImageView img = (ImageView) node;
-            img.fitWidthProperty().bind(objectiveCardGrid.widthProperty().divide(3));
-            img.fitHeightProperty().bind(objectiveCardGrid.heightProperty());
+            fitImageToParent(img,objectiveCardGrid);
         }
     }
 
@@ -551,16 +550,44 @@ public class MatchViewController implements Initializable, SceneInterface {
 
                 image.fitWidthProperty().bind(draftPool.widthProperty().divide(3));
                 image.fitHeightProperty().bind(draftPool.heightProperty().divide(3));
-                //fitToParent(image,pane);
 
                 //((AnchorPane)(draftPool.getChildren().get(i))).getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
             }
         }
     }
 
-    private void fitToParent(ImageView image, AnchorPane pane) {
+    private void fitImageToParent(ImageView image, AnchorPane pane) {
         image.fitWidthProperty().bind(pane.widthProperty());
         image.fitHeightProperty().bind(pane.heightProperty());
+    }
+
+    private void fitImageToParent(ImageView image, GridPane grid) {
+        image.fitWidthProperty().bind(grid.widthProperty().divide(findGridNumColumns(grid)));
+        image.fitHeightProperty().bind(grid.heightProperty().divide(findGridNumRows(grid)));
+    }
+
+    public int findGridNumColumns(GridPane grid) {
+        int numColumns = 1;
+        int tempNumColumns;
+        for (Node node:grid.getChildren()) {
+            tempNumColumns = grid.getColumnIndex(node)+1;
+            if(tempNumColumns >= numColumns) {
+                numColumns = tempNumColumns;
+            }
+        }
+        return numColumns;
+    }
+
+    public int findGridNumRows(GridPane grid) {
+        int numRows = 1;
+        int tempNumRows;
+        for (Node node:grid.getChildren()) {
+            tempNumRows = grid.getRowIndex(node)+1;
+            if(tempNumRows >= numRows) {
+                numRows = tempNumRows;
+            }
+        }
+        return numRows;
     }
 
     public void startTimer() {
