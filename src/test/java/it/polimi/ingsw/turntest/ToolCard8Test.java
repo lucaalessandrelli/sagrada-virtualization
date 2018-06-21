@@ -170,8 +170,14 @@ public class ToolCard8Test {
             e.printStackTrace();
         }
 
-        assertFalse(turn.getPlayer().isActive());
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+
+        assertFalse(turn.getPlayer().isActive());
 
         state = "EndTurn";
 
