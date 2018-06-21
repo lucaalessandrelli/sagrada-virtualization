@@ -87,7 +87,7 @@ public class Match extends Thread {
         builder.append("score ");
         for(Player player: playerList) {
             builder.append(player.getUsername()).append(" ");
-            builder.append(player.calculatePoints()).append(",").append(" ");
+            builder.append(player.calculatePoints()).append(",");
         }
         return builder.toString();
     }
