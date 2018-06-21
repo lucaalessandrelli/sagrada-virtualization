@@ -53,6 +53,7 @@ public class Match extends Thread {
             Thread.sleep(timerCard);
             playerList.stream().filter(player -> player.getWindowPatternCard()==null)
                     .forEach(player -> table.setWindow(player.getUsername()));
+            exec.shutdown();
         } catch (InterruptedException e) {
             exec.shutdown();
         }
