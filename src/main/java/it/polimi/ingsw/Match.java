@@ -67,13 +67,9 @@ public class Match extends Thread {
                 this.table.fillDraftPool();
                 playerList.forEach(Player::notifyPlayer);
             } catch (NotEnoughPlayersException e) {
-                playerList.stream().filter(Player::isActive)
-                        .forEach(player -> player.notifyScore("score "+ player.getUsername()+" "+player.calculatePoints()));
-                playerList.forEach(player -> manager.matchEnded(player.getUsername()));
-                return;
+                break;
             }
         }
-
         //match is now ended - call methods to calculate player points
 
         //send points and name winner(to do)
