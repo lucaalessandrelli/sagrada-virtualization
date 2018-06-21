@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui;
 
+import com.jfoenix.controls.JFXButton;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
 import javafx.collections.FXCollections;
@@ -9,11 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -26,6 +29,12 @@ public class ScoreViewController implements Initializable, SceneInterface {
     private String time;
     private GuiHandler guiHandler;
     private ObservableList<User> userList = FXCollections.observableArrayList();
+
+    @FXML
+    private JFXButton playAgainButton;
+
+    @FXML
+    private Label announcementLabel;
 
     @FXML
     private TableView scoreTable;
@@ -63,6 +72,28 @@ public class ScoreViewController implements Initializable, SceneInterface {
         playerColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         scoreTable.setItems(userList);
+        displayWinner();
+    }
+
+    private void displayWinner() {
+        int maxScore = 0;
+        int tempScore;
+        String winnerName = "";
+
+        for (User user: userList) {
+            tempScore = Integer.parseInt(user.getScore());
+            if(tempScore > maxScore) {
+                maxScore = tempScore;
+                winnerName = user.getUsername();
+            }
+        }
+
+        announcementLabel.setText(winnerName+" ha vinto la partita!");
+    }
+
+    @FXML
+    public void handleMouseClicked(javafx.scene.input.MouseEvent event) {
+        client.sendCommand("playAgain "+client.getName());
     }
 
     public void changeScene() throws IOException {

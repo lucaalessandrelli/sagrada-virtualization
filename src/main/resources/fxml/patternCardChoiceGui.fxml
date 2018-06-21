@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="850.0" prefWidth="1200.0" style="-fx-background-color: #a0a2ab;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.PatternCardChoiceViewController">
+<AnchorPane prefHeight="768.0" prefWidth="1200.0" style="-fx-background-color: #a0a2ab;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.PatternCardChoiceViewController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="190.0" prefWidth="1200.0" style="-fx-background-color: #2D3647;" AnchorPane.bottomAnchor="660.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="190.0" prefWidth="1200.0" style="-fx-background-color: #2D3647;">
          <children>
             <Label alignment="CENTER" layoutX="86.0" layoutY="34.0" prefHeight="170.0" prefWidth="1221.0" text="Scegli la tua Vetrata" textFill="WHITE" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
@@ -27,7 +27,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <GridPane fx:id="patternCardGrid" alignment="CENTER" hgap="100.0" layoutX="177.0" layoutY="225.0" prefHeight="603.0" prefWidth="846.0" vgap="30.0">
+      <GridPane fx:id="patternCardGrid" alignment="CENTER" hgap="100.0" layoutX="186.0" layoutY="231.0" prefHeight="502.0" prefWidth="828.0" vgap="30.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="186.0" AnchorPane.rightAnchor="186.0" AnchorPane.topAnchor="231.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.0" minWidth="10.0" prefWidth="387.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="436.0" minWidth="10.0" prefWidth="381.0" />
