@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import com.jfoenix.controls.JFXButton;
+import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
 import javafx.animation.Animation;
@@ -8,6 +9,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,11 +18,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,6 +33,7 @@ import org.omg.CORBA.IMP_LIMIT;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -41,9 +47,11 @@ public class MatchViewController implements Initializable, SceneInterface {
     private ObservableList<String> gamePlayerlist = FXCollections.observableArrayList();
     private ObservableList<String> playerStatusList = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
-    private List<String> toolList;
+    private List<String> toolList = new ArrayList<>();
     private String time;
     private String score;
+    private ImageView diceChosen = new ImageView();
+    private List<ViewDice> diceList = new ArrayList<>();
 
     @FXML
     private TableColumn<User,String> userNameColumn;
@@ -59,6 +67,9 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @FXML
     private GridPane objectiveCardGrid;
+
+    @FXML
+    private GridPane toolCostGrid;
 
     @FXML
     private TableView statusTable;
@@ -145,11 +156,11 @@ public class MatchViewController implements Initializable, SceneInterface {
     }
 
     private Node getChildrenByIndex(GridPane gridPane,final int i,final int y) {
-        ObservableList<Node> textList = gridPane.getChildren();
+        ObservableList<Node> children = gridPane.getChildren();
 
-        for (Node text: textList) {
-            if(gridPane.getColumnIndex(text) == y && gridPane.getRowIndex(text) == i) {
-                return text;
+        for (Node pane: children) {
+            if(gridPane.getColumnIndex(pane) == y && gridPane.getRowIndex(pane) == i) {
+                return pane;
             }
         }
         return null;
@@ -189,7 +200,9 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @FXML
     public void handleToolCardClicked(MouseEvent event) {
-        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" T;"+toolList.get(findNodeIndexIntoHbox(boxToolCards,(Node)event.getSource())));
+        //client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" T;"+toolList.get(findNodeIndexIntoHbox(boxToolCards,(Node)event.getSource())));
+        int n = toolCardGrid.getColumnIndex((Node)event.getSource());
+        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" T;"+toolList.get(toolCardGrid.getColumnIndex((Node)event.getSource())));
     }
 
     private int findNodeIndexIntoHbox(HBox boxToolCards, Node toolcard) {
@@ -407,20 +420,29 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
 
         ObservableList<Node> boxChildren = vBox.getChildren();
-        HBox favorBox = (HBox)(boxChildren.get(1));
+        GridPane favorGrid = (GridPane) (boxChildren.get(1));
 
-        ObservableList<Node> tokenList = favorBox.getChildren();
+        ObservableList<Node> tokenList = favorGrid.getChildren();
 
         for(int i = 0; i < tokenList.size();i++) {
-            if(i >= Integer.parseInt(favorsList.get(1))) {
-                tokenList.get(i).setVisible(false);
+            AnchorPane pane = (AnchorPane)tokenList.get(i);
+            if(pane.getChildren().size() > 0) {
+                pane.getChildren().remove(0);
             }
         }
 
+        for(int i = 0; i < tokenList.size();i++) {
+            if(i < Integer.parseInt(favorsList.get(1))) {
+                ImageView favimg = new ImageView("/viewLogo/favortoken.png");
+                ((AnchorPane)tokenList.get(i)).getChildren().add(favimg);
+                fitImageToParent(favimg,favorGrid);
+                favimg.setPreserveRatio(true);
+            }
+        }
     }
 
     public void setObjectCard(String objectCard) {
-        List<String> objectCardList = Arrays.asList(objectCard.split(","));
+        List<String> objectCardList = Arrays.asList(objectCard.split("\\\\"));
 
         /*ObservableList<Node> boxChildren = boxObjectiveCards.getChildren();
 
@@ -431,16 +453,18 @@ public class MatchViewController implements Initializable, SceneInterface {
         ObservableList<Node> gridChildren = objectiveCardGrid.getChildren();
 
         for(int i = 0; i < toolList.size();i++) {
-            ((javafx.scene.image.ImageView)gridChildren.get(i)).setImage(new Image ("/objectivecards/public/"+objectCardList.get(i)+".png"));
+            List<String> infoObjectiveCard = Arrays.asList(objectCardList.get(i).split("/"));
+            ((javafx.scene.image.ImageView)gridChildren.get(i)).setImage(new Image ("/objectivecards/public/"+infoObjectiveCard.get(0)+".png"));
         }
     }
 
     public void setPrivateCard(String privateCard) {
-        privateObjectiveCard.setImage(new Image ("/objectivecards/private/"+privateCard+".png"));
+        List<String> infoPrivateCard = Arrays.asList(privateCard.split(","));
+        privateObjectiveCard.setImage(new Image ("/objectivecards/private/"+infoPrivateCard.get(0)+".png"));
     }
 
     public void updateToolcards(String toolCard) {
-        toolList = Arrays.asList(toolCard.split(","));
+        List<String> tools = Arrays.asList(toolCard.split("\\\\"));
 
         /*ObservableList<Node> boxChildren = boxToolCards.getChildren();
 
@@ -448,10 +472,19 @@ public class MatchViewController implements Initializable, SceneInterface {
             ((javafx.scene.image.ImageView)boxChildren.get(i)).setImage(new Image ("/toolcards/"+toolList.get(i)+".png"));
         }*/
 
-        ObservableList<Node> gridChildren = toolCardGrid.getChildren();
+        ObservableList<Node> toolGridChildren = toolCardGrid.getChildren();
+        ObservableList<Node> toolCostGridChildren = toolCostGrid.getChildren();
 
-        for(int i = 0; i < toolList.size();i++) {
-            ((javafx.scene.image.ImageView)gridChildren.get(i)).setImage(new Image ("/toolcards/"+toolList.get(i)+".png"));
+        for(int i = 0; i < tools.size();i++) {
+            List<String> infoToolCard = Arrays.asList(tools.get(i).split("/"));
+            ((javafx.scene.image.ImageView)toolGridChildren.get(i)).setImage(new Image ("/toolcards/"+infoToolCard.get(0)+".png"));
+            toolList.add(i,infoToolCard.get(0));
+
+            if(Integer.parseInt(infoToolCard.get(1)) > 1) {
+                toolGridChildren.get(i).setEffect(new DropShadow());
+            }
+            Text txt = (Text)toolCostGridChildren.get(i);
+            txt.setText(infoToolCard.get(1));
         }
     }
 
@@ -472,17 +505,20 @@ public class MatchViewController implements Initializable, SceneInterface {
         ObservableList<Node> boxChildren = vBox.getChildren();
         GridPane currentWindow = (GridPane)(boxChildren.get(0));
 
-        Node text;
+        Node pane;
 
         for (String cell: cellList) {
             if(!cell.equals(player)) {
                 int x = Character.getNumericValue(cell.charAt(2));
                 int y = Character.getNumericValue(cell.charAt(3));
-                text = this.getChildrenByIndex(currentWindow,x,y);
-                if(text == null) {
+                pane = this.getChildrenByIndex(currentWindow,x,y);
+                if(pane == null) {
                     System.out.println("Sbagliato");
                 } else {
-                    ((Text)text).setText(cell.charAt(0)+" "+cell.charAt(1));
+                    //((Text)text).setText(cell.charAt(0)+" "+cell.charAt(1));
+                    ImageView image = new ImageView("/dice/" + cell.substring(0,2) + ".png");
+                    ((AnchorPane)pane).getChildren().add(image);
+                    fitImageToParent(image,currentWindow);
                 }
             }
         }
@@ -547,13 +583,59 @@ public class MatchViewController implements Initializable, SceneInterface {
                 ImageView image = new ImageView("/dice/" + draftList.get(i) + ".png");
                 AnchorPane pane = ((AnchorPane)(draftPool.getChildren().get(i)));
                 pane.getChildren().add(image);
+                diceList.add(new ViewDice(image,draftList.get(i)));
 
                 image.fitWidthProperty().bind(draftPool.widthProperty().divide(3));
                 image.fitHeightProperty().bind(draftPool.heightProperty().divide(3));
 
+                addDraftEvent(image);
                 //((AnchorPane)(draftPool.getChildren().get(i))).getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
             }
         }
+    }
+
+    private void addDraftEvent(ImageView image) {
+        image.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                handleDraftDiceClicked((Node) mouseEvent.getSource());
+            }
+        });
+    }
+
+    private void handleDraftDiceClicked(Node node) {
+        diceChosen.setEffect(null);
+        diceChosen = (ImageView) node;
+        diceChosen.setEffect(new DropShadow());
+        ViewDice dice = findDiceInfo(node);
+        if(dice != null) {
+            //int x = draftPool.getColumnConstraints().size()*draftPool.getRowIndex(node)+draftPool.getColumnIndex(node);
+            int i = draftPool.getColumnIndex((Node)node.getParent());
+            int j = draftPool.getRowIndex((Node)node.getParent());
+            int x = 3*j+i;
+            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + dice.getDiceColor() + "," + dice.getDiceNumber() + "," + x + ",0");
+        }
+    }
+
+    private ViewDice findDiceInfo(Node node) {
+        for (ViewDice dice : diceList) {
+            if(dice.getDiceImage() == (ImageView)node) {
+                return dice;
+            }
+        }
+        return null;
+    }
+
+    @FXML
+    void handleCellClicked(MouseEvent event) {
+        //AnchorPane source = (AnchorPane) event.getSource();
+        /*source.getChildren().add(diceChosen);
+        diceChosen.fitHeightProperty().unbind();
+        diceChosen.fitWidthProperty().unbind();
+        fitImageToParent(diceChosen, mywindow);*/
+        int y = mywindow.getColumnIndex((Node) event.getSource());
+        int x = mywindow.getRowIndex((Node)event.getSource());
+        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);
     }
 
     private void fitImageToParent(ImageView image, AnchorPane pane) {
@@ -562,32 +644,8 @@ public class MatchViewController implements Initializable, SceneInterface {
     }
 
     private void fitImageToParent(ImageView image, GridPane grid) {
-        image.fitWidthProperty().bind(grid.widthProperty().divide(findGridNumColumns(grid)));
-        image.fitHeightProperty().bind(grid.heightProperty().divide(findGridNumRows(grid)));
-    }
-
-    public int findGridNumColumns(GridPane grid) {
-        int numColumns = 1;
-        int tempNumColumns;
-        for (Node node:grid.getChildren()) {
-            tempNumColumns = grid.getColumnIndex(node)+1;
-            if(tempNumColumns >= numColumns) {
-                numColumns = tempNumColumns;
-            }
-        }
-        return numColumns;
-    }
-
-    public int findGridNumRows(GridPane grid) {
-        int numRows = 1;
-        int tempNumRows;
-        for (Node node:grid.getChildren()) {
-            tempNumRows = grid.getRowIndex(node)+1;
-            if(tempNumRows >= numRows) {
-                numRows = tempNumRows;
-            }
-        }
-        return numRows;
+        image.fitWidthProperty().bind(grid.widthProperty().divide(grid.getColumnConstraints().size()));
+        image.fitHeightProperty().bind(grid.heightProperty().divide(grid.getRowConstraints().size()));
     }
 
     public void startTimer() {
