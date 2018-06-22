@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class VirtualViewParser {
@@ -13,6 +14,8 @@ public class VirtualViewParser {
     private static final String SPACE = " ";
     private static final String VIRG = ",";
     private static final String SEP = ";";
+    private static final String SLASH = "/";
+    private static final String BACKSLASH = "\\";
     private static final String ACTIVE = "Active";
     private static final String INACTIVE = "Inactive";
     private static final String PLAYERS = "gamePlayers ";
@@ -87,9 +90,13 @@ public class VirtualViewParser {
 
         for(ToolCard toolCard : player.getPublicObjects().getToolCards()){
             builder.append(toolCard.getID());
-            builder.append(VIRG);
+            builder.append(SLASH);
+            builder.append(toolCard.getCost());
+            builder.append(SLASH);
+            builder.append(toolCard.getDescription());
+            builder.append(BACKSLASH);
         }
-        if(builder.charAt(builder.length()-1) == VIRG.charAt(0)){
+        if(builder.charAt(builder.length()-1) == BACKSLASH.charAt(0)){
             builder.deleteCharAt(builder.length()-1);
         }
         builder.append(SEP);
@@ -138,15 +145,19 @@ public class VirtualViewParser {
 
         for (ObjectiveCard objective: player.getPublicObjects().getObjectiveCards()) {
             builder.append(objective.getID());
-            builder.append(VIRG);
+            builder.append(SLASH);
+            builder.append(objective.getDescription());
+            builder.append(BACKSLASH);
         }
-        if(builder.charAt(builder.length()-1) == VIRG.charAt(0)){
+        if(builder.charAt(builder.length()-1) == BACKSLASH.charAt(0)){
             builder.deleteCharAt(builder.length()-1);
         }
 
         builder.append(SEP);
         builder.append(PRIV);
         builder.append(player.getPrivateCard().getID());
+        builder.append(VIRG);
+        builder.append(player.getPrivateCard().getDescription().substring(player.getPrivateCard().getDescription().lastIndexOf(' ')+1,player.getPrivateCard().getDescription().length()));
         builder.append(SEP);
         return builder.toString();
     }
@@ -175,7 +186,7 @@ public class VirtualViewParser {
         return builder.toString();
     }
 
-    private String parseWindowPatternRestrictions(Player player){
+    public String parseWindowPatternRestrictions(Player player){
         builder.append(RESTR);
         builder.append(player.getUsername());
         builder.append(VIRG);
