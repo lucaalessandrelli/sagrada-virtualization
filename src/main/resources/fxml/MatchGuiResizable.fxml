@@ -374,17 +374,17 @@
                                               <RowConstraints minHeight="0.0" prefHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
                                             </rowConstraints>
                                              <children>
-                                                <ImageView fx:id="cartaobiettivo3" fitHeight="151.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                                                <ImageView fx:id="cartaobiettivo3" fitHeight="151.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                                    <image>
                                                       <Image url="@../objectivecards/public/cover.png" />
                                                    </image>
                                                 </ImageView>
-                                                <ImageView fx:id="cartaobiettivo1" fitHeight="154.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="cartaobiettivo1" fitHeight="154.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                    <image>
                                                       <Image url="@../objectivecards/public/cover.png" />
                                                    </image>
                                                 </ImageView>
-                                                <ImageView fx:id="cartaobiettivo2" fitHeight="153.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                                <ImageView fx:id="cartaobiettivo2" fitHeight="153.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                                    <image>
                                                       <Image url="@../objectivecards/public/cover.png" />
                                                    </image>
@@ -528,17 +528,17 @@
                                                                       <RowConstraints minHeight="0.0" prefHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
                                                                     </rowConstraints>
                                                                      <children>
-                                                                                <ImageView fx:id="toolcard2" fitHeight="160.0" fitWidth="137.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                                                                <ImageView fx:id="toolcard2" fitHeight="160.0" fitWidth="137.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                                                                     <image>
                                                                                         <Image url="@../toolcards/cover.png" />
                                                                                     </image>
                                                                                 </ImageView>
-                                                                                <ImageView fx:id="toolcard1" fitHeight="157.0" fitWidth="132.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true">
+                                                                                <ImageView fx:id="toolcard1" fitHeight="157.0" fitWidth="132.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                                                     <image>
                                                                                         <Image url="@../toolcards/cover.png" />
                                                                                     </image>
                                                                                 </ImageView>
-                                                                                <ImageView fx:id="toolcard3" fitHeight="162.0" fitWidth="144.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                                                                                <ImageView fx:id="toolcard3" fitHeight="162.0" fitWidth="144.0" onMouseClicked="#handleToolCardClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                                                                     <image>
                                                                                         <Image url="@../toolcards/cover.png" />
                                                                                     </image>
