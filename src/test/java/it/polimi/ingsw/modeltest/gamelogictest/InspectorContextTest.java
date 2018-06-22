@@ -22,7 +22,7 @@ public class InspectorContextTest {
 
         toolcard = toolCardArrayList.get(2);
 
-        System.out.println("Tool: " + toolcard.getID());
+        //System.out.println("Tool: " + toolcard.getID());
         assertTrue(tester.check(toolcard,toolCardArrayList));
     }
 

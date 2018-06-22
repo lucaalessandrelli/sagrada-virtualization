@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.DiceBag;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,9 +65,20 @@ public class DiceBagTest {
 
     @Test
     public void testSetNumPlayers(){
+        PrintStream original = System.out;
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         DiceBag tester = new DiceBag();
         tester.setNumPlayers(5);
+        assertEquals("Invalid number of players",outContent.toString().trim());
+        outContent.reset();
+
         tester.setNumPlayers(2);
+        assertEquals("",outContent.toString().trim());
+
+        System.setOut(original);
+
     }
 
     @Test

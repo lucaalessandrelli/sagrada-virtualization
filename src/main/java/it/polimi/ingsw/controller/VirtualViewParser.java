@@ -193,6 +193,10 @@ public class VirtualViewParser {
 
         builder.append(this.restrictions(player.getWindowPatternCard()));
 
+        if(builder.charAt(builder.length()-1) == VIRG.charAt(0)){
+            builder.deleteCharAt(builder.length()-1);
+        }
+
         builder.append(SEP);
         return builder.toString();
     }

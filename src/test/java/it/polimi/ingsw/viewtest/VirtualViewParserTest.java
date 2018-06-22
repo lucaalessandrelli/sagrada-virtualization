@@ -12,11 +12,13 @@ import it.polimi.ingsw.view.cli.Printer;
 import org.fusesource.jansi.Ansi;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.out;
+import static java.lang.System.runFinalization;
 import static org.fusesource.jansi.Ansi.ansi;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -260,8 +262,11 @@ public class VirtualViewParserTest {
         p1.getWindowPatternCard().placeDice(d3,2,4);
 
 
-
         Table table = new Table(players);
+
+        table.getRoundTrack().setDiceOnRoundTrack(1,table.getDiceBag().pullOut(4));
+        table.getRoundTrack().setDiceOnRoundTrack(2,table.getDiceBag().pullOut(6));
+
 
         table.initialize();
 
@@ -271,7 +276,7 @@ public class VirtualViewParserTest {
 
         String parsed = tester.startParsing();
 
-        //System.out.println(parsed);
+        System.out.println(parsed);
 
         List<String> x = Arrays.asList(parsed.split(";"));
         for (String s: x){
@@ -300,10 +305,62 @@ public class VirtualViewParserTest {
         //String tmp2 = parsed.substring(parsed.indexOf(lu)+lu.length(),parsed.length());
         //tmp2 = tmp2.substring(0,tmp2.indexOf(";"));
 
-
+        //printer.printCoordinates();
         //printer.printPatternCard(Arrays.asList(tmp.split(",")));
         //printer.printPlacedDices(Arrays.asList(tmp2.split(",")));
 
+        /*ArrayList<String> playersconnected = new ArrayList<>();
+        playersconnected.add(p1.getUsername());
+        playersconnected.add(p2.getUsername());
+        playersconnected.add(p3.getUsername());
+        playersconnected.add(p4.getUsername());
+
+        printer.printWaitingRoom("30",playersconnected,"The match will start in..");
+        out.println();
+        out.println();
+        out.println();
+        out.println();
+        out.println();
+        out.println();
+        out.println();*/
+
+        /*container = new CardContainer();
+        String z = tester.extractedWindows(container.pullOutPattern(1));
+        z = z.replace("choseWindow ", "");
+        List<String> space = Arrays.asList(z.split(";"));
+        System.out.println("space " +space);
+        for(int k = 0; k < space.size(); k++){
+            List <String> list = Arrays.asList(space.get(k).split(" "));
+            printer.printchoosePatternCard(list.get(0),list.get(1));
+            List<String> restr = Arrays.asList(list.get(2).split(","));
+            printer.printPatternCard(restr);
+        }*/
+        //printer.printtimer("30","Remaining time:");
+        //printer.rePrintChoseCard("7","Remaining time:");
+
+        String testForChoseCard = "14 3 R000,W001,B002,W003,Y004,W410,P011,W312,G013,W214,W020,W121,W022,W523,W024,W030,W031,W632,W033,W034,;" +
+                "2 5 W200,W001,W502,W003,W104,Y010,W611,P012,W213,R014,W020,B021,W422,G023,W024,W030,W331,W032,W533,W034,;";
+
+        //printer.printChooseCardRoom(testForChoseCard,"20");
+
+        List<String> names = new ArrayList<>();
+
+        for (Player p: players){
+            names.add(p.getUsername());
+        }
+
+
+        String turnstate = "Is the turn of:" + p1.getUsername();
+
+        printer.printMatch(parsed,"30",names,turnstate);
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        System.out.print(parsed);
 
         /*Deparser deparser = new Deparser();
         System.out.println(deparser.DivideinStrings(tester.startParsing()));

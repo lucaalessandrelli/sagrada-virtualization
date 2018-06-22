@@ -170,7 +170,7 @@ public class ToolCard12Test {
         p1.getWindowPatternCard().placeDice(d7d,3,2);
         p1.getWindowPatternCard().placeDice(d8d,0,1);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
 
         Dice tmp = new Dice(p1.getDraftPool().chooseDice(6).getColour());
@@ -252,7 +252,7 @@ public class ToolCard12Test {
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
     }
 
     @Test
@@ -698,7 +698,7 @@ public class ToolCard12Test {
         p1.getWindowPatternCard().placeDice(d7d,3,2);
         p1.getWindowPatternCard().placeDice(d8d,0,1);
 
-        p1.getWindowPatternCard().show();
+        //p1.getWindowPatternCard().show();
 
 
         Dice tmp = new Dice(p1.getDraftPool().chooseDice(6).getColour());

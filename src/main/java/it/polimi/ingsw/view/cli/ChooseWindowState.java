@@ -25,7 +25,7 @@ public class ChooseWindowState implements SceneInterface {
     @Override
     public void setPatternCards(String patternCards) {
         cards=patternCards;
-        printer.printChoose(patternCards,timer);
+        printer.printChooseCardRoom(patternCards,timer);
     }
 
     @Override

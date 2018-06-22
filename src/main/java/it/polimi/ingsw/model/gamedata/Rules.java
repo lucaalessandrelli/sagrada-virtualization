@@ -189,7 +189,7 @@ public class Rules {
                 for (i = 0; i < y; i++) {
                     for (j = 0; j < x - 1 && !find; j++) {
                         for(k = j; k < x -1 && !find; k++){
-                            if (w.get(k).get(i).getDice().getNumber() == w.get(k + 1).get(i).getDice().getNumber())
+                            if (w.get(k).get(i).isOccupied() && w.get(k).get(i).getDice().getNumber() == w.get(k + 1).get(i).getDice().getNumber())
                                 find = true;
                         }
                     }
@@ -204,7 +204,7 @@ public class Rules {
                 if (!column) {
                     for (i = 0; i < x; i++) {
                         if (allDifferent(w.get(i), true, 5)) {
-                            System.out.println(allDifferent(w.get(i), true, 5));
+                            //System.out.println(allDifferent(w.get(i), true, 5));
                             result++;
                         }
                     }
@@ -212,7 +212,7 @@ public class Rules {
                     for (i = 0; i < y; i++) {
                         for (j = 0; j < x - 1 && !find; j++) {
                             for(k = j; k < x -1 && !find; k++){
-                                if (w.get(k).get(i).getDice().getColour().equals(w.get(k + 1).get(i).getDice().getColour()))
+                                if (w.get(k).get(i).isOccupied() && w.get(k).get(i).getDice().getColour().equals(w.get(k + 1).get(i).getDice().getColour()))
                                     find = true;
                             }
                         }
@@ -229,7 +229,7 @@ public class Rules {
 
     private int diagonal(WindowPatternCard window){
         List<List<Cell>> w = window.getMatr();
-        boolean[][] verified = new boolean[3][4];
+        boolean[][] verified = new boolean[4][5];
         int result = 0;
         int j;
         int adder;

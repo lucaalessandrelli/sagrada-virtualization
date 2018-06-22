@@ -348,7 +348,7 @@ public class ToolCard4Test {
 
         turn.startTurn();
 
-        System.out.println(turn.getState().getClass());
+        //System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
@@ -508,7 +508,7 @@ public class ToolCard4Test {
 
         turn.startTurn();
 
-        System.out.println(turn.getState().getClass());
+        //System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
@@ -676,7 +676,7 @@ public class ToolCard4Test {
 
         turn.startTurn();
 
-        System.out.println(turn.getState().getClass());
+        //System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
@@ -852,7 +852,7 @@ public class ToolCard4Test {
 
         turn.startTurn();
 
-        System.out.println(turn.getState().getClass());
+        //System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 

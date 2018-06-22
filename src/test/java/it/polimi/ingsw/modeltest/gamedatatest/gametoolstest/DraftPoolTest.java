@@ -43,7 +43,7 @@ public class DraftPoolTest{
         for(i = 0; tester.getNumOfDices() > 1;){
             tester.removeDice(i);
         }
-        assertTrue(tester.getNumOfDices() == 1);
+        assertEquals(1,tester.getNumOfDices());
         assertThrows(IndexOutOfBoundsException.class,()->{tester.chooseDice(0);});
     }
 

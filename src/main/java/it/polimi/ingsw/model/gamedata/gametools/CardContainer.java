@@ -107,10 +107,10 @@ public class CardContainer {
         if(numPlayers < 1 || numPlayers > 4)
             throw new IndexOutOfBoundsException();
 
-        ArrayList<ObjectiveCard> tmp = new ArrayList<ObjectiveCard>(dimension);
+        ArrayList<ObjectiveCard> tmp = new ArrayList<>(dimension);
 
         try {
-            if(this.privateused == true)
+            if(this.privateused)
                 throw new AlreadyBeenCalledException();
             this.privateused = true;
             int randomNum;
@@ -130,10 +130,10 @@ public class CardContainer {
     //Pull out 3 Object Public Card given to the table
     public ArrayList<ObjectiveCard> pullOutPublic(){
         int dimension = 3;
-        ArrayList<ObjectiveCard> tmp = new ArrayList<ObjectiveCard>(dimension);
+        ArrayList<ObjectiveCard> tmp = new ArrayList<>(dimension);
 
         try {
-            if(this.publicused == true)
+            if(this.publicused)
                 throw new AlreadyBeenCalledException();
             this.publicused = true;
             int randomNum;
@@ -156,7 +156,7 @@ public class CardContainer {
 
         ArrayList<ToolCard> tmp = new ArrayList<>(dimension);
         try {
-            if(this.toolsused == true)
+            if(this.toolsused)
                 throw new AlreadyBeenCalledException();
             this.toolsused = true;
             int randomNum;

@@ -52,7 +52,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(1);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Kaleidoscopic Dream", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -89,7 +89,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(2);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Virtus", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -126,7 +126,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(3);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Aurorae Magnificus", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -163,7 +163,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(4);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Via Lux", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -199,7 +199,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(5);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Sun Catcher", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -235,7 +235,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(6);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Bellesguard", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -271,7 +271,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(7);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Firmitas", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -340,7 +340,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(9);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Aurora Sagradis", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -376,7 +376,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(10);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Industria", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -412,7 +412,7 @@ class WindowPatternCardTest {
         WindowPatternCard tester;
          tester = this.pullOutCard(11);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Shadow Thief", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -448,7 +448,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(12);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Batllo", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -484,7 +484,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(13);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Gravitas", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -520,7 +520,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(14);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Fractal Drops", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -557,7 +557,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(15);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Lux Astram", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -594,7 +594,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(16);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Chromatic Splendor", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -631,7 +631,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(17);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Firelight", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -668,7 +668,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(18);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Luz Celestial", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -705,7 +705,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(19);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Water of Life", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -742,7 +742,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(20);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Ripples of Light", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -779,7 +779,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(21);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Lux Mundi", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -816,7 +816,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(22);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Comitas", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -853,7 +853,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(23);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Sun's Glory", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
@@ -890,7 +890,7 @@ class WindowPatternCardTest {
          WindowPatternCard tester;
          tester = this.pullOutCard(24);
 
-         System.out.println("Name: " + tester.getName());
+         //System.out.println("Name: " + tester.getName());
          assertEquals("Fulgor del Cielo", tester.getName());
 
          List<List<Cell>> arrayLists = tester.getMatr();
