@@ -1,8 +1,8 @@
 package it.polimi.ingsw.view.gui;
 
 import com.jfoenix.controls.JFXButton;
-import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.turn.StartTurn;
 import it.polimi.ingsw.view.SceneInterface;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -19,17 +19,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.omg.CORBA.IMP_LIMIT;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,9 +33,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
 
 public class MatchViewController implements Initializable, SceneInterface {
+    private static final int DRAFT_LENGTH = 9;
+    private static final String START = "StartTurn";
+    private static final String DRAFTDICE1 = "ToolBeforeDice";
+    private static final String DRAFTDICE2 = "SelectingDraftDice";
+    private static final String ROUNDDICE1 = "SelectingRoundTrackDice";
+    private static final String WINDOWDICE1 = "SelectingWindowDice";
+    private static final String WINDOWDICE2 = "SelectingOptionalWindowDice";
+    private static final String INCDECVALUE = "IncDecValue";
+    private static final String SELECTVALUE = "SelectingValue";
     private Client client;
     private Stage stage;
     private GuiHandler guiHandler;
@@ -50,8 +54,10 @@ public class MatchViewController implements Initializable, SceneInterface {
     private List<String> toolList = new ArrayList<>();
     private String time;
     private String score;
-    private ImageView diceChosen = new ImageView();
+    private int diceChosenColumn = 0;
+    private int diceChosenRow = 0;
     private List<ViewDice> diceList = new ArrayList<>();
+    private String currentState = START;
 
     @FXML
     private TableColumn<User,String> userNameColumn;
@@ -63,10 +69,10 @@ public class MatchViewController implements Initializable, SceneInterface {
     private JFXButton passButton;
 
     @FXML
-    private HBox boxObjectiveCards;
+    private GridPane objectiveCardGrid;
 
     @FXML
-    private GridPane objectiveCardGrid;
+    private GridPane roundTrackGrid;
 
     @FXML
     private GridPane toolCostGrid;
@@ -81,9 +87,6 @@ public class MatchViewController implements Initializable, SceneInterface {
     private TextField turnOwnerField;
 
     @FXML
-    private HBox boxToolCards;
-
-    @FXML
     private GridPane toolCardGrid;
 
     @FXML
@@ -93,7 +96,7 @@ public class MatchViewController implements Initializable, SceneInterface {
     private TitledPane myTitle;
 
     @FXML
-    private javafx.scene.image.ImageView privateObjectiveCard;
+    private ImageView privateObjectiveCard;
 
     @FXML
     private TitledPane titlePlayer2;
@@ -106,10 +109,6 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @FXML
     private GridPane draftPool;
-
-    private Text textReceiver;
-    private Text source;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -167,106 +166,18 @@ public class MatchViewController implements Initializable, SceneInterface {
     }
 
     @FXML
-    public void handleDragDetection(MouseEvent event) {
-        source = (Text) event.getSource();
-        Dragboard dragboard = source.startDragAndDrop(TransferMode.ANY);
-        ClipboardContent clipboardContent = new ClipboardContent();
-
-        clipboardContent.putString(source.getText());
-        dragboard.setContent(clipboardContent);
-
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-
-                int j = draftPool.getColumnIndex(source);
-                int i = draftPool.getRowIndex(source);
-                List<String> list = Arrays.asList(source.getText().split(" "));
-
-                String x = Integer.toString(3 * i + j);
-
-                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+list.get(1)+","+list.get(0)+","+x+",0");
-            }
-        });
-
-        event.consume();
-
-    }
-
-    @FXML
     public void handlePassClicked(MouseEvent event) {
         client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" pass");
+        event.consume();
     }
 
     @FXML
     public void handleToolCardClicked(MouseEvent event) {
-        //client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" T;"+toolList.get(findNodeIndexIntoHbox(boxToolCards,(Node)event.getSource())));
-        int n = toolCardGrid.getColumnIndex((Node)event.getSource());
         client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" T;"+toolList.get(toolCardGrid.getColumnIndex((Node)event.getSource())));
+        event.consume();
     }
 
-    private int findNodeIndexIntoHbox(HBox boxToolCards, Node toolcard) {
-        ObservableList<Node> nodeList = boxToolCards.getChildren();
-        for(int i = 0; i < nodeList.size();i++) {
-            if(nodeList.get(i) == toolcard) {
-                return i;
-            }
-        }
-
-        //cambia,sbagliato
-        return 0;
-    }
-
-    @FXML
-    public void handleMouseClicked(MouseEvent event) {
-        source = (Text) event.getSource();
-
-        Glow glow = new Glow();
-        source.setEffect(glow);
-
-        System.out.println(source.getText());
-        System.out.println("SOURCE -> \nColumn : "+ draftPool.getColumnIndex(source) +" ------- Row :"+ draftPool.getRowIndex(source));
-    }
-
-    @FXML
-    public void handleDragOver(DragEvent event) {
-        if(event.getDragboard().hasString()) {
-            event.acceptTransferModes(TransferMode.ANY);
-        }
-    }
-
-    @FXML
-    public void handleDragDropped(DragEvent event) {
-        textReceiver = (Text) event.getTarget();
-        String str = event.getDragboard().getString();
-
-        System.out.println("RECEIVER \nColumn : "+ mywindow.getColumnIndex(textReceiver) +" ------- Row :"+ mywindow.getRowIndex(textReceiver));
-        System.out.println("SOURCE -> \nColumn : "+ mywindow.getColumnIndex(source) +" ------- Row :"+ mywindow.getRowIndex(source));
-        textReceiver.setText(str);
-
-
-        int y = mywindow.getColumnIndex(textReceiver);
-        int x = mywindow.getRowIndex(textReceiver);
-
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);
-            }
-        });
-    }
-
-    @FXML
-    public void handleDragDone(DragEvent event) {
-
-        System.out.println("Source: "+source.getText() +" ------- Target: "+textReceiver.getText());
-        if(textReceiver.getText().equals(source.getText())) {
-            String str = "";
-            source.setText(str);
-        }
-    }
-
-    public void changeScene() throws IOException {
+    private void changeScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/scoreGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -290,6 +201,7 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @Override
     public void handleClientConnected(String message) {
+        /*no need to display to the user a message that says "you are connected"*/
     }
 
     @Override
@@ -321,17 +233,28 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @Override
     public void handleMatchId(String idMatch) {
-
+        /*matchId is already stored*/
     }
 
     @Override
     public void setPatternCards(String setup) {
-
+        /*this message will not be received by this controller*/
     }
 
     @Override
     public void handleGameState(String gameState) {
+        this.currentState = gameState;
 
+        Node node = getChildrenByIndex(draftPool,diceChosenRow,diceChosenColumn);
+        ViewDice dice = findDiceInfo(node);
+
+        if(currentState.equals(INCDECVALUE)) {
+            /*pop a window to let the player chose to increment or decrement the value of the dice*/
+            SelValueWindow.display(client,dice,diceChosenRow,diceChosenColumn);
+        } else if(currentState.equals(SELECTVALUE)) {
+            /*pop a window to let the player chose the value of the dice*/
+
+        }
     }
 
     @Override
@@ -340,17 +263,17 @@ public class MatchViewController implements Initializable, SceneInterface {
         try {
             changeScene();
         } catch (IOException e) {
-            System.out.println("Errore cambio di scena: matchView -> scoreView");
+            handleAlert("Errore cambio di scena Match->Score");
         }
     }
 
     @Override
     public void updateBoard(String setup) {
-        //divido la stringa grande con tutte le cose da aggiornare in più stringhe ognuna contenente solo un componente da aggiornare
+        /*divide the setup string into substrings which contains single messages*/
         List<String> messages = Arrays.asList(setup.split(";"));
 
         for (String subMessage: messages) {
-            //qui ho il subMessage quindi devo fare starts with -> chiamo funzione sulla view diversa in base alla intestazione
+            /*call a different method based on the start of the string*/
             if(subMessage.startsWith("gamePlayers")) {
                 this.handleGamePlayers(subMessage.replace("gamePlayers ", ""));
             } else if(subMessage.startsWith("draftpool")) {
@@ -362,8 +285,7 @@ public class MatchViewController implements Initializable, SceneInterface {
             } else if(subMessage.startsWith("privatecard")) {
                 this.setPrivateCard(subMessage.replace("privatecard ", ""));
             } else if(subMessage.startsWith("roundtrack")) {
-                subMessage.replace("roundtrack ", "");
-
+                //this.updateRoundTrack(subMessage.replace("roundtrack ", ""));
             } else if(subMessage.startsWith("restrictions")) {
                 this.updateRestriction(subMessage.replace("restrictions ", ""));
             } else if(subMessage.startsWith("dices")) {
@@ -409,7 +331,6 @@ public class MatchViewController implements Initializable, SceneInterface {
         List<String> favorsList = Arrays.asList(favors.split(","));
 
         String player = favorsList.get(0);
-        TitledPane container = new TitledPane();
 
         VBox vBox = new VBox();
 
@@ -443,16 +364,9 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     public void setObjectCard(String objectCard) {
         List<String> objectCardList = Arrays.asList(objectCard.split("\\\\"));
-
-        /*ObservableList<Node> boxChildren = boxObjectiveCards.getChildren();
-
-        for(int i = 0; i < objectCardList.size();i++) {
-            ((javafx.scene.image.ImageView)boxChildren.get(i)).setImage(new Image ("/objectivecards/public/"+objectCardList.get(i)+".png"));
-        }*/
-
         ObservableList<Node> gridChildren = objectiveCardGrid.getChildren();
 
-        for(int i = 0; i < toolList.size();i++) {
+        for(int i = 0; i < objectCardList.size();i++) {
             List<String> infoObjectiveCard = Arrays.asList(objectCardList.get(i).split("/"));
             ((javafx.scene.image.ImageView)gridChildren.get(i)).setImage(new Image ("/objectivecards/public/"+infoObjectiveCard.get(0)+".png"));
         }
@@ -465,13 +379,6 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     public void updateToolcards(String toolCard) {
         List<String> tools = Arrays.asList(toolCard.split("\\\\"));
-
-        /*ObservableList<Node> boxChildren = boxToolCards.getChildren();
-
-        for(int i = 0; i < toolList.size();i++) {
-            ((javafx.scene.image.ImageView)boxChildren.get(i)).setImage(new Image ("/toolcards/"+toolList.get(i)+".png"));
-        }*/
-
         ObservableList<Node> toolGridChildren = toolCardGrid.getChildren();
         ObservableList<Node> toolCostGridChildren = toolCostGrid.getChildren();
 
@@ -488,11 +395,46 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    private void updateRoundTrack(String roundTrackList) {
+        List<String> cellList = Arrays.asList(roundTrackList.split(","));
+
+        int numRows = roundTrackGrid.getRowConstraints().size();
+        int numColumns = roundTrackGrid.getColumnConstraints().size();
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; i < numColumns; i++) {
+                deleteDice((AnchorPane)roundTrackGrid.getChildren().get(numRows*i+j));
+            }
+        }
+
+        Node pane;
+
+        for (String cell: cellList) {
+            int y = Character.getNumericValue(cell.charAt(2));
+            int x = Character.getNumericValue(cell.charAt(3));
+            pane = this.getChildrenByIndex(roundTrackGrid,x,y);
+            if(pane == null) {
+                System.out.println("Sbagliato");
+            } else {
+                ImageView image = new ImageView("/dice/" + cell.substring(0,2) + ".png");
+                ((AnchorPane)pane).getChildren().add(image);
+                fitImageToParent(image,roundTrackGrid);
+
+                /*add the WindowDiceEvent to the dice,plus add the dice to viewDiceList*/
+                diceList.add(new ViewDice(image,cell.substring(2,4)));
+                addRoundTrackEvent(image);
+            }
+        }
+    }
+
     private void updateWindowCards(String windowPatternCard) {
+        boolean isMyWindow = false;
         List<String> cellList = Arrays.asList(windowPatternCard.split(","));
 
         String player = cellList.get(0);
-        TitledPane container = new TitledPane();
+
+        if(player.equals(client.getName())) {
+            isMyWindow = true;
+        }
 
         VBox vBox = new VBox();
 
@@ -504,6 +446,17 @@ public class MatchViewController implements Initializable, SceneInterface {
 
         ObservableList<Node> boxChildren = vBox.getChildren();
         GridPane currentWindow = (GridPane)(boxChildren.get(0));
+
+        /*Removes all dices from the player window,plus delete them from viewDiceList*/
+        if(isMyWindow) {
+            int numRows = currentWindow.getRowConstraints().size();
+            int numColumns = currentWindow.getColumnConstraints().size();
+            for (int i = 0; i < numRows; i++) {
+                for (int j = 0; i < numColumns; i++) {
+                    deleteDice((AnchorPane)currentWindow.getChildren().get(numRows*i+j));
+                }
+            }
+        }
 
         Node pane;
 
@@ -515,10 +468,15 @@ public class MatchViewController implements Initializable, SceneInterface {
                 if(pane == null) {
                     System.out.println("Sbagliato");
                 } else {
-                    //((Text)text).setText(cell.charAt(0)+" "+cell.charAt(1));
                     ImageView image = new ImageView("/dice/" + cell.substring(0,2) + ".png");
                     ((AnchorPane)pane).getChildren().add(image);
                     fitImageToParent(image,currentWindow);
+
+                    /*If the current window is the player's one then add the WindowDiceEvent to the dice,plus add the dice to viewDiceList*/
+                    if(isMyWindow) {
+                        diceList.add(new ViewDice(image,cell.substring(2,4)));
+                        addWindowEvent(image);
+                    }
                 }
             }
         }
@@ -528,7 +486,6 @@ public class MatchViewController implements Initializable, SceneInterface {
         List<String> restrictionList = Arrays.asList(resctriction.split(","));
 
         String player = restrictionList.get(0);
-        TitledPane container = new TitledPane();
 
         VBox vBox = new VBox();
 
@@ -540,8 +497,6 @@ public class MatchViewController implements Initializable, SceneInterface {
 
         ObservableList<Node> boxChildren = vBox.getChildren();
         GridPane currentWindow = (GridPane)(boxChildren.get(0));
-
-        Node text;
 
         for(int i = 0; i< 4;i++) {
             for(int j = 0; j<5;j++) {
@@ -578,48 +533,107 @@ public class MatchViewController implements Initializable, SceneInterface {
     private void updateDraftPool(String draftPoolInfo) {
         List<String> draftList = Arrays.asList(draftPoolInfo.split(","));
 
-        for(int i = 0; i < 9;i++) {
+        for(int i = 0; i < DRAFT_LENGTH;i++) {
+            AnchorPane pane = ((AnchorPane)(draftPool.getChildren().get(i)));
+            deleteDice(pane);
             if(i < draftList.size()) {
                 ImageView image = new ImageView("/dice/" + draftList.get(i) + ".png");
-                AnchorPane pane = ((AnchorPane)(draftPool.getChildren().get(i)));
                 pane.getChildren().add(image);
                 diceList.add(new ViewDice(image,draftList.get(i)));
-
-                image.fitWidthProperty().bind(draftPool.widthProperty().divide(3));
-                image.fitHeightProperty().bind(draftPool.heightProperty().divide(3));
+                fitImageToParent(image,draftPool);
 
                 addDraftEvent(image);
-                //((AnchorPane)(draftPool.getChildren().get(i))).getChildren().add(new ImageView("/dice/" + draftList.get(i) + ".png"));
             }
+        }
+    }
+
+    /**
+     * Delete the imageView in the given cell of the DraftPoolGrid in order to update the draftpool, also it deletes the reference in the viewDiceList
+     * @param pane the pane contained in a cell of the DraftPoolGrid
+     */
+    private void deleteDice(AnchorPane pane) {
+        ObservableList<Node> children = pane.getChildren();
+        if(!children.isEmpty()) {
+            ViewDice dice = findDiceInfo(children.get(0));
+            if(dice != null) {
+                diceList.remove(dice);
+            }
+            children.clear();
         }
     }
 
     private void addDraftEvent(ImageView image) {
-        image.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                handleDraftDiceClicked((Node) mouseEvent.getSource());
-            }
-        });
+        image.addEventHandler(MouseEvent.MOUSE_PRESSED, this::handleDraftDiceClicked);
     }
 
-    private void handleDraftDiceClicked(Node node) {
-        diceChosen.setEffect(null);
-        diceChosen = (ImageView) node;
-        diceChosen.setEffect(new DropShadow());
-        ViewDice dice = findDiceInfo(node);
-        if(dice != null) {
-            //int x = draftPool.getColumnConstraints().size()*draftPool.getRowIndex(node)+draftPool.getColumnIndex(node);
-            int i = draftPool.getColumnIndex((Node)node.getParent());
-            int j = draftPool.getRowIndex((Node)node.getParent());
-            int x = 3*j+i;
-            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + dice.getDiceColor() + "," + dice.getDiceNumber() + "," + x + ",0");
+    private void addWindowEvent(ImageView image) {
+        image.addEventHandler(MouseEvent.MOUSE_PRESSED, this::handleWindowDiceClicked);
+    }
+
+    private void addRoundTrackEvent(ImageView image) {
+        image.addEventHandler(MouseEvent.MOUSE_PRESSED, this::handleRoundTrackDiceClicked);
+    }
+
+    private void handleRoundTrackDiceClicked(MouseEvent mouseEvent) {
+        if(!(currentState.equals(WINDOWDICE1) || currentState.equals(WINDOWDICE2) ||
+                currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2) || currentState.equals(START))) {
+            Node source = (Node) mouseEvent.getSource();
+            source.setEffect(new DropShadow());
+            ViewDice dice = findDiceInfo(source);
+
+            if(dice != null) {
+                int j = roundTrackGrid.getColumnIndex(source.getParent());
+                int i = roundTrackGrid.getRowIndex(source.getParent());
+                int x = roundTrackGrid.getColumnConstraints().size()*j+i;
+                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceColor()+","+dice.getDiceNumber()+","+x+",0");
+            }
         }
+        mouseEvent.consume();
+    }
+
+
+    private void handleWindowDiceClicked(MouseEvent mouseEvent) {
+        if(!(currentState.equals(START) || currentState.equals(ROUNDDICE1) ||
+                currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2))) {
+            Node source = (Node) mouseEvent.getSource();
+            source.setEffect(new DropShadow());
+            ViewDice dice = findDiceInfo(source);
+
+            if(dice != null) {
+                int i = mywindow.getColumnIndex(source.getParent());
+                int j = mywindow.getRowIndex(source.getParent());
+                int x = mywindow.getColumnConstraints().size()*j+i;
+                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceColor()+","+dice.getDiceNumber()+","+x+",0");
+            }
+        }
+        mouseEvent.consume();
+    }
+
+    private void handleDraftDiceClicked(MouseEvent mouseEvent) {
+        if(!(currentState.equals(WINDOWDICE1) || currentState.equals(WINDOWDICE2) ||
+                currentState.equals(ROUNDDICE1))) {
+            Node source = (Node) mouseEvent.getSource();
+            source.setEffect(new DropShadow());
+            ViewDice dice = findDiceInfo(source);
+
+            if(dice != null) {
+                int i = draftPool.getColumnIndex(source.getParent());
+                int j = draftPool.getRowIndex(source.getParent());
+                diceChosenRow = j;
+                diceChosenColumn = i;
+                //prova
+                SelValueWindow.display(client,dice,diceChosenRow,diceChosenColumn);
+                //prova
+                int x = draftPool.getColumnConstraints().size()*j+i;
+                //client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceColor()+","+dice.getDiceNumber()+","+x+",0");
+            }
+        }
+        mouseEvent.consume();
     }
 
     private ViewDice findDiceInfo(Node node) {
         for (ViewDice dice : diceList) {
-            if(dice.getDiceImage() == (ImageView)node) {
+            if(dice.getDiceImage() == node) {
                 return dice;
             }
         }
@@ -628,14 +642,10 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @FXML
     void handleCellClicked(MouseEvent event) {
-        //AnchorPane source = (AnchorPane) event.getSource();
-        /*source.getChildren().add(diceChosen);
-        diceChosen.fitHeightProperty().unbind();
-        diceChosen.fitWidthProperty().unbind();
-        fitImageToParent(diceChosen, mywindow);*/
         int y = mywindow.getColumnIndex((Node) event.getSource());
-        int x = mywindow.getRowIndex((Node)event.getSource());
+        int x = mywindow.getRowIndex((Node) event.getSource());
         client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);
+        event.consume();
     }
 
     private void fitImageToParent(ImageView image, AnchorPane pane) {
