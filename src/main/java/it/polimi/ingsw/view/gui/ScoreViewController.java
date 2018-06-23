@@ -76,8 +76,9 @@ public class ScoreViewController implements Initializable, SceneInterface {
     }
 
     private void displayWinner() {
-        int maxScore = 0;
+        int maxScore = -1;
         int tempScore;
+        boolean draw = false;
         String winnerName = "";
 
         for (User user: userList) {
@@ -85,10 +86,17 @@ public class ScoreViewController implements Initializable, SceneInterface {
             if(tempScore > maxScore) {
                 maxScore = tempScore;
                 winnerName = user.getUsername();
+            } else if (tempScore == maxScore) {
+                draw = true;
             }
         }
 
-        announcementLabel.setText(winnerName+" ha vinto la partita!");
+        if(draw) {
+            announcementLabel.setText("Pareggio!");
+        } else {
+            announcementLabel.setText(winnerName+" ha vinto la partita!");
+        }
+
     }
 
     @FXML
