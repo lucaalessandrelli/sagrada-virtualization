@@ -1,11 +1,16 @@
 package it.polimi.ingsw.view.cli;
 
+import com.sun.org.apache.regexp.internal.RE;
+import it.polimi.ingsw.model.gamedata.Player;
+import it.polimi.ingsw.view.gui.Deparser;
 import org.omg.CORBA.OBJECT_NOT_EXIST;
+import org.omg.CORBA.PolicyListHelper;
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
+import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
@@ -27,6 +32,7 @@ public class Printer {
     private static final String COSTO = "Costo";
     private static final String OBJECTIVE = "Objective Cards";
     private static final String DESCRIZIONE = "Descrizione";
+    private static final String RESTRICTIONS = "restrictions";
 
 
 
@@ -208,31 +214,37 @@ public class Printer {
             out.print(ansi().reset());
             out.print(ansi().restoreCursorPosition());
         }
-        out.print(ansi().cursorDown(6));
+        out.print(ansi().restoreCursorPosition());
+        out.print(ansi().cursorUp(1));
+        out.print(ansi().saveCursorPosition());
+        out.print(ansi().restoreCursorPosition());
+        out.print(ansi().cursorDown(7));
     }
 
     private void printBackground(Character c){
+        Color color = WHITE;
         switch (c) {
             case 'W':
-                out.print(ansi().bg(WHITE).fg(WHITE).a(ZERO).reset());
+                color = WHITE;
                 break;
             case 'B':
-                out.print(ansi().bg(BLUE).fg(BLUE).a(ZERO).reset());
+                color = BLUE;
                 break;
             case 'Y':
-                out.print(ansi().bg(YELLOW).fg(YELLOW).a(ZERO).reset());
+                color = YELLOW;
                 break;
             case 'R':
-                out.print(ansi().bg(RED).fg(RED).a(ZERO).reset());
+                color = RED;
                 break;
             case 'G':
-                out.print(ansi().bg(GREEN).fg(GREEN).a(ZERO).reset());
+                color = GREEN;
                 break;
             case 'P':
-                out.print(ansi().bg(MAGENTA).fg(MAGENTA).a(ZERO).reset());
+                color = MAGENTA;
                 break;
             default:
         }
+        out.print(ansi().bg(color).fg(color).a(ZERO).reset());
 
     }
 
@@ -240,26 +252,31 @@ public class Printer {
         try{
             PrintStream outStream = new PrintStream(System.out, true, "UTF-8");
             Character num = whatNumber(number);
-            switch (colour){
-                case 'W':
-                    outStream.print(ansi().fg(WHITE).a(" " + num +" ").reset());
-                    break;
-                case 'B':
-                    outStream.print(ansi().bg(Color.WHITE).fg(BLUE).a(" " + num +" ").reset());
-                    break;
-                case 'Y':
-                    outStream.print(ansi().bg(Color.WHITE).fg(YELLOW).a(" " + num +" ").reset());
-                    break;
-                case 'R':
-                    outStream.print(ansi().bg(Color.WHITE).fg(RED).a(" " + num +" ").reset());
-                    break;
-                case 'G':
-                    outStream.print(ansi().bg(Color.WHITE).fg(GREEN).a(" " + num +" ").reset());
-                    break;
-                case 'P':
-                    outStream.print(ansi().bg(Color.WHITE).fg(MAGENTA).a(" " + num +" ").reset());
-                    break;
-                default:
+            Color color = WHITE;
+
+            if(colour == 'W'){
+                outStream.print(ansi().fg(WHITE).a(" " + num +" ").reset());
+            }
+            else{
+                switch (colour){
+                    case 'B':
+                        color = BLUE;
+                        break;
+                    case 'Y':
+                        color = YELLOW;
+                        break;
+                    case 'R':
+                        color = RED;
+                        break;
+                    case 'G':
+                        color = GREEN;
+                        break;
+                    case 'P':
+                        color = MAGENTA;
+                        break;
+                    default:
+                }
+                outStream.print(ansi().bg(Color.WHITE).fg(color).a(" " + num +" ").reset());
             }
         } catch(UnsupportedEncodingException e){
             System.out.println("Caught exception: " + e.getMessage());
@@ -345,7 +362,9 @@ public class Printer {
 
         Deparser deparser = new Deparser();
 
-        deparser.setMyplayer(turnState.substring(TURNOF.length()-1,turnState.length()));
+        String currentPlayer = turnState.substring(TURNOF.length()-1,turnState.length());
+
+        deparser.setMyplayer(currentPlayer);
 
         out.print(ansi().eraseScreen(Erase.ALL));
 
@@ -368,24 +387,29 @@ public class Printer {
         this.printRoundtrack(setup,deparser);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorDown(10));
+        out.print(ansi().cursorDown(13));
         out.print(ansi().saveCursorPosition());
 
         this.printDescriptionCards(setup,deparser);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorDown(18));
+        out.print(ansi().cursorDown(15));
         out.print(ansi().saveCursorPosition());
 
-        //this.printMyPatternCard
+        this.printMyPatternCard(setup,currentPlayer,deparser);
 
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorRight(25));
 
-        //this.printDraftPool
+        this.printPrivateCard(setup,deparser);
 
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorRight(50));
+
+        this.printDraftPool(setup,deparser);
+
+        out.print(ansi().restoreCursorPosition());
+        out.print(ansi().cursorRight(70));
 
         //this.printTurnOf
 
@@ -559,6 +583,75 @@ public class Printer {
         }
     }
 
+    private void printMyPatternCard(String setup, String player, Deparser deparser){
+
+        String myCard = deparser.getMyCard(setup,player);
+
+        List<String> newString = deparser.divideBySpace(myCard);
+
+        out.print(ansi().a(newString.get(0)));
+
+        out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
+
+        this.printPatternCard(deparser.divideByComma(newString.get(1)));
+
+        if(newString.size() == 3)
+            this.printPlacedDices(deparser.divideByComma(newString.get(2)));
+
+        out.print(ansi().restoreCursorPosition());
+    }
+
+    private void printPrivateCard(String setup, Deparser deparser){
+
+        String tmp = deparser.findString(setup,"privatecard");
+
+        List<String> tempz = deparser.divideByComma(tmp);
+
+        out.print(ansi().a("Numero Colore Dadi"));
+
+        out.print(ansi().cursorLeft("Numero Colore Dadi".length()).cursorDown(1));
+
+        Color color = WHITE;
+
+        switch (tempz.get(1).charAt(0)){
+            case 'b':
+                color = BLUE;
+                break;
+            case 'g':
+                color = YELLOW;
+                break;
+            case 'r':
+                color = RED;
+                break;
+            case 'v':
+                if(tempz.get(1).charAt(1)=='i')
+                    color = MAGENTA;
+                else
+                    color = GREEN;
+                break;
+            default:
+        }
+
+        out.print(ansi().a(tempz.get(0) + "      ").fg(color).a(tempz.get(1).substring(0,1).toUpperCase() + tempz.get(1).substring(1)).reset());
+
+    }
+
+    private void printDraftPool(String setup, Deparser deparser){
+
+        String tmp = deparser.findString(setup,"draftpool");
+
+        List<String> tempz = deparser.divideByComma(tmp);
+
+        out.print(ansi().a("DraftPool"));
+
+        out.print(ansi().cursorDown(1).cursorLeft("DraftPool".length()));
+
+        for (String s: tempz) {
+            this.printDice(s.charAt(0),s.charAt(1));
+        }
+
+    }
+
     private class Deparser {
 
         String myplayer;
@@ -574,13 +667,13 @@ public class Printer {
         private String otherCards(String setup, List<String> players){
             StringBuilder builder = new StringBuilder();
 
-            String tmp = setup.substring(setup.indexOf("restrictions"),setup.length());
+            String tmp = setup.substring(setup.indexOf(RESTRICTIONS),setup.length());
 
             List<String> tempz = this.divideBySemicolon(tmp);
 
 
             for(int i = 0; i < (players.size()*2); i = i+2){
-                tempz.set(i,tempz.get(i).replace("restrictions ",""));
+                tempz.set(i,tempz.get(i).replace(RESTRICTIONS + " ",""));
                 tempz.set(i+1,tempz.get(i+1).replace("dices ",""));
 
                 if(!tempz.get(i).substring(0,tempz.get(i).indexOf(',')).equals(myplayer)){
@@ -598,14 +691,41 @@ public class Printer {
             return builder.toString();
         }
 
+        private String getMyCard(String setup, String player){
 
+            StringBuilder builder = new StringBuilder();
+
+            String tmp = setup.substring(setup.indexOf((RESTRICTIONS + " " + player)));
+
+            int secondIndex = tmp.indexOf(';', tmp.indexOf(';')+1);
+
+            tmp = tmp.substring(0, secondIndex); //should find the pattern card and dices of my player
+
+            List<String> tempz = this.divideBySemicolon(tmp);
+
+            tempz.set(0,tempz.get(0).replace(RESTRICTIONS + " ",""));
+            tempz.set(1,tempz.get(1).replace("dices ",""));
+
+            builder.append(tempz.get(0).substring(0,tempz.get(0).indexOf(',')));
+            builder.append(" ");
+            builder.append(tempz.get(0).replace(";","").replace(tempz.get(0).substring(0,tempz.get(0).indexOf(',')+1),""));
+            builder.append(" ");
+            builder.append(tempz.get(1).replace(";","").replace(
+                    tempz.get(0).substring(0,tempz.get(0).indexOf(',')+1),""));
+            builder.append(";");
+
+
+            return builder.toString();
+        }
+
+
+
+        //returns the substring you're looking for without the keyword toFind
         private String findString(String setup, String toFind){
             List<String> divided = divideBySemicolon(setup);
 
             int i;
             for(i = 0; i < divided.size() && !divideBySpace(divided.get(i)).get(0).equals(toFind);i++);
-
-            String x =  divided.get(i).substring(toFind.length()+1,divided.get(i).length());
 
             return divided.get(i).substring(toFind.length()+1,divided.get(i).length());
         }
