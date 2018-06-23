@@ -15,12 +15,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
 
 public class ScoreViewController implements Initializable, SceneInterface {
     private Client client;
@@ -100,7 +99,7 @@ public class ScoreViewController implements Initializable, SceneInterface {
     }
 
     @FXML
-    public void handleMouseClicked(javafx.scene.input.MouseEvent event) {
+    public void handleMouseClicked(MouseEvent event) {
         client.sendCommand("playAgain "+client.getName());
     }
 

@@ -2,14 +2,13 @@ package it.polimi.ingsw.view.gui;
 
 import com.jfoenix.controls.JFXButton;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.turn.StartTurn;
 import it.polimi.ingsw.view.SceneInterface;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,7 +25,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -248,12 +246,20 @@ public class MatchViewController implements Initializable, SceneInterface {
         Node node = getChildrenByIndex(draftPool,diceChosenRow,diceChosenColumn);
         ViewDice dice = findDiceInfo(node);
 
-        if(currentState.equals(INCDECVALUE)) {
-            /*pop a window to let the player chose to increment or decrement the value of the dice*/
-            SelValueWindow.display(client,dice,diceChosenRow,diceChosenColumn);
-        } else if(currentState.equals(SELECTVALUE)) {
-            /*pop a window to let the player chose the value of the dice*/
-
+        if(dice != null) {
+            if(currentState.equals(INCDECVALUE)) {
+                /*pop a window to let the player chose to increment or decrement the value of the dice*/
+                Platform.runLater(() -> {
+                    // Update UI here.
+                    SelValueWindow.display(client,dice,diceChosenRow,diceChosenColumn,currentState);
+                });
+            } else if(currentState.equals(SELECTVALUE)) {
+                /*pop a window to let the player chose the value of the dice*/
+                Platform.runLater(() -> {
+                    // Update UI here.
+                    IncDecWindow.display(client, dice, diceChosenRow, diceChosenColumn,currentState);
+                });
+            }
         }
     }
 
@@ -576,7 +582,8 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     private void handleRoundTrackDiceClicked(MouseEvent mouseEvent) {
         if(!(currentState.equals(WINDOWDICE1) || currentState.equals(WINDOWDICE2) ||
-                currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2) || currentState.equals(START))) {
+                currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2) ||
+                currentState.equals(START) ||currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE))) {
             Node source = (Node) mouseEvent.getSource();
             source.setEffect(new DropShadow());
             ViewDice dice = findDiceInfo(source);
@@ -594,7 +601,8 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     private void handleWindowDiceClicked(MouseEvent mouseEvent) {
         if(!(currentState.equals(START) || currentState.equals(ROUNDDICE1) ||
-                currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2))) {
+                currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2) ||
+                currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE))) {
             Node source = (Node) mouseEvent.getSource();
             source.setEffect(new DropShadow());
             ViewDice dice = findDiceInfo(source);
@@ -611,7 +619,7 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     private void handleDraftDiceClicked(MouseEvent mouseEvent) {
         if(!(currentState.equals(WINDOWDICE1) || currentState.equals(WINDOWDICE2) ||
-                currentState.equals(ROUNDDICE1))) {
+                currentState.equals(ROUNDDICE1) || currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE))) {
             Node source = (Node) mouseEvent.getSource();
             source.setEffect(new DropShadow());
             ViewDice dice = findDiceInfo(source);
@@ -621,11 +629,8 @@ public class MatchViewController implements Initializable, SceneInterface {
                 int j = draftPool.getRowIndex(source.getParent());
                 diceChosenRow = j;
                 diceChosenColumn = i;
-                //prova
-                SelValueWindow.display(client,dice,diceChosenRow,diceChosenColumn);
-                //prova
                 int x = draftPool.getColumnConstraints().size()*j+i;
-                //client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceColor()+","+dice.getDiceNumber()+","+x+",0");
+                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceColor()+","+dice.getDiceNumber()+","+x+",0");
             }
         }
         mouseEvent.consume();
