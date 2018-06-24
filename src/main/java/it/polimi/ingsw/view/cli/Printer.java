@@ -1,16 +1,10 @@
 package it.polimi.ingsw.view.cli;
 
-import com.sun.org.apache.regexp.internal.RE;
-import it.polimi.ingsw.model.gamedata.Player;
-import it.polimi.ingsw.view.gui.Deparser;
-import org.omg.CORBA.OBJECT_NOT_EXIST;
-import org.omg.CORBA.PolicyListHelper;
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
-import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
@@ -22,15 +16,16 @@ public class Printer {
     private static final String FOUR = "2683";
     private static final String FIVE = "2684";
     private static final String SIX = "2685";
-    private static final String IDNUMBER = "Id number: ";
-    private static final String DIFFICULTY = "     Difficulty: ";
+    private static final String CIRCLE = "25CF";
+    private static final String IDNUMBER = "Numero id: ";
+    private static final String DIFFICULTY = "     Difficoltà: ";
     private static final String ZERO = " 0 ";
-    private static final String SETTEDTO = "The timer is setted to: ";
-    private static final String TURNOF = "Is the turn of: ";
-    private static final String WAITING = "Waiting for a move..";
-    private static final String TOOLCARDS = "ToolCards";
+    private static final String SETTEDTO = "Il timer è settato a: ";
+    private static final String TURNOF = "E' il turno di: ";
+    private static final String WAITING = "In attesa di una mossa..";
+    private static final String TOOLCARDS = "Carte utensile";
     private static final String COSTO = "Costo";
-    private static final String OBJECTIVE = "Objective Cards";
+    private static final String OBJECTIVE = "Carte obiettivo";
     private static final String DESCRIZIONE = "Descrizione";
     private static final String RESTRICTIONS = "restrictions";
 
@@ -45,7 +40,7 @@ public class Printer {
 
     public void welcome() {
         out.print(ansi().saveCursorPosition());
-        out.print(ansi().a("Welcome to "));
+        out.print(ansi().a("Benvenuto in "));
         out.print( ansi().render("@|red S|@"));
         try {
             Thread.sleep(500);
@@ -89,12 +84,12 @@ public class Printer {
     }
 
     public String getName() {
-        out.println("Please, insert username:");
+        out.println("Inserisci l'username:");
         return in.nextLine();
     }
 
     public int getConnection() {
-        out.println("Insert what kind of connection you want to use: \n1)SOCKET \n2)RMI");
+        out.println("Inserisci quale tipo di connessione vuoi utilizzare: \n1)SOCKET \n2)RMI");
         return in.nextInt();
     }
 
@@ -119,7 +114,7 @@ public class Printer {
 
     public void connectedPlayers(String players){
         List<String> connectedplayers = Arrays.asList(players.split(" "));
-        out.print(ansi().a("Players connected :"));
+        out.print(ansi().a("Giocatori connessi:"));
         for(int i = 0; i < connectedplayers.size(); i++){
             out.print("  " + ansi().a(connectedplayers.get(i)));
         }
@@ -140,7 +135,7 @@ public class Printer {
     public void printplayersConnected(List<String> players){
         //out.print(ansi().saveCursorPosition());
 
-        out.print(ansi().a("Players connected:").cursorLeft("Players connected:".length()));
+        out.print(ansi().a("Giocatori connessi:").cursorLeft("Giocatori connessi:".length()));
 
         out.print(ansi().cursorDown(1));
 
@@ -375,13 +370,13 @@ public class Printer {
         this.printActivePlayers(setup,players,deparser);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorDown(7));
+        out.print(ansi().cursorDown(8));
         out.print(ansi().saveCursorPosition());
 
         this.printCards(setup,deparser);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorRight(50));
+        out.print(ansi().cursorRight(70));
 
         this.printRoundtrack(setup,deparser);
 
@@ -403,17 +398,17 @@ public class Printer {
         this.printPrivateCard(setup,deparser);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorRight(50));
+        out.print(ansi().cursorRight(60));
 
         this.printDraftPool(setup,deparser);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorRight(80));
+        out.print(ansi().cursorRight(100));
 
-        this.printTurnOf(turnState);
+        this.printTurnOf(turnState, deparser);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorRight(110));
+        out.print(ansi().cursorRight(140));
 
         this.printTimerMatch(timer);
 
@@ -471,6 +466,10 @@ public class Printer {
 
                 out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
 
+                this.printFavoreTokens(setup, newString.get(0), deparser);
+
+                out.print(ansi().cursorDown(1));
+
                 this.printPatternCard(deparser.divideByComma(newString.get(1)));
 
                 if(newString.size() == 3)
@@ -484,6 +483,26 @@ public class Printer {
         out.print(ansi().restoreCursorPosition());
     }
 
+    private void printFavoreTokens(String setup, String name, Deparser deparser) {
+
+        try {
+            PrintStream outStream = new PrintStream(System.out, true, "UTF-8");
+
+
+            int tmp = setup.indexOf("favors " + name);
+            int num = setup.charAt(tmp + ("favors " + name).length() + 1) - '0';
+
+            char circle = (char)Integer.parseInt(CIRCLE, 16);
+
+            for(int i = 0; i < num; i++){
+                outStream.print(ansi().fg(CYAN).a(circle + " ").reset());
+            }
+            outStream.print(ansi().cursorLeft(num*2));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void printCards(String setup, Deparser deparser){
 
@@ -538,9 +557,9 @@ public class Printer {
 
         List<String> tmp = deparser.divideByComma(deparser.findString(setup,"roundtrack"));
 
-        out.print(ansi().a("Roundtrack"));
-        out.print(ansi().cursorLeft("Roundtrack".length()).cursorDown(1));
-        out.print(ansi().a("Round number:"));
+        out.print(ansi().a("Traccia dei Round"));
+        out.print(ansi().cursorLeft("Traccia dei Round".length()).cursorDown(1));
+        out.print(ansi().a("Round numero:"));
         for(int i = 1; i < 11; i++){
             out.print(ansi().a(" " + i + " "));
         }
@@ -562,7 +581,6 @@ public class Printer {
         out.print(ansi().restoreCursorPosition());
 
     }
-
 
     private void printDescriptionCards(String setup, Deparser deparser){
 
@@ -614,9 +632,13 @@ public class Printer {
 
         List<String> newString = deparser.divideBySpace(myCard);
 
-        out.print(ansi().a(newString.get(0)));
+        out.print(ansi().a("   "+newString.get(0)));
 
         out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
+
+        this.printFavoreTokens(setup,newString.get(0),deparser);
+
+        out.print(ansi().cursorDown(1).cursorLeft(3));
 
         this.printCoordinates();
         this.printPatternCard(deparser.divideByComma(newString.get(1)));
@@ -634,9 +656,9 @@ public class Printer {
 
         List<String> tempz = deparser.divideByComma(tmp);
 
-        out.print(ansi().a("Private Objective Card").cursorDown(2));
+        out.print(ansi().a("Carta obiettivo privata").cursorDown(1));
 
-        out.print(ansi().cursorLeft("Private Objective Card".length()).a("Numero  Colore Dadi"));
+        out.print(ansi().cursorLeft("Carta obiettivo privata".length()).a("Numero  Colore Dadi"));
 
         out.print(ansi().cursorLeft("Numero  Colore Dadi".length()).cursorDown(1));
 
@@ -671,9 +693,9 @@ public class Printer {
 
         List<String> tempz = deparser.divideByComma(tmp);
 
-        out.print(ansi().a("DraftPool"));
+        out.print(ansi().a("Riserva"));
 
-        out.print(ansi().cursorDown(1).cursorLeft("DraftPool".length()));
+        out.print(ansi().cursorDown(1).cursorLeft("Riserva".length()));
 
         for (String s: tempz) {
             this.printDice(s.charAt(0),s.charAt(1));
@@ -681,9 +703,9 @@ public class Printer {
 
     }
 
-    private void printTurnOf(String turnState){
+    private void printTurnOf(String turnState, Deparser deparser){
 
-        out.print(ansi().a(turnState));
+        out.print(ansi().a(TURNOF + deparser.getMyPlayer()));
 
     }
 
