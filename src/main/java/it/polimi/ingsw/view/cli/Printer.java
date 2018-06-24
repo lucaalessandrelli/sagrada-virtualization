@@ -148,6 +148,8 @@ public class Printer {
             out.print(ansi().a(player));
             out.print(ansi().cursorLeft(player.length()).cursorDown(1));
         }
+
+        out.print(ansi().cursorUp(players.size()));
         //out.print(ansi().restoreCursorPosition());
 
     }
@@ -324,12 +326,6 @@ public class Printer {
 
     }
 
-
-    public void rePrintChoseCard(String output, String timer){
-        out.print(ansi().cursorLeft(50));
-        this.printtimer(timer,output+"  ");
-    }
-
     public void printChooseCardRoom(String patternCards, String timer) {
 
         Deparser dep = new Deparser();
@@ -375,6 +371,9 @@ public class Printer {
         out.print(ansi().cursorRight(90));
         this.printplayersConnected(players);
 
+        out.print(ansi().cursorRight(15));
+        this.printActivePlayers(setup,players,deparser);
+
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(7));
         out.print(ansi().saveCursorPosition());
@@ -398,7 +397,7 @@ public class Printer {
 
         this.printMyPatternCard(setup,currentPlayer,deparser);
 
-        out.print(ansi().restoreCursorPosition());
+        out.print(ansi().restoreCursorPosition().cursorLeft(3).saveCursorPosition());
         out.print(ansi().cursorRight(25));
 
         this.printPrivateCard(setup,deparser);
@@ -409,14 +408,14 @@ public class Printer {
         this.printDraftPool(setup,deparser);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorRight(70));
+        out.print(ansi().cursorRight(80));
 
-        //this.printTurnOf
+        this.printTurnOf(turnState);
 
         out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorRight(100));
+        out.print(ansi().cursorRight(110));
 
-        //this.printTimer
+        this.printTimerMatch(timer);
 
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(8));
@@ -430,6 +429,32 @@ public class Printer {
 
     public void printScore(String score) {
         //print players score
+    }
+
+    private void printActivePlayers(String setup, List<String> players, Deparser deparser){
+
+        String tmp = deparser.findString(setup,"state");
+
+        List<String> tempz = deparser.divideByComma(tmp);
+
+        List<String> active;
+
+        Color color;
+
+        for (String s: tempz) {
+
+            active = deparser.divideBySpace(s);
+
+            if(active.get(1).charAt(0)=='A')
+                color = GREEN;
+            else
+                color = RED;
+
+
+            out.print(ansi().fg(color).a(active.get(1)).reset().cursorLeft(active.get(1).length()).cursorDown(1));
+
+        }
+
     }
 
     private void printMatchOtherCards(String setup, List<String> players, Deparser deparser){
@@ -593,12 +618,14 @@ public class Printer {
 
         out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
 
+        this.printCoordinates();
         this.printPatternCard(deparser.divideByComma(newString.get(1)));
 
         if(newString.size() == 3)
             this.printPlacedDices(deparser.divideByComma(newString.get(2)));
 
         out.print(ansi().restoreCursorPosition());
+
     }
 
     private void printPrivateCard(String setup, Deparser deparser){
@@ -607,9 +634,11 @@ public class Printer {
 
         List<String> tempz = deparser.divideByComma(tmp);
 
-        out.print(ansi().a("Numero Colore Dadi"));
+        out.print(ansi().a("Private Objective Card").cursorDown(2));
 
-        out.print(ansi().cursorLeft("Numero Colore Dadi".length()).cursorDown(1));
+        out.print(ansi().cursorLeft("Private Objective Card".length()).a("Numero  Colore Dadi"));
+
+        out.print(ansi().cursorLeft("Numero  Colore Dadi".length()).cursorDown(1));
 
         Color color = WHITE;
 
@@ -632,7 +661,7 @@ public class Printer {
             default:
         }
 
-        out.print(ansi().a(tempz.get(0) + "      ").fg(color).a(tempz.get(1).substring(0,1).toUpperCase() + tempz.get(1).substring(1)).reset());
+        out.print(ansi().a(tempz.get(0) + "       ").fg(color).a(tempz.get(1).substring(0,1).toUpperCase() + tempz.get(1).substring(1)).reset());
 
     }
 
@@ -649,6 +678,18 @@ public class Printer {
         for (String s: tempz) {
             this.printDice(s.charAt(0),s.charAt(1));
         }
+
+    }
+
+    private void printTurnOf(String turnState){
+
+        out.print(ansi().a(turnState));
+
+    }
+
+    private void printTimerMatch(String timer){
+
+        out.print(ansi().a("Timer: "+timer));
 
     }
 
