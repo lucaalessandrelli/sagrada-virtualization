@@ -26,7 +26,7 @@ public class Game {
 
     void notifyGame(){
         clients.notifyIdMatch(id);
-        clients.setMatchStarted(true);
+        clients.setMatchStarted();
 
     }
 
@@ -34,7 +34,7 @@ public class Game {
         match.start();
     }
 
-    public boolean findClient(String name) {
+    boolean findClient(String name) {
         return clients.findClient(name);
     }
 
@@ -42,32 +42,32 @@ public class Game {
         return clients.remove(name);
     }
 
-    public Round getCurrRound() {
+    Round getCurrRound() {
         return match.getCurrRound();
     }
 
-    public void setPlayerActivity(String name, boolean b) {
+    void setPlayerActivity(String name, boolean b) {
         match.setPlayerActivity(name,b);
     }
 
 
-    public void setPlayerWindow(String name, int idWindow) {
+    void setPlayerWindow(String name, int idWindow) {
         match.setPlayerWindow(name,idWindow);
     }
 
-    public void setEnd() {
+    void setEnd() {
         ended=true;
     }
 
-    public boolean endedMatch() {
+    boolean endedMatch() {
         return ended;
     }
 
-    public int sizeClient() {
+    int sizeClient() {
         return clients.sizeContainer();
     }
 
-    public ClientInterface getClientBox(String name) {
+    ClientInterface getClientBox(String name) {
         return clients.getClientBox(name);
     }
 }

@@ -34,7 +34,7 @@ public class InputComposer {
 
     }
 
-    public String compose(String cmd) {
+    String compose(String cmd) {
         if(cmd.equals("login")) {
             return LOGIN + " <User>" + client.getName() + "<User>";
         }

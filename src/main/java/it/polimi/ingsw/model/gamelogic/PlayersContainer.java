@@ -25,31 +25,16 @@ public class PlayersContainer {
         return firstBracket;
     }
 
-    private void setFirstBracket(boolean v){
-        firstBracket =v;
-    }
-
-
-
     public IterPlayer getIterator(){
         return new IterPlayer();
     }
 
-    public void notifyChanges() {
-        players.forEach(p -> p.notifyPlayer());
+    void notifyChanges() {
+        players.forEach(Player::notifyPlayer);
     }
 
-    public void notifyTurn(String username, long timeSleep) {
+    void notifyTurn(String username, long timeSleep) {
         players.forEach(p->p.notifyTurn(username,timeSleep));
-    }
-
-    public Player getLastPlayer() {
-        for (Player p : players){
-            if(p.isActive()){
-                return p;
-            }
-        }
-        return null;
     }
 
     private class IterPlayer implements Iterator{
@@ -62,24 +47,16 @@ public class PlayersContainer {
         @Override
         public boolean hasNext() {
             if(isFirstBracket()) {
-                if (i <= players.size()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return i <= players.size();
             }else{
-                if(i!=0){
-                    return true;
-                }else{
-                    return false;
-                }
+                return i != 0;
             }
         }
 
         @Override
         public Player next() {
             if (i == players.size()-1 && isFirstBracket()) {
-                setFirstBracket(false);
+                setFirstBracket();
                 i++;
             }
             if (this.hasNext()) {
@@ -93,6 +70,10 @@ public class PlayersContainer {
             }else {
                 return null;
             }
+        }
+
+        private void setFirstBracket(){
+            firstBracket = false;
         }
     }
 }

@@ -3,23 +3,21 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.network.client.MessageQueue;
 
 public abstract class AbstractView  {
-    public SceneInterface scene;
-    public MessageQueue queue;
+    SceneInterface scene;
+    private MessageQueue queue;
 
     public void notifyMessage() {
         readQueue();
     }
 
-    public void readQueue() {
+    private void readQueue() {
         while(queue.size()>0) {
             analyze(queue.poll());
         }
     }
 
-    public void analyze(String message){
-        if(message.equals("service Disconnected form server")){
-            message = message.replace("service ", "");
-        }else if(message.startsWith("setup")){
+    private void analyze(String message){
+        if(message.startsWith("setup")){
             String setup = message.replace("setup ","");
             scene.updateBoard(setup);
 

@@ -9,7 +9,7 @@ public class MatchTimerTask extends TimerTask {
     private long time;
     private long tempTime;
 
-    public MatchTimerTask(WaitingRoom lobby, long time) {
+    MatchTimerTask(WaitingRoom lobby, long time) {
         this.lobby = lobby;
         this.time = time;
         this.tempTime = time;
@@ -25,15 +25,13 @@ public class MatchTimerTask extends TimerTask {
             //CREATE A REAL MATCH
             lobby.notifyManager();
         }
-        //out.println("Now the state is: StartedMatch");
         else if (playerList.sizeContainer() < 2 && tempTime == 0) {
             tempTime = time;
-            //out.println("Timer:"+ tempTime);
         }
 
     }
 
-    synchronized public long getTempTime () {
+    synchronized long getTempTime () {
             return tempTime;
         }
 

@@ -10,26 +10,9 @@ import static java.lang.System.out;
 
 public class Server implements ServerInterface {
     private Manager manager;
-
-
-    public Server() throws RemoteException {
-    }
     public void setManager(Manager m){
         manager = m;
     }
-
-
-
-
-    //Getter methods
-    /*public List<Match> getMatchList() {
-        return this.matchList;
-    }
-
-    public WaitingRoom getLobby() {
-        return lobby;
-    }*/
-
 
     @Override
     public synchronized boolean login(String name,ClientInterface client){

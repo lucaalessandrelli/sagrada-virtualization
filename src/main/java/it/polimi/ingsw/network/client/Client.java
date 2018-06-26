@@ -2,8 +2,6 @@ package it.polimi.ingsw.network.client;
 
 import it.polimi.ingsw.view.AbstractView;
 
-import java.rmi.RemoteException;
-
 public class Client  {
     private String name;
     private boolean connected;
@@ -13,10 +11,9 @@ public class Client  {
     private int numOfMatch;
     private MessageQueue messages;
 
-    public Client(String addr) throws RemoteException{
+    public Client(String addr) {
         connected=false;
         this.addr = addr;
-        //messages = new MessageQueue(view);
     }
 
     public void setQueue(AbstractView view){
@@ -24,30 +21,18 @@ public class Client  {
     }
 
 
-    synchronized public void setConnected(boolean b){
+    public synchronized void setConnected(boolean b){
         connected = b;
     }
 
 
-    synchronized public void connect(){
+    public synchronized void connect(){
         connectionHandler.connect();
     }
 
-
-
-   /* @Override
-    synchronized public void disconnect() {
-        connectionHandler.disconnect();
-
-    }*/
-
-
-    synchronized public String getName() {
+    public synchronized String getName() {
         return name;
     }
-
-
-
 
     public void sendCommand(String cmd) {
          connectionHandler.sendCommand(cmd);
@@ -57,7 +42,7 @@ public class Client  {
         return connected;
     }
 
-    public void setName(String n) {
+    public synchronized void setName(String n) {
         name=n;
 
     }
@@ -81,7 +66,7 @@ public class Client  {
         return messages;
     }
 
-    public void setServiceMessage(String serviceMessage) {
+    void setServiceMessage(String serviceMessage) {
         messages.add(serviceMessage);
     }
 
@@ -93,7 +78,4 @@ public class Client  {
         messages.add(s);
     }
 
-    public void retryConnection(String command) {
-
-    }
 }

@@ -8,14 +8,9 @@ public class ClientStub implements ClientInterface {
     private String name;
     private MessageQueue queue;
 
-    public ClientStub(MessageQueue q, String n) {
+    ClientStub(MessageQueue q, String n) {
         queue = q;
         name=n;
-
-    }
-
-
-    public void disconnect() throws RemoteException {
 
     }
 
@@ -25,8 +20,7 @@ public class ClientStub implements ClientInterface {
     }
 
     @Override
-    public boolean ping() throws RemoteException {
-        return true;
+    public void ping() throws RemoteException {
     }
 
     @Override

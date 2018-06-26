@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model.gamedata;
 
-import it.polimi.ingsw.model.gamelogic.Move;
-
-public class Pos implements Move {
+public class Pos {
     private int x;
     private int y;
 

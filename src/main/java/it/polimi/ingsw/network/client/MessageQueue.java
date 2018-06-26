@@ -19,9 +19,9 @@ public class MessageQueue {
         messages.add(s);
         view.notifyMessage();
     }
-    synchronized public String poll(){
+    public synchronized String poll(){
         return messages.poll();
     }
 
-    synchronized public int size(){return messages.size();}
+    public synchronized int size(){return messages.size();}
 }

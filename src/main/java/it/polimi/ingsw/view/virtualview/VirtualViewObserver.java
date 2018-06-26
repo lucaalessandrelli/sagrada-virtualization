@@ -4,13 +4,12 @@ import it.polimi.ingsw.controller.ClientBox;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
 //observer interface, it will be implemented by gui and cli
 public abstract class VirtualViewObserver {
     //subject observable
-    protected ClientBox clientBox;
+    ClientBox clientBox;
     protected Player player;
     //this method will be called when a pattern card is modified
     public abstract void update();

@@ -19,18 +19,17 @@ public class Manager {
     private WaitingRoom lobby;
     private ClientHandler clientHandler;
     private InputAnalyzer analyzer;
-    private long timerRoom;
     private long timerCard;
     private long timerMove;
 
     public Manager(int timerRoom,int timerCard, int timerMove) {
-        this.timerRoom=timerRoom*1000;
+        long timerRoom1 = timerRoom * 1000;
         this.timerCard=timerCard*1000;
         this.timerMove=timerMove*1000;
         games = new HashMap<>();
         numOfMatch = 0;
         clients = new ClientsContainer(this);
-        lobby = new WaitingRoom(this.timerRoom, this, clients);
+        lobby = new WaitingRoom(timerRoom1, this, clients);
         clientHandler = new ClientHandler();
         analyzer = new InputAnalyzer(this);
     }
@@ -47,11 +46,11 @@ public class Manager {
         lobby.restore(clients);
     }
 
-    public synchronized void addPlayerInQueue(ClientInterface client) throws RemoteException {
+    public synchronized void addPlayerInQueue(ClientInterface client) {
         lobby.addPlayer(client);
     }
 
-    public synchronized boolean checkIfPlayerIsLogged(String name) throws RemoteException {
+    public synchronized boolean checkIfPlayerIsLogged(String name) {
         if(clients.findClient(name)){
             return true;
         }
@@ -61,12 +60,6 @@ public class Manager {
             }
         }
         return false;
-        /*for (Game g : games) {
-            if (g.findClient(name)) {
-                return true;
-            }
-        }
-        return false;*/
     }
 
     public boolean checkIfPlayerIsPlaying(String name) {
@@ -81,15 +74,8 @@ public class Manager {
                 return;
             }
         }
-        /*for (Game g : games) {
-            if (g.remove(name)) {
-                return;
-            }
-        }*/
     }
 
-    public void notifyEnd(String name) {
-    }
 
     public void analyze(String cmd) {
         analyzer.analyse(cmd);
@@ -105,14 +91,14 @@ public class Manager {
         }
     }
 
-    public void setPlayerActivity(String name,boolean b) {
+    void setPlayerActivity(String name, boolean b) {
         int numMatch = clientHandler.getGame(name);
         games.get(numMatch).setPlayerActivity(name,b);
     }
 
     public void reconnectPlayer(ClientInterface c) {
         try {
-            ClientBox clientB = new ClientBox(c,c.getName(),c.getTypeConnection());
+            ClientBox clientB = new ClientBox(c,c.getName());
             int num = clientHandler.getGame(clientB.getName());
             clientB.setNumMatch(num);
             games.get(num).reconnect(clientB);
@@ -125,11 +111,11 @@ public class Manager {
         clientHandler.removePlayer(username);
     }
 
-    public void setPlayerWindow(int num, String name, String window) {
+    void setPlayerWindow(int num, String name, String window) {
         games.get(num).setPlayerWindow(name,Integer.parseInt(window));
     }
 
-    public void disconnectPlayer(int num, String name) {
+    void disconnectPlayer(int num, String name) {
         games.get(num).remove(name);
     }
 
@@ -147,7 +133,7 @@ public class Manager {
         }, 0, 1, TimeUnit.SECONDS);
     }
 
-    public void revenge(String name) {
+    void revenge(String name) {
         for (Map.Entry<Integer,Game> pair : games.entrySet()){
             if(pair.getValue().findClient(name)){
                 lobby.addPlayer(pair.getValue().getClientBox(name));

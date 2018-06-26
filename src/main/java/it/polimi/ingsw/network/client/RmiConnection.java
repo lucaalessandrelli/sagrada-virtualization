@@ -10,17 +10,16 @@ import java.rmi.server.UnicastRemoteObject;
 
 
 public class RmiConnection implements ConnectionHandler {
-    static int PORT_RMI = 56789;
-    ServerInterface server;
-    Client client;
-    String address;
-    ClientInterface stub;
+    private static final String SERVERALERT = "alert Server not available";
+    private static final int PORTRMI = 56789;
+    private ServerInterface server;
+    private Client client;
+    private ClientInterface stub;
 
-    public RmiConnection(Client client,String addr){
+    RmiConnection(Client client, String addr){
         this.client = client;
-        address = addr;
         try {
-            Registry registry = LocateRegistry.getRegistry(addr,PORT_RMI);
+            Registry registry = LocateRegistry.getRegistry(addr,PORTRMI);
             ClientStub obj = new ClientStub(client.getQueue(),client.getName());
             stub = (ClientInterface) UnicastRemoteObject.exportObject(obj,0);
             server = (ServerInterface) registry.lookup("server");
@@ -35,27 +34,15 @@ public class RmiConnection implements ConnectionHandler {
                 String name = client.getName();
                 if (server.login(name,stub)) {
                     client.setConnected(true);
-                    //client.setServiceMessage("Connected, Welcome!");
                 } else {
                     client.setConnected(false);
                     client.setServiceMessage("alert Already connected");
 
                 }
             } catch (Exception e) {
-                client.setServiceMessage("alert Server not available");
+                client.setServiceMessage(SERVERALERT);
             }
         }
-    }
-
-    public void disconnect() {
-        client.setConnected(false);
-        try {
-            server.disconnect(client.getName(),stub);
-        } catch (RemoteException e) {
-            client.setServiceMessage("alert Server not available");
-        }
-        client.setServiceMessage("Disconnected form server");
-
     }
 
     @Override
@@ -63,7 +50,7 @@ public class RmiConnection implements ConnectionHandler {
         try {
             server.command(cmd);
         } catch (RemoteException e) {
-            client.setServiceMessage("alert Server not available");
+            client.setServiceMessage(SERVERALERT);
         }
     }
 

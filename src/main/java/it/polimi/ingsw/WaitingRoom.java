@@ -41,16 +41,7 @@ public class WaitingRoom {
         }
     }
 
-    /*public void removePlayer(Player player) {
-        playerList.remove(player);
-
-        if (playerList.size() < 2) { //if n°players drops below 2 timer needs to be reset and stopped
-            //resetTimer
-            this.resetTimer();
-        }
-    }*/
-
-    public void resetTimer() {
+    void resetTimer() {
         task = new MatchTimerTask(this,time);
     }
 
@@ -66,22 +57,12 @@ public class WaitingRoom {
     }
 
 
-    public void notifyManager() {
+    void notifyManager() {
         manager.createMatch(this);
     }
 
-    public ClientsContainer getClients() {
+    ClientsContainer getClients() {
         return playerList;
     }
 
-
-    /*public ArrayList<Player> clonePlayerList() {
-        ArrayList<Player> cloneList = new ArrayList<>();
-
-        for (Player player: this.playerList) {
-            cloneList.add(player.clonePlayer());
-        }
-
-        return cloneList;
-    }*/
 }

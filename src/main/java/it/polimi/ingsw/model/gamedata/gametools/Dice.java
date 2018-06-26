@@ -2,9 +2,8 @@ package it.polimi.ingsw.model.gamedata.gametools;
 
 import it.polimi.ingsw.model.gamedata.Colour;
 import it.polimi.ingsw.model.gamedata.Property;
-import it.polimi.ingsw.model.gamelogic.Move;
 
-public class Dice implements Move {
+public class Dice {
     private Property prop;
     private boolean selected;
 

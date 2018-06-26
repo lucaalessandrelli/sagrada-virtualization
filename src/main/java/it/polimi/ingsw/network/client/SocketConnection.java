@@ -6,24 +6,23 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class SocketConnection implements ConnectionHandler {
-    static int PORT_SOCKET = 45678;
-
-    Client client;
-    Socket socket;
-    InputComposer inputComposer;
-    SocketListener listner;
+    private static final String SERVERALERT = "alert Server not available";
+    private static int PORTSOCKET = 45678;
+    private Client client;
+    private Socket socket;
+    private InputComposer inputComposer;
 
     public SocketConnection(Client client, String addr) {
         this.client = client;
         inputComposer = new InputComposer(client);
         try {
-            socket = new Socket(addr, PORT_SOCKET);
+            socket = new Socket(addr, PORTSOCKET);
         } catch (IOException e) {
             client.setServiceMessage("alert Connection not available");        }
     }
 
-    public void startListener(Scanner in){
-        listner = new SocketListener(client.getQueue(), socket,in);
+    private void startListener(Scanner in){
+        SocketListener listner = new SocketListener(client.getQueue(), socket, in);
         new Thread(listner).start();
     }
 
@@ -43,26 +42,11 @@ public class SocketConnection implements ConnectionHandler {
             }
             startListener(in);
         } catch (Exception e) {
-            client.setServiceMessage("alert Server not available");
+            client.setServiceMessage(SERVERALERT);
         }
 
 
     }
-
-
-    /*public void disconnect() {
-        try {
-            PrintWriter pr = new PrintWriter(socket.getOutputStream(), true);
-            client.setConnected(false);
-            String rqst = inputComposer.compose("disconnect");
-            pr.println(rqst);
-            pr.close();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }*/
 
     @Override
     public void sendCommand(String cmd) {
@@ -71,7 +55,7 @@ public class SocketConnection implements ConnectionHandler {
             cmd = inputComposer.compose(cmd);
             pr.println(cmd);
         } catch (Exception e) {
-            client.setServiceMessage("alert Server not available");
+            client.setServiceMessage(SERVERALERT);
         }
 
     }

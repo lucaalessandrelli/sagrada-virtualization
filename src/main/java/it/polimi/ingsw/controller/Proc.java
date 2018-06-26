@@ -6,16 +6,16 @@ import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamelogic.Round;
 
-public class Proc {
-    Round round;
-    String move;
+class Proc {
+    private Round round;
+    private String move;
 
-    public Proc(Round round, String move) {
+    Proc(Round round, String move) {
         this.round = round;
         this.move= move;
     }
 
-    public void process() {
+    void process() {
         if(move.startsWith("D;")){
             String res = move.replace("D;","");
             String[] diceToken = res.split(",");

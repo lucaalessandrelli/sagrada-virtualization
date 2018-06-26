@@ -13,6 +13,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.System.*;
+
 public class ClientsContainer {
     private List<ClientBox> clients;
     private boolean matchStarted;
@@ -20,7 +22,7 @@ public class ClientsContainer {
     private ScheduledExecutorService exec;
 
 
-    public ClientsContainer(Manager manager){
+    ClientsContainer(Manager manager){
         clients = new ArrayList<>();
         this.manager= manager;
         matchStarted = false;
@@ -30,7 +32,7 @@ public class ClientsContainer {
                 try {
                     c.ping();
                 } catch (IOException e) {
-                    System.out.println(c.getName() + " is disconnected");
+                    out.println(c.getName() + " is disconnected");
                     remove(c.getName());
 
                 }
@@ -40,20 +42,20 @@ public class ClientsContainer {
     }
 
 
-    synchronized public void addClient(ClientInterface c, long tempTime){
+    public synchronized void addClient(ClientInterface c, long tempTime){
         try {
-            ClientBox cli =new ClientBox(c,c.getName(),c.getTypeConnection());
+            ClientBox cli =new ClientBox(c,c.getName());
             cli.setTimer(tempTime);
             clients.add(cli);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
-    synchronized public int sizeContainer(){
+    public synchronized int sizeContainer(){
         return clients.size();
     }
 
-    synchronized public List<Player>  getPlayerList(){
+    public synchronized List<Player>  getPlayerList(){
         List<Player> p = new ArrayList<>();
         Iterator<ClientBox> i = clients.iterator();
         while (i.hasNext()){
@@ -64,7 +66,7 @@ public class ClientsContainer {
         }
         return p;
     }
-    synchronized public boolean findClient(String name) {
+    synchronized boolean findClient(String name) {
         for (ClientBox cli : clients){
                 if(cli.getName().equals(name)){
                     return true;
@@ -73,7 +75,7 @@ public class ClientsContainer {
         return false;
     }
 
-    synchronized public boolean remove(String name) {
+    public synchronized boolean remove(String name) {
         for (ClientBox cli : clients){
                 if(cli.getName().equals(name)){
                     clients.remove(cli);
@@ -90,7 +92,7 @@ public class ClientsContainer {
     public synchronized void notifyPlayers(){
         StringBuilder str = new StringBuilder();
             for (ClientBox c : clients){
-                 str.append(" " + c.getName());
+                 str.append(" ").append(c.getName());
             }
             String playersIn = str.toString();
             for(ClientBox c : clients){
@@ -102,11 +104,11 @@ public class ClientsContainer {
             }
     }
 
-    public void setMatchStarted(boolean matchStarted) {
-        this.matchStarted = matchStarted;
+    void setMatchStarted() {
+        this.matchStarted = true;
     }
 
-    synchronized public void notifyIdMatch(int numOfMatch) {
+    synchronized void notifyIdMatch(int numOfMatch) {
         for (ClientBox c : clients){
             try {
                 c.setNumMatch(numOfMatch);
@@ -127,7 +129,7 @@ public class ClientsContainer {
         }
     }
 
-    public void reconnect(ClientBox cb) {
+    void reconnect(ClientBox cb) {
         clients.add(cb);
     }
 
@@ -141,7 +143,7 @@ public class ClientsContainer {
         }
     }
 
-    public ClientInterface getClientBox(String name) {
+    ClientInterface getClientBox(String name) {
         for (ClientBox c : clients){
             if (c.getName().equals(name)){
                 clients.remove(c);

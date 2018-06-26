@@ -21,7 +21,6 @@ public class Round {
     private Table table;
     private Turn turn;
     private Player currTurn;
-    private Iterator<Player> iterator;
     private Match match;
     private long timerMove;
     private ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
@@ -36,7 +35,7 @@ public class Round {
 
     public void go() throws NotEnoughPlayersException {
         Player p;
-        iterator = players.getIterator();
+        Iterator<Player> iterator = players.getIterator();
         while(iterator.hasNext()){
             p = iterator.next();
             currTurn = p;
@@ -71,11 +70,7 @@ public class Round {
         return currTurn.getUsername();
     }
 
-    public void notifyPlayers(){
-        players.notifyChanges();
-    }
-
-    public int getRoundNumber() {
+    private int getRoundNumber() {
         return this.roundNumber;
     }
 
@@ -122,10 +117,7 @@ public class Round {
 
     public void inactivatePlayer(Player p) {
         if (currTurn != p) {
-            exec.scheduleWithFixedDelay(() -> {
-                    p.setActivity(false);
-
-            }, 0, 500, TimeUnit.MILLISECONDS);
+            exec.scheduleWithFixedDelay(() -> p.setActivity(false), 0, 500, TimeUnit.MILLISECONDS);
         }
     }
 

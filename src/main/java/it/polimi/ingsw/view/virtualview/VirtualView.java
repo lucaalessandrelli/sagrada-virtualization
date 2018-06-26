@@ -9,9 +9,9 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public class VirtualView extends VirtualViewObserver {
-    final static private String turn="turn ";
-    final static private String timer="timer ";
-    final static private String stateMove="gamestate ";
+    private static final String TURN="turn ";
+    private static final String TIMER="timer ";
+    private static final String STATEMOVE="gamestate ";
 
     public VirtualView(ClientBox s, Player player) {
     clientBox=s;
@@ -36,8 +36,8 @@ public class VirtualView extends VirtualViewObserver {
     public void updateStateTurn(String whoIsTurn,long timeSleep){
         try {
             timeSleep=timeSleep/1000;
-            clientBox.updateTurn(timer+String.valueOf(timeSleep));
-            clientBox.updateTurn(turn+whoIsTurn+" current turn.");
+            clientBox.updateTurn(TIMER+String.valueOf(timeSleep));
+            clientBox.updateTurn(TURN+whoIsTurn+" current turn.");
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,7 @@ public class VirtualView extends VirtualViewObserver {
     @Override
     public void notifyState(String state) {
         try {
-            clientBox.update(stateMove+state);
+            clientBox.update(STATEMOVE+state);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

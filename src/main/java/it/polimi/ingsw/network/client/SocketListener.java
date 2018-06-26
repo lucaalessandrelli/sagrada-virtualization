@@ -4,9 +4,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class SocketListener extends Thread {
-    Socket socket;
-    MessageQueue queue;
-    Scanner in;
+    private Socket socket;
+    private MessageQueue queue;
+    private Scanner in;
 
     public SocketListener(MessageQueue q, Socket socket, Scanner in) {
         this.socket=socket;
@@ -17,7 +17,6 @@ public class SocketListener extends Thread {
     @Override
     public void run() {
         try {
-            //Scanner in = new Scanner(socket.getInputStream());
             while(socket.isConnected()) {
                 String answer = in.nextLine();
                 queue.add(answer);

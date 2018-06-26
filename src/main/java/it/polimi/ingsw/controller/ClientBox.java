@@ -7,20 +7,18 @@ import java.rmi.RemoteException;
 public class ClientBox {
     private ClientInterface client;
     private String name;
-    private String typeConnection;
-    final static private String connected="connectedPlayers";
-    final static private String match="match ";
-    final static private String time="timer ";
-    final static private String alert="alert ";
+    private static final String CONNECTED="connectedPlayers";
+    private static final String MATCH="match ";
+    private static final String TIME="timer ";
+    private static final String ALERT="alert ";
 
 
-    public ClientBox(ClientInterface c, String n,String t){
+    ClientBox(ClientInterface c, String n){
         client=c;
         name=n;
-        typeConnection=t;
     }
 
-    public void ping() throws RemoteException {
+    void ping() throws RemoteException {
         client.ping();
     }
 
@@ -28,14 +26,14 @@ public class ClientBox {
         return name;
     }
 
-    public void updatePlayers(String finalPlayersIn) throws RemoteException {
-        finalPlayersIn = connected + finalPlayersIn;
+    void updatePlayers(String finalPlayersIn) throws RemoteException {
+        finalPlayersIn = CONNECTED + finalPlayersIn;
         client.updatePlayers(finalPlayersIn);
     }
 
     public void setNumMatch(int numOfMatch) throws RemoteException {
         String num = String.valueOf(numOfMatch);
-        client.setNumMatch(match+num);
+        client.setNumMatch(MATCH+num);
     }
 
     public void updateTurn(String s) throws RemoteException {
@@ -49,11 +47,11 @@ public class ClientBox {
     public void setTimer(long tempTime) throws RemoteException {
         tempTime = tempTime/1000;
         String timer = String.valueOf(tempTime);
-        client.setTimer(time+timer);
+        client.setTimer(TIME+timer);
     }
 
     public void wrongMove(String s) throws RemoteException {
-        client.updateMessage(alert+s);
+        client.updateMessage(ALERT+s);
     }
 
     public void chooseWindow(String windows) throws RemoteException {

@@ -1,12 +1,11 @@
 package it.polimi.ingsw.model.gamedata.gametools;
 
 import it.polimi.ingsw.model.gamedata.Colour;
-import it.polimi.ingsw.model.gamelogic.Move;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToolCard extends Card implements Move {
+public class ToolCard extends Card {
     private boolean used;
     private int cost;
     private Colour colour;

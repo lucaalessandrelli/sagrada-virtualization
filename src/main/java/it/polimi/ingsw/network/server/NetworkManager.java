@@ -8,40 +8,41 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.System.out;
+
 public class NetworkManager {
-    final static int PORT_RMI = 56789;
-    final static int PORT_SOCKET = 45678;
-    final static String alert = "alert ";
+    static final int PORTRMI = 56789;
+    static final int PORTSOCKET = 45678;
+    static final String ALERT = "alert ";
 
     private ArrayList<ClientInterface> clients;
     private Server server;
 
-    public NetworkManager(Server s) {
+    NetworkManager(Server s) {
         clients = new ArrayList<>();
         server = s;
     }
 
     public void start(){
         try {
-            Registry registry = LocateRegistry.createRegistry(PORT_RMI);
-            ServerInterface stub = (ServerInterface)UnicastRemoteObject.exportObject(server,PORT_RMI);
+            Registry registry = LocateRegistry.createRegistry(PORTRMI);
+            ServerInterface stub = (ServerInterface)UnicastRemoteObject.exportObject(server,PORTRMI);
             registry.bind("server", stub);
-            try (ServerSocket serverSocket = new ServerSocket(PORT_SOCKET)) {
+            try (ServerSocket serverSocket = new ServerSocket(PORTSOCKET)) {
                 SocketContainer sc;
-                System.out.println("Server is up");
+                out.println("Server is up");
                 do  {
                     Socket socket = serverSocket.accept();
                     sc = new SocketContainer(socket, server);
                     new Thread(sc).start();
                 }while (20 > clients.size());
-                System.out.println("Too many users connected");
+                out.println("Too many users connected");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class NetworkManager {
         private PrintWriter pr;
         private Scanner in;
 
-        public SocketContainer(Socket socket, ServerInterface s){
+        SocketContainer(Socket socket, ServerInterface s){
             this.socket = socket;
             server = s;
             connected =false;
@@ -86,13 +87,12 @@ public class NetworkManager {
             while (!connected) {
                 if (message.startsWith("login")) {
                     InputAnalyzer analyzer = new InputAnalyzer();
-                    String name = analyzer.getData(message);
-                    setName(name);
-                    if (server.login(name, this)) {
-                        //pr.println("Connected, Welcome!");
+                    String nameP = analyzer.getData(message);
+                    setName(nameP);
+                    if (server.login(nameP, this)) {
                         connected = true;
                     } else {
-                        pr.println(alert+"Already connected");
+                        pr.println(ALERT+"Already connected");
                         message = in.nextLine();
                     }
                 }
@@ -103,18 +103,6 @@ public class NetworkManager {
                 String message;
                 message = in.nextLine();
                 server.command(message);
-                   /* pr.println(asw);
-                    server.disconnect(name, this);
-                    connected = false;
-                    in.close();
-                    pr.close();
-                    socket.close();
-                }else if(message.startsWith("play")){
-
-                } else {
-                    pr.println(server.command(message));
-
-                }*/
         }
 
 
@@ -123,27 +111,14 @@ public class NetworkManager {
         }
 
 
-
-        /*public void disconnect() throws RemoteException {
-            server.disconnect(name, this);
-            pr.println("Disconnected form server");
-            pr.close();
-            try {
-                socket.close();
-            } catch (Exception e) {
-                System.out.println("Connection already closed");
-            }
-        }*/
-
         @Override
         public String getName() {
             return name;
         }
 
         @Override
-        public boolean ping()  {
+        public void ping()  {
             pr.println("ping");
-            return true;
         }
 
         @Override
@@ -158,7 +133,7 @@ public class NetworkManager {
         }
 
         @Override
-        public void updatePlayers(String playersIn) throws RemoteException {
+        public void updatePlayers(String playersIn) {
             pr.println(playersIn);
         }
 
@@ -169,17 +144,17 @@ public class NetworkManager {
         }
 
         @Override
-        public void setNumMatch(String num) throws RemoteException {
+        public void setNumMatch(String num) {
             pr.println(num);
         }
 
         @Override
-        public void updateMessage(String message) throws RemoteException {
+        public void updateMessage(String message) {
             pr.println(message);
         }
 
         @Override
-        public void setTimer(String timer) throws RemoteException {
+        public void setTimer(String timer) {
             pr.println(timer);
         }
     }

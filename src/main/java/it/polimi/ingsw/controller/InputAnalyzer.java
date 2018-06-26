@@ -1,17 +1,15 @@
 package it.polimi.ingsw.controller;
 
 public class InputAnalyzer {
-    Manager manager;
+    private Manager manager;
 
     public  InputAnalyzer(){manager=null;}
-    public InputAnalyzer(Manager manager) {
+    InputAnalyzer(Manager manager) {
         this.manager = manager;
     }
 
-    public void analyse(String in){
-        if (in.startsWith("login")){
-            //return "login";
-        }else if (in.startsWith("move ")) {
+    void analyse(String in){
+        if (in.startsWith("move ")) {
             String res = in.replace("move ", "");
             String[] token = res.split(" ");
             int num = Integer.parseInt(token[0]);
@@ -37,7 +35,6 @@ public class InputAnalyzer {
             String name = token[0];
             manager.revenge(name);
         }
-        //return "Command Not Valid";
     }
 
     public  String getData(String in){

@@ -1,13 +1,11 @@
 package it.polimi.ingsw.network;
 
-import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface ClientInterface extends Remote {
-    /*void disconnect() throws RemoteException;*/
     String getName()throws RemoteException;
-    boolean ping() throws RemoteException;
+    void ping() throws RemoteException;
     String getTypeConnection() throws RemoteException;
     void update(String allWindows) throws RemoteException;
     void updatePlayers(String playersIn) throws RemoteException;
