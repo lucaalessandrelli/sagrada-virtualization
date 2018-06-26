@@ -1,10 +1,13 @@
 package it.polimi.ingsw.view.cli;
 
 
+import org.fusesource.jansi.AnsiConsole;
+
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
+import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
@@ -23,7 +26,12 @@ public class Printer {
     private static final String SETTEDTO = "Il timer è settato a: ";
     private static final String TURNOF = "E' il turno di: ";
     private static final String WAITING = "In attesa di una mossa..";
+    private static final String WINNER = "Il vincitore:   ";
     private static final String TOOLCARDS = "Carte utensile";
+    private static final String CONNECTED = "Giocatori connessi:";
+    private static final String COORDINATES = "   j0 j1 j2 j3 j4";
+    private static final String USERNAME = "Inserisci l'username:";
+    private static final String CONNECTION = "Inserisci quale tipo di connessione vuoi utilizzare: \n1)SOCKET \n2)RMI";
     private static final String COSTO = "Costo";
     private static final String OBJECTIVE = "Carte obiettivo";
     private static final String DESCRIZIONE = "Descrizione";
@@ -34,7 +42,7 @@ public class Printer {
     private Scanner in = new Scanner(System.in);
 
     public Printer(){
-        //AnsiConsole.systemInstall();
+        AnsiConsole.systemInstall();
     }
 
 
@@ -84,12 +92,12 @@ public class Printer {
     }
 
     public String getName() {
-        out.println("Inserisci l'username:");
+        out.print(ansi().a(USERNAME).cursorDown(1).cursorLeft(USERNAME.length()));
         return in.nextLine();
     }
 
     public int getConnection() {
-        out.println("Inserisci quale tipo di connessione vuoi utilizzare: \n1)SOCKET \n2)RMI");
+        out.print(ansi().a(CONNECTION).cursorDown(1).cursorLeft(CONNECTION.length()));
         return in.nextInt();
     }
 
@@ -108,21 +116,8 @@ public class Printer {
 
     public void printError(String alert) {
         out.print(ansi().saveCursorPosition());
-        out.println(ansi().fg(RED).a(alert).reset());
+        out.print(ansi().fg(RED).a(alert).reset().cursorDown(1));
         out.print(ansi().restoreCursorPosition().cursorDown(3));
-    }
-
-    public void connectedPlayers(String players){
-        List<String> connectedplayers = Arrays.asList(players.split(" "));
-        out.print(ansi().a("Giocatori connessi:"));
-        for(int i = 0; i < connectedplayers.size(); i++){
-            out.print("  " + ansi().a(connectedplayers.get(i)));
-        }
-        out.println();
-    }
-
-    public void matchnumber(String match){
-        out.println(ansi().fg(MAGENTA).a("You are connected to the match number ").reset().a(match).reset());
     }
 
 
@@ -133,9 +128,8 @@ public class Printer {
     }
 
     public void printplayersConnected(List<String> players){
-        //out.print(ansi().saveCursorPosition());
 
-        out.print(ansi().a("Giocatori connessi:").cursorLeft("Giocatori connessi:".length()));
+        out.print(ansi().a(CONNECTED).cursorLeft(CONNECTED.length()));
 
         out.print(ansi().cursorDown(1));
 
@@ -145,7 +139,6 @@ public class Printer {
         }
 
         out.print(ansi().cursorUp(players.size()));
-        //out.print(ansi().restoreCursorPosition());
 
     }
 
@@ -173,9 +166,9 @@ public class Printer {
 
     public void printCoordinates(){
         out.print(ansi().saveCursorPosition());
-        out.println(ansi().a("   j0 j1 j2 j3 j4"));
+        out.print(ansi().a(COORDINATES).cursorDown(1).cursorLeft(COORDINATES.length()));
         for(int i = 0; i < 4; i++){
-            out.println("i"+i);
+            out.print(ansi().a("i"+i).cursorDown(1).cursorLeft(2));
         }
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(1).cursorRight(3));
@@ -415,7 +408,7 @@ public class Printer {
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(8));
 
-        out.print(ansi().fg(YELLOW).a(WAITING).reset());
+        out.print(ansi().fg(YELLOW).a(WAITING).reset().cursorLeft(WAITING.length()));
 
         out.print(ansi().cursorDown(2));
 
@@ -423,7 +416,50 @@ public class Printer {
     }
 
     public void printScore(String score) {
-        //print players score
+        Deparser deparser = new Deparser();
+
+        List<String> players = deparser.divideByComma(score);
+        List<String> playersandscore;
+
+        String winner = "Nobody won";
+
+        int maximum=0;
+        int result;
+
+        out.print(ansi().eraseScreen(Erase.ALL));
+
+        out.print(ansi().cursorDown(4));
+
+        for(String s:players){
+
+            out.print(ansi().cursorDown(1));
+
+            playersandscore = deparser.divideBySpace(s);
+
+            result = Integer.parseInt(playersandscore.get(1));
+
+            if(result > maximum) {
+                winner = playersandscore.get(0);
+                maximum = result;
+            }
+            else if(result == maximum)
+                winner = "Pareggio!";
+
+            out.print(ansi().a(playersandscore.get(0) + "  " + playersandscore.get(1)).cursorLeft(playersandscore.get(0).length() + playersandscore.get(1).length() + 2));
+
+        }
+
+        out.print(ansi().cursorUp(players.size()+2));
+
+        out.print(ansi().cursorRight(20));
+        out.print(ansi().a(WINNER + winner).cursorLeft(WINNER.length() + winner.length() + 20).cursorDown(players.size()+6));
+
+        out.print(ansi().a("Gioca ancora?"));
+
+        out.print(ansi().cursorDown(2));
+
+
+
     }
 
     private void printActivePlayers(String setup, List<String> players, Deparser deparser){
@@ -567,15 +603,16 @@ public class Printer {
         out.print(ansi().cursorLeft(31).cursorDown(1));
 
         for (String dice: tmp){
+            if(!dice.equals("")) {
 
-            out.print(ansi().cursorRight((dice.charAt(2)-'0')*3).cursorDown((dice.charAt(3)-'0')));
-
-
-            this.printDice(dice.charAt(0),dice.charAt(1));
+                out.print(ansi().cursorRight((dice.charAt(2) - '0') * 3).cursorDown((dice.charAt(3) - '0')));
 
 
-            out.print(ansi().cursorLeft(((dice.charAt(2)-'0')+1)*3).cursorUp(((dice.charAt(3)-'0'))));
+                this.printDice(dice.charAt(0), dice.charAt(1));
 
+
+                out.print(ansi().cursorLeft(((dice.charAt(2) - '0') + 1) * 3).cursorUp(((dice.charAt(3) - '0'))));
+            }
         }
 
         out.print(ansi().restoreCursorPosition());
