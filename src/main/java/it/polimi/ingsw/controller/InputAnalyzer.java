@@ -34,7 +34,7 @@ public class InputAnalyzer {
         }else if(in.startsWith("playAgain ")){
             String res = in.replace("playAgain ","");
             String[] token = res.split(" ");
-            String name = token[1];
+            String name = token[0];
             manager.revenge(name);
         }
         //return "Command Not Valid";

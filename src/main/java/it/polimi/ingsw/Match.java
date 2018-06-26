@@ -134,4 +134,10 @@ public class Match extends Thread {
             }
         }
     }
+
+    /*public void update() {
+        for(Player p : playerList){
+            p.notifyPlayer();
+        }
+    }*/
 }

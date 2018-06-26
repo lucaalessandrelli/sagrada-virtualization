@@ -52,7 +52,7 @@ public abstract class AbstractView  {
         }else if(message.startsWith("gamestate")) {
             String gameState = message.replace("gamestate ", "");
             scene.handleGameState(gameState);
-        }else if(message.startsWith("score")) {
+        }else if(message.startsWith("score ")) {
             String score = message.replace("score ", "");
             scene.handleScore(score);
 
