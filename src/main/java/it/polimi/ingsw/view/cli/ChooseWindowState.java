@@ -2,6 +2,8 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.SceneInterface;
 
+import java.util.List;
+
 public class ChooseWindowState implements SceneInterface {
 
     private String tmpTimer;
@@ -9,12 +11,14 @@ public class ChooseWindowState implements SceneInterface {
     private Printer printer;
     private String timer;
     private String cards;
+    private List<String> players;
 
-    public ChooseWindowState(Printer printer, CliHandler cliHandler, String timer) {
+    public ChooseWindowState(Printer printer, CliHandler cliHandler, String timer, List<String> players) {
         this.timer=timer;
         this.printer=printer;
         this.cliHandler=cliHandler;
         this.tmpTimer=timer;
+        this.players=players;
     }
 
     @Override
@@ -30,6 +34,6 @@ public class ChooseWindowState implements SceneInterface {
 
     @Override
     public void updateBoard(String setup) {
-        cliHandler.setState(new MatchState(printer,cliHandler,setup));
+        cliHandler.setState(new MatchState(printer,cliHandler,setup,players));
     }
 }

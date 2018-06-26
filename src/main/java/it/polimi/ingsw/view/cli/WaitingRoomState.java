@@ -26,7 +26,7 @@ public class WaitingRoomState implements SceneInterface {
 
     @Override
     public void handleTimer(String timer) {
-        cliHandler.setState(new ChooseWindowState(printer,cliHandler,timer));
+        cliHandler.setState(new ChooseWindowState(printer,cliHandler,timer,players));
         exec.shutdown();
     }
 

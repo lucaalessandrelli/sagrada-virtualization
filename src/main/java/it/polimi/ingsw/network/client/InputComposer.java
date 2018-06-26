@@ -74,7 +74,7 @@ public class InputComposer {
         }
         else if (command.startsWith(MYCARD) ){
             res=command.replace(MYCARD,"");
-            return MOVE+client.getNumOfMatch()+" "+client.getName()+" "+res;
+            return CHOOSECARD+client.getNumOfMatch()+" "+client.getName()+" "+res;
         }
 
         return "error";
