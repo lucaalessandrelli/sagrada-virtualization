@@ -3,7 +3,7 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.network.client.MessageQueue;
 
 public abstract class AbstractView  {
-    SceneInterface scene;
+    public SceneInterface scene;
     private MessageQueue queue;
 
     public void notifyMessage() {
