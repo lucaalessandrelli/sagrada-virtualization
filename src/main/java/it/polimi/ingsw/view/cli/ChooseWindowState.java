@@ -29,7 +29,7 @@ public class ChooseWindowState implements SceneInterface {
     }
 
     @Override
-    public void handleTimer(String timer) {
-        cliHandler.setState(new MatchState(printer,cliHandler,timer));
+    public void updateBoard(String setup) {
+        cliHandler.setState(new MatchState(printer,cliHandler,setup));
     }
 }

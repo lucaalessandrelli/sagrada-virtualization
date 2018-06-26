@@ -13,10 +13,10 @@ public class MatchState implements SceneInterface {
     private List<String> players;
     private String turnState;
 
-    public MatchState(Printer printer, CliHandler cliHandler, String timer) {
+    public MatchState(Printer printer, CliHandler cliHandler, String setup) {
         this.printer=printer;
         this.cliHandler=cliHandler;
-        this.timer=timer;
+        this.setup=setup;
     }
     private void printUpdate(){
         printer.printMatch(setup,timer,players,turnState);
