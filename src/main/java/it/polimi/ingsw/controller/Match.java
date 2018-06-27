@@ -1,6 +1,5 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamelogic.NotEnoughPlayersException;
@@ -116,18 +115,18 @@ public class Match extends Thread {
         return this.roundList;
     }
 
-    public Round getCurrRound() {
+    Round getCurrRound() {
         return currRound;
     }
 
-    public void setPlayerActivity(String name,boolean b) {
+    void setPlayerActivity(String name, boolean b) {
         for (Player p : playerList){
             if(p.getUsername().equals(name)){
                 p.setActivity(b);
             }
         }
     }
-    public synchronized void setPlayerWindow(String name,int idCard){
+    synchronized void setPlayerWindow(String name, int idCard){
         for(Player p : playerList){
             if (p.getUsername().equals(name)) {
                 table.setWindow(p,idCard);
@@ -135,9 +134,7 @@ public class Match extends Thread {
         }
     }
 
-    /*public void update() {
-        for(Player p : playerList){
-            p.notifyPlayer();
-        }
-    }*/
+    public void update() {
+        playerList.forEach(Player::notifyPlayer);
+    }
 }

@@ -5,12 +5,10 @@ import it.polimi.ingsw.view.SceneInterface;
 
 public class LoginState implements SceneInterface {
     private Printer printer;
-    private Client client;
     private CliHandler cliHandler;
 
-    public LoginState(Printer printer, Client client, CliHandler cliHandler) {
+    LoginState(Printer printer, Client client, CliHandler cliHandler) {
         this.printer=printer;
-        this.client = client;
         this.cliHandler=cliHandler;
     }
 
@@ -36,7 +34,7 @@ public class LoginState implements SceneInterface {
 
     @Override
     public void handleMatchId(String idMatch) {
-
+        //cliHandler.setState(new MatchState(printer,cliHandler,));
     }
 
     @Override

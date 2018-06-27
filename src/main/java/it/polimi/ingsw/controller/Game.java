@@ -19,7 +19,7 @@ public class Game {
     void reconnect(ClientBox cb){
         match.setPlayerActivity(cb.getName(),true);
         clients.reconnect(cb);
-        //match.update();
+        match.update();
 
     }
 

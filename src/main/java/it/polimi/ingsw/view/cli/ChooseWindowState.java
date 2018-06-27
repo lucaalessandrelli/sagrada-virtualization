@@ -6,18 +6,15 @@ import java.util.List;
 
 public class ChooseWindowState implements SceneInterface {
 
-    private String tmpTimer;
     private CliHandler cliHandler;
     private Printer printer;
     private String timer;
-    private String cards;
     private List<String> players;
 
-    public ChooseWindowState(Printer printer, CliHandler cliHandler, String timer, List<String> players) {
+    ChooseWindowState(Printer printer, CliHandler cliHandler, String timer, List<String> players) {
         this.timer=timer;
         this.printer=printer;
         this.cliHandler=cliHandler;
-        this.tmpTimer=timer;
         this.players=players;
     }
 
@@ -28,7 +25,6 @@ public class ChooseWindowState implements SceneInterface {
 
     @Override
     public void setPatternCards(String patternCards) {
-        cards=patternCards;
         printer.printChooseCardRoom(patternCards,timer);
     }
 

@@ -13,7 +13,7 @@ public class MatchState implements SceneInterface {
     private List<String> players;
     private String turnState;
 
-    public MatchState(Printer printer, CliHandler cliHandler, String setup, List<String> players) {
+    MatchState(Printer printer, CliHandler cliHandler, String setup, List<String> players) {
         this.printer=printer;
         this.cliHandler=cliHandler;
         this.setup=setup;
@@ -51,11 +51,6 @@ public class MatchState implements SceneInterface {
     @Override
     public void handleAlert(String alert) {
         printer.printError(alert);
-    }
-
-    @Override
-    public void handleGameState(String gameState) {
-
     }
 
     @Override

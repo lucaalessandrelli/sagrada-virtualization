@@ -9,16 +9,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class WaitingRoomState implements SceneInterface {
-    final static String message = "You are currently in queue. Waiting for players...     Timer: ";
-    String timer;
-    Printer printer;
-    CliHandler cliHandler;
-    String tmpTimer;
-    List<String> players;
-    ScheduledExecutorService exec;
+    private static final String MESSAGE = "Sei in coda. Aspetto altri giocatori...     Timer: ";
+    private Printer printer;
+    private CliHandler cliHandler;
+    private String tmpTimer;
+    private List<String> players;
+    private ScheduledExecutorService exec;
 
-    public WaitingRoomState(Printer printer, CliHandler cliHandler,String timer) {
-        this.timer=timer;
+    WaitingRoomState(Printer printer, CliHandler cliHandler, String timer) {
         this.printer=printer;
         this.cliHandler=cliHandler;
         this.tmpTimer=timer;
@@ -33,14 +31,14 @@ public class WaitingRoomState implements SceneInterface {
     @Override
     public void handleConnectedPlayers(String playerlist) {
         players = Arrays.asList(playerlist.split(" "));
-        printer.printWaitingRoom(tmpTimer,players,message);
-        if(players.size()==2){
+        printer.printWaitingRoom(tmpTimer,players,MESSAGE);
+        if(players.size()>1){
             exec = Executors.newSingleThreadScheduledExecutor();
             exec.scheduleWithFixedDelay(() -> {
                 if(Integer.valueOf(tmpTimer)==0){
                     exec.shutdown();
                 }
-                printer.printWaitingRoom(tmpTimer,players,message);
+                printer.printWaitingRoom(tmpTimer,players,MESSAGE);
                 int i = Integer.parseInt(tmpTimer)-1;
                 tmpTimer= String.valueOf(i);
             }, 0, 1, TimeUnit.SECONDS);
