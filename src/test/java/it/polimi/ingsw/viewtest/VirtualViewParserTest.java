@@ -276,7 +276,7 @@ public class VirtualViewParserTest {
 
         String parsed = tester.startParsing();
 
-        System.out.println(parsed);
+        //System.out.println(parsed);
 
         List<String> x = Arrays.asList(parsed.split(";"));
         for (String s: x){
@@ -338,7 +338,8 @@ public class VirtualViewParserTest {
         //printer.printtimer("30","Remaining time:");
         //printer.rePrintChoseCard("7","Remaining time:");
 
-        String testForChoseCard = "14 3 R000,W001,B002,W003,Y004,W410,P011,W312,G013,W214,W020,W121,W022,W523,W024,W030,W031,W632,W033,W034,;" +
+        /*String testForChoseCard = "14 3 R000,W001,B002,W003,Y004,W410,P011,W312,G013,W214,W020,W121,W022,W523,W024,W030,W031,W632,W033,W034,;" +
+        /*String testForChoseCard = "14 3 R000,W001,B002,W003,Y004,W410,P011,W312,G013,W214,W020,W121,W022,W523,W024,W030,W031,W632,W033,W034,;" +
                 "2 5 W200,W001,W502,W003,W104,Y010,W611,P012,W213,R014,W020,B021,W422,G023,W024,W030,W331,W032,W533,W034,;";
 
         //printer.printChooseCardRoom(testForChoseCard,"20");
@@ -352,7 +353,15 @@ public class VirtualViewParserTest {
 
         String turnstate = "Is the turn of:" + p1.getUsername();
 
-        printer.printMatch(parsed,"30",names,turnstate);
+        //printer.printMatch(parsed,"30",names,turnstate);
+
+        String score = "Luca 19,Andrea 4,Giovanni 16,Vincenzo 30";
+
+        //printer.printScore(score);
+
+        String score2 = "Luca 19,Andrea 4,Giovanni 16,Vincenzo 19";
+
+        //printer.printScore(score2);
 
         System.out.println();
         System.out.println();
@@ -360,7 +369,7 @@ public class VirtualViewParserTest {
         System.out.println();
         System.out.println();
 
-        System.out.print(parsed);
+        System.out.print(parsed);*/
 
         /*Deparser deparser = new Deparser();
         System.out.println(deparser.DivideinStrings(tester.startParsing()));

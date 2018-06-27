@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TableTest {
 
     @Test
-    void TestConstructorAndPublicObjects(){
+    public void TestConstructorAndPublicObjects(){
         Player p1 = new Player("Gionny");
         Player p2 = new Player("Luca");
         Player p3 = new Player("Andrea");
@@ -51,7 +51,7 @@ public class TableTest {
     }
 
     @Test
-    void TestinGetters(){
+    public void TestinGetters(){
         Player p1 = new Player("Gionny");
         Player p2 = new Player("Luca");
         Player p3 = new Player("Andrea");
@@ -76,7 +76,7 @@ public class TableTest {
     }
 
     @Test
-    void TestDraftPool(){
+    public void TestDraftPool(){
         Player p1 = new Player("Gionny");
         Player p2 = new Player("Luca");
         Player p3 = new Player("Andrea");
@@ -104,7 +104,7 @@ public class TableTest {
     }
 
     @Test
-    void TestRoundTrack(){
+    public void TestRoundTrack(){
 
         Player p1 = new Player("Gionny");
         Player p2 = new Player("Luca");

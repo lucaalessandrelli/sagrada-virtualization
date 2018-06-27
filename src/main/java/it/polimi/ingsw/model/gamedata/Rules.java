@@ -94,7 +94,7 @@ public class Rules {
     }
 
     private int five(WindowPatternCard window){
-        int[] arrayofvalues = new int[5];
+        int[] arrayofvalues = new int[6];
         int min = 20;
         List<List<Cell>> w = window.getMatr();
         for(List<Cell> cells: w){
@@ -175,6 +175,9 @@ public class Rules {
         List<List<Cell>> w = window.getMatr();
         int result = 0;
         int j,i,x,y,k;
+        Pos pos = new Pos(0,0);
+        List<Character> colours = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         boolean column = direction.equals("COLUMN");
         boolean find = false;
         x = w.size();
@@ -187,16 +190,16 @@ public class Rules {
                 }
             } else {
                 for (i = 0; i < y; i++) {
-                    for (j = 0; j < x - 1 && !find; j++) {
-                        for(k = j; k < x -1 && !find; k++){
-                            if (w.get(k).get(i).isOccupied() && w.get(k).get(i).getDice().getNumber() == w.get(k + 1).get(i).getDice().getNumber())
-                                find = true;
+                    pos.setY(i);
+                    for (j = 0; j < x; j++) {
+                        pos.setX(j);
+                        if(window.getCell(pos).isOccupied() && !numbers.contains(window.getDice(pos).getNumber())){
+                            numbers.add((window.getDice(pos).getNumber()));
                         }
                     }
-                    if (!find)
+                    if(numbers.size()==4)
                         result++;
-                    else
-                        find = false;
+                    numbers.clear();
                 }
             }
         }
@@ -210,16 +213,16 @@ public class Rules {
                     }
                 } else {
                     for (i = 0; i < y; i++) {
-                        for (j = 0; j < x - 1 && !find; j++) {
-                            for(k = j; k < x -1 && !find; k++){
-                                if (w.get(k).get(i).isOccupied() && w.get(k).get(i).getDice().getColour().equals(w.get(k + 1).get(i).getDice().getColour()))
-                                    find = true;
+                        pos.setY(i);
+                        for (j = 0; j < x; j++) {
+                            pos.setX(j);
+                            if(window.getCell(pos).isOccupied() && !colours.contains(window.getDice(pos).getColour().toString().charAt(0))){
+                                colours.add(window.getDice(pos).getColour().toString().charAt(0));
                             }
                         }
-                        if (!find)
+                        if(colours.size()==4)
                             result++;
-                        else
-                            find = false;
+                        colours.clear();
                     }
                 }
             }
@@ -233,8 +236,8 @@ public class Rules {
         int result = 0;
         int j;
         int adder;
-        int x = w.size();
-        int y = w.get(0).size();
+        int x = w.size()-1;
+        int y = w.get(0).size()-1;
         for(int i = 0; i < 4; i++){
             for(int k = 0; k < 5; k++){
                 verified[i][k] = false;
@@ -252,13 +255,13 @@ public class Rules {
                     verified[i+1][j+1] = true;
                 }
                 if(j != 0 && verifySameColour(w,i,j,i+1,j-1)){
-                    if(verified[i][j])
+                    if(verified[i][j] || verified[i+1][j-1])
                         adder = 1;
                     else
                         adder = 2;
                     result = result + adder;
                     verified[i][j] = true;
-                    verified[i+1][j+1] = true;
+                    verified[i+1][j-1] = true;
                 }
             }
         }

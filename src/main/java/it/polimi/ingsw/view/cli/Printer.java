@@ -1,6 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
 
+import org.fusesource.jansi.AnsiConsole;
+
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -23,7 +25,8 @@ public class Printer {
     private static final String DIFFICULTY = "     Difficoltà: ";
     private static final String ZERO = " 0 ";
     private static final String SETTEDTO = "Il timer è settato a: ";
-    private static final String TURNOF = "E' il turno di: ";
+    private static final String TURNOF = "Is the turn of:";
+    private static final String TURNODI = "E' il turno di: ";
     private static final String WAITING = "In attesa di una mossa..";
     private static final String WINNER = "Il vincitore:   ";
     private static final String TOOLCARDS = "Carte utensile";
@@ -36,12 +39,12 @@ public class Printer {
     private static final String DESCRIZIONE = "Descrizione";
     private static final String RESTRICTIONS = "restrictions";
 
-
+    private Deparser deparser = new Deparser();
 
     private Scanner in = new Scanner(System.in);
 
     public Printer(){
-        //AnsiConsole.systemInstall();
+        AnsiConsole.systemInstall();
     }
 
 
@@ -343,9 +346,8 @@ public class Printer {
 
     public void printMatch(String setup, String timer, List<String> players, String turnState) {
 
-        Deparser deparser = new Deparser();
 
-        String currentPlayer = turnState.substring(TURNOF.length()-1,turnState.length());
+        String currentPlayer = deparser.divideBySpace(turnState).get(0);
 
         deparser.setMyplayer(currentPlayer);
 
@@ -455,7 +457,7 @@ public class Printer {
 
         out.print(ansi().a("Gioca ancora?"));
 
-        out.print(ansi().cursorDown(2));
+        out.print(ansi().cursorDown(2).cursorLeft("Gioca ancora?".length()));
 
 
 
@@ -741,7 +743,7 @@ public class Printer {
 
     private void printTurnOf(String turnState, Deparser deparser){
 
-        out.print(ansi().a(TURNOF + deparser.getMyPlayer()));
+        out.print(ansi().a(TURNODI + deparser.getMyPlayer()));
 
     }
 
