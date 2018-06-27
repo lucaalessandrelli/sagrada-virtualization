@@ -1,13 +1,12 @@
 package it.polimi.ingsw.view.cli;
 
 
-import org.fusesource.jansi.AnsiConsole;
-
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
-import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
@@ -42,7 +41,7 @@ public class Printer {
     private Scanner in = new Scanner(System.in);
 
     public Printer(){
-        AnsiConsole.systemInstall();
+        //AnsiConsole.systemInstall();
     }
 
 
