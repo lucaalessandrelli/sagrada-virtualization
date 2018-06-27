@@ -1,7 +1,5 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.controller.ClientsContainer;
-import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.network.ClientInterface;
 

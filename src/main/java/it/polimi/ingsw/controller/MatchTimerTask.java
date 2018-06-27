@@ -1,6 +1,4 @@
-package it.polimi.ingsw;
-
-import it.polimi.ingsw.controller.ClientsContainer;
+package it.polimi.ingsw.controller;
 
 import java.util.TimerTask;
 

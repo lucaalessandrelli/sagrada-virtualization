@@ -1,6 +1,6 @@
 package it.polimi.ingsw.turntest;
 
-import it.polimi.ingsw.Match;
+import it.polimi.ingsw.controller.Match;
 import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.PublicObjects;

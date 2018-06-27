@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 
-import it.polimi.ingsw.Match;
 import it.polimi.ingsw.model.gamelogic.Round;
 import it.polimi.ingsw.network.ClientInterface;
 
