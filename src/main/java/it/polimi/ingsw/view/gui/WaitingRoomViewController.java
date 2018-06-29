@@ -84,7 +84,7 @@ public class WaitingRoomViewController implements Initializable, SceneInterface 
             tempTime = fixedTime;
         }
 
-        timerLabel.setText("You are currently in queue. Waiting for players...                       Timer : " + tempTime);
+        timerLabel.setText("Sei attualmente in coda. Aspettando ulteriori giocatori...                       Timer : " + tempTime);
     }
 
     public void changeScene() throws IOException {
@@ -107,7 +107,7 @@ public class WaitingRoomViewController implements Initializable, SceneInterface 
 
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("PatternCard Choice");
+        stage.setTitle("Scelta della vetrata");
         stage.show();
     }
 

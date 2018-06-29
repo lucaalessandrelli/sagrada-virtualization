@@ -89,18 +89,6 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
 
     @FXML
     public void handleCardChoice(javafx.scene.input.MouseEvent event) {
-        /*int indexChosen;
-
-        if(!isChosen) {
-            GridPane source = (GridPane) event.getSource();
-            for(int i = 0; i < children.size();i++) {
-                if(children.get(i) == source) {
-                    indexChosen = i;
-                }
-            }
-        }
-
-        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);*/
         if (!isChosen) {
             Node source = (Node) event.getSource();
             //Lighting lightingEffect = new Lighting();
@@ -137,7 +125,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
 
         stage.setScene(scene);
         stage.setResizable(true);
-        stage.setTitle("Match");
+        stage.setTitle("Partita");
         stage.show();
     }
 
@@ -157,7 +145,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
     public void handleAlert(String message) {
         //AlertWindow.display("Alert", message);
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle("Errore");
         alert.setHeaderText(null);
         alert.setContentText(message);
 

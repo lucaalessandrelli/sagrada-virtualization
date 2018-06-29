@@ -122,7 +122,7 @@ public class ScoreViewController implements Initializable, SceneInterface {
         guiHandler.setGui(controller);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Waiting room");
+        stage.setTitle("Sala d'attesa");
         stage.show();
     }
 

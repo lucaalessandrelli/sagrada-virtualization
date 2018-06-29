@@ -607,7 +607,7 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                        <TitledPane animated="false" collapsible="false" prefHeight="311.0" prefWidth="684.0" text="ToolCard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <TitledPane animated="false" collapsible="false" prefHeight="311.0" prefWidth="684.0" text="Carte Strumento" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <content>
                                                                 <AnchorPane prefHeight="282.0" prefWidth="594.0">
                                                                     <children>
@@ -811,8 +811,8 @@
                                                    <children>
                                                         <TableView fx:id="statusTable" prefHeight="337.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <columns>
-                                                                <TableColumn fx:id="userNameColumn" prefWidth="145.0" text="Player" />
-                                                                <TableColumn fx:id="userStatusColumn" prefWidth="145.0" text="Status" />
+                                                                <TableColumn fx:id="userNameColumn" prefWidth="145.0" text="Giocatore" />
+                                                                <TableColumn fx:id="userStatusColumn" prefWidth="145.0" text="Stato" />
                                                             </columns>
                                                         </TableView>
                                                    </children>

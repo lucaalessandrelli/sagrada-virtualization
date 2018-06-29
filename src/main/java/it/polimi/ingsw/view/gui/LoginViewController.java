@@ -60,7 +60,10 @@ public class LoginViewController implements Initializable, SceneInterface {
     @FXML
     public void handleMouseClicked(MouseEvent event) {
         username = usernameField.getText();
-        if (!username.equals("")) {
+
+        if(username.equals("") || username.contains(" ")) {
+            handleAlert("Nome utente non valido: un nome valido non contiene spazi e non è vuoto.");
+        } else {
             setConnection();
         }
     }
@@ -69,7 +72,9 @@ public class LoginViewController implements Initializable, SceneInterface {
     public void handleEnterPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             username = usernameField.getText();
-            if (!username.equals("")) {
+            if(username.equals("") || username.contains(" ")) {
+                handleAlert("Nome utente non valido: un nome valido non contiene spazi e non è vuoto.");
+            } else {
                 setConnection();
             }
         }
@@ -120,12 +125,12 @@ public class LoginViewController implements Initializable, SceneInterface {
         guiHandler.setGui(controller);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Waiting room");
+        stage.setTitle("Sala d'attesa");
         stage.show();
     }
 
     public void changeSceneToMatch() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGuiResizable.fxml"));
         Parent root = fxmlLoader.load();
 
         // Get the Controller from the FXMLLoader
@@ -135,6 +140,8 @@ public class LoginViewController implements Initializable, SceneInterface {
         controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
         controller.setTime(time);
+        //problema: quando ricevo la lista dei giocatori passo alla schermata di waiting room
+        // controller.setList(playerList);
 
         Scene scene = new Scene(root);
         //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
@@ -144,8 +151,8 @@ public class LoginViewController implements Initializable, SceneInterface {
         guiHandler.setGui(controller);
 
         stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Match");
+        stage.setResizable(true);
+        stage.setTitle("Partita");
         stage.show();
     }
 
@@ -171,7 +178,7 @@ public class LoginViewController implements Initializable, SceneInterface {
     public void handleAlert(String message) {
         //AlertWindow.display("Alert", message);
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle("Errore");
         alert.setHeaderText(null);
         alert.setContentText(message);
 

@@ -193,7 +193,7 @@ public class MatchViewController implements Initializable, SceneInterface {
 
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Score");
+        stage.setTitle("Punteggi");
         stage.show();
     }
 
@@ -217,7 +217,7 @@ public class MatchViewController implements Initializable, SceneInterface {
     public void handleAlert(String message) {
         //AlertWindow.display("Alert", message);
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle("Errore");
         alert.setHeaderText(null);
         alert.setContentText(message);
 
@@ -592,7 +592,7 @@ public class MatchViewController implements Initializable, SceneInterface {
                 int j = roundTrackGrid.getColumnIndex(source.getParent());
                 int i = roundTrackGrid.getRowIndex(source.getParent());
                 int x = roundTrackGrid.getColumnConstraints().size()*j+i;
-                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceColor()+","+dice.getDiceNumber()+","+x+",0");
+                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+j+","+i);
             }
         }
         mouseEvent.consume();
@@ -610,8 +610,7 @@ public class MatchViewController implements Initializable, SceneInterface {
             if(dice != null) {
                 int i = mywindow.getColumnIndex(source.getParent());
                 int j = mywindow.getRowIndex(source.getParent());
-                int x = mywindow.getColumnConstraints().size()*j+i;
-                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceColor()+","+dice.getDiceNumber()+","+x+",0");
+                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+j+","+i);
             }
         }
         mouseEvent.consume();
@@ -630,7 +629,7 @@ public class MatchViewController implements Initializable, SceneInterface {
                 diceChosenRow = j;
                 diceChosenColumn = i;
                 int x = draftPool.getColumnConstraints().size()*j+i;
-                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceColor()+","+dice.getDiceNumber()+","+x+",0");
+                client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+x+",0");
             }
         }
         mouseEvent.consume();
