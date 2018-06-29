@@ -146,29 +146,25 @@ public class Table {
     }
 
     public void setWindow(Player p, int id){
-        int i = 0;
         int k = 0;
+        int i = 0;
+
         while (i < this.myplayers.size() && !(p.getUsername().equals(this.myplayers.get(i).getUsername()))) {
             i++;
         }
-        Player player = this.myplayers.get(i);
 
-        if(!temporaryCards.isEmpty() && temporaryCards.size()==4 && temporaryCards.contains(id)){
-            if(id == windowPatternCards.get(i*4).getNum()){
-                k = i*4;
+        if(temporaryCards.contains(id)){
+            if(windowPatternCards.get(i*4).getNum() == id)
+                this.myplayers.get(i).setMyWindow(windowPatternCards.get(i*4));
+            if(windowPatternCards.get((i*4)+1).getNum() == id)
+                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i*4)+1));
+            if(windowPatternCards.get((i*4)+2).getNum() == id)
+                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i*4)+2));
+            if(windowPatternCards.get((i*4)+3).getNum() == id)
+                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i*4)+3));
             }
-            else if(id == windowPatternCards.get((i*4)+1).getNum()){
-                k = (i*4)+1;
-            }
-            else if(id == windowPatternCards.get((i*4)+2).getNum()){
-                k = (i*4)+2;
-            }
-            else if(id == windowPatternCards.get((i*4)+3).getNum()){
-                k = (i*4)+3;
-            }
-            player.setMyWindow(windowPatternCards.get(k));
         }
-    }
+
 
     public void fillDraftPool(){
         this.draftPool.addNewDices(diceBag.pullOut());
