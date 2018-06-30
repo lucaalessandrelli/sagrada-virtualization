@@ -18,7 +18,7 @@ public class InputComposer {
     private static final String ROUNDTRACK = "roundtrack ";
     private static final String PLACE = "place ";
     private static final String TOOLCARD = "toolcard ";
-    private static final String RETRY = "retry ";
+    private static final String RETRY = "retry";
     private static final String MYCARD = "mycard ";
 
     private static final String ALERT = "alert Formato mossa errato!";
