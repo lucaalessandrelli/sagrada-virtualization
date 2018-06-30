@@ -75,6 +75,11 @@ public class ToolCard3Test {
             public void notifyScore(String s) {
 
             }
+
+            @Override
+            public void reconnectingMessage() {
+
+            }
         };
 
         p1.addObserver(virtualViewObserver);
@@ -244,6 +249,11 @@ public class ToolCard3Test {
             public void notifyScore(String s) {
 
             }
+
+            @Override
+            public void reconnectingMessage() {
+
+            }
         };
 
         p1.addObserver(virtualViewObserver);
@@ -409,6 +419,11 @@ public class ToolCard3Test {
 
             @Override
             public void notifyScore(String s) {
+
+            }
+
+            @Override
+            public void reconnectingMessage() {
 
             }
         };

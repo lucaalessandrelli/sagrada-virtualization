@@ -76,7 +76,10 @@ public class Round {
 
     private void updateAfterMove(){
         players.notifyChanges();
-        currTurn.notifyState(turn.getState().getClass().getName());
+        String name = turn.getState().getClass().getName();
+        String[] pkg= name.split(".");
+        name=pkg[pkg.length-1];
+        currTurn.notifyState(name);
     }
 
     public void setTurn(Pos p){

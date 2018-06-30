@@ -72,6 +72,11 @@ public class PositionDice1Test {
             public void notifyScore(String s) {
 
             }
+
+            @Override
+            public void reconnectingMessage() {
+
+            }
         };
 
         p1.addObserver(virtualViewObserver);
@@ -205,6 +210,11 @@ public class PositionDice1Test {
             public void notifyScore(String s) {
 
             }
+
+            @Override
+            public void reconnectingMessage() {
+
+            }
         };
 
         p1.addObserver(virtualViewObserver);
@@ -307,6 +317,11 @@ public class PositionDice1Test {
 
             @Override
             public void notifyScore(String s) {
+
+            }
+
+            @Override
+            public void reconnectingMessage() {
 
             }
         };
