@@ -16,6 +16,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Round {
+    private static final String PATH ="it.polimi.ingsw.turn.";
+
     private int roundNumber;
     private PlayersContainer players;
     private Table table;
@@ -77,8 +79,7 @@ public class Round {
     private void updateAfterMove(){
         players.notifyChanges();
         String name = turn.getState().getClass().getName();
-        String[] pkg= name.split(".");
-        name=pkg[pkg.length-1];
+        name = name.replace(PATH,"");
         currTurn.notifyState(name);
     }
 
