@@ -15,6 +15,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         this.view = gui;
     }
 
+    @Override
     public void handleAlert(String alert) {
         Platform.runLater(() -> {
             // Update UI here.
@@ -22,6 +23,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void handleClientConnected(String messageConnection) {
         Platform.runLater(() -> {
             // Update UI here.
@@ -29,6 +31,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void handleConnectedPlayers(String playerlist) {
         Platform.runLater(() -> {
             // Update UI here.
@@ -36,6 +39,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void handleTimer(String timer){
         Platform.runLater(() -> {
             // Update UI here.
@@ -43,6 +47,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void handleMatchId(String idMatch) {
         Platform.runLater(() -> {
             // Update UI here.
@@ -50,6 +55,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void handleTurnMessage(String turnMessage) {
         Platform.runLater(() -> {
             // Update UI here.
@@ -57,6 +63,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void updateBoard(String setup) {
         Platform.runLater(() -> {
             // Update UI here.
@@ -64,6 +71,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void setPatternCards(String patternCards) {
         Platform.runLater(() -> {
             // Update UI here.
@@ -71,6 +79,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void handleGameState(String gameState) {
         Platform.runLater(() -> {
             // Update UI here.
@@ -78,6 +87,7 @@ public class GuiHandler extends AbstractView implements SceneInterface {
         });
     }
 
+    @Override
     public void handleScore(String score) {
         Platform.runLater(() -> {
             // Update UI here.

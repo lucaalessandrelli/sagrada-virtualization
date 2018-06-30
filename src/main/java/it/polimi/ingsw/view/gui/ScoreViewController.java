@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.gui;
 
-import com.jfoenix.controls.JFXButton;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
 import javafx.collections.FXCollections;
@@ -30,9 +29,6 @@ public class ScoreViewController implements Initializable, SceneInterface {
     private ObservableList<User> userList = FXCollections.observableArrayList();
 
     @FXML
-    private JFXButton playAgainButton;
-
-    @FXML
     private Label announcementLabel;
 
     @FXML
@@ -46,6 +42,7 @@ public class ScoreViewController implements Initializable, SceneInterface {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        /*no need to initialize something*/
     }
 
     public void setClient(Client client) {
@@ -103,7 +100,7 @@ public class ScoreViewController implements Initializable, SceneInterface {
         client.sendCommand("playAgain "+client.getName());
     }
 
-    public void changeScene() throws IOException {
+    private void changeScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/waitingRoomGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -127,14 +124,6 @@ public class ScoreViewController implements Initializable, SceneInterface {
     }
 
     @Override
-    public void handleClientConnected(String message) {
-    }
-
-    @Override
-    public void handleTurnMessage(String turnMessage) {
-    }
-
-    @Override
     public void handleConnectedPlayers(String connectedPlayers) {
         this.connectedPlayerList = FXCollections.observableArrayList(Arrays.asList(connectedPlayers.split(" ")));
     }
@@ -152,30 +141,5 @@ public class ScoreViewController implements Initializable, SceneInterface {
         } catch (IOException e) {
             System.out.println("Errore cambio di scena: scoreView -> WaitingRoom");
         }
-    }
-
-    @Override
-    public void handleMatchId(String idMatch) {
-
-    }
-
-    @Override
-    public void updateBoard(String setup) {
-
-    }
-
-    @Override
-    public void setPatternCards(String setup) {
-
-    }
-
-    @Override
-    public void handleGameState(String gameState) {
-
-    }
-
-    @Override
-    public void handleScore(String score) {
-
     }
 }

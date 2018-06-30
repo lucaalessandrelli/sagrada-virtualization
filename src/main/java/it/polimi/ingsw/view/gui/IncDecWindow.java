@@ -26,6 +26,10 @@ public class IncDecWindow {
     private static double OFFSET = 10;
     private static int actualValue;
 
+    private IncDecWindow() {
+
+    }
+
     public static void display(Client client, ViewDice dice, int diceChosenRow, int diceChosenColumn, String currentState) {
         ObservableList<ImageView> diceList = FXCollections.observableArrayList();
         List<ViewDice> viewDiceList = new ArrayList<>();
@@ -68,10 +72,10 @@ public class IncDecWindow {
 
         anchorPane.getChildren().add(gridPane);
 
-        anchorPane.setTopAnchor(gridPane,OFFSET);
-        anchorPane.setLeftAnchor(gridPane,OFFSET);
-        anchorPane.setBottomAnchor(gridPane,OFFSET);
-        anchorPane.setRightAnchor(gridPane,OFFSET);
+        AnchorPane.setTopAnchor(gridPane,OFFSET);
+        AnchorPane.setLeftAnchor(gridPane,OFFSET);
+        AnchorPane.setBottomAnchor(gridPane,OFFSET);
+        AnchorPane.setRightAnchor(gridPane,OFFSET);
 
         Scene scene = new Scene(anchorPane,200,100);
         stage.setScene(scene);
@@ -81,7 +85,7 @@ public class IncDecWindow {
     private static void handleValueChosen(MouseEvent event,String currentState, Client client, List<ViewDice> viewDiceList, int r, int c) {
         if(currentState.equals(INCDECVALUE)) {
             Node source = (Node) event.getSource();
-            int diceColumn = gridPane.getColumnIndex(source);
+            int diceColumn = GridPane.getColumnIndex(source);
             ViewDice chosenDice = findDiceInfo(source, viewDiceList);
 
             if (chosenDice != null && !(actualValue == 1 && diceColumn == 0) && !(actualValue == 6 && diceColumn == 1)) {
@@ -95,7 +99,7 @@ public class IncDecWindow {
     }
 
     private static void addToGrid(GridPane gridPane, ImageView image, int index) {
-        gridPane.setConstraints(image,index,NUM_ROWS);
+        GridPane.setConstraints(image,index,NUM_ROWS);
         image.fitHeightProperty().bind(gridPane.heightProperty());
         image.fitWidthProperty().bind(gridPane.widthProperty().divide(NUM_COL));
         gridPane.getChildren().add(image);

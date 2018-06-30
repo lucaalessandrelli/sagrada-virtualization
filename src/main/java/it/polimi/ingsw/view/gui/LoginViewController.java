@@ -43,6 +43,7 @@ public class LoginViewController implements Initializable, SceneInterface {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        /*no need to initialize something*/
     }
 
     public void setClient(Client client) {
@@ -96,7 +97,7 @@ public class LoginViewController implements Initializable, SceneInterface {
         }
     }
 
-    public void setConnection() {
+    private void setConnection() {
         if (!username.equals("")) {
             guiHandler.setGui(this);
 
@@ -106,7 +107,7 @@ public class LoginViewController implements Initializable, SceneInterface {
         }
     }
 
-    public void changeSceneToWaitingRoom() throws IOException {
+    private void changeSceneToWaitingRoom() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/waitingRoomGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -129,7 +130,7 @@ public class LoginViewController implements Initializable, SceneInterface {
         stage.show();
     }
 
-    public void changeSceneToMatch() throws IOException {
+    private void changeSceneToMatch() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGuiResizable.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -154,14 +155,6 @@ public class LoginViewController implements Initializable, SceneInterface {
         stage.setResizable(true);
         stage.setTitle("Partita");
         stage.show();
-    }
-
-    @Override
-    public void handleClientConnected(String message) {
-    }
-
-    @Override
-    public void handleTurnMessage(String turnMessage) {
     }
 
     @Override
@@ -203,20 +196,5 @@ public class LoginViewController implements Initializable, SceneInterface {
     @Override
     public void updateBoard(String setup) {
         this.setup = setup;
-    }
-
-    @Override
-    public void setPatternCards(String setup) {
-
-    }
-
-    @Override
-    public void handleGameState(String gameState) {
-
-    }
-
-    @Override
-    public void handleScore(String score) {
-
     }
 }

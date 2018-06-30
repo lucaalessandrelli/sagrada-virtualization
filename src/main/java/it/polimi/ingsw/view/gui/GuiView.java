@@ -13,6 +13,7 @@ public class GuiView extends Application {
     private LoginViewController controller;
 
     public GuiView() {
+        /*no need to create an instance of this class*/
     }
 
     public static void setClient(Client c) {

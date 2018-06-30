@@ -21,6 +21,10 @@ public class SelValueWindow {
     private static AnchorPane anchorPane;
     private static double OFFSET = 10;
 
+    private SelValueWindow() {
+
+    }
+
     public static void display(Client client, ViewDice dice, int diceChosenRow, int diceChosenColumn,String currentState) {
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -31,7 +35,7 @@ public class SelValueWindow {
 
         for(int i = 0; i < NUM_COL;i++) {
             ImageView image = new ImageView("/dice/"+dice.getDiceColor()+(i+1)+".png");
-            gridPane.setConstraints(image,i,NUM_ROWS);
+            GridPane.setConstraints(image,i,NUM_ROWS);
             image.fitHeightProperty().bind(gridPane.heightProperty());
             image.fitWidthProperty().bind(gridPane.widthProperty().divide(NUM_COL));
             gridPane.getChildren().add(image);
@@ -40,10 +44,10 @@ public class SelValueWindow {
 
         anchorPane.getChildren().add(gridPane);
 
-        anchorPane.setTopAnchor(gridPane,OFFSET);
-        anchorPane.setLeftAnchor(gridPane,OFFSET);
-        anchorPane.setBottomAnchor(gridPane,OFFSET);
-        anchorPane.setRightAnchor(gridPane,OFFSET);
+        AnchorPane.setTopAnchor(gridPane,OFFSET);
+        AnchorPane.setLeftAnchor(gridPane,OFFSET);
+        AnchorPane.setBottomAnchor(gridPane,OFFSET);
+        AnchorPane.setRightAnchor(gridPane,OFFSET);
 
         Scene scene = new Scene(anchorPane,600,100);
         stage.setScene(scene);
@@ -52,7 +56,7 @@ public class SelValueWindow {
 
     private static void handleValueChosen(MouseEvent event,String currentState, Client client,ViewDice dice,int r,int c) {
         if(currentState.equals(SELVALUE)) {
-            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + dice.getDiceColor() + "," + gridPane.getColumnIndex((Node) event.getSource()) + "," + r + "," + c);
+            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + dice.getDiceColor() + "," + GridPane.getColumnIndex((Node) event.getSource()) + "," + r + "," + c);
         } else {
             handleAlert(ALERT_DICE_SEL_VALUE);
         }

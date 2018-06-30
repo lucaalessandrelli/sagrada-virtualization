@@ -5,7 +5,6 @@ import it.polimi.ingsw.view.SceneInterface;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +49,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        /*no need to initialize something*/
     }
 
     public void setClient(Client client) {
@@ -91,19 +91,18 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
     public void handleCardChoice(javafx.scene.input.MouseEvent event) {
         if (!isChosen) {
             Node source = (Node) event.getSource();
-            //Lighting lightingEffect = new Lighting();
             source.setEffect(new DropShadow());
-            int y = patternCardGrid.getColumnIndex(source);
-            int x = patternCardGrid.getRowIndex(source);
+            int col = GridPane.getColumnIndex(source);
+            int row = GridPane.getRowIndex(source);
 
-            String patternCardToSend = givenPatternCards.get(2 * x + y);
+            String patternCardToSend = givenPatternCards.get(2 * row + col);
             System.out.println("Carta Scelta: "+patternCardToSend);
             client.sendCommand("chooseCard "+idMatch+" "+client.getName()+" "+patternCardToSend);
             isChosen = true;
         }
     }
 
-    public void changeScene() throws IOException {
+    private void changeScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGuiResizable.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -127,18 +126,6 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
         stage.setResizable(true);
         stage.setTitle("Partita");
         stage.show();
-    }
-
-    @Override
-    public void handleClientConnected(String message) {
-    }
-
-    @Override
-    public void handleTurnMessage(String turnMessage) {
-    }
-
-    @Override
-    public void handleConnectedPlayers(String playerList) {
     }
 
     @Override
@@ -200,44 +187,9 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
 
             for(int i = 0; i< 4;i++) {
                 for(int j = 0; j<5;j++) {
-                    this.setRestriction(restrictionList.get(5*i+j) , currentWindow.getChildren().get(5*i+j));
+                    DrawPatternCard.drawRestrictions(restrictionList.get(5*i+j) , currentWindow.getChildren().get(5*i+j));
                 }
             }
         }
-    }
-
-    public void setRestriction(String restriction, Node anchorPane) {
-        char colorRestriction = restriction.charAt(0);
-        char shadeRestriction = restriction.charAt(1);
-
-
-        if(colorRestriction == 'P') {
-            anchorPane.setStyle("-fx-background-color: purple");
-        } else if(colorRestriction == 'R') {
-            anchorPane.setStyle("-fx-background-color: red");
-        } else if(colorRestriction == 'B') {
-            anchorPane.setStyle("-fx-background-color: blue");
-        } else if(colorRestriction == 'Y') {
-            anchorPane.setStyle("-fx-background-color: yellow");
-        } else if(colorRestriction == 'G') {
-            anchorPane.setStyle("-fx-background-color: green");
-        }
-
-        if(shadeRestriction!= '0') {
-            anchorPane.setStyle("-fx-background-image: url('/restrictions/"+shadeRestriction+".png');"+
-                    "-fx-background-size: contain;"+
-                    "-fx-background-repeat: no-repeat;"+
-                    "-fx-background-position: center center;");
-        }
-    }
-
-    @Override
-    public void handleGameState(String gameState) {
-
-    }
-
-    @Override
-    public void handleScore(String score) {
-
     }
 }

@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 
 
 public class AlertWindow {
+
+    private AlertWindow() {
+
+    }
+
     public static void display(String title, String message) {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

@@ -15,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,13 +34,13 @@ public class WaitingRoomViewController implements Initializable, SceneInterface 
 
     @FXML
     private JFXListView<String> playerListView;
-    @FXML
-    private TextArea textArea;
+
     @FXML
     private Label timerLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        /*no need to initialize something*/
     }
 
     public void setClient(Client client) {
@@ -87,7 +86,7 @@ public class WaitingRoomViewController implements Initializable, SceneInterface 
         timerLabel.setText("Sei attualmente in coda. Aspettando ulteriori giocatori...                       Timer : " + tempTime);
     }
 
-    public void changeScene() throws IOException {
+    private void changeScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/patternCardChoiceGui.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -109,15 +108,6 @@ public class WaitingRoomViewController implements Initializable, SceneInterface 
         stage.setResizable(false);
         stage.setTitle("Scelta della vetrata");
         stage.show();
-    }
-
-
-    @Override
-    public void handleClientConnected(String message) {
-    }
-
-    @Override
-    public void handleTurnMessage(String turnMessage) {
     }
 
     @Override
@@ -145,29 +135,5 @@ public class WaitingRoomViewController implements Initializable, SceneInterface 
         } catch (IOException e) {
             System.out.println("Errore cambio di scena: waitingRoom -> PatternCardChoiceView");
         }
-    }
-
-    @Override
-    public void handleMatchId(String idMatch) {
-    }
-
-    @Override
-    public void updateBoard(String setup) {
-
-    }
-
-    @Override
-    public void setPatternCards(String setup) {
-
-    }
-
-    @Override
-    public void handleGameState(String gameState) {
-
-    }
-
-    @Override
-    public void handleScore(String score) {
-
     }
 }
