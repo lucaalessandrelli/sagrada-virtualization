@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +19,7 @@ public class IncDecWindow {
     private static final int NUM_ROWS = 0;
     private static final int NUM_COL = 2;
     private static final String INCDECVALUE = "IncDecValue";
+    private static final String ALERT_DICE_INC_DEC = "Non puoi aumentare/diminuire il valore di un dado in questa fase del turno.";
     private static Stage stage;
     private static GridPane gridPane;
     private static AnchorPane anchorPane;
@@ -33,7 +35,7 @@ public class IncDecWindow {
 
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Increment of decrease dice value");
+        stage.setTitle("Aumenta o diminuisci il valore del dado");
 
         anchorPane = new AnchorPane();
         gridPane = new GridPane();
@@ -85,6 +87,8 @@ public class IncDecWindow {
             if (chosenDice != null && !(actualValue == 1 && diceColumn == 0) && !(actualValue == 6 && diceColumn == 1)) {
                 client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceColor() + "," + chosenDice.getDiceNumber() + "," + r + "," + c);
             }
+        } else {
+            handleAlert(ALERT_DICE_INC_DEC);
         }
         stage.close();
         event.consume();
@@ -105,5 +109,15 @@ public class IncDecWindow {
             }
         }
         return null;
+    }
+
+    public static void handleAlert(String message) {
+        //AlertWindow.display("Alert", message);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 }

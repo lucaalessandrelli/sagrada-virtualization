@@ -42,6 +42,10 @@ public class MatchViewController implements Initializable, SceneInterface {
     private static final String WINDOWDICE2 = "SelectingOptionalWindowDice";
     private static final String INCDECVALUE = "IncDecValue";
     private static final String SELECTVALUE = "SelectingValue";
+    private static final String ALERT_DICE_DRAFT = "Non puoi scegliere un dado dalla Riserva in questa fase del turno.";
+    private static final String ALERT_DICE_ROUNDTRACK = "Non puoi scegliere un dado dal Tracciato dei Round  in questa fase del turno.";
+    private static final String ALERT_DICE_PATTERN = "Non puoi scegliere un dado dalla Vetrata in questa fase del turno.";
+
     private Client client;
     private Stage stage;
     private GuiHandler guiHandler;
@@ -291,7 +295,7 @@ public class MatchViewController implements Initializable, SceneInterface {
             } else if(subMessage.startsWith("privatecard")) {
                 this.setPrivateCard(subMessage.replace("privatecard ", ""));
             } else if(subMessage.startsWith("roundtrack")) {
-                //this.updateRoundTrack(subMessage.replace("roundtrack ", ""));
+                this.updateRoundTrack(subMessage.replace("roundtrack ", ""));
             } else if(subMessage.startsWith("restrictions")) {
                 this.updateRestriction(subMessage.replace("restrictions ", ""));
             } else if(subMessage.startsWith("dices")) {
@@ -415,19 +419,21 @@ public class MatchViewController implements Initializable, SceneInterface {
         Node pane;
 
         for (String cell: cellList) {
-            int y = Character.getNumericValue(cell.charAt(2));
-            int x = Character.getNumericValue(cell.charAt(3));
-            pane = this.getChildrenByIndex(roundTrackGrid,x,y);
-            if(pane == null) {
-                System.out.println("Sbagliato");
-            } else {
-                ImageView image = new ImageView("/dice/" + cell.substring(0,2) + ".png");
-                ((AnchorPane)pane).getChildren().add(image);
-                fitImageToParent(image,roundTrackGrid);
+            if(!cell.equals("")) {
+                int y = Character.getNumericValue(cell.charAt(2));
+                int x = Character.getNumericValue(cell.charAt(3));
+                pane = this.getChildrenByIndex(roundTrackGrid, x, y);
+                if (pane == null) {
+                    System.out.println("Sbagliato");
+                } else {
+                    ImageView image = new ImageView("/dice/" + cell.substring(0, 2) + ".png");
+                    ((AnchorPane) pane).getChildren().add(image);
+                    fitImageToParent(image, roundTrackGrid);
 
-                /*add the WindowDiceEvent to the dice,plus add the dice to viewDiceList*/
-                diceList.add(new ViewDice(image,cell.substring(2,4)));
-                addRoundTrackEvent(image);
+                    /*add the WindowDiceEvent to the dice,plus add the dice to viewDiceList*/
+                    diceList.add(new ViewDice(image, cell.substring(2, 4)));
+                    addRoundTrackEvent(image);
+                }
             }
         }
     }
@@ -594,6 +600,8 @@ public class MatchViewController implements Initializable, SceneInterface {
                 int x = roundTrackGrid.getColumnConstraints().size()*j+i;
                 client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+j+","+i);
             }
+        } else {
+            handleAlert(ALERT_DICE_ROUNDTRACK);
         }
         mouseEvent.consume();
     }
@@ -612,6 +620,8 @@ public class MatchViewController implements Initializable, SceneInterface {
                 int j = mywindow.getRowIndex(source.getParent());
                 client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+j+","+i);
             }
+        } else {
+            handleAlert(ALERT_DICE_PATTERN);
         }
         mouseEvent.consume();
     }
@@ -631,6 +641,8 @@ public class MatchViewController implements Initializable, SceneInterface {
                 int x = draftPool.getColumnConstraints().size()*j+i;
                 client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+x+",0");
             }
+        } else {
+            handleAlert(ALERT_DICE_DRAFT);
         }
         mouseEvent.consume();
     }

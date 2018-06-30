@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.gui;
 import it.polimi.ingsw.network.client.Client;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
@@ -14,6 +15,7 @@ public class SelValueWindow {
     private static final int NUM_ROWS = 0;
     private static final int NUM_COL = 6;
     private static final String SELVALUE = "SelectingValue";
+    private static final String ALERT_DICE_SEL_VALUE = "Non puoi scegliere il valore di un dado in questa fase del turno.";
     private static Stage stage;
     private static GridPane gridPane;
     private static AnchorPane anchorPane;
@@ -22,7 +24,7 @@ public class SelValueWindow {
     public static void display(Client client, ViewDice dice, int diceChosenRow, int diceChosenColumn,String currentState) {
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Select dice value");
+        stage.setTitle("Seleziona il valore del dado");
 
         anchorPane = new AnchorPane();
         gridPane = new GridPane();
@@ -51,8 +53,20 @@ public class SelValueWindow {
     private static void handleValueChosen(MouseEvent event,String currentState, Client client,ViewDice dice,int r,int c) {
         if(currentState.equals(SELVALUE)) {
             client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + dice.getDiceColor() + "," + gridPane.getColumnIndex((Node) event.getSource()) + "," + r + "," + c);
+        } else {
+            handleAlert(ALERT_DICE_SEL_VALUE);
         }
         stage.close();
         event.consume();
+    }
+
+    public static void handleAlert(String message) {
+        //AlertWindow.display("Alert", message);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 }
