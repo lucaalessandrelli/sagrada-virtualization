@@ -31,7 +31,22 @@ public class MatchState implements SceneInterface {
     @Override
     public void updateBoard(String setup) {
         this.setup=setup;
+        analyze();
         printUpdate();
+    }
+
+    private void analyze() {
+        String[] messages = setup.split(";");
+
+        for (String substring : messages){
+            if(substring.startsWith("draftpool")){
+                cliHandler.setDraftPool(substring.replace("draftpool ",""));
+            }else if(substring.startsWith("roundtrack")){
+                cliHandler.setRoundtrack(substring.replace("roundtrack ",""));
+            }else if(substring.startsWith("dices")){
+                cliHandler.setRestrictions(substring.replace("dices ",""));
+            }
+        }
     }
 
     @Override

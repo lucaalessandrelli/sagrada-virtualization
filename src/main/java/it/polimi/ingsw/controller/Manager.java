@@ -133,7 +133,7 @@ public class Manager {
 
     void revenge(String name) {
         for (Map.Entry<Integer,Game> pair : games.entrySet()){
-            if(pair.getValue().findClient(name)){
+            if(!pair.getValue().endedMatch()&&pair.getValue().findClient(name)){
                 lobby.addPlayer(pair.getValue().getClientBox(name));
             }
         }

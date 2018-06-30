@@ -131,6 +131,7 @@ public class ClientsContainer {
 
     void reconnect(ClientBox cb) {
         clients.add(cb);
+        notifyPlayers();
     }
 
     public void sendWinner(String message) {

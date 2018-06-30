@@ -25,4 +25,6 @@ public abstract class VirtualViewObserver {
     public abstract void notifyState(String state);
 
     public abstract void notifyScore(String s);
+
+    public abstract void reconnectingMessage();
 }

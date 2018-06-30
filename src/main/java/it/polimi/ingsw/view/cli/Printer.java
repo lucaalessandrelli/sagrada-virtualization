@@ -95,7 +95,11 @@ public class Printer {
 
     public String getName() {
         out.print(ansi().a(USERNAME).cursorDown(1).cursorLeft(USERNAME.length()));
-        return in.nextLine();
+        String name = in.nextLine();
+        while (name.equals("")) {
+            name = in.nextLine();
+        }
+        return name;
     }
 
     public int getConnection() {

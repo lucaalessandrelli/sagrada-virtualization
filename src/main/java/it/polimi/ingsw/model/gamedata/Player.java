@@ -141,5 +141,9 @@ public class Player {
     public void notifyScore(String s) {
         observer.notifyScore(s);
     }
+
+    public void reconnectingMessage() {
+        observer.reconnectingMessage();
+    }
 }
 

@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamelogic.NotEnoughPlayersException;
 import it.polimi.ingsw.model.gamelogic.Round;
+import it.polimi.ingsw.view.virtualview.VirtualView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +135,20 @@ public class Match extends Thread {
         }
     }
 
-    public void update() {
-        playerList.forEach(Player::notifyPlayer);
+    public void update(String name) {
+       playerList.forEach(Player::notifyPlayer);
+       for (Player p : playerList){
+           if(p.getUsername().equals(name)){
+               p.reconnectingMessage();
+           }
+       }
+    }
+
+    void reconnect(ClientBox cb) {
+        for (Player p : playerList){
+            if(p.getUsername().equals(cb.getName())){
+                p.addObserver(new VirtualView(cb,p));
+            }
+        }
     }
 }

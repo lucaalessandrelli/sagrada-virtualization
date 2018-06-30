@@ -91,5 +91,14 @@ public class VirtualView extends VirtualViewObserver {
         }
     }
 
+    @Override
+    public void reconnectingMessage() {
+        try {
+            clientBox.updateTurn(TIMER + "0");
+            clientBox.updateTurn(TURN + "Aspetta un attimo, ti sto riconnettendo...");
+        }catch (RemoteException e){
+            e.printStackTrace();
+        }
+    }
 
 }
