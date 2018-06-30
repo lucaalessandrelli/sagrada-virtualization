@@ -240,6 +240,12 @@ public class VirtualViewParserTest {
         CardContainer container = new CardContainer();
         List<WindowPatternCard> windowPatternCards = container.pullOutPattern(4);
         ArrayList<Player> players = new ArrayList<>();
+        ArrayList<String> namePlayers = new ArrayList<>();
+        namePlayers.add(p1.getUsername());
+        namePlayers.add(p2.getUsername());
+        namePlayers.add(p3.getUsername());
+        namePlayers.add(p4.getUsername());
+
         players.add(p1);
         players.add(p2);
         players.add(p3);
@@ -276,7 +282,9 @@ public class VirtualViewParserTest {
 
         String parsed = tester.startParsing();
 
-        //System.out.println(parsed);
+        Printer printer = new Printer();
+
+        /*System.out.println(parsed);
 
         List<String> x = Arrays.asList(parsed.split(";"));
         for (String s: x){
@@ -286,11 +294,14 @@ public class VirtualViewParserTest {
             }
         }
 
-        Printer printer = new Printer();
         String lu = "restrictions Luca,";
         String tmp = parsed.substring(parsed.indexOf(lu) + lu.length(), parsed.length());
         tmp = tmp.substring(0,tmp.indexOf(";"));
-        //System.out.println(tmp);
+        //System.out.println(tmp);*/
+
+        String turnState = "Is the turn of:Andrea";
+
+        printer.printMatch(parsed,"10",namePlayers,turnState);
 
         //printer.welcome();
         //printer.timer("30");
@@ -305,7 +316,8 @@ public class VirtualViewParserTest {
         //String tmp2 = parsed.substring(parsed.indexOf(lu)+lu.length(),parsed.length());
         //tmp2 = tmp2.substring(0,tmp2.indexOf(";"));
 
-        //printer.printCoordinates();
+        //
+        //printer.printCoordinates(0,3,0,4);
         //printer.printPatternCard(Arrays.asList(tmp.split(",")));
         //printer.printPlacedDices(Arrays.asList(tmp2.split(",")));
 
@@ -353,7 +365,7 @@ public class VirtualViewParserTest {
 
         String turnstate = "Is the turn of:" + p1.getUsername();
 
-        //printer.printMatch(parsed,"30",names,turnstate);
+        printer.printMatch(parsed,"30",names,turnstate);
 
         String score = "Luca 19,Andrea 4,Giovanni 16,Vincenzo 30";
 

@@ -16,8 +16,8 @@ public class VirtualViewParser {
     private static final String SEP = ";";
     private static final String SLASH = "/";
     private static final String BACKSLASH = "\\";
-    private static final String ACTIVE = "Active";
-    private static final String INACTIVE = "Inactive";
+    private static final String ACTIVE = "Attivo";
+    private static final String INACTIVE = "Inattivo";
     private static final String PLAYERS = "gamePlayers ";
     private static final String DRAFT = "draftpool ";
     private static final String TOOL = "toolcards ";

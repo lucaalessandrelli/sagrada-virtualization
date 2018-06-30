@@ -170,7 +170,7 @@ public class Printer {
         return in.nextLine();
     }
 
-    public void printCoordinates(){
+    private void printCoordinates(){
         out.print(ansi().saveCursorPosition());
         out.print(ansi().a(COORDINATES).cursorDown(1).cursorLeft(COORDINATES.length()));
         for(int i = 0; i < 4; i++){
@@ -178,6 +178,19 @@ public class Printer {
         }
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(1).cursorRight(3));
+    }
+
+    private void printCoordinates(int ri, int rf, int ci, int cf){
+        out.print(ansi().cursorRight(3));
+        for(int k = ci; k <= cf; k++){
+            out.print(ansi().a("j"+k));
+            if(k<10)
+                out.print(ansi().a(" "));
+        }
+        out.print(ansi().cursorLeft((cf-ci+1)*3+(3)).cursorDown(1));
+        for(int i = ri; i <= rf; i++){
+            out.print(ansi().a("i"+i).cursorDown(1).cursorLeft(2));
+        }
     }
 
     public void printPatternCard(List<String> restr){
@@ -350,10 +363,9 @@ public class Printer {
 
     public void printMatch(String setup, String timer, List<String> players, String turnState) {
 
+        String thisplayer = deparser.findPlayer(setup);
 
-        String currentPlayer = deparser.divideBySpace(turnState).get(0);
-
-        deparser.setMyplayer(currentPlayer);
+        deparser.setMyplayer(thisplayer);
 
         out.print(ansi().eraseScreen(Erase.ALL));
 
@@ -388,7 +400,7 @@ public class Printer {
         out.print(ansi().cursorDown(15));
         out.print(ansi().saveCursorPosition());
 
-        this.printMyPatternCard(setup,currentPlayer,deparser);
+        this.printMyPatternCard(setup,thisplayer,deparser);
 
         out.print(ansi().restoreCursorPosition().cursorLeft(3).saveCursorPosition());
         out.print(ansi().cursorRight(25));
@@ -426,7 +438,7 @@ public class Printer {
         List<String> players = deparser.divideByComma(score);
         List<String> playersandscore;
 
-        String winner = "Nobody won";
+        String winner = "Nessun vincitore";
 
         int maximum=0;
         int result;
@@ -605,18 +617,29 @@ public class Printer {
             out.print(ansi().a(" " + i + " "));
         }
 
-        out.print(ansi().cursorLeft(31).cursorDown(1));
+        out.print(ansi().cursorLeft(33).cursorDown(1));
+
+        int max = 0;
+        for(String d : tmp){
+            if(!d.equals("") && (d.charAt(2) - '0')> max){
+                    max = (d.charAt(2)-'0');
+            }
+        }
+
+        printCoordinates(0,max,1,10);
+
+        out.print(ansi().cursorUp(max+1));
 
         for (String dice: tmp){
             if(!dice.equals("")) {
 
-                out.print(ansi().cursorRight((dice.charAt(2) - '0') * 3).cursorDown((dice.charAt(3) - '0')));
+                out.print(ansi().cursorRight((dice.charAt(3) - '0') * 3).cursorDown((dice.charAt(2) - '0')));
 
 
                 this.printDice(dice.charAt(0), dice.charAt(1));
 
 
-                out.print(ansi().cursorLeft(((dice.charAt(2) - '0') + 1) * 3).cursorUp(((dice.charAt(3) - '0'))));
+                out.print(ansi().cursorLeft(((dice.charAt(3) - '0') + 1) * 3).cursorUp(((dice.charAt(2) - '0'))));
             }
         }
 
@@ -739,6 +762,10 @@ public class Printer {
 
         out.print(ansi().cursorDown(1).cursorLeft("Riserva".length()));
 
+        printCoordinates(0,0,0,8);
+
+        out.print(ansi().cursorRight(3).cursorUp(1));
+
         for (String s: tempz) {
             this.printDice(s.charAt(0),s.charAt(1));
         }
@@ -747,13 +774,14 @@ public class Printer {
 
     private void printTurnOf(String turnState, Deparser deparser){
 
-        out.print(ansi().a(TURNODI + deparser.getMyPlayer()));
+        out.print(ansi().a(TURNODI +deparser.divideBySpace(turnState).get(0)));
 
     }
 
     private void printTimerMatch(String timer){
-
-        out.print(ansi().a("Timer: "+timer));
+        if(Integer.valueOf(timer)>=0){
+            out.print(ansi().a("Timer: "+timer));
+        }
 
     }
 
@@ -833,6 +861,21 @@ public class Printer {
             for(i = 0; i < divided.size() && !divideBySpace(divided.get(i)).get(0).equals(toFind);i++);
 
             return divided.get(i).substring(toFind.length()+1,divided.get(i).length());
+        }
+
+        private String findPlayer(String setup){
+
+            String tmp = setup.substring(setup.indexOf((RESTRICTIONS + " " )));
+
+            int secondIndex = tmp.indexOf(';', tmp.indexOf(';')+1);
+
+            tmp = tmp.substring(0, secondIndex);
+
+            tmp = tmp.replace(RESTRICTIONS + " ","");
+
+            String thisplayer = tmp.substring(0,tmp.indexOf(','));
+
+            return thisplayer;
         }
 
         private List<String> divideBySemicolon(String setup) {return Arrays.asList(setup.split(";")); }
