@@ -34,9 +34,7 @@ public final class GeneralFunctionalities {
         ObservableList<Node> children = pane.getChildren();
         if(!children.isEmpty()) {
             ViewDice dice = findDiceInfo(children.get(0),diceList);
-            if(dice != null) {
-                diceList.remove(dice);
-            }
+            diceList.remove(dice);
             children.clear();
         }
     }
@@ -47,7 +45,8 @@ public final class GeneralFunctionalities {
                 return dice;
             }
         }
-        return null;
+
+        throw new IllegalStateException();
     }
 
     public static void fitImageToParent(ImageView image, AnchorPane pane) {

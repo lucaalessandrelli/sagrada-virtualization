@@ -31,7 +31,6 @@ public class LoginViewController implements Initializable, SceneInterface {
     private GuiHandler guiHandler;
     private ObservableList<String> connectedPlayerList = FXCollections.observableArrayList();
     private String time;
-    private String setup;
 
     @FXML
     private JFXTextField usernameField;
@@ -140,8 +139,6 @@ public class LoginViewController implements Initializable, SceneInterface {
         controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
         controller.setTime(time);
-        //problema: quando ricevo la lista dei giocatori passo alla schermata di waiting room
-        // controller.setList(playerList);
 
         Scene scene = new Scene(root);
         // Calling methods that need to be executed before showing the gui
@@ -177,10 +174,5 @@ public class LoginViewController implements Initializable, SceneInterface {
         } catch (IOException e) {
             handleAlert("Errore nel cambio scena, riavviare il gioco.");
         }
-    }
-
-    @Override
-    public void updateBoard(String setup) {
-        this.setup = setup;
     }
 }

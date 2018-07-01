@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.gui.utilitywindows;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.gui.data.ViewDice;
+import it.polimi.ingsw.view.gui.drawers.GeneralFunctionalities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -85,9 +86,9 @@ public class IncDecWindow {
         if(currentState.equals(INCDECVALUE)) {
             Node source = (Node) event.getSource();
             int diceColumn = GridPane.getColumnIndex(source);
-            ViewDice chosenDice = findDiceInfo(source, viewDiceList);
+            ViewDice chosenDice = GeneralFunctionalities.findDiceInfo(source, viewDiceList);
 
-            if (chosenDice != null && !(actualValue == 1 && diceColumn == 0) && !(actualValue == 6 && diceColumn == 1)) {
+            if (!(actualValue == 1 && diceColumn == 0) && !(actualValue == 6 && diceColumn == 1)) {
                 client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceColor() + "," + chosenDice.getDiceNumber() + "," + r + "," + c);
             }
         } else {
@@ -102,16 +103,6 @@ public class IncDecWindow {
         image.fitHeightProperty().bind(gridPane.heightProperty());
         image.fitWidthProperty().bind(gridPane.widthProperty().divide(NUM_COL));
         gridPane.getChildren().add(image);
-    }
-
-
-    private static ViewDice findDiceInfo(Node node,List<ViewDice> viewDiceList) {
-        for (ViewDice dice : viewDiceList) {
-            if(dice.getDiceImage() == node) {
-                return dice;
-            }
-        }
-        return null;
     }
 
     public static void handleAlert(String message) {

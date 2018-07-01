@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 public class GuiView extends Application {
     private static Client client;
     private static GuiHandler guiHandler;
-    private LoginViewController controller;
 
     public GuiView() {
         /*no need to create an instance of this class*/
@@ -31,7 +30,7 @@ public class GuiView extends Application {
         Parent root = fxmlLoader.load();
 
         // Get the Controller from the FXMLLoader
-        controller = fxmlLoader.getController();
+        LoginViewController controller = fxmlLoader.getController();
         // Set data in the controller
         controller.setClient(client);
         controller.setGuiHandler(guiHandler);

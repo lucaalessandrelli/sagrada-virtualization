@@ -133,12 +133,12 @@ public class MatchViewController implements Initializable, SceneInterface {
     private void setTitleWindowPatternCard() {
         listTitle.addAll(myTitle,titlePlayer2,titlePlayer3,titlePlayer4);
         myTitle.setText(client.getName());
-        int j = 1;
+        int numTitle;
 
-        for(int i = 0; i < gamePlayerlist.size(); i++) {
-            if(!gamePlayerlist.get(i).equals(client.getName())) {
-                listTitle.get(j).setText(gamePlayerlist.get(i));
-                j++;
+        for (String player:gamePlayerlist) {
+            if(!player.equals(client.getName())) {
+                numTitle = gamePlayerlist.indexOf(player);
+                listTitle.get(numTitle).setText(player);
             }
         }
     }
@@ -222,14 +222,11 @@ public class MatchViewController implements Initializable, SceneInterface {
         Node node = GeneralFunctionalities.getChildrenByIndex(draftPool,diceChosenRow,diceChosenColumn);
         ViewDice dice = GeneralFunctionalities.findDiceInfo(node,diceList);
 
-        if(dice != null) {
-            /*pop a window to let the player chose to increment or decrement the value of the dice*/
-            if(currentState.equals(INCDECVALUE)) {
-                Platform.runLater(() -> SelValueWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
-
-            } else if(currentState.equals(SELECTVALUE)) { /*pop a window to let the player chose the value of the dice*/
-                Platform.runLater(() -> IncDecWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
-            }
+        /*pop a window to let the player chose to increment or decrement the value of the dice*/
+        if(currentState.equals(INCDECVALUE)) {
+            Platform.runLater(() -> SelValueWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
+        } else if(currentState.equals(SELECTVALUE)) { /*pop a window to let the player chose the value of the dice*/
+            Platform.runLater(() -> IncDecWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
         }
     }
 
@@ -444,10 +441,7 @@ public class MatchViewController implements Initializable, SceneInterface {
             Node source = (Node) mouseEvent.getSource();
             source.setEffect(new DropShadow());
             ViewDice dice = GeneralFunctionalities.findDiceInfo(source,diceList);
-
-            if(dice != null) {
-                client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+GridPane.getColumnIndex(source.getParent())+","+GridPane.getRowIndex(source.getParent()));
-            }
+            client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+GridPane.getColumnIndex(source.getParent())+","+GridPane.getRowIndex(source.getParent()));
         } else {
             handleAlert(ALERT_DICE_ROUNDTRACK);
         }
@@ -462,10 +456,7 @@ public class MatchViewController implements Initializable, SceneInterface {
             Node source = (Node) mouseEvent.getSource();
             source.setEffect(new DropShadow());
             ViewDice dice = GeneralFunctionalities.findDiceInfo(source,diceList);
-
-            if(dice != null) {
-                client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+GridPane.getRowIndex(source.getParent())+","+GridPane.getColumnIndex(source.getParent()));
-            }
+            client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+GridPane.getRowIndex(source.getParent())+","+GridPane.getColumnIndex(source.getParent()));
         } else {
             handleAlert(ALERT_DICE_PATTERN);
         }
@@ -478,15 +469,12 @@ public class MatchViewController implements Initializable, SceneInterface {
             Node source = (Node) mouseEvent.getSource();
             source.setEffect(new DropShadow());
             ViewDice dice = GeneralFunctionalities.findDiceInfo(source,diceList);
-
-            if(dice != null) {
-                int col = GridPane.getColumnIndex(source.getParent());
-                int row = GridPane.getRowIndex(source.getParent());
-                diceChosenRow = row;
-                diceChosenColumn = col;
-                int x = draftPool.getColumnConstraints().size()*row+col;
-                client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+x+",0");
-            }
+            int col = GridPane.getColumnIndex(source.getParent());
+            int row = GridPane.getRowIndex(source.getParent());
+            diceChosenRow = row;
+            diceChosenColumn = col;
+            int x = draftPool.getColumnConstraints().size()*row+col;
+            client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+x+",0");
         } else {
             handleAlert(ALERT_DICE_DRAFT);
         }
