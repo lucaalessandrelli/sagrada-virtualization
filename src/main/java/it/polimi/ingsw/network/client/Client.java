@@ -12,8 +12,9 @@ public class Client  {
     private MessageQueue messages;
 
     public Client(String addr) {
-        connected=false;
+        this.connected=false;
         this.addr = addr;
+        this.numOfMatch=-1;
     }
 
     public void setQueue(AbstractView view){
