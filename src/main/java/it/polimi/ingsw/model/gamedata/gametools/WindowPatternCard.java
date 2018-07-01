@@ -17,7 +17,7 @@ public class WindowPatternCard {
 
     public WindowPatternCard(){
         this.num = 0;
-        this.difficulty = 0;
+        this.difficulty = 10;
         this.name ="Card not valid";
         Cell y;
         Pos p;
