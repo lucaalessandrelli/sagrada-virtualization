@@ -20,7 +20,7 @@ public class InputComposer {
     private static final String TOOLCARD = "toolcard ";
     private static final String RETRY = "retry";
     private static final String MYCARD = "mycard ";
-    private static final String PASS = "pass ";
+    private static final String PASS = "pass";
 
     private static final String ALERT = "alert Formato mossa errato!";
     private static final String ERROR = "error";
