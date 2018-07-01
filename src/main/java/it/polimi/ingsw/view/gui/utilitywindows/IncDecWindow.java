@@ -1,6 +1,7 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.utilitywindows;
 
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.gui.data.ViewDice;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -21,9 +22,7 @@ public class IncDecWindow {
     private static final String INCDECVALUE = "IncDecValue";
     private static final String ALERT_DICE_INC_DEC = "Non puoi aumentare/diminuire il valore di un dado in questa fase del turno.";
     private static Stage stage;
-    private static GridPane gridPane;
-    private static AnchorPane anchorPane;
-    private static double OFFSET = 10;
+    private static final double OFFSET = 10;
     private static int actualValue;
 
     private IncDecWindow() {
@@ -41,8 +40,8 @@ public class IncDecWindow {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Aumenta o diminuisci il valore del dado");
 
-        anchorPane = new AnchorPane();
-        gridPane = new GridPane();
+        AnchorPane anchorPane = new AnchorPane();
+        GridPane gridPane = new GridPane();
 
         if(actualValue == 6) {
             valueDecreased = actualValue-1;
@@ -116,7 +115,6 @@ public class IncDecWindow {
     }
 
     public static void handleAlert(String message) {
-        //AlertWindow.display("Alert", message);
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore");
         alert.setHeaderText(null);

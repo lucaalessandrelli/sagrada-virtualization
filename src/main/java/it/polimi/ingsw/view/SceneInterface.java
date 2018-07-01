@@ -1,9 +1,16 @@
 package it.polimi.ingsw.view;
 
+import javafx.scene.control.Alert;
+
 public interface SceneInterface {
 
-    default void handleAlert(String alert) {
+    default void handleAlert(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null);
+        alert.setContentText(alertMessage);
 
+        alert.showAndWait();
     }
 
     default void handleClientConnected(String messageConnection) {

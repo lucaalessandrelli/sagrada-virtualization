@@ -1,7 +1,9 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.guicontrollers;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
+import it.polimi.ingsw.view.gui.drawers.DrawPatternCard;
+import it.polimi.ingsw.view.gui.GuiHandler;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,11 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -94,9 +94,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
             source.setEffect(new DropShadow());
             int col = GridPane.getColumnIndex(source);
             int row = GridPane.getRowIndex(source);
-
             String patternCardToSend = givenPatternCards.get(2 * row + col);
-            System.out.println("Carta Scelta: "+patternCardToSend);
             client.sendCommand("chooseCard "+idMatch+" "+client.getName()+" "+patternCardToSend);
             isChosen = true;
         }
@@ -129,23 +127,12 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
     }
 
     @Override
-    public void handleAlert(String message) {
-        //AlertWindow.display("Alert", message);
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-
-        alert.showAndWait();
-    }
-
-    @Override
     public void handleTimer(String time) {
         this.matchTimer = time;
         try {
             changeScene();
         } catch (IOException e) {
-            System.out.println("Errore cambio di scena: patternCardChoice -> Match");
+            handleAlert("Errore nel cambio scena, riavviare il gioco.");
         }
     }
 
@@ -169,21 +156,20 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
             List<String> substring = Arrays.asList(patternCardList.get(k).split(" "));
 
             givenPatternCards.add(substring.get(0));
-            String numFavors = substring.get(1);
             List<String> restrictionList = Arrays.asList(substring.get(2).split(","));
 
             VBox currentVbox = (VBox)children.get(k);
             ObservableList<Node> boxChildren = currentVbox.getChildren();
 
             GridPane currentWindow = (GridPane)(boxChildren.get(0));
-            HBox favorBox = (HBox)(boxChildren.get(1));
-            ObservableList<Node> tokenList = favorBox.getChildren();
+            GridPane favorGrid = (GridPane) (boxChildren.get(1));
 
-            for(int i = 0; i < tokenList.size();i++) {
-                if(i >= Integer.parseInt(numFavors)) {
-                    tokenList.get(i).setVisible(false);
-                }
-            }
+            ObservableList<Node> tokenList = favorGrid.getChildren();
+
+            /*redraw all favor tokens*/
+            DrawPatternCard.removeFavTokens(tokenList);
+            DrawPatternCard.drawFavTokens(tokenList,substring,favorGrid);
+
 
             for(int i = 0; i< 4;i++) {
                 for(int j = 0; j<5;j++) {

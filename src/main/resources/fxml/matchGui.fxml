@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="858.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.MatchViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="858.0" prefWidth="1290.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.guicontrollers.MatchViewController">
     <children>
         <TextField fx:id="turnOwnerField" editable="false" layoutX="105.0" layoutY="28.0" prefHeight="31.0" prefWidth="1157.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="133.0" AnchorPane.topAnchor="0.0" />
         <Label fx:id="timerLabel" alignment="CENTER" layoutX="1207.0" layoutY="5.0" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: #2D3647;" text="Timer : " textFill="#ebebeb" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

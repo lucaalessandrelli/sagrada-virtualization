@@ -1,5 +1,6 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.drawers;
 
+import it.polimi.ingsw.view.gui.guicontrollers.MatchViewController;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 

@@ -1,7 +1,10 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.guicontrollers;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
+import it.polimi.ingsw.view.gui.utilitywindows.AlertWindow;
+import it.polimi.ingsw.view.gui.GuiHandler;
+import it.polimi.ingsw.view.gui.data.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,11 +17,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import javafx.scene.input.MouseEvent;
 
 public class ScoreViewController implements Initializable, SceneInterface {
     private Client client;
@@ -32,7 +35,7 @@ public class ScoreViewController implements Initializable, SceneInterface {
     private Label announcementLabel;
 
     @FXML
-    private TableView scoreTable;
+    private TableView<User> scoreTable;
 
     @FXML
     private TableColumn<User,String> playerColumn;
@@ -96,7 +99,7 @@ public class ScoreViewController implements Initializable, SceneInterface {
     }
 
     @FXML
-    public void handleMouseClicked(MouseEvent event) {
+    public void handleMouseClicked() {
         client.sendCommand("playAgain "+client.getName());
     }
 
@@ -139,7 +142,7 @@ public class ScoreViewController implements Initializable, SceneInterface {
         try {
             changeScene();
         } catch (IOException e) {
-            System.out.println("Errore cambio di scena: scoreView -> WaitingRoom");
+            handleAlert("Errore nel cambio scena, riavviare il gioco.");
         }
     }
 }

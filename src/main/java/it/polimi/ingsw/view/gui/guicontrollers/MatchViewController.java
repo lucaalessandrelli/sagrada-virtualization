@@ -1,7 +1,16 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.guicontrollers;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
+import it.polimi.ingsw.view.gui.*;
+import it.polimi.ingsw.view.gui.data.User;
+import it.polimi.ingsw.view.gui.data.ViewDice;
+import it.polimi.ingsw.view.gui.drawers.DrawDraftPool;
+import it.polimi.ingsw.view.gui.drawers.DrawPatternCard;
+import it.polimi.ingsw.view.gui.drawers.DrawRoundTrack;
+import it.polimi.ingsw.view.gui.drawers.GeneralFunctionalities;
+import it.polimi.ingsw.view.gui.utilitywindows.IncDecWindow;
+import it.polimi.ingsw.view.gui.utilitywindows.SelValueWindow;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -77,7 +86,7 @@ public class MatchViewController implements Initializable, SceneInterface {
     private GridPane toolCostGrid;
 
     @FXML
-    private TableView statusTable;
+    private TableView<User> statusTable;
 
     @FXML
     private Label timerLabel;
@@ -202,17 +211,6 @@ public class MatchViewController implements Initializable, SceneInterface {
     }
 
     @Override
-    public void handleAlert(String message) {
-        //AlertWindow.display("Alert", message);
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-
-        alert.showAndWait();
-    }
-
-    @Override
     public void handleTimer(String time){
         this.setTime(time);
     }
@@ -226,16 +224,12 @@ public class MatchViewController implements Initializable, SceneInterface {
 
         if(dice != null) {
             /*pop a window to let the player chose to increment or decrement the value of the dice*/
-            if(currentState.equals(INCDECVALUE))
-                Platform.runLater(() -> {
-                    // Update UI here.
-                    SelValueWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState);
-                });
-            else /*pop a window to let the player chose the value of the dice*/if(currentState.equals(SELECTVALUE))
-                Platform.runLater(() -> {
-                    // Update UI here.
-                    IncDecWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState);
-                });
+            if(currentState.equals(INCDECVALUE)) {
+                Platform.runLater(() -> SelValueWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
+
+            } else if(currentState.equals(SELECTVALUE)) { /*pop a window to let the player chose the value of the dice*/
+                Platform.runLater(() -> IncDecWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
+            }
         }
     }
 
@@ -245,7 +239,7 @@ public class MatchViewController implements Initializable, SceneInterface {
         try {
             changeScene();
         } catch (IOException e) {
-            handleAlert("Errore cambio di scena Match->Score");
+            handleAlert("Errore nel cambio scena, riavviare il gioco.");
         }
     }
 

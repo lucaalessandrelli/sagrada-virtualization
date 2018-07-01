@@ -1,9 +1,10 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.guicontrollers;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
+import it.polimi.ingsw.view.gui.GuiHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class LoginViewController implements Initializable, SceneInterface {
     }
 
     @FXML
-    public void handleMouseClicked(MouseEvent event) {
+    public void handleMouseClicked() {
         username = usernameField.getText();
 
         if(username.equals("") || username.contains(" ")) {
@@ -145,10 +144,8 @@ public class LoginViewController implements Initializable, SceneInterface {
         // controller.setList(playerList);
 
         Scene scene = new Scene(root);
-        //chiamate a metodi che devono essere eseguiti prima di visualizzare la gui
+        // Calling methods that need to be executed before showing the gui
         controller.startTimer();
-        controller.updateBoard(setup);
-        controller.updateStatusTable();
         guiHandler.setGui(controller);
 
         stage.setScene(scene);
@@ -163,19 +160,8 @@ public class LoginViewController implements Initializable, SceneInterface {
         try {
             changeSceneToWaitingRoom();
         } catch (IOException e) {
-            System.out.println("Errore cambio di scena: login -> waitingRoom");
+            handleAlert("Errore nel cambio scena, riavviare il gioco.");
         }
-    }
-
-    @Override
-    public void handleAlert(String message) {
-        //AlertWindow.display("Alert", message);
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-
-        alert.showAndWait();
     }
 
     @Override
@@ -189,7 +175,7 @@ public class LoginViewController implements Initializable, SceneInterface {
         try {
             changeSceneToMatch();
         } catch (IOException e) {
-            System.out.println("Errore cambio di scena: login -> Match");
+            handleAlert("Errore nel cambio scena, riavviare il gioco.");
         }
     }
 

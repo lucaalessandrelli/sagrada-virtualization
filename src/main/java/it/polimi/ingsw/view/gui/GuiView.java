@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.gui.guicontrollers.LoginViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,10 +44,10 @@ public class GuiView extends Application {
 
         primaryStage.setOnCloseRequest(event -> {
             //If the numOfMatch in the client isn't the default one
-            /*if(client.getNumOfMatch() >= 0) {
+            if(client.getNumOfMatch() >= 0) {
                 client.sendCommand("disconnect " + client.getNumOfMatch() + " " + client.getName());
             }
-            System.exit(0);*/
+            System.exit(0);
         });
 
         primaryStage.show();

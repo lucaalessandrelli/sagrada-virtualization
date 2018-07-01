@@ -1,5 +1,7 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.drawers;
 
+import it.polimi.ingsw.view.gui.data.ViewDice;
+import it.polimi.ingsw.view.gui.guicontrollers.MatchViewController;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -14,20 +16,16 @@ public final class DrawPatternCard {
 
     }
 
-    public static void drawDicePatternCard(GridPane grid,int row, int col, boolean isMyWindow, List<ViewDice> diceList, String cell, MatchViewController controller) {
+    public static void drawDicePatternCard(GridPane grid, int row, int col, boolean isMyWindow, List<ViewDice> diceList, String cell, MatchViewController controller) {
         Node pane = GeneralFunctionalities.getChildrenByIndex(grid,row,col);
-        if(pane == null) {
-            System.out.println("Sbagliato");
-        } else {
-            ImageView image = new ImageView("/dice/" + cell.substring(0,2) + ".png");
-            ((AnchorPane)pane).getChildren().add(image);
-            GeneralFunctionalities.fitImageToParent(image,grid);
+        ImageView image = new ImageView("/dice/" + cell.substring(0,2) + ".png");
+        ((AnchorPane)pane).getChildren().add(image);
+        GeneralFunctionalities.fitImageToParent(image,grid);
 
-            /*If the current window is the player's one then add the WindowDiceEvent to the dice,plus add the dice to viewDiceList*/
-            if(isMyWindow) {
-                diceList.add(new ViewDice(image,cell.substring(2,4)));
-                EventAssigner.addWindowEvent(image,controller);
-            }
+        /*If the current window is the player's one then add the WindowDiceEvent to the dice,plus add the dice to viewDiceList*/
+        if(isMyWindow) {
+            diceList.add(new ViewDice(image,cell.substring(2,4)));
+            EventAssigner.addWindowEvent(image,controller);
         }
     }
 

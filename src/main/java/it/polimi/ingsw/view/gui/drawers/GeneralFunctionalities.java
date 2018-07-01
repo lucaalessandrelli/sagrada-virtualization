@@ -1,5 +1,6 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.drawers;
 
+import it.polimi.ingsw.view.gui.data.ViewDice;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -21,7 +22,8 @@ public final class GeneralFunctionalities {
                 return pane;
             }
         }
-        return null;
+
+        throw new IllegalStateException();
     }
 
     /**

@@ -1,5 +1,7 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.drawers;
 
+import it.polimi.ingsw.view.gui.data.ViewDice;
+import it.polimi.ingsw.view.gui.guicontrollers.MatchViewController;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -12,7 +14,7 @@ public final class DrawDraftPool {
 
     }
 
-    public static void drawDiceIntoDraft(GridPane draftPool,int i,List<String> draftList, List<ViewDice> diceList, MatchViewController controller) {
+    public static void drawDiceIntoDraft(GridPane draftPool, int i, List<String> draftList, List<ViewDice> diceList, MatchViewController controller) {
         AnchorPane pane = ((AnchorPane)(draftPool.getChildren().get(i)));
         GeneralFunctionalities.deleteDice(pane,diceList);
         if(i < draftList.size()) {

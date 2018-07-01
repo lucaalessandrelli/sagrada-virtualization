@@ -1,6 +1,7 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.utilitywindows;
 
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.view.gui.data.ViewDice;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -17,21 +18,19 @@ public class SelValueWindow {
     private static final String SELVALUE = "SelectingValue";
     private static final String ALERT_DICE_SEL_VALUE = "Non puoi scegliere il valore di un dado in questa fase del turno.";
     private static Stage stage;
-    private static GridPane gridPane;
-    private static AnchorPane anchorPane;
-    private static double OFFSET = 10;
+    private static final double OFFSET = 10;
 
     private SelValueWindow() {
 
     }
 
-    public static void display(Client client, ViewDice dice, int diceChosenRow, int diceChosenColumn,String currentState) {
+    public static void display(Client client, ViewDice dice, int diceChosenRow, int diceChosenColumn, String currentState) {
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Seleziona il valore del dado");
 
-        anchorPane = new AnchorPane();
-        gridPane = new GridPane();
+        AnchorPane anchorPane = new AnchorPane();
+        GridPane gridPane = new GridPane();
 
         for(int i = 0; i < NUM_COL;i++) {
             ImageView image = new ImageView("/dice/"+dice.getDiceColor()+(i+1)+".png");
@@ -65,7 +64,6 @@ public class SelValueWindow {
     }
 
     public static void handleAlert(String message) {
-        //AlertWindow.display("Alert", message);
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore");
         alert.setHeaderText(null);

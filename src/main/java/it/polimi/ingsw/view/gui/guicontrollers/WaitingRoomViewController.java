@@ -1,8 +1,9 @@
-package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui.guicontrollers;
 
 import com.jfoenix.controls.JFXListView;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
+import it.polimi.ingsw.view.gui.GuiHandler;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -117,23 +117,12 @@ public class WaitingRoomViewController implements Initializable, SceneInterface 
     }
 
     @Override
-    public void handleAlert(String message) {
-        //AlertWindow.display("Alert", message);
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-
-        alert.showAndWait();
-    }
-
-    @Override
     public void handleTimer(String time) {
         this.choseCardTimer = time;
         try {
             changeScene();
         } catch (IOException e) {
-            System.out.println("Errore cambio di scena: waitingRoom -> PatternCardChoiceView");
+            handleAlert("Errore nel cambio scena, riavviare il gioco.");
         }
     }
 }
