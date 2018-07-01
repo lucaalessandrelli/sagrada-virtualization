@@ -383,14 +383,5 @@ public class VirtualViewParserTest {
 
         System.out.print(parsed);*/
 
-        /*Deparser deparser = new Deparser();
-        System.out.println(deparser.DivideinStrings(tester.startParsing()));
-        List<String> strings = deparser.DivideinStrings(tester.startParsing());
-        for (String string: strings){
-            List <String> deparsed = deparser.Deparse(string);
-            for (String x: deparsed){
-                System.out.println(x);
-            }
-        }*/
     }
 }

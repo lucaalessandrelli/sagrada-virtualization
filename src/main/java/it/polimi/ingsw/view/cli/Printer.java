@@ -25,9 +25,8 @@ public class Printer {
     private static final String DIFFICULTY = "     Difficoltà: ";
     private static final String ZERO = " 0 ";
     private static final String SETTEDTO = "Il timer è settato a: ";
-    private static final String TURNOF = "Is the turn of:";
-    private static final String TURNODI = "E' il turno di: ";
-    private static final String WAITING = "In attesa di una mossa..";
+    private static final String WAITING = "Fai una mossa..";
+    private static final String NOTTURN = "In attesa di una mossa avversaria..";
     private static final String WINNER = "Il vincitore:   ";
     private static final String TOOLCARDS = "Carte utensile";
     private static final String CONNECTED = "Giocatori connessi:";
@@ -415,7 +414,7 @@ public class Printer {
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorRight(100));
 
-        this.printTurnOf(turnState, deparser);
+        this.printTurnOf(turnState);
 
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorRight(140));
@@ -425,18 +424,32 @@ public class Printer {
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(8));
 
-        if(deparser.getMyPlayer().equals(turnState))
-        out.print(ansi().fg(YELLOW).a(WAITING).reset().cursorLeft(WAITING.length()));
+        this.printMove(players,turnState,deparser);
 
         out.print(ansi().cursorDown(2));
 
         //print all match layout (statico)
     }
 
-    public void printScore(String score) {
-        Deparser deparser = new Deparser();
+    private void printMove(List<String> players, String turnState, Deparser deparser) {
+        boolean found = false;
+        for (int i = 0; i < players.size() && !found;i++){
+            if(turnState.contains(players.get(i)))
+                found = true;
+        }
+        if(turnState.contains(deparser.getMyPlayer()))
+            out.print(ansi().fg(YELLOW).a(WAITING).reset().cursorLeft(WAITING.length()));
+        else if(!turnState.contains(deparser.getMyPlayer()) && found)
+            out.print(ansi().fg(YELLOW).a(NOTTURN).reset().cursorLeft(NOTTURN.length()));
+        else
+            out.print(ansi().a(""));
 
-        List<String> players = deparser.divideByComma(score);
+    }
+
+    public void printScore(String score) {
+        Deparser dep = new Deparser();
+
+        List<String> players = dep.divideByComma(score);
         List<String> playersandscore;
 
         String winner = "Nessun vincitore";
@@ -452,7 +465,7 @@ public class Printer {
 
             out.print(ansi().cursorDown(1));
 
-            playersandscore = deparser.divideBySpace(s);
+            playersandscore = dep.divideBySpace(s);
 
             result = Integer.parseInt(playersandscore.get(1));
 
@@ -773,10 +786,8 @@ public class Printer {
 
     }
 
-    private void printTurnOf(String turnState, Deparser deparser){
-
-        out.print(ansi().a(TURNODI +deparser.divideBySpace(turnState).get(0)));
-
+    private void printTurnOf(String turnState){
+        out.print(ansi().a(turnState));
     }
 
     private void printTimerMatch(String timer){
