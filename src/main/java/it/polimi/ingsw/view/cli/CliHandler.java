@@ -56,4 +56,8 @@ public class CliHandler extends AbstractView {
     void setRestrictions(String restrictions){
         gameData.setRestrictions(restrictions);
     }
+
+    void setConnected() {
+        client.setConnected(true);
+    }
 }

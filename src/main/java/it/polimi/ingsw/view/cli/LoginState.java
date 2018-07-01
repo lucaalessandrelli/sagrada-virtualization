@@ -3,6 +3,9 @@ package it.polimi.ingsw.view.cli;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class LoginState implements SceneInterface {
     private Printer printer;
     private CliHandler cliHandler;
@@ -24,7 +27,8 @@ public class LoginState implements SceneInterface {
 
     @Override
     public void handleConnectedPlayers(String playerlist) {
-
+        List<String> players = Arrays.asList(playerlist.split(" "));
+        cliHandler.setState(new MatchState(printer,cliHandler,players));
     }
 
     @Override
@@ -34,7 +38,7 @@ public class LoginState implements SceneInterface {
 
     @Override
     public void handleMatchId(String idMatch) {
-        //cliHandler.setState(new MatchState(printer,cliHandler,));
+        cliHandler.setIdMatch(Integer.valueOf(idMatch));
     }
 
     @Override

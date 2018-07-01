@@ -23,6 +23,7 @@ public class Server implements ServerInterface {
                 return false;
             } else {
                 if (manager.checkIfPlayerIsPlaying(name)) {
+                    client.updateMessage("Connected, Welcome!");
                     out.println("Reconnecting "+ name + " to the match");
                     manager.reconnectPlayer(client);
                     return true;

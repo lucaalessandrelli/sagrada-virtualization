@@ -32,12 +32,13 @@ public class GameData {
         }
     }
     void setDraftPool(String draftPool) {
-        this.draftPool = Arrays.asList(draftPool.split(","));
-        for(int i = 0; i< this.draftPool.size(); i++){
+        List<String> splitted = Arrays.asList(draftPool.split(","));
+        this.draftPool = new ArrayList<>();
+        for(int i = 0; i< splitted.size(); i++){
             String tmp;
-            tmp = String.valueOf(this.draftPool.get(i).charAt(1));
-            tmp= tmp +","+(this.draftPool.get(i).charAt(0));
-            this.draftPool.add(i,tmp);
+            tmp = String.valueOf(splitted.get(i).charAt(1));
+            tmp= tmp +","+(splitted.get(i).charAt(0));
+            this.draftPool.add(tmp);
         }
 
     }
