@@ -20,6 +20,7 @@ public class InputComposer {
     private static final String TOOLCARD = "toolcard ";
     private static final String RETRY = "retry";
     private static final String MYCARD = "mycard ";
+    private static final String PASS = "pass ";
 
     private static final String ALERT = "alert Formato mossa errato!";
     private static final String ERROR = "error";
@@ -76,12 +77,14 @@ public class InputComposer {
             res=command.replace(TOOLCARD,"");
             return MOVE+client.getNumOfMatch()+" "+client.getName()+" "+"T;"+res;
         }
-        else if (command.startsWith(RETRY)) {
+        else if (command.equals(RETRY)) {
             return PLAYAGAIN + client.getName();
         }
         else if (command.startsWith(MYCARD) ){
             res=command.replace(MYCARD,"");
             return CHOOSECARD+client.getNumOfMatch()+" "+client.getName()+" "+res;
+        }else if(command.equals(PASS)){
+            return MOVE+client.getNumOfMatch()+" "+client.getName()+" "+PASS;
         }
 
         return ERROR;
@@ -131,7 +134,7 @@ public class InputComposer {
     private String getDraftData(String res, GameData gameData) {
         try {
             int x = Integer.parseInt(res);
-            return MOVE+client.getNumOfMatch()+" "+client.getName()+" "+"D;"+gameData.getDraft(x)+","+x+"0";
+            return MOVE+client.getNumOfMatch()+" "+client.getName()+" "+"D;"+gameData.getDraft(x)+","+x+","+"0";
         }catch (RuntimeException e){
             client.setServiceMessage(ALERT);
             return ERROR;

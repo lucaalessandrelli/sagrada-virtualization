@@ -18,6 +18,7 @@ public class MatchState implements SceneInterface {
         this.cliHandler=cliHandler;
         this.setup=setup;
         this.players=players;
+        analyze();
     }
 
     MatchState(Printer printer, CliHandler cliHandler, List<String> playerlist) {
@@ -48,11 +49,11 @@ public class MatchState implements SceneInterface {
         String[] messages = setup.split(";");
 
         for (String substring : messages){
-            if(substring.startsWith("draftpool")){
+            if(substring.startsWith("draftpool ")){
                 cliHandler.setDraftPool(substring.replace("draftpool ",""));
-            }else if(substring.startsWith("roundtrack")){
+            }else if(substring.startsWith("roundtrack ")){
                 cliHandler.setRoundtrack(substring.replace("roundtrack ",""));
-            }else if(substring.startsWith("dices")){
+            }else if(substring.startsWith("dices ")){
                 cliHandler.setRestrictions(substring.replace("dices ",""));
             }
         }

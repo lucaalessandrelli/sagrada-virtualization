@@ -37,7 +37,7 @@ public class Player {
     }
 
 
-    public void setMyObjCard(ObjectiveCard obj){
+    void setMyObjCard(ObjectiveCard obj){
         myObjCard =obj;
     }
 
@@ -77,32 +77,17 @@ public class Player {
     public ObjectiveCard getPrivateCard(){return this.myObjCard;}
 
 
-    public void showMyObjCard(){
-
-    }
-
     //choose between 4 WindowsPatternCard and set MyFavTokens
     public void chooseWindow(List<WindowPatternCard> windows) {
         observer.chooseWindow(windows);
-        /*int chosenOne = 0;
-        // while (myWindow==null) {
-        setMyWindow(windows.get(chosenOne));
-        setmyFavTokens();
-        windows.get(chosenOne).setPlayer(this.username);
-        */
-
     }
 
     //decreases favTokens if ToolCard is used
     public void useToken(boolean used){
-        if(!used){
-            if(myFavTokens>=1) {
-                myFavTokens--;
-            }
-        }else{
-            if(myFavTokens>=2) {
-                myFavTokens -= 2;
-            }
+        if(!used) {
+            myFavTokens--;
+        }else {
+            myFavTokens -= 2;
         }
     }
     public void notifyPlayer() {
@@ -144,6 +129,14 @@ public class Player {
 
     public void reconnectingMessage() {
         observer.reconnectingMessage();
+    }
+
+    public boolean canUseTool(boolean used) {
+        if(used){
+            return myFavTokens >= 2;
+        }else{
+            return myFavTokens >= 1;
+        }
     }
 }
 

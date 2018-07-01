@@ -50,10 +50,9 @@ public class ToolCard extends Card {
         this.cost = 2;
     }
 
-    /*public void setCost(int cost) {
-        this.cost = cost;
+    public boolean isUsed() {
+        return used;
     }
-    */
 
     public int getCost() {
         return cost;

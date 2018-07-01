@@ -1,11 +1,11 @@
 package it.polimi.ingsw.model.gamelogic.checker;
 
+import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.DraftPool;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,11 +29,12 @@ public class InspectorContext {
      * This method check if the group of tool cards in the table contains the chosen tool card.
      * @param tool Chosen tool card.
      * @param allTool Group of tool card on the table.
-     * @return True if the chosen tool card is in the group.
+     * @param p Player who choose card
+     * @return True if the chosen tool card is in the group and if player has enough favour token.
      */
-    public boolean check (ToolCard tool, List<ToolCard> allTool){
+    public boolean check (ToolCard tool, List<ToolCard> allTool, Player p){
         for (ToolCard t : allTool){
-            if (t.getID()==tool.getID()){
+            if (t.getID()==tool.getID()&&p.canUseTool(tool.isUsed())){
                 return true;
             }
         }
