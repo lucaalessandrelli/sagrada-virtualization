@@ -2,7 +2,7 @@ package it.polimi.ingsw.view.gui.data;
 
 public class User {
     private String username;
-    private String status = "";
+    private String status = "xxx";
     private String score = "";
 
     public User(String username) {
@@ -14,12 +14,24 @@ public class User {
         this.status = status;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public void setScore(String score) {
         this.score = score;
     }
 
     public String getUsername() {
         return this.username;
+    }
+
+    public String getStatus() {
+        return this.status;
     }
 
     public String getScore() {
