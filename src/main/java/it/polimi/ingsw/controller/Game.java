@@ -37,12 +37,8 @@ public class Game {
         return clients.findClient(name);
     }
 
-    public boolean remove(String name) {
-        if (!ended) {
-            return clients.remove(name);
-        }else{
-            return true;
-        }
+    public void remove(String name) {
+            clients.remove(name);
     }
 
     Round getCurrRound() {

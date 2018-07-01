@@ -68,9 +68,7 @@ public class Manager {
     public void remove(String name){
         clients.remove(name);
         for (Map.Entry<Integer,Game> pair : games.entrySet()) {
-            if (pair.getValue().remove(name)) {
-                return;
-            }
+            pair.getValue().remove(name);
         }
     }
 
