@@ -425,6 +425,7 @@ public class Printer {
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(8));
 
+        if(deparser.getMyPlayer().equals(turnState))
         out.print(ansi().fg(YELLOW).a(WAITING).reset().cursorLeft(WAITING.length()));
 
         out.print(ansi().cursorDown(2));
@@ -843,9 +844,16 @@ public class Printer {
             builder.append(" ");
             builder.append(tempz.get(0).replace(";","").replace(tempz.get(0).substring(0,tempz.get(0).indexOf(',')+1),""));
             builder.append(" ");
-            builder.append(tempz.get(1).replace(";","").replace(
-                    tempz.get(0).substring(0,tempz.get(0).indexOf(',')+1),""));
-            builder.append(";");
+            /*builder.append(tempz.get(1).replace(";","").replace(
+                    tempz.get(0).substring(0,tempz.get(0).indexOf(',')+1),""));*/
+            String dices = tempz.get(1).replace(";","").replace(player,"");
+            if(!dices.equals("") && dices.charAt(0)==',') {
+                dices = dices.substring(1, dices.length());
+                builder.append(dices);
+            }
+                //builder.append(";");
+            if (builder.charAt(builder.length()-1) == ' ' || builder.charAt(builder.length()-1)==',')
+                builder.deleteCharAt(builder.length()-1);
 
 
             return builder.toString();
