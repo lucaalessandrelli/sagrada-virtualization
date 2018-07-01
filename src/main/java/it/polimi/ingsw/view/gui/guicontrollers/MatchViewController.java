@@ -206,7 +206,7 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @Override
     public void handleConnectedPlayers(String connPlayers) {
-        connectedPlayers = FXCollections.observableArrayList(Arrays.asList(connPlayers.split(",")));
+        connectedPlayers = FXCollections.observableArrayList(Arrays.asList(connPlayers.split(" ")));
         this.updateStatusTable();
     }
 
