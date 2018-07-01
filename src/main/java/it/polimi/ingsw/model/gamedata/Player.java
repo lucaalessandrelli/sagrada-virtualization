@@ -76,6 +76,9 @@ public class Player {
 
     public ObjectiveCard getPrivateCard(){return this.myObjCard;}
 
+    public int getMyFavTokens() {
+        return myFavTokens;
+    }
 
     //choose between 4 WindowsPatternCard and set MyFavTokens
     public void chooseWindow(List<WindowPatternCard> windows) {

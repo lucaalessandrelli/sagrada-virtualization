@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class VirtualViewParser {
@@ -108,14 +107,14 @@ public class VirtualViewParser {
 
         builder.append(this.player.getUsername());
         builder.append(VIRG);
-        builder.append(player.getWindowPatternCard().getDifficulty());
+        builder.append(player.getMyFavTokens());
         builder.append(SEP);
         for(Player p :player.getPublicObjects().getPlayers()){
             builder.append(FAV);
 
             builder.append(p.getUsername());
             builder.append(VIRG);
-            builder.append(p.getWindowPatternCard().getDifficulty());
+            builder.append(p.getMyFavTokens());
             builder.append(SEP);
         }
 
