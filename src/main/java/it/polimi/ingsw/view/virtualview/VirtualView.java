@@ -37,7 +37,7 @@ public class VirtualView extends VirtualViewObserver {
         try {
             timeSleep=timeSleep/1000;
             clientBox.updateTurn(TIMER+String.valueOf(timeSleep));
-            clientBox.updateTurn(TURN+whoIsTurn+" current turn.");
+            clientBox.updateTurn(TURN+"E' il turno di : "+whoIsTurn);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
