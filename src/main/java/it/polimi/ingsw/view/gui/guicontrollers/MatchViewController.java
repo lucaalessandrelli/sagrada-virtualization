@@ -276,7 +276,6 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     public void updateStatusTable() {
         ObservableList<User> userList = FXCollections.observableArrayList();
-
         ObservableList<String> playerInfo;
 
         for (String username:connectedPlayers) {

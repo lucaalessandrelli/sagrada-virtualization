@@ -5,20 +5,42 @@ import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
+import java.util.List;
+
 public class ModelModifier {
+    private static final int NOT_USED = 1;
     private RoundTrack roundTrack;
     private DraftPool draftPool;
     private WindowPatternCard windowPatternCard;
     private DiceBag diceBag;
+    private List<ToolCard> toolCards;
 
     public ModelModifier(Table table, Player player) {
         this.roundTrack = table.getRoundTrack();
         this.draftPool = table.getDraftPool();
         this.windowPatternCard = player.getWindowPatternCard();
         this.diceBag = table.getDiceBag();
+        this.toolCards = table.getToolCards();
     }
 
     //methods that modify the model
+
+    public void updateToolCardPrice(ToolCard toolCard,Player player) {
+        for (ToolCard card: toolCards) {
+            if(toolCard.getID() == card.getID()) {
+                updatePlayerTokens(player,card.getCost());
+                card.setUsed();
+            }
+        }
+    }
+
+    private void updatePlayerTokens(Player player,int toolCardCost) {
+        if(toolCardCost == NOT_USED) {
+            player.useToken(false);
+        } else {
+            player.useToken(true);
+        }
+    }
 
     //parameters needed: used all 4
     public void switchDice(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {

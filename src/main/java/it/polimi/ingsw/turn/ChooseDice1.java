@@ -1,5 +1,6 @@
 package it.polimi.ingsw.turn;
 
+import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
@@ -35,10 +36,11 @@ public class ChooseDice1 implements TurnState {
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) throws WrongMoveException {
-        if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards()))) {
-            //setting the toolCard used in this turn
-            //setting the list of states for the dynamic state machine
-            //setting the list of operations for the AutomatedOperation State
+        Player currentPlayer = turn.getPlayer();
+        if(toolList.contains(toolCard.getID()) && (inspectorContext.check(toolCard, currentPlayer.getToolCards(),currentPlayer))) {
+            //call the modifier method to update the cost of the toolcard and the favtokens of the player
+            turn.getModifier().updateToolCardPrice(toolCard,currentPlayer);
+            //setting the toolCard used in this turn, setting the list of states for the dynamic state machine, setting the list of operations for the AutomatedOperation State
             turn.setToolCardInfo(toolCard);
             //setting the check point i need to return after the user do the moves of the toolCard
             turn.setCheckPointState(new EndTurn(turn));

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.turn;
 
 
+import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
@@ -29,13 +30,15 @@ public class StartTurn implements TurnState {
     @Override
     public void receiveMove(ToolCard toolCard) throws WrongMoveException {
         int cardId = toolCard.getID();
-        if(toolList.contains(cardId) && (inspectorContext.check(toolCard, turn.getPlayer().getToolCards())) && ((cardId != 7) ||
+        Player currentPlayer = turn.getPlayer();
+        if(toolList.contains(cardId) && (inspectorContext.check(toolCard, currentPlayer.getToolCards(),currentPlayer)) && ((cardId != 7) ||
                 (!turn.isFirstBracket())) && ((cardId!=12) || (turn.getRoundNumber()!=1))) {
-            //setting the toolCard used in this turn
-            //setting the list of states for the dynamic state machine
-            //setting the list of operations for the AutomatedOperation State
+
+            //call the modifier method to update the cost of the toolcard and the favtokens of the player
+            turn.getModifier().updateToolCardPrice(toolCard,currentPlayer);
+            //setting the toolCard used in this turn, setting the list of states for the dynamic state machine, setting the list of operations for the AutomatedOperation State
             turn.setToolCardInfo(toolCard);
-            //setting the check point i need to return after the user do the moves of the toolCard
+            //setting the check point i need to return to, after the user do the moves of the toolCard
             turn.setCheckPointState(new ToolBeforeDice(turn));
             //need to set dynamic current state
             turn.setDynamicState(new Dice(), new Pos(),new Dice(), new Pos());
