@@ -12,11 +12,7 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlaceTool;
 import it.polimi.ingsw.model.gamelogic.ModelModifier;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
-
 import java.lang.reflect.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,7 +79,7 @@ public class Turn {
                 String path =("it.polimi.ingsw.turn."+ (nextStateName));
 
 
-                Class cls = Class.forName(path);
+                Class<?> cls = Class.forName(path);
 
                 Class[] parametersTypes = new Class[5];
                 parametersTypes [0] = Turn.class;
@@ -194,7 +190,7 @@ public class Turn {
      * Set the ToolCard chosen by the player
      * @param toolCard ToolCard object
      */
-    public void setToolCard(ToolCard toolCard) {
+    private void setToolCard(ToolCard toolCard) {
         this.toolCard = toolCard;
     }
 

@@ -3,7 +3,6 @@ package it.polimi.ingsw.turn;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
-import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 public class SelectingWindowDice implements TurnState {
