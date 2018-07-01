@@ -3,13 +3,10 @@ package it.polimi.ingsw.turn;
 
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
-
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
-
-import javax.swing.text.WrappedPlainView;
 import java.util.ArrayList;
 
 public class PositionDice1 implements TurnState {
