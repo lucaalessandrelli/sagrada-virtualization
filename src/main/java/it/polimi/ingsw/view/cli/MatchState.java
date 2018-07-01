@@ -39,7 +39,9 @@ public class MatchState implements SceneInterface {
     public void updateBoard(String setup) {
         this.setup=setup;
         analyze();
-        printUpdate();
+        if(turnState!=null){
+            printUpdate();
+        }
     }
 
     private void analyze() {
@@ -67,7 +69,6 @@ public class MatchState implements SceneInterface {
     public void handleTurnMessage(String turnMessage) {
         turnState=turnMessage;
         printUpdate();
-
     }
 
     @Override
