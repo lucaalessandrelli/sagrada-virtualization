@@ -10,6 +10,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class is the main controller of game, it has references of all games, waiting room and client connected. Every
+ * user input passes throw it.
+ */
 public class Manager {
     private HashMap<Integer,Game> games;
     private ClientsContainer clients;
@@ -32,7 +36,12 @@ public class Manager {
         analyzer = new InputAnalyzer(this);
     }
 
-    public void createMatch(WaitingRoom lobby) {
+    /**
+     * When the waiting room timer is expired, it creates a new match and starts the associated thread, after that
+     * creates a new waiting room and waits players.
+     * @param lobby current waiting room
+     */
+    void createMatch(WaitingRoom lobby) {
         Game g = new Game(clients,new Match(lobby.getPlayerList(), this, numOfMatch,timerCard,timerMove),numOfMatch);
         g.notifyGame();
         games.put(numOfMatch, g);
@@ -44,10 +53,19 @@ public class Manager {
         lobby.restore(clients);
     }
 
+    /**
+     * add player to the waiting room
+     * @param client object for communication
+     */
     public synchronized void addPlayerInQueue(ClientInterface client) {
         lobby.addPlayer(client);
     }
 
+    /**
+     * Look for waiting room and started match
+     * @param name player to connect
+     * @return true if found.
+     */
     public synchronized boolean checkIfPlayerIsLogged(String name) {
         if(clients.findClient(name)){
             return true;
@@ -60,11 +78,20 @@ public class Manager {
         return false;
     }
 
+    /**
+     * Check if is playing
+     * @param name player name
+     * @return true if found
+     */
     public boolean checkIfPlayerIsPlaying(String name) {
         return (clientHandler.isAPlayerIn(name));
     }
 
 
+    /**
+     * Remove player from games or current waiting room
+     * @param name
+     */
     public void remove(String name){
         clients.remove(name);
         for (Map.Entry<Integer,Game> pair : games.entrySet()) {
@@ -73,10 +100,20 @@ public class Manager {
     }
 
 
+    /**
+     * Sends user command to input analyzer
+     * @param cmd user command
+     */
     public void analyze(String cmd) {
         analyzer.analyse(cmd);
     }
 
+    /**
+     * Sends the move to the processor, checking if the player who moved is correct
+     * @param match player match
+     * @param name player name
+     * @param move player move
+     */
     void move(int match,String name, String move){
         Round round = games.get(match).getCurrRound();
         if(round.getCurrTurn().equals(name)){
@@ -87,11 +124,20 @@ public class Manager {
         }
     }
 
+    /**
+     * Set a player activity
+     * @param name player's name
+     * @param b true if active
+     */
     void setPlayerActivity(String name, boolean b) {
         int numMatch = clientHandler.getGame(name);
         games.get(numMatch).setPlayerActivity(name,b);
     }
 
+    /**
+     * used to reconnect the player
+     * @param c client interface for communication
+     */
     public void reconnectPlayer(ClientInterface c) {
         try {
             ClientBox clientB = new ClientBox(c,c.getName());
@@ -103,21 +149,45 @@ public class Manager {
         }
     }
 
-    public void matchEnded(String username) {
+    /**
+     * When a match ends remove the player from client handler
+     * @param username player to remove
+     */
+    void matchEnded(String username) {
         clientHandler.removePlayer(username);
     }
 
+    /**
+     * set the player chosen window pattern card
+     * @param num id match
+     * @param name player name
+     * @param window id card
+     */
     void setPlayerWindow(int num, String name, String window) {
         games.get(num).setPlayerWindow(name,Integer.parseInt(window));
     }
 
+    /**
+     * remove player from a match
+     * @param num id match
+     * @param name player name
+     */
     void disconnectPlayer(int num, String name) {
         games.get(num).remove(name);
     }
 
-    public void endGame(int id) {
+    /**
+     * set boolean value in game
+     * @param id id match
+     */
+    void endGame(int id) {
         games.get(id).setEnd();
     }
+
+    /**
+     *This method removes the games object where there are no more client connected, so after the end of the game
+     * they just exit from application whiteout play again.
+     */
     public void checkEndGame(){
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(10);
         exec.scheduleWithFixedDelay(() -> {
@@ -129,6 +199,10 @@ public class Manager {
         }, 0, 1, TimeUnit.SECONDS);
     }
 
+    /**
+     * Used if a player wants to revenge
+     * @param name player's name
+     */
     void revenge(String name) {
         for (Map.Entry<Integer,Game> pair : games.entrySet()){
             if(pair.getValue().endedMatch()&&pair.getValue().findClient(name)){

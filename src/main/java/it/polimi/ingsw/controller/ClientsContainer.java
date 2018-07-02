@@ -15,6 +15,10 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.*;
 
+/**
+ * This class is used to group all the clients that are playing the same game or are waiting in the same waiting room
+ * This class also starts a scheduled thread which ping each client to verify if them are still alive.
+ */
 public class ClientsContainer {
     private List<ClientBox> clients;
     private boolean matchStarted;
@@ -42,7 +46,12 @@ public class ClientsContainer {
     }
 
 
-    public synchronized void addClient(ClientInterface c, long tempTime){
+    /**
+     * Add client to the container, creating the a ClientBox object and send to it the timer of the waiting room
+     * @param c client
+     * @param tempTime timer waiting room
+     */
+    synchronized void addClient(ClientInterface c, long tempTime){
         try {
             ClientBox cli =new ClientBox(c,c.getName());
             cli.setTimer(tempTime);
@@ -51,10 +60,14 @@ public class ClientsContainer {
             e.printStackTrace();
         }
     }
-    public synchronized int sizeContainer(){
+    synchronized int sizeContainer(){
         return clients.size();
     }
 
+    /**
+     * Create a list of players from the client connected ready to play
+     * @return List of player connected
+     */
     public synchronized List<Player>  getPlayerList(){
         List<Player> p = new ArrayList<>();
         Iterator<ClientBox> i = clients.iterator();
@@ -66,6 +79,12 @@ public class ClientsContainer {
         }
         return p;
     }
+
+    /**
+     * Find if there is a client who has the same name
+     * @param name client name
+     * @return true if there is.
+     */
     synchronized boolean findClient(String name) {
         for (ClientBox cli : clients){
                 if(cli.getName().equals(name)){
@@ -75,6 +94,11 @@ public class ClientsContainer {
         return false;
     }
 
+    /**
+     * Remove a client from the container.
+     * @param name name of client to disconnect.
+     * @return true if found it.
+     */
     public synchronized boolean remove(String name) {
         for (ClientBox cli : clients){
                 if(cli.getName().equals(name)){
@@ -89,7 +113,10 @@ public class ClientsContainer {
         return false;
     }
 
-    public synchronized void notifyPlayers(){
+    /**
+     * Create the list of client currently connected and sends it to everyone.
+     */
+    synchronized void notifyPlayers(){
         StringBuilder str = new StringBuilder();
             for (ClientBox c : clients){
                  str.append(" ").append(c.getName());
@@ -108,6 +135,10 @@ public class ClientsContainer {
         this.matchStarted = true;
     }
 
+    /**
+     * Sends to every client the number of the match that is going to start
+     * @param numOfMatch number of match
+     */
     synchronized void notifyIdMatch(int numOfMatch) {
         for (ClientBox c : clients){
             try {
@@ -119,31 +150,22 @@ public class ClientsContainer {
 
     }
 
-    public void notifyTimer(long tempTime) {
-        for (ClientBox c : clients){
-            try {
-                c.setTimer(tempTime);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
+    /**
+     * Reconnect the client object to the match
+     * @param cb
+     */
     void reconnect(ClientBox cb) {
         clients.add(cb);
         notifyPlayers();
     }
 
-    public void sendWinner(String message) {
-        for(ClientBox c : clients){
-            try {
-                c.update(message);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
+    /**
+     * Used to manage the revenge of a player
+     * @param name player's name that wants to play again
+     * @return Client interface for communication
+     */
     ClientInterface getClientBox(String name) {
         for (ClientBox c : clients){
             if (c.getName().equals(name)){
