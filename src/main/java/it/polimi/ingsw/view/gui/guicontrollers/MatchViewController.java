@@ -40,6 +40,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller of the Match Scene. This class implements Initializable and SceneInterface in order
+ * to Override the interface methods.
+ */
 public class MatchViewController implements Initializable, SceneInterface {
     private static final int DRAFT_LENGTH = 9;
     private static final String MOVE = "move";
@@ -115,6 +119,10 @@ public class MatchViewController implements Initializable, SceneInterface {
     @FXML
     private GridPane draftPool;
 
+    /**
+     * {@inheritDoc}
+     * Fit to their parents the privateObjectiveCard, all the ToolCards and ObjectiveCards.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         GeneralFunctionalities.fitImageToParent(privateObjectiveCard,(AnchorPane)privateObjectiveCard.getParent());
@@ -130,6 +138,9 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * This method set the name of all the players to their Title object. Called by updateGamePlayers().
+     */
     private void setTitleWindowPatternCard() {
         listTitle.addAll(myTitle,titlePlayer2,titlePlayer3,titlePlayer4);
         myTitle.setText(client.getName());
@@ -143,22 +154,49 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * Setter method to store the Client Object in order to call methods on it.
+     * @param client The Client object.
+     */
     public void setClient(Client client) {
         this.client = client;
     }
+
+    /**
+     * Setter method to store the Stage object in order to call methods on it.
+     * @param stage The Stage object.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    /**
+     * Setter method to store the GuiHandler object in order to call methods on it.
+     * @param guiHandler The Stage object.
+     */
     public void setGuiHandler(GuiHandler guiHandler) {
         this.guiHandler = guiHandler;
     }
+
+    /**
+     * Setter method to store the players that are currently connected to the match, this way they can be displayed.
+     * @param connectedPlayers List of players currently connected in the match
+     */
     public void setList(ObservableList<String> connectedPlayers) {
         this.connectedPlayers = connectedPlayers;
     }
+
+    /**
+     * Set the timer to store the current time in seconds of the Match timer.
+     * @param time String representing the current time in seconds on the timer.
+     */
     public void setTime(String time) {
         this.time = time;
     }
 
+    /**
+     * Starts the Match timer, every second call the method countTimer()
+     */
     public void startTimer() {
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(1000),
@@ -167,6 +205,9 @@ public class MatchViewController implements Initializable, SceneInterface {
         timeline.play();
     }
 
+    /**
+     * Decrement the timer if it's different from zero.
+     */
     private void countTimer() {
         if (!time.equals("0")) {
             time = Long.toString((Long.parseLong(time) - 1));
@@ -177,6 +218,11 @@ public class MatchViewController implements Initializable, SceneInterface {
         timerLabel.setText("Timer :" + time);
     }
 
+    /**
+     * Method used to change the Match scene to ScoreView scene. Loads the ScoreView fxml file, get the ScoreView controller
+     * and set it into the guiHandler SceneInterface object.
+     * @throws IOException If the file can't be loaded this exception will be thrown.
+     */
     private void changeScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/scoreGui.fxml"));
         Parent root = fxmlLoader.load();
@@ -200,6 +246,16 @@ public class MatchViewController implements Initializable, SceneInterface {
     }
 
     @Override
+    public void handleAlert(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null);
+        alert.setContentText(alertMessage);
+
+        alert.showAndWait();
+    }
+
+    @Override
     public void handleTurnMessage(String turnMessage) {
         turnOwnerField.setText(turnMessage);
     }
@@ -215,6 +271,11 @@ public class MatchViewController implements Initializable, SceneInterface {
         this.setTime(time);
     }
 
+    /**
+     * {@inheritDoc}
+     * If the gameState is SELECTVALUE or INCDECVALUE, respectively open a SelValueWindow or a IncDecWindow in order to let the player
+     * do these two special moves.
+     */
     @Override
     public void handleGameState(String gameState) {
         this.currentState = gameState;
@@ -236,6 +297,10 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * Call the method changeScene()
+     */
     @Override
     public void handleScore(String score) {
         this.score = score;
@@ -277,6 +342,9 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * Update the TableView in order to show currently connected players and their state (active/inactive). Called by ().
+     */
     public void updateStatusTable() {
         ObservableList<User> userList = FXCollections.observableArrayList();
         ObservableList<String> playerInfo;
@@ -295,16 +363,28 @@ public class MatchViewController implements Initializable, SceneInterface {
         statusTable.setItems(userList);
     }
 
+    /**
+     * Set the gamePlayerList attribute.
+     * @param gamePlayers List of all the players belonging to the match.
+     */
     private void updateGamePlayers(String gamePlayers) {
         gamePlayerlist = FXCollections.observableArrayList(Arrays.asList(gamePlayers.split(",")));
         this.setTitleWindowPatternCard();
     }
 
+    /**
+     * Called every time the state of a player changes, set the playerStatusList attribute.
+     * @param status  A string containing the name of a player and it's state.
+     */
     private void updatePlayersStatus(String status) {
         playerStatusList = FXCollections.observableArrayList(Arrays.asList(status.split(",")));
         this.updateStatusTable();
     }
 
+    /**
+     * Draw the favorTokens of a given player.
+     * @param favors A string containing the name of a player and it's favorTokens
+     */
     private void updateFavTokens(String favors) {
         List<String> favorsList = Arrays.asList(favors.split(","));
 
@@ -327,6 +407,10 @@ public class MatchViewController implements Initializable, SceneInterface {
         DrawPatternCard.drawFavTokens(tokenList,favorsList,favorGrid);
     }
 
+    /**
+     * Draw the publicObjective cards.
+     * @param objectCard String that contains the list of objectCard's id along with their description.
+     */
     private void updateObjectCard(String objectCard) {
         List<String> objectCardList = Arrays.asList(objectCard.split("\\\\"));
         ObservableList<Node> gridChildren = objectiveCardGrid.getChildren();
@@ -337,11 +421,19 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * Draw the private ObjectiveCard.
+     * @param privateCard String that contains the idNumber of the privateObjectiveCard and it's color.
+     */
     private void updatePrivateCard(String privateCard) {
         List<String> infoPrivateCard = Arrays.asList(privateCard.split(","));
         privateObjectiveCard.setImage(new Image ("/objectivecards/private/"+infoPrivateCard.get(0)+".png"));
     }
 
+    /**
+     * Draw all the ToolCards.
+     * @param toolCard String that contains a list of toolCard's id, their cost and their description.
+     */
     private void updateToolCards(String toolCard) {
         List<String> tools = Arrays.asList(toolCard.split("\\\\"));
         ObservableList<Node> toolGridChildren = toolCardGrid.getChildren();
@@ -360,6 +452,10 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * Draw all Dices on the roundTrack.
+     * @param roundTrackList String that contains all the dice that belong to the roundTrack.
+     */
     private void updateRoundTrack(String roundTrackList) {
         List<String> cellList = Arrays.asList(roundTrackList.split(","));
 
@@ -374,6 +470,10 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * Draw all the dice on the WindowPatternCards.
+     * @param windowPatternCard String that contains all the dices placed on a given player's patternCard.
+     */
     private void updateWindowCards(String windowPatternCard) {
         boolean isMyWindow = false;
         List<String> cellList = Arrays.asList(windowPatternCard.split(","));
@@ -409,6 +509,10 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * Draw all the restrictions of a given PatternCard.
+     * @param resctriction String that contains all the restriction of a given player's patternCard.
+     */
     private void updateRestriction(String resctriction) {
         List<String> restrictionList = Arrays.asList(resctriction.split(","));
 
@@ -432,6 +536,10 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * Draw all dicec on the draftPool.
+     * @param draftPoolInfo String that contains all the dice that belong to the draftPool.
+     */
     private void updateDraftPool(String draftPoolInfo) {
         List<String> draftList = Arrays.asList(draftPoolInfo.split(","));
 
@@ -440,6 +548,12 @@ public class MatchViewController implements Initializable, SceneInterface {
         }
     }
 
+    /**
+     * Method called when the player click a dice on the RoundTrack. Check if a roundTrack dice can be selected in the current state of the
+     * turn. If it can be selected than call the method sendCommand() on the client in order to send to the server the player's move.
+     * On the other hand if it can't be selected the handleAlert() method is called.
+     * @param mouseEvent MouseEvent object used to get the dice clicked by the player.
+     */
     public void handleRoundTrackDiceClicked(MouseEvent mouseEvent) {
         if(!(currentState.equals(WINDOWDICE1) || currentState.equals(WINDOWDICE2) ||
                 currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2) ||
@@ -453,7 +567,12 @@ public class MatchViewController implements Initializable, SceneInterface {
         mouseEvent.consume();
     }
 
-
+    /**
+     * Method called when the player click a dice on the PatternCard. Check if a patternCard dice can be selected in the current state of the
+     * turn. If it can be selected than call the method sendCommand() on the client in order to send to the server the player's move.
+     * On the other hand if it can't be selected the handleAlert() method is called.
+     * @param mouseEvent MouseEvent object used to get the dice clicked by the player.
+     */
     public void handleWindowDiceClicked(MouseEvent mouseEvent) {
         if(!(currentState.equals(START) || currentState.equals(ROUNDDICE1) ||
                 currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2) ||
@@ -467,6 +586,12 @@ public class MatchViewController implements Initializable, SceneInterface {
         mouseEvent.consume();
     }
 
+    /**
+     * Method called when the player click a dice on the DraftPool. Check if a draftPool dice can be selected in the current state of the
+     * turn. If it can be selected than call the method sendCommand() on the client in order to send to the server the player's move.
+     * On the other hand if it can't be selected the handleAlert() method is called.
+     * @param mouseEvent MouseEvent object used to get the dice clicked by the player.
+     */
     public void handleDraftDiceClicked(MouseEvent mouseEvent) {
         if(!(currentState.equals(WINDOWDICE1) || currentState.equals(WINDOWDICE2) ||
                 currentState.equals(ROUNDDICE1) || currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE))) {
@@ -484,18 +609,34 @@ public class MatchViewController implements Initializable, SceneInterface {
         mouseEvent.consume();
     }
 
+    /**
+     * Method called as soon as the player click on the Pass button. Call the method sendCommand() on the client object
+     * in order to send the player's move to the server.
+     * @param event MouseEvent object
+     */
     @FXML
     public void handlePassClicked(MouseEvent event) {
         client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" pass");
         event.consume();
     }
 
+    /**
+     * Method called when the player click a ToolCard. Call the method sendCommand() on the client object
+     * in order to send the player's move to the server.
+     * @param event MouseEvent object used to get the ToolCard clicked by the player.
+     */
     @FXML
     public void handleToolCardClicked(MouseEvent event) {
         client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" T;"+toolList.get(GridPane.getColumnIndex((Node)event.getSource())));
 
         event.consume();
     }
+
+    /**
+     * Method called when the player click a on a PatternCard. Call the method sendCommand() on the client object
+     * in order to send the player's move to the server.
+     * @param event MouseEvent object used to get the cell clicked by the player.
+     */
     @FXML
     void handleCellClicked(MouseEvent event) {
         int y = GridPane.getColumnIndex((Node) event.getSource());

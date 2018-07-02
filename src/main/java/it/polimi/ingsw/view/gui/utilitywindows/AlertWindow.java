@@ -8,13 +8,23 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
+/**
+ * Static class to define a new javafx window screen that displays alert messages.
+ */
 public class AlertWindow {
 
+    /**
+     * Private constructor preventing instantiation of AlertWindow objects.
+     */
     private AlertWindow() {
 
     }
 
+    /**
+     * Method used to display the alert Window.
+     * @param title String containing the title of the alter window.
+     * @param message String containing the message that will be displayed in the alert window.
+     */
     public static void display(String title, String message) {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

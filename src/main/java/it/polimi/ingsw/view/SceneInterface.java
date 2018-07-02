@@ -1,9 +1,7 @@
 package it.polimi.ingsw.view;
 
-import javafx.scene.control.Alert;
-
 /**
- * This interface is used both by the CLI and the GUI, implements methods that are called by AbstractView.
+ * This interface is used both by the CLI and the GUI.
  */
 public interface SceneInterface {
 
@@ -12,12 +10,7 @@ public interface SceneInterface {
      * @param alertMessage Contains the alert message that needs to be shown to the user.
      */
     default void handleAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null);
-        alert.setContentText(alertMessage);
 
-        alert.showAndWait();
     }
 
     /**
@@ -65,21 +58,21 @@ public interface SceneInterface {
      * This method is used to update the UI every time it changes.
      * @param setup String containing multiple messages divided by ';'.
      *              The meaning of those messages is listed here:
-     *              1) gamePlayers -> the list of all players that belongs to the match
-     *              2) draftpool -> contains all the dice that belong to the draftpool
+     *              1) gamePlayers -> the list of all players that belongs to the match.
+     *              2) draftpool -> contains all the dice that belong to the draftPool.
      *              3) toolcards -> contains a list of toolCard's id, their cost and their description.
-     *              4) favors -> contains the username of a player along with his favorToken's number
-     *              5) state -> contains the player name along with his state (active/inactive)
+     *              4) favors -> contains the username of a player along with his favorToken's number.
+     *              5) state -> contains the player name along with his state (active/inactive).
      *              6) publiccards -> contains the list of objectCard's id along with their description.
-     *              7) privatecard -> contains the idNumber of the privateObjectiveCard
-     *              8) roundtrack -> contains all the dice that belong to the roundTrack
-     *              9) restrictions -> contains all the restriction of a given player's patternCard
-     *              10) dices -> contains all the dices placed on a given player's patternCard
+     *              7) privatecard -> contains the idNumber of the privateObjectiveCard and it's color.
+     *              8) roundtrack -> contains all the dice that belong to the roundTrack.
+     *              9) restrictions -> contains all the restriction of a given player's patternCard.
+     *              10) dices -> contains all the dices placed on a given player's patternCard.
      */
     default void updateBoard(String setup) {}
 
     /**
-     * This method is used to communicate the 4 patternCards that have been selected for that player
+     * This method is used to communicate the four patternCards that have been selected for that player
      * @param patternCards String containing the id of the patternCard and also the number of it's favor tokens.
      */
     default void setPatternCards(String patternCards) {

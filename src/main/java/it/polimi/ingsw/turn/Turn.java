@@ -29,7 +29,6 @@ public class Turn {
     private int roundNumber;
     private ToolCard toolCard;
     private Round round;
-    private Table table;
 
     private List<String> toolStateList;
     private List<String> toolAutomatedOperationList;
@@ -50,7 +49,6 @@ public class Turn {
         this.firstBracket = firstBracket;
 
         this.inspectorPlace = new InspectorPlace();
-        this.table = table;
         this.round = round;
         this.inspectorContextTool = new InspectorContextTool(player.getWindowPatternCard(),player.getDraftPool(), player.getRoundTrack());
         this.inspectorPlaceTool = new InspectorPlaceTool(player.getWindowPatternCard());
@@ -106,8 +104,8 @@ public class Turn {
                 if(nextStateName.equals("AutomatedOperation")) {
                     ((AutomatedOperation)state).doAutomatedOperations(toolAutomatedOperationList);
                 }
-            } catch (Throwable e) {
-                e.printStackTrace();
+            } catch (ReflectiveOperationException e) {
+                /*this exception should not be thrown*/
             }
         } else {
             this.setStateToCheckPoint();

@@ -17,6 +17,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Static class that defines a window screen that let the player increment or decrement the value of a Dice.
+ */
 public class IncDecWindow {
     private static final int NUM_ROWS = 0;
     private static final int NUM_COL = 2;
@@ -26,10 +29,23 @@ public class IncDecWindow {
     private static final double OFFSET = 10;
     private static int actualValue;
 
+    /**
+     * Private constructor preventing instantiation of IncDecWindow objects.
+     */
     private IncDecWindow() {
 
     }
 
+    /**
+     * Method used in order to display the IncDecWindow screen. In this window there will be two dice. The first one will be the same Dice
+     * previously chosen by the player decremented by one in value and the second one will be incremented by one in value. Assigning events
+     * on these two dices, the player will be able to increment or decrement the value of the dice.
+     * @param client Client object
+     * @param dice ViewDice object representing the dice previously chosen by the player
+     * @param diceChosenRow The row of the dice previously chosen by the player
+     * @param diceChosenColumn The column of the dice previously chosen by the player
+     * @param currentState The current state of the turn
+     */
     public static void display(Client client, ViewDice dice, int diceChosenRow, int diceChosenColumn, String currentState) {
         ObservableList<ImageView> diceList = FXCollections.observableArrayList();
         List<ViewDice> viewDiceList = new ArrayList<>();
@@ -82,14 +98,23 @@ public class IncDecWindow {
         stage.showAndWait();
     }
 
-    private static void handleValueChosen(MouseEvent event,String currentState, Client client, List<ViewDice> viewDiceList, int r, int c) {
+    /**
+     * Called when the player chose to increment or decrement the value of the dice.
+     * @param event MouseEvent object used to get the dice the player has chosen.
+     * @param currentState The current state of the turn
+     * @param client Client object
+     * @param viewDiceList The list of ViewDice
+     * @param diceChosenRow The row of the dice previously chosen by the player
+     * @param diceChosenColumn The column of the dice previously chosen by the player
+     */
+    private static void handleValueChosen(MouseEvent event,String currentState, Client client, List<ViewDice> viewDiceList, int diceChosenRow, int diceChosenColumn) {
         if(currentState.equals(INCDECVALUE)) {
             Node source = (Node) event.getSource();
             int diceColumn = GridPane.getColumnIndex(source);
             ViewDice chosenDice = GeneralFunctionalities.findDiceInfo(source, viewDiceList);
 
             if (!(actualValue == 1 && diceColumn == 0) && !(actualValue == 6 && diceColumn == 1)) {
-                client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceColor() + "," + chosenDice.getDiceNumber() + "," + r + "," + c);
+                client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceColor() + "," + chosenDice.getDiceNumber() + "," + diceChosenRow + "," + diceChosenColumn);
             }
         } else {
             handleAlert(ALERT_DICE_INC_DEC);
@@ -98,6 +123,12 @@ public class IncDecWindow {
         event.consume();
     }
 
+    /**
+     * Add to the grid the two dices.
+     * @param gridPane GridPane object
+     * @param image ImageView of the dice to add.
+     * @param index Index of the cell to which the dice needs to be added.
+     */
     private static void addToGrid(GridPane gridPane, ImageView image, int index) {
         GridPane.setConstraints(image,index,NUM_ROWS);
         image.fitHeightProperty().bind(gridPane.heightProperty());
@@ -105,6 +136,10 @@ public class IncDecWindow {
         gridPane.getChildren().add(image);
     }
 
+    /**
+     * Called to show a window which displays a wrong move has occurred. Thrown if the current state don't allow this type of move.
+     * @param message Message shown in the alertWindow screen.
+     */
     public static void handleAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore");

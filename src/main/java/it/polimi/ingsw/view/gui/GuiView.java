@@ -8,14 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 /**
  * This static class extends Application and it's used to start the GUI
  */
 public class GuiView extends Application {
     private static Client userClient;
     private static GuiHandler guiHandler;
-
 
     /**
      * Private constructor to prevent the instantiation of any GuiView object

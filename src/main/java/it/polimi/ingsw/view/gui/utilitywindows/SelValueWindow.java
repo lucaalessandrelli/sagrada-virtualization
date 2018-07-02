@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Static class that defines a window screen that let the player select the value of a Dice.
+ */
 public class SelValueWindow {
     private static final int NUM_ROWS = 0;
     private static final int NUM_COL = 6;
@@ -20,10 +23,23 @@ public class SelValueWindow {
     private static Stage stage;
     private static final double OFFSET = 10;
 
+    /**
+     * Private constructor preventing instantiation of SelValueWindow objects.
+     */
     private SelValueWindow() {
 
     }
 
+    /**
+     * Method used in order to display the SelValueWindow screen. In this window there will be six dices. These colour of these dices
+     * will be the same color of the dice previously chosen by the player, while the number will increase from one to 6. Assigning events
+     * on these six dices, the player will be able to select the value of the dice.
+     * @param client Client object
+     * @param dice ViewDice object representing the dice previously chosen by the player
+     * @param diceChosenRow The row of the dice previously chosen by the player
+     * @param diceChosenColumn The column of the dice previously chosen by the player
+     * @param currentState The current state of the turn
+     */
     public static void display(Client client, ViewDice dice, int diceChosenRow, int diceChosenColumn, String currentState) {
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -53,9 +69,18 @@ public class SelValueWindow {
         stage.showAndWait();
     }
 
-    private static void handleValueChosen(MouseEvent event,String currentState, Client client,ViewDice dice,int r,int c) {
+    /**
+     * Called when the player chose the value of the dice.
+     * @param event MouseEvent object used to get the dice the player has chosen.
+     * @param currentState The current state of the turn
+     * @param client Client object
+     * @param dice ViewDice object representing the dice previously chosen by the player
+     * @param diceChosenRow The row of the dice previously chosen by the player
+     * @param diceChosenColumn The column of the dice previously chosen by the player
+     */
+    private static void handleValueChosen(MouseEvent event,String currentState, Client client,ViewDice dice,int diceChosenRow,int diceChosenColumn) {
         if(currentState.equals(SELVALUE)) {
-            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + dice.getDiceColor() + "," + GridPane.getColumnIndex((Node) event.getSource()) + "," + r + "," + c);
+            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + dice.getDiceColor() + "," + GridPane.getColumnIndex((Node) event.getSource()) + "," + diceChosenRow + "," + diceChosenColumn);
         } else {
             handleAlert(ALERT_DICE_SEL_VALUE);
         }
@@ -63,6 +88,10 @@ public class SelValueWindow {
         event.consume();
     }
 
+    /**
+     * Called to show a window which displays a wrong move has occurred. Thrown if the current state don't allow this type of move.
+     * @param message Message shown in the alertWindow screen.
+     */
     public static void handleAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore");

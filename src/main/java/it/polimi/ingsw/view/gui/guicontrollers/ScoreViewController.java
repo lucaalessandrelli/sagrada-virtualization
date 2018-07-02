@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.gui.guicontrollers;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
-import it.polimi.ingsw.view.gui.utilitywindows.AlertWindow;
 import it.polimi.ingsw.view.gui.GuiHandler;
 import it.polimi.ingsw.view.gui.data.User;
 import javafx.collections.FXCollections;
@@ -12,17 +11,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller of the ScoreView Scene. This class implements Initializable and SceneInterface in order
+ * to Override the interface methods.
+ */
 public class ScoreViewController implements Initializable, SceneInterface {
     private Client client;
     private Stage stage;
@@ -48,16 +51,34 @@ public class ScoreViewController implements Initializable, SceneInterface {
         /*no need to initialize something*/
     }
 
+    /**
+     * Setter method to store the Client Object in order to call methods on it.
+     * @param client The Client object.
+     */
     public void setClient(Client client) {
         this.client = client;
     }
+
+    /**
+     * Setter method to store the Stage object in order to call methods on it.
+     * @param stage The Stage object.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    /**
+     * Setter method to store the GuiHandler object in order to call methods on it.
+     * @param guiHandler The Stage object.
+     */
     public void setGuiHandler(GuiHandler guiHandler) {
         this.guiHandler = guiHandler;
     }
 
+    /**
+     * Load on the TableView all the players of the match and their scores. Also calls dispayWinner() method.
+     * @param playerScore List containing all the player's username and their score.
+     */
     public void loadScores(String playerScore) {
         ObservableList<String> scoreList = FXCollections.observableArrayList(Arrays.asList(playerScore.split(",")));
 
@@ -74,6 +95,9 @@ public class ScoreViewController implements Initializable, SceneInterface {
         displayWinner();
     }
 
+    /**
+     * Show on the screen the name of the winner or a drawn message in case there are more top score players.
+     */
     private void displayWinner() {
         int maxScore = -1;
         int tempScore;
@@ -98,11 +122,20 @@ public class ScoreViewController implements Initializable, SceneInterface {
 
     }
 
+    /**
+     * Method called when the player click on the playAgain button. Call sendCommand method on a client object to communicate
+     * to the server that the player wants to play again.
+     */
     @FXML
     public void handleMouseClicked() {
         client.sendCommand("playAgain "+client.getName());
     }
 
+    /**
+     * Method used to change the ScoreView scene to WaitingRoom scene. Loads the WaitingRoom fxml file, get the WaitingRoom controller
+     * and set it into the guiHandler SceneInterface object.
+     * @throws IOException If the file can't be loaded this exception will be thrown.
+     */
     private void changeScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/waitingRoomGui.fxml"));
         Parent root = fxmlLoader.load();
@@ -127,15 +160,24 @@ public class ScoreViewController implements Initializable, SceneInterface {
     }
 
     @Override
+    public void handleAlert(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null);
+        alert.setContentText(alertMessage);
+
+        alert.showAndWait();
+    }
+
+    @Override
     public void handleConnectedPlayers(String connectedPlayers) {
         this.connectedPlayerList = FXCollections.observableArrayList(Arrays.asList(connectedPlayers.split(" ")));
     }
 
-    @Override
-    public void handleAlert(String message) {
-        AlertWindow.display("Alert", message);
-    }
-
+    /**
+     * {@inheritDoc}
+     * Call the method changeScene()
+     */
     @Override
     public void handleTimer(String time) {
         this.time = time;

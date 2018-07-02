@@ -10,7 +10,16 @@ import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.util.ArrayList;
 
+/**
+ * Class defining the concrete state ChooseDice1,in this state a player can chose a ToolCard, a Position, or Pass moves.
+ */
 public class ChooseDice1 implements TurnState {
+    private static final int TOOLCARD_1 = 1;
+    private static final int TOOLCARD_5 = 5;
+    private static final int TOOLCARD_6 = 6;
+    private static final int TOOLCARD_9 = 9;
+    private static final int TOOLCARD_10 = 10;
+    private static final int TOOLCARD_11 = 11;
     private Turn turn;
     private Dice chosenDice;
     private Pos posDiceChosen;
@@ -18,19 +27,24 @@ public class ChooseDice1 implements TurnState {
     private InspectorContext inspectorContext;
     private InspectorPlace inspectorPlace;
 
+    /**
+     * Classic constructor.
+     * @param turn Store the Turn object in order to call methods on it.
+     * @param chosenDice The Dice the player has selected.
+     * @param posDiceChosen The Position of the Dice the player has selected.
+     */
     public ChooseDice1(Turn turn, Dice chosenDice, Pos posDiceChosen) {
         this.turn = turn;
         this.chosenDice = chosenDice;
         this.posDiceChosen = posDiceChosen;
-
         this.inspectorContext = turn.getInspectorContext();
         this.inspectorPlace = turn.getInspectorPlace();
-        this.toolList.add(1);
-        this.toolList.add(5);
-        this.toolList.add(6);
-        this.toolList.add(9);
-        this.toolList.add(10);
-        this.toolList.add(11);
+        this.toolList.add(TOOLCARD_1);
+        this.toolList.add(TOOLCARD_5);
+        this.toolList.add(TOOLCARD_6);
+        this.toolList.add(TOOLCARD_9);
+        this.toolList.add(TOOLCARD_10);
+        this.toolList.add(TOOLCARD_11);
     }
 
     //GETTING MOVE METHODS

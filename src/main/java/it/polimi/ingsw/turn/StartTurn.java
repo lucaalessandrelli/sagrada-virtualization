@@ -10,29 +10,45 @@ import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 import java.util.ArrayList;
 
-
+/**
+ * Class defining the concrete state StartTurn, in this state the player can chose a ToolCard, a Dice, or Pass moves.
+ */
 public class StartTurn implements TurnState {
+    private static final int TOOLCARD_2 = 2;
+    private static final int TOOLCARD_3 = 3;
+    private static final int TOOLCARD_4 = 4;
+    private static final int TOOLCARD_7 = 7;
+    private static final int TOOLCARD_12 = 12;
     private Turn turn;
     private ArrayList<Integer> toolList = new ArrayList<>();
     private InspectorContext inspectorContext;
 
+    /**
+     * Classic constructor
+     * @param turn Store the Turn object in order to call methods on it.
+     */
     public StartTurn(Turn turn) {
         this.turn = turn;
         this.inspectorContext = turn.getInspectorContext();
-        this.toolList.add(2);
-        this.toolList.add(3);
-        this.toolList.add(4);
-        this.toolList.add(12);
-        this.toolList.add(7);
+        this.toolList.add(TOOLCARD_2);
+        this.toolList.add(TOOLCARD_3);
+        this.toolList.add(TOOLCARD_4);
+        this.toolList.add(TOOLCARD_7);
+        this.toolList.add(TOOLCARD_12);
     }
 
     //GETTING MOVE METHODS
+
+    /**
+     * {@inheritDoc}
+     * The ToolCards's id that the player can chose in this state are: 2,3,4,12 (cannot be used in the first round),7 (can be used only in the second turn of a given round).
+     */
     @Override
     public void receiveMove(ToolCard toolCard) throws WrongMoveException {
         int cardId = toolCard.getID();
         Player currentPlayer = turn.getPlayer();
-        if(toolList.contains(cardId) && (inspectorContext.check(toolCard, currentPlayer.getToolCards(),currentPlayer)) && ((cardId != 7) ||
-                (!turn.isFirstBracket())) && ((cardId!=12) || (turn.getRoundNumber()!=1))) {
+        if(toolList.contains(cardId) && (inspectorContext.check(toolCard, currentPlayer.getToolCards(),currentPlayer)) && ((cardId != TOOLCARD_7) ||
+                (!turn.isFirstBracket())) && ((cardId!=TOOLCARD_12) || (turn.getRoundNumber()!=1))) {
 
             //call the modifier method to update the cost of the toolcard and the favtokens of the player
             turn.getModifier().updateToolCardPrice(toolCard,currentPlayer);
@@ -60,5 +76,4 @@ public class StartTurn implements TurnState {
     public void receiveMove(String pass) {
         turn.setState(new EndTurn(turn));
     }
-
 }
