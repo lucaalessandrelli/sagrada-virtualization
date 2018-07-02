@@ -94,7 +94,7 @@ public class InspectorPlace {
      * @param pos Chosen pos.
      * @return True if is on the frame.
      */
-    private boolean checkFrame(Pos pos){
+    protected boolean checkFrame(Pos pos){
         int x = pos.getX();
         int y = pos.getY();
         if((x>MINROW && x<MAXROW) && (y==MINCOL || y==MAXCOL)){
