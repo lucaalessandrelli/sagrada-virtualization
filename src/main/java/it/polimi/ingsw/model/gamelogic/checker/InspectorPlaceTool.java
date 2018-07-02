@@ -1,11 +1,10 @@
 package it.polimi.ingsw.model.gamelogic.checker;
 
-import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.Pos;
+import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,7 +57,11 @@ public class InspectorPlaceTool implements InspectorTool {
          * @return True if placing respect rules of tool card.
          */
         protected boolean checkFrame(){
-            return (checkPos() && checkColour() && checkNumber() && particularFrame());
+            if(window.isEmpty()){
+                return (checkPos() && checkColour() && checkNumber() && particularFrame())&&super.checkFrame(pos);
+            }else{
+                return (checkPos() && checkColour() && checkNumber() && particularFrame());
+            }
         }
 
         /**
