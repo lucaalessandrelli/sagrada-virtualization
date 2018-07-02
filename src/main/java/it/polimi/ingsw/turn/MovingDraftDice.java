@@ -2,7 +2,6 @@ package it.polimi.ingsw.turn;
 
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
-import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlaceTool;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
@@ -13,7 +12,6 @@ public class MovingDraftDice implements TurnState {
     private Pos posChosenDice;
     private Pos toolPos;
     private InspectorPlaceTool inspectorPlaceTool;
-    private InspectorPlace inspectorPlace;
 
     public MovingDraftDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
@@ -22,7 +20,6 @@ public class MovingDraftDice implements TurnState {
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
         this.inspectorPlaceTool = turn.getInspectorPlaceTool();
-        this.inspectorPlace = turn.getInspectorPlace();
     }
 
     //GETTING MOVE METHODS
