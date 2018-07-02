@@ -5,7 +5,9 @@ import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Property;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WindowPatternCard {
     private int num;
@@ -229,6 +231,13 @@ public class WindowPatternCard {
     }
 
     public boolean isEmpty() {
+        for (List<Cell> cells:matr) {
+            for (Cell c:cells) {
+                if(c.isOccupied())
+                    return true;
+            }
+        }
+        return false;
     }
 }
 

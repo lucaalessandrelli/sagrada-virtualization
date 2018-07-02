@@ -27,7 +27,7 @@ public class InspectorPlaceTest {
         //this should return true because is a white cell
         Dice d = new Dice(Colour.GREEN);
         Pos pos = new Pos(0,3);
-        assertTrue(tester.checkFirst(d,pos,windowPatternCard));
+        assertTrue(tester.check(d,pos,windowPatternCard));
 
     }
 
