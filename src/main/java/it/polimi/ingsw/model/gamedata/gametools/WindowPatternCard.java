@@ -227,6 +227,9 @@ public class WindowPatternCard {
     public void resetSelection() {
         matr.forEach(cells -> cells.forEach(cell -> cell.getDice().deSelect()));
     }
+
+    public boolean isEmpty() {
+    }
 }
 
 

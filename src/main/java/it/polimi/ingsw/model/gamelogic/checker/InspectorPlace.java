@@ -23,19 +23,36 @@ public class InspectorPlace {
      * @param window Player's pattern card where check rules.
      * @return True if conditions are verified.
      */
-    public boolean checkFirst(Dice dice, Pos pos, WindowPatternCard window){
+    private boolean checkFirst(Dice dice, Pos pos, WindowPatternCard window){
         return (checkPos(pos, window) && checkColour(window, pos, dice) && checkNumber(window, pos, dice) && checkFrame(pos));
     }
 
     /**
-     * Check if the dice could be placed on the chosen position following classic rules.
+     * Check if the dice could be placed on the chosen position verifying if is the first placement.
      * @param dice Dice to place.
      * @param pos Chosen position.
      * @param window Player's pattern card where check rules.
      * @return True if conditions are verified.
      */
     public boolean check(Dice dice, Pos pos, WindowPatternCard window) {
+        if(window.isEmpty()){
+            return checkFirst(dice,pos,window);
+        }else{
+          return checkNormal(dice,pos,window);
+        }
+    }
+
+    /**
+     * Check the normal placement restrictions.
+     * @param dice Dice to place.
+     * @param pos Chosen position.
+     * @param window Player's pattern card where check rules.
+     * @return True if conditions are verified.
+     */
+
+    private boolean checkNormal(Dice dice, Pos pos, WindowPatternCard window) {
         return (checkPos(pos,window) && checkColour(window,pos,dice) && checkNumber(window,pos,dice) && checkCol(pos,window,dice) && checkRow(pos,window,dice) && !particularFrame(pos,window));
+
     }
 
     /**
