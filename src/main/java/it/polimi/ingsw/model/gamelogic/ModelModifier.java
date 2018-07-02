@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.*;
-
 import java.util.List;
 
 /**
