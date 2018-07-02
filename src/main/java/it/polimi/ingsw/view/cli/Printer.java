@@ -797,6 +797,9 @@ public class Printer {
 
     }
 
+    public void printChooseDice() {
+    }
+
     private class Deparser {
 
         String myplayer;

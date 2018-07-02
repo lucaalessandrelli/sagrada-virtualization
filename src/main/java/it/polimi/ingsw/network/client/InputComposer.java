@@ -21,6 +21,7 @@ public class InputComposer {
     private static final String RETRY = "retry";
     private static final String MYCARD = "mycard ";
     private static final String PASS = "pass";
+    private static final String NUMBER = "number ";
 
     private static final String ALERT = "alert Formato mossa errato!";
     private static final String ERROR = "error";
@@ -31,6 +32,7 @@ public class InputComposer {
 
     private Client client;
     private List<String> words;
+
     public InputComposer(Client client) {
         this.client = client;
         words = new ArrayList<>();
@@ -85,10 +87,23 @@ public class InputComposer {
             return CHOOSECARD+client.getNumOfMatch()+" "+client.getName()+" "+res;
         }else if(command.equals(PASS)){
             return MOVE+client.getNumOfMatch()+" "+client.getName()+" "+PASS;
+        }else if(command.startsWith(NUMBER)){
+            res=command.replace(NUMBER,"");
+            return getDiceData(res,gameData);
         }
 
         return ERROR;
 
+    }
+
+    private String getDiceData(String res, GameData gameData) {
+        try{
+            int num = Integer.parseInt(res);
+            return MOVE+client.getNumOfMatch()+" "+client.getName()+" "+"D;"+gameData.getChangedDice(num)+","+"0"+" --";
+        }catch (RuntimeException e){
+            client.setServiceMessage(ALERT);
+            return ERROR;
+        }
     }
 
     private String getPos(String res) {

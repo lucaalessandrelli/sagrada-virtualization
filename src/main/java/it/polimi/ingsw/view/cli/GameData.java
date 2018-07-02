@@ -9,6 +9,7 @@ public class GameData {
     private List<String> draftPool;
     private List<List<String>> roundTrack;
     private String[][] restrictions;
+    private int lastSelectedDice;
 
     GameData(String name){
         player=name;
@@ -17,6 +18,7 @@ public class GameData {
             roundTrack.add(i,new ArrayList<>());
         }
         restrictions = new String[3][4];
+        lastSelectedDice=-1;
     }
 
     void setRoundTrack(String roundTrack) {
@@ -58,6 +60,7 @@ public class GameData {
     }
 
     public String getDraft(int x) {
+        lastSelectedDice=x;
         return draftPool.get(x);
     }
 
@@ -67,5 +70,10 @@ public class GameData {
 
     public String getRound(int x, int y) {
         return roundTrack.get(x).get(y);
+    }
+
+    public String getChangedDice(int num) {
+        String s = draftPool.get(lastSelectedDice);
+        return num+","+s.charAt(2)+lastSelectedDice;
     }
 }

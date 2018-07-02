@@ -10,6 +10,7 @@ public class CliHandler extends AbstractView {
     private Printer printer;
     private InputComposer composer;
     private GameData gameData;
+    private boolean specialToolcCard;
 
     public CliHandler(Client client){
         this.client= client;
@@ -17,6 +18,7 @@ public class CliHandler extends AbstractView {
         this.scene = new LoginState(printer,client,this);
         this.composer = new InputComposer(client);
         this.gameData = new GameData(client.getName());
+        this.specialToolcCard = false;
     }
 
     public void initialize() {
@@ -30,6 +32,9 @@ public class CliHandler extends AbstractView {
     public void receiveCommand(){
         while(client.connected()) {
             String cmd =composer.sanitize(printer.getCommand(),gameData);
+            if(cmd.contains("--")&&!specialToolcCard){
+                cmd="error";
+            }
             client.sendCommand(cmd);
         }
     }
@@ -42,7 +47,7 @@ public class CliHandler extends AbstractView {
         printer.welcome();
     }
 
-    public void setIdMatch(Integer num) {
+    void setIdMatch(Integer num) {
         client.setNumMatch(num);
     }
 
@@ -57,7 +62,8 @@ public class CliHandler extends AbstractView {
         gameData.setRestrictions(restrictions);
     }
 
-    void setConnected() {
-        client.setConnected(true);
+    void setSpecialToolcCard(boolean specialToolcCard) {
+        this.specialToolcCard = specialToolcCard;
     }
+
 }
