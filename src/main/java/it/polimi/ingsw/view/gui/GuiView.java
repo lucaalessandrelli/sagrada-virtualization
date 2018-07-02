@@ -16,9 +16,9 @@ public class GuiView extends Application {
     private static GuiHandler guiHandler;
 
     /**
-     * Private constructor to prevent the instantiation of any GuiView object
+     * Empty constructor
      */
-    private GuiView() {
+    public GuiView() {
         /*no need to create an instance of this class*/
     }
 
@@ -56,6 +56,7 @@ public class GuiView extends Application {
         controller.setStage(primaryStage);
 
         Scene scene = new Scene(root);
+        guiHandler.setGui(controller);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.setTitle("Sagrada");
