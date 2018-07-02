@@ -234,10 +234,10 @@ public class WindowPatternCard {
         for (List<Cell> cells:matr) {
             for (Cell c:cells) {
                 if(c.isOccupied())
-                    return true;
+                    return false;
             }
         }
-        return false;
+        return true;
     }
 }
 

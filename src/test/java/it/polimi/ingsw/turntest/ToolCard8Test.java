@@ -111,6 +111,7 @@ public class ToolCard8Test {
         p1.setPublicObjects(publicObjects);
 
         Dice di = new Dice(Colour.RED);
+        di.setNumber(1);
         p1.getWindowPatternCard().placeDice(di,1,0);
 
         Turn turn = new Turn(p1, round, 1, true, table);
@@ -135,9 +136,10 @@ public class ToolCard8Test {
 
         assertEquals(state, lastName(turn.getState().getClass().toString(), state.length()+1));
 
-
+        d = new Dice(Colour.YELLOW);
+        d.setNumber(2);
         pos.setX(1);
-        pos.setY(4);
+        pos.setY(1);
         try {
             turn.receiveMove(pos);
         } catch (WrongMoveException e) {
@@ -170,7 +172,7 @@ public class ToolCard8Test {
         assertEquals(state, lastName(turn.getState().getClass().toString(), state.length()+1));
 
         try {
-            turn.receiveMove(new Pos(2,1));
+            turn.receiveMove(new Pos(2,0));
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }

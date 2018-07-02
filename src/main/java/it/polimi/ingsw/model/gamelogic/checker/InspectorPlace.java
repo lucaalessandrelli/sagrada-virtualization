@@ -24,6 +24,7 @@ public class InspectorPlace {
      * @return True if conditions are verified.
      */
     private boolean checkFirst(Dice dice, Pos pos, WindowPatternCard window){
+        System.out.print("checkpos " + checkPos(pos,window) + ";colour " + checkColour(window,pos,dice) + ";number " + checkNumber(window,pos,dice) + ";frame " + checkFrame(pos));
         return (checkPos(pos, window) && checkColour(window, pos, dice) && checkNumber(window, pos, dice) && checkFrame(pos));
     }
 
