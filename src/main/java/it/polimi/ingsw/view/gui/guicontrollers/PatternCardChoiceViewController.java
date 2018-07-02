@@ -145,7 +145,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
      * @throws IOException If the file can't be loaded this exception will be thrown.
      */
     private void changeScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGuiResizable.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
         Parent root = fxmlLoader.load();
 
         // Get the Controller from the FXMLLoader

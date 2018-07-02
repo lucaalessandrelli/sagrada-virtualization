@@ -170,7 +170,7 @@ public class LoginViewController implements Initializable, SceneInterface {
      * @throws IOException If the file can't be loaded this exception will be thrown.
      */
     private void changeSceneToMatch() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGuiResizable.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/matchGui.fxml"));
         Parent root = fxmlLoader.load();
 
         // Get the Controller from the FXMLLoader

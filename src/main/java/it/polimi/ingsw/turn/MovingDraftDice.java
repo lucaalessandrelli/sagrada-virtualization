@@ -29,22 +29,12 @@ public class MovingDraftDice implements TurnState {
 
     @Override
     public void receiveMove(Pos pos) throws WrongMoveException {
-        if(turn.getRoundNumber() == 1 && turn.isFirstBracket() && turn.getToolCard().getID() != 8) {
-            if (inspectorPlace.checkFirst(chosenDice,pos,turn.getPlayer().getWindowPatternCard()) && inspectorPlaceTool.check(chosenDice, pos, turn.getToolCard())) {
-                //call modifier
-                turn.getModifier().positionDiceFromDraft(chosenDice, posChosenDice, pos);
-                turn.setDynamicState(chosenDice, posChosenDice, toolDice, toolPos);
-            } else {
-                throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole del primo piazzamento e relative alla carta selezionata.");
-            }
+        if (inspectorPlaceTool.check(chosenDice, pos, turn.getToolCard())) {
+            //call modifier
+            turn.getModifier().positionDiceFromDraft(chosenDice, posChosenDice, pos);
+            turn.setDynamicState(chosenDice, posChosenDice, toolDice, toolPos);
         } else {
-            if (inspectorPlaceTool.check(chosenDice, pos, turn.getToolCard())) {
-                //call modifier
-                turn.getModifier().positionDiceFromDraft(chosenDice, posChosenDice, pos);
-                turn.setDynamicState(chosenDice, posChosenDice, toolDice, toolPos);
-            } else {
-                throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");
-            }
+            throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento e relative alla carta selezionata.");
         }
     }
 }
