@@ -219,6 +219,10 @@ public class MatchViewController implements Initializable, SceneInterface {
     public void handleGameState(String gameState) {
         this.currentState = gameState;
 
+        //start testing states and moves
+        System.out.println(currentState);
+        //end testing stats and moves
+
         if(currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE)) {
             Node node = GeneralFunctionalities.getChildrenByIndex(draftPool,diceChosenRow,diceChosenColumn);
             ViewDice dice = GeneralFunctionalities.findDiceInfo(node,diceList);
@@ -441,7 +445,6 @@ public class MatchViewController implements Initializable, SceneInterface {
                 currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2) ||
                 currentState.equals(START) ||currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE))) {
             Node source = (Node) mouseEvent.getSource();
-            source.setEffect(new DropShadow());
             ViewDice dice = GeneralFunctionalities.findDiceInfo(source,diceList);
             client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+GridPane.getColumnIndex(source.getParent())+","+GridPane.getRowIndex(source.getParent()));
         } else {
@@ -456,7 +459,6 @@ public class MatchViewController implements Initializable, SceneInterface {
                 currentState.equals(DRAFTDICE1) || currentState.equals(DRAFTDICE2) ||
                 currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE))) {
             Node source = (Node) mouseEvent.getSource();
-            source.setEffect(new DropShadow());
             ViewDice dice = GeneralFunctionalities.findDiceInfo(source,diceList);
             client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" D;"+dice.getDiceNumber()+","+dice.getDiceColor()+","+GridPane.getRowIndex(source.getParent())+","+GridPane.getColumnIndex(source.getParent()));
         } else {
@@ -469,7 +471,6 @@ public class MatchViewController implements Initializable, SceneInterface {
         if(!(currentState.equals(WINDOWDICE1) || currentState.equals(WINDOWDICE2) ||
                 currentState.equals(ROUNDDICE1) || currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE))) {
             Node source = (Node) mouseEvent.getSource();
-            source.setEffect(new DropShadow());
             ViewDice dice = GeneralFunctionalities.findDiceInfo(source,diceList);
             int col = GridPane.getColumnIndex(source.getParent());
             int row = GridPane.getRowIndex(source.getParent());

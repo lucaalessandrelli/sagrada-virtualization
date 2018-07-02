@@ -8,22 +8,43 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+/**
+ * This static class extends Application and it's used to start the GUI
+ */
 public class GuiView extends Application {
-    private static Client client;
+    private static Client userClient;
     private static GuiHandler guiHandler;
 
-    public GuiView() {
+
+    /**
+     * Private constructor to prevent the instantiation of any GuiView object
+     */
+    private GuiView() {
         /*no need to create an instance of this class*/
     }
 
-    public static void setClient(Client c) {
-        client = c;
+    /**
+     * Setter method, used to save up the Client object for it's needed also in further GUI scenes.
+     * @param client Reference to the Client object
+     */
+    public static void setClient(Client client) {
+        userClient = client;
     }
 
+    /**
+     * Setter method, used to save up the GuiHandler object for it's needed also in further GUI scenes.
+     * @param handler Reference to the GuiHandler object
+     */
     public static void setGuiHandler(GuiHandler handler) {
         guiHandler = handler;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This method creates the main stage and launches the Login scene.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/loginGui.fxml"));
@@ -32,7 +53,7 @@ public class GuiView extends Application {
         // Get the Controller from the FXMLLoader
         LoginViewController controller = fxmlLoader.getController();
         // Set data in the controller
-        controller.setClient(client);
+        controller.setClient(userClient);
         controller.setGuiHandler(guiHandler);
         controller.setStage(primaryStage);
 
@@ -42,9 +63,9 @@ public class GuiView extends Application {
         primaryStage.setTitle("Sagrada");
 
         primaryStage.setOnCloseRequest(event -> {
-            //If the numOfMatch in the client isn't the default one
-            if(client.getNumOfMatch() >= 0) {
-                client.sendCommand("disconnect " + client.getNumOfMatch() + " " + client.getName());
+            //If the numOfMatch of the client isn't the default one
+            if(userClient.getNumOfMatch() >= 0) {
+                userClient.sendCommand("disconnect " + userClient.getNumOfMatch() + " " + userClient.getName());
             }
             System.exit(0);
         });
@@ -52,6 +73,10 @@ public class GuiView extends Application {
         primaryStage.show();
     }
 
+
+    /**
+     * This method call the launch() method, which manage to call the Start method
+     */
     public static void launching() {
         launch();
     }
