@@ -25,7 +25,7 @@ public class Round {
     private PlayersContainer players;
     private Table table;
     private Turn turn;
-    private Player currTurn;
+    private Player currPlayer;
     private Match match;
     private long timerMove;
     private ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
@@ -49,7 +49,7 @@ public class Round {
         Iterator<Player> iterator = players.getIterator();
         while(iterator.hasNext()){
             p = iterator.next();
-            currTurn = p;
+            currPlayer = p;
             if (p.isActive()) {
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
                 turn.startTurn();
@@ -57,13 +57,14 @@ public class Round {
                 updateBeforeMove();
                 try {
                     Thread.sleep(timerMove);
-                    p.setActivity(false);
+                    p.noMove();
                 } catch (InterruptedException e) {
                     players.notifyChanges();
                 }
                 if (!players.checkActivity()) {
                     throw new NotEnoughPlayersException();
                 }
+                p.resetMove();
                 table.resetSelection();
             }
         }
@@ -85,7 +86,7 @@ public class Round {
      * @return name of player who has turn
      */
     public String getCurrTurn() {
-        return currTurn.getUsername();
+        return currPlayer.getUsername();
     }
 
     /**
@@ -103,12 +104,15 @@ public class Round {
         players.notifyChanges();
         String name = turn.getState().getClass().getName();
         name = name.replace(PATH,"");
-        currTurn.notifyState(name);
+        currPlayer.notifyState(name);
     }
 
+    /**
+     * sends the start turn message to the current player
+     */
     private void updateBeforeMove(){
         String name = turn.getState().getClass().getName().replace(PATH,"");
-        currTurn.notifyState(name);
+        currPlayer.notifyState(name);
     }
 
     /**
@@ -120,7 +124,7 @@ public class Round {
             turn.receiveMove(p);
             updateAfterMove();
         } catch (WrongMoveException e) {
-            currTurn.wrongMove(e.getMessage());
+            currPlayer.wrongMove(e.getMessage());
         }
     }
 
@@ -133,7 +137,7 @@ public class Round {
             turn.receiveMove(s);
             updateAfterMove();
         } catch (WrongMoveException e) {
-            currTurn.wrongMove(e.getMessage());
+            currPlayer.wrongMove(e.getMessage());
         }
     }
 
@@ -146,7 +150,7 @@ public class Round {
             turn.receiveMove(t);
             updateAfterMove();
         } catch (WrongMoveException e) {
-            currTurn.wrongMove(e.getMessage());
+            currPlayer.wrongMove(e.getMessage());
         }
     }
 
@@ -160,7 +164,7 @@ public class Round {
             turn.receiveMove(d,p);
             updateAfterMove();
         } catch (WrongMoveException e) {
-            currTurn.wrongMove(e.getMessage());
+            currPlayer.wrongMove(e.getMessage());
         }
     }
 
@@ -169,7 +173,7 @@ public class Round {
      * @param p
      */
     public void inactivatePlayer(Player p) {
-        if (currTurn != p) {
+        if (currPlayer != p) {
             exec.scheduleWithFixedDelay(() -> p.setActivity(false), 0, 500, TimeUnit.MILLISECONDS);
         }
     }

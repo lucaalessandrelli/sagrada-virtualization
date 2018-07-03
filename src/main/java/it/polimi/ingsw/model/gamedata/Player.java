@@ -14,20 +14,33 @@ public class Player {
     private WindowPatternCard myWindow;
     private int myFavTokens;
     private VirtualViewObserver observer;
+    private boolean hasMoved;
 
 
     //just get the username from user
     public Player(String username) {
         this.username = username;
-        active = true;
+        this.active = true;
+        this.hasMoved = false;
     }
 
     public synchronized boolean isActive() {
         return active;
     }
 
+    public void resetMove(){
+        hasMoved = false;
+    }
 
-    //SETTER
+    public void moveDone(){
+        hasMoved=true;
+    }
+
+    public void noMove(){
+        if (!this.hasMoved){
+            setActivity(false);
+        }
+    }
 
     public synchronized void setActivity(boolean active) {
         this.active = active;
