@@ -212,23 +212,13 @@ public class ToolCard5Test {
 
         p1.getDraftPool().chooseDice(2).setNumber(5);
 
-        if(!p1.getDraftPool().chooseDice(2).getColour().equals(d6.getColour())) {
             try {
-                turn.receiveMove(new Pos(3, 4));
+                turn.receiveMove(new Pos(1, 4));
             } catch (WrongMoveException e) {
                 e.printStackTrace();
             } catch (NullPointerException e) {
                 System.out.println("If this is printed we have a NullPointerException that is right");
             }
-        }
-        else {
-            try {
-                turn.receiveMove("pass");
-            } catch (WrongMoveException e) {
-                e.printStackTrace();
-            }
-        }
-
 
         state = "EndTurn";
 

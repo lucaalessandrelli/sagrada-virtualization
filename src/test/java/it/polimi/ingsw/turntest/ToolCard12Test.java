@@ -832,7 +832,7 @@ public class ToolCard12Test {
     }
 
     @Test
-    public void testNotInFirstRound() {
+    public void testInFirstRound() {
         ToolCard tester = pullOutThatCard(12);
 
         ArrayList<Player> players = new ArrayList<>();
@@ -944,7 +944,17 @@ public class ToolCard12Test {
 
         assertEquals(state, lastName(turn.getState().toString(), state.length() + 1));
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(tester);});
+
+        try {
+            turn.receiveMove(tester);
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
+
+
+        state = "SelectingRoundTrackDice";
+
+        assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
     }
 
