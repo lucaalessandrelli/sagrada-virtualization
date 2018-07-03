@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
  * Static class that defines a window screen that let the player select the value of a Dice.
  */
 public class SelValueWindow {
+    private static final int DRAFT_ROWS = 3;
     private static final int NUM_ROWS = 0;
     private static final int NUM_COL = 6;
     private static final String SELVALUE = "SelectingValue";
@@ -81,7 +82,8 @@ public class SelValueWindow {
     private static void handleValueChosen(MouseEvent event,String currentState, Client client,ViewDice dice,int diceChosenRow,int diceChosenColumn) {
         if(currentState.equals(SELVALUE)) {
             Node source = (Node) event.getSource();
-            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + (GridPane.getColumnIndex(source)+1) + "," + dice.getDiceColor() + "," + diceChosenRow + "," + diceChosenColumn);
+            int x = DRAFT_ROWS*diceChosenRow+diceChosenColumn;
+            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + (GridPane.getColumnIndex(source)+1) + "," + dice.getDiceColor() + "," + x + "," + 0);
             stage.close();
         } else {
             handleAlert(ALERT_DICE_SEL_VALUE);

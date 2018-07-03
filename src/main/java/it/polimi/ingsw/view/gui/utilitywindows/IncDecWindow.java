@@ -21,6 +21,7 @@ import java.util.List;
  * Static class that defines a window screen that let the player increment or decrement the value of a Dice.
  */
 public class IncDecWindow {
+    private static final int DRAFT_ROWS = 3;
     private static final int NUM_ROWS = 0;
     private static final int NUM_COL = 2;
     private static final String INCDECVALUE = "IncDecValue";
@@ -115,7 +116,8 @@ public class IncDecWindow {
             ViewDice chosenDice = GeneralFunctionalities.findDiceInfo(source, viewDiceList);
 
             if (!((valueToChange == 1 && diceColumn == 0) || (valueToChange == 6 && diceColumn == 1))) {
-                client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceNumber() + "," + chosenDice.getDiceColor() + "," + diceChosenRow + "," + diceChosenColumn);
+                int x = DRAFT_ROWS*diceChosenRow+diceChosenColumn;
+                client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceNumber() + "," + chosenDice.getDiceColor() + "," + x + "," + 0);
                 stage.close();
             } else {
                 handleAlert(ALERT_DICE_INC_DEC_CHOICE_NOT_VALID);

@@ -204,7 +204,7 @@ public class ModelModifier {
      */
     public void changeDiceValue(Dice chosenDice, Pos posChosenDice, Dice toolDice) {
         //set the value of chosenDice to the toolDice one
-        chosenDice.setNumber(toolDice.getNumber());
+        //chosenDice.setNumber(toolDice.getNumber());
         draftPool.chooseDice(posChosenDice.getX()).setNumber(toolDice.getNumber());
     }
 }
