@@ -58,16 +58,16 @@ public interface SceneInterface {
      * This method is used to update the UI every time it changes.
      * @param setup String containing multiple messages divided by ';'.
      *              The meaning of those messages is listed here:
-     *              1) gamePlayers -> the list of all players that belongs to the match.
-     *              2) draftpool -> contains all the dice that belong to the draftPool.
-     *              3) toolcards -> contains a list of toolCard's id, their cost and their description.
-     *              4) favors -> contains the username of a player along with his favorToken's number.
-     *              5) state -> contains the player name along with his state (active/inactive).
-     *              6) publiccards -> contains the list of objectCard's id along with their description.
-     *              7) privatecard -> contains the idNumber of the privateObjectiveCard and it's color.
-     *              8) roundtrack -> contains all the dice that belong to the roundTrack.
-     *              9) restrictions -> contains all the restriction of a given player's patternCard.
-     *              10) dices -> contains all the dices placed on a given player's patternCard.
+     *              1) gamePlayers : the list of all players that belongs to the match.
+     *              2) draftpool : contains all the dice that belong to the draftPool.
+     *              3) toolcards : contains a list of toolCard's id, their cost and their description.
+     *              4) favors : contains the username of a player along with his favorToken's number.
+     *              5) state : contains the player name along with his state (active/inactive).
+     *              6) publiccards : contains the list of objectCard's id along with their description.
+     *              7) privatecard : contains the idNumber of the privateObjectiveCard and it's color.
+     *              8) roundtrack : contains all the dice that belong to the roundTrack.
+     *              9) restrictions : contains all the restriction of a given player's patternCard.
+     *              10) dices : contains all the dices placed on a given player's patternCard.
      */
     default void updateBoard(String setup) {}
 
