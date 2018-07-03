@@ -40,7 +40,7 @@ public class ModelModifier {
      * @param toolPos Position of the dice chosen during toolCard
      */
     public void switchDice(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
-        Dice draftDice = new Dice(draftPool.chooseDice(posChosenDice.getX()).getColour());
+        /*Dice draftDice = new Dice(draftPool.chooseDice(posChosenDice.getX()).getColour());
         draftDice.setNumber(draftPool.chooseDice(posChosenDice.getX()).getNumber());
         Dice roundDice = new Dice(roundTrack.getDice(toolPos).getColour());
         roundDice.setNumber(roundTrack.getDice(toolPos).getNumber());
@@ -48,6 +48,18 @@ public class ModelModifier {
 
         draftPool.setDice(roundDice,posChosenDice.getX());
         roundTrack.setDice(draftDice,toolPos);
+
+        //switch also the copy of the dice
+        chosenDice = toolDice;
+        posChosenDice = toolPos;*/
+        Dice draftDice = draftPool.chooseDice(posChosenDice.getX()); //reference copy
+        draftPool.removeDice(posChosenDice.getX()); //remove the dice from the draftPool
+
+        Dice roundDice = roundTrack.getDice(toolPos); //reference copy
+        roundTrack.removeDice(toolPos); //remove the dice from the roundTrack
+
+        draftPool.getDraftPool().add(posChosenDice.getX(),roundDice); //add the round track dice in the draftpool at the position defined by posDiceChosen
+        roundTrack.getDiceOnRoundtrack(toolPos.getX()).add(toolPos.getY(),draftDice); //add the draf pool dice in the roundtrack at the position defined by toolPos
 
         //switch also the copy of the dice
         chosenDice = toolDice;
@@ -114,8 +126,20 @@ public class ModelModifier {
      * @param toolPos Position of the dice chosen during toolCard
      */
     public void newDice(Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
-        diceBag.addDice(chosenDice);
+        /*diceBag.addDice(chosenDice);
         draftPool.setDice(diceBag.pullOut(1).get(0),posChosenDice.getX());
+        */
+
+        Dice draftDice = draftPool.chooseDice(posChosenDice.getX()); //reference copy
+        draftPool.removeDice(posChosenDice.getX()); //remove the dice from the draftPool
+
+        Dice newBagDice = diceBag.pullOut(1).get(0); //reference copy and removes the dice from the bag
+
+        diceBag.addDice(draftDice); //add to the bag the dice chosen by the player
+        draftPool.getDraftPool().add(posChosenDice.getX(),newBagDice); //add the new dice in the drafpool at the position defined by posChosenDice
+
+        chosenDice.setNumber(newBagDice.getNumber());
+        chosenDice.setColour(newBagDice.getColour().toString());
     }
 
     //Methods that are not automatic moves but still modifies the model due to some moves done by the player
@@ -166,9 +190,9 @@ public class ModelModifier {
      * @param pos Position of the cell in which the player wants to move the chosenDice
      */
     public void positionDiceFromWindow(Dice chosenDice, Pos posChosenDice, Pos pos) {
-        Dice d = windowPatternCard.getDice(posChosenDice);
+        Dice windowDice = windowPatternCard.getDice(posChosenDice);
         windowPatternCard.removeDice(posChosenDice);
-        windowPatternCard.placeDice(d, pos.getX(),pos.getY());
+        windowPatternCard.placeDice(windowDice, pos.getX(),pos.getY());
     }
 
     /**

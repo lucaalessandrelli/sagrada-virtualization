@@ -56,6 +56,10 @@ public class Dice {
         this.prop.setNumber(number);
     }
 
+    public void setColour(String colour) {
+        this.prop.setColour(Colour.isIn(colour.charAt(0)));
+    }
+
     public void setDice(Dice d){
         this.prop.setNumber(d.getNumber());
         this.prop.setColour(d.getColour());
