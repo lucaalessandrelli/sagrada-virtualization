@@ -24,10 +24,11 @@ public class IncDecWindow {
     private static final int NUM_ROWS = 0;
     private static final int NUM_COL = 2;
     private static final String INCDECVALUE = "IncDecValue";
-    private static final String ALERT_DICE_INC_DEC = "Non puoi aumentare/diminuire il valore di un dado in questa fase del turno.";
+    private static final String ALERT_STATE_NOT_VALID = "Non puoi aumentare/diminuire il valore di un dado in questa fase del turno.";
+    private static final String ALERT_DICE_INC_DEC_CHOICE_NOT_VALID = "Mossa sbagliata : non puoi cambiare un 1 in un 6 o un 6 in un 1.";
     private static Stage stage;
     private static final double OFFSET = 10;
-    private static int actualValue;
+    private static int valueToChange;
 
     /**
      * Private constructor preventing instantiation of IncDecWindow objects.
@@ -51,7 +52,7 @@ public class IncDecWindow {
         List<ViewDice> viewDiceList = new ArrayList<>();
         int valueDecreased;
         int valueIncreased;
-        actualValue = Character.getNumericValue(dice.getDiceNumber());
+        valueToChange = Character.getNumericValue(dice.getDiceNumber());
 
         stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -60,16 +61,16 @@ public class IncDecWindow {
         AnchorPane anchorPane = new AnchorPane();
         GridPane gridPane = new GridPane();
 
-        if(actualValue == 6) {
-            valueDecreased = actualValue-1;
+        if(valueToChange == 6) {
+            valueDecreased = valueToChange-1;
             valueIncreased = 1;
-        } else if(actualValue == 1) {
+        } else if(valueToChange == 1) {
             valueDecreased = 6;
-            valueIncreased = actualValue+1;
+            valueIncreased = valueToChange+1;
 
         } else {
-            valueDecreased = actualValue-1;
-            valueIncreased = actualValue+1;
+            valueDecreased = valueToChange-1;
+            valueIncreased = valueToChange+1;
         }
 
         String infoDiceDecreased = dice.getDiceColor()+""+valueDecreased;
@@ -113,13 +114,16 @@ public class IncDecWindow {
             int diceColumn = GridPane.getColumnIndex(source);
             ViewDice chosenDice = GeneralFunctionalities.findDiceInfo(source, viewDiceList);
 
-            if (!(actualValue == 1 && diceColumn == 0) && !(actualValue == 6 && diceColumn == 1)) {
-                client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceColor() + "," + chosenDice.getDiceNumber() + "," + diceChosenRow + "," + diceChosenColumn);
+            if (!((valueToChange == 1 && diceColumn == 0) || (valueToChange == 6 && diceColumn == 1))) {
+                client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceNumber() + "," + chosenDice.getDiceColor() + "," + diceChosenRow + "," + diceChosenColumn);
+                stage.close();
+            } else {
+                handleAlert(ALERT_DICE_INC_DEC_CHOICE_NOT_VALID);
             }
         } else {
-            handleAlert(ALERT_DICE_INC_DEC);
+            handleAlert(ALERT_STATE_NOT_VALID);
         }
-        stage.close();
+
         event.consume();
     }
 

@@ -285,14 +285,14 @@ public class MatchViewController implements Initializable, SceneInterface {
         //end testing stats and moves
 
         if(currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE)) {
-            Node node = GeneralFunctionalities.getChildrenByIndex(draftPool,diceChosenRow,diceChosenColumn);
-            ViewDice dice = GeneralFunctionalities.findDiceInfo(node,diceList);
+            AnchorPane pane = (AnchorPane)GeneralFunctionalities.getChildrenByIndex(draftPool,diceChosenRow,diceChosenColumn);
+            ViewDice dice = GeneralFunctionalities.findDiceInfo(pane.getChildren().get(0),diceList);
 
             /*pop a window to let the player chose to increment or decrement the value of the dice*/
             if (currentState.equals(INCDECVALUE)) {
-                Platform.runLater(() -> SelValueWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
-            } else { /*pop a window to let the player chose the value of the dice*/
                 Platform.runLater(() -> IncDecWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
+            } else { /*pop a window to let the player chose the value of the dice*/
+                Platform.runLater(() -> SelValueWindow.display(client, dice, diceChosenRow, diceChosenColumn, currentState));
             }
         }
     }

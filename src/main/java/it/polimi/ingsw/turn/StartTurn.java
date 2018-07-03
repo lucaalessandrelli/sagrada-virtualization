@@ -55,7 +55,8 @@ public class StartTurn implements TurnState {
         Player currentPlayer = turn.getPlayer();
         if(toolList.contains(cardId) && (inspectorContext.check(toolCard, currentPlayer.getToolCards(),currentPlayer)) &&
                 ((cardId != TOOLCARD_7) || (!turn.isFirstBracket()))) {
-
+            //call this method to state that the player has done at least 1 successful move
+            currentPlayer.moveDone();
             //call the modifier method to update the cost of the toolcard and the favtokens of the player
             turn.getModifier().updateToolCardPrice(toolCard,currentPlayer);
             //setting the toolCard used in this turn, setting the list of states for the dynamic state machine, setting the list of operations for the AutomatedOperation State
@@ -77,6 +78,8 @@ public class StartTurn implements TurnState {
     @Override
     public void receiveMove(Dice dice, Pos pos) throws WrongMoveException {
         if(inspectorContext.check(dice,pos,turn.getPlayer().getDraftPool())) {
+            //call this method to state that the player has done at least 1 successful move
+            turn.getPlayer().moveDone();
             turn.setState(new ChooseDice1(turn, dice, pos));
         } else {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado. Selezionare un dado della Riserva.");
@@ -85,6 +88,8 @@ public class StartTurn implements TurnState {
 
     @Override
     public void receiveMove(String pass) {
+        //call this method to state that the player has done at least 1 successful move
+        turn.getPlayer().moveDone();
         turn.setState(new EndTurn(turn));
     }
 }

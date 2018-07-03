@@ -80,11 +80,12 @@ public class SelValueWindow {
      */
     private static void handleValueChosen(MouseEvent event,String currentState, Client client,ViewDice dice,int diceChosenRow,int diceChosenColumn) {
         if(currentState.equals(SELVALUE)) {
-            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + dice.getDiceColor() + "," + GridPane.getColumnIndex((Node) event.getSource()) + "," + diceChosenRow + "," + diceChosenColumn);
+            Node source = (Node) event.getSource();
+            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + (GridPane.getColumnIndex(source)+1) + "," + dice.getDiceColor() + "," + diceChosenRow + "," + diceChosenColumn);
+            stage.close();
         } else {
             handleAlert(ALERT_DICE_SEL_VALUE);
         }
-        stage.close();
         event.consume();
     }
 
