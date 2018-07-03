@@ -54,6 +54,7 @@ public class Round {
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
                 turn.startTurn();
                 players.notifyTurn(p.getUsername(), timerMove);
+                updateBeforeMove();
                 try {
                     Thread.sleep(timerMove);
                     p.setActivity(false);
@@ -102,6 +103,11 @@ public class Round {
         players.notifyChanges();
         String name = turn.getState().getClass().getName();
         name = name.replace(PATH,"");
+        currTurn.notifyState(name);
+    }
+
+    private void updateBeforeMove(){
+        String name = turn.getState().getClass().getName().replace(PATH,"");
         currTurn.notifyState(name);
     }
 
