@@ -84,11 +84,18 @@ public class MatchState implements SceneInterface {
 
     @Override
     public void handleGameState(String gameState) {
-        if(gameState.equals("SelectingValue")){
-            printer.printChooseDice();
-            cliHandler.setSpecialToolCard(true);
-        }else{
-            cliHandler.setSpecialToolCard(false);
+        switch (gameState) {
+            case "SelectingValue":
+                printer.printChooseDice();
+                cliHandler.setSpecialToolCard(true);
+                break;
+            case "IncDecValue":
+                printer.printIncDecDice();
+                cliHandler.setSpecialToolCard(true);
+                break;
+            default:
+                cliHandler.setSpecialToolCard(false);
+                break;
         }
 
     }

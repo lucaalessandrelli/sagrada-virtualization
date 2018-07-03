@@ -800,6 +800,9 @@ public class Printer {
     public void printChooseDice() {
     }
 
+    public void printIncDecDice() {
+    }
+
     private class Deparser {
 
         String myplayer;

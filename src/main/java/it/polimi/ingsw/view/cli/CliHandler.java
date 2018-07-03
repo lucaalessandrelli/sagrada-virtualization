@@ -98,7 +98,7 @@ public class CliHandler extends AbstractView {
 
     /**
      *
-     * @param specialToolCard true if is selected tool card 11
+     * @param specialToolCard true if is selected tool card 11 or 1
      */
     void setSpecialToolCard(boolean specialToolCard) {
         this.specialToolCard = specialToolCard;
