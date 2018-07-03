@@ -95,7 +95,8 @@ public class Printer {
     public String getName() {
         out.print(ansi().a(USERNAME).cursorDown(1).cursorLeft(USERNAME.length()));
         String name = in.nextLine();
-        while (name.equals("")) {
+        while (name.equals("")||name.contains(" ")) {
+            //inserisci qui l'avviso scritto nel blocco note
             name = in.nextLine();
         }
         return name;
