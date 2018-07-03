@@ -6,9 +6,8 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 /**
- * Class defining the concrete state ChooseDice2,in this state a player can chose a Position, or Pass move.
- * If he choose a Position the next state would be "EndTurn". Finally if he choose to pass
- * the next state would also be "EndTurn".
+ * Class defining the concrete state ChooseDice2,in this state a player can choose a Position, or Pass move.
+ * If he choose a Position the next state would be "EndTurn". Finally if he choose to pass the next state would also be "EndTurn".
  */
 public class ChooseDice2 implements TurnState {
     private Turn turn;
@@ -25,7 +24,6 @@ public class ChooseDice2 implements TurnState {
      * @param posDiceChosen The Position of the Dice the player has just selected (chosenDice).
      * @param toolDice The dice has chosen through the toolCard.
      * @param toolPos The position of the the Dice the player has chosen through the toolCard (toolDice).
-     *
      */
     public ChooseDice2(Turn turn, Dice chosenDice,Pos posDiceChosen, Dice toolDice, Pos toolPos) {
         this.turn = turn;

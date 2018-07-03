@@ -10,7 +10,7 @@ import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import java.util.ArrayList;
 
 /**
- * Class defining the concrete state StartTurn, in this state the player can chose a ToolCard, a Dice, or Pass move.
+ * Class defining the concrete state StartTurn, in this state the player can choose a ToolCard, a Dice, or Pass move.
  * If he choose a ToolCard then the next state would be dynamically loaded and the state "ToolBeforeDice" would be
  * set as CheckPoint state. If he choose a Dice the next state would be "ChooseDice1". Finally if he choose to pass
  * the next state would be "EndTurn".

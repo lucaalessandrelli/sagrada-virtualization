@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 /**
- * Class defining the concrete state StartTurn, in this state the player can chose a Dice, or Pass move.
+ * Class defining the concrete state ToolBeforeDice, in this state the player can chose a Dice, or Pass move.
  * If he choose a Dice the next state would be "ChooseDice2". Finally if he choose to pass
  * the next state would be "EndTurn".
  */
