@@ -11,7 +11,8 @@ import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 public interface TurnState {
 
     /**
-     * This method is called on concrete states when the player does a move, more precisely when he chose a ToolCard
+     * This method is called on concrete states when the player does a move, more precisely when he choose a ToolCard.
+     * As default throws a WrongMoveException.
      * @param toolCard The toolCard the player has chosen
      * @throws WrongMoveException Describe the type of wrong move the player has done.
      */
@@ -20,7 +21,8 @@ public interface TurnState {
     }
 
     /**
-     * This method is called on concrete states when the player does a move, more precisely when he chose a Dice
+     * This method is called on concrete states when the player does a move, more precisely when he choose a Dice.
+     * As default throws a WrongMoveException.
      * @param dice The Dice the player has chosen
      * @param pos The position of the dice the player has chosen
      * @throws WrongMoveException Describe the type of wrong move the player has done.
@@ -30,7 +32,8 @@ public interface TurnState {
     }
 
     /**
-     * This method is called on concrete states when the player does a move, more precisely when he chose a position to move the dice previously chosen
+     * This method is called on concrete states when the player does a move, more precisely when he choose a position to move the dice
+     * previously chosen. As default throws a WrongMoveException.
      * @param pos The position the player wants to move a dice to.
      * @throws WrongMoveException Describe the type of wrong move the player has done.
      */
@@ -39,7 +42,8 @@ public interface TurnState {
     }
 
     /**
-     * This method is called on concrete states when the player does a move, more precisely when he chose to pass the turn.
+     * This method is called on concrete states when the player does a move, more precisely when he choose to pass the turn.
+     * As default throws a WrongMoveException.
      * @param pass A string containing "pass" in order to recognize he want's to pass his turn.
      * @throws WrongMoveException Describe the type of wrong move the player has done.
      */
