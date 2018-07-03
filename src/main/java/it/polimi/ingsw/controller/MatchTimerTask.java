@@ -2,6 +2,9 @@ package it.polimi.ingsw.controller;
 
 import java.util.TimerTask;
 
+/**
+ * Timer to handle the waiting room.
+ */
 public class MatchTimerTask extends TimerTask {
     private WaitingRoom lobby;
     private long time;

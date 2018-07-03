@@ -8,57 +8,79 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class is used to handle the players before the game starts
+ */
 public class WaitingRoom {
     private Manager manager;
     private MatchTimerTask task;
     private long time;
     private ClientsContainer playerList;
 
-    public WaitingRoom(long time, Manager manager, ClientsContainer clientContainer) {
+    WaitingRoom(long time, Manager manager, ClientsContainer clientContainer) {
         playerList = clientContainer;
         this.time = time;
         this.manager = manager;
         task = new MatchTimerTask(this,time);
     }
 
-    //Modifier methods
-    public void addPlayer(ClientInterface player) {
+
+    /**
+     * This will add the player and verify if starts the timer or if starts the match in case of four player
+     * @param player player to add
+     */
+    void addPlayer(ClientInterface player) {
         if (playerList.sizeContainer() == 1) {
             playerList.addClient(player,task.getTempTime());
             playerList.notifyPlayers();
-            //start the timer
             ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
             exec.scheduleWithFixedDelay(task,0,1000,TimeUnit.MILLISECONDS);
         } else if (playerList.sizeContainer() < 4) {
             playerList.addClient(player,task.getTempTime());
             playerList.notifyPlayers();
             if(playerList.sizeContainer() == 4) {
-                //NOTIFY THE SERVER IT NEEDS TO CREATE A REAL MATCH AND ADD IT TO THE LIST OF MATCHES
                 this.notifyManager();
             }
         }
     }
 
+    /**
+     * When match starts or there aren't enough player to start it
+     */
     void resetTimer() {
         task = new MatchTimerTask(this,time);
     }
 
-    public void restore(ClientsContainer clientContainer) {
+    /**
+     * Used when is created a new waiting room
+     * @param clientContainer object that will group all clients.
+     */
+    void restore(ClientsContainer clientContainer) {
         this.playerList = clientContainer;
-        //resetTimer
         this.resetTimer();
     }
 
-    //Getter methods
+
+    /**
+     *
+     * @return player list from client container
+     */
     public List<Player> getPlayerList() {
         return playerList.getPlayerList();
     }
 
 
+    /**
+     * Used when match is ready to start
+     */
     void notifyManager() {
         manager.createMatch(this);
     }
 
+    /**
+     *
+     * @return client container
+     */
     ClientsContainer getClients() {
         return playerList;
     }

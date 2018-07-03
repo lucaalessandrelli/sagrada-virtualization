@@ -15,6 +15,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class handle the timeout for a move and set the move to the object Turn, which verify the it correctness
+ */
 public class Round {
     private static final String PATH ="it.polimi.ingsw.turn.";
 
@@ -32,9 +35,15 @@ public class Round {
         this.players = new PlayersContainer(playerList);
         this.table=table;
         this.timerMove =timerMove;
-        match = m;
+        this.match = m;
     }
 
+    /**
+     * This method starts the round,notify all players who has to move and it does a thread.sleep(), if the player will not do the move
+     * it will be set inactive. If he does a right move, will be called an interrupt on the sleep and the round goes on with the turn of next
+     * player.
+     * @throws NotEnoughPlayersException
+     */
     public void go() throws NotEnoughPlayersException {
         Player p;
         Iterator<Player> iterator = players.getIterator();
@@ -63,19 +72,32 @@ public class Round {
         }
     }
 
-
+    /**
+     * This method set last dices on round track at the end of round.
+     */
     private void setLastDice() {
         table.setLastDices(roundNumber);
     }
 
+    /**
+     *
+     * @return name of player who has turn
+     */
     public String getCurrTurn() {
         return currTurn.getUsername();
     }
 
+    /**
+     *
+     * @return round number
+     */
     private int getRoundNumber() {
         return this.roundNumber;
     }
 
+    /**
+     * sends the current state of move
+     */
     private void updateAfterMove(){
         players.notifyChanges();
         String name = turn.getState().getClass().getName();
@@ -83,6 +105,10 @@ public class Round {
         currTurn.notifyState(name);
     }
 
+    /**
+     * Set chosen position to the Turn
+     * @param p chosen position
+     */
     public void setTurn(Pos p){
         try {
             turn.receiveMove(p);
@@ -92,6 +118,10 @@ public class Round {
         }
     }
 
+    /**
+     * Set pass to the Turn
+     * @param s pass string
+     */
     public void setTurn(String s){
         try {
             turn.receiveMove(s);
@@ -101,6 +131,10 @@ public class Round {
         }
     }
 
+    /**
+     * Set chosen tool card to the Turn
+     * @param t chosen toolcard
+     */
     public void setTurn(ToolCard t){
         try {
             turn.receiveMove(t);
@@ -110,6 +144,11 @@ public class Round {
         }
     }
 
+    /**
+     * Set chosen dice to the Turn and its position in the model
+     * @param d chosen dice
+     * @param p dice position in draft pool, roundtrack or window pattern card
+     */
     public void setTurn(Dice d, Pos p){
         try {
             turn.receiveMove(d,p);
@@ -119,12 +158,19 @@ public class Round {
         }
     }
 
+    /**
+     * used when a player uses tool card 8
+     * @param p
+     */
     public void inactivatePlayer(Player p) {
         if (currTurn != p) {
             exec.scheduleWithFixedDelay(() -> p.setActivity(false), 0, 500, TimeUnit.MILLISECONDS);
         }
     }
 
+    /**
+     * Used when a move ends.
+     */
     public  void interrupt(){
         match.interrupt();
     }

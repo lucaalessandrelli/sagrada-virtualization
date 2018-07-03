@@ -12,6 +12,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class has all the info about the current match like players and their attributes and the game table which contains
+ * all the data for play. It is a thread to realize the multi-match function.
+ */
 public class Match extends Thread {
     private  Manager manager;
     private int id;
@@ -32,8 +36,13 @@ public class Match extends Thread {
         this.manager=manager;
         playerList.forEach(player -> player.timerChoose(timerCard));
     }
-    
 
+
+    /**
+     * When the thread is ran it first stars a scheduled executor which verify if the player choose the toolcard, if he
+     * don't choose the card it will set him a random card between the four possibility.
+     * After that starts rounds and when the game end, notify the manager and the thread will return.
+     */
     @Override
     public void run() {
         table = new Table(playerList);
@@ -78,6 +87,10 @@ public class Match extends Thread {
         manager.endGame(id);
     }
 
+    /**
+     * For all players compute his point
+     * @return player score
+     */
     private String computePlayerPoints() {
         StringBuilder builder = new StringBuilder();
         builder.append("score ");
@@ -88,6 +101,10 @@ public class Match extends Thread {
         return builder.toString();
     }
 
+    /**
+     * Create and starts new round
+     * @throws NotEnoughPlayersException
+     */
     private void startNextRound() throws NotEnoughPlayersException {
             currRound = new Round(this.playerList, roundNumber,table,this,timerMove);
             roundList.add(currRound);
@@ -96,6 +113,9 @@ public class Match extends Thread {
 
     }
 
+    /**
+     * After each round it changes the order of players, in this way the first of the turn will not be always the same player.
+     */
     private synchronized void changeOrder(){
         ArrayList tmpList = new ArrayList();
         Player tmp;
@@ -107,29 +127,45 @@ public class Match extends Thread {
         playerList = tmpList;
     }
 
-    //Getter methods
+    /**
+     *
+     * @return player list.
+     */
     public List<Player> getPlayerList() {
         return this.playerList;
     }
 
-    public List<Round> getRoundList() {
-        return this.roundList;
-    }
 
+    /**
+     *
+     * @return the current round object.
+     */
     Round getCurrRound() {
         return currRound;
     }
 
+    /**
+     * If a player will connect or disconnect, set the player's activity. It handle if the player disconnected is the one
+     * who has the current turn.
+     * @param name player to change activity
+     * @param b true if active
+     */
     void setPlayerActivity(String name, boolean b) {
         for (Player p : playerList){
             if(p.getUsername().equals(name)){
                 p.setActivity(b);
-                if(p.getUsername().equals(currRound.getCurrTurn())){
+                if(p.getUsername().equals(currRound.getCurrTurn())&&!b){
                     currRound.interrupt();
                 }
             }
         }
     }
+
+    /**
+     * Set the chosen pattern card to the player
+     * @param name player's name
+     * @param idCard id card
+     */
     synchronized void setPlayerWindow(String name, int idCard){
         for(Player p : playerList){
             if (p.getUsername().equals(name)) {
@@ -138,6 +174,10 @@ public class Match extends Thread {
         }
     }
 
+    /**
+     * Used when a player is reconnecting, it will notify each player
+     * @param name player who is reconnecting
+     */
     public void update(String name) {
        playerList.forEach(Player::notifyPlayer);
        for (Player p : playerList){
@@ -147,6 +187,10 @@ public class Match extends Thread {
        }
     }
 
+    /**
+     * Add to the right player object, the new virtual view observer after a reconnection.
+     * @param cb encapsulated in the virtual view of the player
+     */
     void reconnect(ClientBox cb) {
         for (Player p : playerList){
             if(p.getUsername().equals(cb.getName())){
