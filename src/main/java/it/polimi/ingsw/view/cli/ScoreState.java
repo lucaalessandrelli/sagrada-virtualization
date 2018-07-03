@@ -6,7 +6,7 @@ public class ScoreState implements SceneInterface {
     private Printer printer;
     private CliHandler cliHandler;
 
-    public ScoreState(String score, Printer printer, CliHandler cliHandler) {
+    ScoreState(String score, Printer printer, CliHandler cliHandler) {
         this.printer=printer;
         this.cliHandler=cliHandler;
         printer.printScore(score);

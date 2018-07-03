@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class is used by cliHandler to analyze if the input from user is well formed.
+ */
 public class InputComposer {
     private static final String MOVE = "move ";
     private static final String CHOOSECARD = "chooseCard ";
@@ -33,6 +36,10 @@ public class InputComposer {
     private Client client;
     private List<String> words;
 
+    /**
+     * adds all the forbidden words in a list
+     * @param client client reference
+     */
     public InputComposer(Client client) {
         this.client = client;
         words = new ArrayList<>();
@@ -44,6 +51,11 @@ public class InputComposer {
 
     }
 
+    /**
+     * Compose the login message
+     * @param cmd command to compose
+     * @return message well formed
+     */
     String compose(String cmd) {
         if(cmd.equals("login")) {
             return LOGIN + " <User>" + client.getName() + "<User>";
@@ -51,6 +63,13 @@ public class InputComposer {
         return cmd;
     }
 
+    /**
+     * This method check if the input is well formed, and compose the command for the server thanks to gameData who memorize the current state of the
+     * model
+     * @param command user input
+     * @param gameData game data, represent server model
+     * @return error if it's not a good input else the command to send
+     */
     public String sanitize(String command, GameData gameData) {
         for (String s : words) {
             if (command.contains(s)) {
@@ -96,6 +115,12 @@ public class InputComposer {
 
     }
 
+    /**
+     * this is a special command for the toolcard 11 which choose the number of a dice
+     * @param res dice number to set
+     * @param gameData model representation
+     * @return error if string is not well formed else the right command
+     */
     private String getDiceData(String res, GameData gameData) {
         try{
             int num = Integer.parseInt(res);
@@ -106,6 +131,11 @@ public class InputComposer {
         }
     }
 
+    /**
+     * check if position
+     * @param res position chosen
+     * @return error if string is not well formed else the right command
+     */
     private String getPos(String res) {
         try{
             String[] pos = res.split(",");
@@ -122,6 +152,12 @@ public class InputComposer {
         }
     }
 
+    /**
+     * Get command for dice chosen from round track
+     * @param res dice position on round track
+     * @param gameData model representation
+     * @return error if string is not well formed else the right command
+     */
     private String getRoundData(String res, GameData gameData) {
         try {
             String[] pos = (res.split(","));
@@ -134,6 +170,12 @@ public class InputComposer {
         }
     }
 
+    /**
+     * get command for a dice chosen from window pattern card
+     * @param res dice position on window pattern card
+     * @param gameData model representation
+     * @return error if string is not well formed else the right command
+     */
     private String getWindowData(String res, GameData gameData) {
         try {
             String[] pos = (res.split(","));
@@ -146,6 +188,12 @@ public class InputComposer {
         }
     }
 
+    /**
+     * get command for a dice chosen from draft pool
+     * @param res dice position on draft pool
+     * @param gameData model representation
+     * @return error if string is not well formed else the right command
+     */
     private String getDraftData(String res, GameData gameData) {
         try {
             int x = Integer.parseInt(res);

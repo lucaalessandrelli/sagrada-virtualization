@@ -4,6 +4,10 @@ import it.polimi.ingsw.network.ClientInterface;
 
 import java.rmi.RemoteException;
 
+/**
+ * This class is used when the client choose an rmi connection. When he try to log in to server, passes this object like the reference of itself
+ * for the communication
+ */
 public class ClientStub implements ClientInterface {
     private String name;
     private MessageQueue queue;

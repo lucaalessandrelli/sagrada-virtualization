@@ -3,12 +3,15 @@ package it.polimi.ingsw.network.client;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * This class is used to listen every message send from server by socket connection
+ */
 public class SocketListener extends Thread {
     private Socket socket;
     private MessageQueue queue;
     private Scanner in;
 
-    public SocketListener(MessageQueue q, Socket socket, Scanner in) {
+    SocketListener(MessageQueue q, Socket socket, Scanner in) {
         this.socket=socket;
         this.queue=q;
         this.in=in;

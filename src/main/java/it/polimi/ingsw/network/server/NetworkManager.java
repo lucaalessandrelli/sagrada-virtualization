@@ -4,31 +4,33 @@ import it.polimi.ingsw.controller.InputAnalyzer;
 import it.polimi.ingsw.network.ClientInterface;
 import it.polimi.ingsw.network.ServerInterface;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.System.out;
 
+/**
+ * This class make available the server on the network with rmi or socket connection
+ */
 public class NetworkManager {
-    static final int PORTRMI = 56789;
-    static final int PORTSOCKET = 45678;
-    static final String ALERT = "alert ";
+    private static final int PORTRMI = 56789;
+    private static final int PORTSOCKET = 45678;
+    private static final String ALERT = "alert ";
 
-    private ArrayList<ClientInterface> clients;
     private Server server;
 
     NetworkManager(Server s) {
-        clients = new ArrayList<>();
         server = s;
     }
 
+    /**
+     * initialize the network manager, it create the rmi registry and the socket connection
+     */
     public void start(){
         try {
             Registry registry = LocateRegistry.createRegistry(PORTRMI);
@@ -41,28 +43,35 @@ public class NetworkManager {
                     Socket socket = serverSocket.accept();
                     sc = new SocketContainer(socket, server);
                     new Thread(sc).start();
-                }while (20 > clients.size());
-                out.println("Too many users connected");
+                }while (server!=null);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            out.println("Can't listen for communication");
         }
 
     }
 
+    /**
+     * This class is used for socket connection, when a client is connected by socket, is created a new thread which keep the connection alive
+     *
+     */
     private class SocketContainer implements ClientInterface, Runnable{
         private Socket socket;
-        private ServerInterface server;
+        private Server server;
         private String name;
         private boolean connected;
         private PrintWriter pr;
         private Scanner in;
 
-        SocketContainer(Socket socket, ServerInterface s){
+        SocketContainer(Socket socket, Server s){
             this.socket = socket;
             server = s;
             connected =false;
         }
+
+        /**
+         * it first wait the login message, then wait a command from client
+         */
         @Override
         public void run() {
             try {
@@ -73,16 +82,15 @@ public class NetworkManager {
                     receiveCommand();
                 }
             } catch (Exception e) {
-                try {
-                    server.disconnect(name,this);
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
+                server.disconnect(name,this);
             }
 
         }
 
-        private void loginPlayer() throws IOException {
+        /**
+         * handling the login message, and verify if the player is already connected
+         */
+        private void loginPlayer() {
             String message = in.nextLine();
             while (!connected) {
                 if (message.startsWith("login")) {
@@ -99,13 +107,20 @@ public class NetworkManager {
             }
         }
 
-        private void receiveCommand() throws IOException {
+        /**
+         * keep listen for a command from client
+         */
+        private void receiveCommand() {
                 String message;
                 message = in.nextLine();
                 server.command(message);
         }
 
 
+        /**
+         *
+         * @param name name to set on this client reference
+         */
         private void setName(String name){
             this.name =name;
         }

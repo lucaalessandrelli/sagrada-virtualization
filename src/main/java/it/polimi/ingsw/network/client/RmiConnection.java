@@ -8,6 +8,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * This class is used to make a rmi connection to server, when created the constructor create also the client stub to pass to server like the
+ * reference to the client
+ */
 
 public class RmiConnection implements ConnectionHandler {
     private static final String SERVERALERT = "alert Server not available";
@@ -28,6 +32,8 @@ public class RmiConnection implements ConnectionHandler {
         }
 
     }
+
+
       public void connect(){
         if(!client.connected()) {
             try {

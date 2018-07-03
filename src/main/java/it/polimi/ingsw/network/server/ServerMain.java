@@ -5,6 +5,10 @@ import it.polimi.ingsw.controller.Manager;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 
+/**
+ * The server main class set the timer parameters passed from command line and initialize the server, manager and the network manager starting to
+ * listen communication
+ */
 public class ServerMain {
 
     public static void main(String[] args) {
@@ -14,8 +18,6 @@ public class ServerMain {
         parser.accepts("timerMove").withOptionalArg().ofType(Integer.class).defaultsTo(30);
 
         OptionSet options = parser.parse(args);
-
-        try {
             Server server = new Server();
             Manager manager = new Manager((Integer) options.valueOf("timerRoom"),(Integer)options.valueOf("timerCard"),
                     (Integer)options.valueOf("timerMove"));
@@ -23,8 +25,5 @@ public class ServerMain {
             manager.checkEndGame();
             NetworkManager networkManager = new NetworkManager(server);
             networkManager.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

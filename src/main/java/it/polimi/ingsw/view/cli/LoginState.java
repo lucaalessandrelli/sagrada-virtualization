@@ -41,28 +41,4 @@ public class LoginState implements SceneInterface {
         cliHandler.setIdMatch(Integer.valueOf(idMatch));
     }
 
-    @Override
-    public void handleTurnMessage(String turnMessage) {
-
-    }
-
-    @Override
-    public void updateBoard(String setup) {
-
-    }
-
-    @Override
-    public void setPatternCards(String patternCards) {
-
-    }
-
-    @Override
-    public void handleGameState(String gameState) {
-
-    }
-
-    @Override
-    public void handleScore(String score) {
-
-    }
 }

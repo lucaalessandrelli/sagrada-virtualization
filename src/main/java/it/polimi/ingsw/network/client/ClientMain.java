@@ -6,12 +6,13 @@ import it.polimi.ingsw.view.gui.GuiView;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 
-import java.rmi.RemoteException;
-
+/**
+ * The client main class set the parameters passed from command line,creates the Client object and according to the passed value initialize gui or cli
+ */
 public class ClientMain {
     private static String addr = "127.0.0.1";
 
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args){
         OptionParser parser = new OptionParser();
         parser.accepts("a","server address").withRequiredArg().ofType(String.class).defaultsTo(addr);
         parser.accepts("gui","gui interface");

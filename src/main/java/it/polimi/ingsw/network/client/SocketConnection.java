@@ -5,6 +5,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * This class is used to handle the socket connection
+ */
 public class SocketConnection implements ConnectionHandler {
     private static final String SERVERALERT = "alert Server not available";
     private static int PORTSOCKET = 45678;
@@ -12,7 +15,7 @@ public class SocketConnection implements ConnectionHandler {
     private Socket socket;
     private InputComposer inputComposer;
 
-    public SocketConnection(Client client, String addr) {
+    SocketConnection(Client client, String addr) {
         this.client = client;
         inputComposer = new InputComposer(client);
         try {
@@ -21,9 +24,13 @@ public class SocketConnection implements ConnectionHandler {
             client.setServiceMessage("alert Connection not available");        }
     }
 
+    /**
+     * this starts a new thread who listen every message from server
+     * @param in communication channel already open
+     */
     private void startListener(Scanner in){
-        SocketListener listner = new SocketListener(client.getQueue(), socket, in);
-        new Thread(listner).start();
+        SocketListener listener = new SocketListener(client.getQueue(), socket, in);
+        listener.start();
     }
 
     @Override
