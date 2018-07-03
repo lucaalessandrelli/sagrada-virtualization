@@ -114,7 +114,7 @@ public class ToolCard8Test {
         di.setNumber(1);
         p1.getWindowPatternCard().placeDice(di,1,0);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round, 2, false, table);
 
         turn.startTurn();
 
@@ -136,8 +136,6 @@ public class ToolCard8Test {
 
         assertEquals(state, lastName(turn.getState().getClass().toString(), state.length()+1));
 
-        d = new Dice(Colour.YELLOW);
-        d.setNumber(2);
         pos.setX(1);
         pos.setY(1);
         try {

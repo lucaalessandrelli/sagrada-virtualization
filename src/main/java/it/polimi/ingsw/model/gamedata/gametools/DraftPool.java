@@ -22,11 +22,10 @@ public class DraftPool {
     }
 
     //get dice from array at position i
-    public Dice chooseDice(int i) throws IndexOutOfBoundsException{
+    public Dice chooseDice(int i){
         try {
             if (draftPool.size() > 1) {
-                Dice d = draftPool.get(i);
-                return d;
+                return draftPool.get(i);
             }
             else{
                 throw new IndexOutOfBoundsException();
