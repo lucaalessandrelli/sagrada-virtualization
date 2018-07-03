@@ -5,6 +5,11 @@ import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
+/**
+ * Class defining the concrete state StartTurn, in this state the player can chose a Dice, or Pass move.
+ * If he choose a Dice the next state would be "ChooseDice2". Finally if he choose to pass
+ * the next state would be "EndTurn".
+ */
 public class ToolBeforeDice implements TurnState {
     private Turn turn;
     private InspectorContext inspectorContext;
@@ -15,6 +20,12 @@ public class ToolBeforeDice implements TurnState {
     }
 
     //GETTING MOVE METHODS
+
+    /**
+     * {@inheritDoc}
+     * In this implementation the method check() on the inspectorContext is being called to actually understand whether the move is
+     * valid or not. If it is valid then we change state, we throw the exception otherwise.
+     */
     @Override
     public void receiveMove(Dice dice,Pos pos) throws WrongMoveException {
         if(inspectorContext.check(dice,pos,turn.getPlayer().getDraftPool())) {

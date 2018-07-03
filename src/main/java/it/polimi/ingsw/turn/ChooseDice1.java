@@ -11,7 +11,10 @@ import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import java.util.ArrayList;
 
 /**
- * Class defining the concrete state ChooseDice1,in this state a player can chose a ToolCard, a Position, or Pass moves.
+ * Class defining the concrete state ChooseDice1,in this state a player can chose a ToolCard, a Position, or Pass move.
+ * If he choose a ToolCard then the next state would be dynamically loaded and the state "EndTurn" would be
+ * set as CheckPoint state. If he choose a Position the next state would be "PositionDice1". Finally if he choose to pass
+ * the next state would be "EndTurn".
  */
 public class ChooseDice1 implements TurnState {
     private static final int TOOLCARD_1 = 1;
@@ -29,9 +32,9 @@ public class ChooseDice1 implements TurnState {
 
     /**
      * Classic constructor.
-     * @param turn Store the Turn object in order to call methods on it.
-     * @param chosenDice The Dice the player has selected.
-     * @param posDiceChosen The Position of the Dice the player has selected.
+     * @param turn Store the Turn object in order to call methods on it, like changing the concrete state of the turn calling setState().
+     * @param chosenDice The Dice the player has just selected.
+     * @param posDiceChosen The Position of the Dice the player has just selected (chosenDice).
      */
     public ChooseDice1(Turn turn, Dice chosenDice, Pos posDiceChosen) {
         this.turn = turn;
@@ -47,6 +50,13 @@ public class ChooseDice1 implements TurnState {
         this.toolList.add(TOOLCARD_11);
     }
 
+    /**
+     * {@inheritDoc}
+     * The ToolCards that the player can choose in this state are: 1,5,6,9,10,11
+     * In his implementation the move is valid i.f.f. : the toolCard chosen by the player is one of those that can be used in this state and
+     * the method check() on the inspectorContext returns true value (the toolCard actually is one of those which are on the table).
+     * If the move is valid then we change state, we throw the exception otherwise.
+     */
     //GETTING MOVE METHODS
     @Override
     public void receiveMove(ToolCard toolCard) throws WrongMoveException {
@@ -65,6 +75,11 @@ public class ChooseDice1 implements TurnState {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * In this implementation the method check() on the inspectorPlace is being called to actually understand whether the move is
+     * valid or not. If it is valid then we change state, we throw the exception otherwise.
+     */
     @Override
     public void receiveMove(Pos pos) throws WrongMoveException {
         if(inspectorPlace.check(chosenDice,pos,turn.getPlayer().getWindowPatternCard())) {

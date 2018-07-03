@@ -1,6 +1,5 @@
 package it.polimi.ingsw.turn;
 
-
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
@@ -11,7 +10,10 @@ import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 import java.util.ArrayList;
 
 /**
- * Class defining the concrete state StartTurn, in this state the player can chose a ToolCard, a Dice, or Pass moves.
+ * Class defining the concrete state StartTurn, in this state the player can chose a ToolCard, a Dice, or Pass move.
+ * If he choose a ToolCard then the next state would be dynamically loaded and the state "ToolBeforeDice" would be
+ * set as CheckPoint state. If he choose a Dice the next state would be "ChooseDice1". Finally if he choose to pass
+ * the next state would be "EndTurn".
  */
 public class StartTurn implements TurnState {
     private static final int TOOLCARD_2 = 2;
@@ -25,7 +27,7 @@ public class StartTurn implements TurnState {
 
     /**
      * Classic constructor
-     * @param turn Store the Turn object in order to call methods on it.
+     * @param turn Store the Turn object in order to call methods on it, like changing the concrete state of the turn calling setState().
      */
     public StartTurn(Turn turn) {
         this.turn = turn;
@@ -41,14 +43,18 @@ public class StartTurn implements TurnState {
 
     /**
      * {@inheritDoc}
-     * The ToolCards's id that the player can chose in this state are: 2,3,4,12 (cannot be used in the first round),7 (can be used only in the second turn of a given round).
+     * The ToolCards that the player can choose in this state are: 2,3,4,12,7 (can be used only in the second turn of a given round).
+     * In his implementation the move is valid i.f.f. : the toolCard chosen by the player is one of those that can be used in this state,
+     * the method check() on the inspector Context returns true value (the toolCard actually is one of those which are on the table),
+     * finally if the toolCard is the number 7 then it's not the firstBracket.
+     * If the move is valid then we change state, we throw the exception otherwise.
      */
     @Override
     public void receiveMove(ToolCard toolCard) throws WrongMoveException {
         int cardId = toolCard.getID();
         Player currentPlayer = turn.getPlayer();
-        if(toolList.contains(cardId) && (inspectorContext.check(toolCard, currentPlayer.getToolCards(),currentPlayer)) && ((cardId != TOOLCARD_7) ||
-                (!turn.isFirstBracket())) && ((cardId!=TOOLCARD_12) || (turn.getRoundNumber()!=1))) {
+        if(toolList.contains(cardId) && (inspectorContext.check(toolCard, currentPlayer.getToolCards(),currentPlayer)) &&
+                ((cardId != TOOLCARD_7) || (!turn.isFirstBracket()))) {
 
             //call the modifier method to update the cost of the toolcard and the favtokens of the player
             turn.getModifier().updateToolCardPrice(toolCard,currentPlayer);
@@ -63,6 +69,11 @@ public class StartTurn implements TurnState {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * In this implementation the method check() on the inspectorContext is being called to actually understand whether the move is
+     * valid or not. If it is valid then we change state, we throw the exception otherwise.
+     */
     @Override
     public void receiveMove(Dice dice, Pos pos) throws WrongMoveException {
         if(inspectorContext.check(dice,pos,turn.getPlayer().getDraftPool())) {
