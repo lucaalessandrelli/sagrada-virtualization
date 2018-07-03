@@ -38,7 +38,7 @@ public final class DrawRoundTrack {
         GeneralFunctionalities.fitImageToParent(image, roundTrackGrid);
 
         /*add the WindowDiceEvent to the dice,plus add the dice to viewDiceList*/
-        diceList.add(new ViewDice(image, diceInfo.substring(2, 4)));
+        diceList.add(new ViewDice(image, diceInfo.substring(0,2)));
         EventAssigner.addRoundTrackEvent(image,controller);
     }
 }

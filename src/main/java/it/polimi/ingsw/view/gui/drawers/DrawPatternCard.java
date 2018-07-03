@@ -42,7 +42,7 @@ public final class DrawPatternCard {
 
         /*If the current window is the player's one then add the WindowDiceEvent to the dice,plus add the dice to viewDiceList*/
         if(isMyWindow) {
-            diceList.add(new ViewDice(image,diceInfo.substring(2,4)));
+            diceList.add(new ViewDice(image,diceInfo.substring(0,2)));
             EventAssigner.addWindowEvent(image,controller);
         }
     }
