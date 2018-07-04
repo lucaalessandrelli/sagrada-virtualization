@@ -47,7 +47,7 @@ public class SelectingValue implements TurnState {
         if(inspectorContextTool.checkColourDice(chosenDice,posChosenDice,toolDice,toolPos)) {
             //call modifier
             turn.getModifier().changeDiceValue(chosenDice,posChosenDice,toolDice);
-            turn.setDynamicState(toolDice,toolPos,new Dice(), new Pos());
+            turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
             throw new WrongMoveException("Mossa sbagliata: selezionare un valore da assegnare al dado scelto.");
         }
