@@ -127,7 +127,7 @@
 		<COLOUR>B</COLOUR>
 		<STATE>SelectingRoundTrackDice,SelectingWindowDice,MovingWindowDice,SelectingOptionalWindowDice,MovingWindowDice,CheckPointState</STATE>
 		<AUTOMATED>operationEnded</AUTOMATED>
-		<CMETHODS>inRoundTr,inPatCard,inPatCard</CMETHODS>
+		<CMETHODS>inRoundTrS,inPatCardS,inPatCardS</CMETHODS>
 		<PMETHODS>
 			<PM0>checkAll</PM0>
 			<PM1>checkAll</PM1>

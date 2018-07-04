@@ -44,7 +44,6 @@ public class DraftPoolTest{
             tester.removeDice(i);
         }
         assertEquals(1,tester.getNumOfDices());
-        assertThrows(IndexOutOfBoundsException.class,()->{tester.chooseDice(0);});
     }
 
     @Test
