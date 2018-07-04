@@ -343,7 +343,7 @@ public class ChooseDice1Test {
 
         Dice d1 = new Dice(Colour.BLUE);
         d1.setNumber(3);
-        table.getDraftPool().setDice(d1,4);
+        table.getDraftPool().chooseDice(4).setDice(d1);
 
         Pos pos = new Pos(4,0);
 
