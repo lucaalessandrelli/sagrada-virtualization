@@ -639,9 +639,13 @@ public class MatchViewController implements Initializable, SceneInterface {
      */
     @FXML
     void handleCellClicked(MouseEvent event) {
-        int y = GridPane.getColumnIndex((Node) event.getSource());
-        int x = GridPane.getRowIndex((Node) event.getSource());
-        client.sendCommand("move "+client.getNumOfMatch()+" "+client.getName()+" P;"+x+","+y);
+        //if the cell is not empty than do not send the command for there already is a dice in that position
+        AnchorPane source = (AnchorPane) event.getSource();
+        if(source.getChildren().size() == 0) {
+            int y = GridPane.getColumnIndex((Node) event.getSource());
+            int x = GridPane.getRowIndex((Node) event.getSource());
+            client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " P;" + x + "," + y);
+        }
         event.consume();
     }
 }
