@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.gamelogic.checker;
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,6 +83,7 @@ public class InspectorContextTool implements InspectorTool {
         DraftPool pool;
         RoundTrack roundT;
         Pos pos;
+        Pos specialPos;
         private RuleEngineC(Dice dice, Pos pos, WindowPatternCard window, DraftPool draftPool, RoundTrack roundT) {
             this.dice = dice;
             this.window = window;
@@ -113,6 +113,15 @@ public class InspectorContextTool implements InspectorTool {
          */
         protected boolean inRoundTr(){
             return roundT.findDice(dice,pos);
+        }
+
+        protected boolean inRoundTrS(){
+            pos=specialPos;
+            return this.inRoundTr();
+        }
+
+        protected boolean inPatCardS(){
+            return inPatCard() && dice.getColour().equals(roundT.getDice(specialPos).getColour());
         }
 
     }
