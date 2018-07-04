@@ -34,7 +34,7 @@ public class InspectorContext {
      */
     public boolean check (ToolCard tool, List<ToolCard> allTool, Player p){
         for (ToolCard t : allTool){
-            if (t.getID()==tool.getID()&&p.canUseTool(tool.isUsed())){
+            if (t.getID()==tool.getID()&&p.canUseTool(t.isUsed())){
                 return true;
             }
         }

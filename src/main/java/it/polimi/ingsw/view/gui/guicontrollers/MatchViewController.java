@@ -96,7 +96,7 @@ public class MatchViewController implements Initializable, SceneInterface {
     private Label timerLabel;
 
     @FXML
-    private TextField turnOwnerField;
+    private Label turnOwnerLabel;
 
     @FXML
     private GridPane toolCardGrid;
@@ -257,7 +257,7 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @Override
     public void handleTurnMessage(String turnMessage) {
-        turnOwnerField.setText(turnMessage);
+        turnOwnerLabel.setText(turnMessage);
     }
 
     @Override

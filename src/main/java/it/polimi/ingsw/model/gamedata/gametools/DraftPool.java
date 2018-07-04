@@ -4,68 +4,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DraftPool {
-    private List<Dice> draftPool;
+    private List<Dice> diceList;
 
     public DraftPool(){
-        draftPool = new ArrayList<>(0);
+        diceList = new ArrayList<>(0);
     }
 
     //the number x is the number of players present in the match
     public DraftPool(int x){
         int y = (x * 2) + 1;
-        this.draftPool = new ArrayList<>(y);
+        this.diceList = new ArrayList<>(y);
     }
 
     //getter method
     public List<Dice> getDraftPool() {
-        return this.draftPool;
+        return this.diceList;
     }
 
     //get dice from array at position i
     public Dice chooseDice(int i){
-        try {
-            if (draftPool.size() > 1) {
-                return draftPool.get(i);
-            }
-            else{
-                throw new IndexOutOfBoundsException();
-            }
-        }catch (IndexOutOfBoundsException e){
-            System.out.println("The size of the array is under 1");
-            throw e;
-        }
-    }
-
-    //show all dice in
-    public void showDraftPool(){
-        System.out.print("This is the draftpool:" );
-        for (Dice x: this.draftPool) {
-            x.show();
+        if(i >= 0 && i < diceList.size()) {
+            return diceList.get(i);
+        } else {
+            throw new IndexOutOfBoundsException();
         }
     }
 
     //add new dices that have been drown out from the bag
     public void addNewDices(List<Dice> newDice){
-        this.draftPool = newDice;
+        this.diceList = newDice;
     }
 
     //gives back the number of dices remaining in the draftpool
     public int getNumOfDices(){
-        return draftPool.size();
+        return diceList.size();
     }
 
-    /*/**
+    /**
      * Returns true if the dices passed (d) is the same as the one that is at the position where of the draftpool
      * @param d A dice
      * @param where The position
      * @return a boolean
      */
     public boolean findDice(Dice d, int where){
-        return this.draftPool.get(where).equals(d);
+        return this.diceList.get(where).equals(d);
     }
 
     public boolean findDice(Dice d){
-        for (Dice x: this.draftPool){
+        for (Dice x: this.diceList){
             if (x.equals(d))
                 return true;
         }
@@ -77,15 +63,14 @@ public class DraftPool {
      * @param where The position where the dice is
      */
     public void removeDice(int where){
-        this.draftPool.remove(where);
+        this.diceList.remove(where);
     }
 
-
-    public void setDice(Dice d, int where){
-        this.draftPool.get(where).setDice(d);
+    public void addDice(int index, Dice dice) {
+        this.diceList.add(index,dice);
     }
 
     public void resetSelection() {
-        draftPool.forEach(dice -> dice.deSelect());
+        diceList.forEach(Dice::deSelect);
     }
 }
