@@ -52,6 +52,10 @@ public class RoundTrack {
         this.diceOnRoundTrack.get(pos.getX()).remove(pos.getY());
     }
 
+    public void addDice(Pos pos,Dice dice) {
+        this.diceOnRoundTrack.get(pos.getX()).add(pos.getY(), dice);
+    }
+
     public void setDice(Dice d,Pos p){
         this.getDice(p).setDice(d);
     }

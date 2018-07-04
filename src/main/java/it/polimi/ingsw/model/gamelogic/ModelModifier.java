@@ -58,8 +58,9 @@ public class ModelModifier {
         Dice roundDice = roundTrack.getDice(toolPos); //reference copy
         roundTrack.removeDice(toolPos); //remove the dice from the roundTrack
 
-        draftPool.getDraftPool().add(posChosenDice.getX(),roundDice); //add the round track dice in the draftpool at the position defined by posDiceChosen
-        roundTrack.getDiceOnRoundtrack(toolPos.getX()).add(toolPos.getY(),draftDice); //add the draf pool dice in the roundtrack at the position defined by toolPos
+        //draftPool.getDraftPool().add(posChosenDice.getX(),roundDice); //add the round track dice in the draftpool at the position defined by posDiceChosen
+        draftPool.addDice(posChosenDice.getX(),roundDice);
+        roundTrack.addDice(toolPos,draftDice);
 
         //switch also the copy of the dice
         chosenDice = toolDice;
@@ -135,8 +136,10 @@ public class ModelModifier {
 
         Dice newBagDice = diceBag.pullOut(1).get(0); //reference copy and removes the dice from the bag
 
+
         diceBag.addDice(draftDice); //add to the bag the dice chosen by the player
-        draftPool.getDraftPool().add(posChosenDice.getX(),newBagDice); //add the new dice in the drafpool at the position defined by posChosenDice
+        draftPool.addDice(posChosenDice.getX(),newBagDice);
+        //draftPool.getDraftPool().add(posChosenDice.getX(),newBagDice); //add the new dice in the drafpool at the position defined by posChosenDice
 
         chosenDice.setNumber(newBagDice.getNumber());
         chosenDice.setColour(newBagDice.getColour().toString());

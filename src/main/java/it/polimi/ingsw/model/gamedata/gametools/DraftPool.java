@@ -80,6 +80,9 @@ public class DraftPool {
         this.draftPool.remove(where);
     }
 
+    public void addDice(int index, Dice dice) {
+        this.draftPool.add(index,dice);
+    }
 
     public void setDice(Dice d, int where){
         this.draftPool.get(where).setDice(d);
