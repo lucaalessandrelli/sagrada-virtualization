@@ -38,7 +38,7 @@
 		<NUMBER>4</NUMBER>
 		<NAME>Lathekin</NAME>
 		<COLOUR>Y</COLOUR>
-		<STATE>SelectingWindowDice,MovingWindowDice,SelectingWindowDice,MovingWindowDice,CheckPointState</STATE>
+		<STATE>SelectingMandatoryWindowDice,MovingMandatoryWindowDice,SelectingMandatoryWindowDice,MovingMandatoryWindowDice,CheckPointState</STATE>
 		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS>inPatCard,inPatCard</CMETHODS>
 		<PMETHODS>
@@ -75,7 +75,7 @@
 		<AUTOMATED>resetDraftPool,operationEnded</AUTOMATED>
 		<CMETHODS></CMETHODS>
 		<PMETHODS></PMETHODS>
-		<DESCRIPTION>Tira nuovamente tutti i dadi della Riserva. Questa carta può essere usata solo durante il tuo secondo turno, prima di scegliere il secondo dado</DESCRIPTION>
+		<DESCRIPTION>Tira nuovamente tutti i dadi della Riserva. Questa carta puo' essere usata solo durante il tuo secondo turno, prima di scegliere il secondo dado</DESCRIPTION>
 	</CARD>
 	<CARD>
 		<NUMBER>8</NUMBER>
@@ -125,7 +125,7 @@
 		<NUMBER>12</NUMBER>
 		<NAME>Taglierina Manuale</NAME>
 		<COLOUR>B</COLOUR>
-		<STATE>SelectingRoundTrackDice,SelectingWindowDice,MovingWindowDice,SelectingOptionalWindowDice,MovingWindowDice,CheckPointState</STATE>
+		<STATE>SelectingRoundTrackDice,SelectingWindowDice,MovingWindowDice,SelectingWindowDice,MovingWindowDice,CheckPointState</STATE>
 		<AUTOMATED>operationEnded</AUTOMATED>
 		<CMETHODS>inRoundTrS,inPatCardS,inPatCardS</CMETHODS>
 		<PMETHODS>

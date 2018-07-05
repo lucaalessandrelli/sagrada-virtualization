@@ -6,13 +6,11 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 /**
- * Class defining the concrete state SelectingOptionalWindowDice, in this state the player can choose a Dice that belongs
- * to the his windowPatternCard or pass the move.
- * This state can be dynamically set only for the toolCard number 12.
- * If he choose a Dice then the concrete state will dynamically change, otherwise if he chose to Pass the next concrete state
- * will be the checkPointOne.
+ * Class defining the concrete state SelectingWindowDice, in this state the player can only choose a Dice that belongs to the his windowPatternCard.
+ * This state can be dynamically set only for the toolCards number 2,3,4,12.
+ * If the the player choose a Dice then the concrete state will dynamically change.
  */
-public class SelectingOptionalWindowDice implements TurnState {
+public class SelectingMandatoryWindowDice implements TurnState {
     private Turn turn;
     private Dice chosenDice;
     private Dice toolDice;
@@ -28,7 +26,7 @@ public class SelectingOptionalWindowDice implements TurnState {
      * @param toolDice The dice has chosen through the toolCard.
      * @param toolPos The position of the the Dice the player has chosen through the toolCard (toolDice).
      */
-    public SelectingOptionalWindowDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public SelectingMandatoryWindowDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
@@ -51,10 +49,5 @@ public class SelectingOptionalWindowDice implements TurnState {
         } else {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado.");
         }
-    }
-
-    @Override
-    public void receiveMove(String pass) {
-        turn.setStateToCheckPoint();
     }
 }

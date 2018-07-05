@@ -6,11 +6,11 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorPlaceTool;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 /**
- * Class defining the concrete state MovingDraftDice,in this state a player can only choose a Position and the dice he
- * has previously chosen comes from the draftPool. This state can be dynamically set only for toolCards number 8 and 9.
+ * Class defining the concrete state MovingWindowDice,in this state a player can only choose a Position and the dice he
+ * has previously chosen comes from his windowPatternCard. This state can be dynamically set only for toolCards number 2,3,4,12.
  * If the the player choose a Position then the concrete state will dynamically change.
  */
-public class MovingDraftDice implements TurnState {
+public class MovingMandatoryWindowDice implements TurnState {
     private Turn turn;
     private Dice chosenDice;
     private Dice toolDice;
@@ -26,7 +26,7 @@ public class MovingDraftDice implements TurnState {
      * @param toolDice The dice has chosen through the toolCard.
      * @param toolPos The position of the the Dice the player has chosen through the toolCard (toolDice).
      */
-    public MovingDraftDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public MovingMandatoryWindowDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
         this.toolDice = toolDice;
         this.toolPos = toolPos;
@@ -44,17 +44,12 @@ public class MovingDraftDice implements TurnState {
      */
     @Override
     public void receiveMove(Pos pos) throws WrongMoveException {
-        if (inspectorPlaceTool.check(chosenDice, pos, turn.getToolCard())) {
+        if(inspectorPlaceTool.check(chosenDice,pos,turn.getToolCard())) {
             //call modifier
-            turn.getModifier().positionDiceFromDraft(chosenDice, posChosenDice, pos);
-            turn.setDynamicState(chosenDice, posChosenDice, toolDice, toolPos);
+            turn.getModifier().positionDiceFromWindow(chosenDice,posChosenDice,pos);
+            turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
-            throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento e relative alla carta selezionata.");
+            throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");
         }
-    }
-
-    @Override
-    public void receiveMove(String pass) {
-        turn.setState(new EndTurn(turn));
     }
 }

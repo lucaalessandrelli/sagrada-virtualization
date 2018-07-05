@@ -50,4 +50,9 @@ public class SelectingWindowDice implements TurnState {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado.");
         }
     }
+
+    @Override
+    public void receiveMove(String pass) {
+        turn.setState(new EndTurn(turn));
+    }
 }

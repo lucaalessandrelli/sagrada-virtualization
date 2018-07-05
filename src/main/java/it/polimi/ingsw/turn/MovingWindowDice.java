@@ -52,4 +52,9 @@ public class MovingWindowDice implements TurnState {
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");
         }
     }
+
+    @Override
+    public void receiveMove(String pass) {
+        turn.setState(new EndTurn(turn));
+    }
 }
