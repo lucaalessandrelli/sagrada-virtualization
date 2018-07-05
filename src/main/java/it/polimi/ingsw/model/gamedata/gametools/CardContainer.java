@@ -80,7 +80,7 @@ public class CardContainer {
             int next = 0;
             Random rand = new Random();
 
-            for (int k = 0; k < dimension; k=k+2) {
+            /*for (int k = 0; k < dimension; k=k+2) {
                 randomNum = rand.nextInt(cont - (k+1));
                 if(randomNum%2 == 0)
                     if((randomNum - 1) >= 0)
@@ -93,6 +93,11 @@ public class CardContainer {
                 tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(next))); //Supposing that z is the selected card from this "turn"
                 pattern.remove(randomNum);
                 pattern.remove(next-1);
+            }*/
+            for (int k = 0; k < dimension; k++) {
+                randomNum = rand.nextInt(cont - k);
+                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                pattern.remove(randomNum);
             }
         } catch (AlreadyBeenCalledException e) {
             System.out.println(e.message);
@@ -150,7 +155,7 @@ public class CardContainer {
         return tmp;
     }
 
-    //Pull out 4 WindowPatternCard given to the player to select one of them
+    //Pull out 4 ToolCards given to the player to select one of them
     public ArrayList<ToolCard> pullOutTools() {
         int dimension = 3;
 

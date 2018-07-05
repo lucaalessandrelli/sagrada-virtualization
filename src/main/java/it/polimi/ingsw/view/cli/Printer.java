@@ -30,7 +30,12 @@ public class Printer {
     private static final String WINNER = "Il vincitore:   ";
     private static final String TOOLCARDS = "Carte utensile";
     private static final String CONNECTED = "Giocatori connessi:";
-    private static final String COORDINATES = "   j0 j1 j2 j3 j4";
+    private static final String DRAFT = "Prendere un dado dal draftpool:  draft indexDice";
+    private static final String ROUND = "Prendere un dado dal roundtrack:  roundtrack x,y";
+    private static final String WINDOW = "Prendere un dado dal windowpatterncard:  window x,y";
+    private static final String PLACE = "Posizionare il dado:  place x,y";
+    private static final String TOOL = "Scegliere una toolcard:  toolcard idcarta";
+    private static final String COORDINATES = "   y0 y1 y2 y3 y4";
     private static final String USERNAME = "Inserisci l'username:";
     private static final String CONNECTION = "Inserisci quale tipo di connessione vuoi utilizzare: \n1)SOCKET \n2)RMI";
     private static final String COSTO = "Costo";
@@ -174,22 +179,25 @@ public class Printer {
         out.print(ansi().saveCursorPosition());
         out.print(ansi().a(COORDINATES).cursorDown(1).cursorLeft(COORDINATES.length()));
         for(int i = 0; i < 4; i++){
-            out.print(ansi().a("i"+i).cursorDown(1).cursorLeft(2));
+            out.print(ansi().a("x"+i).cursorDown(1).cursorLeft(2));
         }
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(1).cursorRight(3));
     }
 
-    private void printCoordinates(int ri, int rf, int ci, int cf){
+    private void printCoordinates(int ri, int rf, int ci, int cf, char column, char row){
         out.print(ansi().cursorRight(3));
         for(int k = ci; k <= cf; k++){
-            out.print(ansi().a("j"+k));
+            out.print(ansi().a(column));
+            out.print(ansi().a(k));
             if(k<10)
                 out.print(ansi().a(" "));
         }
         out.print(ansi().cursorLeft((cf-ci+1)*3+(3)).cursorDown(1));
-        for(int i = ri; i <= rf; i++){
-            out.print(ansi().a("i"+i).cursorDown(1).cursorLeft(2));
+        for(int i = ri; i < rf; i++){
+            out.print(ansi().a(row).a(i).cursorDown(1).cursorLeft(2));
+            if(i+1 == rf)
+                out.print(ansi().cursorUp(1));
         }
     }
 
@@ -424,6 +432,11 @@ public class Printer {
 
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(8));
+        out.print(ansi().saveCursorPosition());
+
+        this.printCommands();
+
+        out.print(ansi().restoreCursorPosition());
 
         this.printMove(players,turnState,deparser);
 
@@ -641,7 +654,7 @@ public class Printer {
             }
         }
 
-        printCoordinates(0,max,1,10);
+        printCoordinates(0,max+1,1,10,'y','x');
 
         out.print(ansi().cursorUp(max+1));
 
@@ -777,9 +790,9 @@ public class Printer {
 
         out.print(ansi().cursorDown(1).cursorLeft("Riserva".length()));
 
-        printCoordinates(0,0,0,8);
+        printCoordinates(0,0,0,8,' ','\0');
 
-        out.print(ansi().cursorRight(3).cursorUp(1));
+        out.print(ansi().cursorRight(3));
 
         for (String s: tempz) {
             this.printDice(s.charAt(0),s.charAt(1));
@@ -795,6 +808,23 @@ public class Printer {
         if(Integer.valueOf(timer)>=0){
             out.print(ansi().a("Timer: "+timer));
         }
+
+    }
+
+    private void printCommands(){
+
+        out.print(ansi().cursorRight(60));
+
+        out.print(ansi().a("Legenda mosse:  ").cursorLeft("  ".length()));
+
+        out.print(ansi().cursorDown(1));
+
+        out.print(ansi().a(DRAFT).cursorLeft(DRAFT.length()).cursorDown(1));
+        out.print(ansi().a(ROUND).cursorLeft(ROUND.length()).cursorDown(1));
+        out.print(ansi().a(WINDOW).cursorLeft(WINDOW.length()).cursorDown(1));
+        out.print(ansi().a(PLACE).cursorLeft(PLACE.length()).cursorDown(1));
+        out.print(ansi().a(TOOL).cursorLeft(TOOL.length()).cursorDown(1));
+
 
     }
 
