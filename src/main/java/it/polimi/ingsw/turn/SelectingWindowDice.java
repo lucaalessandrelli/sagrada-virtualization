@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
 /**
- * Class defining the concrete state SelectingWindowDice, in this state the player can only choose a Dice that belongs to the his windowPatternCard.
- * This state can be dynamically set only for the toolCards number 2,3,4,12.
+ * Class defining the concrete state SelectingWindowDice, in this state the player can choose a Dice that belongs to the his windowPatternCard,
+ * or he can choose to pass the turn. This state can be dynamically set only for the toolCards number 2,3,4,12.
  * If the the player choose a Dice then the concrete state will dynamically change.
  */
 public class SelectingWindowDice implements TurnState {

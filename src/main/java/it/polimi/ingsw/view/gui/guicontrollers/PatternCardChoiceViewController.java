@@ -222,11 +222,14 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
             givenPatternCards.add(substring.get(0));
             List<String> restrictionList = Arrays.asList(substring.get(2).split(","));
 
-            VBox currentVbox = (VBox)children.get(k);
-            ObservableList<Node> boxChildren = currentVbox.getChildren();
+            /*VBox currentVbox = (VBox)children.get(k);
+            ObservableList<Node> boxChildren = currentVbox.getChildren();*/
 
-            GridPane currentWindow = (GridPane)(boxChildren.get(0));
-            GridPane favorGrid = (GridPane) (boxChildren.get(1));
+            GridPane gridContainer = (GridPane)children.get(k);
+            ObservableList<Node> containerChildren = gridContainer.getChildren();
+
+            GridPane currentWindow = (GridPane)(containerChildren.get(0));
+            GridPane favorGrid = (GridPane) (containerChildren.get(1));
 
             ObservableList<Node> tokenList = favorGrid.getChildren();
 
