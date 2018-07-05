@@ -30,7 +30,7 @@ public class InspectorPlaceTool implements InspectorTool {
      * @return True if the place is right using the tool card
      */
     public boolean check(Dice dice, Pos pos, ToolCard tool){
-        RuleEngine ruleEngine = new RuleEngineP(dice,pos,window);
+        RuleEngineP ruleEngine = new RuleEngineP(dice,pos,window);
         List<List<String>> nameMethods = tool.getNamePMethods();
         List<String> currMethods = nameMethods.get(index);
         index++;

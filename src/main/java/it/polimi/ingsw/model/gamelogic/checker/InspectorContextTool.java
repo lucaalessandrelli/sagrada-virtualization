@@ -14,6 +14,7 @@ public class InspectorContextTool implements InspectorTool {
     private DraftPool draftPool;
     private RoundTrack roundTrack;
     private int index;
+    private Pos specialPos;
 
     public InspectorContextTool(WindowPatternCard window, DraftPool draftPool, RoundTrack roundTrack){
         this.windowPatternCard=window;
@@ -31,10 +32,16 @@ public class InspectorContextTool implements InspectorTool {
      * @return True if the dice is taken from the right place.
      */
     public boolean check(Dice dice, Pos pos, ToolCard tool){
-        RuleEngine ruleEngine = new RuleEngineC(dice,pos,windowPatternCard,draftPool,roundTrack);
+        RuleEngineC ruleEngine = new RuleEngineC(dice,pos,windowPatternCard,draftPool,roundTrack);
         List<String> nameMethods = tool.getNameCMethods();
         String method = nameMethods.get(index);
         index++;
+        if(method.equals("inRoundTrS")){
+            specialPos=pos;
+        }
+        if(method.equals("inPatCardS")){
+            ruleEngine.setSpecialPos(specialPos);
+        }
         return doMethods(method, ruleEngine);
     }
 
@@ -116,12 +123,14 @@ public class InspectorContextTool implements InspectorTool {
         }
 
         protected boolean inRoundTrS(){
-            specialPos=pos;
             return this.inRoundTr();
         }
 
         protected boolean inPatCardS(){
             return inPatCard() && dice.getColour().equals(roundT.getDice(specialPos).getColour());
+        }
+        protected void setSpecialPos(Pos specialPos){
+            this.specialPos=specialPos;
         }
 
     }
