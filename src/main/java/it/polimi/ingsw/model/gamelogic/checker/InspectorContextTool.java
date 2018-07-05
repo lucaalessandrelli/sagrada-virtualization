@@ -116,7 +116,7 @@ public class InspectorContextTool implements InspectorTool {
         }
 
         protected boolean inRoundTrS(){
-            pos=specialPos;
+            specialPos=pos;
             return this.inRoundTr();
         }
 
