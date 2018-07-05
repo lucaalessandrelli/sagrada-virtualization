@@ -43,7 +43,7 @@ public final class GeneralFunctionalities {
 
     /**
      * Delete the ImageView in the given cell, also it deletes the reference in the diceList
-     * @param pane the pane that contains the ImageView that needs to be deleted.
+     * @param pane The pane that contains the ImageView that needs to be deleted.
      * @param diceList @param diceList The list containing all ViewDice objects
      */
     public static void deleteDice(AnchorPane pane, List<ViewDice> diceList) {
@@ -53,6 +53,15 @@ public final class GeneralFunctionalities {
             diceList.remove(dice);
             children.clear();
         }
+    }
+
+    /**
+     * Delete the ImageView in the given cell
+     * @param pane The pane that contains the ImageView that needs to be deleted.
+     */
+    private static void deleteOnlyImage(AnchorPane pane) {
+        ObservableList<Node> children = pane.getChildren();
+        children.clear();
     }
 
     /**
@@ -92,16 +101,23 @@ public final class GeneralFunctionalities {
     }
 
     /**
-     * Methos used to remove all dices that has been drawn in a given GridPane
+     * Method used to remove all dices that has been drawn in a given GridPane, if the GridPane it's the player WindowPatternCard
+     * or if it's the DraftPool also deletes the ViewDice object related to the dice deleted.
      * @param grid The GridPane that contains the dice that need to be romeved
      * @param diceList The list containing all ViewDice objects
+     * @param viewDiceToBeDeleted Boolean value that states is the gridPane is the player WindowPatternCard or the Draftpool rather than
+     *                            another GridPane (use this value to decide whether to delete the viewDice object as well).
      */
-    public static void removeDiceFromGrid(GridPane grid, List<ViewDice> diceList) {
+    public static void removeDiceFromGrid(GridPane grid, List<ViewDice> diceList, boolean viewDiceToBeDeleted) {
         int numRows = grid.getRowConstraints().size();
         int numColumns = grid.getColumnConstraints().size();
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
-                GeneralFunctionalities.deleteDice((AnchorPane)grid.getChildren().get(numRows*i+j), diceList);
+                if(viewDiceToBeDeleted) {
+                    GeneralFunctionalities.deleteDice((AnchorPane)grid.getChildren().get(numColumns*i+j), diceList);
+                } else {
+                    GeneralFunctionalities.deleteOnlyImage((AnchorPane)grid.getChildren().get(numColumns*i+j));
+                }
             }
         }
     }

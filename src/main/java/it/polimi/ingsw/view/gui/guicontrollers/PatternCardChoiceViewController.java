@@ -234,10 +234,11 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
             DrawPatternCard.removeFavTokens(tokenList);
             DrawPatternCard.drawFavTokens(tokenList,substring,favorGrid);
 
-
-            for(int i = 0; i< 4;i++) {
-                for(int j = 0; j<5;j++) {
-                    DrawPatternCard.drawRestrictions(restrictionList.get(5*i+j) , currentWindow.getChildren().get(5*i+j));
+            int numColumns = currentWindow.getColumnConstraints().size();
+            int numRows = currentWindow.getRowConstraints().size();
+            for(int i = 0; i < numRows; i++) {
+                for(int j = 0; j < numColumns; j++) {
+                    DrawPatternCard.drawRestrictions(restrictionList.get(numColumns*i+j) , currentWindow.getChildren().get(numColumns*i+j));
                 }
             }
         }

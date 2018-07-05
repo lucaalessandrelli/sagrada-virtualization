@@ -142,6 +142,7 @@ public class MatchViewController implements Initializable, SceneInterface {
      * This method set the name of all the players to their Title object. Called by updateGamePlayers().
      */
     private void setTitleWindowPatternCard() {
+        listTitle.clear();
         listTitle.addAll(myTitle,titlePlayer2,titlePlayer3,titlePlayer4);
         myTitle.setText(client.getName());
         int numTitle;
@@ -435,6 +436,7 @@ public class MatchViewController implements Initializable, SceneInterface {
      * @param toolCard String that contains a list of toolCard's id, their cost and their description.
      */
     private void updateToolCards(String toolCard) {
+        toolList.clear();
         List<String> tools = Arrays.asList(toolCard.split("\\\\"));
         ObservableList<Node> toolGridChildren = toolCardGrid.getChildren();
         ObservableList<Node> toolCostGridChildren = toolCostGrid.getChildren();
@@ -459,7 +461,7 @@ public class MatchViewController implements Initializable, SceneInterface {
     private void updateRoundTrack(String roundTrackList) {
         List<String> cellList = Arrays.asList(roundTrackList.split(","));
 
-        GeneralFunctionalities.removeDiceFromGrid(roundTrackGrid,diceList);
+        GeneralFunctionalities.removeDiceFromGrid(roundTrackGrid,diceList,true);
 
         for (String cell: cellList) {
             if(!cell.equals("")) {
@@ -496,9 +498,7 @@ public class MatchViewController implements Initializable, SceneInterface {
         GridPane currentWindow = (GridPane)(boxChildren.get(0));
 
         /*Removes all dices from the player window,plus delete them from viewDiceList*/
-        if(isMyWindow) {
-            GeneralFunctionalities.removeDiceFromGrid(currentWindow,diceList);
-        }
+        GeneralFunctionalities.removeDiceFromGrid(currentWindow,diceList,isMyWindow);
 
         for (String cell: cellList) {
             if(!cell.equals(player)) {
@@ -528,10 +528,12 @@ public class MatchViewController implements Initializable, SceneInterface {
 
         ObservableList<Node> boxChildren = vBox.getChildren();
         GridPane currentWindow = (GridPane)(boxChildren.get(0));
+        int numColumns = currentWindow.getColumnConstraints().size();
+        int numRows = currentWindow.getRowConstraints().size();
 
-        for(int i = 0; i< 4;i++) {
-            for(int j = 0; j<5;j++) {
-                DrawPatternCard.drawRestrictions(restrictionList.get(5*i+j+1) , currentWindow.getChildren().get(5*i+j));
+        for(int i = 0; i < numRows; i++) {
+            for(int j = 0; j < numColumns; j++) {
+                DrawPatternCard.drawRestrictions(restrictionList.get(numColumns*i+j+1) , currentWindow.getChildren().get(numColumns*i+j));
             }
         }
     }
