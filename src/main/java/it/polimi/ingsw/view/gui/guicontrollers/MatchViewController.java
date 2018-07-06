@@ -120,9 +120,12 @@ public class MatchViewController implements Initializable, SceneInterface {
     @FXML
     private GridPane draftPool;
 
+    @FXML
+    private GridPane roundNumbers;
+
     /**
      * {@inheritDoc}
-     * Fit to their parents the privateObjectiveCard, all the ToolCards and ObjectiveCards.
+     * Fit to their parents the privateObjectiveCard, the ToolCards, the ObjectiveCards and RoundNumbers.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -136,6 +139,11 @@ public class MatchViewController implements Initializable, SceneInterface {
         for (Node node:objectiveCardGrid.getChildren()) {
             ImageView img = (ImageView) node;
             GeneralFunctionalities.fitImageToParent(img,objectiveCardGrid);
+        }
+
+        for (Node node :roundNumbers.getChildren()) {
+            ImageView img = (ImageView) node;
+            GeneralFunctionalities.fitImageToParent(img,roundNumbers);
         }
     }
 
