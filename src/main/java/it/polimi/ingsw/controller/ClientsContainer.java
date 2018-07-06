@@ -153,7 +153,7 @@ public class ClientsContainer {
 
     /**
      * Reconnect the client object to the match
-     * @param cb
+     * @param cb client box to add
      */
     void reconnect(ClientBox cb) {
         clients.add(cb);
@@ -174,5 +174,12 @@ public class ClientsContainer {
             }
         }
         return null;
+    }
+
+    /**
+     * Called when a match ends
+     */
+    void setEnd() {
+        matchStarted=false;
     }
 }

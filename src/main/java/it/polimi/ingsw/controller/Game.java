@@ -93,6 +93,7 @@ public class Game {
 
     void setEnd() {
         ended=true;
+        clients.setEnd();
     }
 
     boolean endedMatch() {
