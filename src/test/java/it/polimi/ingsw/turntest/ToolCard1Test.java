@@ -117,8 +117,7 @@ public class ToolCard1Test {
 
         turn.startTurn();
 
-        ToolCard finalTester = tester;
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(finalTester);});
+        assertThrows(WrongMoveException.class,()->{turn.receiveMove(tester);});
 
     }
 

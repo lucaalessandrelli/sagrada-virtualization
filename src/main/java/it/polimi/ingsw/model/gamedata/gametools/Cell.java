@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Property;
 
 
+/**
+ *
+ */
 public class Cell {
     private Property property;
     private Pos pos;
@@ -56,10 +59,4 @@ public class Cell {
         this.dice = x;
     }
 
-    public void show(){
-        if(this.isOccupied())
-            this.dice.show();
-        else
-            System.out.print("/");
-    }
 }

@@ -486,7 +486,7 @@ public class ToolCard3Test {
 
         assertEquals("SelectingWindowDice", lastName(turn.getState().toString(),20));
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(d3, new Pos(2, 3));});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(d3, new Pos(2, 3)));
 
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());

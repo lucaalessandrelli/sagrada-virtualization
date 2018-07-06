@@ -256,8 +256,7 @@ public class ToolCard7Test {
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
 
-        ToolCard finalTester = tester;
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(finalTester);});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(tester));
     }
 
     @Test
@@ -373,7 +372,6 @@ public class ToolCard7Test {
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
-        ToolCard finalTester = tester;
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(finalTester);});
+        assertThrows(WrongMoveException.class,()->{turn.receiveMove(tester);});
     }
 }

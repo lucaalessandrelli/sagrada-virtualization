@@ -4,15 +4,17 @@ package it.polimi.ingsw.model.gamedata.gametools;
 import it.polimi.ingsw.model.gamedata.Colour;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class DiceBag {
-    private ArrayList<Dice> dicecontainer = new ArrayList<>(90);
+    private List<Dice> dicecontainer = new ArrayList<>(90);
     private int numPlayers;
 
     public DiceBag(){
-        int i,j;
-        Colour coll[] = new Colour[5];
+        int i;
+        int j;
+        Colour[] coll = new Colour[5];
         coll[0] = Colour.BLUE;
         coll[1] = Colour.GREEN;
         coll[2] = Colour.PURPLE;
@@ -31,7 +33,7 @@ public class DiceBag {
         if(n > 0 && n < 5)
             this.numPlayers = n;
         else
-            System.out.println("Invalid number of players");
+            this.numPlayers = 0;
     }
 
     //getter method
@@ -40,9 +42,9 @@ public class DiceBag {
     }
 
     //pull out (2numPlayers + 1) dice from bag (Tested, should work)
-    public ArrayList<Dice> pullOut(){
+    public List<Dice> pullOut(){
         int dimension = (2*numPlayers) + 1;
-        ArrayList<Dice> result = new ArrayList<>(dimension);
+        List<Dice> result = new ArrayList<>(dimension);
         randomPullOut(dimension,result,dicecontainer.size());
         return result;
     }
@@ -53,13 +55,13 @@ public class DiceBag {
 
 
     //pull out number dice from bag (Tested, should work)
-    public ArrayList<Dice> pullOut(int number){
-        ArrayList<Dice> tmp = new ArrayList<>(number);
+    public List<Dice> pullOut(int number){
+        List<Dice> tmp = new ArrayList<>(number);
         randomPullOut(number,tmp,dicecontainer.size());
         return tmp;
     }
 
-    public void randomPullOut(int number, ArrayList<Dice> tmp, int cont){
+    private void randomPullOut(int number, List<Dice> tmp, int cont){
         int randomNum;
         Random rand = new Random();
         Dice randomdice;

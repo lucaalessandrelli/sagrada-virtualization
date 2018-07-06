@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.gamedata.gametools.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,10 +13,9 @@ public class ObjectiveCardTest {
 
     @Test
     public void testCardOne(){
-        ObjectiveCard tester = new ObjectiveCard();
+        ObjectiveCard tester;
         CardContainer container = new CardContainer();
-        ArrayList<ObjectiveCard> objectiveCards = new ArrayList<>();
-        ArrayList<ArrayList<Cell>> matr = new ArrayList<>(4);
+        List<ObjectiveCard> objectiveCards;
         WindowPatternCard windowPatternCard = new WindowPatternCard();
         Dice db = new Dice(Colour.BLUE);
         Dice dy = new Dice(Colour.YELLOW);
@@ -87,17 +87,5 @@ public class ObjectiveCardTest {
         assertEquals(12,tester.finalpoints((windowPatternCard)));
     }
 
-     /*How to extract random dices
-    int randomNum;
-    Random rand = new Random();
-    for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 5; j++) {
-                randomNum = rand.nextInt(4);
-                p = new Property(coll[randomNum]);
-                d = new Dice(p);
-                windowPatternCard.placeDice(d,i,j);
-            }
-        }
-     */
 }
 

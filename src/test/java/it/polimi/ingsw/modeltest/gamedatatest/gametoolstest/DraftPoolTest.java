@@ -27,7 +27,7 @@ public class DraftPoolTest{
         tester.addNewDices(x);
         j = tester.getNumOfDices();
         tester.removeDice(1);
-        assertTrue(tester.getNumOfDices() == (j - 1));
+        assertEquals(tester.getNumOfDices(), (j - 1));
     }
 
     @Test

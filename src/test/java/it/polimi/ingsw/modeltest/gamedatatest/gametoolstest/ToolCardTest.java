@@ -3,9 +3,7 @@ package it.polimi.ingsw.modeltest.gamedatatest.gametoolstest;
 import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

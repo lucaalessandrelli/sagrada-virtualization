@@ -16,11 +16,6 @@ public class ObjectiveCard extends Card {
         this.rules = new Rules();
     }
 
-    /*public ObjectiveCard(int points, String type, String name, String description, int idnumber) {
-        this.points = points;
-        this.type = type;
-    }*/
-
     //getter
     public int getPoints(){ return this.points; }
 
@@ -37,21 +32,10 @@ public class ObjectiveCard extends Card {
         this.type = type;
     }
 
-    public void setPoints(int points) {
+    protected void setPoints(int points) {
         this.points = points;
     }
 
-
-    @Override
-    public void show() {
-        System.out.print("Name :" + this.getName() + "\nDescription :"
-        + this.getDescription() + "\nIdentification number:"
-        + this.getID() + "\nPoints:"
-        + this.points + "\nType: "
-        + this.type);
-    }
-
-    //Left for future implementation
     public int finalpoints(WindowPatternCard w){
         int result = 0;
         for (String x: this.rules.getRules()) {

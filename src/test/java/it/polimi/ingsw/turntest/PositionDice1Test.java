@@ -266,7 +266,7 @@ public class PositionDice1Test {
         pos.setX(1);
         pos.setY(2);
 
-        assertThrows(WrongMoveException.class,()->{tester.receiveMove(pos);});
+        assertThrows(WrongMoveException.class,()-> tester.receiveMove(pos));
 
     }
 

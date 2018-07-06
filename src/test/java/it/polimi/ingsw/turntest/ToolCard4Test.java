@@ -159,7 +159,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
         try {
             turn.receiveMove(d5, new Pos(1, 2));
@@ -167,7 +167,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingMandatoryW", lastName(turn.getState().toString(), 17));
 
         try {
             turn.receiveMove(new Pos(0, 1));
@@ -175,7 +175,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
         try {
             turn.receiveMove(d6, new Pos(3, 3));
@@ -183,7 +183,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingMandatoryW", lastName(turn.getState().toString(), 17));
 
         try {
             turn.receiveMove(new Pos(3, 1));
@@ -368,11 +368,11 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(d8, new Pos(2, 2));});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(d8, new Pos(2, 2)));
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 1)).isOccupied());
         assertFalse(p1.getWindowPatternCard().getCell(new Pos(0, 2)).isOccupied());
@@ -533,7 +533,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
         try {
             turn.receiveMove(d5, new Pos(1, 2));
@@ -541,11 +541,11 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingMandatoryW", lastName(turn.getState().toString(), 17));
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(new Pos(2, 2));});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(new Pos(2, 2)));
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingMandatoryW", lastName(turn.getState().toString(), 17));
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(0, 0)).isOccupied());
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(1, 0)).isOccupied());
@@ -706,7 +706,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
         try {
             turn.receiveMove(d6, new Pos(3, 3));
@@ -714,7 +714,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingMandatoryW", lastName(turn.getState().toString(), 17));
 
         try {
             turn.receiveMove(new Pos(2, 0));
@@ -722,11 +722,11 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(d5,new Pos(2, 2));});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(d5,new Pos(2, 2)));
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(0, 0)).isOccupied());
         assertTrue(p1.getWindowPatternCard().getCell(new Pos(1, 0)).isOccupied());
@@ -887,7 +887,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
         try {
             turn.receiveMove(d5, new Pos(1, 2));
@@ -895,7 +895,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingMandatoryW", lastName(turn.getState().toString(), 17));
 
         try {
             turn.receiveMove(new Pos(0, 1));
@@ -903,7 +903,7 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("SelectingWindowDice", lastName(turn.getState().toString(), 20));
+        assertEquals("SelectingMandatoryW", lastName(turn.getState().toString(), 20));
 
         try {
             turn.receiveMove(d7, new Pos(2, 2));
@@ -911,11 +911,11 @@ public class ToolCard4Test {
             e.printStackTrace();
         }
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingMandatoryW", lastName(turn.getState().toString(), 17));
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(d7,new Pos(2, 0));});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(d7,new Pos(2, 0)));
 
-        assertEquals("MovingWindowDice", lastName(turn.getState().toString(), 17));
+        assertEquals("MovingMandatoryW", lastName(turn.getState().toString(), 17));
 
 
 

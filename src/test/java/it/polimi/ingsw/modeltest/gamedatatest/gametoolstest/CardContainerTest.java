@@ -7,8 +7,6 @@ import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,32 +69,6 @@ public class CardContainerTest {
             tester.pullOutPattern(4);
             tester = new CardContainer();
         }
-    }
-
-    @Test
-    public void testNeverCallTwoTimes(){
-        final PrintStream original = System.out;
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        CardContainer tester = new CardContainer();
-        System.setOut(new PrintStream(outContent));
-
-        tester.pullOutPattern(2);
-        tester.pullOutPublic();
-        tester.pullOutPrivate(2);
-
-        tester.pullOutPrivate(3);
-        assertEquals("This method is already been called",outContent.toString().trim());
-        outContent.reset();
-
-        tester.pullOutPublic();
-        assertEquals("This method is already been called",outContent.toString().trim());
-        outContent.reset();
-
-        tester.pullOutPattern(4);
-        assertEquals("This method is already been called",outContent.toString().trim());
-        outContent.reset();
-
-        System.setOut(original);
     }
 
     @Test

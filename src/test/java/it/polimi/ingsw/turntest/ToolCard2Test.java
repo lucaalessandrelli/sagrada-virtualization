@@ -29,7 +29,7 @@ public class ToolCard2Test {
     public void testingAllowedMoves(){
         ToolCard tester = new ToolCard();
         CardContainer container = new CardContainer();
-        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
+        List<ToolCard> toolCardArrayList = container.pullOutTools();
 
         while(toolCardArrayList.get(0).getID()!=2 && toolCardArrayList.get(1).getID()!= 2 && toolCardArrayList.get(2).getID()!=2 ){
             container = new CardContainer();
@@ -510,13 +510,9 @@ public class ToolCard2Test {
         p1.getWindowPatternCard().placeDice(d2, 2, 1);
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
 
-        //p1.getWindowPatternCard().show();
-
         p1.getWindowPatternCard().addRestr('5',2,2);
 
         turn.startTurn();
-
-        //System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 

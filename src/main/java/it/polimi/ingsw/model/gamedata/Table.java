@@ -2,7 +2,10 @@ package it.polimi.ingsw.model.gamedata;
 
 
 import it.polimi.ingsw.model.gamedata.gametools.*;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -61,46 +64,11 @@ public class Table {
         }
         setPublicObjects();
     }
-    //Implement this in the other class
-    private void showPlayers() {
-        for (Player x : this.myplayers) {
-            System.out.print("Player: " + x.getUsername() + "\n");
-        }
-    }
-
-    private void showObjective() {
-        for (ObjectiveCard y : this.objectiveCards) {
-            y.show();
-        }
-    }
-
-    private void showTool() {
-        for (ToolCard z : this.toolCards) {
-            z.show();
-        }
-    }
-
-    private void showWindow() {
-        for(Player p: this.myplayers){
-            p.getWindowPatternCard().show();
-        }
-    }
-
-    public void show(){
-        this.showPlayers();
-        this.showObjective();
-        this.showTool();
-        this.showWindow();
-    }
 
     //GETTER METHODS
     public List<ObjectiveCard> getObjCard() {
         return objectiveCards;
     }
-
-    /*public ArrayList<WindowPatternCard> getRandomWindows() {
-        return this.container.pullOutPattern(myplayers.size());
-    }*/
 
     public List<Dice> getDiceFromBag() {
         return diceBag.pullOut();
@@ -117,7 +85,6 @@ public class Table {
     public RoundTrack getRoundTrack(){
         return this.roundTrack;
     }
-
 
     public DiceBag getDiceBag() {
         return this.diceBag;
@@ -146,7 +113,6 @@ public class Table {
     }
 
     public void setWindow(Player p, int id){
-        int k = 0;
         int i = 0;
 
         while (i < this.myplayers.size() && !(p.getUsername().equals(this.myplayers.get(i).getUsername()))) {

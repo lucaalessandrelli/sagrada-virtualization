@@ -174,12 +174,14 @@ public class Rules {
     private int near(WindowPatternCard window, String direction, String type){
         List<List<Cell>> w = window.getMatr();
         int result = 0;
-        int j,i,x,y,k;
+        int j;
+        int i;
+        int x;
+        int y;
         Pos pos = new Pos(0,0);
         List<Character> colours = new ArrayList<>();
         List<Integer> numbers = new ArrayList<>();
         boolean column = direction.equals("COLUMN");
-        boolean find = false;
         x = w.size();
         y = w.get(0).size();
         if (type.equals("NOVALUE")) {
@@ -207,7 +209,6 @@ public class Rules {
                 if (!column) {
                     for (i = 0; i < x; i++) {
                         if (allDifferent(w.get(i), true, 5)) {
-                            //System.out.println(allDifferent(w.get(i), true, 5));
                             result++;
                         }
                     }

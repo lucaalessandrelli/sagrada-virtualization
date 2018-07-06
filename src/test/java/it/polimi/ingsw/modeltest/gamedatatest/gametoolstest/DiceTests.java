@@ -50,7 +50,7 @@ public class DiceTests {
     }
 
     @Test
-    void testRollDice(){
+    public void testRollDice(){
         Dice tester = new Dice();
         tester.rollDice();
         assertTrue(tester.getNumber() >=1 && tester.getNumber() <=6);

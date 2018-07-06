@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InspectorPlaceTest {
 
@@ -323,7 +324,7 @@ public class InspectorPlaceTest {
 
     public static WindowPatternCard getWindowPatternCard(int value) {
         CardContainer container = new CardContainer();
-        ArrayList<WindowPatternCard> windows;
+        List<WindowPatternCard> windows;
         windows = container.pullOutPattern(4);
         int i;
         for (i = 0; i < windows.size() && windows.get(i).getNum() != value; i++) {

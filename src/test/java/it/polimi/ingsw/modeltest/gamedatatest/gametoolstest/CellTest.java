@@ -20,8 +20,6 @@ public class CellTest {
     @Test
     public void testGetPosition(){
         Cell tester = new Cell();
-        Property p = new Property();
-        Pos pos = new Pos();
         assertNotNull(tester.getPosition());
     }
 

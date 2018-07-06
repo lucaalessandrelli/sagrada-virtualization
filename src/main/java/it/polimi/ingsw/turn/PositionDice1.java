@@ -62,7 +62,7 @@ public class PositionDice1 implements TurnState {
            //need to set dynamic current state
            turn.setDynamicState(new Dice(),new Pos(), new Dice(), new Pos());
         } else {
-            throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere la carta strumento "+ toolCard.toString() +".");
+            throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere la carta strumento "+ toolCard.getName() +".");
         }
     }
 

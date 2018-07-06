@@ -24,26 +24,6 @@ public class ToolCard extends Card {
         return cardContainer.readTools("src/main/resources/tool_cards_formalization.xml", i-1);
     }
 
-    @Override
-    public void show() {
-        System.out.println("Name :" + this.getName() + "\nDescription :"
-                            + this.getDescription() + "\nIdentification number:"
-                            + this.getID() + "\nIs already been used? " + this.used);
-        for (String x: this.automatedoperationlist){
-            System.out.println("Automated: " + x);
-        }
-        for(String x : this.stateList){
-            System.out.println("Statelist: " + x);
-        }
-        for (String x: this.cMethods){
-            System.out.println("CMethods: " + x);
-        }
-        for(int i = 0; i < this.pMethods.size(); i++){
-            for(int j = 0; j < this.pMethods.get(i).size();j++){
-                System.out.println(i + "_" + j + "_Methods: " + this.pMethods.get(i).get(j));
-            }
-        }
-    }
 
     public void setUsed() {
         this.used = true;
@@ -79,7 +59,7 @@ public class ToolCard extends Card {
     }
 
 
-    public void setNameCMethods(List<String> x){
+    void setNameCMethods(List<String> x){
          this.cMethods = x;
     }
 
@@ -87,11 +67,11 @@ public class ToolCard extends Card {
         this.pMethods = x;
     }
 
-    public void setAutomatedoperationlist(List<String> x){
+    void setAutomatedoperationlist(List<String> x){
         this.automatedoperationlist = x;
     }
 
-    public void setStateList(List<String> x){
+    void setStateList(List<String> x){
         this.stateList = x;
     }
 

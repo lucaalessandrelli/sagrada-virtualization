@@ -154,7 +154,6 @@ public class ToolCard5Test {
             for(int j = 0; j < table.getRoundTrack().getRoundTrack().get(i).size()-1;i++){
                 Dice d = new Dice(table.getRoundTrack().getRoundTrack().get(i).get(j).getColour());
                 d.setNumber(table.getRoundTrack().getRoundTrack().get(i).get(j).getNumber());
-                table.getRoundTrack().getRoundTrack().get(i).get(j).show();
                 tmp.get(i).add(j,d);
             }
         }
@@ -339,7 +338,7 @@ public class ToolCard5Test {
         Dice d = new Dice(p1.getRoundTrack().getDice(new Pos(0, 0)).getColour());
         d.setNumber(p1.getRoundTrack().getDice(new Pos(0, 0)).getNumber() + 1);
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(d,new Pos(0,0));});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(d,new Pos(0,0)));
 
         assertFalse(d.equals(table.getRoundTrack().getDice(new Pos(0,0))));
 
@@ -561,8 +560,7 @@ public class ToolCard5Test {
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
-        ToolCard finalTester = tester;
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(finalTester);});
+        assertThrows(WrongMoveException.class,()->{turn.receiveMove(tester);});
     }
 
 }

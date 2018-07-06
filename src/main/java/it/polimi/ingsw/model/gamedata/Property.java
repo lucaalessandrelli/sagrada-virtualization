@@ -45,10 +45,6 @@ public class Property {
         this.number = k;
     }
 
-    public void show(){
-        System.out.print(this.colour.toString() + this.number);
-    }
-
     public void rollDice(){
         int randomNum;
         Random rand = new Random();

@@ -37,20 +37,14 @@ public class Dice {
         return  prop.getNumber();
     }
 
-
     public boolean equals(Dice d) {
-        if (this.prop.getNumber() == d.prop.getNumber()){
-            if(this.prop.getColour().equals(d.prop.getColour())) {
+        if (this.prop.getNumber() == d.prop.getNumber() && this.prop.getColour().equals(d.prop.getColour())){
                 selected = true;
                 return true;
-            }
         }
         return false;
     }
 
-    public void show(){
-        this.prop.show();
-    }
 
     public void setNumber(int number){
         this.prop.setNumber(number);
@@ -70,7 +64,7 @@ public class Dice {
         this.prop.rollDice();
     }
 
-    public void deSelect() {
+    protected void deSelect() {
         selected=false;
     }
 }

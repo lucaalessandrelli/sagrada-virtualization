@@ -468,7 +468,7 @@ public class ToolCard9Test {
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(new Pos(3,1));});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(new Pos(3,1)));
 
     }
 
@@ -615,7 +615,7 @@ public class ToolCard9Test {
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
-        assertThrows(WrongMoveException.class,()->{turn.receiveMove(new Pos(3,1));});
+        assertThrows(WrongMoveException.class,()-> turn.receiveMove(new Pos(3,1)));
 
     }
 }

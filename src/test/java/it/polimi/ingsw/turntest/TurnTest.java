@@ -108,7 +108,6 @@ public class TurnTest {
         publicObjects.setOthersPlayers(playerList);
 
         p1.setPublicObjects(publicObjects);
-        //p1.getWindowPatternCard().show();
 
         InspectorContextTool inspectorContextTool = new InspectorContextTool(p1.getWindowPatternCard(),table.getDraftPool(),table.getRoundTrack());
         Turn tester = new Turn(p1,round,1,true,table);
@@ -124,7 +123,7 @@ public class TurnTest {
 
     public static ToolCard pullOutThatCard(int num){
         CardContainer container = new CardContainer();
-        ArrayList<ToolCard> toolCardArrayList = container.pullOutTools();
+        List<ToolCard> toolCardArrayList = container.pullOutTools();
         while (toolCardArrayList.get(0).getID() != num && toolCardArrayList.get(1).getID() != num && toolCardArrayList.get(2).getID() != num) {
             container = new CardContainer();
             toolCardArrayList = container.pullOutTools();

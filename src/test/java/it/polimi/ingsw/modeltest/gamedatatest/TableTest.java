@@ -1,7 +1,6 @@
 package it.polimi.ingsw.modeltest.gamedatatest;
 
 import it.polimi.ingsw.model.gamedata.Player;
-import it.polimi.ingsw.model.gamedata.PublicObjects;
 import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 import org.junit.jupiter.api.Test;
@@ -139,5 +138,65 @@ public class TableTest {
             }
         }
 
+    }
+
+    @Test
+    public void testSettingWindowandResetSelection(){
+
+
+        Player p1 = new Player("Gionny");
+        Player p2 = new Player("Luca");
+        Player p3 = new Player("Andrea");
+        Player p4 = new Player("Giuseppe");
+
+        List<Player> players = new ArrayList<>();
+        players.add(p1);
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
+        p1.setMyWindow(windowPatternCard1);
+        players.add(p2);
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
+        p2.setMyWindow(windowPatternCard2);
+        players.add(p3);
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
+        p3.setMyWindow(windowPatternCard3);
+        players.add(p4);
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        p4.setMyWindow(windowPatternCard4);
+
+        Table tester = new Table(players);
+
+        tester.initialize();
+
+        tester.setPublicObjects();
+
+        tester.fillDraftPool();
+
+        tester.getRoundTrack().setDiceOnRoundTrack(1,tester.getDraftPool().getDraftPool());
+
+        tester.fillDraftPool();
+
+        Dice d1 = new Dice();
+        Dice d2 = new Dice();
+        Dice d3 = new Dice();
+        Dice d4 = new Dice();
+        p1.getWindowPatternCard().placeDice(d1,0,0);
+        p2.getWindowPatternCard().placeDice(d2,0,0);
+        p3.getWindowPatternCard().placeDice(d3,0,0);
+        p4.getWindowPatternCard().placeDice(d4,0,0);
+
+        tester.resetSelection();
+
+        for (Dice d: tester.getRoundTrack().getDiceOnRoundtrack(1)) {
+            assertFalse(d.isSelected());
+        }
+        for (List<Cell> cells: p1.getWindowPatternCard().getMatr()) {
+            for(Cell c: cells){
+                if(c.isOccupied())
+                    assertFalse(c.getDice().isSelected());
+            }
+        }
+        for(Dice d: tester.getAllDraft()){
+            assertFalse(d.isSelected());
+        }
     }
 }

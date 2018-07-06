@@ -23,7 +23,6 @@ import static org.fusesource.jansi.Ansi.ansi;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class VirtualViewParserTest {
-    private static final String BLOCK = "⚀";
 
     @Test
     public void TestParsingPlayers(){

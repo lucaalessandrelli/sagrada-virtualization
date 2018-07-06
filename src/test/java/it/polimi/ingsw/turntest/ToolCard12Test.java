@@ -175,9 +175,6 @@ public class ToolCard12Test {
         p1.getWindowPatternCard().placeDice(d7d,3,2);
         p1.getWindowPatternCard().placeDice(d8d,0,1);
 
-        //p1.getWindowPatternCard().show();
-
-
         Dice tmp = new Dice(p1.getDraftPool().chooseDice(6).getColour());
         tmp.setNumber(p1.getDraftPool().chooseDice(6).getNumber());
 
@@ -218,7 +215,7 @@ public class ToolCard12Test {
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
-            turn.receiveMove(turn.getPlayer().getWindowPatternCard().getDice(new Pos(2,0)),new Pos(2,0));
+            turn.receiveMove(turn.getPlayer().getWindowPatternCard().getDice(new Pos(0,1)),new Pos(0,1));
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }
@@ -233,12 +230,12 @@ public class ToolCard12Test {
             e.printStackTrace();
         }
 
-        state = "SelectingOptionalWindowDice";
+        state = "SelectingWindowDice";
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
-            turn.receiveMove(turn.getPlayer().getWindowPatternCard().getDice(new Pos(0,0)),new Pos(0,0));
+            turn.receiveMove(turn.getPlayer().getWindowPatternCard().getDice(new Pos(3,0)),new Pos(3,0));
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }
@@ -248,7 +245,7 @@ public class ToolCard12Test {
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
         try {
-            turn.receiveMove(new Pos(2,0));
+            turn.receiveMove(new Pos(2,1));
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }
@@ -257,7 +254,18 @@ public class ToolCard12Test {
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
-        //p1.getWindowPatternCard().show();
+
+
+        assertFalse(turn.getPlayer().getWindowPatternCard().getCell(new Pos(3,0)).isOccupied());
+        assertFalse(turn.getPlayer().getWindowPatternCard().getCell(new Pos(0,1)).isOccupied());
+
+        assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(0,0)).isOccupied());
+        assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(1,0)).isOccupied());
+        assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(1,1)).isOccupied());
+        assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(2,0)).isOccupied());
+        assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(2,1)).isOccupied());
+        assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(2,2)).isOccupied());
+        assertTrue(turn.getPlayer().getWindowPatternCard().getCell(new Pos(3,2)).isOccupied());
     }
 
     @Test
@@ -523,7 +531,7 @@ public class ToolCard12Test {
             e.printStackTrace();
         }
 
-        state = "SelectingOptionalWindowDice";
+        state = "SelectingWindowDice";
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 
@@ -804,7 +812,7 @@ public class ToolCard12Test {
             e.printStackTrace();
         }
 
-        state = "SelectingOptionalWindowDice";
+        state = "SelectingWindowDice";
 
         assertEquals(state, lastName(turn.getState().toString(), state.length()+1));
 

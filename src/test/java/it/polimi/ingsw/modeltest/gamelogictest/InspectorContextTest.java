@@ -29,7 +29,6 @@ public class InspectorContextTest {
     @Test
     public void testCheckPlaceDice(){
         InspectorContext tester = new InspectorContext();
-        CardContainer container = new CardContainer();
         DiceBag diceBag = new DiceBag();
         diceBag.setNumPlayers(4);
         DraftPool draftPool = new DraftPool();

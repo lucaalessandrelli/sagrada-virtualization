@@ -10,7 +10,7 @@ public enum Colour {
 
     private String name;
 
-    private Colour(String mystring) {
+    Colour(String mystring) {
         this.name = mystring;
     }
 
@@ -28,8 +28,9 @@ public enum Colour {
                 return Colour.PURPLE;
             case 'W':
                 return Colour.WHITE;
+            default:
+                return Colour.WHITE;
         }
-        return Colour.WHITE;
     }
 
     @Override
@@ -38,9 +39,7 @@ public enum Colour {
     }
 
     public boolean equals(Colour c){
-        if(this.toString().equals(c.toString()))
-            return true;
-        return false;
+        return this.toString().equals(c.toString());
     }
 
 }

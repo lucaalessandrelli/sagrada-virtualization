@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.lang.System.out;
+import static java.lang.System.*;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
 
@@ -32,9 +32,12 @@ public class Printer {
     private static final String CONNECTED = "Giocatori connessi:";
     private static final String DRAFT = "Prendere un dado dal draftpool:  draft indexDice";
     private static final String ROUND = "Prendere un dado dal roundtrack:  roundtrack x,y";
-    private static final String WINDOW = "Prendere un dado dal windowpatterncard:  window x,y";
+    private static final String WINDOW = "Prendere un dado dalla windowpatterncard:  window x,y";
     private static final String PLACE = "Posizionare il dado:  place x,y";
+    private static final String PATTERNCARD = "Per scegliere la carta:  mycard idCarta";
+    private static final String NUMBERTOOLCARD = "Per scegliere il valore del dado:  number numeroDado";
     private static final String TOOL = "Scegliere una toolcard:  toolcard idcarta";
+    private static final String PASS = "Per andare avanti o passare il turno: pass";
     private static final String COORDINATES = "   y0 y1 y2 y3 y4";
     private static final String USERNAME = "Inserisci l'username:";
     private static final String CONNECTION = "Inserisci quale tipo di connessione vuoi utilizzare: \n1)SOCKET \n2)RMI";
@@ -52,7 +55,7 @@ public class Printer {
     }
 
 
-    public void welcome() {
+    void welcome() {
         out.print(ansi().saveCursorPosition());
         out.print(ansi().a("Benvenuto in "));
         out.print( ansi().render("@|red S|@"));
@@ -201,7 +204,7 @@ public class Printer {
         }
     }
 
-    public void printPatternCard(List<String> restr){
+    private void printPatternCard(List<String> restr){
         for(int i = 0; i < restr.size(); i++){
             if((restr.get(i).charAt(1)-'0')!=0){
                 out.print(ansi().bg(WHITE).fg(BLACK).a(" " + restr.get(i).charAt(1) + " ").reset());
@@ -215,7 +218,7 @@ public class Printer {
         }
     }
 
-    public void printPlacedDices(List<String> dices){
+    private void printPlacedDices(List<String> dices){
         int updown;
         int leftright;
         out.print(ansi().cursorUp(4));
@@ -226,7 +229,7 @@ public class Printer {
 
             out.print(ansi().cursorDown(updown).cursorRight((leftright*3)));
 
-            printDice(dices.get(i).charAt(0),dices.get(i).charAt(1));
+            this.printDice(dices.get(i).charAt(0),dices.get(i).charAt(1));
 
             out.print(ansi().reset());
             out.print(ansi().restoreCursorPosition());
@@ -267,7 +270,7 @@ public class Printer {
 
     private void printDice(Character colour, Character number){
         try{
-            PrintStream outStream = new PrintStream(System.out, true, "UTF-8");
+            PrintStream outStream = new PrintStream(out, true, "UTF-8");
             Character num = whatNumber(number);
             Color color = WHITE;
 
@@ -296,7 +299,7 @@ public class Printer {
                 outStream.print(ansi().bg(Color.WHITE).fg(color).a(" " + num +" ").reset());
             }
         } catch(UnsupportedEncodingException e){
-            System.out.println("Caught exception: " + e.getMessage());
+            out.println("Caught exception: " + e.getMessage());
         }
     }
 
@@ -326,7 +329,7 @@ public class Printer {
         return (char)intValue;
     }
 
-    public void printWaitingRoom(String timer, List<String> players, String output){
+    void printWaitingRoom(String timer, List<String> players, String output){
         out.print(ansi().saveCursorPosition());
 
         out.print(ansi().eraseScreen(Erase.ALL));
@@ -341,7 +344,7 @@ public class Printer {
 
     }
 
-    public void printChooseCardRoom(String patternCards, String timer) {
+    void printChooseCardRoom(String patternCards, String timer) {
 
         Deparser dep = new Deparser();
 
@@ -366,10 +369,13 @@ public class Printer {
             this.printchoosePatternCard(numplusrestr.get(0),numplusrestr.get(1),dep.divideByComma(numplusrestr.get(2)));
         }
 
+        out.print(ansi().a(PATTERNCARD).cursorLeft(PATTERNCARD.length()).cursorDown(1));
+
         //print all 4 windows and the timer (il timer deve essere fisso altrimenti il giocatore non può scrivere)
     }
 
     public void printMatch(String setup, String timer, List<String> players, String turnState) {
+
 
         String thisplayer = deparser.findPlayer(setup);
 
@@ -385,7 +391,7 @@ public class Printer {
         this.printplayersConnected(players);
 
         out.print(ansi().cursorRight(15));
-        this.printActivePlayers(setup,players,deparser);
+        this.printActivePlayers(setup, deparser);
 
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorDown(8));
@@ -460,7 +466,7 @@ public class Printer {
 
     }
 
-    public void printScore(String score) {
+    void printScore(String score) {
         Deparser dep = new Deparser();
 
         List<String> players = dep.divideByComma(score);
@@ -499,15 +505,15 @@ public class Printer {
         out.print(ansi().cursorRight(20));
         out.print(ansi().a(WINNER + winner).cursorLeft(WINNER.length() + winner.length() + 20).cursorDown(players.size()+6));
 
-        out.print(ansi().a("Gioca ancora?"));
+        out.print(ansi().a("Gioca ancora? (Scrivi retry per accettare)"));
 
-        out.print(ansi().cursorDown(2).cursorLeft("Gioca ancora?".length()));
+        out.print(ansi().cursorDown(2).cursorLeft("Gioca ancora? (Scrivi retry per accettare)".length()));
 
 
 
     }
 
-    private void printActivePlayers(String setup, List<String> players, Deparser deparser){
+    private void printActivePlayers(String setup, Deparser deparser){
 
         String tmp = deparser.findString(setup,"state");
 
@@ -547,7 +553,7 @@ public class Printer {
 
                 out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
 
-                this.printFavoreTokens(setup, newString.get(0), deparser);
+                this.printFavoreTokens(setup, newString.get(0));
 
                 out.print(ansi().cursorDown(1));
 
@@ -564,10 +570,10 @@ public class Printer {
         out.print(ansi().restoreCursorPosition());
     }
 
-    private void printFavoreTokens(String setup, String name, Deparser deparser) {
+    private void printFavoreTokens(String setup, String name) {
 
         try {
-            PrintStream outStream = new PrintStream(System.out, true, "UTF-8");
+            PrintStream outStream = new PrintStream(out, true, "UTF-8");
 
 
             int tmp = setup.indexOf("favors " + name);
@@ -656,7 +662,9 @@ public class Printer {
 
         printCoordinates(0,max+1,1,10,'y','x');
 
-        out.print(ansi().cursorUp(max+1));
+        out.print(ansi().cursorUp(max));
+
+        out.print(ansi().cursorRight(3));
 
         for (String dice: tmp){
             if(!dice.equals("")) {
@@ -729,7 +737,7 @@ public class Printer {
 
         out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
 
-        this.printFavoreTokens(setup,newString.get(0),deparser);
+        this.printFavoreTokens(setup,newString.get(0));
 
         out.print(ansi().cursorDown(1).cursorLeft(3));
 
@@ -813,7 +821,7 @@ public class Printer {
 
     private void printCommands(){
 
-        out.print(ansi().cursorRight(60));
+        out.print(ansi().cursorRight(70));
 
         out.print(ansi().a("Legenda mosse:  ").cursorLeft("  ".length()));
 
@@ -824,14 +832,21 @@ public class Printer {
         out.print(ansi().a(WINDOW).cursorLeft(WINDOW.length()).cursorDown(1));
         out.print(ansi().a(PLACE).cursorLeft(PLACE.length()).cursorDown(1));
         out.print(ansi().a(TOOL).cursorLeft(TOOL.length()).cursorDown(1));
+        out.print(ansi().a(PASS).cursorLeft(PASS.length()).cursorDown(1));
 
 
     }
 
-    public void printChooseDice() {
+    void printChooseDice() {
+
+        out.print(ansi().cursorDown(2));
+
+        out.print(ansi().a(NUMBERTOOLCARD).cursorLeft(NUMBERTOOLCARD.length()).cursorDown(2));
+
+        out.print(ansi().saveCursorPosition());
     }
 
-    public void printIncDecDice() {
+    void printIncDecDice() {
     }
 
     private class Deparser {
@@ -859,15 +874,21 @@ public class Printer {
                 tempz.set(i+1,tempz.get(i+1).replace("dices ",""));
 
                 if(!tempz.get(i).substring(0,tempz.get(i).indexOf(',')).equals(myplayer)){
-                    builder.append(tempz.get(i).substring(0,tempz.get(i).indexOf(',')));
+                    String player = tempz.get(i).substring(0,tempz.get(i).indexOf(','));
+                    builder.append(player);
                     builder.append(" ");
                     builder.append(tempz.get(i).replace(";","").replace(tempz.get(i).substring(0,tempz.get(i).indexOf(',')+1),""));
                     builder.append(" ");
-                    builder.append(tempz.get(i+1).replace(";","").replace(
-                            tempz.get(i).substring(0,tempz.get(i).indexOf(',')),""));
+                    String dices = tempz.get(i+1).replace(";","").replace(player,"");
+                    if(!dices.equals("") && dices.charAt(0)==',') {
+                        dices = dices.substring(1, dices.length());
+                        builder.append(dices);
+                    }
+                    if (builder.charAt(builder.length()-1) == ' ' || builder.charAt(builder.length()-1)==',')
+                        builder.deleteCharAt(builder.length()-1);
+
                     builder.append(";");
                 }
-
             }
 
             return builder.toString();
@@ -892,14 +913,13 @@ public class Printer {
             builder.append(" ");
             builder.append(tempz.get(0).replace(";","").replace(tempz.get(0).substring(0,tempz.get(0).indexOf(',')+1),""));
             builder.append(" ");
-            /*builder.append(tempz.get(1).replace(";","").replace(
-                    tempz.get(0).substring(0,tempz.get(0).indexOf(',')+1),""));*/
             String dices = tempz.get(1).replace(";","").replace(player,"");
+
             if(!dices.equals("") && dices.charAt(0)==',') {
                 dices = dices.substring(1, dices.length());
                 builder.append(dices);
             }
-                //builder.append(";");
+
             if (builder.charAt(builder.length()-1) == ' ' || builder.charAt(builder.length()-1)==',')
                 builder.deleteCharAt(builder.length()-1);
 
@@ -929,9 +949,7 @@ public class Printer {
 
             tmp = tmp.replace(RESTRICTIONS + " ","");
 
-            String thisplayer = tmp.substring(0,tmp.indexOf(','));
-
-            return thisplayer;
+            return tmp.substring(0,tmp.indexOf(','));
         }
 
         private List<String> divideBySemicolon(String setup) {return Arrays.asList(setup.split(";")); }
