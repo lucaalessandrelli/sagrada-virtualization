@@ -19,6 +19,7 @@ import java.util.List;
  * Turn class: manages the turn of a given player through a state machine
  */
 public class Turn {
+    private static final int TOOL8 = 8;
     private Player player;
     private TurnState state;
     private InspectorContext inspectorContext;
@@ -29,6 +30,7 @@ public class Turn {
     private int roundNumber;
     private ToolCard toolCard;
     private Round round;
+    private boolean tool8used = false;
 
     private List<String> toolStateList;
     private List<String> toolAutomatedOperationList;
@@ -120,9 +122,13 @@ public class Turn {
     }
 
     /**
-     * Notifies the round that the current turn ended
+     * Notifies the round that the current turn ended, also if the toolCard 8 has been used call
+     * a method on round that makes this player inactive for the second turn of the round.
      */
     public void notifyEndRound() {
+        if(tool8used) {
+            round.inactivatePlayer(player);
+        }
         round.interrupt();
     }
 
@@ -155,16 +161,16 @@ public class Turn {
     }
 
     /**
-     * Called by concrete states when the player choose a toolCard in order to save information for next states, if the user plays toolcard8 then
-     * a method on round, which makes this player inactive for the second turn of the round, is called
+     * Called by concrete states when the player choose a toolCard in order to save information for next states, if the toolCard 8
+     * has been used set the boolean variable tool8used to true.
      * @param toolCard ToolCard object
      */
     public void setToolCardInfo(ToolCard toolCard) {
         this.setToolCard(toolCard);
         this.setToolStateList(toolCard.getStateList());
         this.setToolAutomatedOperationList(toolCard.getAutomatedoperationlist());
-        if(toolCard.getID() == 8) {
-            round.inactivatePlayer(player);
+        if(toolCard.getID() == TOOL8) {
+            tool8used = true;
         }
     }
 

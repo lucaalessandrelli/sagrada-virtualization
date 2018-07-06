@@ -66,6 +66,7 @@ public class MatchViewController implements Initializable, SceneInterface {
     private ObservableList<String> gamePlayerlist = FXCollections.observableArrayList();
     private ObservableList<String> playerStatusList = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
+    private ObservableList<User> userList = FXCollections.observableArrayList();
     private List<String> toolList = new ArrayList<>();
     private String time;
     private String score;
@@ -75,10 +76,10 @@ public class MatchViewController implements Initializable, SceneInterface {
     private String currentState = START;
 
     @FXML
-    private TableColumn<User,String> userNameColumn;
+    private TableColumn<User,String> usernameColumn;
 
     @FXML
-    private TableColumn<User,String> userStatusColumn;
+    private TableColumn<User,String> statusColumn;
 
     @FXML
     private GridPane objectiveCardGrid;
@@ -347,7 +348,7 @@ public class MatchViewController implements Initializable, SceneInterface {
      * Update the TableView in order to show currently connected players and their state (active/inactive). Called by ().
      */
     public void updateStatusTable() {
-        ObservableList<User> userList = FXCollections.observableArrayList();
+        userList.clear();
         ObservableList<String> playerInfo;
 
         for (String username:connectedPlayers) {
@@ -359,8 +360,8 @@ public class MatchViewController implements Initializable, SceneInterface {
             }
         }
 
-        userNameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        userStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         statusTable.setItems(userList);
     }
 

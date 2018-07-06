@@ -76,50 +76,30 @@ public class ScoreViewController implements Initializable, SceneInterface {
     }
 
     /**
-     * Load on the TableView all the players of the match and their scores. Also calls dispayWinner() method.
+     * Load on the TableView all the players of the match and their scores. Also calls displays the winner of the game which is the
+     * first user inside the list.
      * @param playerScore List containing all the player's username and their score.
      */
     public void loadScores(String playerScore) {
         ObservableList<String> scoreList = FXCollections.observableArrayList(Arrays.asList(playerScore.split(",")));
+        String username;
+        String score;
 
-        for (String score:scoreList) {
-            ObservableList<String> currentPlayerScore = FXCollections.observableArrayList(Arrays.asList(score.split(" ")));
-            User user = new User(currentPlayerScore.get(0));
-            user.setScore(currentPlayerScore.get(1));
+        for(int i = 0; i < scoreList.size();i++) {
+            ObservableList<String> currentPlayerScore = FXCollections.observableArrayList(Arrays.asList(scoreList.get(i).split(" ")));
+            username = currentPlayerScore.get(0);
+            score = currentPlayerScore.get(1);
+            User user = new User(username);
+            user.setScore(score);
             userList.add(user);
+            if(i == 0) {
+                announcementLabel.setText(username+" ha vinto la partita!");
+            }
         }
 
         playerColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         scoreTable.setItems(userList);
-        displayWinner();
-    }
-
-    /**
-     * Show on the screen the name of the winner or a drawn message in case there are more top score players.
-     */
-    private void displayWinner() {
-        int maxScore = -1;
-        int tempScore;
-        boolean draw = false;
-        String winnerName = "";
-
-        for (User user: userList) {
-            tempScore = Integer.parseInt(user.getScore());
-            if(tempScore > maxScore) {
-                maxScore = tempScore;
-                winnerName = user.getUsername();
-            } else if (tempScore == maxScore) {
-                draw = true;
-            }
-        }
-
-        if(draw) {
-            announcementLabel.setText("Pareggio!");
-        } else {
-            announcementLabel.setText(winnerName+" ha vinto la partita!");
-        }
-
     }
 
     /**
