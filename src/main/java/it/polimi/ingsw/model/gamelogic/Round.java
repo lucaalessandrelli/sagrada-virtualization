@@ -58,6 +58,7 @@ public class Round {
                 try {
                     Thread.sleep(timerMove);
                     p.noMove();
+                    players.notifyChanges();
                 } catch (InterruptedException e) {
                     players.notifyChanges();
                 }
