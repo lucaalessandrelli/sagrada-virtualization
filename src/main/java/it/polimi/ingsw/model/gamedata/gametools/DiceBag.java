@@ -7,10 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class represents the dicebag
+ */
 public class DiceBag {
     private List<Dice> dicecontainer = new ArrayList<>(90);
     private int numPlayers;
 
+    /**
+     * The classic constructor that adds 18 dices for every colour to the arraylist
+     */
     public DiceBag(){
         int i;
         int j;
@@ -28,6 +34,10 @@ public class DiceBag {
         }
     }
 
+    /**
+     * The setter method for the number of the players
+     * @param n
+     */
     //setter method
     public void setNumPlayers(int n){
         if(n > 0 && n < 5)

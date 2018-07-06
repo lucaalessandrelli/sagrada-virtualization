@@ -64,7 +64,8 @@ public class RoundTrackTest {
         for(int j = 0; j < num; j++) {
             randomNum = rand.nextInt(4);
             p = new Property(coll[randomNum],true);
-            dice = new Dice(p);
+            dice = new Dice();
+            dice.setColour(p.getColour().toString());
             dices.add(dice);
         }
     }

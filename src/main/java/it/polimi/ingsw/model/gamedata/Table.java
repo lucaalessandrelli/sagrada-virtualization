@@ -180,7 +180,7 @@ public class Table {
 
         builder.append(this.findWinner(scores));
 
-        for (Player player : this.myplayers) {
+        for (Player player : scores.keySet()) {
             builder.append(player.getUsername());
             builder.append(SPACE);
             builder.append(scores.get(player));
@@ -211,6 +211,7 @@ public class Table {
         if(numberActive == 1){
             for(Player p: this.myplayers){
                 if(p.isActive()){
+                    winner = p;
                     appendWinner(builder,scores,winner);
                 }
             }
@@ -306,10 +307,11 @@ public class Table {
     }
 
     private void appendWinner(StringBuilder builder,HashMap<Player,Integer> scores,Player winner){
-        builder.append(winner);
+        builder.append(winner.getUsername());
         builder.append(SPACE);
         builder.append(scores.get(winner));
         builder.append(VIRG);
+        scores.remove(winner);
     }
 
     public void resetSelection() {
