@@ -159,6 +159,8 @@ public class Match extends Thread {
                 }
             }
         }
+        playerList.forEach(Player::notifyPlayer);
+
     }
 
     /**
