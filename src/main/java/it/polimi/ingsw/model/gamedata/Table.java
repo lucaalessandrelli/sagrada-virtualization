@@ -1,12 +1,14 @@
 package it.polimi.ingsw.model.gamedata;
 
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -21,6 +23,11 @@ public class Table {
     private CardContainer container;
     private List<WindowPatternCard> windowPatternCards;
     private List<Integer> temporaryCards = new ArrayList<>();
+
+    private final static String SCORE = "score ";
+    private final static char SPACE = ' ';
+    private final static char VIRG = ',';
+
 
     public Table(List<Player> players){
         this.diceBag = new DiceBag();
@@ -159,6 +166,150 @@ public class Table {
 
             p.setPublicObjects(publicObjects);
         }
+    }
+
+    public String calculatePoints(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(SCORE);
+
+        HashMap<Player,Integer> scores = new HashMap<>();
+
+        for (Player player:this.myplayers){
+            scores.put(player,player.calculatePoints());
+        }
+
+        builder.append(this.findWinner(scores));
+
+        for (Player player : this.myplayers) {
+            builder.append(player.getUsername());
+            builder.append(SPACE);
+            builder.append(scores.get(player));
+            builder.append(VIRG);
+        }
+
+        if(builder.toString().charAt(builder.length()-1)== VIRG)
+            builder.deleteCharAt(builder.length()-1);
+
+        return builder.toString();
+    }
+
+
+    private String findWinner(HashMap<Player,Integer> scores){
+
+        StringBuilder builder = new StringBuilder();
+        int max = 0;
+        Player winner = new Player("noone");
+
+        List<Player> drawPlayers = new ArrayList<>();
+
+        int numberActive = 0;
+        for (Player p: this.myplayers){
+            if(p.isActive())
+                numberActive++;
+        }
+
+        if(numberActive == 1){
+            for(Player p: this.myplayers){
+                if(p.isActive()){
+                    appendWinner(builder,scores,winner);
+                }
+            }
+        }
+        else {
+            for(Player player:scores.keySet()){
+                int currentScore = scores.get(player);
+                if(currentScore > max) {
+                    winner = player;
+                    drawPlayers.clear();
+                    max = currentScore;
+                }
+                else if(currentScore == max)
+                    drawPlayers.add(player);
+            }
+
+            if(drawPlayers.size() > 1)
+                appendWinner(builder,scores,this.drawOnScore(drawPlayers));
+            else {
+                appendWinner(builder,scores,winner);
+            }
+        }
+
+        return builder.toString();
+
+    }
+
+    private Player drawOnScore(List<Player> drawPlayers) {
+        int maxDraw = 0;
+        Player winner = new Player("noone");
+
+        List<Player> drawPlayersOnPrivate = new ArrayList<>();
+
+        for (Player player : drawPlayers) {
+            int privatePoints = player.calculatePointsPrivate();
+
+            if(privatePoints > maxDraw){
+                winner = player;
+                drawPlayersOnPrivate.clear();
+                maxDraw = privatePoints;
+            }
+            else if(privatePoints == maxDraw)
+                drawPlayersOnPrivate.add(player);
+        }
+
+        if(drawPlayersOnPrivate.size() > 1)
+            return(this.drawOnPrivateScore(drawPlayersOnPrivate));
+
+        return winner;
+
+        }
+
+    private Player drawOnPrivateScore(List<Player> drawPlayersOnPrivate) {
+        int maxFavors = 0;
+        Player winner = new Player("noone");
+
+        List<Player> drawPlayersOnFavors = new ArrayList<>();
+
+        for(Player player : drawPlayersOnPrivate){
+            int favorTokens = player.getMyFavTokens();
+
+            if(favorTokens > maxFavors){
+                winner = player;
+                drawPlayersOnFavors.clear();
+                maxFavors = favorTokens;
+            }
+            else if(favorTokens == maxFavors)
+                drawPlayersOnFavors.add(player);
+        }
+
+        if(drawPlayersOnFavors.size() > 1) {
+                return(this.drawOnFavors(drawPlayersOnFavors));
+            }
+
+            return winner;
+    }
+
+    private Player drawOnFavors(List<Player> drawPlayersOnFavors) {
+
+        int max = 0;
+
+        Player winner = new Player("noone");
+
+        for (Player player : drawPlayersOnFavors) {
+            if(this.myplayers.indexOf(player) > max) {
+                winner = player;
+                max = this.myplayers.indexOf(player);
+            }
+        }
+
+        return winner;
+
+    }
+
+    private void appendWinner(StringBuilder builder,HashMap<Player,Integer> scores,Player winner){
+        builder.append(winner);
+        builder.append(SPACE);
+        builder.append(scores.get(winner));
+        builder.append(VIRG);
     }
 
     public void resetSelection() {
