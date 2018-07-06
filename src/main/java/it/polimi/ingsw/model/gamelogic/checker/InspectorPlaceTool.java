@@ -33,8 +33,11 @@ public class InspectorPlaceTool implements InspectorTool {
         RuleEngineP ruleEngine = new RuleEngineP(dice,pos,window);
         List<List<String>> nameMethods = tool.getNamePMethods();
         List<String> currMethods = nameMethods.get(index);
-        index++;
-        return doMethods(currMethods,ruleEngine);
+        boolean result = doMethods(currMethods,ruleEngine);
+        if(result){
+            index++;
+        }
+        return result;
     }
 
     /**

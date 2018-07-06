@@ -35,14 +35,17 @@ public class InspectorContextTool implements InspectorTool {
         RuleEngineC ruleEngine = new RuleEngineC(dice,pos,windowPatternCard,draftPool,roundTrack);
         List<String> nameMethods = tool.getNameCMethods();
         String method = nameMethods.get(index);
-        index++;
+        boolean result =doMethods(method, ruleEngine);
+        if(result) {
+            index++;
+        }
         if(method.equals("inRoundTrS")){
             specialPos=pos;
         }
         if(method.equals("inPatCardS")){
             ruleEngine.setSpecialPos(specialPos);
         }
-        return doMethods(method, ruleEngine);
+        return result;
     }
 
     /**
