@@ -108,7 +108,7 @@
         <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
-            <version>8.0.4</version>
+            <version>9.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.fusesource.jansi</groupId>
