@@ -95,10 +95,10 @@ public class TableTest {
         tester.fillDraftPool();
 
         for(int i = 0; i < tester.getDraftPool().getNumOfDices();i++){
-            assertTrue(tester.getDraftPool().getDraftPool().get(i).equals(p1.getDraftPool().getDraftPool().get(i)));
-            assertTrue(tester.getDraftPool().getDraftPool().get(i).equals(p2.getDraftPool().getDraftPool().get(i)));
-            assertTrue(tester.getDraftPool().getDraftPool().get(i).equals(p3.getDraftPool().getDraftPool().get(i)));
-            assertTrue(tester.getDraftPool().getDraftPool().get(i).equals(p4.getDraftPool().getDraftPool().get(i)));
+            assertTrue(tester.getDraftPool().getDraftPool().get(i).areEquals(p1.getDraftPool().getDraftPool().get(i)));
+            assertTrue(tester.getDraftPool().getDraftPool().get(i).areEquals(p2.getDraftPool().getDraftPool().get(i)));
+            assertTrue(tester.getDraftPool().getDraftPool().get(i).areEquals(p3.getDraftPool().getDraftPool().get(i)));
+            assertTrue(tester.getDraftPool().getDraftPool().get(i).areEquals(p4.getDraftPool().getDraftPool().get(i)));
         }
     }
 
@@ -133,7 +133,7 @@ public class TableTest {
         for(int i = 0; i < tester.getRoundTrack().getRoundTrack().size();i++){
             if(tester.getRoundTrack().getRoundTrack().get(i)!=null){
                 for(int j = 0; j < tester.getRoundTrack().getRoundTrack().get(i).size(); j++){
-                    assertTrue(tester.getRoundTrack().getRoundTrack().get(i).get(j).equals(p1.getRoundTrack().getRoundTrack().get(i).get(j)));
+                    assertTrue(tester.getRoundTrack().getRoundTrack().get(i).get(j).areEquals(p1.getRoundTrack().getRoundTrack().get(i).get(j)));
                 }
             }
         }

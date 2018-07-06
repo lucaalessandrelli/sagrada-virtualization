@@ -136,7 +136,7 @@ public class ToolCard7Test {
         }
 
         for (int i = 0; i < p1.getDraftPool().getDraftPool().size()-1; i++){
-            assertTrue(p1.getDraftPool().getDraftPool().get(i).equals(tmp.get(i)));
+            assertTrue(p1.getDraftPool().getDraftPool().get(i).areEquals(tmp.get(i)));
         }
 
         try {

@@ -74,7 +74,7 @@ public class InspectorPlace {
      */
     protected boolean checkColour(WindowPatternCard window, Pos pos, Dice dice){
         Cell c =window.getCell(pos);
-        return ((c.getProperty().getColour().toString().equals("W")) || (c.getProperty().getColour().equals(dice.getColour())));
+        return ((c.getProperty().getColour().toString().equals("W")) || (c.getProperty().getColour().areEquals(dice.getColour())));
     }
 
     /**
@@ -166,7 +166,7 @@ public class InspectorPlace {
     private boolean checkSide(Pos p,WindowPatternCard window,Dice dice) {
         if(window.isIn(p)){
             Dice d = window.getDice(p);
-            return (d.getNumber() != dice.getNumber() && !d.getColour().equals(dice.getColour())) || d.isSelected();
+            return (d.getNumber() != dice.getNumber() && !d.getColour().areEquals(dice.getColour())) || d.isSelected();
         }else{
             return true;
         }

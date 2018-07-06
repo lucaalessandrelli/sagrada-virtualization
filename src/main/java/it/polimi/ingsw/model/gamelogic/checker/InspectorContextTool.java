@@ -130,7 +130,7 @@ public class InspectorContextTool implements InspectorTool {
         }
 
         protected boolean inPatCardS(){
-            return inPatCard() && dice.getColour().equals(roundT.getDice(specialPos).getColour());
+            return inPatCard() && dice.getColour().areEquals(roundT.getDice(specialPos).getColour());
         }
         protected void setSpecialPos(Pos specialPos){
             this.specialPos=specialPos;

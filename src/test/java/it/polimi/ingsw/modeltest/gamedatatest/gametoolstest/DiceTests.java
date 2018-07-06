@@ -1,11 +1,8 @@
 package it.polimi.ingsw.modeltest.gamedatatest.gametoolstest;
 
 import it.polimi.ingsw.model.gamedata.Colour;
-import it.polimi.ingsw.model.gamedata.Property;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -33,20 +30,20 @@ public class DiceTests {
         Dice tester = new Dice();
         Dice test = new Dice();
         while(test.getNumber()!=tester.getNumber()){
-            assertFalse(test.equals(tester));
+            assertFalse(test.areEquals(tester));
             test = new Dice();
             tester = new Dice();
         }
-        assertTrue(test.equals(tester));
+        assertTrue(test.areEquals(tester));
     }
 
     @Test
     public void testSetDice(){
         Dice tester = new Dice(Colour.GREEN);
         Dice test = new Dice(Colour.BLUE);
-        assertFalse(tester.equals(test));
+        assertFalse(tester.areEquals(test));
         tester.setDice(test);
-        assertTrue(test.equals(tester));
+        assertTrue(test.areEquals(tester));
     }
 
     @Test

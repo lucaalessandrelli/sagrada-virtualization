@@ -24,13 +24,13 @@ public class RoundTrack {
     }
 
     public boolean findDice(Dice dice, Pos pos){
-        return this.getDice(pos).equals(dice);
+        return this.getDice(pos).areEquals(dice);
     }
 
     public Dice switchDice(Dice dice) {
         for (List<Dice> aDiceOnRoundTrack : diceOnRoundTrack) {
             for (int j = 0; j < aDiceOnRoundTrack.size(); j++) {
-                if (dice.equals(aDiceOnRoundTrack.get(j))) {
+                if (dice.areEquals(aDiceOnRoundTrack.get(j))) {
                     Dice tmp = aDiceOnRoundTrack.get(j);
                     aDiceOnRoundTrack.remove(j);
                     aDiceOnRoundTrack.add(j, dice);

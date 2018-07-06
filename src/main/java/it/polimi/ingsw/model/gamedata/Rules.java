@@ -271,7 +271,7 @@ public class Rules {
 
     private boolean verifySameColour(List<List<Cell>> matrix, int i1, int i2, int i3, int i4){
         return (matrix.get(i1).get(i2).isOccupied() && matrix.get(i3).get(i4).isOccupied() &&
-                matrix.get(i1).get(i2).getDice().getColour().equals(matrix.get(i3).get(i4).getDice().getColour()));
+                matrix.get(i1).get(i2).getDice().getColour().areEquals(matrix.get(i3).get(i4).getDice().getColour()));
     }
 
     private boolean allDifferent(List<Cell> cells,boolean colour,int value){

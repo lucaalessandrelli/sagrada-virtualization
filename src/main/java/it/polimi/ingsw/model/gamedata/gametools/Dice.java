@@ -57,8 +57,8 @@ public class Dice {
      * @param d The dice to compare
      * @return If the dice has the same properties or not
      */
-    public boolean equals(Dice d) {
-        if (this.prop.getNumber() == d.prop.getNumber() && this.prop.getColour().equals(d.prop.getColour())){
+    public boolean areEquals(Dice d) {
+        if (this.prop.getNumber() == d.prop.getNumber() && this.prop.getColour().areEquals(d.prop.getColour())){
                 selected = true;
                 return true;
         }
