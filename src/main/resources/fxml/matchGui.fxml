@@ -848,19 +848,36 @@
                                                    <children>
                                                         <TableView fx:id="statusTable" prefHeight="337.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <columns>
-                                                                <TableColumn fx:id="userNameColumn" prefWidth="145.0" text="Giocatore" />
-                                                                <TableColumn fx:id="userStatusColumn" prefWidth="145.0" text="Stato" />
+                                                                <TableColumn fx:id="userNameColumn" prefWidth="95.0" text="Giocatore" />
+                                                                <TableColumn fx:id="userStatusColumn" prefWidth="95.0" text="Stato" />
                                                             </columns>
                                                         </TableView>
                                                    </children>
                                                 </AnchorPane>
                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                    <children>
-                                                      <JFXButton fx:id="passButton" alignment="CENTER" onMouseClicked="#handlePassClicked" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #3C58FA;" text="Passo" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <font>
-                                                            <Font name="System Bold" size="15.0" />
-                                                         </font>
-                                                      </JFXButton>
+                                                      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="239.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <items>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                               <children>
+                                                                  <JFXButton alignment="CENTER" onMouseClicked="#handlePassClicked" prefHeight="95.0" prefWidth="158.0" style="-fx-background-color: #3C58FA;" text="Passo" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="15.0" />
+                                                                     </font>
+                                                                  </JFXButton>
+                                                               </children>
+                                                            </AnchorPane>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                               <children>
+                                                                  <JFXButton alignment="CENTER" onMouseClicked="#handleGetActiveClicked" prefHeight="95.0" prefWidth="158.0" style="-fx-background-color: #3C58FA;" text="Torna Attivo" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="15.0" />
+                                                                     </font>
+                                                                  </JFXButton>
+                                                               </children>
+                                                            </AnchorPane>
+                                                        </items>
+                                                      </SplitPane>
                                                    </children></AnchorPane>
                                             </items>
                                           </SplitPane>

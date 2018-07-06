@@ -391,21 +391,12 @@ public class MatchViewController implements Initializable, SceneInterface {
 
         String player = favorsList.get(0);
 
-        /*VBox vBox = new VBox();
-
-        for (TitledPane titlePane: listTitle) {
-            if(titlePane.getText().equals(player)) {
-                vBox = (VBox)((Parent) titlePane.getContent()).getChildrenUnmodifiable().get(0);
-            }
-        }*/
-
         GridPane gridContainer = new GridPane();
         for (TitledPane titlePane: listTitle) {
             if(titlePane.getText().equals(player)) {
                 gridContainer = (GridPane) ((Parent) titlePane.getContent()).getChildrenUnmodifiable().get(0);
             }
         }
-
 
         ObservableList<Node> children = gridContainer.getChildren();
         GridPane favorGrid = (GridPane) (children.get(1));
@@ -494,28 +485,7 @@ public class MatchViewController implements Initializable, SceneInterface {
             isMyWindow = true;
         }
 
-        /*VBox vBox = new VBox();
-
-        for (TitledPane titlePane: listTitle) {
-            if(titlePane.getText().equals(player)) {
-                vBox = (VBox)((Parent) titlePane.getContent()).getChildrenUnmodifiable().get(0);
-            }
-        }
-
-        ObservableList<Node> boxChildren = vBox.getChildren();
-        GridPane currentWindow = (GridPane)(boxChildren.get(0));*/
-
-        /*Removes all dices from the player window,plus delete them from viewDiceList*/
-       /* GeneralFunctionalities.removeDiceFromGrid(currentWindow,diceList,isMyWindow);
-
-        for (String cell: cellList) {
-            if(!cell.equals(player)) {
-                int row = Character.getNumericValue(cell.charAt(2));
-                int col = Character.getNumericValue(cell.charAt(3));
-                DrawPatternCard.drawDicePatternCard(currentWindow,row,col,isMyWindow,diceList,cell,this);
-            }
-        }*/
-       GridPane gridContainer = new GridPane();
+        GridPane gridContainer = new GridPane();
 
         for (TitledPane titlePane: listTitle) {
             if(titlePane.getText().equals(player)) {
@@ -545,17 +515,6 @@ public class MatchViewController implements Initializable, SceneInterface {
         List<String> restrictionList = Arrays.asList(resctriction.split(","));
 
         String player = restrictionList.get(0);
-
-        /*VBox vBox = new VBox();
-
-        for (TitledPane titlePane: listTitle) {
-            if(titlePane.getText().equals(player)) {
-                vBox = (VBox)((Parent) titlePane.getContent()).getChildrenUnmodifiable().get(0);
-            }
-        }
-
-        ObservableList<Node> boxChildren = vBox.getChildren();
-        GridPane currentWindow = (GridPane)(boxChildren.get(0));*/
 
         GridPane gridContainer = new GridPane();
 
@@ -659,6 +618,17 @@ public class MatchViewController implements Initializable, SceneInterface {
     @FXML
     public void handlePassClicked(MouseEvent event) {
         client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" pass");
+        event.consume();
+    }
+
+    /**
+     * Method called as soon as the player click on the getActive button. Call the method sendCommand() on the client object
+     * in order to communicate the server that the players is active.
+     * @param event MouseEvent object
+     */
+    @FXML
+    public void handleGetActiveClicked(MouseEvent event) {
+        client.sendCommand(MOVE+" "+client.getNumOfMatch()+" "+client.getName()+" active");
         event.consume();
     }
 

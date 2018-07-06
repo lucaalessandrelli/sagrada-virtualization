@@ -18,7 +18,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.input.MouseEvent;
@@ -221,9 +220,6 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
 
             givenPatternCards.add(substring.get(0));
             List<String> restrictionList = Arrays.asList(substring.get(2).split(","));
-
-            /*VBox currentVbox = (VBox)children.get(k);
-            ObservableList<Node> boxChildren = currentVbox.getChildren();*/
 
             GridPane gridContainer = (GridPane)children.get(k);
             ObservableList<Node> containerChildren = gridContainer.getChildren();
