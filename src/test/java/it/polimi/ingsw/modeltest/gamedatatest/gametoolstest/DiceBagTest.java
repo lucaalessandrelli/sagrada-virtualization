@@ -71,7 +71,7 @@ public class DiceBagTest {
         assertEquals(remaining+1,tester.remainingDices());
         List<Dice> test = tester.pullOut(91);
         for (Dice x: test){
-            if(x.equals(dice)){
+            if(x.areEquals(dice)){
                 if(x == dice) {
                     assertTrue(true);
                     ended = true;

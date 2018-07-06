@@ -47,8 +47,6 @@ public class CardContainer {
     private static final String CMETHODS = "CMETHODS";
     private static final String PMETHODS = "PMETHODS";
     private static final String DIFFICULTY = "DIFFICULTY";
-    private String PM = "PM";
-
 
     /**
      * The constructor fills the lists of the class
@@ -260,13 +258,11 @@ public class CardContainer {
         mypattern.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());
         mypattern.setDifficulty(Integer.valueOf(document.getElementsByTagName(DIFFICULTY).item(cont).getTextContent()));
         all = document.getElementsByTagName(RULES).item(cont).getTextContent();
-        final int len = all.length();
-        for(int i = 0; i < len; i=i+4){
-            if(all.charAt(i) == ',') {
-                i++;
-            }
-            mypattern.addRestr(all.charAt(i),Character.getNumericValue(all.charAt(i+1)),Character.getNumericValue(all.charAt(i+2)));
+        List<String> rules = Arrays.asList(all.split(","));
+        for (String rule:rules){
+            mypattern.addRestr(rule.charAt(0),Character.getNumericValue(rule.charAt(1)),Character.getNumericValue(rule.charAt(2)));
         }
+
         return mypattern;
     }
 
@@ -299,9 +295,6 @@ public class CardContainer {
 
         mytool.setID(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()));
         mytool.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());
-
-        tmpc = Colour.isIn((document.getElementsByTagName(COLOUR).item(cont).getTextContent()).charAt(0));
-        mytool.setColour(tmpc);
 
         all = document.getElementsByTagName(STATE).item(cont).getTextContent();
         mytool.setStateList(Arrays.asList(all.split(",")));

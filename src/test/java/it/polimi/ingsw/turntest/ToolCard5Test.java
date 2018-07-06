@@ -191,19 +191,19 @@ public class ToolCard5Test {
 
 
         for(int i = 0; i < p1.getDraftPool().getDraftPool().size(); i++){
-                assertTrue(p1.getDraftPool().getDraftPool().get(i).equals(table.getDraftPool().getDraftPool().get(i)));
+                assertTrue(p1.getDraftPool().getDraftPool().get(i).areEquals(table.getDraftPool().getDraftPool().get(i)));
         }
 
-        assertTrue(p1.getDraftPool().chooseDice(2).equals(d));
+        assertTrue(p1.getDraftPool().chooseDice(2).areEquals(d));
 
         for(int i = 0; i < p1.getRoundTrack().getRoundTrack().size(); i++){
             for(int j = 0; j < p1.getRoundTrack().getRoundTrack().get(i).size(); j++){
                 if(i != 0 && j != 0)
-                assertTrue(p1.getRoundTrack().getRoundTrack().get(i).get(j).equals(tmp.get(i).get(j)));
+                assertTrue(p1.getRoundTrack().getRoundTrack().get(i).get(j).areEquals(tmp.get(i).get(j)));
             }
         }
 
-        assertTrue(p1.getDraftPool().getDraftPool().get(2).equals(d));
+        assertTrue(p1.getDraftPool().getDraftPool().get(2).areEquals(d));
 
 
         state = "ChooseDice2";
@@ -340,7 +340,7 @@ public class ToolCard5Test {
 
         assertThrows(WrongMoveException.class,()-> turn.receiveMove(d,new Pos(0,0)));
 
-        assertFalse(d.equals(table.getRoundTrack().getDice(new Pos(0,0))));
+        assertFalse(d.areEquals(table.getRoundTrack().getDice(new Pos(0,0))));
 
     }
 

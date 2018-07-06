@@ -72,12 +72,8 @@ public class WindowPatternCard {
     }
 
     public Dice getDice(Pos p){
-        try {
-            if (!(this.getCell(p).isOccupied()))
-                throw new EmptyCellException();
-        } catch (EmptyCellException e){
-            System.out.println(e.message);
-        }
+        if (!(this.getCell(p).isOccupied()))
+            throw new IllegalStateException();
         return (this.getCell(p).getDice());
     }
 
@@ -93,7 +89,7 @@ public class WindowPatternCard {
     public boolean findDice(Dice d){
         for(List<Cell> x: this.matr){
             for (Cell y: x) {
-                if(y.getDice().equals(d))
+                if(y.getDice().areEquals(d))
                     return true;
             }
         }
@@ -140,7 +136,7 @@ public class WindowPatternCard {
 
 
     public boolean findDice(Dice d, Pos p){
-        return (this.getCell(p).getDice().equals(d));
+        return (this.getCell(p).getDice().areEquals(d));
     }
 
     public void addRestr(char c,int x, int y) {

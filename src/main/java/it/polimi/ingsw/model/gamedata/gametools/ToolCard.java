@@ -8,7 +8,6 @@ import java.util.List;
 public class ToolCard extends Card {
     private boolean used;
     private int cost;
-    private Colour colour;
     private List<String> stateList;
     private List<String> automatedoperationlist = new ArrayList<>();
     private List<String> cMethods = new ArrayList<>();
@@ -53,11 +52,6 @@ public class ToolCard extends Card {
     public List<String> getStateList(){
         return stateList;
     }
-
-    public void setColour(Colour colour){
-        this.colour = colour;
-    }
-
 
     void setNameCMethods(List<String> x){
          this.cMethods = x;

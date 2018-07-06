@@ -47,12 +47,12 @@ public class DraftPool {
      * @return a boolean
      */
     public boolean findDice(Dice d, int where){
-        return this.diceList.get(where).equals(d);
+        return this.diceList.get(where).areEquals(d);
     }
 
     public boolean findDice(Dice d){
         for (Dice x: this.diceList){
-            if (x.equals(d))
+            if (x.areEquals(d))
                 return true;
         }
         return false;

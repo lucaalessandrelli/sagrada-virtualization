@@ -154,7 +154,7 @@ public class ToolCard6Test {
             else
                 chosenone.setNumber(d.getNumber()+1);
 
-        if(!d.getColour().equals(chosenone.getColour())) {
+        if(!d.getColour().areEquals(chosenone.getColour())) {
             try {
                 turn.receiveMove(new Pos(2, 1));
             } catch (WrongMoveException e) {
@@ -294,7 +294,7 @@ public class ToolCard6Test {
         }
 
         assertSame(chosenone,p1.getDraftPool().chooseDice(3));
-        assertTrue(chosenone.equals(p1.getDraftPool().chooseDice(3)));
+        assertTrue(chosenone.areEquals(p1.getDraftPool().chooseDice(3)));
 
         state = "EndTurn";
 
