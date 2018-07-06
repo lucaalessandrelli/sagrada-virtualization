@@ -119,7 +119,7 @@ public class Manager {
         if(round.getCurrTurn().equals(name)){
             Proc processor = new Proc(round,move);
             processor.process();
-        }else{
+        }else if(move.equals("active")){
             setPlayerActivity(name,true);
         }
     }
