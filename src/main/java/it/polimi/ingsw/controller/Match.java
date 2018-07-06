@@ -66,15 +66,14 @@ public class Match extends Thread {
         } catch (InterruptedException e) {
             exec.shutdown();
         }
-        playerList.forEach(Player::notifyPlayer);
         /*SETTING ROUNDS*/
         for(roundNumber = 1; roundNumber <= 10; roundNumber++) {
             //reminder to implement exception management later (in case the match end before)
             try {
                 this.table.fillDraftPool();
+                playerList.forEach(Player::notifyPlayer);
                 this.startNextRound();
                 changeOrder();
-                playerList.forEach(Player::notifyPlayer);
             } catch (NotEnoughPlayersException e) {
                 break;
             }
