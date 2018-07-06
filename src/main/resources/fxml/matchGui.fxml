@@ -483,6 +483,7 @@
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="1.0" prefWidth="100.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="1.0" prefWidth="100.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="1.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                                              </columnConstraints>
                                              <rowConstraints>
                                                 <RowConstraints minHeight="1.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
@@ -577,6 +578,15 @@
                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="0" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="8" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -848,8 +858,8 @@
                                                    <children>
                                                         <TableView fx:id="statusTable" prefHeight="337.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <columns>
-                                                                <TableColumn fx:id="userNameColumn" prefWidth="95.0" text="Giocatore" />
-                                                                <TableColumn fx:id="userStatusColumn" prefWidth="95.0" text="Stato" />
+                                                                <TableColumn fx:id="usernameColumn" prefWidth="95.0" text="Giocatore" />
+                                                                <TableColumn fx:id="statusColumn" prefWidth="95.0" text="Stato" />
                                                             </columns>
                                                         </TableView>
                                                    </children>
