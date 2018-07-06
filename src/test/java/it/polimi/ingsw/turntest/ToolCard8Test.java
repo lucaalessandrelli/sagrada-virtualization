@@ -1,7 +1,7 @@
 package it.polimi.ingsw.turntest;
 
-import it.polimi.ingsw.controller.Match;
 import it.polimi.ingsw.controller.Manager;
+import it.polimi.ingsw.controller.Match;
 import it.polimi.ingsw.model.gamedata.*;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
@@ -17,7 +17,6 @@ import java.util.List;
 
 import static it.polimi.ingsw.turntest.TurnTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ToolCard8Test {
     long timerCard = 0;
@@ -175,14 +174,6 @@ public class ToolCard8Test {
             e.printStackTrace();
         }
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        assertFalse(turn.getPlayer().isActive());
 
         state = "EndTurn";
 

@@ -10,10 +10,8 @@ import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.turn.Turn;
 import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
 
-import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * This class handle the timeout for a move and set the move to the object Turn, which verify the it correctness
@@ -28,7 +26,7 @@ public class Round {
     private Player currPlayer;
     private Match match;
     private long timerMove;
-    private ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+    private String usedTool8="";
 
     public Round(List<Player> playerList, int roundNumber, Table table, Match m, long timerMove) {
         this.roundNumber = roundNumber;
@@ -50,7 +48,7 @@ public class Round {
         while(iterator.hasNext()){
             p = iterator.next();
             currPlayer = p;
-            if (p.isActive()) {
+            if (p.isActive()&&!p.getUsername().equals(usedTool8)) {
                 turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
                 turn.startTurn();
                 players.notifyTurn(p.getUsername(), timerMove);
@@ -70,8 +68,8 @@ public class Round {
             }
         }
         setLastDice();
-        if(!exec.isTerminated()){
-            exec.shutdown();
+        if(!usedTool8.equals("")){
+            usedTool8="";
         }
     }
 
@@ -174,9 +172,7 @@ public class Round {
      * @param p
      */
     public void inactivatePlayer(Player p) {
-        if (currPlayer != p) {
-            exec.scheduleWithFixedDelay(() -> p.setActivity(false), 0, 500, TimeUnit.MILLISECONDS);
-        }
+        this.usedTool8=p.getUsername();
     }
 
     /**
