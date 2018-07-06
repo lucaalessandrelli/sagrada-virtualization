@@ -82,28 +82,16 @@ public class Match extends Thread {
         //match is now ended - call methods to calculate player points
 
         //send points and name winner(to do)
-        playerList.forEach(player -> player.notifyScore(computePlayerPoints()));
+        String score = table.calculatePoints();
+        playerList.forEach(player -> player.notifyScore(score));
         playerList.forEach(player -> manager.matchEnded(player.getUsername()));
         manager.endGame(id);
     }
 
-    /**
-     * For all players compute his point
-     * @return player score
-     */
-    private String computePlayerPoints() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("score ");
-        for(Player player: playerList) {
-            builder.append(player.getUsername()).append(" ");
-            builder.append(player.calculatePoints()).append(",");
-        }
-        return builder.toString();
-    }
 
     /**
      * Create and starts new round
-     * @throws NotEnoughPlayersException
+     * @throws NotEnoughPlayersException if the number of players is < 2
      */
     private void startNextRound() throws NotEnoughPlayersException {
             currRound = new Round(this.playerList, roundNumber,table,this,timerMove);
