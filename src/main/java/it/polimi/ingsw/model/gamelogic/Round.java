@@ -182,4 +182,10 @@ public class Round {
         match.interrupt();
     }
 
+    /**
+     * Update when a player became active again
+     */
+    public void update() {
+        players.notifyChanges();
+    }
 }
