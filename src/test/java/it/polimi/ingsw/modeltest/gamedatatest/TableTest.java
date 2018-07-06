@@ -31,13 +31,13 @@ public class TableTest {
 
         tester.setPublicObjects();
 
-        assertFalse(tester.getDraftPool().getDraftPool().isEmpty());
+        assertTrue(tester.getDraftPool().getDraftPool().isEmpty());
 
         assertFalse(tester.getObjCard().isEmpty());
 
         assertFalse(tester.getToolCards().isEmpty());
 
-        assertEquals(90 - ((tester.getNumPlayers()*2) + 1),tester.getDiceBag().remainingDices());
+        assertEquals(90,tester.getDiceBag().remainingDices());
 
         assertTrue(tester.getRoundTrack().getRoundTrack().isEmpty());
 

@@ -195,7 +195,7 @@ public class Table {
     private String findWinner(HashMap<Player,Integer> scores){
 
         StringBuilder builder = new StringBuilder();
-        int max = 0;
+        int max = -50;
         Player winner = new Player("noone");
 
         List<Player> drawPlayers = new ArrayList<>();
@@ -226,8 +226,9 @@ public class Table {
                     drawPlayers.add(player);
             }
 
-            if(drawPlayers.size() > 1)
-                appendWinner(builder,scores,this.drawOnScore(drawPlayers));
+            if(drawPlayers.size() > 1) {
+                appendWinner(builder, scores, this.drawOnScore(drawPlayers));
+            }
             else {
                 appendWinner(builder,scores,winner);
             }

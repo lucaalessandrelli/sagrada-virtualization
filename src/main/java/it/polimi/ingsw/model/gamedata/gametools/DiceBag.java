@@ -38,7 +38,6 @@ public class DiceBag {
      * The setter method for the number of the players
      * @param n
      */
-    //setter method
     public void setNumPlayers(int n){
         if(n > 0 && n < 5)
             this.numPlayers = n;
@@ -46,12 +45,18 @@ public class DiceBag {
             this.numPlayers = 0;
     }
 
-    //getter method
+    /**
+     * The getter method for the remaining dices
+     * @return The number of remaining dices
+     */
     public int remainingDices(){
         return dicecontainer.size();
     }
 
-    //pull out (2numPlayers + 1) dice from bag (Tested, should work)
+    /**
+     * Pullout (2*numberOfPlayers + 1) dices from the bag
+     * @return The dices pulled out
+     */
     public List<Dice> pullOut(){
         int dimension = (2*numPlayers) + 1;
         List<Dice> result = new ArrayList<>(dimension);
@@ -59,18 +64,32 @@ public class DiceBag {
         return result;
     }
 
+    /**
+     * Add a dice into the dicebag
+     * @param dice The dice to add
+     */
     public void addDice(Dice dice){
         this.dicecontainer.add(dice);
     }
 
 
-    //pull out number dice from bag (Tested, should work)
+    /**
+     * PullOut the number requested of dices
+     * @param number The number of dices to pullOut
+     * @return The dices pulled out
+     */
     public List<Dice> pullOut(int number){
         List<Dice> tmp = new ArrayList<>(number);
         randomPullOut(number,tmp,dicecontainer.size());
         return tmp;
     }
 
+    /**
+     * The method that really pulls out randomly the dices from the bag
+     * @param number Number of dices to pull out
+     * @param tmp The list of dices to fill
+     * @param cont The number of dices remaining in the dicebag
+     */
     private void randomPullOut(int number, List<Dice> tmp, int cont){
         int randomNum;
         Random rand = new Random();

@@ -37,7 +37,7 @@ public class RoundTrackTest {
      * Testing Find method and Switch method
      */
     @Test
-    public void testFind_And_Switch(){
+    public void testFind(){
         RoundTrack roundTrack = new RoundTrack();
         List<Dice> dices = new ArrayList<>();
         Dice dice = new Dice(Colour.GREEN);
@@ -47,7 +47,6 @@ public class RoundTrackTest {
         addRandomDices(dices,10); //Using method to generate random dices with random colours and random numbers
         roundTrack.setDiceOnRoundTrack(2,dices); //Adding dices to the round
         assertTrue(roundTrack.findDice(dice,new Pos(0,0)));
-        assertTrue(dice.areEquals(roundTrack.switchDice(dice)));
     }
 
     private void addRandomDices(List<Dice> dices,int num){
