@@ -115,14 +115,37 @@ public class Player {
     }
 
     public int calculatePoints() {
-        int score = myObjCard.finalpoints(myWindow);
+        return myFavTokens + this.calculatePointsPrivate() + this.calculatePointsPublic() - this.calculateMissingCells();
+
+    }
+
+    public int calculatePointsPublic(){
+        int score = 0;
+
         List<ObjectiveCard> cards = publicObjects.getObjectiveCards();
         for(ObjectiveCard c : cards){
             score = score + c.finalpoints(myWindow);
         }
-        return score + myFavTokens;
 
+        return score;
     }
+
+    public int calculateMissingCells(){
+        int numberOfMissingCells = 0;
+
+        for(List<Cell> cells: myWindow.getMatr()){
+            for (Cell c: cells){
+                if(!c.isOccupied())
+                    numberOfMissingCells++;
+            }
+        }
+        return numberOfMissingCells;
+    }
+
+    public int calculatePointsPrivate(){
+        return myObjCard.finalpoints(myWindow);
+    }
+
     public void addObserver(VirtualViewObserver o){
         observer=o;
     }
