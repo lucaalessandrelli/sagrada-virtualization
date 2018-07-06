@@ -59,13 +59,15 @@ public class DraftPoolTest{
         Property prop = new Property(Colour.RED,true);
         Dice d;
         for(int i = 0; i < 5; i++) {
-            d = new Dice(prop);
+            d = new Dice();
+            d.setColour(prop.getColour().toString());
             d.setNumber(i+1);
             assertTrue(tester.getDraftPool().add(d));
         }
         prop = new Property(Colour.YELLOW,true);
         prop.setNumber(5);
-        d = new Dice(prop);
+        d = new Dice();
+        d.setColour(prop.getColour().toString());
         assertFalse(tester.findDice(d));
         assertTrue(tester.getDraftPool().add(d));
         assertTrue(tester.findDice(d));
@@ -81,7 +83,8 @@ public class DraftPoolTest{
             d = new Dice();
             assertTrue(tester.getDraftPool().add(d));
         }
-        d = new Dice(prop);
+        d = new Dice();
+        d.setColour(prop.getColour().toString());
         tester.getDraftPool().add(d);
         prop = new Property(Colour.GREEN,true);
         assertTrue(tester.findDice(d,tester.getNumOfDices()-1));

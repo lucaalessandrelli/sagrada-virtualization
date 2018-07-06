@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.gamedata.gametools.*;
 
 import java.util.List;
 
+/**
+ * This class takes all the model elements and transforms them into a string formalization
+ */
 public class VirtualViewParser {
     private StringBuilder builder = new StringBuilder();
 
@@ -31,11 +34,18 @@ public class VirtualViewParser {
     private static final String CHOSE = "choseWindow ";
 
 
-
+    /**Classic constructor
+     * @param player This parameter is needed in order to know who's the player that is asking the string so that the parser
+     *               can distinguish between the player's card and other players cards; the parameter is also used to take
+     *               all the model information
+     */
     public VirtualViewParser(Player player){
         this.player = player;
     }
 
+    /**Method that calls other methods to generate the setup string that will be sent to the current client
+     * @return the setup string
+     */
     public String startParsing(){
         builder.append(SETUP);
         this.parsePlayers();
@@ -55,7 +65,10 @@ public class VirtualViewParser {
         return builder.toString();
     }
 
-    private String parsePlayers(){
+    /**
+     * This methods adds to the string the usernames of the connected players
+     */
+    private void parsePlayers(){
         builder.append(PLAYERS);
 
         builder.append(this.player.getUsername());
@@ -64,9 +77,11 @@ public class VirtualViewParser {
             builder.append(p.getUsername());
         }
         builder.append(SEP);
-        return builder.toString();
     }
 
+    /**
+     * This methods adds to the string the dices of the draftpool
+     */
     public String parseDraftPool(){
         builder.append(DRAFT);
         List<Dice> dice = this.player.getDraftPool().getDraftPool();
@@ -81,10 +96,13 @@ public class VirtualViewParser {
             builder.deleteCharAt(builder.length()-1);
         }
         builder.append(SEP);
-        return  builder.toString();
+        return builder.toString();
     }
 
-    private String parseToolcards(){
+    /**
+     * This methods adds to the string the toolcards with their idnumber, cost and description
+     */
+    private void parseToolcards(){
         builder.append(TOOL);
 
         for(ToolCard toolCard : player.getPublicObjects().getToolCards()){
@@ -99,10 +117,12 @@ public class VirtualViewParser {
             builder.deleteCharAt(builder.length()-1);
         }
         builder.append(SEP);
-        return builder.toString();
     }
 
-    private String parseFavorToken(){
+    /**
+     * This methods adds to the string the usernames with their current favortokens
+     */
+    private void parseFavorToken(){
         builder.append(FAV);
 
         builder.append(this.player.getUsername());
@@ -118,10 +138,12 @@ public class VirtualViewParser {
             builder.append(SEP);
         }
 
-        return builder.toString();
     }
 
-    private String parseStatePlayers() {
+    /**
+     * This methods adds to the string the state(active or inactive) of the connected players
+     */
+    private void parseStatePlayers() {
         builder.append(STATE);
         builder.append(this.player.getUsername());
         builder.append(SPACE);
@@ -136,10 +158,12 @@ public class VirtualViewParser {
         }
         builder.append(SEP);
 
-        return builder.toString();
     }
 
-    private String parseObjectiveCard(){
+    /**
+     * This methods adds to the string the objective cards with their idnumber and description
+     */
+    private void parseObjectiveCard(){
         builder.append(PUBLIC);
 
         for (ObjectiveCard objective: player.getPublicObjects().getObjectiveCards()) {
@@ -158,12 +182,13 @@ public class VirtualViewParser {
         builder.append(VIRG);
         builder.append(player.getPrivateCard().getDescription().substring(player.getPrivateCard().getDescription().lastIndexOf(' ')+1,player.getPrivateCard().getDescription().length()));
         builder.append(SEP);
-        return builder.toString();
     }
 
-    private String parseRoundTrack(){
-        String passing = TRACK;
-        builder.append(passing);
+    /**
+     * This methods adds to the string the dices on the roundtrack
+     */
+    private void parseRoundTrack(){
+        builder.append(TRACK);
 
         List<List<Dice>> roundtrack = player.getPublicObjects().getRoundTrack().getRoundTrack();
         int size = roundtrack.size();
@@ -182,10 +207,13 @@ public class VirtualViewParser {
             builder.deleteCharAt(builder.length()-1);
         }
         builder.append(SEP);
-        return builder.toString();
     }
 
-    public String parseWindowPatternRestrictions(Player player){
+    /**
+     * This methods adds to the string the current player windowpattern card restrictions
+     * @param player is the current player(client) that is asking me the string
+     */
+    private void parseWindowPatternRestrictions(Player player){
         builder.append(RESTR);
         builder.append(player.getUsername());
         builder.append(VIRG);
@@ -197,10 +225,13 @@ public class VirtualViewParser {
         }
 
         builder.append(SEP);
-        return builder.toString();
     }
 
-    private String parseWindowPatternDice(Player player){
+    /**
+     * This methods adds to the string the current player windowpattern card placed dices
+     * @param player is the current player(client) that is asking me the string
+     */
+    private void parseWindowPatternDice(Player player){
         builder.append(DICES);
         builder.append(player.getUsername());
         builder.append(VIRG);
@@ -222,9 +253,13 @@ public class VirtualViewParser {
         }
 
         builder.append(SEP);
-        return builder.toString();
     }
 
+    /**
+     * This methods returns a string that represents the 4 window pattern cards that the player has to chose at the beginning
+     * @param windows The 4 window pattern card extracted for the player
+     * @return the string representing the 4 cards
+     */
     public String extractedWindows(List<WindowPatternCard> windows){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(CHOSE);
@@ -241,13 +276,22 @@ public class VirtualViewParser {
         }
         return stringBuilder.toString();
     }
-    
+
+    /**
+     * Set the player that is asking me to parse the model
+     * @param player the player representing the client that is asking me to parse
+     */
     public void setPlayer(Player player){
         this.player = player;
     }
 
 
-    private StringBuilder addProperties(List<Cell> cellArrayList, StringBuilder builder){
+    /**
+     * This method is used every time the parser wants to parse a windowpattern card in order to parse the restrictions present in the cell
+     * @param cellArrayList The list representing the cells of the pattern card
+     * @param builder The stringbuilder where you want to add the restrictions
+     */
+    private void addProperties(List<Cell> cellArrayList, StringBuilder builder){
         for (Cell cell: cellArrayList){
             builder.append(cell.getProperty().getColour().toString());
             builder.append(cell.getProperty().getNumber());
@@ -255,9 +299,13 @@ public class VirtualViewParser {
             builder.append(cell.getPosition().getY());
             builder.append(VIRG);
         }
-        return builder;
     }
 
+    /**
+     * Takes the window patter card and for every row(or column) calls the method addproperties
+     * @param window The window pattern card that of which you want to parse the restrictions
+     * @return The Stringbuilder that has all the parsed restrictions
+     */
     private StringBuilder restrictions(WindowPatternCard window){
         StringBuilder topass = new StringBuilder();
         for (List<Cell> cells: window.getMatr()){
@@ -266,6 +314,11 @@ public class VirtualViewParser {
         return topass;
     }
 
+    /**
+     * Depending on the player's property, returns a builder with a different content
+     * @param p The player of which you want to know if is active or not
+     * @return The Stringbuilder with the string corresponding to the property of the player
+     */
     private StringBuilder active(Player p){
         StringBuilder topass = new StringBuilder();
         if(p.isActive()){

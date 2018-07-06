@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.gamedata.Property;
 
 
 /**
- *
+ *This class represents the Cells that make the WindowPatternCard
  */
 public class Cell {
     private Property property;
@@ -13,48 +13,75 @@ public class Cell {
     private boolean occupied = false;
     private Dice dice;
 
+    /**
+     * The classic constructor
+     */
     public Cell(){
         this.property = new Property();
         this.pos = new Pos();
         this.dice = new Dice();
     }
 
-    public Cell(Property property, Pos pos){
-        this.property = property;
-        this.pos = pos;
-    }
-
-    //getter method
+    /**
+     * Getter of the property
+     * @return The property of the cell
+     */
     public Property getProperty(){
         return this.property;
     }
 
-    //getter method
+    /**
+     * Getter of the Position
+     * @return The position of the cell
+     */
     public Pos getPosition(){
         return this.pos;
     }
 
-    //getter method
+    /**
+     * Getter of the dice
+     * @return The dice place on the cell
+     */
     public Dice getDice(){
        return this.dice;
     }
 
+    /**
+     * Says if the cell is occupied by a dice
+     * @return A boolean that indicates if the cell is occupied by a dice
+     */
     public boolean isOccupied(){
         return this.occupied;
     }
-    //setter method
+
+    /**
+     * Sets the value "occupied" of the class to the one passed
+     * @param x The parameter to set
+     */
     protected void setOccupation(boolean x){
         this.occupied = x;
     }
-    //setter method
+
+    /**
+     * Sets the value "pos" of the class to the one passed
+     * @param x The parameter to set
+     */
     protected void setPos(Pos x) {
         this.pos = x;
     }
-    //setter method
+
+    /**
+     * Sets the value "property" of the class to the one passed
+     * @param x The parameter to set
+     */
     protected void setProperty(Property x){
         this.property = x;
     }
-    //setter method
+
+    /**
+     * Sets the value "dice" of the class to the one passed
+     * @param x The parameter to set
+     */
     protected void setDice(Dice x){
         this.dice = x;
     }

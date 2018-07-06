@@ -15,12 +15,15 @@ import java.util.List;
 import java.util.Random;
 
 
+/**
+ * This class is used as container for all the cards in the game and to read and to deal cards at the beginning of the match
+ */
 public class CardContainer {
 
-    private ArrayList<Integer> pattern = new ArrayList<>(24);
-    private ArrayList<Integer> objectiveprivate = new ArrayList<>(5);
-    private ArrayList<Integer> objectivepublic = new ArrayList<>(10);
-    private ArrayList<Integer> tools = new ArrayList<>(12);
+    private List<Integer> pattern = new ArrayList<>(24);
+    private List<Integer> objectiveprivate = new ArrayList<>(5);
+    private List<Integer> objectivepublic = new ArrayList<>(10);
+    private List<Integer> tools = new ArrayList<>(12);
 
     private boolean privateused = false;
     private boolean publicused = false;
@@ -47,6 +50,9 @@ public class CardContainer {
     private String PM = "PM";
 
 
+    /**
+     * The constructor fills the lists of the class
+     */
     public CardContainer(){
         for(int i = 0; i < 24; i++) {
             pattern.add((i));
@@ -61,8 +67,12 @@ public class CardContainer {
         }
     }
 
-    //Pull out 4 WindowPatternCard given to the player to select one of them
-    public ArrayList<WindowPatternCard> pullOutPattern(int numPlayers) {
+    /**
+     * This method is used to pullOut the window pattern cards depending on the number of the players
+     * @param numPlayers The number of the players present at the beginning of the match
+     * @return The list with the cards extracted
+     */
+    public List<WindowPatternCard> pullOutPattern(int numPlayers) {
         int dimension = numPlayers*4;
 
         if(numPlayers < 1 || numPlayers > 4)
@@ -70,118 +80,100 @@ public class CardContainer {
 
         ArrayList<WindowPatternCard> tmp = new ArrayList<>(dimension);
 
-        try {
-            if(this.patternused)
-                throw new AlreadyBeenCalledException();
+        if(this.patternused)
+            throw new IllegalStateException();
 
-            this.patternused = true;
-            int randomNum;
-            int cont = 24;
-            int next = 0;
-            Random rand = new Random();
+        this.patternused = true;
+        int randomNum;
+        int cont = 24;
+        Random rand = new Random();
 
-            /*for (int k = 0; k < dimension; k=k+2) {
-                randomNum = rand.nextInt(cont - (k+1));
-                if(randomNum%2 == 0)
-                    if((randomNum - 1) >= 0)
-                        next = randomNum - 1;
-                    else
-                        next = pattern.size()-1;
-                else
-                    next = randomNum + 1;
-                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
-                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(next))); //Supposing that z is the selected card from this "turn"
-                pattern.remove(randomNum);
-                pattern.remove(next-1);
-            }*/
-            for (int k = 0; k < dimension; k++) {
-                randomNum = rand.nextInt(cont - k);
-                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
-                pattern.remove(randomNum);
-            }
-        } catch (AlreadyBeenCalledException e) {
-            System.out.println(e.message);
+        for (int k = 0; k < dimension; k++) {
+            randomNum = rand.nextInt(cont - k);
+            tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            pattern.remove(randomNum);
         }
         return tmp;
     }
 
-    //Pull out x Object Private Card given to the player to select one of them
-    public ArrayList<ObjectiveCard> pullOutPrivate(int numPlayers) {
-        int dimension = numPlayers;
+    /**
+     * This method is used to pullOut the private cards depending on the number of the players
+     * @param numPlayers The number of the players present at the beginning of the match
+     * @return The list with the cards exctracted
+     */
+    public List<ObjectiveCard> pullOutPrivate(int numPlayers) {
 
         if(numPlayers < 1 || numPlayers > 4)
             throw new IndexOutOfBoundsException();
 
-        ArrayList<ObjectiveCard> tmp = new ArrayList<>(dimension);
+        ArrayList<ObjectiveCard> tmp = new ArrayList<>(numPlayers);
 
-        try {
-            if(this.privateused)
-                throw new AlreadyBeenCalledException();
-            this.privateused = true;
-            int randomNum;
-            int cont = objectiveprivate.size();
-            Random rand = new Random();
-            for (int k = 0; k < dimension; k++) {
-                randomNum = rand.nextInt(cont - k);
-                tmp.add(this.readObjective("src/main/resources/private_cards_formalization.xml", objectiveprivate.get(randomNum))); //Supposing that z is the selected card from this "turn"
-                objectiveprivate.remove(randomNum);
-            }
-        } catch (AlreadyBeenCalledException e){
-            System.out.println(e.message);
+        if(this.privateused)
+            throw new IllegalStateException();
+        this.privateused = true;
+        int randomNum;
+        int cont = objectiveprivate.size();
+        Random rand = new Random();
+        for (int k = 0; k < numPlayers; k++) {
+            randomNum = rand.nextInt(cont - k);
+            tmp.add(this.readObjective("src/main/resources/private_cards_formalization.xml", objectiveprivate.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            objectiveprivate.remove(randomNum);
         }
         return tmp;
     }
 
-    //Pull out 3 Object Public Card given to the table
-    public ArrayList<ObjectiveCard> pullOutPublic(){
+    /**
+     * This method is used to pullOut the public cards
+     * @return The list with the cards exctracted
+     */
+    public List<ObjectiveCard> pullOutPublic(){
         int dimension = 3;
         ArrayList<ObjectiveCard> tmp = new ArrayList<>(dimension);
 
-        try {
-            if(this.publicused)
-                throw new AlreadyBeenCalledException();
-            this.publicused = true;
-            int randomNum;
-            int cont = objectivepublic.size();
-            Random rand = new Random();
-            for (int k = 0; k < dimension; k++) {
-                randomNum = rand.nextInt(cont - k);
-                tmp.add(this.readObjective("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
-                objectivepublic.remove(randomNum);
-            }
-        } catch (AlreadyBeenCalledException e){
-            System.out.println(e.message);
+        if(this.publicused)
+            throw new IllegalStateException();
+        this.publicused = true;
+        int randomNum;
+        int cont = objectivepublic.size();
+        Random rand = new Random();
+        for (int k = 0; k < dimension; k++) {
+            randomNum = rand.nextInt(cont - k);
+            tmp.add(this.readObjective("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            objectivepublic.remove(randomNum);
         }
         return tmp;
     }
 
-    //Pull out 4 ToolCards given to the player to select one of them
-    public ArrayList<ToolCard> pullOutTools() {
+    /**
+     * This method is used to pullOut the tool cards
+     * @return The list with the cards exctracted
+     */
+    public List<ToolCard> pullOutTools() {
         int dimension = 3;
 
         ArrayList<ToolCard> tmp = new ArrayList<>(dimension);
-        try {
-            if(this.toolsused)
-                throw new AlreadyBeenCalledException();
-            this.toolsused = true;
-            int randomNum;
-            int cont = this.tools.size();
-            int next = 0;
-            Random rand = new Random();
-            for (int k = 0; k < dimension; k++) {
-                randomNum = rand.nextInt(cont - k);
-                tmp.add(this.readTools("src/main/resources/tool_cards_formalization.xml", tools.get(randomNum))); //Supposing that z is the selected card from this "turn"
-                tools.remove(randomNum);
-            }
-        } catch (AlreadyBeenCalledException e){
-            System.out.println(e.message);
+        if(this.toolsused)
+            throw new IllegalStateException();
+        this.toolsused = true;
+        int randomNum;
+        int cont = this.tools.size();
+        Random rand = new Random();
+        for (int k = 0; k < dimension; k++) {
+            randomNum = rand.nextInt(cont - k);
+            tmp.add(this.readTools("src/main/resources/tool_cards_formalization.xml", tools.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            tools.remove(randomNum);
         }
         return tmp;
     }
 
 
-    //read the values in the xml file and create a objective card to return
-    protected ObjectiveCard readObjective(String namefile, int cont) {
+    /**
+     * The method creates the ObjectiveCard element taking all the parameters from the xml configuration files
+     * @param namefile The name of the file from where the method needs to read all the parameters
+     * @param cont The number of the card I want to read
+     * @return The Objective card requested
+     */
+    private ObjectiveCard readObjective(String namefile, int cont) {
         ObjectiveCard myobj = new ObjectiveCard();
         int result;
         String path = new File(namefile).getAbsolutePath();
@@ -224,15 +216,27 @@ public class CardContainer {
         return myobj;
     }
 
-    //read values that are relevant only for public cards and not for private ones
-    protected void readRulesPublic(Document document, ArrayList<String> rules, int cont){
+
+    /**
+     * This method reads the rules of the card
+     * @param document The document from whom the method needs to read
+     * @param rules The ArrayList to fill with the rules of the public card
+     * @param cont The number of the card that has to be read
+     */
+    private void readRulesPublic(Document document, ArrayList<String> rules, int cont){
         rules.add(document.getElementsByTagName(WHERE).item(cont).getTextContent());
         rules.add(document.getElementsByTagName(PROPE).item(cont).getTextContent());
         rules.add(document.getElementsByTagName(VALUES).item(cont).getTextContent());
         rules.add(document.getElementsByTagName(COLOUR).item(cont).getTextContent());
     }
 
-    protected WindowPatternCard readPatterns(String namefile, int cont){
+    /**
+     * The method creates the WindowPatternCard element taking all the parameters from the xml configuration files
+     * @param namefile The name of the file from where the method needs to read all the parameters
+     * @param cont The number of the card I want to read
+     * @return The WindowPatternCard requested
+     */
+    private WindowPatternCard readPatterns(String namefile, int cont){
         WindowPatternCard mypattern = new WindowPatternCard();
         String all;
         String path = new File(namefile).getAbsolutePath();
@@ -266,7 +270,13 @@ public class CardContainer {
         return mypattern;
     }
 
-    protected ToolCard readTools(String namefile, int cont){
+    /**
+     * The method creates the ToolCard element taking all the parameters from the xml configuration files
+     * @param namefile The name of the file from where the method needs to read all the parameters
+     * @param cont The number of the card I want to read
+     * @return The ToolCard requested
+     */
+    ToolCard readTools(String namefile, int cont){
         ToolCard mytool = new ToolCard();
         String all;
         Colour tmpc = null;
@@ -290,7 +300,7 @@ public class CardContainer {
         mytool.setID(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()));
         mytool.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());
 
-        tmpc = tmpc.isIn((document.getElementsByTagName(COLOUR).item(cont).getTextContent()).charAt(0));
+        tmpc = Colour.isIn((document.getElementsByTagName(COLOUR).item(cont).getTextContent()).charAt(0));
         mytool.setColour(tmpc);
 
         all = document.getElementsByTagName(STATE).item(cont).getTextContent();
@@ -302,15 +312,12 @@ public class CardContainer {
         all = document.getElementsByTagName(CMETHODS).item(cont).getTextContent();
         mytool.setNameCMethods(Arrays.asList(all.split(",")));
 
-        StringBuilder iterate = new StringBuilder();
-        iterate.append(PM);
 
         NodeList nodelist = document.getElementsByTagName(PMETHODS).item(cont).getChildNodes();
 
         for(int i = 1; i < nodelist.getLength() - 1; i = i+2){
             all = nodelist.item(i).getTextContent(); //here the counter i starts from 1 because the first element in the nodelist is not a real element
             mytool.getNamePMethods().add(Arrays.asList(all.split(",")));
-            //iterate.deleteCharAt(iterate.toString().length()-1);
         }
 
         mytool.setDescription((document.getElementsByTagName(DESCRIPTION).item(cont).getTextContent()));
