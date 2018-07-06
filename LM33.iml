@@ -22,6 +22,7 @@
     </orderEntry>
     <orderEntry type="library" name="Maven: junit:junit:5.1.0" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:5.1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:8.0.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.plugins:maven-surefire-plugin:2.22.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.surefire:maven-surefire-common:2.22.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:2.2.1" level="project" />

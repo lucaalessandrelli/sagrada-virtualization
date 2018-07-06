@@ -121,6 +121,7 @@ public class Manager {
             processor.process();
         }else if(move.equals("active")){
             setPlayerActivity(name,true);
+            round.update();
         }
     }
 
