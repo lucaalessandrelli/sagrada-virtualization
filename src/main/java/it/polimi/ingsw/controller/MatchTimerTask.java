@@ -23,11 +23,10 @@ public class MatchTimerTask extends TimerTask {
 
         if (playerList.sizeContainer() >= 2 && tempTime == 0) {
             lobby.resetTimer();
-            //CREATE A REAL MATCH
             lobby.notifyManager();
         }
-        else if (playerList.sizeContainer() < 2 && tempTime == 0) {
-            tempTime = time;
+        else if (playerList.sizeContainer() < 2) {
+            lobby.resetTimer();
         }
 
     }
