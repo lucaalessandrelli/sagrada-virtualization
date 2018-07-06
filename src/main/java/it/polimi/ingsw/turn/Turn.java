@@ -122,7 +122,8 @@ public class Turn {
     }
 
     /**
-     * Notifies the round that the current turn ended
+     * Notifies the round that the current turn ended, also if the toolCard 8 has been used call
+     * a method on round that makes this player inactive for the second turn of the round.
      */
     public void notifyEndRound() {
         if(tool8used) {
@@ -160,8 +161,8 @@ public class Turn {
     }
 
     /**
-     * Called by concrete states when the player choose a toolCard in order to save information for next states, if the user plays toolcard8 then
-     * a method on round, which makes this player inactive for the second turn of the round, is called
+     * Called by concrete states when the player choose a toolCard in order to save information for next states, if the toolCard 8
+     * has been used set the boolean variable tool8used to true.
      * @param toolCard ToolCard object
      */
     public void setToolCardInfo(ToolCard toolCard) {

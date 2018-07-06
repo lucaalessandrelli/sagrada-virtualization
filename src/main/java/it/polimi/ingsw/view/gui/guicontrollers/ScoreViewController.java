@@ -76,24 +76,14 @@ public class ScoreViewController implements Initializable, SceneInterface {
     }
 
     /**
-     * Load on the TableView all the players of the match and their scores. Also calls dispayWinner() method.
+     * Load on the TableView all the players of the match and their scores. Also calls displays the winner of the game which is the
+     * first user inside the list.
      * @param playerScore List containing all the player's username and their score.
      */
     public void loadScores(String playerScore) {
         ObservableList<String> scoreList = FXCollections.observableArrayList(Arrays.asList(playerScore.split(",")));
         String username;
         String score;
-
-        /*for (String score:scoreList) {
-            ObservableList<String> currentPlayerScore = FXCollections.observableArrayList(Arrays.asList(score.split(" ")));
-            username = currentPlayerScore.get(0);
-            User user = new User(username);
-            user.setScore(currentPlayerScore.get(1));
-            userList.add(user);
-            if(score.equals(scoreList.get(0))) {
-                announcementLabel.setText(username+" ha vinto la partita!");
-            }
-        }*/
 
         for(int i = 0; i < scoreList.size();i++) {
             ObservableList<String> currentPlayerScore = FXCollections.observableArrayList(Arrays.asList(scoreList.get(i).split(" ")));
