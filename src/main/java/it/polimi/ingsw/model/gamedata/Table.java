@@ -50,8 +50,6 @@ public class Table {
         windowPatternCards = this.container.pullOutPattern(this.myplayers.size());
 
         this.diceBag.setNumPlayers(this.myplayers.size());
-        this.draftPool.addNewDices(this.diceBag.pullOut());
-
     }
 
 
