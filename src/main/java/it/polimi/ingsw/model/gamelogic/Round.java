@@ -187,4 +187,10 @@ public class Round {
     public void update() {
         players.notifyChanges();
     }
+
+    public void check(){
+        if(!players.checkActivity()){
+            interrupt();
+        }
+    }
 }

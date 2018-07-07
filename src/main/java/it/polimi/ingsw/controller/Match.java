@@ -143,6 +143,8 @@ public class Match extends Thread {
                 p.setActivity(b);
                 if(currRound!=null && p.getUsername().equals(currRound.getCurrTurn())&&!b){
                     currRound.interrupt();
+                }else if(currRound!=null){
+                    currRound.check();
                 }
             }
         }
