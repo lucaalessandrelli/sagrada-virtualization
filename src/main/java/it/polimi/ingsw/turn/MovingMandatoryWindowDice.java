@@ -49,7 +49,9 @@ public class MovingMandatoryWindowDice implements TurnState {
             turn.getModifier().positionDiceFromWindow(chosenDice,posChosenDice,pos);
             turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
         } else {
+            turn.resetSelectionDice();
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento della relativa carta.");
         }
+        turn.resetSelectionDice();
     }
 }

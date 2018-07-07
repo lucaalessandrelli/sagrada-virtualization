@@ -50,8 +50,10 @@ public class MovingDraftDice implements TurnState {
             turn.getModifier().positionDiceFromDraft(chosenDice, posChosenDice, pos);
             turn.setDynamicState(chosenDice, posChosenDice, toolDice, toolPos);
         } else {
+            turn.resetSelectionDice();
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento e relative alla carta selezionata.");
         }
+        turn.resetSelectionDice();
     }
 
     @Override

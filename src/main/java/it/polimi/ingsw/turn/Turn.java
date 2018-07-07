@@ -27,10 +27,10 @@ public class Turn {
     private InspectorContextTool inspectorContextTool;
     private InspectorPlaceTool inspectorPlaceTool;
     private boolean firstBracket;
-    private int roundNumber;
     private ToolCard toolCard;
     private Round round;
     private boolean tool8used = false;
+    private Table table;
 
     private List<String> toolStateList;
     private List<String> toolAutomatedOperationList;
@@ -41,15 +41,13 @@ public class Turn {
     /**
      * Turn constructor
      * @param player The player to whom the turn is assigned
-     * @param roundNumber The number of the current round
      * @param firstBracket Boolean value: true if it's the player first turn in the current round
      */
-    public Turn(Player player,Round round,int roundNumber, boolean firstBracket,Table table) {
+    public Turn(Player player,Round round, boolean firstBracket,Table table) {
         this.player = player;
         this.inspectorContext = new InspectorContext();
-        this.roundNumber = roundNumber;
         this.firstBracket = firstBracket;
-
+        this.table = table;
         this.inspectorPlace = new InspectorPlace();
         this.round = round;
         this.inspectorContextTool = new InspectorContextTool(player.getWindowPatternCard(),player.getDraftPool(), player.getRoundTrack());
@@ -117,7 +115,7 @@ public class Turn {
     /**
      * Set the current concrete turn state to the checkpointState
      */
-    public void setStateToCheckPoint() {
+    private void setStateToCheckPoint() {
         this.setState(checkPointState);
     }
 
@@ -130,6 +128,14 @@ public class Turn {
             round.inactivatePlayer(player);
         }
         round.interrupt();
+    }
+
+    /**
+     * Call the method resetSelection on the table in order to set the selected attribute of the dice to false. This method is called
+     * by concrete states at the end of a move that position a dice.
+     */
+    public void resetSelectionDice() {
+        table.resetSelection();
     }
 
     /**
@@ -196,16 +202,6 @@ public class Turn {
      */
     private void setToolCard(ToolCard toolCard) {
         this.toolCard = toolCard;
-    }
-
-
-    //GETTER METHODS
-    /**
-     * Called by concrete states in order to know which round is currently being played by a player
-     * @return The round number which is currently being played by a player
-     */
-    public int getRoundNumber() {
-        return this.roundNumber;
     }
 
     /**

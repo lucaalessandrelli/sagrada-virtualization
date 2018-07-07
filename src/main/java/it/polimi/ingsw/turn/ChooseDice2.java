@@ -47,8 +47,10 @@ public class ChooseDice2 implements TurnState {
             turn.getModifier().positionDiceFromDraft(chosenDice,posDiceChosen,pos);
             turn.setState(new EndTurn(turn));
         } else {
+            turn.resetSelectionDice();
             throw new WrongMoveException("Mossa sbagliata: selezionare una posizione della Vetrata che rispetti le regole di piazzamento.");
         }
+        turn.resetSelectionDice();
     }
 
     @Override

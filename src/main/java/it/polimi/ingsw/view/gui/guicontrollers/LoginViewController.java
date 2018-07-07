@@ -82,7 +82,8 @@ public class LoginViewController implements Initializable, SceneInterface {
     public void handleMouseClicked() {
         username = usernameField.getText();
 
-        if(username.equals("") || username.contains(" ")) {
+        if(username.equals("") || username.contains(" ") || username.contains(",") || username.contains(";") || username.contains("/")
+                || username.contains("\\")) {
             handleAlert("Nome utente non valido: un nome valido non contiene spazi e non è vuoto.");
         } else {
             setConnection();
@@ -97,7 +98,8 @@ public class LoginViewController implements Initializable, SceneInterface {
     public void handleEnterPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             username = usernameField.getText();
-            if(username.equals("") || username.contains(" ")) {
+            if(username.equals("") || username.contains(" ") || username.contains(",") || username.contains(";") || username.contains("/")
+                    || username.contains("\\")) {
                 handleAlert("Nome utente non valido: un nome valido non contiene spazi e non è vuoto.");
             } else {
                 setConnection();
