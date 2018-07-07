@@ -153,7 +153,7 @@ public class LoginViewController implements Initializable, SceneInterface {
         }
 
         if(username.equals(EMPTY) || invalidStringContained) {
-            handleAlert("Nome utente non valido: un nome valido non contiene spazi e non è vuoto.");
+            handleAlert("Nome utente non valido: il nome utente non deve essere vuoto e non deve contenere i seguenti caratteri: [spazi] [;] [,] [/] [\\].");
         } else {
             setConnection();
         }
