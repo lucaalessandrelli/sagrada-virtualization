@@ -1,4 +1,4 @@
-package it.polimi.ingsw.turn;
+package it.polimi.ingsw.model.gamelogic.turn;
 
 /**
  * Class defining the concrete state EndTurn, in this state the turn automatically ends for there isn't any valid move the player can make.

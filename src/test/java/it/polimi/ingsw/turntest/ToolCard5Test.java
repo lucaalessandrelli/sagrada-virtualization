@@ -5,10 +5,10 @@ import it.polimi.ingsw.controller.Manager;
 import it.polimi.ingsw.model.gamedata.*;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 import it.polimi.ingsw.model.gamelogic.Round;
-import it.polimi.ingsw.turn.ChooseDice1;
-import it.polimi.ingsw.turn.Turn;
-import it.polimi.ingsw.turn.TurnState;
-import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.model.gamelogic.turn.ChooseDice1;
+import it.polimi.ingsw.model.gamelogic.turn.Turn;
+import it.polimi.ingsw.model.gamelogic.turn.TurnState;
+import it.polimi.ingsw.model.gamelogic.turn.moveexceptions.WrongMoveException;
 import it.polimi.ingsw.view.virtualview.VirtualViewObserver;
 import org.junit.jupiter.api.Test;
 

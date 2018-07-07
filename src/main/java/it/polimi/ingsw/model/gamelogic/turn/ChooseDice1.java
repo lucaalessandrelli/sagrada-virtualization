@@ -1,4 +1,4 @@
-package it.polimi.ingsw.turn;
+package it.polimi.ingsw.model.gamelogic.turn;
 
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
-import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.model.gamelogic.turn.moveexceptions.WrongMoveException;
 
 import java.util.ArrayList;
 

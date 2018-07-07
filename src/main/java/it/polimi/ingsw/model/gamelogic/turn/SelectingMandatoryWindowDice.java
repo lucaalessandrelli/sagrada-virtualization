@@ -1,9 +1,9 @@
-package it.polimi.ingsw.turn;
+package it.polimi.ingsw.model.gamelogic.turn;
 
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
-import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.model.gamelogic.turn.moveexceptions.WrongMoveException;
 
 /**
  * Class defining the concrete state SelectingMandatoryWindowDice, in this state the player can only choose a Dice that belongs to the his windowPatternCard.

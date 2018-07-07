@@ -7,8 +7,8 @@ import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.ToolCard;
-import it.polimi.ingsw.turn.Turn;
-import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.model.gamelogic.turn.Turn;
+import it.polimi.ingsw.model.gamelogic.turn.moveexceptions.WrongMoveException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  * This class handle the timeout for a move and set the move to the object Turn, which verify the it correctness
  */
 public class Round {
-    private static final String PATH ="it.polimi.ingsw.turn.";
+    private static final String PATH ="it.polimi.ingsw.model.gamelogic.turn.";
 
     private int roundNumber;
     private PlayersContainer players;

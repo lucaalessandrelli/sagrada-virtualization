@@ -1,16 +1,16 @@
-package it.polimi.ingsw.turn;
+package it.polimi.ingsw.model.gamelogic.turn;
 
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
-import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.model.gamelogic.turn.moveexceptions.WrongMoveException;
 
 /**
- * Class defining the concrete state SelectingDraftDice, in this state the player can choose a Dice that belongs to the DraftPool or
- * he can pass the turn. This state can be dynamically set only for the toolCard number 8.
+ * Class defining the concrete state SelectingWindowDice, in this state the player can choose a Dice that belongs to the his windowPatternCard,
+ * or he can choose to pass the turn. This state can be dynamically set only for the toolCards number 2,3,4,12.
  * If the the player choose a Dice then the concrete state will dynamically change.
  */
-public class SelectingDraftDice implements TurnState {
+public class SelectingWindowDice implements TurnState {
     private Turn turn;
     private InspectorContextTool inspectorContextTool;
 
@@ -22,7 +22,7 @@ public class SelectingDraftDice implements TurnState {
      * @param toolDice The dice has chosen through the toolCard.
      * @param toolPos The position of the the Dice the player has chosen through the toolCard (toolDice).
      */
-    public SelectingDraftDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public SelectingWindowDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
         this.inspectorContextTool = turn.getInspectorContextTool();
     }

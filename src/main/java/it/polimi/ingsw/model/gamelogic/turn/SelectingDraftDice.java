@@ -1,19 +1,17 @@
-package it.polimi.ingsw.turn;
+package it.polimi.ingsw.model.gamelogic.turn;
 
 import it.polimi.ingsw.model.gamedata.Pos;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
-import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.model.gamelogic.turn.moveexceptions.WrongMoveException;
 
 /**
- * Class defining the concrete state SelectingRoundTrackDice, in this state the player can choose a Dice that belongs to the roundTrack,
- * or he can choose to pass the round. This state can be dynamically set only for the toolCards number 5,12.
+ * Class defining the concrete state SelectingDraftDice, in this state the player can choose a Dice that belongs to the DraftPool or
+ * he can pass the turn. This state can be dynamically set only for the toolCard number 8.
  * If the the player choose a Dice then the concrete state will dynamically change.
  */
-public class SelectingRoundTrackDice implements TurnState {
+public class SelectingDraftDice implements TurnState {
     private Turn turn;
-    private Dice chosenDice;
-    private Pos posChosenDice;
     private InspectorContextTool inspectorContextTool;
 
     /**
@@ -24,10 +22,8 @@ public class SelectingRoundTrackDice implements TurnState {
      * @param toolDice The dice has chosen through the toolCard.
      * @param toolPos The position of the the Dice the player has chosen through the toolCard (toolDice).
      */
-    public SelectingRoundTrackDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
+    public SelectingDraftDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
-        this.chosenDice = chosenDice;
-        this.posChosenDice = posChosenDice;
         this.inspectorContextTool = turn.getInspectorContextTool();
     }
 
@@ -39,9 +35,9 @@ public class SelectingRoundTrackDice implements TurnState {
      * valid or not. If it is valid then we change state, we throw the exception otherwise.
      */
     @Override
-    public void receiveMove(Dice toolDice,Pos toolPos) throws WrongMoveException {
-        if(inspectorContextTool.check(toolDice,toolPos,turn.getToolCard())) {
-            turn.setDynamicState(chosenDice,posChosenDice,toolDice,toolPos);
+    public void receiveMove(Dice chosenDice, Pos posChosenDice) throws WrongMoveException {
+        if (inspectorContextTool.check(chosenDice,posChosenDice,turn.getToolCard())) {
+            turn.setDynamicState(chosenDice, posChosenDice, new Dice(), new Pos());
         } else {
             throw new WrongMoveException("Mossa sbagliata: non è possibile scegliere questo dado.");
         }

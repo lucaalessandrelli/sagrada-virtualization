@@ -1,4 +1,4 @@
-package it.polimi.ingsw.turn;
+package it.polimi.ingsw.model.gamelogic.turn;
 
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
@@ -11,7 +11,7 @@ import it.polimi.ingsw.model.gamelogic.checker.InspectorContextTool;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlace;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorPlaceTool;
 import it.polimi.ingsw.model.gamelogic.ModelModifier;
-import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
+import it.polimi.ingsw.model.gamelogic.turn.moveexceptions.WrongMoveException;
 import java.lang.reflect.*;
 import java.util.List;
 
@@ -74,7 +74,7 @@ public class Turn {
 
         if(!nextStateName.equals("CheckPointState")) {
             try {
-                String path =("it.polimi.ingsw.turn."+ (nextStateName));
+                String path =("it.polimi.ingsw.model.gamelogic.turn."+ (nextStateName));
 
 
                 Class<?> cls = Class.forName(path);
