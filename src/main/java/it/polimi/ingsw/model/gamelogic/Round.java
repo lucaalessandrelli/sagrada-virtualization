@@ -88,14 +88,6 @@ public class Round {
     }
 
     /**
-     *
-     * @return round number
-     */
-    private int getRoundNumber() {
-        return this.roundNumber;
-    }
-
-    /**
      * sends the current state of move
      */
     private void updateAfterMove(){

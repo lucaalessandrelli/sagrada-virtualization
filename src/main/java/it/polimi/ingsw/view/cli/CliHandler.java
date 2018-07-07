@@ -19,7 +19,7 @@ public class CliHandler extends AbstractView {
     public CliHandler(Client client){
         this.client= client;
         this.printer = new Printer();
-        this.scene = new LoginState(printer,client,this);
+        this.scene = new LoginState(printer,this);
         this.composer = new InputComposer(client);
         this.gameData = new GameData(client.getName());
         this.specialToolCard = false;

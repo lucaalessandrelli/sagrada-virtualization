@@ -59,7 +59,7 @@ public class ClientBox {
             String num = String.valueOf(numOfMatch);
             client.setNumMatch(MATCH + num);
         }catch (RemoteException e){
-
+            out.println(CONNECTIONALERT);
         }
     }
 
@@ -71,6 +71,8 @@ public class ClientBox {
         try {
             client.updateTurn(s);
         } catch (RemoteException e) {
+            out.println(CONNECTIONALERT);
+
         }
     }
 
@@ -82,7 +84,7 @@ public class ClientBox {
         try {
             client.update(updateMove);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            out.println(CONNECTIONALERT);
         }
     }
 
@@ -96,7 +98,7 @@ public class ClientBox {
             String timer = String.valueOf(tempTime);
             client.setTimer(TIME + timer);
         }catch (RemoteException e){
-
+            out.println(CONNECTIONALERT);
         }
     }
 
@@ -108,7 +110,7 @@ public class ClientBox {
         try {
             client.updateMessage(ALERT+s);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            out.println(CONNECTIONALERT);
         }
     }
 
@@ -120,7 +122,7 @@ public class ClientBox {
         try {
             client.updateMessage(windows);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            out.println(CONNECTIONALERT);
         }
     }
 

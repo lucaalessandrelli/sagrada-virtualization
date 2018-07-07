@@ -20,8 +20,6 @@ import static java.lang.System.out;
 public class NetworkManager {
     private static final int PORTRMI = 56789;
     private static final int PORTSOCKET = 45678;
-    private static final String ALERT = "alert ";
-
     private Server server;
 
     NetworkManager(Server s) {

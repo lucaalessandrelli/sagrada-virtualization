@@ -7,12 +7,10 @@ import java.util.TimerTask;
  */
 public class MatchTimerTask extends TimerTask {
     private WaitingRoom lobby;
-    private long time;
     private long tempTime;
 
     MatchTimerTask(WaitingRoom lobby, long time) {
         this.lobby = lobby;
-        this.time = time;
         this.tempTime = time;
     }
 

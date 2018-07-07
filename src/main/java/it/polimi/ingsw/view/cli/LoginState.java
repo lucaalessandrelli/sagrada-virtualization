@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
 
 import java.util.Arrays;
@@ -10,7 +9,7 @@ public class LoginState implements SceneInterface {
     private Printer printer;
     private CliHandler cliHandler;
 
-    LoginState(Printer printer, Client client, CliHandler cliHandler) {
+    LoginState(Printer printer,CliHandler cliHandler) {
         this.printer=printer;
         this.cliHandler=cliHandler;
     }

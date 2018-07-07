@@ -25,6 +25,7 @@ public class ClientStub implements ClientInterface {
 
     @Override
     public void ping() throws RemoteException {
+        //this is used to verify if the rmi connection is alive
     }
 
     @Override
