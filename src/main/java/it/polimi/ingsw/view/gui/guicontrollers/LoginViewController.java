@@ -16,10 +16,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -29,6 +30,14 @@ import java.util.ResourceBundle;
 public class LoginViewController implements Initializable, SceneInterface {
     private static final int SOCKET = 1;
     private static final int RMI = 2;
+    private static final String EMPTY = "";
+    private static final String BLANK = " ";
+    private static final String COMMA = ",";
+    private static final String SEMICOLUMN = ";";
+    private static final String SLASH = "/";
+    private static final String BACKSLASH = "\\";
+    private List<String> invalidStrings = new ArrayList<>();
+    private boolean invalidStringContained;
     private Client client;
     private String  username;
     private int connectionType = SOCKET;
@@ -44,9 +53,17 @@ public class LoginViewController implements Initializable, SceneInterface {
     @FXML
     private JFXCheckBox rmiBox;
 
+    /**
+     * {@inheritDoc}
+     * Initialize the list "invalidStrings" to a set of strings that the username must not contain.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*no need to initialize something*/
+        invalidStrings.add(BLANK);
+        invalidStrings.add(COMMA);
+        invalidStrings.add(SEMICOLUMN);
+        invalidStrings.add(SLASH);
+        invalidStrings.add(BACKSLASH);
     }
 
     /**
@@ -81,13 +98,7 @@ public class LoginViewController implements Initializable, SceneInterface {
     @FXML
     public void handleMouseClicked() {
         username = usernameField.getText();
-
-        if(username.equals("") || username.contains(" ") || username.contains(",") || username.contains(";") || username.contains("/")
-                || username.contains("\\")) {
-            handleAlert("Nome utente non valido: un nome valido non contiene spazi e non è vuoto.");
-        } else {
-            setConnection();
-        }
+        checkUsernameValidity(username);
     }
 
     /**
@@ -98,12 +109,7 @@ public class LoginViewController implements Initializable, SceneInterface {
     public void handleEnterPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             username = usernameField.getText();
-            if(username.equals("") || username.contains(" ") || username.contains(",") || username.contains(";") || username.contains("/")
-                    || username.contains("\\")) {
-                handleAlert("Nome utente non valido: un nome valido non contiene spazi e non è vuoto.");
-            } else {
-                setConnection();
-            }
+            checkUsernameValidity(username);
         }
     }
 
@@ -136,6 +142,22 @@ public class LoginViewController implements Initializable, SceneInterface {
         client.setName(username);
         client.setKindConnection(connectionType);
         client.connect();
+    }
+
+    private void checkUsernameValidity(String username) {
+        invalidStringContained = false;
+
+        for (String string: invalidStrings) {
+            if(username.contains(string)) {
+                invalidStringContained = true;
+            }
+        }
+
+        if(username.equals(EMPTY) || invalidStringContained) {
+            handleAlert("Nome utente non valido: un nome valido non contiene spazi e non è vuoto.");
+        } else {
+            setConnection();
+        }
     }
 
     /**
