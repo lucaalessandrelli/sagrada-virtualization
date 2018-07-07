@@ -13,8 +13,6 @@ public class ChooseDice2 implements TurnState {
     private Turn turn;
     private Pos posDiceChosen;
     private Dice chosenDice;
-    private Dice toolDice;
-    private Pos toolPos;
     private InspectorPlace inspectorPlace;
 
     /**
@@ -29,8 +27,6 @@ public class ChooseDice2 implements TurnState {
         this.turn = turn;
         this.chosenDice = chosenDice;
         this.posDiceChosen = posDiceChosen;
-        this.toolDice = toolDice;
-        this.toolPos = toolPos;
         this.inspectorPlace = turn.getInspectorPlace();
     }
 

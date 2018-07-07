@@ -257,12 +257,7 @@ public class MatchViewController implements Initializable, SceneInterface {
 
     @Override
     public void handleAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null);
-        alert.setContentText(alertMessage);
-
-        alert.showAndWait();
+        GeneralFunctionalities.displayAlertWindow(alertMessage);
     }
 
     @Override

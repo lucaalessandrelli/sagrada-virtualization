@@ -12,10 +12,6 @@ import it.polimi.ingsw.turn.moveexceptions.WrongMoveException;
  */
 public class SelectingWindowDice implements TurnState {
     private Turn turn;
-    private Dice chosenDice;
-    private Dice toolDice;
-    private Pos posChosenDice;
-    private Pos toolPos;
     private InspectorContextTool inspectorContextTool;
 
     /**
@@ -28,10 +24,6 @@ public class SelectingWindowDice implements TurnState {
      */
     public SelectingWindowDice(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
-        this.posChosenDice = posChosenDice;
-        this.chosenDice = chosenDice;
-        this.toolDice = toolDice;
-        this.toolPos = toolPos;
         this.inspectorContextTool = turn.getInspectorContextTool();
     }
 

@@ -4,6 +4,7 @@ import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.SceneInterface;
 import it.polimi.ingsw.view.gui.drawers.DrawPatternCard;
 import it.polimi.ingsw.view.gui.GuiHandler;
+import it.polimi.ingsw.view.gui.drawers.GeneralFunctionalities;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.effect.*;
 import javafx.scene.layout.GridPane;
@@ -171,12 +171,7 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
 
     @Override
     public void handleAlert(String alertMessage) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null);
-        alert.setContentText(alertMessage);
-
-        alert.showAndWait();
+        GeneralFunctionalities.displayAlertWindow(alertMessage);
     }
 
 

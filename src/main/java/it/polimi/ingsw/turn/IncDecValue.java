@@ -15,8 +15,6 @@ public class IncDecValue implements TurnState {
     private Turn turn;
     private Dice chosenDice;
     private Pos posChosenDice;
-    private Dice toolDice;
-    private Pos toolPos;
     private InspectorContextTool inspectContextTool;
 
     /**
@@ -29,8 +27,6 @@ public class IncDecValue implements TurnState {
      */
     public IncDecValue(Turn turn, Dice chosenDice, Pos posChosenDice, Dice toolDice, Pos toolPos) {
         this.turn = turn;
-        this.toolDice = toolDice;
-        this.toolPos = toolPos;
         this.posChosenDice = posChosenDice;
         this.chosenDice = chosenDice;
         this.inspectContextTool = turn.getInspectorContextTool();

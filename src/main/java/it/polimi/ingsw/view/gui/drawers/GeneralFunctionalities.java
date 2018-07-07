@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.gui.drawers;
 import it.polimi.ingsw.view.gui.data.ViewDice;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -120,5 +121,14 @@ public final class GeneralFunctionalities {
                 }
             }
         }
+    }
+
+    public static void displayAlertWindow(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null);
+        alert.setContentText(alertMessage);
+
+        alert.showAndWait();
     }
 }

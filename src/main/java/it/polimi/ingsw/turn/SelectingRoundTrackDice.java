@@ -14,8 +14,6 @@ public class SelectingRoundTrackDice implements TurnState {
     private Turn turn;
     private Dice chosenDice;
     private Pos posChosenDice;
-    private Dice toolDice;
-    private Pos toolPos;
     private InspectorContextTool inspectorContextTool;
 
     /**
@@ -30,8 +28,6 @@ public class SelectingRoundTrackDice implements TurnState {
         this.turn = turn;
         this.chosenDice = chosenDice;
         this.posChosenDice = posChosenDice;
-        this.toolDice = toolDice;
-        this.toolPos = toolPos;
         this.inspectorContextTool = turn.getInspectorContextTool();
     }
 
