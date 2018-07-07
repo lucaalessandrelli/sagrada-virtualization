@@ -49,7 +49,7 @@ public class Round {
             p = iterator.next();
             currPlayer = p;
             if (p.isActive()&&!p.getUsername().equals(usedTool8)) {
-                turn = new Turn(p, this, getRoundNumber(), players.isFirstBracket(), table);
+                turn = new Turn(p, this, players.isFirstBracket(), table);
                 turn.startTurn();
                 players.notifyTurn(p.getUsername(), timerMove);
                 updateBeforeMove();
