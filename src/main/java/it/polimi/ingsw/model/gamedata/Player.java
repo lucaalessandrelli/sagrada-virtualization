@@ -191,11 +191,19 @@ public class Player {
             observer.updateStateTurn(whoIsTurn,timeSleep);
     }
 
+    /**
+     * Calculate the points made at the end of the match
+     * @return The points
+     */
     public int calculatePoints() {
         return myFavTokens + this.calculatePointsPrivate() + this.calculatePointsPublic() - this.calculateMissingCells();
 
     }
 
+    /**
+     * Calculate the points made with the public cards
+     * @return The points
+     */
     public int calculatePointsPublic(){
         int score = 0;
 
@@ -207,6 +215,10 @@ public class Player {
         return score;
     }
 
+    /**
+     * Calculate the points removed due to empty cells
+     * @return The points
+     */
     public int calculateMissingCells(){
         int numberOfMissingCells = 0;
 
@@ -219,6 +231,10 @@ public class Player {
         return numberOfMissingCells;
     }
 
+    /**
+     * Calculate points made with private cards
+     * @return The points
+     */
     public int calculatePointsPrivate(){
         return myObjCard.finalpoints(myWindow);
     }

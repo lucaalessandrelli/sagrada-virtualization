@@ -91,10 +91,15 @@ public class ToolCard3Test {
 
         Round round = new Round(players,1,table,match, timerMove);
 
-        ArrayList<WindowPatternCard> windows = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windows.add(windowPatternCard);
-        p1.setMyWindow(windows.get(0));
+       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+
+       p1.setMyWindow(windowPatternCard1);
+       p2.setMyWindow(windowPatternCard2);
+       p3.setMyWindow(windowPatternCard3);
+       p4.setMyWindow(windowPatternCard4);
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -265,10 +270,15 @@ public class ToolCard3Test {
 
         Round round = new Round(players,1,table,match, timerMove);
 
-        ArrayList<WindowPatternCard> windows = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windows.add(windowPatternCard);
-        p1.setMyWindow(windows.get(0));
+       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+
+       p1.setMyWindow(windowPatternCard1);
+       p2.setMyWindow(windowPatternCard2);
+       p3.setMyWindow(windowPatternCard3);
+       p4.setMyWindow(windowPatternCard4);
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -437,10 +447,15 @@ public class ToolCard3Test {
 
         Round round = new Round(players,1,table, match, timerMove);
 
-        ArrayList<WindowPatternCard> windows = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windows.add(windowPatternCard);
-        p1.setMyWindow(windows.get(0));
+       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+
+       p1.setMyWindow(windowPatternCard1);
+       p2.setMyWindow(windowPatternCard2);
+       p3.setMyWindow(windowPatternCard3);
+       p4.setMyWindow(windowPatternCard4);
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());

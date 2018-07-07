@@ -1,18 +1,16 @@
 package it.polimi.ingsw.model.gamedata;
 
 
-import edu.emory.mathcs.backport.java.util.Collections;
 import it.polimi.ingsw.model.gamedata.gametools.*;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-//I used ArrayList for data structures but we'll see better in the future which one is the best for this situation
+/**
+ * This class represents the table with all his elements
+ */
 public class Table {
     private List<Player> myplayers;
     private List<ObjectiveCard> objectiveCards;
@@ -24,11 +22,17 @@ public class Table {
     private List<WindowPatternCard> windowPatternCards;
     private List<Integer> temporaryCards = new ArrayList<>();
 
-    private final static String SCORE = "score ";
-    private final static char SPACE = ' ';
-    private final static char VIRG = ',';
+    private static final String SCORE = "score ";
+    private static final char SPACE = ' ';
+    private static final char VIRG = ',';
+    private static final String NOONE = "noone";
 
 
+
+    /**
+     * The classic constructor
+     * @param players The players that will be part of the table
+     */
     public Table(List<Player> players){
         this.diceBag = new DiceBag();
         this.draftPool = new DraftPool();
@@ -37,6 +41,10 @@ public class Table {
         this.roundTrack = new RoundTrack();
     }
 
+    /**
+     * This methods pulls out all the cards needed for the game, sets the players for the dicebag and sets the public objects
+     * for every player
+     */
     public void initialize(){
         int i;
         this.toolCards = this.container.pullOutTools();
@@ -53,6 +61,9 @@ public class Table {
     }
 
 
+    /**
+     * The method used to ask to the players which pattern card they want to use
+     */
     public void selectWindowCards(){
         List<WindowPatternCard> patterns = new ArrayList<>();
         for (int i = 0; i < myplayers.size();i++) {
@@ -71,42 +82,83 @@ public class Table {
     }
 
     //GETTER METHODS
+
+
+    /**
+     * Getter method for Objective cards
+     * @return The list representing the objective cards
+     */
     public List<ObjectiveCard> getObjCard() {
         return objectiveCards;
     }
 
+
+    /**
+     * Getter method for the dicebag
+     * @return The list representing the dicebag
+     */
     public List<Dice> getDiceFromBag() {
         return diceBag.pullOut();
     }
 
+
+    /**
+     * Getter method for draftpool
+     * @return The list representing the draftpool
+     */
     public List<Dice> getAllDraft() {
         return this.draftPool.getDraftPool();
     }
 
+
+    /**
+     * Getter method for the draftppol
+     * @return The draftpool
+     */
     public DraftPool getDraftPool(){
         return this.draftPool;
     }
 
+
+    /**
+     * Getter method for the roundtrack
+     * @return The roundtrack
+     */
     public RoundTrack getRoundTrack(){
         return this.roundTrack;
     }
 
+
+    /**
+     * Getter method for dicebag
+     * @return The dicebag
+     */
     public DiceBag getDiceBag() {
         return this.diceBag;
     }
 
+
+    /**
+     * Getter method for Tool cards
+     * @return The list representing the Tool cards
+     */
     public List<ToolCard> getToolCards(){
         return this.toolCards;
     }
 
-    public int getNumPlayers(){
-        return this.myplayers.size();
-    }
 
+    /**
+     * Sets the dices left from the draftpool on the roundtrack at the specified round
+     * @param numRound The round specified
+     */
     public void setLastDices(int numRound){
         this.roundTrack.setDiceOnRoundTrack(numRound,this.draftPool.getDraftPool());
     }
 
+    /**
+     * Method to assign a random WindowPattern card when a players doesn't make a choice
+     * @param p The name of the players
+     */
     public void setWindow(String p){
         Random random = new Random();
         int i = 0;
@@ -117,6 +169,11 @@ public class Table {
         player.setMyWindow(windowPatternCards.get(random.nextInt(4) + 4*i));
     }
 
+    /**
+     * The method called to assign the WindowPattern card that the player has chosen
+     * @param p The name of the player
+     * @param id The idnumber of the card chosen
+     */
     public void setWindow(Player p, int id){
         int i = 0;
 
@@ -124,23 +181,31 @@ public class Table {
             i++;
         }
 
-        if(temporaryCards.contains(id)){
-            if(windowPatternCards.get(i*4).getNum() == id)
-                this.myplayers.get(i).setMyWindow(windowPatternCards.get(i*4));
-            if(windowPatternCards.get((i*4)+1).getNum() == id)
-                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i*4)+1));
-            if(windowPatternCards.get((i*4)+2).getNum() == id)
-                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i*4)+2));
-            if(windowPatternCards.get((i*4)+3).getNum() == id)
-                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i*4)+3));
-            }
+        if(temporaryCards.contains(id)) {
+            if (windowPatternCards.get(i * 4).getNum() == id)
+                this.myplayers.get(i).setMyWindow(windowPatternCards.get(i * 4));
+            if (windowPatternCards.get((i * 4) + 1).getNum() == id)
+                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 1));
+            if (windowPatternCards.get((i * 4) + 2).getNum() == id)
+                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 2));
+            if (windowPatternCards.get((i * 4) + 3).getNum() == id)
+                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 3));
         }
+        else
+            this.setWindow(p.getUsername());
+    }
 
 
+    /**
+     * Fill the draftpool by pulling out dices from the dicebag
+     */
     public void fillDraftPool(){
         this.draftPool.addNewDices(diceBag.pullOut());
     }
 
+    /**
+     * Set the public objects for every player present in the table
+     */
     public void setPublicObjects(){
         for (Player p: this.myplayers) {
             PublicObjects publicObjects = new PublicObjects();
@@ -166,6 +231,11 @@ public class Table {
         }
     }
 
+    /**
+     * Method that finds out who's the winner of the match and return a string representing the score of every player
+     * and the winner
+     * @return The string with each score(in the first position there's the winner)
+     */
     public String calculatePoints(){
         StringBuilder builder = new StringBuilder();
         builder.append(SCORE);
@@ -192,13 +262,16 @@ public class Table {
     }
 
 
+    /**
+     * Find the winner
+     * @param scores The scores of each player
+     * @return The string with the winner
+     */
     private String findWinner(HashMap<Player,Integer> scores){
 
         StringBuilder builder = new StringBuilder();
-        int max = -50;
-        Player winner = new Player("noone");
+        Player winner = new Player(NOONE);
 
-        List<Player> drawPlayers = new ArrayList<>();
 
         int numberActive = 0;
         for (Player p: this.myplayers){
@@ -215,32 +288,45 @@ public class Table {
             }
         }
         else {
-            for(Player player:scores.keySet()){
-                int currentScore = scores.get(player);
-                if(currentScore > max) {
-                    winner = player;
-                    drawPlayers.clear();
-                    max = currentScore;
-                }
-                else if(currentScore == max)
-                    drawPlayers.add(player);
-            }
-
-            if(drawPlayers.size() > 1) {
-                appendWinner(builder, scores, this.drawOnScore(drawPlayers));
-            }
-            else {
-                appendWinner(builder,scores,winner);
-            }
+            winner = moreThenOneActive(scores,winner);
+            appendWinner(builder,scores,winner);
         }
 
         return builder.toString();
 
     }
 
+    private Player moreThenOneActive(HashMap<Player,Integer> scores, Player winner){
+        int max = -50;
+        List<Player> drawPlayers = new ArrayList<>();
+
+        for(Player player: this.myplayers){
+            int currentScore = scores.get(player);
+            if(currentScore > max) {
+                winner = player;
+                drawPlayers.clear();
+                max = currentScore;
+            }
+            else if(currentScore == max)
+                drawPlayers.add(player);
+        }
+
+        if(drawPlayers.size() > 1) {
+            return this.drawOnScore(drawPlayers);
+        }
+        else {
+            return winner;
+        }
+    }
+
+    /**
+     * Find the winner if there's been a draw on points
+     * @param drawPlayers The players that have the same points
+     * @return The player designed as winner
+     */
     private Player drawOnScore(List<Player> drawPlayers) {
         int maxDraw = 0;
-        Player winner = new Player("noone");
+        Player winner = new Player(NOONE);
 
         List<Player> drawPlayersOnPrivate = new ArrayList<>();
 
@@ -263,9 +349,14 @@ public class Table {
 
         }
 
+    /**
+     * Find winner if there's been a draw on PrivateScore
+     * @param drawPlayersOnPrivate List of players that have the same points
+     * @return The designed winner
+     */
     private Player drawOnPrivateScore(List<Player> drawPlayersOnPrivate) {
         int maxFavors = 0;
-        Player winner = new Player("noone");
+        Player winner = new Player(NOONE);
 
         List<Player> drawPlayersOnFavors = new ArrayList<>();
 
@@ -288,11 +379,16 @@ public class Table {
             return winner;
     }
 
+    /**
+     * Find winner if there's been a draw on Favor tokens
+     * @param drawPlayersOnFavors List of players drawing on favor tokens
+     * @return The designed winner
+     */
     private Player drawOnFavors(List<Player> drawPlayersOnFavors) {
 
         int max = 0;
 
-        Player winner = new Player("noone");
+        Player winner = new Player(NOONE);
 
         for (Player player : drawPlayersOnFavors) {
             if(this.myplayers.indexOf(player) > max) {
@@ -305,6 +401,12 @@ public class Table {
 
     }
 
+    /**
+     * Method to add to builder the name and the points of the winner
+     * @param builder The stringbuilder
+     * @param scores The Hashmap that stores the score for every player
+     * @param winner The winner
+     */
     private void appendWinner(StringBuilder builder,HashMap<Player,Integer> scores,Player winner){
         builder.append(winner.getUsername());
         builder.append(SPACE);
@@ -313,6 +415,9 @@ public class Table {
         scores.remove(winner);
     }
 
+    /**
+     * For every player in the table reset the "selected" value to every dice placed on the card, does this also for roundtrack and draftpool
+     */
     public void resetSelection() {
         myplayers.forEach(player -> player.getWindowPatternCard().resetSelection());
         roundTrack.resetSelection();

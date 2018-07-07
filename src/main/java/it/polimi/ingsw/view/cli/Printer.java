@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 
+import it.polimi.ingsw.model.gamedata.Colour;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.PrintStream;
@@ -13,6 +14,9 @@ import static java.lang.System.*;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
 
+/**
+ * The class used to print data for the CLI
+ */
 public class Printer {
     private static final String ONE = "2680";
     private static final String TWO = "2681";
@@ -50,56 +54,36 @@ public class Printer {
 
     private Scanner in = new Scanner(System.in);
 
+    /**
+     * Installs the AnsiConsole on the system.out so it will handle by himself the Ansi escapes
+     */
     public Printer(){
         AnsiConsole.systemInstall();
     }
 
 
+    /**
+     * Print the welcome message
+     */
     void welcome() {
         out.print(ansi().saveCursorPosition());
         out.print(ansi().a("Benvenuto in "));
         out.print( ansi().render("@|red S|@"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         out.print( ansi().render("@|green A|@"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         out.print( ansi().render("@|magenta G|@"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         out.print( ansi().render("@|yellow R|@"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         out.print( ansi().render("@|blue A|@"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         out.print( ansi().render("@|red D|@"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         out.print( ansi().render("@|green A|@"));
         out.print(ansi().a("    "));
         out.print(ansi().restoreCursorPosition().cursorDown(3));
 
     }
 
+    /**
+     * The method to ask the name of the player
+     * @return The name of the player
+     */
     public String getName() {
         out.print(ansi().a(USERNAME).cursorDown(1).cursorLeft(USERNAME.length()));
         String name = in.nextLine();
@@ -110,24 +94,30 @@ public class Printer {
         return name;
     }
 
+    /**
+     * The method to ask which connection the client want to chose
+     * @return An int representing the connection
+     */
     public int getConnection() {
         out.print(ansi().a(CONNECTION).cursorDown(1).cursorLeft(CONNECTION.length()));
         return in.nextInt();
     }
 
+    /**
+     * The method prints if the connection has gone well
+     * @param messageConnection The message for connection
+     */
     public void printConnection(String messageConnection) {
         out.print(ansi().saveCursorPosition());
         out.print(ansi().fg(GREEN).a(messageConnection).reset()); //add a colour maybe
         out.print(ansi().restoreCursorPosition().cursorDown(3));
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
-
+    /**
+     * The method prints the error message
+     * @param alert The error message
+     */
     public void printError(String alert) {
         out.print(ansi().saveCursorPosition());
         out.print(ansi().fg(RED).a(alert).reset().cursorDown(1));
@@ -135,12 +125,21 @@ public class Printer {
     }
 
 
+    /**
+     * This method prints the timer and the specified string
+     * @param timer The timer
+     * @param output The specified string
+     */
     public void printtimer(String timer, String output){
         out.print(ansi().saveCursorPosition());
-        out.print(ansi().a(output + timer));
+        out.print(ansi().a(output + timer + "  "));
         out.print(ansi().restoreCursorPosition());
     }
 
+    /**
+     * Prints the players connected
+     * @param players The name of players
+     */
     public void printplayersConnected(List<String> players){
 
         out.print(ansi().a(CONNECTED).cursorLeft(CONNECTED.length()));
@@ -148,8 +147,8 @@ public class Printer {
         out.print(ansi().cursorDown(1));
 
         for (String player: players) {
-            out.print(ansi().a(player));
-            out.print(ansi().cursorLeft(player.length()).cursorDown(1));
+            out.print(ansi().a(player + "  "));
+            out.print(ansi().cursorLeft(player.length()+2).cursorDown(1));
         }
 
         out.print(ansi().cursorUp(players.size()));
@@ -157,6 +156,12 @@ public class Printer {
     }
 
 
+    /**
+     * The method that prints the WindowPattern card that the player can chose
+     * @param id The idnumber of the card
+     * @param difficulty The difficulty of the card
+     * @param restr The restrictions of the card
+     */
     public void printchoosePatternCard(String id, String difficulty, List<String> restr){
         out.print(ansi().cursorDown(2));
 
@@ -174,10 +179,17 @@ public class Printer {
         out.print(ansi().cursorDown(2));
     }
 
+    /**
+     * The method to wait to get the command
+     * @return The command that the player has inserted
+     */
     public String getCommand() {
         return in.nextLine();
     }
 
+    /**
+     * The method that prints the coordinates
+     */
     private void printCoordinates(){
         out.print(ansi().saveCursorPosition());
         out.print(ansi().a(COORDINATES).cursorDown(1).cursorLeft(COORDINATES.length()));
@@ -188,6 +200,15 @@ public class Printer {
         out.print(ansi().cursorDown(1).cursorRight(3));
     }
 
+    /**
+     * Print the coordinates of the specified dimension
+     * @param ri Initial row
+     * @param rf Final row
+     * @param ci Initial column
+     * @param cf Final column
+     * @param column Tha "name" of the index on column
+     * @param row The "name" of the index on row
+     */
     private void printCoordinates(int ri, int rf, int ci, int cf, char column, char row){
         out.print(ansi().cursorRight(3));
         for(int k = ci; k <= cf; k++){
@@ -204,6 +225,10 @@ public class Printer {
         }
     }
 
+    /**
+     * The method that prints the WindowPattern card
+     * @param restr The list of strings representing the restrictions
+     */
     private void printPatternCard(List<String> restr){
         for(int i = 0; i < restr.size(); i++){
             if((restr.get(i).charAt(1)-'0')!=0){
@@ -218,6 +243,10 @@ public class Printer {
         }
     }
 
+    /**
+     * The method that prints the placed dices
+     * @param dices The list of string representing the placed dices
+     */
     private void printPlacedDices(List<String> dices){
         int updown;
         int leftright;
@@ -236,17 +265,28 @@ public class Printer {
         }
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorUp(1));
-        out.print(ansi().saveCursorPosition());
-        out.print(ansi().restoreCursorPosition());
-        out.print(ansi().cursorDown(7));
     }
 
+    /**
+     * The method that prints the background
+     * @param c The character representing the restriction (colour or number)
+     */
     private void printBackground(Character c){
+
+        Color color = this.findColor(c);
+
+        out.print(ansi().bg(color).fg(color).a(ZERO).reset());
+
+    }
+
+    /**
+     * Method to retrieve a color depending on a character
+     * @param c The character representing the color
+     * @return The Ansi color variable
+     */
+    private Color findColor(Character c){
         Color color = WHITE;
         switch (c) {
-            case 'W':
-                color = WHITE;
-                break;
             case 'B':
                 color = BLUE;
                 break;
@@ -264,38 +304,24 @@ public class Printer {
                 break;
             default:
         }
-        out.print(ansi().bg(color).fg(color).a(ZERO).reset());
-
+        return color;
     }
 
+    /**
+     * The method that prints the dices
+     * @param colour The colour of the dice
+     * @param number The number of the dice
+     */
     private void printDice(Character colour, Character number){
         try{
             PrintStream outStream = new PrintStream(out, true, "UTF-8");
             Character num = whatNumber(number);
-            Color color = WHITE;
 
             if(colour == 'W'){
                 outStream.print(ansi().fg(WHITE).a(" " + num +" ").reset());
             }
             else{
-                switch (colour){
-                    case 'B':
-                        color = BLUE;
-                        break;
-                    case 'Y':
-                        color = YELLOW;
-                        break;
-                    case 'R':
-                        color = RED;
-                        break;
-                    case 'G':
-                        color = GREEN;
-                        break;
-                    case 'P':
-                        color = MAGENTA;
-                        break;
-                    default:
-                }
+                Color color = this.findColor(colour);
                 outStream.print(ansi().bg(Color.WHITE).fg(color).a(" " + num +" ").reset());
             }
         } catch(UnsupportedEncodingException e){
@@ -303,6 +329,11 @@ public class Printer {
         }
     }
 
+    /**
+     * This method is used to find out which exadecimal number represents the right dice
+     * @param number The number of the dice
+     * @return The corresponding dice character to the number
+     */
     private Character whatNumber(Character number){
         int intValue = 0;
         switch (number){
@@ -329,6 +360,12 @@ public class Printer {
         return (char)intValue;
     }
 
+    /**
+     * The method that prints the Waiting room screen
+     * @param timer The timer of the waiting room
+     * @param players The players connected
+     * @param output The output string to print before the timer
+     */
     void printWaitingRoom(String timer, List<String> players, String output){
         out.print(ansi().saveCursorPosition());
 
@@ -344,6 +381,11 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the screen for the selection of the WindowPattern cards
+     * @param patternCards The pattern cards extracted
+     * @param timer The timer
+     */
     void printChooseCardRoom(String patternCards, String timer) {
 
         Deparser dep = new Deparser();
@@ -374,6 +416,13 @@ public class Printer {
         //print all 4 windows and the timer (il timer deve essere fisso altrimenti il giocatore non può scrivere)
     }
 
+    /**
+     * Prints the match screen
+     * @param setup The setup string with all the data of the match
+     * @param timer The timer
+     * @param players The players connected
+     * @param turnState The current player
+     */
     public void printMatch(String setup, String timer, List<String> players, String turnState) {
 
 
@@ -387,6 +436,7 @@ public class Printer {
 
         this.printMatchOtherCards(setup,players,deparser);
 
+        out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorRight(90));
         this.printplayersConnected(players);
 
@@ -451,6 +501,12 @@ public class Printer {
         //print all match layout (statico)
     }
 
+    /**
+     * Prints a different information depending on who's the current player
+     * @param players The players connected
+     * @param turnState The current player
+     * @param deparser The deparser
+     */
     private void printMove(List<String> players, String turnState, Deparser deparser) {
         boolean found = false;
         for (int i = 0; i < players.size() && !found;i++){
@@ -466,6 +522,10 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the score screen
+     * @param score The string representing all the players score and the winner
+     */
     void printScore(String score) {
         Deparser dep = new Deparser();
 
@@ -487,15 +547,6 @@ public class Printer {
 
             playersandscore = dep.divideBySpace(s);
 
-            result = Integer.parseInt(playersandscore.get(1));
-
-            if(result > maximum) {
-                winner = playersandscore.get(0);
-                maximum = result;
-            }
-            else if(result == maximum)
-                winner = "Pareggio!";
-
             out.print(ansi().a(playersandscore.get(0) + "  " + playersandscore.get(1)).cursorLeft(playersandscore.get(0).length() + playersandscore.get(1).length() + 2));
 
         }
@@ -503,7 +554,7 @@ public class Printer {
         out.print(ansi().cursorUp(players.size()+2));
 
         out.print(ansi().cursorRight(20));
-        out.print(ansi().a(WINNER + winner).cursorLeft(WINNER.length() + winner.length() + 20).cursorDown(players.size()+6));
+        out.print(ansi().bg(BLUE).fg(YELLOW).a(WINNER + winner).reset().cursorLeft(WINNER.length() + winner.length() + 20).cursorDown(players.size()+6));
 
         out.print(ansi().a("Gioca ancora? (Scrivi retry per accettare)"));
 
@@ -513,6 +564,11 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the state (Active or Inactive) of the player
+     * @param setup The setup string
+     * @param deparser The deparser
+     */
     private void printActivePlayers(String setup, Deparser deparser){
 
         String tmp = deparser.findString(setup,"state");
@@ -539,6 +595,12 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the WindowPattern card of the other players
+     * @param setup The setup string
+     * @param players The players connceted
+     * @param deparser The deparser
+     */
     private void printMatchOtherCards(String setup, List<String> players, Deparser deparser){
 
         String parsed = deparser.otherCards(setup,players);
@@ -553,7 +615,7 @@ public class Printer {
 
                 out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
 
-                this.printFavoreTokens(setup, newString.get(0));
+                this.printFavorTokens(setup, newString.get(0));
 
                 out.print(ansi().cursorDown(1));
 
@@ -570,7 +632,12 @@ public class Printer {
         out.print(ansi().restoreCursorPosition());
     }
 
-    private void printFavoreTokens(String setup, String name) {
+    /**
+     * Prints favor tokens for the player
+     * @param setup The setup string
+     * @param name The name of the player
+     */
+    private void printFavorTokens(String setup, String name) {
 
         try {
             PrintStream outStream = new PrintStream(out, true, "UTF-8");
@@ -591,6 +658,11 @@ public class Printer {
 
     }
 
+    /**
+     * Print public cards and toolcards
+     * @param setup The setup string
+     * @param deparser The deparser
+     */
     private void printCards(String setup, Deparser deparser){
 
         String toolCards = deparser.findString(setup,"toolcards");
@@ -640,6 +712,11 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the roundtrack
+     * @param setup The setup string
+     * @param deparser The deparser
+     */
     private void printRoundtrack(String setup, Deparser deparser){
 
         List<String> tmp = deparser.divideByComma(deparser.findString(setup,"roundtrack"));
@@ -683,6 +760,11 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the description for Toolcards
+     * @param setup The setup string
+     * @param deparser The deparser
+     */
     private void printDescriptionCards(String setup, Deparser deparser){
 
         String tmp = deparser.findString(setup,"toolcards");
@@ -727,6 +809,12 @@ public class Printer {
         }
     }
 
+    /**
+     * Prints the WindowPattern card of the current player
+     * @param setup The setup string
+     * @param player The current player
+     * @param deparser The deparser
+     */
     private void printMyPatternCard(String setup, String player, Deparser deparser){
 
         String myCard = deparser.getMyCard(setup,player);
@@ -737,7 +825,7 @@ public class Printer {
 
         out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
 
-        this.printFavoreTokens(setup,newString.get(0));
+        this.printFavorTokens(setup,newString.get(0));
 
         out.print(ansi().cursorDown(1).cursorLeft(3));
 
@@ -751,6 +839,11 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the private card
+     * @param setup The setup string
+     * @param deparser The deparser
+     */
     private void printPrivateCard(String setup, Deparser deparser){
 
         String tmp = deparser.findString(setup,"privatecard");
@@ -788,6 +881,11 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the draftpool
+     * @param setup The setup string
+     * @param deparser The deparser
+     */
     private void printDraftPool(String setup, Deparser deparser){
 
         String tmp = deparser.findString(setup,"draftpool");
@@ -808,10 +906,18 @@ public class Printer {
 
     }
 
+    /**
+     * Prints the player that is owning the turn
+     * @param turnState The string telling who is the current player
+     */
     private void printTurnOf(String turnState){
         out.print(ansi().a(turnState));
     }
 
+    /**
+     * The method that prints the timer for the match
+     * @param timer The timer
+     */
     private void printTimerMatch(String timer){
         if(Integer.valueOf(timer)>=0){
             out.print(ansi().a("Timer: "+timer));
@@ -819,6 +925,9 @@ public class Printer {
 
     }
 
+    /**
+     * The method that prints the commands legenda
+     */
     private void printCommands(){
 
         out.print(ansi().cursorRight(70));
@@ -837,6 +946,9 @@ public class Printer {
 
     }
 
+    /**
+     * The method used to make the player choose a dice in particular toolcards
+     */
     void printChooseDice() {
 
         out.print(ansi().cursorDown(2));
@@ -849,18 +961,34 @@ public class Printer {
     void printIncDecDice() {
     }
 
+    /**
+     * A private class used to divide strings, find substrings and retrieve the current player
+     */
     private class Deparser {
 
         String myplayer;
 
+        /**
+         * @return The string representing the player associated to this deparser
+         */
         private String getMyPlayer(){
             return myplayer;
         }
 
+        /**
+         * Set the player to the player given
+         * @param myplayer The player to set
+         */
         private void setMyplayer(String myplayer) {
             this.myplayer = myplayer;
         }
 
+        /**
+         * Method used to retrieve other players cards and write them in a string in a defined way
+         * @param setup The setup string
+         * @param players The players connected
+         * @return The string representing WindowPatter cards of the other players, comprehensive of the dices placed
+         */
         private String otherCards(String setup, List<String> players){
             StringBuilder builder = new StringBuilder();
 
@@ -894,6 +1022,12 @@ public class Printer {
             return builder.toString();
         }
 
+        /**
+         * Method to retrieve the card of the current player
+         * @param setup The setup string
+         * @param player The player you're looking for
+         * @return The string representing WindowPatter cards of the player, comprehensive of the dices placed
+         */
         private String getMyCard(String setup, String player){
 
             StringBuilder builder = new StringBuilder();
@@ -928,7 +1062,12 @@ public class Printer {
         }
 
 
-
+        /**
+         * Returns the substring you're looking for without the keyword toFind
+         * @param setup The setup string
+         * @param toFind The substring you're looking for
+         * @return The string requested
+         */
         //returns the substring you're looking for without the keyword toFind
         private String findString(String setup, String toFind){
             List<String> divided = divideBySemicolon(setup);
@@ -939,6 +1078,11 @@ public class Printer {
             return divided.get(i).substring(toFind.length()+1,divided.get(i).length());
         }
 
+        /**
+         * Method used to find the name of the current player
+         * @param setup The setup string
+         * @return The name of the current player
+         */
         private String findPlayer(String setup){
 
             String tmp = setup.substring(setup.indexOf((RESTRICTIONS + " " )));
@@ -952,17 +1096,42 @@ public class Printer {
             return tmp.substring(0,tmp.indexOf(','));
         }
 
-        private List<String> divideBySemicolon(String setup) {return Arrays.asList(setup.split(";")); }
+        /**
+         * Method that returns a list of strings dividing the given one by semicolon
+         * @param toDivide The string to divide
+         * @return The list with the divided strings
+         */
+        private List<String> divideBySemicolon(String toDivide) {return Arrays.asList(toDivide.split(";")); }
 
-        private List<String> divideByComma(String subMessage) {
-            return Arrays.asList(subMessage.split(","));
+        /**
+         * Method that returns a list of strings dividing the given one by semicolon
+         * @param toDivide The string to divide
+         * @return The list with the divided strings
+         */
+        private List<String> divideByComma(String toDivide) {
+            return Arrays.asList(toDivide.split(","));
         }
 
-        private List<String> divideBySpace(String chosen){return Arrays.asList(chosen.split(" ")); }
+        /**
+         * Method that returns a list of strings dividing the given one by semicolon
+         * @param toDivide The string to divide
+         * @return The list with the divided strings
+         */
+        private List<String> divideBySpace(String toDivide){return Arrays.asList(toDivide.split(" ")); }
 
-        private List<String> divideBySlash(String setup) {return Arrays.asList(setup.split("/")); }
+        /**
+         * Method that returns a list of strings dividing the given one by semicolon
+         * @param toDivide The string to divide
+         * @return The list with the divided strings
+         */
+        private List<String> divideBySlash(String toDivide) {return Arrays.asList(toDivide.split("/")); }
 
-        private List<String> divideByBackslash(String setup) {return Arrays.asList(setup.split("\\\\")); }
+        /**
+         * Method that returns a list of strings dividing the given one by semicolon
+         * @param toDivide The string to divide
+         * @return The list with the divided strings
+         */
+        private List<String> divideByBackslash(String toDivide) {return Arrays.asList(toDivide.split("\\\\")); }
 
     }
 

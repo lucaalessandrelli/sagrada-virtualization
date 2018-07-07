@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model.gamedata.gametools;
 
-import it.polimi.ingsw.model.gamedata.Colour;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 
 /**
  * This class is used as container for all the cards in the game and to read and to deal cards at the beginning of the match
@@ -47,6 +46,10 @@ public class CardContainer {
     private static final String CMETHODS = "CMETHODS";
     private static final String PMETHODS = "PMETHODS";
     private static final String DIFFICULTY = "DIFFICULTY";
+
+    static final String XMLERROR = "Error while reading the xml configuration files";
+
+
 
     /**
      * The constructor fills the lists of the class
@@ -88,7 +91,11 @@ public class CardContainer {
 
         for (int k = 0; k < dimension; k++) {
             randomNum = rand.nextInt(cont - k);
-            tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            try {
+                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            } catch (ParserConfigurationException | IOException | SAXException e) {
+                System.err.print(XMLERROR);
+            }
             pattern.remove(randomNum);
         }
         return tmp;
@@ -114,7 +121,11 @@ public class CardContainer {
         Random rand = new Random();
         for (int k = 0; k < numPlayers; k++) {
             randomNum = rand.nextInt(cont - k);
-            tmp.add(this.readObjective("src/main/resources/private_cards_formalization.xml", objectiveprivate.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            try {
+                tmp.add(this.readObjective("src/main/resources/private_cards_formalization.xml", objectiveprivate.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            } catch (ParserConfigurationException | SAXException | IOException e) {
+                System.err.print(XMLERROR);
+            }
             objectiveprivate.remove(randomNum);
         }
         return tmp;
@@ -136,7 +147,11 @@ public class CardContainer {
         Random rand = new Random();
         for (int k = 0; k < dimension; k++) {
             randomNum = rand.nextInt(cont - k);
-            tmp.add(this.readObjective("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            try {
+                tmp.add(this.readObjective("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            } catch (ParserConfigurationException | IOException | SAXException e) {
+                System.err.print(XMLERROR);
+            }
             objectivepublic.remove(randomNum);
         }
         return tmp;
@@ -158,7 +173,11 @@ public class CardContainer {
         Random rand = new Random();
         for (int k = 0; k < dimension; k++) {
             randomNum = rand.nextInt(cont - k);
-            tmp.add(this.readTools("src/main/resources/tool_cards_formalization.xml", tools.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            try {
+                tmp.add(this.readTools("src/main/resources/tool_cards_formalization.xml", tools.get(randomNum))); //Supposing that z is the selected card from this "turn"
+            } catch (ParserConfigurationException | IOException | SAXException e) {
+                System.err.print(XMLERROR);
+            }
             tools.remove(randomNum);
         }
         return tmp;
@@ -171,25 +190,16 @@ public class CardContainer {
      * @param cont The number of the card I want to read
      * @return The Objective card requested
      */
-    private ObjectiveCard readObjective(String namefile, int cont) {
+    private ObjectiveCard readObjective(String namefile, int cont) throws ParserConfigurationException, IOException, SAXException {
         ObjectiveCard myobj = new ObjectiveCard();
         int result;
         String path = new File(namefile).getAbsolutePath();
         File file = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = null;
 
-        try {
-            documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        Document document = null;
-        try {
-            document = documentBuilder.parse(file);
-        } catch (IOException | org.xml.sax.SAXException e) {
-            e.printStackTrace();
-        }
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+
+        Document document = documentBuilder.parse(file);
 
         myobj.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());
         myobj.setDescription(document.getElementsByTagName(DESCRIPTION).item(cont).getTextContent());
@@ -221,7 +231,7 @@ public class CardContainer {
      * @param rules The ArrayList to fill with the rules of the public card
      * @param cont The number of the card that has to be read
      */
-    private void readRulesPublic(Document document, ArrayList<String> rules, int cont){
+    private void readRulesPublic(Document document, List<String> rules, int cont){
         rules.add(document.getElementsByTagName(WHERE).item(cont).getTextContent());
         rules.add(document.getElementsByTagName(PROPE).item(cont).getTextContent());
         rules.add(document.getElementsByTagName(VALUES).item(cont).getTextContent());
@@ -234,25 +244,14 @@ public class CardContainer {
      * @param cont The number of the card I want to read
      * @return The WindowPatternCard requested
      */
-    private WindowPatternCard readPatterns(String namefile, int cont){
+    private WindowPatternCard readPatterns(String namefile, int cont) throws ParserConfigurationException, IOException, SAXException {
         WindowPatternCard mypattern = new WindowPatternCard();
         String all;
         String path = new File(namefile).getAbsolutePath();
         File file = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = null;
-
-        try {
-            documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        Document document = null;
-        try {
-            document = documentBuilder.parse(file);
-        } catch (IOException | org.xml.sax.SAXException e) {
-            e.printStackTrace();
-        }
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        Document document = documentBuilder.parse(file);
 
         mypattern.setNum(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()));
         mypattern.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());
@@ -272,26 +271,16 @@ public class CardContainer {
      * @param cont The number of the card I want to read
      * @return The ToolCard requested
      */
-    ToolCard readTools(String namefile, int cont){
+    ToolCard readTools(String namefile, int cont) throws ParserConfigurationException, IOException, SAXException {
         ToolCard mytool = new ToolCard();
         String all;
-        Colour tmpc = null;
         String path = new File(namefile).getAbsolutePath();
         File file = new File(path);
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = null;
 
-        try {
-            documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        Document document = null;
-        try {
-            document = documentBuilder.parse(file);
-        } catch (IOException | org.xml.sax.SAXException e) {
-            e.printStackTrace();
-        }
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+
+        Document document = documentBuilder.parse(file);
 
         mytool.setID(Integer.valueOf(document.getElementsByTagName(NUMBER).item(cont).getTextContent()));
         mytool.setName(document.getElementsByTagName(NAME).item(cont).getTextContent());

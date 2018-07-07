@@ -17,6 +17,7 @@ public class ObjectiveCard extends Card {
      * The classic constructor
      */
     public ObjectiveCard(){
+        super();
         this.points = 0;
         this.type = "";
         this.rules = new Rules();

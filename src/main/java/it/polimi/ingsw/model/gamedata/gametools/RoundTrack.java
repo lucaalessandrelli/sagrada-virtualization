@@ -80,7 +80,7 @@ public class RoundTrack {
     }
 
     /**
-     * Reset the selected value
+     * Reset the (selected) value for every dice in roundtrack
      */
     public void resetSelection() {
         diceOnRoundTrack.forEach(dice -> dice.forEach(Dice::deSelect));

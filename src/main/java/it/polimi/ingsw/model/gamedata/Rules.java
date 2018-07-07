@@ -9,21 +9,37 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+/**
+ * The class used to represent the rules to check tue calculation of the points wiht the Objective cards
+ */
 public class Rules {
 
     private ArrayList<String> myrules;
     private String direction;
 
+    /**
+     * Classic constructor
+     */
     public Rules(){
         myrules = new ArrayList<>();
         direction = "";
     }
 
 
-    public ArrayList<String> getRules(){
+    /**
+     * Getter of the rules
+     * @return The rules
+     */
+    public List<String> getRules(){
         return this.myrules;
     }
 
+    /**
+     * Method used to distinguish the method to call depending on the rule
+     * @param rule The rule to check
+     * @param window The window on which the rules need to be checked
+     * @return The points obtained
+     */
     public int verify(String rule, WindowPatternCard window){
         int result = 0;
         switch (rule){
@@ -69,6 +85,13 @@ public class Rules {
         return result;
     }
 
+    /**
+     * The method used to check the objective cards 5,6,7
+     * @param window The Windowpattern card to check
+     * @param first The number of the first of the two dices
+     * @param second The number of the second of the two dices
+     * @return
+     */
     private int couple(WindowPatternCard window, int first, int second){
         int countfirst = 0;
         int countsecond = 0;
@@ -93,6 +116,11 @@ public class Rules {
             return countsecond;
     }
 
+    /**
+     * Method used to check the rule of the objective card 8
+     * @param window The WindowPattern card to check
+     * @return The points earned with this rule
+     */
     private int five(WindowPatternCard window){
         int[] arrayofvalues = new int[6];
         int min = 20;
@@ -116,16 +144,19 @@ public class Rules {
             return min;
     }
 
+    /**
+     * Method used to check the rule of the objective card 10
+     * @param window The WindowPattern card to check
+     * @return The points earned with this rule
+     */
     private int varietycolours(WindowPatternCard window){
         int[] arrayofvalues = new int[5];
         int min = 20;
-        String color;
         List<List<Cell>> w = window.getMatr();
         for(List<Cell> cells: w){
             for(Cell cell: cells){
                 if(cell.isOccupied()) {
-                    color = cell.getDice().getColour().toString();
-                    switch (color) {
+                    switch (cell.getDice().getColour().toString()) {
                         case "Y":
                             arrayofvalues[0]++;
                             break;
@@ -153,11 +184,15 @@ public class Rules {
                 min = h;
         }
         if(min == 20)
-            return 0;
-        else
-            return min;
+            min = 0;
+        return min;
     }
 
+    /**
+     * Method used to check the rule of the private objective cards
+     * @param window The WindowPattern card to check
+     * @return The points earned with this rule
+     */
     private int countcolor (WindowPatternCard window, Colour c){
         List<List<Cell>> w = window.getMatr();
         String color = c.toString();
@@ -171,72 +206,120 @@ public class Rules {
         return cont;
     }
 
+    /**
+     * Method used to check the rule of the objective card 1,2
+     * @param window The WindowPattern card to check
+     * @param direction The direction to check(horizontal or vertical)
+     * @param type The type to check (colour or number)
+     * @return The points earned with this rule
+     */
     private int near(WindowPatternCard window, String direction, String type){
-        List<List<Cell>> w = window.getMatr();
         int result = 0;
-        int j;
-        int i;
-        int x;
-        int y;
-        Pos pos = new Pos(0,0);
-        List<Character> colours = new ArrayList<>();
-        List<Integer> numbers = new ArrayList<>();
         boolean column = direction.equals("COLUMN");
-        x = w.size();
-        y = w.get(0).size();
         if (type.equals("NOVALUE")) {
-            if (!column) {
-                for (i = 0; i < x; i++) {
-                    if (allDifferent(w.get(i), false, 5))
-                        result++;
-                }
-            } else {
-                for (i = 0; i < y; i++) {
-                    pos.setY(i);
-                    for (j = 0; j < x; j++) {
-                        pos.setX(j);
-                        if(window.getCell(pos).isOccupied() && !numbers.contains(window.getDice(pos).getNumber())){
-                            numbers.add((window.getDice(pos).getNumber()));
-                        }
-                    }
-                    if(numbers.size()==4)
-                        result++;
-                    numbers.clear();
-                }
-            }
+            result = this.columnOrRow(column,false,window);
         }
         else if (type.equals("NOCOLOR")) {
-                if (!column) {
-                    for (i = 0; i < x; i++) {
-                        if (allDifferent(w.get(i), true, 5)) {
-                            result++;
-                        }
-                    }
-                } else {
-                    for (i = 0; i < y; i++) {
-                        pos.setY(i);
-                        for (j = 0; j < x; j++) {
-                            pos.setX(j);
-                            if(window.getCell(pos).isOccupied() && !colours.contains(window.getDice(pos).getColour().toString().charAt(0))){
-                                colours.add(window.getDice(pos).getColour().toString().charAt(0));
-                            }
-                        }
-                        if(colours.size()==4)
-                            result++;
-                        colours.clear();
-                    }
-                }
+                result = this.columnOrRow(column,true,window);
             }
 
         return result;
     }
 
+    /**
+     * Call the right method depending if you wanto to check on the row or thr column and on the colour or the number
+     * @param column If the check goes on the column
+     * @param colour If the check is for colour or for number
+     * @param window The WindowPattern card to check
+     * @return The result of the check
+     */
+    private int columnOrRow(boolean column, boolean colour, WindowPatternCard window){
+        int i;
+        int x = window.getMatr().size();
+        int result = 0;
+        if (!column) {
+            for (i = 0; i < x; i++) {
+                if (allDifferent(window.getMatr().get(i), colour, 5))
+                    result++;
+            }
+        } else if(!colour) {
+            result = this.differentColumnNumber(window);
+        } else {
+            result = this.differentColumnColor(window);
+        }
+        return result;
+    }
+
+    /**
+     * Method called to check on the column on the number
+     * @param window The WindowPattern card to check
+     * @return The result of the check
+     */
+    private int differentColumnNumber(WindowPatternCard window){
+        int result = 0;
+        Pos pos = new Pos(0,0);
+        List<Character> colours = new ArrayList<>();
+        List<List<Cell>> w = window.getMatr();
+        int i;
+        int j;
+        int x = w.size();
+        int y = w.get(0).size();
+
+        for (i = 0; i < y; i++) {
+            pos.setY(i);
+            for (j = 0; j < x; j++) {
+                pos.setX(j);
+                if(window.getCell(pos).isOccupied() && !colours.contains(window.getDice(pos).getColour().toString().charAt(0))){
+                    colours.add(window.getDice(pos).getColour().toString().charAt(0));
+                }
+            }
+            if(colours.size()==4)
+                result++;
+            colours.clear();
+        }
+        return result;
+    }
+
+    /**
+     * Method called to check on the column on the number
+     * @param window The WindowPattern card to check
+     * @return The result of the check
+     */
+    private int differentColumnColor(WindowPatternCard window){
+        int result = 0;
+        Pos pos = new Pos(0,0);
+        List<Integer> numbers = new ArrayList<>();
+        List<List<Cell>> w = window.getMatr();
+        int i;
+        int j;
+        int x = w.size();
+        int y = w.get(0).size();
+
+        for (i = 0; i < y; i++) {
+            pos.setY(i);
+            for (j = 0; j < x; j++) {
+                pos.setX(j);
+                if(window.getCell(pos).isOccupied() && !numbers.contains(window.getDice(pos).getNumber())){
+                    numbers.add((window.getDice(pos).getNumber()));
+                }
+            }
+            if(numbers.size()==4)
+                result++;
+            numbers.clear();
+        }
+        return result;
+    }
+
+    /**
+     * Method used to check the rule of the objective card 9
+     * @param window The WindowPattern card to check
+     * @return The points earned with this rule
+     */
     private int diagonal(WindowPatternCard window){
         List<List<Cell>> w = window.getMatr();
         boolean[][] verified = new boolean[4][5];
         int result = 0;
         int j;
-        int adder;
         int x = w.size()-1;
         int y = w.get(0).size()-1;
         for(int i = 0; i < 4; i++){
@@ -246,34 +329,65 @@ public class Rules {
         }
         for(int i = 0; i < x; i++){
             for(j = 0; j < y; j++){
-                if(j != 4 && verifySameColour(w,i,j,i+1,j+1)){
-                    if(verified[i][j] || verified[i+1][j+1])
-                        adder = 1;
-                    else
-                        adder = 2;
-                    result = result + adder;
-                    verified[i][j] = true;
-                    verified[i+1][j+1] = true;
-                }
-                if(j != 0 && verifySameColour(w,i,j,i+1,j-1)){
-                    if(verified[i][j] || verified[i+1][j-1])
-                        adder = 1;
-                    else
-                        adder = 2;
-                    result = result + adder;
-                    verified[i][j] = true;
-                    verified[i+1][j-1] = true;
-                }
+                result = result + this.toAdd(i,j,w,verified);
             }
         }
         return result;
     }
 
+
+    /**
+     * @param i The row
+     * @param j The column
+     * @param w The windowpattern card
+     * @param verified The matrix that indicates if a cell has been already verified
+     * @return
+     */
+    private int toAdd(int i, int j, List<List<Cell>> w, boolean[][] verified){
+        int adder;
+        int result = 0;
+        if(j != 4 && verifySameColour(w,i,j,i+1,j+1)){
+            if(verified[i][j] || verified[i+1][j+1])
+                adder = 1;
+            else
+                adder = 2;
+            result = result + adder;
+            verified[i][j] = true;
+            verified[i+1][j+1] = true;
+        }
+        if(j != 0 && verifySameColour(w,i,j,i+1,j-1)){
+            if(verified[i][j] || verified[i+1][j-1])
+                adder = 1;
+            else
+                adder = 2;
+            result = result + adder;
+            verified[i][j] = true;
+            verified[i+1][j-1] = true;
+        }
+        return result;
+    }
+
+    /**
+     * Method used to check if the two cells taken from the 4 indices are occupied and have the same colour
+     * @param matrix The WindowPattern card
+     * @param i1 The first index
+     * @param i2 The second index
+     * @param i3 The third index
+     * @param i4 The fourth index
+     * @return If the two cells are occupied and have the same colour
+     */
     private boolean verifySameColour(List<List<Cell>> matrix, int i1, int i2, int i3, int i4){
         return (matrix.get(i1).get(i2).isOccupied() && matrix.get(i3).get(i4).isOccupied() &&
                 matrix.get(i1).get(i2).getDice().getColour().areEquals(matrix.get(i3).get(i4).getDice().getColour()));
     }
 
+    /**
+     * The methods that checks if the row has dices with all different colours or numbers
+     * @param cells The List representing the rows
+     * @param colour If you need to check the colour or the numbers
+     * @param value How many dices should found
+     * @return If they're different or not
+     */
     private boolean allDifferent(List<Cell> cells,boolean colour,int value){
         if(colour)
             return(cells.parallelStream().filter(Cell::isOccupied).map(Cell::getDice).map(Dice::getColour).distinct().collect(Collectors.toList()).size() == value);
