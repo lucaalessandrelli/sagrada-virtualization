@@ -182,7 +182,7 @@ public class ToolCard12Test {
         assertFalse(table.getRoundTrack().getDiceOnRoundtrack(1).isEmpty());
 
 
-        Turn turn = new Turn(p1, round, 4, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();
@@ -460,7 +460,7 @@ public class ToolCard12Test {
         assertFalse(table.getRoundTrack().getDiceOnRoundtrack(1).isEmpty());
 
 
-        Turn turn = new Turn(p1, round, 4, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();
@@ -731,7 +731,7 @@ public class ToolCard12Test {
         assertFalse(table.getRoundTrack().getDiceOnRoundtrack(1).isEmpty());
 
 
-        Turn turn = new Turn(p1, round, 4, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();
@@ -943,7 +943,7 @@ public class ToolCard12Test {
         tmp.setNumber(p1.getDraftPool().chooseDice(6).getNumber());
 
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();

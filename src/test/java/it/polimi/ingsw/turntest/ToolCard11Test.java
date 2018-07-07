@@ -124,7 +124,7 @@ public class ToolCard11Test {
         p1.getDraftPool().chooseDice(6).setNumber(3);
 
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();

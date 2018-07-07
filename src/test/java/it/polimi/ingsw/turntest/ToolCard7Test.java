@@ -120,7 +120,7 @@ public class ToolCard7Test {
             tmp.add(table.getDraftPool().getDraftPool().get(i));
         }
 
-        Turn turn = new Turn(p1, round, 1, false, table);
+        Turn turn = new Turn(p1, round,  false, table);
 
 
         turn.startTurn();
@@ -246,7 +246,7 @@ public class ToolCard7Test {
             tmp.add(table.getDraftPool().getDraftPool().get(i));
         }
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();
@@ -353,7 +353,7 @@ public class ToolCard7Test {
             tmp.add(table.getDraftPool().getDraftPool().get(i));
         }
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();

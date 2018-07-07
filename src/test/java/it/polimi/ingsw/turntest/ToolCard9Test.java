@@ -125,7 +125,7 @@ public class ToolCard9Test {
         p1.getWindowPatternCard().placeDice(d3,2,4);
 
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();
@@ -282,7 +282,7 @@ public class ToolCard9Test {
         p1.getWindowPatternCard().addRestr('Y',3,1);
 
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();
@@ -439,7 +439,7 @@ public class ToolCard9Test {
         p1.getWindowPatternCard().addRestr('B',3,1);
 
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();
@@ -586,7 +586,7 @@ public class ToolCard9Test {
         p1.getWindowPatternCard().addRestr('3',3,1);
 
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();

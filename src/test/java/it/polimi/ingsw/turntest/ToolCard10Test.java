@@ -122,7 +122,7 @@ public class ToolCard10Test {
         tmp.setNumber(p1.getDraftPool().chooseDice(6).getNumber());
 
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
 
         turn.startTurn();

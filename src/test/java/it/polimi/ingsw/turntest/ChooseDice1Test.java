@@ -103,7 +103,7 @@ public class ChooseDice1Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn tester = new Turn(p1, round, 1, true, table);
+        Turn tester = new Turn(p1, round,  true, table);
 
         tester.startTurn();
 
@@ -219,7 +219,7 @@ public class ChooseDice1Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn tester = new Turn(p1, round, 1, true, table);
+        Turn tester = new Turn(p1, round,  true, table);
 
         tester.startTurn();
 
@@ -331,7 +331,7 @@ public class ChooseDice1Test {
 
         Round round = new Round(players, 1, table,match, timerMove);
 
-        Turn tester = new Turn(p1, round, 1, false, table);
+        Turn tester = new Turn(p1, round,  false, table);
 
         StartTurn startTurn = new StartTurn(tester);
         tester.setState(startTurn);

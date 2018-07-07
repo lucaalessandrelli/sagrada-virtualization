@@ -111,7 +111,7 @@ public class ToolCard4Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         Dice d1 = new Dice(Colour.GREEN);
         d1.setNumber(1);
@@ -321,7 +321,7 @@ public class ToolCard4Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         Dice d1 = new Dice(Colour.GREEN);
         d1.setNumber(1);
@@ -486,7 +486,7 @@ public class ToolCard4Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round, true, table);
 
         Dice d1 = new Dice(Colour.GREEN);
         d1.setNumber(1);
@@ -659,7 +659,7 @@ public class ToolCard4Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         Dice d1 = new Dice(Colour.GREEN);
         d1.setNumber(1);
@@ -840,7 +840,7 @@ public class ToolCard4Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         Dice d1 = new Dice(Colour.GREEN);
         d1.setNumber(1);

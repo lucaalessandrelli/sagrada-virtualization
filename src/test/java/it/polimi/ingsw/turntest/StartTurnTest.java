@@ -112,7 +112,7 @@ public class StartTurnTest {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn tester = new Turn(p1, round, 1, true, table);
+        Turn tester = new Turn(p1, round,  true, table);
 
         StartTurn startTurn = new StartTurn(tester);
         tester.setState(startTurn);

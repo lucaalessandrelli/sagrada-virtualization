@@ -110,7 +110,7 @@ public class TurnTest {
         p1.setPublicObjects(publicObjects);
 
         InspectorContextTool inspectorContextTool = new InspectorContextTool(p1.getWindowPatternCard(),table.getDraftPool(),table.getRoundTrack());
-        Turn tester = new Turn(p1,round,1,true,table);
+        Turn tester = new Turn(p1,round,true,table);
 
         tester.startTurn();
 

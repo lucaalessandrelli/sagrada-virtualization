@@ -113,7 +113,7 @@ public class ToolCard8Test {
         di.setNumber(1);
         p1.getWindowPatternCard().placeDice(di,1,0);
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         turn.startTurn();
 

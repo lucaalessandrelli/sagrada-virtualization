@@ -118,7 +118,7 @@ public class ToolCard6Test {
         Dice d = new Dice(Colour.RED);
         p1.getWindowPatternCard().placeDice(d,2,0);
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         Dice chosenone = p1.getDraftPool().chooseDice(3);
         Dice tmp = new Dice(chosenone.getColour());
@@ -261,7 +261,7 @@ public class ToolCard6Test {
 
         p1.getRoundTrack().setDiceOnRoundTrack(1, p1.getDraftPool().getDraftPool());
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         Dice chosenone = p1.getDraftPool().chooseDice(3);
         Dice tmp = new Dice(chosenone.getColour());

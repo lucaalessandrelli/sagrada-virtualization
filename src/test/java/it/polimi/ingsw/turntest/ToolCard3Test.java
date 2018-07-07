@@ -112,7 +112,7 @@ public class ToolCard3Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1,round,1,true,table);
+        Turn turn = new Turn(p1,round,true,table);
 
         Dice d1 = new Dice(Colour.GREEN);
         Dice d2 = new Dice(Colour.RED);
@@ -286,7 +286,7 @@ public class ToolCard3Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1,round,1,true,table);
+        Turn turn = new Turn(p1,round,true,table);
 
         Dice d1 = new Dice(Colour.GREEN);
         Dice d2 = new Dice(Colour.RED);
@@ -458,7 +458,7 @@ public class ToolCard3Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1,round,1,true,table);
+        Turn turn = new Turn(p1,round,true,table);
 
         Dice d1 = new Dice(Colour.GREEN);
         Dice d2 = new Dice(Colour.RED);

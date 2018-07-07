@@ -113,7 +113,7 @@ public class ToolCard5Test {
 
         table.getDraftPool().addNewDices(table.getDiceFromBag());
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         Dice d1 = new Dice(Colour.GREEN);
         d1.setNumber(1);
@@ -316,7 +316,7 @@ public class ToolCard5Test {
 
         table.getRoundTrack().setDiceOnRoundTrack(1, table.getDraftPool().getDraftPool());
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         TurnState turnstate = new ChooseDice1(turn,d4,new Pos(1,1));
 
@@ -435,7 +435,7 @@ public class ToolCard5Test {
 
         table.getRoundTrack().setDiceOnRoundTrack(1, table.getDraftPool().getDraftPool());
 
-        Turn turn = new Turn(p1, round, 2, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         TurnState turnstate = new ChooseDice1(turn,d4,new Pos(1,1));
 
@@ -554,7 +554,7 @@ public class ToolCard5Test {
         p1.setPublicObjects(publicObjects);
 
 
-        Turn turn = new Turn(p1, round, 1, true, table);
+        Turn turn = new Turn(p1, round,  true, table);
 
         turn.startTurn();
 

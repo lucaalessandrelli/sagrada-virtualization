@@ -110,7 +110,7 @@ public class PositionDice1Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn tester = new Turn(p1,round,1,true,table);
+        Turn tester = new Turn(p1,round,true,table);
 
         StartTurn startTurn = new StartTurn(tester);
 
@@ -247,7 +247,7 @@ public class PositionDice1Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn tester = new Turn(p1, round, 1, true, table);
+        Turn tester = new Turn(p1, round,  true, table);
 
         StartTurn startTurn = new StartTurn(tester);
 
@@ -356,7 +356,7 @@ public class PositionDice1Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn tester = new Turn(p1, round, 4, true, table);
+        Turn tester = new Turn(p1, round, true, table);
 
         StartTurn startTurn = new StartTurn(tester);
 

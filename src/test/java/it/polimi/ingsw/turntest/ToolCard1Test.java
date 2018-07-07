@@ -113,7 +113,7 @@ public class ToolCard1Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1,round,1,true,table);
+        Turn turn = new Turn(p1,round,true,table);
 
         turn.startTurn();
 
@@ -210,7 +210,7 @@ public class ToolCard1Test {
 
         p1.setPublicObjects(publicObjects);
 
-        Turn turn = new Turn(p1,round,1,true,table);
+        Turn turn = new Turn(p1,round,true,table);
 
         turn.startTurn();
 
