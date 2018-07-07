@@ -41,7 +41,6 @@ public class ClientBox {
      */
     void updatePlayers(String finalPlayersIn)  {
         try {
-
             finalPlayersIn = CONNECTED + finalPlayersIn;
             client.updatePlayers(finalPlayersIn);
         }catch (RemoteException e){

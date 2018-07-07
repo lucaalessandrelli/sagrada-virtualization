@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.virtualview;
 
 import it.polimi.ingsw.controller.ClientBox;
-import it.polimi.ingsw.controller.VirtualViewParser;
 import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 

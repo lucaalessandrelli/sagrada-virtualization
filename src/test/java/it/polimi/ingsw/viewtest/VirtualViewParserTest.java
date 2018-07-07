@@ -7,18 +7,14 @@ import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.CardContainer;
 import it.polimi.ingsw.model.gamedata.gametools.Dice;
 import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
-import it.polimi.ingsw.controller.VirtualViewParser;
+import it.polimi.ingsw.view.virtualview.VirtualViewParser;
 import it.polimi.ingsw.view.cli.Printer;
-import org.fusesource.jansi.Ansi;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.System.out;
-import static java.lang.System.runFinalization;
 import static org.fusesource.jansi.Ansi.ansi;
 import static org.junit.jupiter.api.Assertions.*;
 

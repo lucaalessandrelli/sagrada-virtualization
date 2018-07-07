@@ -214,6 +214,11 @@ public class Manager {
         }
     }
 
+    /**
+     * Check if the string has forbidden characters
+     * @param name string to verify
+     * @return true if it is good
+     */
     public boolean checkFormatName(String name) {
         return analyzer.verifyName(name);
     }
