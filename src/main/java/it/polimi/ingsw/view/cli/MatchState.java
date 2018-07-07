@@ -38,10 +38,12 @@ public class MatchState implements SceneInterface {
 
     @Override
     public void updateBoard(String setup) {
-        this.setup=setup;
-        analyze();
-        if(turnState!=null){
-            printUpdate();
+        if (!this.setup.equals(setup)) {
+            this.setup = setup;
+            analyze();
+            if (turnState != null) {
+                printUpdate();
+            }
         }
     }
 

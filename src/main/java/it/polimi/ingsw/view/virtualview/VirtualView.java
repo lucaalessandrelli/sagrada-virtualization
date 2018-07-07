@@ -26,7 +26,6 @@ public class VirtualView extends VirtualViewObserver {
         try {
             clientBox.update(updateMove);
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
 
 
@@ -39,7 +38,6 @@ public class VirtualView extends VirtualViewObserver {
             clientBox.updateTurn(TIMER+String.valueOf(timeSleep));
             clientBox.updateTurn(TURN+"E' il turno di : "+whoIsTurn);
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
@@ -48,7 +46,6 @@ public class VirtualView extends VirtualViewObserver {
         try {
             clientBox.wrongMove(s);
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
@@ -60,7 +57,6 @@ public class VirtualView extends VirtualViewObserver {
         try {
             clientBox.chooseWindow(wind);
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
@@ -69,7 +65,6 @@ public class VirtualView extends VirtualViewObserver {
         try {
             clientBox.setTimer(timerWindows);
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
@@ -78,7 +73,6 @@ public class VirtualView extends VirtualViewObserver {
         try {
             clientBox.update(STATEMOVE+state);
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
@@ -87,7 +81,6 @@ public class VirtualView extends VirtualViewObserver {
         try {
             clientBox.update(s);
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 
@@ -97,7 +90,6 @@ public class VirtualView extends VirtualViewObserver {
             clientBox.updateTurn(TIMER + "0");
             clientBox.updateTurn(TURN + "Aspetta un attimo, ti sto riconnettendo...");
         }catch (RemoteException e){
-            e.printStackTrace();
         }
     }
 

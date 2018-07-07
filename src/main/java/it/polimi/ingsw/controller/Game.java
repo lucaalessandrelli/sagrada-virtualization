@@ -11,13 +11,13 @@ public class Game {
     private ClientsContainer clients;
     private Match match;
     private int id;
-    private boolean ended;
+    private boolean started;
 
     Game(ClientsContainer c, Match m, int i){
         clients=c;
         match=m;
         id=i;
-        ended=false;
+        started=false;
     }
 
     /**
@@ -36,14 +36,14 @@ public class Game {
      */
     void notifyGame(){
         clients.notifyIdMatch(id);
-        clients.setMatchStarted();
-
     }
 
     /**
      * Starts the match Thread
      */
     public void start() {
+        started=true;
+        clients.setMatchStarted();
         match.start();
     }
 
@@ -78,7 +78,9 @@ public class Game {
      * @param b true if active
      */
     void setPlayerActivity(String name, boolean b) {
-        match.setPlayerActivity(name,b);
+        if(started) {
+            match.setPlayerActivity(name, b);
+        }
     }
 
 
@@ -92,12 +94,12 @@ public class Game {
     }
 
     void setEnd() {
-        ended=true;
+        started=false;
         clients.setEnd();
     }
 
     boolean endedMatch() {
-        return ended;
+        return !started;
     }
 
     int sizeClient() {

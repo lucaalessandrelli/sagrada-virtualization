@@ -64,7 +64,6 @@ public class Round {
                     throw new NotEnoughPlayersException();
                 }
                 p.resetMove();
-                table.resetSelection();
             }
         }
         setLastDice();

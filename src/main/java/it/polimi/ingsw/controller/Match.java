@@ -141,7 +141,7 @@ public class Match extends Thread {
         for (Player p : playerList){
             if(p.getUsername().equals(name)){
                 p.setActivity(b);
-                if(p.getUsername().equals(currRound.getCurrTurn())&&!b){
+                if(currRound!=null && p.getUsername().equals(currRound.getCurrTurn())&&!b){
                     currRound.interrupt();
                 }
             }

@@ -15,17 +15,19 @@ public class WaitingRoomState implements SceneInterface {
     private String tmpTimer;
     private List<String> players;
     private ScheduledExecutorService exec;
+    private boolean started;
 
     WaitingRoomState(Printer printer, CliHandler cliHandler, String timer) {
         this.printer = printer;
         this.cliHandler = cliHandler;
         this.tmpTimer = timer;
+        this.started=false;
     }
 
     @Override
     public void handleTimer(String timer) {
-        cliHandler.setState(new ChooseWindowState(printer, cliHandler, timer, players));
         exec.shutdown();
+        cliHandler.setState(new ChooseWindowState(printer, cliHandler, timer, players));
     }
 
     @Override
@@ -33,22 +35,23 @@ public class WaitingRoomState implements SceneInterface {
         players = Arrays.asList(playerlist.split(" "));
         printer.printWaitingRoom(tmpTimer, players, MESSAGE);
         exec = Executors.newSingleThreadScheduledExecutor();
-        if (players.size() > 1 && !exec.isShutdown()) {
+        if (players.size() > 1 && !started) {
             startTimer();
+            started=true;
         }
         if (players.size() == 1) {
             exec.shutdown();
+            started=false;
             printer.printWaitingRoom(tmpTimer, players, MESSAGE);
         }
     }
 
     private void startTimer() {
         exec.scheduleWithFixedDelay(() -> {
-            if (Integer.parseInt(tmpTimer) <= 0) {
+            if (Integer.parseInt(tmpTimer) == 1) {
                 exec.shutdown();
                 return;
             }
-            printer.printWaitingRoom(tmpTimer, players, MESSAGE);
             int i = Integer.parseInt(tmpTimer) - 1;
             tmpTimer = String.valueOf(i);
         }, 0, 1, TimeUnit.SECONDS);

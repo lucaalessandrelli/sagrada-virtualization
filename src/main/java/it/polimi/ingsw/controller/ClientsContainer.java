@@ -57,7 +57,6 @@ public class ClientsContainer {
             cli.setTimer(tempTime);
             clients.add(cli);
         } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
     synchronized int sizeContainer(){
@@ -126,7 +125,6 @@ public class ClientsContainer {
                 try {
                     c.updatePlayers(playersIn);
                 } catch (RemoteException e) {
-                    e.printStackTrace();
                 }
             }
     }
@@ -144,7 +142,6 @@ public class ClientsContainer {
             try {
                 c.setNumMatch(numOfMatch);
             } catch (RemoteException e) {
-                e.printStackTrace();
             }
         }
 

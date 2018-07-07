@@ -332,7 +332,7 @@ public class Printer {
     void printWaitingRoom(String timer, List<String> players, String output){
         out.print(ansi().saveCursorPosition());
 
-        out.print(ansi().eraseScreen(Erase.ALL));
+        //out.print(ansi().eraseScreen(Erase.ALL));
 
         this.printtimer(timer,output);
 
