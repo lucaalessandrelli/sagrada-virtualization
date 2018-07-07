@@ -42,7 +42,6 @@ public class RmiConnection implements ConnectionHandler {
                     client.setConnected(true);
                 } else {
                     client.setConnected(false);
-                    client.setServiceMessage("alert Already connected");
 
                 }
             } catch (Exception e) {

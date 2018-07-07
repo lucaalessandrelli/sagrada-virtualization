@@ -10,6 +10,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.System.*;
+
 /**
  * This class is the main controller of game, it has references of all games, waiting room and client connected. Every
  * user input passes throw it.
@@ -146,7 +148,7 @@ public class Manager {
             clientB.setNumMatch(num);
             games.get(num).reconnect(clientB);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            out.println("Cannot reconnect player");
         }
     }
 
@@ -210,5 +212,9 @@ public class Manager {
                 lobby.addPlayer(pair.getValue().getClientBox(name));
             }
         }
+    }
+
+    public boolean checkFormatName(String name) {
+        return analyzer.verifyName(name);
     }
 }

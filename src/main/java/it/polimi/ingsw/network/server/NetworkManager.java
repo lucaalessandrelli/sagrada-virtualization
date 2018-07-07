@@ -100,7 +100,6 @@ public class NetworkManager {
                     if (server.login(nameP, this)) {
                         connected = true;
                     } else {
-                        pr.println(ALERT+"Already connected");
                         message = in.nextLine();
                     }
                 }

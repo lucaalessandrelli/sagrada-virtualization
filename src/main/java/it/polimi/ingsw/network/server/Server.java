@@ -17,22 +17,28 @@ public class Server implements ServerInterface {
     @Override
     public synchronized boolean login(String name,ClientInterface client){
         try {
-            out.println(name + " is trying to connect " + client.getTypeConnection());
-            if (manager.checkIfPlayerIsLogged(name)) {
-                out.println("Player " + name + " is already logged");
-                return false;
-            } else {
-                if (manager.checkIfPlayerIsPlaying(name)) {
-                    client.updateMessage("Connected, Welcome!");
-                    out.println("Reconnecting "+ name + " to the match");
-                    manager.reconnectPlayer(client);
-                    return true;
+            if(manager.checkFormatName(name)) {
+                out.println(name + " is trying to connect " + client.getTypeConnection());
+                if (manager.checkIfPlayerIsLogged(name)) {
+                    client.updateMessage("alert Already connected");
+                    out.println("Player " + name + " is already logged");
+                    return false;
                 } else {
-                    client.updateMessage("Connected, Welcome!");
-                    manager.addPlayerInQueue(client);
-                    out.println("Player " + name + " is connected");
-                    return true;
+                    if (manager.checkIfPlayerIsPlaying(name)) {
+                        client.updateMessage("Connected, Welcome!");
+                        out.println("Reconnecting " + name + " to the match");
+                        manager.reconnectPlayer(client);
+                        return true;
+                    } else {
+                        client.updateMessage("Connected, Welcome!");
+                        manager.addPlayerInQueue(client);
+                        out.println("Player " + name + " is connected");
+                        return true;
+                    }
                 }
+            }else{
+                client.updateMessage("alert Not a valid name");
+                return false;
             }
         } catch (RemoteException e) {
             return false;

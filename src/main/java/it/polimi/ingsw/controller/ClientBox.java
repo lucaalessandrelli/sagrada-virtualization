@@ -4,6 +4,8 @@ import it.polimi.ingsw.network.ClientInterface;
 
 import java.rmi.RemoteException;
 
+import static java.lang.System.out;
+
 
 /**
  * This class is used to make invisible, from server side, the problems of the communication. The idea is to have an object
@@ -17,6 +19,7 @@ public class ClientBox {
     private static final String MATCH="match ";
     private static final String TIME="timer ";
     private static final String ALERT="alert ";
+    private static final String CONNECTIONALERT = "Cannot reach the client";
 
 
     ClientBox(ClientInterface c, String n){
@@ -35,68 +38,90 @@ public class ClientBox {
     /**
      * Send the list of connected players.
      * @param finalPlayersIn players' name.
-     * @throws RemoteException
      */
-    void updatePlayers(String finalPlayersIn) throws RemoteException {
-        finalPlayersIn = CONNECTED + finalPlayersIn;
-        client.updatePlayers(finalPlayersIn);
+    void updatePlayers(String finalPlayersIn)  {
+        try {
+
+            finalPlayersIn = CONNECTED + finalPlayersIn;
+            client.updatePlayers(finalPlayersIn);
+        }catch (RemoteException e){
+            out.println(CONNECTIONALERT);
+
+        }
     }
 
     /**
      * Sends the number of the match where the player will play.
-     * @param numOfMatch
-     * @throws RemoteException
+     * @param numOfMatch match id
      */
-    public void setNumMatch(int numOfMatch) throws RemoteException {
-        String num = String.valueOf(numOfMatch);
-        client.setNumMatch(MATCH+num);
+    public void setNumMatch(int numOfMatch) {
+        try {
+            String num = String.valueOf(numOfMatch);
+            client.setNumMatch(MATCH + num);
+        }catch (RemoteException e){
+
+        }
     }
 
     /**
      * Send the name of the player who has to move.
      * @param s message
-     * @throws RemoteException
      */
-    public void updateTurn(String s) throws RemoteException {
-        client.updateTurn(s);
+    public void updateTurn(String s) {
+        try {
+            client.updateTurn(s);
+        } catch (RemoteException e) {
+        }
     }
 
     /**
      * Send an update message
      * @param updateMove message
-     * @throws RemoteException
      */
-    public void update(String updateMove) throws RemoteException {
-        client.update(updateMove);
+    public void update(String updateMove) {
+        try {
+            client.update(updateMove);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Send the timer.
      * @param tempTime timer.
-     * @throws RemoteException
      */
-    public void setTimer(long tempTime) throws RemoteException {
-        tempTime = tempTime/1000;
-        String timer = String.valueOf(tempTime);
-        client.setTimer(TIME+timer);
+    public void setTimer(long tempTime) {
+        try {
+            tempTime = tempTime / 1000;
+            String timer = String.valueOf(tempTime);
+            client.setTimer(TIME + timer);
+        }catch (RemoteException e){
+
+        }
     }
 
     /**
      * Send an alert for a Wrong move.
      * @param s alert message.
-     * @throws RemoteException
      */
-    public void wrongMove(String s) throws RemoteException {
-        client.updateMessage(ALERT+s);
+    public void wrongMove(String s) {
+        try {
+            client.updateMessage(ALERT+s);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Sill send the message for the choose of the pattern card.
      * @param windows all the four pattern card from which choose.
-     * @throws RemoteException
      */
-    public void chooseWindow(String windows) throws RemoteException {
-        client.updateMessage(windows);
+    public void chooseWindow(String windows) {
+        try {
+            client.updateMessage(windows);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     public ClientInterface getInterface() {

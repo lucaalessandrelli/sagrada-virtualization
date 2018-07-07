@@ -1,11 +1,28 @@
 package it.polimi.ingsw.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.lang.System.*;
+
 public class InputAnalyzer {
+    private static final String SLASH = "/";
+    private static final String BSLASH = "\\";
+    private static final String SEMIC = ";";
+    private static final String COMMA = ",";
+    private static final String SPACE = " ";
+    private List<String> badChar;
     private Manager manager;
 
     public  InputAnalyzer(){manager=null;}
     InputAnalyzer(Manager manager) {
         this.manager = manager;
+        badChar = new ArrayList<>();
+        badChar.add(SLASH);
+        badChar.add(BSLASH);
+        badChar.add(SEMIC);
+        badChar.add(COMMA);
+        badChar.add(SPACE);
     }
 
     /**
@@ -42,7 +59,7 @@ public class InputAnalyzer {
                 manager.revenge(name);
             }
         }catch (RuntimeException e){
-            System.out.println("Bad Command");
+            out.println("Bad Command");
         }
     }
 
@@ -53,4 +70,15 @@ public class InputAnalyzer {
         return tmp;
     }
 
+    boolean verifyName(String name) {
+        if (name.equals("")) {
+            return false;
+        }
+        for(String s : badChar){
+            if(name.contains(s)){
+                return false;
+            }
+        }
+        return true;
+    }
 }

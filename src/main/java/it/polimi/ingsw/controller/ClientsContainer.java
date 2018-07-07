@@ -23,14 +23,13 @@ public class ClientsContainer {
     private List<ClientBox> clients;
     private boolean matchStarted;
     private Manager manager;
-    private ScheduledExecutorService exec;
 
 
     ClientsContainer(Manager manager){
         clients = new ArrayList<>();
         this.manager= manager;
         matchStarted = false;
-        exec = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
         exec.scheduleWithFixedDelay(() -> {
             for (ClientBox c : clients) {
                 try {
@@ -57,6 +56,7 @@ public class ClientsContainer {
             cli.setTimer(tempTime);
             clients.add(cli);
         } catch (RemoteException e) {
+            out.println("Unable get client name");
         }
     }
     synchronized int sizeContainer(){
@@ -121,11 +121,8 @@ public class ClientsContainer {
                  str.append(" ").append(c.getName());
             }
             String playersIn = str.toString();
-            for(ClientBox c : clients){
-                try {
-                    c.updatePlayers(playersIn);
-                } catch (RemoteException e) {
-                }
+            for(ClientBox c : clients) {
+                c.updatePlayers(playersIn);
             }
     }
 
@@ -138,13 +135,9 @@ public class ClientsContainer {
      * @param numOfMatch number of match
      */
     synchronized void notifyIdMatch(int numOfMatch) {
-        for (ClientBox c : clients){
-            try {
-                c.setNumMatch(numOfMatch);
-            } catch (RemoteException e) {
-            }
+        for (ClientBox c : clients) {
+            c.setNumMatch(numOfMatch);
         }
-
     }
 
 
