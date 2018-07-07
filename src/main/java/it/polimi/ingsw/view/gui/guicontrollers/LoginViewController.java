@@ -33,11 +33,10 @@ public class LoginViewController implements Initializable, SceneInterface {
     private static final String EMPTY = "";
     private static final String BLANK = " ";
     private static final String COMMA = ",";
-    private static final String SEMICOLUMN = ";";
+    private static final String SEMICOLON = ";";
     private static final String SLASH = "/";
     private static final String BACKSLASH = "\\";
     private List<String> invalidStrings = new ArrayList<>();
-    private boolean invalidStringContained;
     private Client client;
     private String  username;
     private int connectionType = SOCKET;
@@ -61,7 +60,7 @@ public class LoginViewController implements Initializable, SceneInterface {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         invalidStrings.add(BLANK);
         invalidStrings.add(COMMA);
-        invalidStrings.add(SEMICOLUMN);
+        invalidStrings.add(SEMICOLON);
         invalidStrings.add(SLASH);
         invalidStrings.add(BACKSLASH);
     }
@@ -145,7 +144,7 @@ public class LoginViewController implements Initializable, SceneInterface {
     }
 
     private void checkUsernameValidity(String username) {
-        invalidStringContained = false;
+        boolean invalidStringContained = false;
 
         for (String string: invalidStrings) {
             if(username.contains(string)) {
