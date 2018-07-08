@@ -11,14 +11,15 @@ Catano Vincenzo 10520959
 Description of the project: the project is based on the realization of the digital version of the board game "Sagrada".
 Implemented requirements: Complete Rules + CLI(non fully tested) + GUI + RMI + Socket + MultiMatch
 
-CommandLine parameters for the client:
-      "-a serverAddress" (Default: localhost)
-      "-gui" (Default)
-      "-cli"
-CommandLine parameters for the server:
-      "-timerRoom" waitingRoom timer (Default : timerRoom=30)
-	    "-timerCard" timer for the patternCard choice (Default : timerCard=10)
-	    "-timerMove" player move's timer (Default : timerCard=30)
+COMMAND LINE PARAMETERS FOR THE CLIENT
+1) "-a serverAddress" (Default: localhost).
+2) "-gui" (Default).
+3) "-cli".
+
+COMMAND LINE PARAMETERS FOR THE SERVER
+1) "-timerRoom" waitingRoom timer (Default : timerRoom=30).
+2) "-timerCard" timer for the patternCard choice (Default : timerCard=10).
+3) "-timerMove" player move's timer (Default : timerCard=30.
 
 PROJECT CHOICES
 
