@@ -43,7 +43,7 @@ public class CliHandler extends AbstractView {
         while(client.connected()) {
             String cmd =composer.sanitize(printer.getCommand(),gameData);
             if(cmd.contains("--")&&!specialToolCard){
-                cmd="error";
+                cmd="";
             }
             client.sendCommand(cmd);
         }

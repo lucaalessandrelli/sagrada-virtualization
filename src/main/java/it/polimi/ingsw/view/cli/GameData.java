@@ -20,7 +20,7 @@ public class GameData {
         for(int i = 0; i<10;i++){
             roundTrack.add(i,new ArrayList<>());
         }
-        restrictions = new String[3][4];
+        restrictions = new String[4][5];
         lastSelectedDice=-1;
     }
 
