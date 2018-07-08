@@ -603,33 +603,36 @@ public class Printer {
      */
     private void printMatchOtherCards(String setup, List<String> players, Deparser deparser){
 
-        String parsed = deparser.otherCards(setup,players);
+            String parsed = deparser.otherCards(setup, players);
 
-        List<String> tmp = deparser.divideBySemicolon(parsed);
-        List<String> newString;
+            List<String> tmp = deparser.divideBySemicolon(parsed);
+            List<String> newString;
 
-        for (int i = 0; i < players.size()-1; i++){
-            newString = deparser.divideBySpace(tmp.get(i));
-            if(!deparser.getMyPlayer().equals(newString.get(0))) {
-                out.print(ansi().a(newString.get(0))); //Print player name
+            for (int i = 0; i < players.size() - 1; i++) {
+                newString = deparser.divideBySpace(tmp.get(i));
+                if (!deparser.getMyPlayer().equals(newString.get(0))) {
+                    out.print(ansi().a(newString.get(0))); //Print player name
 
-                out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
+                    out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
 
-                this.printFavorTokens(setup, newString.get(0));
+                    this.printFavorTokens(setup, newString.get(0));
 
-                out.print(ansi().cursorDown(1));
+                    out.print(ansi().cursorDown(1));
 
-                this.printPatternCard(deparser.divideByComma(newString.get(1)));
+                    this.printPatternCard(deparser.divideByComma(newString.get(1)));
 
-                if(newString.size() == 3)
-                    this.printPlacedDices(deparser.divideByComma(newString.get(2)));
+                    if (newString.size() == 3){
+                        this.printPlacedDices(deparser.divideByComma(newString.get(2)));
+                        out.print(ansi().cursorUp(1));
+                        out.print(ansi().saveCursorPosition());
+                    }
 
-                out.print(ansi().restoreCursorPosition());
+                    out.print(ansi().restoreCursorPosition());
 
-                out.print(ansi().cursorRight(((i % 2) + 1) * (15 + 7)));
+                    out.print(ansi().cursorRight(((i % 2) + 1) * (15 + 7)));
+                }
             }
-        }
-        out.print(ansi().restoreCursorPosition());
+            out.print(ansi().restoreCursorPosition());
     }
 
     /**
@@ -959,6 +962,7 @@ public class Printer {
     }
 
     void printIncDecDice() {
+        //Still to implement
     }
 
     /**
@@ -990,6 +994,7 @@ public class Printer {
          * @return The string representing WindowPatter cards of the other players, comprehensive of the dices placed
          */
         private String otherCards(String setup, List<String> players){
+
             StringBuilder builder = new StringBuilder();
 
             String tmp = setup.substring(setup.indexOf(RESTRICTIONS),setup.length());
