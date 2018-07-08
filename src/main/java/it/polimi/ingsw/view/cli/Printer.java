@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
 
-import it.polimi.ingsw.model.gamedata.Colour;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.io.PrintStream;
@@ -130,7 +129,7 @@ public class Printer {
      * @param timer The timer
      * @param output The specified string
      */
-    public void printtimer(String timer, String output){
+    public void printTimer(String timer, String output){
         out.print(ansi().saveCursorPosition());
         out.print(ansi().a(output + timer + "  "));
         out.print(ansi().restoreCursorPosition());
@@ -251,7 +250,6 @@ public class Printer {
         int updown;
         int leftright;
         out.print(ansi().cursorUp(4));
-        out.print(ansi().saveCursorPosition());
         for(int i = 0; i < dices.size(); i++){
             updown = dices.get(i).charAt(2)-'0';
             leftright = dices.get(i).charAt(3)-'0';
@@ -259,6 +257,8 @@ public class Printer {
             out.print(ansi().cursorDown(updown).cursorRight((leftright*3)));
 
             this.printDice(dices.get(i).charAt(0),dices.get(i).charAt(1));
+
+            out.print(ansi().cursorUp(updown).cursorLeft(leftright*3));
 
             out.print(ansi().reset());
             out.print(ansi().restoreCursorPosition());
@@ -371,7 +371,7 @@ public class Printer {
 
         //out.print(ansi().eraseScreen(Erase.ALL));
 
-        this.printtimer(timer,output);
+        this.printTimer(timer,output);
 
         out.print(ansi().cursorRight(output.length()+timer.length()+10));
 
@@ -529,7 +529,7 @@ public class Printer {
     void printScore(String score) {
         Deparser dep = new Deparser();
 
-        List<String> players = dep.divideByComma(score);
+        List<String> players = dep.divideByComma(dep.findString(score,"score "));
         List<String> playersandscore;
 
         String winner = "Nessun vincitore";
@@ -611,6 +611,7 @@ public class Printer {
             for (int i = 0; i < players.size() - 1; i++) {
                 newString = deparser.divideBySpace(tmp.get(i));
                 if (!deparser.getMyPlayer().equals(newString.get(0))) {
+                    out.print(ansi().saveCursorPosition());
                     out.print(ansi().a(newString.get(0))); //Print player name
 
                     out.print(ansi().cursorDown(1).cursorLeft(newString.get(0).length()));
@@ -623,8 +624,8 @@ public class Printer {
 
                     if (newString.size() == 3){
                         this.printPlacedDices(deparser.divideByComma(newString.get(2)));
-                        out.print(ansi().cursorUp(1));
-                        out.print(ansi().saveCursorPosition());
+                        //out.print(ansi().cursorUp(1));
+                        //out.print(ansi().saveCursorPosition());
                     }
 
                     out.print(ansi().restoreCursorPosition());
@@ -632,7 +633,10 @@ public class Printer {
                     out.print(ansi().cursorRight(((i % 2) + 1) * (15 + 7)));
                 }
             }
-            out.print(ansi().restoreCursorPosition());
+
+            out.print(ansi().cursorLeft(players.size()*(15+7)));
+            out.print(ansi().saveCursorPosition());
+            //out.print(ansi().restoreCursorPosition());
     }
 
     /**
