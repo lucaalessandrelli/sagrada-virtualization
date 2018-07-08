@@ -88,10 +88,10 @@ public class ChooseDice1Test {
         p4.addObserver(virtualViewObserver);
 
 
-        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
         p1.setMyWindow(windowPatternCard1);
         p2.setMyWindow(windowPatternCard2);
@@ -209,10 +209,10 @@ public class ChooseDice1Test {
         p3.addObserver(virtualViewObserver);
         p4.addObserver(virtualViewObserver);
 
-        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
         p1.setMyWindow(windowPatternCard1);
         p2.setMyWindow(windowPatternCard2);
@@ -273,10 +273,10 @@ public class ChooseDice1Test {
         Table table = new Table(players);
 
 
-        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-        WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
         p1.setMyWindow(windowPatternCard1);
         p2.setMyWindow(windowPatternCard2);

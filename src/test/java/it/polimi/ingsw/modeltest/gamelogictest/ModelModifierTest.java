@@ -151,7 +151,13 @@ public class ModelModifierTest {
         Player p2 = new Player("two");
         Player p3 = new Player("three");
         Player p4 = new Player("four");
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();         WindowPatternCard windowPatternCard2 = new WindowPatternCard();         WindowPatternCard windowPatternCard3 = new WindowPatternCard();         WindowPatternCard windowPatternCard4 = new WindowPatternCard();          p1.setMyWindow(windowPatternCard1);         p2.setMyWindow(windowPatternCard2);         p3.setMyWindow(windowPatternCard3);         p4.setMyWindow(windowPatternCard4);
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");       p1.setMyWindow(windowPatternCard1);
+       p2.setMyWindow(windowPatternCard2);
+       p3.setMyWindow(windowPatternCard3);
+       p4.setMyWindow(windowPatternCard4);
         players.add(p1);
         players.add(p2);
         players.add(p3);
@@ -186,7 +192,7 @@ public class ModelModifierTest {
         Player p4 = new Player("four");
 
         ArrayList<WindowPatternCard> windows = new ArrayList<>();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         windows.add(windowPatternCard);
 
 
@@ -249,7 +255,14 @@ public class ModelModifierTest {
         Player p2 = new Player("two");
         Player p3 = new Player("three");
         Player p4 = new Player("four");
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();         WindowPatternCard windowPatternCard2 = new WindowPatternCard();         WindowPatternCard windowPatternCard3 = new WindowPatternCard();         WindowPatternCard windowPatternCard4 = new WindowPatternCard();          p1.setMyWindow(windowPatternCard1);         p2.setMyWindow(windowPatternCard2);         p3.setMyWindow(windowPatternCard3);         p4.setMyWindow(windowPatternCard4);
+       WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
+       p1.setMyWindow(windowPatternCard1);
+       p2.setMyWindow(windowPatternCard2);
+       p3.setMyWindow(windowPatternCard3);
+       p4.setMyWindow(windowPatternCard4);
         players.add(p1);
         players.add(p2);
         players.add(p3);

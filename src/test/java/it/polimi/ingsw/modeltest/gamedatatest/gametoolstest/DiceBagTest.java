@@ -29,7 +29,6 @@ public class DiceBagTest {
         assertEquals(0,tester.remainingDices());
     }
 
-    //tests that we have the exact number of dices in the dicebag: 18 of yellow,green,purple,red,blue and 0 of white.
     @Test
     public void testExactNumber(){
         DiceBag tester = new DiceBag();

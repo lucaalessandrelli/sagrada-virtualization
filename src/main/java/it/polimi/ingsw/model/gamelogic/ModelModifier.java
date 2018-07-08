@@ -128,7 +128,6 @@ public class ModelModifier {
         chosenDice.setColour(newBagDice.getColour().toString());
     }
 
-    //Methods that are not automatic moves but still modifies the model due to some moves done by the player
 
     /**
      * Method called when a player chose to use a ToolCard and can actually use it, increments the cost of the toolCard and call

@@ -92,7 +92,7 @@ public class CardContainer {
         for (int k = 0; k < dimension; k++) {
             randomNum = rand.nextInt(cont - k);
             try {
-                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                tmp.add(this.readPatterns("src/main/resources/window_pattern_cards_formalization.xml", pattern.get(randomNum)));
             } catch (ParserConfigurationException | IOException | SAXException e) {
                 System.err.print(XMLERROR);
             }
@@ -148,7 +148,7 @@ public class CardContainer {
         for (int k = 0; k < dimension; k++) {
             randomNum = rand.nextInt(cont - k);
             try {
-                tmp.add(this.readObjective("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum))); //Supposing that z is the selected card from this "turn"
+                tmp.add(this.readObjective("src/main/resources/public_cards_formalization.xml", objectivepublic.get(randomNum)));
             } catch (ParserConfigurationException | IOException | SAXException e) {
                 System.err.print(XMLERROR);
             }
@@ -245,7 +245,7 @@ public class CardContainer {
      * @return The WindowPatternCard requested
      */
     private WindowPatternCard readPatterns(String namefile, int cont) throws ParserConfigurationException, IOException, SAXException {
-        WindowPatternCard mypattern = new WindowPatternCard();
+        WindowPatternCard mypattern = new WindowPatternCard(50,10,"noName");
         String all;
         String path = new File(namefile).getAbsolutePath();
         File file = new File(path);

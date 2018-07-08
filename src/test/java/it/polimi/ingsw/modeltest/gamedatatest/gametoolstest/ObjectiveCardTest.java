@@ -16,7 +16,7 @@ public class ObjectiveCardTest {
         ObjectiveCard tester;
         CardContainer container = new CardContainer();
         List<ObjectiveCard> objectiveCards;
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Dice db = new Dice(Colour.BLUE);
         Dice dy = new Dice(Colour.YELLOW);
         Dice dr = new Dice(Colour.RED);
@@ -62,7 +62,7 @@ public class ObjectiveCardTest {
             assertEquals((i+1)*6,tester.finalpoints(windowPatternCard));
         }
 
-        windowPatternCard = new WindowPatternCard();
+        windowPatternCard = new WindowPatternCard(50,10,"noName");
 
         windowPatternCard.placeDice(db,0,0);
         windowPatternCard.placeDice(dy,0,1);

@@ -150,17 +150,17 @@ public class TableTest {
         Player p4 = new Player("Giuseppe");
 
         List<Player> players = new ArrayList<>();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
         players.add(p1);
-        WindowPatternCard windowPatternCard1 = new WindowPatternCard();
         p1.setMyWindow(windowPatternCard1);
         players.add(p2);
-        WindowPatternCard windowPatternCard2 = new WindowPatternCard();
         p2.setMyWindow(windowPatternCard2);
         players.add(p3);
-        WindowPatternCard windowPatternCard3 = new WindowPatternCard();
         p3.setMyWindow(windowPatternCard3);
         players.add(p4);
-        WindowPatternCard windowPatternCard4 = new WindowPatternCard();
         p4.setMyWindow(windowPatternCard4);
 
         Table tester = new Table(players);

@@ -18,7 +18,7 @@ public class InspectorContextTest {
     public void testCheckTools(){
         InspectorContext tester = new InspectorContext();
         Player p1 = new Player("nobody");
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         p1.setMyWindow(windowPatternCard);
         List<Player> players = new ArrayList<>();
         players.add(p1);

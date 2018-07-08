@@ -64,7 +64,7 @@ public class PlayerTest {
             }
         };
         tester.addObserver(observer);
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         windowPatternCard.setDifficulty(5);
         tester.setMyWindow(windowPatternCard);
 

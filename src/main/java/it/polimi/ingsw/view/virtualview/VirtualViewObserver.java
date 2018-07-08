@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 
 import java.util.List;
 
-//observer interface, it will be implemented by gui and cli
 public abstract class VirtualViewObserver {
     //subject observable
     ClientBox clientBox;

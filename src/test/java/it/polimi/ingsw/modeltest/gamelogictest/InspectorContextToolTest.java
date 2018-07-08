@@ -22,7 +22,7 @@ public class InspectorContextToolTest {
 
         Dice newdice = new Dice(oldice.getColour());
 
-        InspectorContextTool tester = new InspectorContextTool(new WindowPatternCard(),draftPool,new RoundTrack());
+        InspectorContextTool tester = new InspectorContextTool(new WindowPatternCard(50,10,"noName"),draftPool,new RoundTrack());
 
         assertTrue(tester.checkColourDice(oldice,oldpos,newdice,newpos));
 

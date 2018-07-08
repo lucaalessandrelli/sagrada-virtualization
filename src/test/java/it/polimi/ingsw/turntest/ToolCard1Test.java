@@ -92,10 +92,10 @@ public class ToolCard1Test {
 
         Round round = new Round(players,1,table,match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);
@@ -194,10 +194,10 @@ public class ToolCard1Test {
 
         Round round = new Round(players,1,table,match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+       WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+       WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);

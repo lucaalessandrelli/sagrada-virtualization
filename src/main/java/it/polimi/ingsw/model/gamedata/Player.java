@@ -19,7 +19,6 @@ public class Player {
     private boolean hasMoved;
 
 
-    //just get the username from user
     public Player(String username) {
         this.username = username;
         this.active = true;

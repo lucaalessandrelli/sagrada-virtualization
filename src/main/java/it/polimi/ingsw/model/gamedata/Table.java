@@ -81,8 +81,6 @@ public class Table {
         setPublicObjects();
     }
 
-    //GETTER METHODS
-
 
     /**
      * Getter method for Objective cards

@@ -91,10 +91,10 @@ public class ToolCard3Test {
 
         Round round = new Round(players,1,table,match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);
@@ -127,7 +127,6 @@ public class ToolCard3Test {
         p1.getWindowPatternCard().placeDice(d2,2,1);
         p1.getWindowPatternCard().placeDice(d3,3,2);
 
-        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 
@@ -268,10 +267,10 @@ public class ToolCard3Test {
 
         Round round = new Round(players,1,table,match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);
@@ -443,10 +442,10 @@ public class ToolCard3Test {
 
         Round round = new Round(players,1,table, match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);
@@ -482,7 +481,6 @@ public class ToolCard3Test {
 
         p1.getWindowPatternCard().addRestrictions('P',2,2);
 
-        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
 

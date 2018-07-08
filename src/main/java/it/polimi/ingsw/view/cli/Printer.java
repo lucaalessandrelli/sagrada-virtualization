@@ -683,7 +683,7 @@ public class Printer {
 
 
         List<String> tmp = deparser.divideByBackslash(toolCards);
-        List<String> tempz = deparser.divideBySlash(tmp.get(0));
+        List<String> tempz;
 
         out.print(ansi().a(TOOLCARDS + ("    ") + COSTO));
 
@@ -765,7 +765,7 @@ public class Printer {
                 this.printDice(dice.charAt(0), dice.charAt(1));
 
 
-                out.print(ansi().cursorLeft(((dice.charAt(3) - '0') + 1) * 3).cursorUp(((dice.charAt(2) - '0'))));
+                out.print(ansi().cursorLeft(((dice.charAt(3) - '0') + 1) * 3).cursorUp((dice.charAt(2) - '0')));
             }
         }
 

@@ -901,8 +901,8 @@ class WindowPatternCardTest {
      }
 
      private void verify(List<List<Cell>> matr, Colour colour, int number, int x, int y){
-         assertEquals(colour, matr.get(x).get(y).getProperty().getColour()); //COLOUR
-         assertEquals(number, matr.get(x).get(y).getProperty().getNumber()); //NUMBER
+         assertEquals(colour, matr.get(x).get(y).getProperty().getColour());
+         assertEquals(number, matr.get(x).get(y).getProperty().getNumber());
      }
 
      private WindowPatternCard pullOutCard(int value){

@@ -285,10 +285,6 @@ public class MatchViewController implements Initializable, SceneInterface {
     public void handleGameState(String gameState) {
         this.currentState = gameState;
 
-        //start testing states and moves
-        System.out.println(currentState);
-        //end testing stats and moves
-
         if(currentState.equals(INCDECVALUE) || currentState.equals(SELECTVALUE)) {
             AnchorPane pane = (AnchorPane)GeneralFunctionalities.getChildrenByIndex(draftPool,diceChosenRow,diceChosenColumn);
             ViewDice dice = GeneralFunctionalities.findDiceInfo(pane.getChildren().get(0),diceList);

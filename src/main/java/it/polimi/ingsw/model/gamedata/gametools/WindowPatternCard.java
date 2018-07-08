@@ -17,29 +17,6 @@ public class WindowPatternCard {
     private String name;
     private String player;
 
-
-    /**
-     * The classic constructor
-     */
-    public WindowPatternCard(){
-        this.num = 0;
-        this.difficulty = 10;
-        this.name ="Card not valid";
-        Cell y;
-        Pos p;
-        for(int i = 0; i < 4; i++){
-            ArrayList<Cell> x = new ArrayList<>(5);
-            this.matr.add(x);
-            for(int j = 0; j < 5; j++){
-                y = new Cell();
-                p = new Pos(i,j);
-                y.setPos(p);
-                y.setOccupation(false);
-                this.matr.get(i).add(y);
-            }
-        }
-    }
-
     /**
      * This constructor is used to create a card with its idnumber, difficulty and name
      * @param num The idnumber
@@ -166,7 +143,6 @@ public class WindowPatternCard {
      * @param y The column
      * @return If the dice has been placed or not
      */
-    //place the dice
     public boolean placeDice(Dice d, int x, int y){
         Pos p = new Pos(x,y);
         if(this.getCell(p).isOccupied() || d == null)

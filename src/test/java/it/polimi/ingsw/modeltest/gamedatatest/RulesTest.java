@@ -17,7 +17,7 @@ public class RulesTest {
     public void testCouple(){
 
         String rule = "1,2";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -61,7 +61,7 @@ public class RulesTest {
     public void testFiveNumbers(){
 
         String rule = "1,2,3,4,5,6";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -114,7 +114,7 @@ public class RulesTest {
     public void testFiveColours(){
 
         String rule = "Y,G,B,P,R";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -167,7 +167,7 @@ public class RulesTest {
     public void testOneColour(){
 
         String rule = "Y";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -221,7 +221,7 @@ public class RulesTest {
 
         String rule = "NOCOLOR";
         String direction = "ROW";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -276,7 +276,7 @@ public class RulesTest {
 
         String rule = "NOCOLOR";
         String direction = "COLUMN";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -331,7 +331,7 @@ public class RulesTest {
 
         String rule = "NOVALUE";
         String direction = "ROW";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -386,7 +386,7 @@ public class RulesTest {
 
         String rule = "NOVALUE";
         String direction = "COLUMN";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -441,7 +441,7 @@ public class RulesTest {
 
         String rule = "COLOR";
         String direction = "DIAGONAL";
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
 
@@ -494,7 +494,7 @@ public class RulesTest {
     @Test
     public void testAllWithEmptyCard(){
 
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         Player player = new Player("vincenzo");
         player.setMyWindow(windowPatternCard);
         Rules test = new Rules();

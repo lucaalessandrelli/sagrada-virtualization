@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.gamedata.Rules;
 /**
  * This class represents the objective cards
  */
-//The strategy pattern will be implemented later
 public class ObjectiveCard extends Card {
     private int points;
     private String type;

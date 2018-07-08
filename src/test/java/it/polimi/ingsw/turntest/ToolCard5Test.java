@@ -101,10 +101,10 @@ public class ToolCard5Test {
 
         Round round = new Round(players, 2, table,match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);
@@ -188,11 +188,6 @@ public class ToolCard5Test {
         } catch (WrongMoveException e) {
             e.printStackTrace();
         }
-
-        /*state = "AutomatedOperation";
-        assertEquals(state,lastName(turn.getState().toString(),state.length()+1));
-
-        //((AutomatedOperation) turn.getState()).doAutomatedOperations(tester.getAutomatedoperationlist());*/
 
 
         for(int i = 0; i < p1.getDraftPool().getDraftPool().size(); i++){
@@ -294,10 +289,10 @@ public class ToolCard5Test {
 
         Round round = new Round(players, 2, table,match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);
@@ -419,10 +414,10 @@ public class ToolCard5Test {
 
         Round round = new Round(players, 2, table,match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);
@@ -550,10 +545,10 @@ public class ToolCard5Test {
 
         Round round = new Round(players, 1, table,match, timerMove);
 
-       WindowPatternCard windowPatternCard1 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard2 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard3 = new WindowPatternCard();
-       WindowPatternCard windowPatternCard4 = new WindowPatternCard();
+        WindowPatternCard windowPatternCard1 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard2 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard3 = new WindowPatternCard(50,10,"noName");
+        WindowPatternCard windowPatternCard4 = new WindowPatternCard(50,10,"noName");
 
        p1.setMyWindow(windowPatternCard1);
        p2.setMyWindow(windowPatternCard2);

@@ -37,7 +37,7 @@ public class InspectorPlaceTest {
     @Test
     public void testCheckFirstRestrictionColour(){
         InspectorPlace tester = new InspectorPlace();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         windowPatternCard.addRestrictions('G',0,0);
         windowPatternCard.addRestrictions('Y',0,1);
         Dice d = new Dice(Colour.GREEN);
@@ -59,7 +59,7 @@ public class InspectorPlaceTest {
     @Test
     public void testCheckBoundaryCell(){
         InspectorPlace tester = new InspectorPlace();
-        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        WindowPatternCard windowPatternCard = new WindowPatternCard(50,10,"noName");
         windowPatternCard.addRestrictions('2',1,2);
         windowPatternCard.addRestrictions('R',2,2);
         Dice d = new Dice(Colour.GREEN);
