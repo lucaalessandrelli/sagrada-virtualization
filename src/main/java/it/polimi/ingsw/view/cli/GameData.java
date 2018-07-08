@@ -67,8 +67,11 @@ public class GameData {
     void setRestrictions(String restrictions) {
         List<String> dices = Arrays.asList(restrictions.split(","));
         if(dices.size()>1 && dices.get(0).equals(player)) {
-            dices.remove(0);
-            for (String dice : dices) {
+            List<String> temp = new ArrayList<>();
+            for(int i=1;i<dices.size();i++){
+                temp.add(dices.get(i));
+            }
+            for (String dice : temp) {
                 int x = Integer.parseInt(String.valueOf(dice.charAt(2)));
                 int y = Integer.parseInt(String.valueOf(dice.charAt(3)));
                 String tmp = String.valueOf(dice.charAt(1));
