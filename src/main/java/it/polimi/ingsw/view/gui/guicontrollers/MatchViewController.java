@@ -63,7 +63,7 @@ public class MatchViewController implements Initializable, SceneInterface {
     private Stage stage;
     private GuiHandler guiHandler;
     private ObservableList<String> connectedPlayers = FXCollections.observableArrayList();
-    private ObservableList<String> gamePlayerlist = FXCollections.observableArrayList();
+    private ObservableList<String> gamePlayerList = FXCollections.observableArrayList();
     private ObservableList<String> playerStatusList = FXCollections.observableArrayList();
     private ObservableList<TitledPane> listTitle = FXCollections.observableArrayList();
     private ObservableList<User> userList = FXCollections.observableArrayList();
@@ -156,9 +156,9 @@ public class MatchViewController implements Initializable, SceneInterface {
         myTitle.setText(client.getName());
         int numTitle;
 
-        for (String player:gamePlayerlist) {
+        for (String player:gamePlayerList) {
             if(!player.equals(client.getName())) {
-                numTitle = gamePlayerlist.indexOf(player);
+                numTitle = gamePlayerList.indexOf(player);
                 listTitle.get(numTitle).setText(player);
             }
         }
@@ -373,7 +373,7 @@ public class MatchViewController implements Initializable, SceneInterface {
      * @param gamePlayers List of all the players belonging to the match.
      */
     private void updateGamePlayers(String gamePlayers) {
-        gamePlayerlist = FXCollections.observableArrayList(Arrays.asList(gamePlayers.split(",")));
+        gamePlayerList = FXCollections.observableArrayList(Arrays.asList(gamePlayers.split(",")));
         this.setTitleWindowPatternCard();
     }
 
@@ -654,7 +654,7 @@ public class MatchViewController implements Initializable, SceneInterface {
      * @param event MouseEvent object used to get the cell clicked by the player.
      */
     @FXML
-    void handleCellClicked(MouseEvent event) {
+    private void handleCellClicked(MouseEvent event) {
         //if the cell is not empty than do not send the command for there already is a dice in that position
         AnchorPane source = (AnchorPane) event.getSource();
         if(source.getChildren().size() == 0) {

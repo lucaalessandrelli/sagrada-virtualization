@@ -123,6 +123,11 @@ public final class GeneralFunctionalities {
         }
     }
 
+    /**
+     * Due to the fact that every viewController have the same implementation of this method, it's a good choice to make it available
+     * in this static class.
+     * @param alertMessage Contains the alert message that needs to be shown to the user.
+     */
     public static void displayAlertWindow(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore");

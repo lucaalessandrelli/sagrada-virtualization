@@ -16,6 +16,6 @@ public class EndTurn implements TurnState {
 
     @Override
     public void automaticPass() {
-        turn.notifyEndRound();
+        turn.notifyEndTurn();
     }
 }

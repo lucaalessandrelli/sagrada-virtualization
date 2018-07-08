@@ -120,10 +120,10 @@ public class IncDecWindow {
                 client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + chosenDice.getDiceNumber() + "," + chosenDice.getDiceColor() + "," + x + "," + 0);
                 stage.close();
             } else {
-                handleAlert(ALERT_DICE_INC_DEC_CHOICE_NOT_VALID);
+                GeneralFunctionalities.displayAlertWindow(ALERT_DICE_INC_DEC_CHOICE_NOT_VALID);
             }
         } else {
-            handleAlert(ALERT_STATE_NOT_VALID);
+            GeneralFunctionalities.displayAlertWindow(ALERT_STATE_NOT_VALID);
         }
 
         event.consume();
@@ -140,18 +140,5 @@ public class IncDecWindow {
         image.fitHeightProperty().bind(gridPane.heightProperty());
         image.fitWidthProperty().bind(gridPane.widthProperty().divide(NUM_COL));
         gridPane.getChildren().add(image);
-    }
-
-    /**
-     * Called to show a window which displays a wrong move has occurred. Thrown if the current state don't allow this type of move.
-     * @param message Message shown in the alertWindow screen.
-     */
-    public static void handleAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-
-        alert.showAndWait();
     }
 }
