@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.gui.utilitywindows;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.view.gui.data.ViewDice;
+import it.polimi.ingsw.view.gui.drawers.GeneralFunctionalities;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -86,21 +87,8 @@ public class SelValueWindow {
             client.sendCommand("move " + client.getNumOfMatch() + " " + client.getName() + " D;" + (GridPane.getColumnIndex(source)+1) + "," + dice.getDiceColor() + "," + x + "," + 0);
             stage.close();
         } else {
-            handleAlert(ALERT_DICE_SEL_VALUE);
+            GeneralFunctionalities.displayAlertWindow(ALERT_DICE_SEL_VALUE);
         }
         event.consume();
-    }
-
-    /**
-     * Called to show a window which displays a wrong move has occurred. Thrown if the current state don't allow this type of move.
-     * @param message Message shown in the alertWindow screen.
-     */
-    public static void handleAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-
-        alert.showAndWait();
     }
 }

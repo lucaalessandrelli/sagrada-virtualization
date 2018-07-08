@@ -202,13 +202,17 @@ public class LoginViewController implements Initializable, SceneInterface {
         controller.setClient(client);
         controller.setGuiHandler(guiHandler);
         controller.setStage(stage);
-        controller.setTime(time);
+
+        if(time != null) {
+            controller.setTime(time);
+        } else {
+            controller.setTime("0");
+        }
 
         Scene scene = new Scene(root);
         // Calling methods that need to be executed before showing the gui
         controller.startTimer();
         guiHandler.setGui(controller);
-
         stage.setScene(scene);
         stage.setResizable(true);
         stage.setTitle("Partita");

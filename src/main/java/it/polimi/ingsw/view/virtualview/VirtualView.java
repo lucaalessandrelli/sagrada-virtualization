@@ -18,10 +18,13 @@ public class VirtualView extends VirtualViewObserver {
 
     @Override
     public void update() {
-        String updateMove;
-        VirtualViewParser parser = new VirtualViewParser(player);
-        updateMove = parser.startParsing();
-        clientBox.update(updateMove);
+        try {
+            String updateMove;
+            VirtualViewParser parser = new VirtualViewParser(player);
+            updateMove = parser.startParsing();
+            clientBox.update(updateMove);
+        }catch (RuntimeException ignored){
+        }
     }
 
     @Override

@@ -123,7 +123,7 @@ public class Turn {
      * Notifies the round that the current turn ended, also if the toolCard 8 has been used call
      * a method on round that makes this player inactive for the second turn of the round.
      */
-    public void notifyEndRound() {
+    public void notifyEndTurn() {
         if(tool8used) {
             round.inactivatePlayer(player);
         }
