@@ -9,7 +9,7 @@ Catano Vincenzo 10520959
 
 
 Description of the project: the project is based on the realization of the digital version of the board game "Sagrada".
-Implemented requirements: Complete Rules + CLI(non fully tested) + GUI + RMI + Socket + MultiMatch
+Implemented requirements: Complete Rules + CLI(it's not fully tested) + GUI + RMI + Socket + MultiMatch
 
 COMMAND LINE PARAMETERS FOR THE CLIENT
 1) "-a serverAddress" (Default: localhost).
