@@ -5,6 +5,7 @@ import org.fusesource.jansi.AnsiConsole;
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -53,6 +54,8 @@ public class Printer {
 
     private Scanner in = new Scanner(System.in);
 
+    private List<String> connectedPlayers = new ArrayList<>();
+
     /**
      * Installs the AnsiConsole on the system.out so it will handle by himself the Ansi escapes
      */
@@ -86,8 +89,8 @@ public class Printer {
     public String getName() {
         out.print(ansi().a(USERNAME).cursorDown(1).cursorLeft(USERNAME.length()));
         String name = in.nextLine();
-        while (name.equals("")||name.contains(" ")) {
-            //inserisci qui l'avviso scritto nel blocco note
+        while (name.equals("")||name.contains(" ") || name.contains("\\") || name.contains("/") || name.contains(",") || name.contains(";")) {
+            out.print(ansi().a("Reinserisci il nome! (Non deve contenere [spazi],[,],[;],[/],[\\]").cursorLeft("Reinserisci il nome! (Non deve contenere [spazi],[,],[;],[/],[\\]".length()).cursorDown(1));
             name = in.nextLine();
         }
         return name;
@@ -140,6 +143,8 @@ public class Printer {
      * @param players The name of players
      */
     public void printPlayersConnected(List<String> players){
+
+        this.connectedPlayers = players;
 
         out.print(ansi().a(CONNECTED).cursorLeft(CONNECTED.length()));
 
@@ -258,10 +263,10 @@ public class Printer {
 
             this.printDice(dices.get(i).charAt(0),dices.get(i).charAt(1));
 
-            out.print(ansi().cursorUp(updown).cursorLeft(leftright*3));
+            out.print(ansi().cursorUp(updown).cursorLeft((leftright*3)+3));
 
             out.print(ansi().reset());
-            out.print(ansi().restoreCursorPosition());
+            //out.print(ansi().restoreCursorPosition());
         }
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorUp(1));
@@ -324,6 +329,7 @@ public class Printer {
                 Color color = this.findColor(colour);
                 outStream.print(ansi().bg(Color.WHITE).fg(color).a(" " + num +" ").reset());
             }
+
         } catch(UnsupportedEncodingException e){
             out.println("Caught exception: " + e.getMessage());
         }
@@ -368,8 +374,6 @@ public class Printer {
      */
     void printWaitingRoom(String timer, List<String> players, String output){
         out.print(ansi().saveCursorPosition());
-
-        //out.print(ansi().eraseScreen(Erase.ALL));
 
         this.printTimer(timer,output);
 
@@ -496,7 +500,7 @@ public class Printer {
 
         this.printMove(players,turnState,deparser);
 
-        out.print(ansi().cursorDown(2));
+        out.print(ansi().cursorDown(10));
 
         //print all match layout (statico)
     }
@@ -583,10 +587,12 @@ public class Printer {
 
             active = deparser.divideBySpace(s);
 
-            if(active.get(1).charAt(0)=='A')
+            if(active.get(1).charAt(0)=='A' && connectedPlayers.contains(active.get(0)))
                 color = GREEN;
-            else
+            else if(active.get(1).charAt(0)=='I' && connectedPlayers.contains(active.get(0)))
                 color = RED;
+            else
+                color = BLACK;
 
 
             out.print(ansi().fg(color).a(active.get(1)).reset().cursorLeft(active.get(1).length()).cursorDown(1));
@@ -744,7 +750,7 @@ public class Printer {
             }
         }
 
-        printCoordinates(0,max+1,1,10,'y','x');
+        printCoordinates(0,max+1,1,10,'x','y');
 
         out.print(ansi().cursorUp(max));
 
