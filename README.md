@@ -28,5 +28,5 @@ PROJECT CHOICES
 3) We chose to represent ObjectiveCards, ToolCards and WindowPatternCards in a XML format, this way we avoid hard coding information inside Classes.
 4) In order to implement game turns and to control the player's moves flow we decided to use the state pattern, creating a finite state machine.
 5) ToolCards have different effects on a player's move but most of the time they have little similarities. We decided to decompose these effects in minor moves (ex: selecting a dice that belongs to the RoundTrack) and formalize them in the ToolCard xml file. Using JavaReflection we analyze each move dynamically, avoiding to write 12 toolcard classes with effects in common.  
-6) We decided to implement a VirtualView in order to process events coming from the model and farward them to the client through the network.
+6) We decided to implement a VirtualView in order to process events coming from the model and forward them to the client through the network.
 7) All messages that pass through the network are strings, this way knowing the protocol adopted, the client application is language independent.
