@@ -6,7 +6,7 @@ package it.polimi.ingsw.view.gui.data;
  */
 public class User {
     private String username;
-    private String status = "xxx";
+    private String status = "";
     private String score = "";
 
     /**
