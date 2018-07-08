@@ -6,25 +6,58 @@ import it.polimi.ingsw.model.gamedata.gametools.WindowPatternCard;
 
 import java.util.List;
 
-//observer interface, it will be implemented by gui and cli
+/**
+ * This interface is used to notify with pattern observer the virtual view observer
+ */
 public abstract class VirtualViewObserver {
-    //subject observable
     ClientBox clientBox;
     protected Player player;
-    //this method will be called when a pattern card is modified
+
+    /**
+     * It will notify the view to update the model
+     */
     public abstract void update();
-    // this method is called when is the turn passes to the next player
+
+    /**
+     *
+     * @param whoIsTurn name of player's turn
+     * @param timeSleep timer move
+     */
     public abstract void updateStateTurn(String whoIsTurn, long timeSleep);
 
+    /**
+     *
+     * @param s wrong move message
+     */
     public abstract void wrongMove(String s);
+
+    /**
+     *
+     * @param windows choose window pattern card message
+     */
     
     public abstract void chooseWindow(List<WindowPatternCard> windows);
 
+    /**
+     *
+     * @param timerWindows timer choose pattern card
+     */
     public abstract void timerChoose(long timerWindows);
 
+    /**
+     *
+     * @param state name turn state move
+     */
     public abstract void notifyState(String state);
 
+    /**
+     *
+     * @param s all players score message
+     */
     public abstract void notifyScore(String s);
 
+    /**
+     * notify view of reconnection
+     */
     public abstract void reconnectingMessage();
 }
