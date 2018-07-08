@@ -60,7 +60,7 @@ public final class GeneralFunctionalities {
      * Delete the ImageView in the given cell
      * @param pane The pane that contains the ImageView that needs to be deleted.
      */
-    private static void deleteOnlyImage(AnchorPane pane) {
+    private static void deleteOnlyDiceImage(AnchorPane pane) {
         ObservableList<Node> children = pane.getChildren();
         children.clear();
     }
@@ -117,7 +117,7 @@ public final class GeneralFunctionalities {
                 if(viewDiceToBeDeleted) {
                     GeneralFunctionalities.deleteDice((AnchorPane)grid.getChildren().get(numColumns*i+j), diceList);
                 } else {
-                    GeneralFunctionalities.deleteOnlyImage((AnchorPane)grid.getChildren().get(numColumns*i+j));
+                    GeneralFunctionalities.deleteOnlyDiceImage((AnchorPane)grid.getChildren().get(numColumns*i+j));
                 }
             }
         }

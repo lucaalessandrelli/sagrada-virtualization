@@ -40,7 +40,7 @@ public class Round {
      * This method starts the round,notify all players who has to move and it does a thread.sleep(), if the player will not do the move
      * it will be set inactive. If he does a right move, will be called an interrupt on the sleep and the round goes on with the turn of next
      * player.
-     * @throws NotEnoughPlayersException
+     * @throws NotEnoughPlayersException if player are less then two
      */
     public void go() throws NotEnoughPlayersException {
         Player p;

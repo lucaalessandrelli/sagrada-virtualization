@@ -8,6 +8,7 @@ import it.polimi.ingsw.view.gui.drawers.GeneralFunctionalities;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -193,6 +194,11 @@ public class PatternCardChoiceViewController implements Initializable, SceneInte
     public void handleMatchId(String idMatch) {
         this.idMatch = idMatch;
         client.setNumMatch(Integer.parseInt(idMatch));
+    }
+
+    @Override
+    public void handleConnectedPlayers(String playerList) {
+        this.connectedPlayers = FXCollections.observableArrayList(Arrays.asList(playerList.split(" ")));
     }
 
     /**
