@@ -66,9 +66,7 @@ public class Match extends Thread {
         } catch (InterruptedException e) {
             exec.shutdown();
         }
-        /*SETTING ROUNDS*/
         for(roundNumber = 1; roundNumber <= 10; roundNumber++) {
-            //reminder to implement exception management later (in case the match end before)
             try {
                 this.table.fillDraftPool();
                 playerList.forEach(Player::notifyPlayer);
@@ -78,9 +76,7 @@ public class Match extends Thread {
                 break;
             }
         }
-        //match is now ended - call methods to calculate player points
 
-        //send points and name winner(to do)
         String score = table.calculatePoints();
         playerList.forEach(player -> player.notifyScore(score));
         playerList.forEach(player -> manager.matchEnded(player.getUsername()));
@@ -95,7 +91,7 @@ public class Match extends Thread {
     private void startNextRound() throws NotEnoughPlayersException {
             currRound = new Round(this.playerList, roundNumber,table,this,timerMove);
             roundList.add(currRound);
-            // call on the round just created a method that start the round
+            roundList.get(roundNumber-1).check();
             roundList.get(roundNumber-1).go();
 
     }
