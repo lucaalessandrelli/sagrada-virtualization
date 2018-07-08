@@ -166,12 +166,14 @@ public class Match extends Thread {
      * @param name player who is reconnecting
      */
     public void update(String name) {
-       playerList.forEach(Player::notifyPlayer);
-       for (Player p : playerList){
-           if(p.getUsername().equals(name)){
-               p.reconnectingMessage();
-           }
-       }
+        if(currRound!=null) {
+            playerList.forEach(Player::notifyPlayer);
+            for (Player p : playerList) {
+                if (p.getUsername().equals(name)) {
+                    p.reconnectingMessage();
+                }
+            }
+        }
     }
 
     /**
