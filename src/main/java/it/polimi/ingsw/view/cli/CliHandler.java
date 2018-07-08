@@ -21,7 +21,7 @@ public class CliHandler extends AbstractView {
         this.printer = new Printer();
         this.scene = new LoginState(printer,this);
         this.composer = new InputComposer(client);
-        this.gameData = new GameData(client.getName());
+        this.gameData = new GameData();
         this.specialToolCard = false;
     }
 
@@ -34,6 +34,7 @@ public class CliHandler extends AbstractView {
             client.setKindConnection(printer.getConnection());
             client.connect();
         }
+        gameData.setName(client.getName());
     }
 
     /**

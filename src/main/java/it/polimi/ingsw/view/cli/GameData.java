@@ -14,8 +14,7 @@ public class GameData {
     private String[][] restrictions;
     private int lastSelectedDice;
 
-    GameData(String name){
-        player=name;
+    GameData(){
         roundTrack= new ArrayList<>();
         for(int i = 0; i<10;i++){
             roundTrack.add(i,new ArrayList<>());
@@ -39,6 +38,10 @@ public class GameData {
                 this.roundTrack.get(x).add(y, tmp);
             }
         }
+    }
+
+    void setName(String name){
+        this.player=name;
     }
 
     /**
