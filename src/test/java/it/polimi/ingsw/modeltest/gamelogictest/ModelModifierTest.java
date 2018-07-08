@@ -52,7 +52,7 @@ public class ModelModifierTest {
     }
 
     @Test
-    public void testResetDraftpool() {
+    public void testResetDraftPool() {
         ArrayList<Player> players = new ArrayList<>();
         Player p1 = new Player("one");
         Player p2 = new Player("two");

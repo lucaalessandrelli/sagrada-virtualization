@@ -204,7 +204,7 @@ public class WindowPatternCard {
      * @param x The row
      * @param y The column
      */
-    public void addRestr(char c,int x, int y) {
+    public void addRestrictions(char c, int x, int y) {
         Pos p = new Pos(x, y);
         if (Character.isLetter(c)) {
             Property pro = new Property(Colour.isIn(c),false);

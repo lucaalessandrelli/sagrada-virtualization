@@ -74,7 +74,7 @@ public class DraftPoolTest{
     }
 
     @Test
-    public void testFindinPosition(){
+    public void testFindInPosition(){
         DraftPool tester = new DraftPool();
         Property prop = new Property(Colour.RED,true);
         Dice d;
@@ -91,7 +91,7 @@ public class DraftPoolTest{
     }
 
     @Test
-    public void testremoveDice(){
+    public void testRemoveAndFindDice(){
         DraftPool tester = new DraftPool();
         Dice d1 = new Dice(Colour.BLUE);
         tester.getDraftPool().add(d1);

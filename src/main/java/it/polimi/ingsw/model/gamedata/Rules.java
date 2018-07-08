@@ -14,14 +14,14 @@ import java.util.stream.Collectors;
  */
 public class Rules {
 
-    private ArrayList<String> myrules;
+    private List<String> myRules;
     private String direction;
 
     /**
      * Classic constructor
      */
     public Rules(){
-        myrules = new ArrayList<>();
+        myRules = new ArrayList<>();
         direction = "";
     }
 
@@ -31,7 +31,7 @@ public class Rules {
      * @return The rules
      */
     public List<String> getRules(){
-        return this.myrules;
+        return this.myRules;
     }
 
     /**
@@ -54,14 +54,14 @@ public class Rules {
                 result = this.five(window);
                 break;
             case "Y,G,B,P,R":
-                result = this.varietycolours(window);
+                result = this.varietyColours(window);
                 break;
             case "Y":
             case "G":
             case "B":
             case "P":
             case "R":
-                result = this.countcolor(window,Colour.isIn(rule.charAt(0)));
+                result = this.countColor(window,Colour.isIn(rule.charAt(0)));
                 break;
             case "ROW":
                 direction = rule;
@@ -149,8 +149,8 @@ public class Rules {
      * @param window The WindowPattern card to check
      * @return The points earned with this rule
      */
-    private int varietycolours(WindowPatternCard window){
-        int[] arrayofvalues = new int[5];
+    private int varietyColours(WindowPatternCard window){
+        int[] arrayOfValues = new int[5];
         int min = 20;
         List<List<Cell>> w = window.getMatr();
         for(List<Cell> cells: w){
@@ -158,26 +158,26 @@ public class Rules {
                 if(cell.isOccupied()) {
                     switch (cell.getDice().getColour().toString()) {
                         case "Y":
-                            arrayofvalues[0]++;
+                            arrayOfValues[0]++;
                             break;
                         case "G":
-                            arrayofvalues[1]++;
+                            arrayOfValues[1]++;
                             break;
                         case "P":
-                            arrayofvalues[2]++;
+                            arrayOfValues[2]++;
                             break;
                         case "R":
-                            arrayofvalues[3]++;
+                            arrayOfValues[3]++;
                             break;
                         case "B":
-                            arrayofvalues[4]++;
+                            arrayOfValues[4]++;
                             break;
                         default:
                     }
                 }
             }
         }
-        for(int h: arrayofvalues){
+        for(int h: arrayOfValues){
             if(h == 0)
                 return 0;
             else if(h < min)
@@ -193,7 +193,7 @@ public class Rules {
      * @param window The WindowPattern card to check
      * @return The points earned with this rule
      */
-    private int countcolor (WindowPatternCard window, Colour c){
+    private int countColor(WindowPatternCard window, Colour c){
         List<List<Cell>> w = window.getMatr();
         String color = c.toString();
         int cont = 0;

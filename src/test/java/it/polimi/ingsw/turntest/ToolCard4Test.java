@@ -149,11 +149,7 @@ public class ToolCard4Test {
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
         p1.getWindowPatternCard().placeDice(d6, 3, 3);
 
-        //p1.getWindowPatternCard().show();
-
         turn.startTurn();
-
-        System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
@@ -363,12 +359,7 @@ public class ToolCard4Test {
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
         p1.getWindowPatternCard().placeDice(d6, 3, 3);
 
-
-        //p1.getWindowPatternCard().show();
-
         turn.startTurn();
-
-        //System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 
@@ -712,11 +703,8 @@ public class ToolCard4Test {
         p1.getWindowPatternCard().placeDice(d6, 3, 3);
 
 
-        //p1.getWindowPatternCard().show();
 
         turn.startTurn();
-
-        //System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(), 10));
 

@@ -139,7 +139,7 @@ public class Printer {
      * Prints the players connected
      * @param players The name of players
      */
-    public void printplayersConnected(List<String> players){
+    public void printPlayersConnected(List<String> players){
 
         out.print(ansi().a(CONNECTED).cursorLeft(CONNECTED.length()));
 
@@ -375,7 +375,7 @@ public class Printer {
 
         out.print(ansi().cursorRight(output.length()+timer.length()+10));
 
-        this.printplayersConnected(players);
+        this.printPlayersConnected(players);
 
         out.print(ansi().restoreCursorPosition());
 
@@ -438,7 +438,7 @@ public class Printer {
 
         out.print(ansi().restoreCursorPosition());
         out.print(ansi().cursorRight(90));
-        this.printplayersConnected(players);
+        this.printPlayersConnected(players);
 
         out.print(ansi().cursorRight(15));
         this.printActivePlayers(setup, deparser);

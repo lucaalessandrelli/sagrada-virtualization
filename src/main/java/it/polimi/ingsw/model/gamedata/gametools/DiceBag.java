@@ -11,7 +11,7 @@ import java.util.Random;
  * This class represents the dicebag
  */
 public class DiceBag {
-    private List<Dice> dicecontainer = new ArrayList<>(90);
+    private List<Dice> diceContainer = new ArrayList<>(90);
     private int numPlayers;
 
     /**
@@ -29,14 +29,14 @@ public class DiceBag {
         for(i = 0; i <5; i++){
             for(j = 0; j <18; j++){
                 Dice x = new Dice(coll[i]);
-                dicecontainer.add(x);
+                diceContainer.add(x);
             }
         }
     }
 
     /**
      * The setter method for the number of the players
-     * @param n
+     * @param n The number of players
      */
     public void setNumPlayers(int n){
         if(n > 0 && n < 5)
@@ -50,7 +50,7 @@ public class DiceBag {
      * @return The number of remaining dices
      */
     public int remainingDices(){
-        return dicecontainer.size();
+        return diceContainer.size();
     }
 
     /**
@@ -60,7 +60,7 @@ public class DiceBag {
     public List<Dice> pullOut(){
         int dimension = (2*numPlayers) + 1;
         List<Dice> result = new ArrayList<>(dimension);
-        randomPullOut(dimension,result,dicecontainer.size());
+        randomPullOut(dimension,result, diceContainer.size());
         return result;
     }
 
@@ -69,7 +69,7 @@ public class DiceBag {
      * @param dice The dice to add
      */
     public void addDice(Dice dice){
-        this.dicecontainer.add(dice);
+        this.diceContainer.add(dice);
     }
 
 
@@ -80,7 +80,7 @@ public class DiceBag {
      */
     public List<Dice> pullOut(int number){
         List<Dice> tmp = new ArrayList<>(number);
-        randomPullOut(number,tmp,dicecontainer.size());
+        randomPullOut(number,tmp, diceContainer.size());
         return tmp;
     }
 
@@ -96,9 +96,9 @@ public class DiceBag {
         Dice randomdice;
         for(int k = 0; k < number; k++) {
             randomNum = rand.nextInt((cont));
-            randomdice = dicecontainer.get(randomNum);
+            randomdice = diceContainer.get(randomNum);
             tmp.add(randomdice);
-            dicecontainer.remove(randomNum);
+            diceContainer.remove(randomNum);
             cont--;
         }
     }

@@ -157,13 +157,9 @@ public class ToolCard2Test {
         p1.getWindowPatternCard().placeDice(d2,2,1);
         p1.getWindowPatternCard().placeDice(d3,3,2);
 
-        p1.getWindowPatternCard().addRestr('B',2,2);
-
-        //p1.getWindowPatternCard().show();
+        p1.getWindowPatternCard().addRestrictions('B',2,2);
 
         turn.startTurn();
-
-        //System.out.println(turn.getState().getClass());
 
         assertEquals("StartTurn", lastName(turn.getState().toString(),10));
 
@@ -187,8 +183,6 @@ public class ToolCard2Test {
             turn.receiveMove(new Pos(2, 2));
         } catch (WrongMoveException e)  {
             e.printStackTrace();
-        } catch (NullPointerException e){
-            System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
         assertEquals("ToolBeforeDice", lastName(turn.getState().toString(),"ToolBeforeDice".length()+1));
@@ -305,7 +299,7 @@ public class ToolCard2Test {
         p3.setMyWindow(new WindowPatternCard());
         p4.setMyWindow(new WindowPatternCard());
 
-        p1.getWindowPatternCard().addRestr('B', 2, 2);
+        p1.getWindowPatternCard().addRestrictions('B', 2, 2);
 
         table.getDiceBag().setNumPlayers(4);
         table.getDraftPool().addNewDices(table.getDiceFromBag());
@@ -335,13 +329,9 @@ public class ToolCard2Test {
         p1.getWindowPatternCard().placeDice(d2, 2, 1);
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
 
-        //p1.getWindowPatternCard().show();
-
         table.resetSelection();
 
         turn.startTurn();
-
-        //System.out.println(turn.getState().getClass());
 
         String state = "StartTurn";
 
@@ -369,8 +359,6 @@ public class ToolCard2Test {
             turn.receiveMove(new Pos(2, 2));
         } catch (WrongMoveException e)  {
             e.printStackTrace();
-        } catch (NullPointerException e){
-            System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
         state = "ToolBeforeDice";
@@ -520,7 +508,7 @@ public class ToolCard2Test {
         p1.getWindowPatternCard().placeDice(d2, 2, 1);
         p1.getWindowPatternCard().placeDice(d3, 3, 2);
 
-        p1.getWindowPatternCard().addRestr('5',2,2);
+        p1.getWindowPatternCard().addRestrictions('5',2,2);
 
         turn.startTurn();
 

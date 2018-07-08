@@ -220,8 +220,6 @@ public class ToolCard5Test {
                 turn.receiveMove(new Pos(1, 4));
             } catch (WrongMoveException e) {
                 e.printStackTrace();
-            } catch (NullPointerException e) {
-                System.out.println("If this is printed we have a NullPointerException that is right");
             }
 
         state = "EndTurn";

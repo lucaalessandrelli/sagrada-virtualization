@@ -16,7 +16,7 @@ public class ToolCard extends Card {
     private boolean used;
     private int cost;
     private List<String> stateList;
-    private List<String> automatedoperationlist = new ArrayList<>();
+    private List<String> automatedOperationlist = new ArrayList<>();
     private List<String> cMethods = new ArrayList<>();
     private List<List<String>> pMethods = new ArrayList<>();
 
@@ -90,7 +90,7 @@ public class ToolCard extends Card {
      * @return The AutomatedOperation of the card
      */
     public List<String> getAutomatedoperationlist(){
-        return automatedoperationlist;
+        return automatedOperationlist;
     }
 
     /**
@@ -120,10 +120,10 @@ public class ToolCard extends Card {
 
     /**
      * Setter for the AutomatedOperation of the card
-     * @param x The AutomedOperations to set
+     * @param x The AutomatedOperations to set
      */
-    void setAutomatedoperationlist(List<String> x){
-        this.automatedoperationlist = x;
+    void setAutomatedOperationlist(List<String> x){
+        this.automatedOperationlist = x;
     }
 
     /**

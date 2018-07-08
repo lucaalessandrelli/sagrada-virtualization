@@ -63,15 +63,6 @@ public class CardContainerTest {
     }
 
     @Test
-    public void testNeverOutofBound(){
-        CardContainer tester = new CardContainer();
-        for(int i = 0; i < 50; i++){
-            tester.pullOutPattern(4);
-            tester = new CardContainer();
-        }
-    }
-
-    @Test
     public void testTooManyPlayers(){
         CardContainer tester = new CardContainer();
         assertThrows(IndexOutOfBoundsException.class,()->{tester.pullOutPattern(6);});

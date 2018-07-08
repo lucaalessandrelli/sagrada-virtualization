@@ -259,7 +259,7 @@ public class CardContainer {
         all = document.getElementsByTagName(RULES).item(cont).getTextContent();
         List<String> rules = Arrays.asList(all.split(","));
         for (String rule:rules){
-            mypattern.addRestr(rule.charAt(0),Character.getNumericValue(rule.charAt(1)),Character.getNumericValue(rule.charAt(2)));
+            mypattern.addRestrictions(rule.charAt(0),Character.getNumericValue(rule.charAt(1)),Character.getNumericValue(rule.charAt(2)));
         }
 
         return mypattern;
@@ -289,7 +289,7 @@ public class CardContainer {
         mytool.setStateList(Arrays.asList(all.split(",")));
 
         all = document.getElementsByTagName(AUTOMATED).item(cont).getTextContent();
-        mytool.setAutomatedoperationlist(Arrays.asList(all.split(",")));
+        mytool.setAutomatedOperationlist(Arrays.asList(all.split(",")));
 
         all = document.getElementsByTagName(CMETHODS).item(cont).getTextContent();
         mytool.setNameCMethods(Arrays.asList(all.split(",")));

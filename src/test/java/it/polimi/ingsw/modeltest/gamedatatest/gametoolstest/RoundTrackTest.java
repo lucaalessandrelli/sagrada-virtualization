@@ -14,10 +14,6 @@ import java.util.Random;
 
 public class RoundTrackTest {
 
-
-    /**
-     * Testing getter and setter
-     */
     @Test
     public void testGet_And_Set(){
         RoundTrack roundTrack = new RoundTrack();
@@ -33,9 +29,6 @@ public class RoundTrackTest {
         assertTrue(arrayList.contains(roundTrack.getDiceOnRoundtrack(1)));
     }
 
-    /**
-     * Testing Find method and Switch method
-     */
     @Test
     public void testFind(){
         RoundTrack roundTrack = new RoundTrack();

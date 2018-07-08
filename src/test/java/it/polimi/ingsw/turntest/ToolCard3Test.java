@@ -159,8 +159,6 @@ public class ToolCard3Test {
             turn.receiveMove(new Pos(1, 1));
         } catch (WrongMoveException e)  {
             e.printStackTrace();
-        } catch (NullPointerException e){
-            System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
         assertEquals("ToolBeforeDice", lastName(turn.getState().toString(),"ToolBeforeDice".length()+1));
@@ -307,7 +305,7 @@ public class ToolCard3Test {
         p1.getWindowPatternCard().placeDice(d2,2,3);
         p1.getWindowPatternCard().placeDice(d3,3,3);
 
-        p1.getWindowPatternCard().addRestr('1',2,2);
+        p1.getWindowPatternCard().addRestrictions('1',2,2);
 
         //p1.getWindowPatternCard().show();
 
@@ -335,8 +333,6 @@ public class ToolCard3Test {
             turn.receiveMove(new Pos(2, 2));
         } catch (WrongMoveException e)  {
             e.printStackTrace();
-        } catch (NullPointerException e){
-            System.out.println("If this is printed we have a NullPointerException that is right");
         }
 
         assertEquals("ToolBeforeDice", lastName(turn.getState().toString(),"ToolBeforeDice".length()+1));
@@ -484,7 +480,7 @@ public class ToolCard3Test {
         p1.getWindowPatternCard().placeDice(d2,2,1);
         p1.getWindowPatternCard().placeDice(d3,3,2);
 
-        p1.getWindowPatternCard().addRestr('P',2,2);
+        p1.getWindowPatternCard().addRestrictions('P',2,2);
 
         //p1.getWindowPatternCard().show();
 

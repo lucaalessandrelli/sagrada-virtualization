@@ -1,6 +1,8 @@
 package it.polimi.ingsw.modeltest.gamelogictest;
 
+import it.polimi.ingsw.model.gamedata.Player;
 import it.polimi.ingsw.model.gamedata.Pos;
+import it.polimi.ingsw.model.gamedata.Table;
 import it.polimi.ingsw.model.gamedata.gametools.*;
 import it.polimi.ingsw.model.gamelogic.checker.InspectorContext;
 import org.junit.jupiter.api.Test;
@@ -12,19 +14,27 @@ import java.util.List;
 
 public class InspectorContextTest {
 
-    /*@Test
+    @Test
     public void testCheckTools(){
         InspectorContext tester = new InspectorContext();
-        CardContainer container = new CardContainer();
+        Player p1 = new Player("nobody");
+        WindowPatternCard windowPatternCard = new WindowPatternCard();
+        p1.setMyWindow(windowPatternCard);
+        List<Player> players = new ArrayList<>();
+        players.add(p1);
+
+        Table table = new Table(players);
+        table.initialize();
+
         ToolCard toolcard;
         List<ToolCard> toolCardArrayList;
-        toolCardArrayList = container.pullOutTools();
+        toolCardArrayList = table.getToolCards();
 
         toolcard = toolCardArrayList.get(2);
 
-        //System.out.println("Tool: " + toolcard.getID());
-        assertTrue(tester.check(toolcard,toolCardArrayList));
-    }*/
+
+        assertTrue(tester.check(toolcard,toolCardArrayList,p1));
+    }
 
     @Test
     public void testCheckPlaceDice(){

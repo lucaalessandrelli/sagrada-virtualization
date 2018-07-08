@@ -12,7 +12,7 @@ import java.util.Random;
  * This class represents the table with all his elements
  */
 public class Table {
-    private List<Player> myplayers;
+    private List<Player> myPlayers;
     private List<ObjectiveCard> objectiveCards;
     private List<ToolCard> toolCards = new ArrayList<>(3);
     private RoundTrack roundTrack;
@@ -37,7 +37,7 @@ public class Table {
         this.diceBag = new DiceBag();
         this.draftPool = new DraftPool();
         this.container = new CardContainer();
-        this.myplayers = players;
+        this.myPlayers = players;
         this.roundTrack = new RoundTrack();
     }
 
@@ -49,15 +49,15 @@ public class Table {
         int i;
         this.toolCards = this.container.pullOutTools();
         this.objectiveCards = this.container.pullOutPublic();
-        List<ObjectiveCard> tmp = this.container.pullOutPrivate(this.myplayers.size());
+        List<ObjectiveCard> tmp = this.container.pullOutPrivate(this.myPlayers.size());
         i = 0;
-        for (Player p: this.myplayers){
+        for (Player p: this.myPlayers){
             p.setMyObjCard(tmp.get(i));
             i++;
         }
-        windowPatternCards = this.container.pullOutPattern(this.myplayers.size());
+        windowPatternCards = this.container.pullOutPattern(this.myPlayers.size());
 
-        this.diceBag.setNumPlayers(this.myplayers.size());
+        this.diceBag.setNumPlayers(this.myPlayers.size());
     }
 
 
@@ -66,7 +66,7 @@ public class Table {
      */
     public void selectWindowCards(){
         List<WindowPatternCard> patterns = new ArrayList<>();
-        for (int i = 0; i < myplayers.size();i++) {
+        for (int i = 0; i < myPlayers.size(); i++) {
             patterns.add(windowPatternCards.get((i*4)));
             temporaryCards.add(windowPatternCards.get(i*4).getNum());
             patterns.add(windowPatternCards.get((i*4)+1));
@@ -75,7 +75,7 @@ public class Table {
             temporaryCards.add(windowPatternCards.get((i*4)+2).getNum());
             patterns.add(windowPatternCards.get((i*4)+3));
             temporaryCards.add(windowPatternCards.get((i*4)+3).getNum());
-            myplayers.get(i).chooseWindow(patterns);
+            myPlayers.get(i).chooseWindow(patterns);
             patterns.clear();
         }
         setPublicObjects();
@@ -162,10 +162,10 @@ public class Table {
     public void setWindow(String p){
         Random random = new Random();
         int i = 0;
-        while (i < this.myplayers.size() && !(p.equals(this.myplayers.get(i).getUsername()))) {
+        while (i < this.myPlayers.size() && !(p.equals(this.myPlayers.get(i).getUsername()))) {
             i++;
         }
-        Player player = this.myplayers.get(i);
+        Player player = this.myPlayers.get(i);
         player.setMyWindow(windowPatternCards.get(random.nextInt(4) + 4*i));
     }
 
@@ -177,19 +177,19 @@ public class Table {
     public void setWindow(Player p, int id){
         int i = 0;
 
-        while (i < this.myplayers.size() && !(p.getUsername().equals(this.myplayers.get(i).getUsername()))) {
+        while (i < this.myPlayers.size() && !(p.getUsername().equals(this.myPlayers.get(i).getUsername()))) {
             i++;
         }
 
         if(temporaryCards.contains(id)) {
             if (windowPatternCards.get(i * 4).getNum() == id)
-                this.myplayers.get(i).setMyWindow(windowPatternCards.get(i * 4));
+                this.myPlayers.get(i).setMyWindow(windowPatternCards.get(i * 4));
             if (windowPatternCards.get((i * 4) + 1).getNum() == id)
-                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 1));
+                this.myPlayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 1));
             if (windowPatternCards.get((i * 4) + 2).getNum() == id)
-                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 2));
+                this.myPlayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 2));
             if (windowPatternCards.get((i * 4) + 3).getNum() == id)
-                this.myplayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 3));
+                this.myPlayers.get(i).setMyWindow(windowPatternCards.get((i * 4) + 3));
         }
         else
             this.setWindow(p.getUsername());
@@ -207,7 +207,7 @@ public class Table {
      * Set the public objects for every player present in the table
      */
     public void setPublicObjects(){
-        for (Player p: this.myplayers) {
+        for (Player p: this.myPlayers) {
             PublicObjects publicObjects = new PublicObjects();
 
             publicObjects.setToolCards(this.getToolCards());
@@ -219,7 +219,7 @@ public class Table {
             publicObjects.setRoundTrack(this.roundTrack);
 
             List<Player> players = new ArrayList<>();
-            for (Player player: this.myplayers){
+            for (Player player: this.myPlayers){
                 if(!(player.getUsername().equals(p.getUsername()))) {
                     players.add(player);
                 }
@@ -242,7 +242,7 @@ public class Table {
 
         HashMap<Player,Integer> scores = new HashMap<>();
 
-        for (Player player:this.myplayers){
+        for (Player player:this.myPlayers){
             scores.put(player,player.calculatePoints());
         }
 
@@ -274,13 +274,13 @@ public class Table {
 
 
         int numberActive = 0;
-        for (Player p: this.myplayers){
+        for (Player p: this.myPlayers){
             if(p.isActive())
                 numberActive++;
         }
 
         if(numberActive == 1){
-            for(Player p: this.myplayers){
+            for(Player p: this.myPlayers){
                 if(p.isActive()){
                     winner = p;
                     appendWinner(builder,scores,winner);
@@ -300,7 +300,7 @@ public class Table {
         int max = -50;
         List<Player> drawPlayers = new ArrayList<>();
 
-        for(Player player: this.myplayers){
+        for(Player player: this.myPlayers){
             int currentScore = scores.get(player);
             if(currentScore > max) {
                 winner = player;
@@ -391,9 +391,9 @@ public class Table {
         Player winner = new Player(NOONE);
 
         for (Player player : drawPlayersOnFavors) {
-            if(this.myplayers.indexOf(player) > max) {
+            if(this.myPlayers.indexOf(player) > max) {
                 winner = player;
-                max = this.myplayers.indexOf(player);
+                max = this.myPlayers.indexOf(player);
             }
         }
 
@@ -419,7 +419,7 @@ public class Table {
      * For every player in the table reset the "selected" value to every dice placed on the card, does this also for roundtrack and draftpool
      */
     public void resetSelection() {
-        myplayers.forEach(player -> player.getWindowPatternCard().resetSelection());
+        myPlayers.forEach(player -> player.getWindowPatternCard().resetSelection());
         roundTrack.resetSelection();
         draftPool.resetSelection();
     }

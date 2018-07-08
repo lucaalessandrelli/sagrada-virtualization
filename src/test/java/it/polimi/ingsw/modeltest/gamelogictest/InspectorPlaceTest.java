@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InspectorPlaceTest {
@@ -39,8 +38,8 @@ public class InspectorPlaceTest {
     public void testCheckFirstRestrictionColour(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windowPatternCard.addRestr('G',0,0);
-        windowPatternCard.addRestr('Y',0,1);
+        windowPatternCard.addRestrictions('G',0,0);
+        windowPatternCard.addRestrictions('Y',0,1);
         Dice d = new Dice(Colour.GREEN);
         Pos pos = new Pos(0,1);
 
@@ -58,11 +57,11 @@ public class InspectorPlaceTest {
      * Verify if you can place a dice in a central cell, doing a wrong move
      */
     @Test
-    public void testcheckBoundaryCell(){
+    public void testCheckBoundaryCell(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard = new WindowPatternCard();
-        windowPatternCard.addRestr('2',1,2);
-        windowPatternCard.addRestr('R',2,2);
+        windowPatternCard.addRestrictions('2',1,2);
+        windowPatternCard.addRestrictions('R',2,2);
         Dice d = new Dice(Colour.GREEN);
         d.setNumber(2);
 
@@ -163,7 +162,7 @@ public class InspectorPlaceTest {
      * Verify that you can't place a dice out of bound
      */
     @Test
-    void TestCheckOutOfBound(){
+    void testCheckOutOfBound(){
         InspectorPlace tester = new InspectorPlace();
         WindowPatternCard windowPatternCard;
 

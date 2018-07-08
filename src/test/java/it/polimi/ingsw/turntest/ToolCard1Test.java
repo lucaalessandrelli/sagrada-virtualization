@@ -224,8 +224,6 @@ public class ToolCard1Test {
 
         turn.startTurn();
 
-        //System.out.println(turn.getState().getClass());
-
         assertEquals("StartTurn", lastName(turn.getState().toString(),10));
 
         Dice dice = p1.getDraftPool().chooseDice(3);
@@ -238,8 +236,6 @@ public class ToolCard1Test {
             e.printStackTrace();
         }
 
-        //System.out.println(turn.getState().getClass());
-
         assertEquals("ChooseDice1", lastName(turn.getState().toString(),12));
 
         try {
@@ -249,8 +245,6 @@ public class ToolCard1Test {
         }
 
         assertEquals("IncDecValue", lastName(turn.getState().toString(),12));
-
-        //System.out.println(turn.getState().getClass());
 
         Dice d = new Dice(Colour.GREEN);
         if(dice.getNumber()==6)
@@ -268,8 +262,7 @@ public class ToolCard1Test {
 
         assertEquals("ChooseDice2", lastName(turn.getState().toString(),12));
 
-        //System.out.println(turn.getState().getClass());
-        
+
         try {
             turn.receiveMove("pass");
         } catch (WrongMoveException e) {

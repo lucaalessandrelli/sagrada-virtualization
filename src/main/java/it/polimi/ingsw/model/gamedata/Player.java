@@ -204,7 +204,7 @@ public class Player {
      * Calculate the points made with the public cards
      * @return The points
      */
-    public int calculatePointsPublic(){
+    private int calculatePointsPublic(){
         int score = 0;
 
         List<ObjectiveCard> cards = publicObjects.getObjectiveCards();
@@ -219,7 +219,7 @@ public class Player {
      * Calculate the points removed due to empty cells
      * @return The points
      */
-    public int calculateMissingCells(){
+    private int calculateMissingCells(){
         int numberOfMissingCells = 0;
 
         for(List<Cell> cells: myWindow.getMatr()){
@@ -235,7 +235,7 @@ public class Player {
      * Calculate points made with private cards
      * @return The points
      */
-    public int calculatePointsPrivate(){
+    int calculatePointsPrivate(){
         return myObjCard.finalpoints(myWindow);
     }
 

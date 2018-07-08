@@ -289,7 +289,7 @@ public class ToolCard9Test {
 
         p1.getDraftPool().chooseDice(2).setDice(new Dice(Colour.YELLOW));
 
-        p1.getWindowPatternCard().addRestr('Y',3,1);
+        p1.getWindowPatternCard().addRestrictions('Y',3,1);
 
 
         Turn turn = new Turn(p1, round,  true, table);
@@ -451,7 +451,7 @@ public class ToolCard9Test {
 
         p1.getDraftPool().chooseDice(2).setDice(new Dice(Colour.YELLOW));
 
-        p1.getWindowPatternCard().addRestr('B',3,1);
+        p1.getWindowPatternCard().addRestrictions('B',3,1);
 
 
         Turn turn = new Turn(p1, round,  true, table);
@@ -603,7 +603,7 @@ public class ToolCard9Test {
         p1.getDraftPool().chooseDice(2).setDice(new Dice(Colour.YELLOW));
         p1.getDraftPool().chooseDice(2).setNumber(2);
 
-        p1.getWindowPatternCard().addRestr('3',3,1);
+        p1.getWindowPatternCard().addRestrictions('3',3,1);
 
 
         Turn turn = new Turn(p1, round,  true, table);
