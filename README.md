@@ -1,4 +1,4 @@
-# ProgettoIngSw
+# sagrada-virtualization
 Team components:
 
 Alessandrelli Luca 10533904
